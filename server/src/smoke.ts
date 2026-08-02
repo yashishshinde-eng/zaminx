@@ -73,6 +73,8 @@ const server = app.listen(0, async () => {
   await check("unauthorized /referrals/children", "/api/v1/referrals/children/me", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
   await check("unauthorized /bonanzas", "/api/v1/bonanzas", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
   await check("unauthorized /compensation/run-yield", "/api/v1/compensation/run-yield", { method: "POST" }, { status: 401, bodyMatch: "Missing access token" });
+  await check("unauthorized /compensation/run-team-energy", "/api/v1/compensation/run-team-energy", { method: "POST" }, { status: 401, bodyMatch: "Missing access token" });
+  await check("unauthorized /ranks", "/api/v1/ranks", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
   await check("payments webhook ack", "/api/v1/payments/nowpayments/webhook", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: "no-such-invoice" }),
   }, { status: 200, bodyMatch: "received" });

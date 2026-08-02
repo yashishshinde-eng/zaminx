@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { env } from "../config/env.js";
 import { getWalletBalances } from "./wallet.service.js";
 import { getTeamCounts } from "./referral.service.js";
+import { getRankInfo } from "./rank.service.js";
 import type { DashboardSummary, IncomeSummary, WalletTxType } from "@zaminex/shared";
 
 const DAY_MS = 86_400_000;
@@ -28,9 +29,9 @@ const STREAM_BY_TYPE: Record<string, keyof IncomeSummary> = {
 };
 
 /**
- * Real income aggregation (Phase 10): per-stream credit totals from the
- * immutable ledger, plus a 30-day daily-totals series for the area chart.
- * Team / community / rankReward stay 0 until Phase 10A wires those streams.
+ * Real income aggregation (Phases 10 & 10A): per-stream credit totals from the
+ * immutable ledger, plus a 30-day daily-totals series for the area chart. All
+ * six streams are now populated by the compensation engine.
  */
 async function getIncomeSummary(userId: string): Promise<IncomeSummary> {
   const since = new Date(Date.now() - 30 * DAY_MS);
@@ -108,6 +109,10 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
     getIncomeSummary(userId),
   ]);
 
+  // Phase 10A: real rank slice from the active ladder, reusing the `team`
+  // counts already fetched above (avoids two extra countDocuments calls).
+  const rank = await getRankInfo(userId, team);
+
   return {
     account: {
       name: user.name,
@@ -116,8 +121,7 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
       isEmailVerified: user.isEmailVerified,
       status: user.status,
       memberSince: user.createdAt instanceof Date ? user.createdAt.toISOString() : new Date().toISOString(),
-      // Static placeholder — the rank ladder is computed in Phase 10.
-      rank: { name: "Starter", nextRank: "Bronze", progress: 0 },
+      rank,
     },
     referral: {
       code: user.referralCode,

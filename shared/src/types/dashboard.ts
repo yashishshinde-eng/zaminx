@@ -3,9 +3,8 @@ import type { WalletBalances } from "./wallet";
 
 /**
  * The six-stream income summary shown on the dashboard. Per-stream totals are
- * summed from the immutable wallet ledger (Phase 10); `series` is a 30-day
- * daily-totals set for the area chart. Team / community / rankReward stay 0
- * until Phase 10A wires those streams.
+ * summed from the immutable wallet ledger (Phases 10 & 10A); `series` is a
+ * 30-day daily-totals set for the area chart.
  */
 export interface IncomeSummary {
   trading: number;

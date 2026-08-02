@@ -1,0 +1,124 @@
+paths:
+  /ranks:
+    get:
+      tags: [Ranks]
+      summary: List the rank ladder (admin)
+      description: >
+        Paginated, filterable list of rank tiers. The ladder drives the dashboard
+        `account.rank` slice and the rank-reward engine. Phase 10A.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: status
+          schema: { type: string, enum: [active, inactive] }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        "200":
+          description: A page of ranks
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      ranks:
+                        type: object
+                        properties:
+                          items: { type: array, items: { type: object } }
+                          page: { type: integer }
+                          limit: { type: integer }
+                          total: { type: integer }
+                          totalPages: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+    post:
+      tags: [Ranks]
+      summary: Create a rank tier (admin)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, order, requiredDirects, requiredTeamSize, rewardAmount]
+              properties:
+                name: { type: string, maxLength: 80 }
+                order: { type: integer, minimum: 0 }
+                requiredDirects: { type: integer, minimum: 0 }
+                requiredTeamSize: { type: integer, minimum: 0 }
+                rewardAmount: { type: number, minimum: 0 }
+                status: { type: string, enum: [active, inactive], default: active }
+                description: { type: string, maxLength: 500 }
+      responses:
+        "201": { description: Rank created }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+
+  /ranks/{id}:
+    get:
+      tags: [Ranks]
+      summary: Get a single rank (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: The rank }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+        "404": { description: Rank not found }
+    patch:
+      tags: [Ranks]
+      summary: Update a rank (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string, maxLength: 80 }
+                order: { type: integer, minimum: 0 }
+                requiredDirects: { type: integer, minimum: 0 }
+                requiredTeamSize: { type: integer, minimum: 0 }
+                rewardAmount: { type: number, minimum: 0 }
+                status: { type: string, enum: [active, inactive] }
+                description: { type: string, maxLength: 500 }
+      responses:
+        "200": { description: Rank updated }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+        "404": { description: Rank not found }
+    delete:
+      tags: [Ranks]
+      summary: Delete a rank (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Rank deleted }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+        "404": { description: Rank not found }

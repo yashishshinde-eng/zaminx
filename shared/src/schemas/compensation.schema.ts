@@ -65,8 +65,82 @@ export const evaluateBonanzaSchema = z.object({
   }),
 });
 
+/* ------------------------------------------------------------------ */
+/*  Phase 10A — team energy, community, rank triggers + rank CRUD      */
+/* ------------------------------------------------------------------ */
+
+const RANK_STATUSES = ["active", "inactive"] as const;
+
+const rankBodyFields = {
+  name: z.string().trim().min(1, "Name is required").max(80),
+  order: z.coerce.number().int().min(0, "Order must be 0 or more"),
+  requiredDirects: z.coerce.number().int().min(0, "Required directs must be 0 or more"),
+  requiredTeamSize: z.coerce.number().int().min(0, "Required team size must be 0 or more"),
+  rewardAmount: z.coerce.number().min(0, "Reward amount must be 0 or more"),
+  status: z.enum(RANK_STATUSES).default("active"),
+  description: z.string().trim().max(500).optional(),
+};
+
+/** POST /ranks — create a rank (admin). */
+export const createRankSchema = z.object({ body: z.object(rankBodyFields) });
+
+/** PATCH /ranks/:id — update a rank (admin). All fields optional. */
+export const updateRankSchema = z.object({
+  body: z.object({
+    name: z.string().trim().min(1).max(80).optional(),
+    order: z.coerce.number().int().min(0).optional(),
+    requiredDirects: z.coerce.number().int().min(0).optional(),
+    requiredTeamSize: z.coerce.number().int().min(0).optional(),
+    rewardAmount: z.coerce.number().min(0).optional(),
+    status: z.enum(RANK_STATUSES).optional(),
+    description: z.string().trim().max(500).optional(),
+  }),
+});
+
+/** GET /ranks — paginated, filterable rank list (admin). */
+export const rankListQuerySchema = z.object({
+  query: z.object({
+    status: z.enum(RANK_STATUSES).optional(),
+    page: z.coerce.number().int().min(1).default(1),
+    limit: z.coerce.number().int().min(1).max(50).default(20),
+  }),
+});
+
+/** POST /compensation/run-team-energy — trigger a daily team-energy run (admin). */
+export const runTeamEnergySchema = z.object({
+  query: z.object({
+    date: z
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be YYYY-MM-DD")
+      .optional(),
+  }),
+});
+
+/** POST /compensation/run-community — trigger a monthly community-bonus run (admin). */
+export const runCommunitySchema = z.object({
+  query: z.object({
+    month: z
+      .string()
+      .regex(/^\d{4}-\d{2}$/, "Month must be YYYY-MM")
+      .optional(),
+  }),
+});
+
+/** POST /compensation/run-rank-check — trigger a rank evaluation (admin). */
+export const runRankCheckSchema = z.object({
+  query: z.object({
+    userId: z.string().trim().optional(),
+  }),
+});
+
 export type CreateBonanzaBody = z.infer<typeof createBonanzaSchema>["body"];
 export type UpdateBonanzaBody = z.infer<typeof updateBonanzaSchema>["body"];
 export type BonanzaListQuery = z.infer<typeof bonanzaListQuerySchema>["query"];
 export type RunYieldQuery = z.infer<typeof runYieldSchema>["query"];
 export type EvaluateBonanzaQuery = z.infer<typeof evaluateBonanzaSchema>["query"];
+export type CreateRankBody = z.infer<typeof createRankSchema>["body"];
+export type UpdateRankBody = z.infer<typeof updateRankSchema>["body"];
+export type RankListQuery = z.infer<typeof rankListQuerySchema>["query"];
+export type RunTeamEnergyQuery = z.infer<typeof runTeamEnergySchema>["query"];
+export type RunCommunityQuery = z.infer<typeof runCommunitySchema>["query"];
+export type RunRankCheckQuery = z.infer<typeof runRankCheckSchema>["query"];

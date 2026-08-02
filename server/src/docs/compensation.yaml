@@ -97,5 +97,120 @@ paths:
                           totalUsers: { type: integer }
                           sponsors: { type: integer }
                           activeOffers: { type: integer }
+                          activeRanks: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+
+  /compensation/run-team-energy:
+    post:
+      tags: [Compensation]
+      summary: Run the daily team-energy credit (admin)
+      description: >
+        For each active, in-window UserPackage, a configurable slice of its daily
+        yield flows up the buyer's lineage to each ancestor (weighted by level,
+        up to `compensation.teamEnergyDepth`). One `team_bonus` credit per
+        ancestor per UTC day, idempotent. Ancestors without an active package are
+        skipped (anti-farming). No cron yet (Phase 18) — admins trigger this.
+        Phase 10A.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: date
+          schema: { type: string, pattern: '^\d{4}-\d{2}-\d{2}$' }
+          description: Optional backfill day (YYYY-MM-DD UTC); defaults to today.
+      responses:
+        "200":
+          description: Team-energy run summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      teamEnergy:
+                        type: object
+                        properties:
+                          asOf: { type: string, format: date-time }
+                          processed: { type: integer }
+                          credited: { type: integer }
+                          skipped: { type: integer }
+                          errors: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+
+  /compensation/run-community:
+    post:
+      tags: [Compensation]
+      summary: Run the monthly community bonus (admin)
+      description: >
+        Each sponsor earns `compensation.communityPct`% of their entire
+        downline's trade yield for the calendar month. One `community_bonus`
+        credit per sponsor per month, idempotent. Sponsors without an active
+        package are skipped (anti-farming). No cron yet (Phase 18) — admins
+        trigger this. Phase 10A.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: month
+          schema: { type: string, pattern: '^\d{4}-\d{2}$' }
+          description: Optional backfill month (YYYY-MM UTC); defaults to the current month.
+      responses:
+        "200":
+          description: Community-bonus run summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      community:
+                        type: object
+                        properties:
+                          month: { type: string }
+                          processed: { type: integer }
+                          credited: { type: integer }
+                          skipped: { type: integer }
+                          errors: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+
+  /compensation/run-rank-check:
+    post:
+      tags: [Compensation]
+      summary: Evaluate the rank ladder (admin)
+      description: >
+        Awards any pending rank rewards to qualifying users. Pass `userId` to
+        evaluate a single user; omit to evaluate every user. Idempotent per rank
+        per user. Phase 10A.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: userId
+          schema: { type: string }
+          description: Optional single-user scope; omit for all users.
+      responses:
+        "200":
+          description: Rank evaluation summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      rank:
+                        type: object
+                        properties:
+                          evaluated: { type: integer }
+                          awarded: { type: integer }
+                          errors: { type: integer }
         "401": { description: Unauthorized }
         "403": { description: Insufficient permissions (admin only) }

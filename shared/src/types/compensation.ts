@@ -1,10 +1,10 @@
 /**
- * Compensation Engine — Phase 10.
+ * Compensation Engine — Phases 10 & 10A.
  *
- * Three income streams ship in Phase 10: Trade Yield, Direct Connect Bonus, and
- * the Bonanza engine. The remaining three (Daily Team Energy, Community Monthly,
- * Rank Reward) arrive in Phase 10A. The wallet ledger (`WalletTransaction`) is
- * the source of truth for every credit; these types are the API-facing shapes.
+ * Phase 10 ships Trade Yield, Direct Connect Bonus, and the Bonanza engine.
+ * Phase 10A completes the engine with Daily Team Energy, Community Monthly, and
+ * the Rank Reward ladder. The wallet ledger (`WalletTransaction`) is the source
+ * of truth for every credit; these types are the API-facing shapes.
  */
 
 export type BonanzaStatus = "active" | "inactive";
@@ -58,6 +58,61 @@ export interface YieldRunSummary {
 
 /** Result of an admin-triggered bonanza evaluation. */
 export interface BonanzaEvalSummary {
+  evaluated: number;
+  awarded: number;
+  errors: number;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Phase 10A — team energy, community, ranks                          */
+/* ------------------------------------------------------------------ */
+
+export type RankStatus = "active" | "inactive";
+
+/** A Rank ladder row, as returned to admins (full record). */
+export interface RankRow {
+  id: string;
+  name: string;
+  order: number;
+  requiredDirects: number;
+  requiredTeamSize: number;
+  rewardAmount: number;
+  status: RankStatus;
+  description: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+/**
+ * Dashboard rank slice — matches `DashboardSummary["account"]["rank"]`. Computed
+ * read-only from the active rank ladder (Phase 10A); no awards are issued here.
+ */
+export interface RankInfo {
+  name: string;
+  nextRank: string | null;
+  progress: number; // 0..1 toward the next rank
+}
+
+/** Result of an admin-triggered daily team-energy run. */
+export interface TeamEnergyRunSummary {
+  asOf: string; // ISO date the run targeted
+  processed: number;
+  credited: number;
+  skipped: number;
+  errors: number;
+}
+
+/** Result of an admin-triggered monthly community-bonus run. */
+export interface CommunityRunSummary {
+  month: string; // YYYY-MM the run targeted
+  processed: number;
+  credited: number;
+  skipped: number;
+  errors: number;
+}
+
+/** Result of an admin-triggered rank evaluation. */
+export interface RankEvalSummary {
   evaluated: number;
   awarded: number;
   errors: number;

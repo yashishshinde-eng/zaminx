@@ -22,3 +22,5 @@ export { Withdrawal } from "./Withdrawal.model.js";
 export type { WithdrawalDocument } from "./Withdrawal.model.js";
 export { BonanzaOffer } from "./BonanzaOffer.model.js";
 export type { BonanzaOfferDocument } from "./BonanzaOffer.model.js";
+export { Rank } from "./Rank.model.js";
+export type { RankDocument } from "./Rank.model.js";

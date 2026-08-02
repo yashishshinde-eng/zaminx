@@ -12,6 +12,7 @@ import withdrawalRoutes from "./withdrawal.routes.js";
 import referralRoutes from "./referral.routes.js";
 import bonanzaRoutes from "./bonanza.routes.js";
 import compensationRoutes from "./compensation.routes.js";
+import rankRoutes from "./rank.routes.js";
 
 const router = Router();
 
@@ -30,7 +31,10 @@ router.use("/withdrawals", authenticate, withdrawalRoutes);
 router.use("/referrals", authenticate, referralRoutes);
 router.use("/bonanzas", authenticate, bonanzaRoutes);
 // Compensation triggers are admin-only (Phase 10): yield run + bonanza eval.
+// Phase 10A adds team-energy, community, and rank-check triggers.
 router.use("/compensation", authenticate, authorize("admin"), compensationRoutes);
+// Rank ladder CRUD is admin-only (Phase 10A).
+router.use("/ranks", authenticate, authorize("admin"), rankRoutes);
 
 // Future phases mount here:
 // router.use("/users", authenticate, authorize("admin"), userRoutes);

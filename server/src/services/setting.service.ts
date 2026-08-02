@@ -37,3 +37,30 @@ export async function getDirectBonusPct(): Promise<number> {
 export async function isYieldEnabled(): Promise<boolean> {
   return getSetting<boolean>("compensation.yieldEnabled", true);
 }
+
+/* ---- Phase 10A compensation convenience reads ---- */
+
+/** Whether the daily team-energy run is enabled (default true). */
+export async function isTeamEnergyEnabled(): Promise<boolean> {
+  return getSetting<boolean>("compensation.teamEnergyEnabled", true);
+}
+
+/** How many ancestor levels a team-energy run pays (default 5). */
+export async function getTeamEnergyDepth(): Promise<number> {
+  return getSetting<number>("compensation.teamEnergyDepth", 5);
+}
+
+/** Per-level team-energy weights, level 1 = direct sponsor (default [10,5,3,2,1]). */
+export async function getTeamEnergyPct(): Promise<number[]> {
+  return getSetting<number[]>("compensation.teamEnergyPct", [10, 5, 3, 2, 1]);
+}
+
+/** Whether the monthly community-bonus run is enabled (default true). */
+export async function isCommunityEnabled(): Promise<boolean> {
+  return getSetting<boolean>("compensation.communityEnabled", true);
+}
+
+/** Community bonus percentage of the team's monthly trade yield (default 5 = 5%). */
+export async function getCommunityPct(): Promise<number> {
+  return getSetting<number>("compensation.communityPct", 5);
+}

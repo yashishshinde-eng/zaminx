@@ -1,7 +1,7 @@
 import { connectDB } from "./config/db.js";
 import { env } from "./config/env.js";
 import { logger } from "./config/logger.js";
-import { User, Setting, CmsPage, Package, BonanzaOffer } from "./models/index.js";
+import { User, Setting, CmsPage, Package, BonanzaOffer, Rank } from "./models/index.js";
 import { isSmtpConfigured } from "./services/email.service.js";
 import type { ContentBlock } from "@zaminex/shared";
 
@@ -82,6 +82,12 @@ async function seed() {
     // Phase 10 compensation defaults (private — admin-tunable).
     { key: "compensation.directBonusPct", value: 10, category: "compensation", isPublic: false },
     { key: "compensation.yieldEnabled", value: true, category: "compensation", isPublic: false },
+    // Phase 10A compensation defaults (private — admin-tunable).
+    { key: "compensation.teamEnergyEnabled", value: true, category: "compensation", isPublic: false },
+    { key: "compensation.teamEnergyDepth", value: 5, category: "compensation", isPublic: false },
+    { key: "compensation.teamEnergyPct", value: [10, 5, 3, 2, 1], category: "compensation", isPublic: false },
+    { key: "compensation.communityEnabled", value: true, category: "compensation", isPublic: false },
+    { key: "compensation.communityPct", value: 5, category: "compensation", isPublic: false },
   ];
 
   for (const d of defaults) {
@@ -117,6 +123,16 @@ async function seed() {
     await BonanzaOffer.create(DEFAULT_BONANZA);
   })();
   logger.info("✅ Default bonanza offer ensured");
+
+  // --- Default rank ladder (Phase 10A), idempotent on name ---
+  await Promise.all(
+    DEFAULT_RANKS.map(async (r) => {
+      const exists = await Rank.findOne({ name: r.name });
+      if (exists) return;
+      await Rank.create(r);
+    }),
+  );
+  logger.info(`✅ Default rank ladder ensured (${DEFAULT_RANKS.length} ranks)`);
 
   logger.info("Seed complete.");
   process.exit(0);
@@ -154,6 +170,19 @@ const DEFAULT_BONANZA = {
   status: "active",
   terms: "Refer 3 direct members during the offer window to earn a $10 bonus reward.",
 };
+
+/**
+ * Default rank ladder (Phase 10A). Starter is the entry tier (0/0, $0); each
+ * step raises the direct + team-size bars and pays a one-time reward on
+ * qualification. Admin-editable via the /ranks endpoints.
+ */
+const DEFAULT_RANKS = [
+  { name: "Starter", order: 0, requiredDirects: 0, requiredTeamSize: 0, rewardAmount: 0, status: "active", description: "Entry tier — every member starts here." },
+  { name: "Bronze", order: 1, requiredDirects: 5, requiredTeamSize: 10, rewardAmount: 10, status: "active", description: "5 direct referrals and a 10-member team." },
+  { name: "Silver", order: 2, requiredDirects: 15, requiredTeamSize: 50, rewardAmount: 25, status: "active", description: "15 direct referrals and a 50-member team." },
+  { name: "Gold", order: 3, requiredDirects: 40, requiredTeamSize: 150, rewardAmount: 60, status: "active", description: "40 direct referrals and a 150-member team." },
+  { name: "Platinum", order: 4, requiredDirects: 100, requiredTeamSize: 400, rewardAmount: 150, status: "active", description: "100 direct referrals and a 400-member team." },
+];
 
 const DEFAULT_PACKAGES = [
   {
