@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import { LayoutDashboard, Wallet, Package, Users, Settings, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
-import { Button } from "@/components/ui/button";
 
 interface NavItem {
   label: string;
@@ -60,9 +59,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
       </nav>
 
       <div className="border-t border-sidebar-border p-3">
-        <Button variant="ghost" className="w-full justify-start" disabled>
-          <Settings className="size-5" /> More (Phase 2+)
-        </Button>
+        <p className="px-3 text-xs text-sidebar-foreground/50">Zaminex · v1.0</p>
       </div>
     </div>
   );

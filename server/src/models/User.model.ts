@@ -43,6 +43,12 @@ const userSchema = new Schema(
       dashboard: { type: Boolean, default: true },
     },
 
+    // User's own crypto payout/deposit addresses (USDT-BEP20 only). Distinct
+    // from the Phase 8 wallet balance system.
+    walletAddresses: {
+      usdtBep20: { type: String, trim: true, default: "" },
+    },
+
     status: { type: String, enum: ["active", "suspended", "banned"], default: "active", index: true },
 
     lastLoginAt: { type: Date, default: null },
@@ -86,6 +92,7 @@ export type UserDocument = InferSchemaType<typeof userSchema> &
     passwordHash: string;
     _plainPassword?: string;
     password?: string;
+    walletAddresses: { usdtBep20?: string };
     verifyPassword(candidate: string): boolean;
     verifyToken(stored: string | null | undefined, candidate: string): boolean;
   };

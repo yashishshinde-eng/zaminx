@@ -34,6 +34,10 @@ export function toPublicUser(user: UserDocument): PublicUser {
     referredBy: user.referredBy ?? undefined,
     isEmailVerified: user.isEmailVerified,
     themePreference: user.themePreference,
+    notificationPreference: user.notificationPreference ?? { email: true, dashboard: true },
+    walletAddresses: {
+      usdtBep20: user.walletAddresses?.usdtBep20 || undefined,
+    },
     status: user.status,
   };
 }

@@ -8,8 +8,8 @@ import { AppRouter } from "@/router";
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <ThemeProvider>
           <AppRouter />
           <Toaster
             position="top-right"
@@ -19,8 +19,8 @@ export default function App() {
               error: { iconTheme: { primary: "hsl(0 84% 60%)", secondary: "#fff" } },
             }}
           />
-        </AuthProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

@@ -1,0 +1,93 @@
+paths:
+  /profile:
+    put:
+      tags: [Profile]
+      summary: Update personal details (name + phone)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string, minLength: 2, maxLength: 80 }
+                phone: { type: string, maxLength: 20 }
+      responses:
+        "200": { description: Profile updated, returns the user }
+        "401": { description: Unauthorized }
+
+  /profile/wallet-addresses:
+    put:
+      tags: [Profile]
+      summary: Update the user's USDT-BEP20 payout/deposit address
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                usdtBep20: { type: string, description: "0x… BEP20 address; empty string clears it" }
+      responses:
+        "200": { description: Wallet address updated, returns the user }
+        "400": { description: Invalid address }
+        "401": { description: Unauthorized }
+
+  /profile/password:
+    put:
+      tags: [Profile]
+      summary: Change password (verifies the current one)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [currentPassword, password]
+              properties:
+                currentPassword: { type: string }
+                password: { type: string, minLength: 8 }
+      responses:
+        "200": { description: Password updated }
+        "400": { description: Current password incorrect / validation failed }
+        "401": { description: Unauthorized }
+
+  /profile/theme:
+    put:
+      tags: [Profile]
+      summary: Persist theme preference
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [theme]
+              properties:
+                theme: { type: string, enum: [light, dark] }
+      responses:
+        "200": { description: Theme preference updated, returns the user }
+        "401": { description: Unauthorized }
+
+  /profile/notifications:
+    put:
+      tags: [Profile]
+      summary: Update notification channel preferences
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, dashboard]
+              properties:
+                email: { type: boolean }
+                dashboard: { type: boolean }
+      responses:
+        "200": { description: Notification preferences updated, returns the user }
+        "401": { description: Unauthorized }
