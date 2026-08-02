@@ -65,3 +65,4 @@ export type ActivatePackageBody = z.infer<typeof activatePackageSchema>["body"];
 export * from "./cms";
 export * from "./dashboard";
 export * from "./package";
+export * from "./deposit";

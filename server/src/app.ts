@@ -25,7 +25,18 @@ export function createApp(): Express {
     }),
   );
   app.use(compression());
-  app.use(express.json({ limit: "1mb" }));
+  app.use(
+    express.json({
+      limit: "1mb",
+      // Capture the raw body so the NOWPayments IPN webhook can verify the
+      // HMAC-SHA512 signature over the exact bytes received.
+      verify: (req, _res, buf) => {
+        // `req` here is the raw IncomingMessage, not the augmented Express
+        // Request — cast to assign the captured raw body for webhook signing.
+        (req as unknown as { rawBody?: Buffer }).rawBody = buf;
+      },
+    }),
+  );
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
 

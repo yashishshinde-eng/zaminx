@@ -1,0 +1,70 @@
+paths:
+  /payments/deposits:
+    get:
+      tags: [Payments]
+      summary: The user's deposits
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Deposits, newest first
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      deposits:
+                        type: array
+                        items: { type: object }
+        "401": { description: Unauthorized }
+
+  /payments/deposits/{id}:
+    get:
+      tags: [Payments]
+      summary: Single deposit status (ownership-checked)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Deposit row }
+        "401": { description: Unauthorized }
+        "404": { description: Deposit not found / not owned }
+
+  /payments/nowpayments/webhook:
+    post:
+      tags: [Payments]
+      summary: NOWPayments IPN webhook (public, signature-verified)
+      description: >
+        Public endpoint receiving NOWPayments payment notifications. The
+        payload is verified via HMAC-SHA512 (x-nowpayments-sig) when the live
+        gateway is configured; in sandbox, verification is skipped. On a
+        confirmed/finished payment the associated deposit is flipped to paid
+        and the package activated. Always returns 200; processing is idempotent.
+      responses:
+        "200":
+          description: Webhook acknowledged
+
+  /payments/dev/simulate/{id}:
+    post:
+      tags: [Payments]
+      summary: Simulate a paid webhook for a sandbox deposit (dev only)
+      description: >
+        Dev-only, owner-only. Returns 404 in production or when the live
+        NOWPayments gateway is configured.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Payment simulated — deposit paid, package activated }
+        "401": { description: Unauthorized }
+        "404": { description: Not found (prod / live mode) }
+        "409": { description: Deposit is not pending }

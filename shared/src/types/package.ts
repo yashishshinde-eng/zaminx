@@ -26,6 +26,22 @@ export interface PackageTier {
 export type UserPackageStatus = "pending" | "active" | "expired" | "cancelled";
 export type UserPackagePaymentStatus = "pending" | "paid" | "failed";
 
+/** Payment info joined onto a subscription row when it has an associated
+ *  deposit (Phase 7). Present for rows that have started payment. */
+export interface UserPackagePayment {
+  depositId: string;
+  status: "pending" | "paid" | "expired" | "failed";
+  /** USDT-BEP20 address to send funds to. */
+  payAddress: string | null;
+  /** Crypto amount due. */
+  payAmount: number | null;
+  currency: "USDT-BEP20";
+  /** NOWPayments hosted checkout URL (null in sandbox). */
+  hostedUrl: string | null;
+  /** True when the invoice is a local mock (no NOWPayments keys configured). */
+  sandbox: boolean;
+}
+
 /** A user's subscription row (activation history). Terms are snapshotted at
  *  activation for immutable-ledger integrity. */
 export interface UserPackageRow {
@@ -44,4 +60,6 @@ export interface UserPackageRow {
   /** ISO — computed on activation (Phase 7). */
   expiresAt: string | null;
   createdAt: string;
+  /** Joined deposit/payment info (Phase 7). Present when payment was started. */
+  payment?: UserPackagePayment;
 }

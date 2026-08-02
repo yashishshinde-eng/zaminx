@@ -6,6 +6,7 @@ import cmsRoutes from "./cms.routes.js";
 import dashboardRoutes from "./dashboard.routes.js";
 import profileRoutes from "./profile.routes.js";
 import packageRoutes from "./package.routes.js";
+import paymentRoutes from "./payment.routes.js";
 
 const router = Router();
 
@@ -18,6 +19,7 @@ router.use("/cms", cmsRoutes);
 router.use("/dashboard", authenticate, dashboardRoutes);
 router.use("/profile", authenticate, profileRoutes);
 router.use("/packages", authenticate, packageRoutes);
+router.use("/payments", paymentRoutes);
 
 // Future phases mount here:
 // router.use("/users", authenticate, authorize("admin"), userRoutes);

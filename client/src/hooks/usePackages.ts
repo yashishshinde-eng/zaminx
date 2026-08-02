@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { fetchPackageCatalog, fetchMyPackages, activatePackageRequest } from "@/lib/packages";
+import { simulatePaymentRequest } from "@/lib/payments";
 import { queryKeys } from "@/config";
 
 /** Active package catalog (investment tiers). */
@@ -14,7 +15,7 @@ export function usePackageCatalog() {
   });
 }
 
-/** The user's package subscriptions (activation history & status). */
+/** The user's package subscriptions (activation history & status + payment). */
 export function useMyPackages() {
   return useQuery({
     queryKey: queryKeys.packages.mine,
@@ -31,13 +32,13 @@ export function useHasOpenPackage(): boolean {
   return Boolean(data?.some((p) => p.status === "pending" || p.status === "active"));
 }
 
-/** Initiate a package activation (creates a pending subscription). */
+/** Initiate a package activation (creates a pending subscription + invoice). */
 export function useActivatePackage() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (packageId: string) => activatePackageRequest(packageId),
-    onSuccess: async (row) => {
-      toast.success(`${row.snapshot.name} activation started — awaiting payment.`);
+    onSuccess: async (res) => {
+      toast.success(`${res.package.snapshot.name} activation started — complete the payment to activate.`);
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: queryKeys.packages.mine }),
         queryClient.invalidateQueries({ queryKey: queryKeys.dashboard }),
@@ -45,6 +46,24 @@ export function useActivatePackage() {
     },
     onError: () => {
       /* interceptor toasts (e.g. 409 already has a package) */
+    },
+  });
+}
+
+/** Simulate a paid sandbox deposit (dev only) — flips the package to active. */
+export function useSimulatePayment() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (depositId: string) => simulatePaymentRequest(depositId),
+    onSuccess: async () => {
+      toast.success("Payment confirmed — your package is now active.");
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: queryKeys.packages.mine }),
+        queryClient.invalidateQueries({ queryKey: queryKeys.dashboard }),
+      ]);
+    },
+    onError: () => {
+      /* interceptor toasts */
     },
   });
 }

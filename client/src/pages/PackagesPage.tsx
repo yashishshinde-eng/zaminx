@@ -3,6 +3,7 @@ import { PageHeader, ErrorState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PackageTierCard } from "@/components/packages/PackageTierCard";
 import { UserPackageList } from "@/components/packages/UserPackageList";
+import { PaymentCard } from "@/components/packages/PaymentCard";
 import {
   usePackageCatalog,
   useMyPackages,
@@ -15,6 +16,9 @@ export function PackagesPage() {
   const mine = useMyPackages();
   const hasOpen = useHasOpenPackage();
   const activate = useActivatePackage();
+
+  // The pending subscription awaiting payment (with joined payment info).
+  const pendingPayment = mine.data?.find((p) => p.status === "pending" && p.payment);
 
   const disabledReason = hasOpen
     ? "You already have a pending or active package"
@@ -29,6 +33,11 @@ export function PackagesPage() {
       />
 
       <div className="mt-6 space-y-8">
+        {/* Payment required (pending activation) */}
+        {pendingPayment && (
+          <PaymentCard payment={pendingPayment.payment!} packageName={pendingPayment.snapshot.name} />
+        )}
+
         {/* Catalog */}
         <section className="space-y-4">
           {catalog.isLoading && (

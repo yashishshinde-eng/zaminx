@@ -10,6 +10,8 @@ declare global {
     interface Request {
       user?: UserDocument & { id: string };
       accessToken?: string;
+      /** Raw request body captured for webhook signature verification. */
+      rawBody?: Buffer;
     }
   }
 }

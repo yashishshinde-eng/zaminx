@@ -21,6 +21,13 @@ interface WelcomeEmailArgs {
   loginLink: string;
 }
 
+interface DepositSuccessEmailArgs {
+  name: string;
+  packageName: string;
+  amountUsd: number;
+  txId: string;
+}
+
 /** Shared wrapper for a branded transactional email. */
 function wrap(subject: string, bodyHtml: string, bodyText: string): EmailContent {
   const html = `<!DOCTYPE html>
@@ -83,5 +90,21 @@ export function resetPasswordTemplate({ name, link }: LinkEmailArgs): EmailConte
      <p style="margin:24px 0;">${button(link, "Reset password")}</p>
      <p style="margin:0;font-size:14px;color:#64748b;">Or paste this link into your browser: <br><a href="${link}" style="color:#4f46e5;word-break:break-all;">${link}</a></p>`,
     `Hi ${name},\n\nReset your ${BRAND_NAME} password by opening this link:\n${link}\n\nIf you didn't request this, ignore this email.`,
+  );
+}
+
+export function depositSuccessTemplate({
+  name,
+  packageName,
+  amountUsd,
+  txId,
+}: DepositSuccessEmailArgs): EmailContent {
+  return wrap(
+    `${BRAND_NAME} — Deposit confirmed`,
+    `<h1 style="margin:0 0 16px;font-size:22px;font-weight:700;">Hi ${name},</h1>
+     <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#334155;">Your deposit has been confirmed and your <strong>${packageName}</strong> package is now active. Daily trading yield begins accruing.</p>
+     <p style="margin:0 0 8px;font-size:15px;color:#334155;">Amount: <strong>$${amountUsd.toFixed(2)}</strong> (USDT-BEP20)</p>
+     <p style="margin:0;font-size:14px;color:#64748b;">Transaction: <span style="font-family:monospace;word-break:break-all;">${txId}</span></p>`,
+    `Hi ${name},\n\nYour deposit has been confirmed and your ${packageName} package is now active.\nAmount: $${amountUsd.toFixed(2)} (USDT-BEP20)\nTransaction: ${txId}`,
   );
 }

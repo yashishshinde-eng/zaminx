@@ -26,6 +26,14 @@ const envSchema = z.object({
   SMTP_PASS: z.string().optional(),
   SMTP_FROM: z.string().default("Zaminex <noreply@zaminex.io>"),
   EMAIL_TOKEN_EXPIRY_HOURS: z.coerce.number().int().positive().default(24),
+
+  // NOWPayments deposit gateway (Phase 7). When API_KEY + IPN_SECRET are both
+  // set, activation calls the live gateway and webhooks are signature-verified.
+  // When unset, a sandbox/mock path is used so the full flow runs locally.
+  NOWPAYMENTS_API_KEY: z.string().optional(),
+  NOWPAYMENTS_IPN_SECRET: z.string().optional(),
+  NOWPAYMENTS_BASE_URL: z.string().url().default("https://api.nowpayments.io/v1"),
+  NOWPAYMENTS_PAY_CURRENCY: z.string().default("usdtbsc"), // USDT on BNB Smart Chain
 });
 
 const parsed = envSchema.safeParse(process.env);
@@ -39,3 +47,7 @@ if (!parsed.success) {
 export const env = parsed.data;
 export const isProd = env.NODE_ENV === "production";
 export const isDev = env.NODE_ENV === "development";
+
+/** True when NOWPayments credentials are configured (live gateway + signed webhooks). */
+export const isNowpaymentsConfigured = () =>
+  Boolean(env.NOWPAYMENTS_API_KEY && env.NOWPAYMENTS_IPN_SECRET);

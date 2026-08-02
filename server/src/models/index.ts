@@ -12,3 +12,5 @@ export { Package } from "./Package.model.js";
 export type { PackageDocument } from "./Package.model.js";
 export { UserPackage } from "./UserPackage.model.js";
 export type { UserPackageDocument } from "./UserPackage.model.js";
+export { Deposit } from "./Deposit.model.js";
+export type { DepositDocument } from "./Deposit.model.js";
