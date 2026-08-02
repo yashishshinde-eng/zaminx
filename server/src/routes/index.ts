@@ -13,6 +13,7 @@ import referralRoutes from "./referral.routes.js";
 import bonanzaRoutes from "./bonanza.routes.js";
 import compensationRoutes from "./compensation.routes.js";
 import rankRoutes from "./rank.routes.js";
+import reportRoutes from "./report.routes.js";
 
 const router = Router();
 
@@ -35,6 +36,8 @@ router.use("/bonanzas", authenticate, bonanzaRoutes);
 router.use("/compensation", authenticate, authorize("admin"), compensationRoutes);
 // Rank ladder CRUD is admin-only (Phase 10A).
 router.use("/ranks", authenticate, authorize("admin"), rankRoutes);
+// Per-user reports (Phase 11): 9 kinds over 3 data sources + CSV/Excel export.
+router.use("/reports", authenticate, reportRoutes);
 
 // Future phases mount here:
 // router.use("/users", authenticate, authorize("admin"), userRoutes);

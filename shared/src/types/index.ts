@@ -70,3 +70,4 @@ export * from "./wallet";
 export * from "./withdrawal";
 export * from "./referral";
 export * from "./compensation";
+export * from "./report";

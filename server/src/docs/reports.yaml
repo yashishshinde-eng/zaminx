@@ -1,0 +1,120 @@
+paths:
+  /reports/{kind}:
+    get:
+      tags: [Reports]
+      summary: Get a user report (paginated + summary)
+      description: >
+        Phase 11. The 9 user report kinds collapse to 3 data sources:
+        `deposits` / `withdrawals` (their own collections) and `wallet` plus the
+        6 income streams (`trading`, `direct`, `team`, `community`, `rank`,
+        `bonanza`) which share the wallet ledger filtered by `type` (and
+        `direction:"credit"` for income streams). Each response is a page of
+        rows plus a summary (count, total, daily series) computed over the same
+        filter as the visible rows. Scoped to the authenticated user.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          schema:
+            type: string
+            enum: [deposits, withdrawals, wallet, trading, direct, team, community, rank, bonanza]
+        - in: query
+          name: from
+          schema: { type: string, format: date, description: "YYYY-MM-DD, UTC inclusive" }
+        - in: query
+          name: to
+          schema: { type: string, format: date, description: "YYYY-MM-DD, UTC inclusive" }
+        - in: query
+          name: status
+          schema: { type: string, maxLength: 40, description: "Deposits/withdrawals status filter" }
+        - in: query
+          name: q
+          schema: { type: string, maxLength: 60, description: "Memo (ledger) or address (withdrawals) search" }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+      responses:
+        "200":
+          description: A page of report rows + summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      report:
+                        type: object
+                        properties:
+                          rows: { type: array, items: { type: object } }
+                          pagination:
+                            type: object
+                            properties:
+                              page: { type: integer }
+                              limit: { type: integer }
+                              total: { type: integer }
+                              totalPages: { type: integer }
+                          summary:
+                            type: object
+                            properties:
+                              count: { type: integer }
+                              total: { type: number }
+                              series:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    date: { type: string }
+                                    value: { type: number }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+
+  /reports/{kind}/export:
+    get:
+      tags: [Reports]
+      summary: Export a user report (CSV or Excel)
+      description: >
+        Same filters as the report read, no pagination (the service caps at 5000
+        rows). `format=csv` returns a UTF-8 BOM CSV (`text/csv`); `format=xls`
+        returns an HTML table served as `application/vnd.ms-excel` with a `.xls`
+        extension that Excel opens without a format-mismatch warning.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          schema:
+            type: string
+            enum: [deposits, withdrawals, wallet, trading, direct, team, community, rank, bonanza]
+        - in: query
+          name: from
+          schema: { type: string, format: date }
+        - in: query
+          name: to
+          schema: { type: string, format: date }
+        - in: query
+          name: status
+          schema: { type: string, maxLength: 40 }
+        - in: query
+          name: q
+          schema: { type: string, maxLength: 60 }
+        - in: query
+          name: format
+          schema: { type: string, enum: [csv, xls], default: csv }
+      responses:
+        "200":
+          description: The exported file
+          headers:
+            Content-Disposition:
+              schema: { type: string, example: 'attachment; filename="report-trading-2026-08-02.csv"' }
+          content:
+            text/csv: { schema: { type: string } }
+            application/vnd.ms-excel: { schema: { type: string } }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }

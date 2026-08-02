@@ -6,3 +6,4 @@ export * from "./wallet.schema";
 export * from "./withdrawal.schema";
 export * from "./referral.schema";
 export * from "./compensation.schema";
+export * from "./report.schema";
