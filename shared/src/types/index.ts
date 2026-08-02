@@ -68,3 +68,4 @@ export * from "./package";
 export * from "./deposit";
 export * from "./wallet";
 export * from "./withdrawal";
+export * from "./referral";

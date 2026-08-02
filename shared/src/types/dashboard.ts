@@ -19,6 +19,13 @@ export interface DashboardSummary {
     rank: { name: string; nextRank: string | null; progress: number }; // 0..1
   };
   referral: { code: string; link: string };
+  /** Phase 9 (Referral) — real direct + team (all-level) counts. */
+  team: {
+    directCount: number;
+    teamCount: number;
+    activeDirectCount: number;
+    activeTeamCount: number;
+  };
   /** Phase 8 (Wallet) — real Main/Bonus/Trading balances + totals. */
   wallets: WalletBalances;
   package: {

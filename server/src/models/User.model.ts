@@ -24,6 +24,12 @@ const userSchema = new Schema(
     referralCode: { type: String, unique: true, required: true, index: true },
     referredBy: { type: String, default: null, index: true },
 
+    // Phase 9 referral graph: sponsor _id + ancestor chain (root → sponsor).
+    // `referredBy` (above) stores the referrer's *code* for display; `sponsorId`
+    // and `lineage` enable indexed descendant queries. Null/empty for roots.
+    sponsorId: { type: Schema.Types.ObjectId, ref: "User", default: null, index: true },
+    lineage: { type: [Schema.Types.ObjectId], default: [], index: true },
+
     isEmailVerified: { type: Boolean, default: false },
 
     // Hashed refresh token currently issued to this user (null after logout).

@@ -4,3 +4,4 @@ export * from "./profile.schema";
 export * from "./package.schema";
 export * from "./wallet.schema";
 export * from "./withdrawal.schema";
+export * from "./referral.schema";

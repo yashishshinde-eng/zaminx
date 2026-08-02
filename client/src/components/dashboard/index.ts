@@ -9,3 +9,4 @@ export { IncomeDistributionCard } from "./IncomeDistributionCard";
 export { NotificationsCard } from "./NotificationsCard";
 export { RecentActivityCard } from "./RecentActivityCard";
 export { StatCard } from "./StatCard";
+export { TeamStatsCard } from "./TeamStatsCard";

@@ -22,6 +22,11 @@ export const queryKeys = {
     list: (params?: unknown) => ["withdrawals", "list", params ?? {}] as const,
     detail: (id: string) => ["withdrawals", "detail", id] as const,
   },
+  referrals: {
+    stats: ["referrals", "stats"] as const,
+    direct: (params?: unknown) => ["referrals", "direct", params ?? {}] as const,
+    children: (id: string, params?: unknown) => ["referrals", "children", id, params ?? {}] as const,
+  },
   users: {
     all: ["users"] as const,
     list: (params?: Record<string, unknown>) => ["users", "list", params ?? {}] as const,

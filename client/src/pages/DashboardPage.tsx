@@ -13,6 +13,7 @@ import {
   IncomeDistributionCard,
   NotificationsCard,
   RecentActivityCard,
+  TeamStatsCard,
 } from "@/components/dashboard";
 
 export function DashboardPage() {
@@ -36,10 +37,11 @@ export function DashboardPage() {
 
       {data && !isLoading && !isError && (
         <div className="mt-6 space-y-6">
-          {/* Top row: account summary + referral link */}
-          <div className="grid gap-6 lg:grid-cols-2">
+          {/* Top row: account summary + referral link + team stats */}
+          <div className="grid gap-6 lg:grid-cols-3">
             <AccountSummaryCard account={data.account} />
             <ReferralLinkCard referral={data.referral} />
+            <TeamStatsCard team={data.team} />
           </div>
 
           {/* Wallet + package + rank */}
@@ -73,7 +75,8 @@ export function DashboardPage() {
 function DashboardSkeleton() {
   return (
     <div className="mt-6 space-y-6">
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-3">
+        <Skeleton className="h-40" />
         <Skeleton className="h-40" />
         <Skeleton className="h-40" />
       </div>

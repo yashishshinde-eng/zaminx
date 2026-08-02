@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@zaminex/shared";
@@ -17,11 +17,19 @@ export function RegisterPage() {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
 
+  // Auto-capture the ?ref=<code> share link (generated on the dashboard) so
+  // referrals register under the right sponsor without pasting the code.
+  const [searchParams] = useSearchParams();
+  const refCode = searchParams.get("ref") ?? "";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterBody>({ resolver: zodResolver(registerSchema) });
+  } = useForm<RegisterBody>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: { referralCode: refCode || undefined },
+  });
 
   const onSubmit = async (values: RegisterBody) => {
     setSubmitting(true);

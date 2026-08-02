@@ -2,6 +2,7 @@ import { User, ActivityLog, UserPackage } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { env } from "../config/env.js";
 import { getWalletBalances } from "./wallet.service.js";
+import { getTeamCounts } from "./referral.service.js";
 import type { DashboardSummary } from "@zaminex/shared";
 
 /**
@@ -26,11 +27,13 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
 
   // Real (Phase 6): the user's active package, pending count, and history total.
   // Real (Phase 8): the user's wallet balances (Main / Bonus / Trading + totals).
-  const [activePkg, pendingCount, historyCount, wallets] = await Promise.all([
+  // Real (Phase 9): the user's referral team counts (direct + all-level).
+  const [activePkg, pendingCount, historyCount, wallets, team] = await Promise.all([
     UserPackage.findOne({ user: userId, status: "active" }).sort({ activatedAt: -1 }).lean(),
     UserPackage.countDocuments({ user: userId, status: "pending" }),
     UserPackage.countDocuments({ user: userId }),
     getWalletBalances(userId),
+    getTeamCounts(userId),
   ]);
 
   return {
@@ -48,6 +51,8 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
       code: user.referralCode,
       link: `${env.CLIENT_URL}/?ref=${user.referralCode}`,
     },
+    // Phase 9 (Referral) — real direct + team (all-level) counts.
+    team,
     // Phase 8 (Wallet) — real Main/Bonus/Trading balances + totals.
     wallets,
     // Phase 6 (Package) — real active package + pending/history counts.

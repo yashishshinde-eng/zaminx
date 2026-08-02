@@ -67,6 +67,10 @@ export async function registerUser(input: RegisterInput) {
     phone: input.phone,
     password: input.password, // virtual hashes it
     referredBy: referrer ? referrer.referralCode : null,
+    // Phase 9: materialise the referral graph so descendants are one index hit.
+    // lineage = the referrer's ancestor chain + the referrer itself (root → sponsor).
+    sponsorId: referrer ? referrer._id : null,
+    lineage: referrer ? [...referrer.lineage, referrer._id] : [],
   });
   await user.save();
 

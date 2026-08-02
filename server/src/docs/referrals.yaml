@@ -1,0 +1,124 @@
+paths:
+  /referrals/me:
+    get:
+      tags: [Referrals]
+      summary: Referral code/link + team statistics
+      description: >
+        Returns the viewer's referral code and share link, direct + all-level
+        team counts (with active breakdowns), and a by-level descendant
+        breakdown. Phase 9.
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Referral stats
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      referral:
+                        type: object
+                        properties:
+                          code: { type: string }
+                          link: { type: string }
+                          directCount: { type: integer }
+                          teamCount: { type: integer, description: All-level descendants }
+                          activeDirectCount: { type: integer }
+                          activeTeamCount: { type: integer }
+                          byLevel:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                level: { type: integer }
+                                count: { type: integer }
+                                active: { type: integer }
+        "401": { description: Unauthorized }
+
+  /referrals/direct:
+    get:
+      tags: [Referrals]
+      summary: The viewer's direct (level-1) referrals (paginated)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: status
+          schema: { type: string, enum: [active, suspended, banned] }
+        - in: query
+          name: q
+          schema: { type: string, maxLength: 60 }
+          description: Case-insensitive name / referral-code substring search
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        "200":
+          description: A page of direct referral member rows (no email / PII)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      direct:
+                        type: object
+                        properties:
+                          items: { type: array, items: { type: object } }
+                          page: { type: integer }
+                          limit: { type: integer }
+                          total: { type: integer }
+                          totalPages: { type: integer }
+        "401": { description: Unauthorized }
+
+  /referrals/children/{userId}:
+    get:
+      tags: [Referrals]
+      summary: Lazy tree expansion — direct children of a node
+      description: >
+        `userId` is `"me"` (the viewer) or an id within the viewer's own
+        subtree. Nodes outside the subtree return 404 (no-leak).
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema: { type: string }
+          description: "me" or a downline user id
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        "200":
+          description: A page of child member rows
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      children:
+                        type: object
+                        properties:
+                          items: { type: array, items: { type: object } }
+                          page: { type: integer }
+                          limit: { type: integer }
+                          total: { type: integer }
+                          totalPages: { type: integer }
+        "401": { description: Unauthorized }
+        "404": { description: Node not found (outside the viewer's subtree) }

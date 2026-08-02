@@ -9,6 +9,7 @@ import packageRoutes from "./package.routes.js";
 import paymentRoutes from "./payment.routes.js";
 import walletRoutes from "./wallet.routes.js";
 import withdrawalRoutes from "./withdrawal.routes.js";
+import referralRoutes from "./referral.routes.js";
 
 const router = Router();
 
@@ -24,6 +25,7 @@ router.use("/packages", authenticate, packageRoutes);
 router.use("/payments", paymentRoutes);
 router.use("/wallet", authenticate, walletRoutes);
 router.use("/withdrawals", authenticate, withdrawalRoutes);
+router.use("/referrals", authenticate, referralRoutes);
 
 // Future phases mount here:
 // router.use("/users", authenticate, authorize("admin"), userRoutes);
