@@ -44,3 +44,4 @@ export type ChangePasswordBody = z.infer<typeof changePasswordSchema>["body"];
 export type VerifyEmailBody = z.infer<typeof verifyEmailSchema>["body"];
 export type ResendVerificationBody = z.infer<typeof resendVerificationSchema>["body"];
 export * from "./cms";
+export * from "./dashboard";

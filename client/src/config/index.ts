@@ -9,6 +9,7 @@ export const STORAGE_KEYS = {
 /** Centralised TanStack Query key factory. */
 export const queryKeys = {
   me: ["auth", "me"] as const,
+  dashboard: ["dashboard", "summary"] as const,
   users: {
     all: ["users"] as const,
     list: (params?: Record<string, unknown>) => ["users", "list", params ?? {}] as const,

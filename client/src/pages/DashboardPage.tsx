@@ -1,72 +1,96 @@
-import { Link } from "react-router-dom";
-import { Construction } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
-import { PageHeader } from "@/components/shared";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useAuth } from "@/context/AuthContext";
-
-const PHASES = [
-  { title: "Wallet System", desc: "Main, bonus & trading wallets with an immutable ledger.", phase: "Phase 8" },
-  { title: "Deposits", desc: "NOWPayments integration with webhook verification.", phase: "Phase 7" },
-  { title: "Compensation Engine", desc: "Trading yield, direct, team, community, rank & bonanza.", phase: "Phase 10" },
-  { title: "Withdrawals", desc: "Manual admin approval with on-hold balance logic.", phase: "Phase 8A" },
-];
+import { PageHeader, ErrorState } from "@/components/shared";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useDashboardSummary } from "@/hooks/useDashboardSummary";
+import {
+  AccountSummaryCard,
+  ReferralLinkCard,
+  WalletCard,
+  PackageCard,
+  RankCard,
+  IncomeBreakdown,
+  IncomeChartCard,
+  IncomeDistributionCard,
+  NotificationsCard,
+  RecentActivityCard,
+} from "@/components/dashboard";
 
 export function DashboardPage() {
-  const { user } = useAuth();
+  const { data, isLoading, isError, refetch } = useDashboardSummary();
 
   return (
     <AppShell>
       <PageHeader
         title="Dashboard"
-        description="Your investment overview — widgets arrive in the next phases."
+        description="Your investment overview at a glance."
         breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard" }]}
       />
 
-      <Card className="mt-6">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle>Signed in as {user?.name}</CardTitle>
-              <CardDescription>{user?.email}</CardDescription>
-            </div>
-            <Badge variant="secondary">{user?.role}</Badge>
+      {isLoading && <DashboardSkeleton />}
+
+      {isError && (
+        <div className="mt-6">
+          <ErrorState message="We couldn't load your dashboard. Please try again." onRetry={() => refetch()} />
+        </div>
+      )}
+
+      {data && !isLoading && !isError && (
+        <div className="mt-6 space-y-6">
+          {/* Top row: account summary + referral link */}
+          <div className="grid gap-6 lg:grid-cols-2">
+            <AccountSummaryCard account={data.account} />
+            <ReferralLinkCard referral={data.referral} />
           </div>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">
-            Your referral code is <span className="font-mono font-semibold text-foreground">{user?.referralCode}</span>.
-            Share it to start building your team.
-          </p>
-        </CardContent>
-      </Card>
 
-      <div className="mt-6">
-        <div className="flex items-center gap-2 text-muted-foreground">
-          <Construction className="size-4" />
-          <span className="text-sm font-medium">Coming in the next phases</span>
-        </div>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PHASES.map((p) => (
-            <Card key={p.title}>
-              <CardHeader>
-                <Badge variant="outline" className="w-fit">
-                  {p.phase}
-                </Badge>
-                <CardTitle className="mt-2 text-base">{p.title}</CardTitle>
-                <CardDescription>{p.desc}</CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-      </div>
+          {/* Wallet + package + rank */}
+          <div className="grid gap-6 lg:grid-cols-3">
+            <WalletCard wallets={data.wallets} />
+            <PackageCard pkg={data.package} />
+            <RankCard rank={data.account.rank} />
+          </div>
 
-      <p className="mt-6 text-sm text-muted-foreground">
-        <Link to="/app/settings" className="text-primary hover:underline">
-          Go to Settings →
-        </Link>
-      </p>
+          {/* Income breakdown */}
+          <IncomeBreakdown income={data.income} />
+
+          {/* Charts */}
+          <div className="grid gap-6 lg:grid-cols-2">
+            <IncomeChartCard income={data.income} />
+            <IncomeDistributionCard income={data.income} />
+          </div>
+
+          {/* Notifications + recent activity */}
+          <div className="grid gap-6 lg:grid-cols-2">
+            <NotificationsCard notifications={data.notifications} />
+            <RecentActivityCard activity={data.recentActivity} />
+          </div>
+        </div>
+      )}
     </AppShell>
+  );
+}
+
+/** Loading skeleton mirroring the dashboard grid. */
+function DashboardSkeleton() {
+  return (
+    <div className="mt-6 space-y-6">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Skeleton className="h-40" />
+        <Skeleton className="h-40" />
+      </div>
+      <div className="grid gap-6 lg:grid-cols-3">
+        <Skeleton className="h-48" />
+        <Skeleton className="h-48" />
+        <Skeleton className="h-48" />
+      </div>
+      <Skeleton className="h-56" />
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Skeleton className="h-72" />
+        <Skeleton className="h-72" />
+      </div>
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Skeleton className="h-64" />
+        <Skeleton className="h-64" />
+      </div>
+    </div>
   );
 }
