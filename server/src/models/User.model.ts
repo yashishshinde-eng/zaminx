@@ -33,6 +33,10 @@ const userSchema = new Schema(
     resetTokenHash: { type: String, default: null, select: false },
     resetTokenExpires: { type: Date, default: null },
 
+    // Hashed email-verification token (with expiry) — Phase 3.
+    emailVerifyTokenHash: { type: String, default: null, select: false },
+    emailVerifyTokenExpires: { type: Date, default: null },
+
     themePreference: { type: String, enum: ["light", "dark"], default: "light" },
     notificationPreference: {
       email: { type: Boolean, default: true },

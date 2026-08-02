@@ -31,6 +31,8 @@ interface AuthContextValue {
     referralCode?: string;
   }) => Promise<PublicUser>;
   logout: () => Promise<void>;
+  /** Re-fetch the current user (e.g. after email verification). */
+  refreshUser: () => Promise<PublicUser | null>;
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -78,6 +80,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   }, []);
 
+  const refreshUser = useCallback(async () => {
+    const token = localStorage.getItem(STORAGE_KEYS.accessToken);
+    if (!token) return null;
+    const u = await fetchMe();
+    setUser(u);
+    return u;
+  }, []);
+
   const value = useMemo<AuthContextValue>(
     () => ({
       user,
@@ -86,8 +96,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       login,
       register,
       logout,
+      refreshUser,
     }),
-    [user, isLoading, login, register, logout],
+    [user, isLoading, login, register, logout, refreshUser],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

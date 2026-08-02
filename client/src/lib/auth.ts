@@ -53,3 +53,14 @@ export async function logoutRequest(): Promise<void> {
     clearTokens();
   }
 }
+
+/** Verify an email using a token issued at registration or resend. */
+export async function verifyEmailRequest(token: string): Promise<PublicUser> {
+  const { data } = await api.post<{ data: { user: PublicUser } }>("/auth/verify-email", { token });
+  return data.data.user;
+}
+
+/** Resend the verification email. Always resolves (never leaks account existence). */
+export async function resendVerificationRequest(email: string): Promise<void> {
+  await api.post("/auth/resend-verification", { email });
+}

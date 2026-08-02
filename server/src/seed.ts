@@ -2,6 +2,7 @@ import { connectDB } from "./config/db.js";
 import { env } from "./config/env.js";
 import { logger } from "./config/logger.js";
 import { User, Setting, CmsPage } from "./models/index.js";
+import { isSmtpConfigured } from "./services/email.service.js";
 import type { ContentBlock } from "@zaminex/shared";
 
 async function seed() {
@@ -76,7 +77,7 @@ async function seed() {
     },
     { key: "cms.announcementBar", value: { enabled: false, message: "" }, category: "cms", isPublic: true },
     { key: "general.maintenanceMode", value: { enabled: false, message: "" }, category: "general", isPublic: true },
-    { key: "smtp.configured", value: false, category: "smtp", isPublic: false },
+    { key: "smtp.configured", value: isSmtpConfigured(), category: "smtp", isPublic: false },
     { key: "payment.configured", value: false, category: "payment", isPublic: false },
   ];
 

@@ -62,6 +62,9 @@ const server = app.listen(0, async () => {
   await check("login validation", "/api/v1/auth/login", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}),
   }, { status: 400, bodyMatch: "Validation failed" });
+  await check("verify-email validation", "/api/v1/auth/verify-email", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}),
+  }, { status: 400, bodyMatch: "Validation failed" });
 
   // --- DB-dependent CMS checks (skipped without MongoDB) ---
   const connected = await tryConnectMongo();
@@ -69,6 +72,14 @@ const server = app.listen(0, async () => {
     console.log("ⓘ MongoDB not reachable — skipping CMS/page/contact checks (they need a DB).");
   } else {
     await CmsPage.create(TEST_PAGE).catch(() => undefined); // ignore if already present
+    await check("resend-verification no-leak", "/api/v1/auth/resend-verification", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: "no-such-account@example.com" }),
+    }, { status: 200, bodyMatch: "If that email exists" });
+    await check("verify-email invalid token", "/api/v1/auth/verify-email", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: "definitely-not-a-real-token" }),
+    }, { status: 400, bodyMatch: "Invalid verification token" });
     await check("cms site", "/api/v1/cms/site", { method: "GET" }, { status: 200, bodyMatch: "maintenanceMode" });
     await check("cms page list", "/api/v1/cms/pages", { method: "GET" }, { status: 200, bodyMatch: "slug" });
     await check("cms page by slug", `/api/v1/cms/pages/${TEST_PAGE.slug}`, { method: "GET" }, { status: 200, bodyMatch: "blocks" });

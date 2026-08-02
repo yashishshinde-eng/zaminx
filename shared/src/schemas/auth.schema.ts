@@ -54,6 +54,18 @@ export const forgotPasswordSchema = z.object({
   body: z.object({ email }),
 });
 
+/** POST /auth/verify-email */
+export const verifyEmailSchema = z.object({
+  body: z.object({
+    token: z.string().min(1, { message: "Token is required" }),
+  }),
+});
+
+/** POST /auth/resend-verification */
+export const resendVerificationSchema = z.object({
+  body: z.object({ email }),
+});
+
 /** POST /auth/reset-password */
 export const resetPasswordSchema = z.object({
   body: z.object({

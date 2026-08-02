@@ -3,7 +3,24 @@ import { ApiError } from "../utils/ApiError.js";
 import { generateOpaqueToken } from "../utils/tokens.js";
 import { issueTokens, verifyRefreshToken } from "./token.service.js";
 import { logger } from "../config/logger.js";
+import { env } from "../config/env.js";
+import { sendEmail } from "./email.service.js";
+import { verifyEmailTemplate, welcomeTemplate, resetPasswordTemplate } from "./emailTemplates.js";
 import type { PublicUser } from "@zaminex/shared";
+
+/** Lifetime of verification/reset tokens, derived from env. */
+const tokenExpiryMs = () => env.EMAIL_TOKEN_EXPIRY_HOURS * 60 * 60 * 1000;
+
+/** Issue a verification token, store its hash + expiry, and email the link. */
+async function issueVerificationToken(user: UserDocument): Promise<void> {
+  const rawToken = generateOpaqueToken(32);
+  user.emailVerifyTokenHash = User.hashToken(rawToken);
+  user.emailVerifyTokenExpires = new Date(Date.now() + tokenExpiryMs());
+  await user.save();
+  const link = `${env.CLIENT_URL}/verify-email?token=${rawToken}`;
+  const { subject, html, text } = verifyEmailTemplate({ name: user.name, link });
+  await sendEmail({ to: user.email, subject, html, text });
+}
 
 /** Strip a User document down to the safe public shape. */
 export function toPublicUser(user: UserDocument): PublicUser {
@@ -53,10 +70,52 @@ export async function registerUser(input: RegisterInput) {
   user.refreshTokenHash = User.hashToken(tokens.refreshToken);
   await user.save();
 
-  // Phase 3 will send a real verification email here.
+  // Send the verification email. Failures are logged, not thrown — a signup
+  // must never be blocked by an email outage (resend is available later).
+  await issueVerificationToken(user);
   logger.info("User registered", { userId: user._id, email: user.email, referredBy: user.referredBy });
 
   return { user, tokens };
+}
+
+/** Verify an email with a token issued at registration or resend. */
+export async function verifyEmail(token: string) {
+  // Phase 3 simplification: scan users with a pending verify token. Phase 15
+  // adds an index for O(1) lookup at scale (P1 volume is trivial).
+  const users = await User.find({ emailVerifyTokenHash: { $ne: null } }).select(
+    "+emailVerifyTokenHash +emailVerifyTokenExpires",
+  );
+  const user = users.find((u) => u.verifyToken(u.emailVerifyTokenHash, token));
+
+  if (!user) throw ApiError.badRequest("Invalid verification token");
+  if (user.emailVerifyTokenExpires && user.emailVerifyTokenExpires.getTime() < Date.now()) {
+    throw ApiError.badRequest("Verification token has expired");
+  }
+
+  user.isEmailVerified = true;
+  user.emailVerifyTokenHash = null;
+  user.emailVerifyTokenExpires = null;
+  await user.save();
+
+  // Send the welcome email (best-effort).
+  const loginLink = `${env.CLIENT_URL}/app`;
+  const { subject, html, text } = welcomeTemplate({ name: user.name, loginLink });
+  await sendEmail({ to: user.email, subject, html, text });
+
+  logger.info("Email verified", { userId: user._id, email: user.email });
+  return toPublicUser(user);
+}
+
+/** Resend the verification email. Never leaks whether the email exists. */
+export async function resendVerification(email: string) {
+  const user = await User.findOne({ email }).select("+emailVerifyTokenHash");
+  if (!user || user.isEmailVerified) {
+    // Resolve silently — do not leak account existence or verified status.
+    return { handled: false };
+  }
+  await issueVerificationToken(user);
+  logger.info("Verification email resent", { userId: user._id, email: user.email });
+  return { handled: true };
 }
 
 interface LoginInput {
@@ -108,7 +167,7 @@ export async function logoutUser(userId: string) {
   await user.save();
 }
 
-/** Forgot-password: create a short-lived reset token. Real email is sent in Phase 3. */
+/** Forgot-password: create a short-lived reset token and email the link. */
 export async function requestPasswordReset(email: string) {
   const user = await User.findOne({ email });
   if (!user) {
@@ -119,11 +178,15 @@ export async function requestPasswordReset(email: string) {
 
   const rawToken = generateOpaqueToken(32);
   user.resetTokenHash = User.hashToken(rawToken);
-  user.resetTokenExpires = new Date(Date.now() + 30 * 60 * 1000); // 30 min
+  user.resetTokenExpires = new Date(Date.now() + tokenExpiryMs());
   await user.save();
 
-  // Phase 3 replaces this with a real email.
-  logger.info("Password reset token issued (email stubbed)", { userId: user._id });
+  // Send the reset email (best-effort).
+  const link = `${env.CLIENT_URL}/reset-password?token=${rawToken}`;
+  const { subject, html, text } = resetPasswordTemplate({ name: user.name, link });
+  await sendEmail({ to: user.email, subject, html, text });
+
+  logger.info("Password reset token issued", { userId: user._id });
   return { handled: true };
 }
 

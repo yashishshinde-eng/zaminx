@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
+import { VerifyEmailBanner } from "./VerifyEmailBanner";
 
 /**
  * Responsive app shell: fixed sidebar on lg+, off-canvas drawer on mobile.
@@ -37,6 +38,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* Main column */}
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar onOpenSidebar={() => setMobileOpen(true)} />
+        <VerifyEmailBanner />
         <main className="flex-1 overflow-x-hidden p-4 sm:p-6">{children}</main>
       </div>
     </div>

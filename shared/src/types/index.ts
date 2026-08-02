@@ -6,6 +6,8 @@ import {
   forgotPasswordSchema,
   resetPasswordSchema,
   changePasswordSchema,
+  verifyEmailSchema,
+  resendVerificationSchema,
 } from "../schemas/auth.schema";
 
 /** Role attached to an authenticated request. */
@@ -39,4 +41,6 @@ export type RefreshBody = z.infer<typeof refreshSchema>["body"];
 export type ForgotPasswordBody = z.infer<typeof forgotPasswordSchema>["body"];
 export type ResetPasswordBody = z.infer<typeof resetPasswordSchema>["body"];
 export type ChangePasswordBody = z.infer<typeof changePasswordSchema>["body"];
+export type VerifyEmailBody = z.infer<typeof verifyEmailSchema>["body"];
+export type ResendVerificationBody = z.infer<typeof resendVerificationSchema>["body"];
 export * from "./cms";

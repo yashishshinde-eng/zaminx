@@ -96,7 +96,7 @@ paths:
   /auth/forgot-password:
     post:
       tags: [Auth]
-      summary: Request a password reset link (stubbed email in Phase 1)
+      summary: Request a password reset link (email sent via configured transport)
       requestBody:
         required: true
         content:
@@ -126,3 +126,36 @@ paths:
       responses:
         "200": { description: Password updated }
         "400": { description: Invalid or expired token }
+
+  /auth/verify-email:
+    post:
+      tags: [Auth]
+      summary: Verify an email address with a token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token: { type: string }
+      responses:
+        "200": { description: Email verified — returns the user }
+        "400": { description: Invalid or expired token }
+
+  /auth/resend-verification:
+    post:
+      tags: [Auth]
+      summary: Resend the email verification link
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+      responses:
+        "200": { description: Always 200 — does not leak account existence }

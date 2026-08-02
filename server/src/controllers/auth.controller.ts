@@ -5,6 +5,8 @@ import {
   refreshSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
+  verifyEmailSchema,
+  resendVerificationSchema,
 } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -18,6 +20,8 @@ import {
   logoutUser,
   requestPasswordReset,
   resetPassword,
+  verifyEmail,
+  resendVerification,
   toPublicUser,
 } from "../services/auth.service.js";
 
@@ -82,5 +86,25 @@ export const reset: RequestHandler[] = [
   asyncHandler(async (req, res) => {
     await resetPassword(req.body.token, req.body.password);
     ok(res, null, "Password updated — please log in");
+  }),
+];
+
+/** POST /auth/verify-email */
+export const verifyEmailHandler: RequestHandler[] = [
+  validate(verifyEmailSchema),
+  asyncHandler(async (req, res) => {
+    const user = await verifyEmail(req.body.token);
+    await ActivityLog.create({ actor: user.id, action: "auth.verify-email", ip: req.ip, userAgent: req.headers["user-agent"] });
+    ok(res, { user }, "Email verified");
+  }),
+];
+
+/** POST /auth/resend-verification */
+export const resendVerificationHandler: RequestHandler[] = [
+  validate(resendVerificationSchema),
+  asyncHandler(async (req, res) => {
+    await resendVerification(req.body.email);
+    // Always 200 to avoid leaking account existence.
+    ok(res, null, "If that email exists and is unverified, a verification link has been sent");
   }),
 ];

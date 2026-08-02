@@ -17,6 +17,15 @@ const envSchema = z.object({
   SEED_ADMIN_NAME: z.string().default("Platform Admin"),
   SEED_ADMIN_EMAIL: z.string().email().default("admin@zaminex.local"),
   SEED_ADMIN_PASSWORD: z.string().min(8).default("ChangeMe!2024"),
+
+  // Email delivery (Phase 3). In dev, omit SMTP_* to fall back to a file
+  // transport that writes each message under server/logs/emails/.
+  SMTP_HOST: z.string().optional(),
+  SMTP_PORT: z.coerce.number().int().positive().default(587),
+  SMTP_USER: z.string().optional(),
+  SMTP_PASS: z.string().optional(),
+  SMTP_FROM: z.string().default("Zaminex <noreply@zaminex.io>"),
+  EMAIL_TOKEN_EXPIRY_HOURS: z.coerce.number().int().positive().default(24),
 });
 
 const parsed = envSchema.safeParse(process.env);
