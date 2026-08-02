@@ -29,6 +29,7 @@ const WithdrawalsPage = lazy(() => import("@/pages/WithdrawalsPage").then((m) =>
 const TeamPage = lazy(() => import("@/pages/TeamPage").then((m) => ({ default: m.TeamPage })));
 const BonanzaPage = lazy(() => import("@/pages/BonanzaPage").then((m) => ({ default: m.BonanzaPage })));
 const ReportsPage = lazy(() => import("@/pages/ReportsPage").then((m) => ({ default: m.ReportsPage })));
+const AdminReportsPage = lazy(() => import("@/pages/AdminReportsPage").then((m) => ({ default: m.AdminReportsPage })));
 const PlaceholderPage = lazy(() => import("@/pages/PlaceholderPage").then((m) => ({ default: m.PlaceholderPage })));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
@@ -70,6 +71,7 @@ export function AppRouter() {
           {/* Admin panel (protected, admin only) */}
           <Route element={<ProtectedRoute adminOnly />}>
             <Route path="/app/admin" element={<PlaceholderPage title="Admin Panel" description="Platform administration." />} />
+            <Route path="/app/admin/reports" element={<AdminReportsPage />} />
           </Route>
 
           {/* Fallback */}

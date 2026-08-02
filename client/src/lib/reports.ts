@@ -1,11 +1,13 @@
 import { api } from "./axios";
 import type {
   UserReportKind,
+  AdminReportKind,
   ReportQuery,
   ReportExportFormat,
   DepositReport,
   WithdrawalReport,
   LedgerReport,
+  AdminReportPayload,
 } from "@zaminex/shared";
 
 /** The report payload returned by `GET /reports/:kind` — narrowed by `kind`. */
@@ -39,8 +41,35 @@ export async function downloadReport(kind: UserReportKind, params: ReportExportP
     params,
     responseType: "blob",
   });
-  const blob = res.data as Blob;
-  const filename = parseFilename(res.headers["content-disposition"]) ?? `report-${kind}.csv`;
+  triggerDownload(res.data as Blob, res.headers["content-disposition"], `report-${kind}.csv`);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Admin reports — Phase 11A                                          */
+/* ------------------------------------------------------------------ */
+
+interface AdminReportResponse {
+  data: { report: AdminReportPayload };
+}
+
+/** GET /reports/admin/:kind — platform-wide admin report (paginated + summary). */
+export async function fetchAdminReport(kind: AdminReportKind, params: ReportQuery): Promise<AdminReportPayload> {
+  const { data } = await api.get<AdminReportResponse>(`/reports/admin/${kind}`, { params });
+  return data.data.report;
+}
+
+/** GET /reports/admin/:kind/export — CSV or Excel (.xls) download (admin). */
+export async function downloadAdminReport(kind: AdminReportKind, params: ReportExportParams): Promise<void> {
+  const res = await api.get(`/reports/admin/${kind}/export`, {
+    params,
+    responseType: "blob",
+  });
+  triggerDownload(res.data as Blob, res.headers["content-disposition"], `admin-report-${kind}.csv`);
+}
+
+/** Stream a blob to the browser as a download, parsing the filename from Content-Disposition. */
+function triggerDownload(blob: Blob, disposition: string | undefined, fallback: string): void {
+  const filename = parseFilename(disposition) ?? fallback;
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;

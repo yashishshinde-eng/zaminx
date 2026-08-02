@@ -16,7 +16,7 @@ import type {
 
 const DAY_MS = 86_400_000;
 /** Max rows materialised for a single export (no pagination on exports). */
-const EXPORT_CAP = 5000;
+export const EXPORT_CAP = 5000;
 
 /**
  * Ledger `WalletTxType` for each income-stream kind. `wallet` → undefined means
@@ -68,7 +68,7 @@ interface FilterArgs {
 /* ------------------------------------------------------------------ */
 
 /** `{ createdAt: { $gte?, $lt? } }` over UTC midnight bounds (`to` inclusive). */
-function dateRangeFilter(from?: string, to?: string): Record<string, unknown> {
+export function dateRangeFilter(from?: string, to?: string): Record<string, unknown> {
   const range: Record<string, unknown> = {};
   if (from) {
     const start = new Date(`${from}T00:00:00.000Z`);
@@ -81,18 +81,18 @@ function dateRangeFilter(from?: string, to?: string): Record<string, unknown> {
   return Object.keys(range).length ? { createdAt: range } : {};
 }
 
-function paginate(total: number, page: number, limit: number): ReportPagination {
+export function paginate(total: number, page: number, limit: number): ReportPagination {
   return { page, limit, total, totalPages: total === 0 ? 0 : Math.ceil(total / limit) };
 }
 
-function toIso(d: Date | string | null | undefined): string {
+export function toIso(d: Date | string | null | undefined): string {
   if (d instanceof Date) return d.toISOString();
   if (typeof d === "string") return d;
   return new Date().toISOString();
 }
 
 /** Clamp the page-size for the paginated JSON endpoint (export uses EXPORT_CAP). */
-function clampPage(page: number, limit: number): { page: number; limit: number } {
+export function clampPage(page: number, limit: number): { page: number; limit: number } {
   return { page: Math.max(1, page), limit: Math.min(100, Math.max(1, limit)) };
 }
 
@@ -229,9 +229,9 @@ function toTxRow(d: LeanTx): WalletTxRow {
 
 /** `$sum` of a signed amount: credits add, debits subtract. For income
  *  streams (all credits) this is a plain sum; for `wallet` it is the net. */
-const SIGNED_AMOUNT = { $cond: [{ $eq: ["$direction", "credit"] }, "$amount", { $multiply: ["$amount", -1] }] };
+export const SIGNED_AMOUNT = { $cond: [{ $eq: ["$direction", "credit"] }, "$amount", { $multiply: ["$amount", -1] }] };
 
-async function ledgerSummary(filter: Record<string, unknown>): Promise<ReportSummary> {
+export async function ledgerSummary(filter: Record<string, unknown>): Promise<ReportSummary> {
   const [agg, daily] = await Promise.all([
     WalletTransaction.aggregate<{ _id: null; count: number; total: number }>([
       { $match: filter },
@@ -255,7 +255,7 @@ async function ledgerSummary(filter: Record<string, unknown>): Promise<ReportSum
   };
 }
 
-async function amountSummary(
+export async function amountSummary(
   model: typeof Deposit | typeof Withdrawal,
   filter: Record<string, unknown>,
   amountField: "amountUsd" | "amount",
@@ -337,7 +337,7 @@ export async function getLedgerReport(
 /* ------------------------------------------------------------------ */
 
 /** Today's UTC `YYYY-MM-DD` for the export filename. */
-function todayUtc(): string {
+export function todayUtc(): string {
   return new Date().toISOString().slice(0, 10);
 }
 

@@ -33,6 +33,9 @@ export const queryKeys = {
   reports: {
     list: (kind: string, params?: unknown) => ["reports", kind, params ?? {}] as const,
   },
+  adminReports: {
+    list: (kind: string, params?: unknown) => ["admin-reports", kind, params ?? {}] as const,
+  },
   users: {
     all: ["users"] as const,
     list: (params?: Record<string, unknown>) => ["users", "list", params ?? {}] as const,

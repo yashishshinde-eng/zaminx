@@ -75,6 +75,133 @@ paths:
         "400": { description: Validation failed }
         "401": { description: Unauthorized }
 
+  /reports/admin/{kind}:
+    get:
+      tags: [Reports, Admin]
+      summary: Get an admin report (platform-wide, paginated + summary)
+      description: >
+        Phase 11A. The 8 admin report kinds are platform-wide (not user-scoped)
+        and authorised to surface PII (email/wallet). Sources: `users` (User +
+        Wallet balances + direct-count), `deposits` / `gateway` (Deposit —
+        gateway shapes an invoice view), `withdrawals` (Withdrawal), `income`
+        (ledger, 6 income types, credit only), `wallet` (ledger, all types,
+        net total), `bonanza` (ledger type=bonanza, joined to BonanzaOffer),
+        `activity` (ActivityLog). The admin summary extends the user summary
+        with optional `byStatus` / `byType` / `byAction` breakdowns. Requires
+        the `admin` role.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          schema:
+            type: string
+            enum: [users, deposits, withdrawals, income, wallet, gateway, bonanza, activity]
+        - in: query
+          name: from
+          schema: { type: string, format: date, description: "YYYY-MM-DD, UTC inclusive" }
+        - in: query
+          name: to
+          schema: { type: string, format: date, description: "YYYY-MM-DD, UTC inclusive" }
+        - in: query
+          name: status
+          schema: { type: string, maxLength: 40, description: "users→user status; deposits/withdrawals/gateway→entity status; ignored otherwise" }
+        - in: query
+          name: q
+          schema: { type: string, maxLength: 60, description: "Per-kind search (name/email/code, memo, address, action, invoiceId)" }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+      responses:
+        "200":
+          description: A page of admin report rows + summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      report:
+                        type: object
+                        properties:
+                          rows: { type: array, items: { type: object } }
+                          pagination:
+                            type: object
+                            properties:
+                              page: { type: integer }
+                              limit: { type: integer }
+                              total: { type: integer }
+                              totalPages: { type: integer }
+                          summary:
+                            type: object
+                            properties:
+                              count: { type: integer }
+                              total: { type: number }
+                              series:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    date: { type: string }
+                                    value: { type: number }
+                              byStatus: { type: object, additionalProperties: { type: integer } }
+                              byType: { type: object, additionalProperties: { type: integer } }
+                              byAction: { type: object, additionalProperties: { type: integer } }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+
+  /reports/admin/{kind}/export:
+    get:
+      tags: [Reports, Admin]
+      summary: Export an admin report (CSV or Excel)
+      description: >
+        Same filters as the admin report read, no pagination (capped at 5000
+        rows). `format=csv` → UTF-8 BOM CSV; `format=xls` → HTML table served
+        as `application/vnd.ms-excel` with a `.xls` extension. Requires the
+        `admin` role.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: kind
+          required: true
+          schema:
+            type: string
+            enum: [users, deposits, withdrawals, income, wallet, gateway, bonanza, activity]
+        - in: query
+          name: from
+          schema: { type: string, format: date }
+        - in: query
+          name: to
+          schema: { type: string, format: date }
+        - in: query
+          name: status
+          schema: { type: string, maxLength: 40 }
+        - in: query
+          name: q
+          schema: { type: string, maxLength: 60 }
+        - in: query
+          name: format
+          schema: { type: string, enum: [csv, xls], default: csv }
+      responses:
+        "200":
+          description: The exported file
+          headers:
+            Content-Disposition:
+              schema: { type: string, example: 'attachment; filename="admin-report-income-2026-08-02.csv"' }
+          content:
+            text/csv: { schema: { type: string } }
+            application/vnd.ms-excel: { schema: { type: string } }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+
   /reports/{kind}/export:
     get:
       tags: [Reports]

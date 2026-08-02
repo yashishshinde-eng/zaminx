@@ -50,3 +50,33 @@ export const reportKindParamSchema = z.object({
 export type ReportQuery = z.infer<typeof reportQuerySchema>["query"];
 export type ReportExportQuery = z.infer<typeof reportExportQuerySchema>["query"];
 export type ReportKindParam = z.infer<typeof reportKindParamSchema>["params"];
+
+/* ------------------------------------------------------------------ */
+/*  Admin reports — Phase 11A                                          */
+/* ------------------------------------------------------------------ */
+
+/** The 8 admin report kinds (platform-wide). */
+export const ADMIN_REPORT_KINDS = [
+  "users",
+  "deposits",
+  "withdrawals",
+  "income",
+  "wallet",
+  "gateway",
+  "bonanza",
+  "activity",
+] as const;
+
+/**
+ * Path param for an admin report kind. Reuses `reportQuerySchema` /
+ * `reportExportQuerySchema` for the query — the `status` field is interpreted
+ * per kind (users→user status, deposits/withdrawals/gateway→entity status;
+ * ignored for income/wallet/bonanza/activity).
+ */
+export const adminReportKindParamSchema = z.object({
+  params: z.object({
+    kind: z.enum(ADMIN_REPORT_KINDS),
+  }),
+});
+
+export type AdminReportKindParam = z.infer<typeof adminReportKindParamSchema>["params"];
