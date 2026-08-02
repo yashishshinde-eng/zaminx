@@ -21,6 +21,7 @@ import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+import { ActivityLog } from "../models/index.js";
 import { getAdminDashboardSummary } from "../services/adminDashboard.service.js";
 import {
   getCompensationSettings,
@@ -62,6 +63,7 @@ export const updateCompensationSettings: RequestHandler[] = [
   asyncHandler(async (req, res) => {
     if (!req.user) throw ApiError.unauthorized();
     const compensation = await updateCompensationSettingsSvc(req.body as CompensationSettingsBody);
+    await ActivityLog.create({ actor: req.user.id, action: "settings.compensation_update", resource: "Setting", meta: req.body }).catch(() => undefined);
     ok(res, { compensation }, "Compensation settings updated");
   }),
 ];
@@ -81,6 +83,7 @@ export const updateSiteConfig: RequestHandler[] = [
   asyncHandler(async (req, res) => {
     if (!req.user) throw ApiError.unauthorized();
     const siteConfig = await updateAdminSiteConfigSvc(req.body as SiteConfigUpdate);
+    await ActivityLog.create({ actor: req.user.id, action: "settings.site_config_update", resource: "Setting", meta: { fields: Object.keys(req.body) } }).catch(() => undefined);
     ok(res, { siteConfig }, "Site configuration updated");
   }),
 ];
@@ -100,6 +103,7 @@ export const updateSmtpSettings: RequestHandler[] = [
   asyncHandler(async (req, res) => {
     if (!req.user) throw ApiError.unauthorized();
     const smtp = await updateSmtpSettingsSvc(req.body as SmtpSettingsBody);
+    await ActivityLog.create({ actor: req.user.id, action: "settings.smtp_update", resource: "Setting", meta: { fields: Object.keys(req.body) } }).catch(() => undefined);
     ok(res, { smtp }, "SMTP settings updated");
   }),
 ];
@@ -111,6 +115,7 @@ export const testSmtpEmail: RequestHandler[] = [
     if (!req.user) throw ApiError.unauthorized();
     const { to } = req.body as SmtpTestEmailBody;
     const result = await sendTestEmail(to);
+    await ActivityLog.create({ actor: req.user.id, action: "settings.smtp_test_send", resource: "Setting", meta: { to } }).catch(() => undefined);
     ok(res, { sent: !result.dev, dev: result.dev }, result.dev ? "Test email written to dev folder" : "Test email sent");
   }),
 ];
@@ -130,6 +135,7 @@ export const updateNowpaymentsSettings: RequestHandler[] = [
   asyncHandler(async (req, res) => {
     if (!req.user) throw ApiError.unauthorized();
     const nowpayments = await updateNowpaymentsSettingsSvc(req.body as NowpaymentsSettingsBody);
+    await ActivityLog.create({ actor: req.user.id, action: "settings.nowpayments_update", resource: "Setting", meta: { fields: Object.keys(req.body) } }).catch(() => undefined);
     ok(res, { nowpayments }, "NOWPayments settings updated");
   }),
 ];
@@ -151,6 +157,7 @@ export const updateMaintenanceSettings: RequestHandler[] = [
   asyncHandler(async (req, res) => {
     if (!req.user) throw ApiError.unauthorized();
     const maintenance = await updateMaintenanceSettingsSvc(req.body as MaintenanceSettingsBody);
+    await ActivityLog.create({ actor: req.user.id, action: "settings.maintenance_update", resource: "Setting", meta: { enabled: maintenance.enabled, message: maintenance.message } }).catch(() => undefined);
     ok(res, { maintenance }, "Maintenance settings updated");
   }),
 ];

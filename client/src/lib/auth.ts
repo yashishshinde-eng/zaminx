@@ -48,7 +48,8 @@ export async function fetchMe(): Promise<PublicUser> {
 
 export async function logoutRequest(): Promise<void> {
   try {
-    await api.post("/auth/logout");
+    const refreshToken = localStorage.getItem(STORAGE_KEYS.refreshToken) ?? undefined;
+    await api.post("/auth/logout", refreshToken ? { refreshToken } : undefined);
   } finally {
     clearTokens();
   }

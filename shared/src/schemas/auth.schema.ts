@@ -11,7 +11,9 @@ const email = z
 const password = z
   .string()
   .min(8, { message: "Password must be at least 8 characters" })
-  .max(128);
+  .max(128)
+  .regex(/[a-zA-Z]/, { message: "Password must contain a letter" })
+  .regex(/[0-9]/, { message: "Password must contain a digit" });
 
 /** POST /auth/register */
 export const registerSchema = z.object({
@@ -79,5 +81,13 @@ export const changePasswordSchema = z.object({
   body: z.object({
     currentPassword: z.string().min(1).max(128),
     password,
+  }),
+});
+
+/** POST /auth/logout — optional refresh token so the server can invalidate it.
+ * Always 200; a missing/invalid token just clears client-side (no-op server-side). */
+export const logoutSchema = z.object({
+  body: z.object({
+    refreshToken: z.string().min(1).optional(),
   }),
 });

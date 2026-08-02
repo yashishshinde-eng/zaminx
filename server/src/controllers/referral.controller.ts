@@ -1,6 +1,6 @@
 import type { Request, RequestHandler } from "express";
 import { validate } from "../middlewares/validate.js";
-import { referralListQuerySchema, referralChildrenQuerySchema } from "@zaminex/shared";
+import { referralListQuerySchema, referralChildrenQuerySchema, referralUserIdParamSchema } from "@zaminex/shared";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ok } from "../utils/ApiResponse.js";
@@ -34,6 +34,7 @@ export const direct: RequestHandler[] = [
 
 /** GET /referrals/children/:userId — lazy tree expansion (userId = "me" or an id). */
 export const children: RequestHandler[] = [
+  validate(referralUserIdParamSchema, "params"),
   validate(referralChildrenQuerySchema, "query"),
   asyncHandler(async (req: Request, res) => {
     if (!req.user) throw ApiError.unauthorized();

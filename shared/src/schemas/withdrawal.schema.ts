@@ -26,6 +26,14 @@ export const adminActionSchema = z.object({
   }),
 });
 
+/** Path param for /withdrawals/:id* (user + admin). */
+export const withdrawalIdParamSchema = z.object({
+  params: z.object({
+    id: z.string().trim().min(1, "Withdrawal id is required"),
+  }),
+});
+
 export type CreateWithdrawalBody = z.infer<typeof createWithdrawalSchema>["body"];
 export type WithdrawalListQuery = z.infer<typeof withdrawalListQuerySchema>["query"];
 export type AdminActionBody = z.infer<typeof adminActionSchema>["body"];
+export type WithdrawalIdParam = z.infer<typeof withdrawalIdParamSchema>["params"];

@@ -1,5 +1,5 @@
 import type { Request, RequestHandler } from "express";
-import { adminActionSchema, withdrawalListQuerySchema } from "@zaminex/shared";
+import { adminActionSchema, withdrawalListQuerySchema, withdrawalIdParamSchema } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";
@@ -32,6 +32,7 @@ export const adminList: RequestHandler[] = [
 
 /** GET /withdrawals/admin/:id — any withdrawal (admin). */
 export const adminDetail: RequestHandler[] = [
+  validate(withdrawalIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
     const row = await getAdminWithdrawal(idParam(req));
     ok(res, { withdrawal: row }, "Withdrawal");
@@ -40,6 +41,7 @@ export const adminDetail: RequestHandler[] = [
 
 /** POST /withdrawals/admin/:id/review — pending → under_review. */
 export const review: RequestHandler[] = [
+  validate(withdrawalIdParamSchema, "params"),
   validate(adminActionSchema),
   asyncHandler(async (req, res) => {
     const row = await reviewWithdrawal(req.user!.id, idParam(req), req.body.remarks);
@@ -49,6 +51,7 @@ export const review: RequestHandler[] = [
 
 /** POST /withdrawals/admin/:id/approve — pending|under_review → approved. */
 export const approve: RequestHandler[] = [
+  validate(withdrawalIdParamSchema, "params"),
   validate(adminActionSchema),
   asyncHandler(async (req, res) => {
     const row = await approveWithdrawal(req.user!.id, idParam(req), req.body.remarks);
@@ -58,6 +61,7 @@ export const approve: RequestHandler[] = [
 
 /** POST /withdrawals/admin/:id/reject — → rejected (funds returned). */
 export const reject: RequestHandler[] = [
+  validate(withdrawalIdParamSchema, "params"),
   validate(adminActionSchema),
   asyncHandler(async (req, res) => {
     const row = await rejectWithdrawal(req.user!.id, idParam(req), req.body.remarks);
@@ -67,6 +71,7 @@ export const reject: RequestHandler[] = [
 
 /** POST /withdrawals/admin/:id/pay — approved → paid (onHold deducted). */
 export const pay: RequestHandler[] = [
+  validate(withdrawalIdParamSchema, "params"),
   validate(adminActionSchema),
   asyncHandler(async (req, res) => {
     const row = await markPaidWithdrawal(req.user!.id, idParam(req), req.body.remarks);

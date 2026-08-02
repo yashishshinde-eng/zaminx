@@ -9,14 +9,15 @@ const envSchema = z.object({
   CLIENT_URL: z.string().url().default("http://localhost:5173"),
   MONGO_URI: z.string().min(1, { message: "MONGO_URI is required" }),
 
-  JWT_ACCESS_SECRET: z.string().min(16, { message: "JWT_ACCESS_SECRET must be >= 16 chars" }),
-  JWT_REFRESH_SECRET: z.string().min(16, { message: "JWT_REFRESH_SECRET must be >= 16 chars" }),
+  JWT_ACCESS_SECRET: z.string().min(32, { message: "JWT_ACCESS_SECRET must be >= 32 chars" }),
+  JWT_REFRESH_SECRET: z.string().min(32, { message: "JWT_REFRESH_SECRET must be >= 32 chars" }),
   JWT_ACCESS_EXPIRY: z.string().default("15m"),
   JWT_REFRESH_EXPIRY: z.string().default("7d"),
 
   SEED_ADMIN_NAME: z.string().default("Platform Admin"),
   SEED_ADMIN_EMAIL: z.string().email().default("admin@zaminex.local"),
-  SEED_ADMIN_PASSWORD: z.string().min(8).default("ChangeMe!2024"),
+  // No default — a known-default seed password must never create a prod admin.
+  SEED_ADMIN_PASSWORD: z.string().min(8, { message: "SEED_ADMIN_PASSWORD is required" }),
 
   // Email delivery (Phase 3). In dev, omit SMTP_* to fall back to a file
   // transport that writes each message under server/logs/emails/.

@@ -28,7 +28,7 @@ export function signRefreshToken(userId: string): string {
 
 export function verifyAccessToken(token: string): AccessJwtPayload {
   try {
-    return jwt.verify(token, env.JWT_ACCESS_SECRET) as AccessJwtPayload;
+    return jwt.verify(token, env.JWT_ACCESS_SECRET, { algorithms: ["HS256"] }) as AccessJwtPayload;
   } catch {
     throw ApiError.unauthorized("Invalid or expired access token");
   }
@@ -36,7 +36,7 @@ export function verifyAccessToken(token: string): AccessJwtPayload {
 
 export function verifyRefreshToken(token: string): { sub: string } {
   try {
-    const payload = jwt.verify(token, env.JWT_REFRESH_SECRET) as jwt.JwtPayload;
+    const payload = jwt.verify(token, env.JWT_REFRESH_SECRET, { algorithms: ["HS256"] }) as jwt.JwtPayload;
     if (payload.type !== "refresh") throw new Error("wrong token type");
     return { sub: payload.sub as string };
   } catch {

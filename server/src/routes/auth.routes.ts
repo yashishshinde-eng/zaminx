@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticate } from "../middlewares/auth.js";
-import { authLimiter } from "../middlewares/rateLimit.js";
+import { loginLimiter, registerLimiter, refreshLimiter, forgotResetLimiter, verifyLimiter } from "../middlewares/rateLimit.js";
 import {
   register,
   login,
@@ -15,14 +15,14 @@ import {
 
 const router = Router();
 
-router.post("/register", authLimiter, ...register);
-router.post("/login", authLimiter, ...login);
-router.post("/refresh", authLimiter, ...refresh);
+router.post("/register", registerLimiter, ...register);
+router.post("/login", loginLimiter, ...login);
+router.post("/refresh", refreshLimiter, ...refresh);
 router.post("/logout", ...logout);
 router.get("/me", authenticate, ...me);
-router.post("/forgot-password", authLimiter, ...forgotPassword);
-router.post("/reset-password", authLimiter, ...reset);
-router.post("/verify-email", authLimiter, ...verifyEmailHandler);
-router.post("/resend-verification", authLimiter, ...resendVerificationHandler);
+router.post("/forgot-password", forgotResetLimiter, ...forgotPassword);
+router.post("/reset-password", forgotResetLimiter, ...reset);
+router.post("/verify-email", verifyLimiter, ...verifyEmailHandler);
+router.post("/resend-verification", verifyLimiter, ...resendVerificationHandler);
 
 export default router;

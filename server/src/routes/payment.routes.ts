@@ -1,16 +1,21 @@
 import { Router } from "express";
+import { authenticate } from "../middlewares/auth.js";
 import { myDeposits, depositStatus, nowpaymentsWebhook, devSimulatePayment } from "../controllers/payment.controller.js";
 
 const router = Router();
 
-// Auth-protected (authenticate applied inline in each handler).
+// Public IPN webhook (signature-verified; no auth). MUST stay mounted before
+// `router.use(authenticate)` so it remains reachable.
+router.post("/nowpayments/webhook", ...nowpaymentsWebhook);
+
+// Everything else under /payments is user-authenticated. Mounting
+// `authenticate` here (rather than inline per handler) means any future
+// /payments route is protected by default instead of silently public.
+router.use(authenticate);
 router.get("/deposits", ...myDeposits);
 router.get("/deposits/:id", ...depositStatus);
 
-// Public IPN webhook (signature-verified; no auth).
-router.post("/nowpayments/webhook", ...nowpaymentsWebhook);
-
-// Dev-only sandbox simulate (auth + owner-only; 404 in prod / when live).
+// Dev-only sandbox simulate (404 in prod / when the live gateway is configured).
 router.post("/dev/simulate/:id", ...devSimulatePayment);
 
 export default router;

@@ -1,9 +1,10 @@
 import type { Request, RequestHandler } from "express";
-import { createBonanzaSchema, updateBonanzaSchema, bonanzaListQuerySchema } from "@zaminex/shared";
+import { createBonanzaSchema, updateBonanzaSchema, bonanzaListQuerySchema, bonanzaIdParamSchema } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+import { ActivityLog } from "../models/index.js";
 import {
   getBonanzaOverview,
   createBonanza,
@@ -41,6 +42,7 @@ export const adminList: RequestHandler[] = [
 
 /** GET /bonanzas/admin/:id — single offer (admin). */
 export const adminDetail: RequestHandler[] = [
+  validate(bonanzaIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
     const row = await getBonanza(idParam(req));
     ok(res, { bonanza: row }, "Bonanza offer");
@@ -52,23 +54,30 @@ export const create: RequestHandler[] = [
   validate(createBonanzaSchema),
   asyncHandler(async (req, res) => {
     const row = await createBonanza(req.body);
+    await ActivityLog.create({ actor: req.user!.id, action: "bonanza.create", resource: "Bonanza", meta: { name: (req.body as { name?: string }).name } }).catch(() => undefined);
     created(res, { bonanza: row }, "Bonanza offer created");
   }),
 ];
 
 /** PATCH /bonanzas/admin/:id — update an offer (admin). */
 export const update: RequestHandler[] = [
+  validate(bonanzaIdParamSchema, "params"),
   validate(updateBonanzaSchema),
   asyncHandler(async (req, res) => {
-    const row = await updateBonanza(idParam(req), req.body);
+    const id = idParam(req);
+    const row = await updateBonanza(id, req.body);
+    await ActivityLog.create({ actor: req.user!.id, action: "bonanza.update", resource: "Bonanza", resourceId: id, meta: { name: (req.body as { name?: string }).name } }).catch(() => undefined);
     ok(res, { bonanza: row }, "Bonanza offer updated");
   }),
 ];
 
 /** DELETE /bonanzas/admin/:id — remove an offer (admin). */
 export const remove: RequestHandler[] = [
+  validate(bonanzaIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
-    await deleteBonanza(idParam(req));
+    const id = idParam(req);
+    await deleteBonanza(id);
+    await ActivityLog.create({ actor: req.user!.id, action: "bonanza.delete", resource: "Bonanza", resourceId: id }).catch(() => undefined);
     ok(res, {}, "Bonanza offer deleted");
   }),
 ];

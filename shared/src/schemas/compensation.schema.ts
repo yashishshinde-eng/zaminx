@@ -48,6 +48,11 @@ export const bonanzaListQuerySchema = z.object({
   }),
 });
 
+/** Path param for /bonanzas/admin/:id (admin). */
+export const bonanzaIdParamSchema = z.object({
+  params: z.object({ id: z.string().trim().min(1, "Offer id is required") }),
+});
+
 /** POST /compensation/run-yield — trigger a daily yield run (admin). */
 export const runYieldSchema = z.object({
   query: z.object({
@@ -106,6 +111,11 @@ export const rankListQuerySchema = z.object({
   }),
 });
 
+/** Path param for /ranks/:id (admin). */
+export const rankIdParamSchema = z.object({
+  params: z.object({ id: z.string().trim().min(1, "Rank id is required") }),
+});
+
 /** POST /compensation/run-team-energy — trigger a daily team-energy run (admin). */
 export const runTeamEnergySchema = z.object({
   query: z.object({
@@ -157,11 +167,13 @@ export const compensationSettingsSchema = z.object({
 export type CreateBonanzaBody = z.infer<typeof createBonanzaSchema>["body"];
 export type UpdateBonanzaBody = z.infer<typeof updateBonanzaSchema>["body"];
 export type BonanzaListQuery = z.infer<typeof bonanzaListQuerySchema>["query"];
+export type BonanzaIdParam = z.infer<typeof bonanzaIdParamSchema>["params"];
 export type RunYieldQuery = z.infer<typeof runYieldSchema>["query"];
 export type EvaluateBonanzaQuery = z.infer<typeof evaluateBonanzaSchema>["query"];
 export type CreateRankBody = z.infer<typeof createRankSchema>["body"];
 export type UpdateRankBody = z.infer<typeof updateRankSchema>["body"];
 export type RankListQuery = z.infer<typeof rankListQuerySchema>["query"];
+export type RankIdParam = z.infer<typeof rankIdParamSchema>["params"];
 export type RunTeamEnergyQuery = z.infer<typeof runTeamEnergySchema>["query"];
 export type RunCommunityQuery = z.infer<typeof runCommunitySchema>["query"];
 export type RunRankCheckQuery = z.infer<typeof runRankCheckSchema>["query"];

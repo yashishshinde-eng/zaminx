@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { authorize } from "../middlewares/auth.js";
+import { withdrawalLimiter } from "../middlewares/rateLimit.js";
 import { create, list, detail, cancel } from "../controllers/withdrawal.controller.js";
 import { adminList, adminDetail, review, approve, reject, pay } from "../controllers/adminWithdrawal.controller.js";
 
 const router = Router();
 
 // --- User root routes ---
-router.post("/", ...create);
+router.post("/", withdrawalLimiter, ...create);
 router.get("/", ...list);
 
 // --- Admin routes (literal "admin" MUST precede the ":id" param route).

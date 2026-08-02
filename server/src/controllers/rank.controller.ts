@@ -1,9 +1,10 @@
 import type { Request, RequestHandler } from "express";
-import { createRankSchema, updateRankSchema, rankListQuerySchema } from "@zaminex/shared";
+import { createRankSchema, updateRankSchema, rankListQuerySchema, rankIdParamSchema } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
+import { ActivityLog } from "../models/index.js";
 import {
   createRank,
   listRanks,
@@ -31,6 +32,7 @@ export const list: RequestHandler[] = [
 
 /** GET /ranks/:id — single rank (admin). */
 export const detail: RequestHandler[] = [
+  validate(rankIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
     const row = await getRank(idParam(req));
     ok(res, { rank: row }, "Rank");
@@ -42,23 +44,30 @@ export const create: RequestHandler[] = [
   validate(createRankSchema),
   asyncHandler(async (req, res) => {
     const row = await createRank(req.body);
+    await ActivityLog.create({ actor: req.user!.id, action: "rank.create", resource: "Rank", meta: { name: (req.body as { name?: string }).name } }).catch(() => undefined);
     created(res, { rank: row }, "Rank created");
   }),
 ];
 
 /** PATCH /ranks/:id — update a rank (admin). */
 export const update: RequestHandler[] = [
+  validate(rankIdParamSchema, "params"),
   validate(updateRankSchema),
   asyncHandler(async (req, res) => {
-    const row = await updateRank(idParam(req), req.body);
+    const id = idParam(req);
+    const row = await updateRank(id, req.body);
+    await ActivityLog.create({ actor: req.user!.id, action: "rank.update", resource: "Rank", resourceId: id, meta: { name: (req.body as { name?: string }).name } }).catch(() => undefined);
     ok(res, { rank: row }, "Rank updated");
   }),
 ];
 
 /** DELETE /ranks/:id — remove a rank (admin). */
 export const remove: RequestHandler[] = [
+  validate(rankIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
-    await deleteRank(idParam(req));
+    const id = idParam(req);
+    await deleteRank(id);
+    await ActivityLog.create({ actor: req.user!.id, action: "rank.delete", resource: "Rank", resourceId: id }).catch(() => undefined);
     ok(res, {}, "Rank deleted");
   }),
 ];

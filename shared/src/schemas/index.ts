@@ -9,3 +9,4 @@ export * from "./compensation.schema";
 export * from "./report.schema";
 export * from "./adminUser.schema";
 export * from "./adminLogs.schema";
+export * from "./payment.schema";

@@ -147,10 +147,12 @@ export async function loginUser(input: LoginInput) {
   const user = await User.findOne({ email: input.email }).select("+passwordHash +refreshTokenHash");
   if (!user) throw ApiError.unauthorized("Invalid email or password");
 
-  if (user.status !== "active") throw ApiError.forbidden("Account is not active");
-
   const match = user.verifyPassword(input.password);
   if (!match) throw ApiError.unauthorized("Invalid email or password");
+
+  // Check status AFTER the password check so an attacker can't enumerate which
+  // emails exist / are active without already knowing the password.
+  if (user.status !== "active") throw ApiError.forbidden("Account is not active");
 
   const tokens = issueTokens(user._id.toString(), user.role);
   user.refreshTokenHash = User.hashToken(tokens.refreshToken);
@@ -185,6 +187,23 @@ export async function logoutUser(userId: string) {
   if (!user) return;
   user.refreshTokenHash = null;
   await user.save();
+}
+
+/**
+ * Logout by refresh token (Phase 15). Verify the token to find the user, then
+ * null their refresh hash. Never throws — logout must always succeed for the
+ * client (it clears its own tokens regardless). Fixes the prior no-op logout
+ * where `/auth/logout` had no `authenticate` so `refreshTokenHash` was never
+ * cleared and a captured refresh token stayed valid for its full TTL.
+ */
+export async function logoutByRefreshToken(refreshToken?: string) {
+  if (!refreshToken) return;
+  try {
+    const { sub } = verifyRefreshToken(refreshToken);
+    await logoutUser(sub);
+  } catch {
+    // Invalid / expired / unknown token — nothing to invalidate server-side.
+  }
 }
 
 /**

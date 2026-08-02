@@ -18,5 +18,13 @@ export const referralChildrenQuerySchema = z.object({
   }),
 });
 
+/** Path param for /referrals/children/:userId (`userId` may be "me"). */
+export const referralUserIdParamSchema = z.object({
+  params: z.object({
+    userId: z.string().trim().min(1, "Node id is required"),
+  }),
+});
+
 export type ReferralListQuery = z.infer<typeof referralListQuerySchema>["query"];
 export type ReferralChildrenQuery = z.infer<typeof referralChildrenQuerySchema>["query"];
+export type ReferralUserIdParam = z.infer<typeof referralUserIdParamSchema>["params"];

@@ -7,6 +7,7 @@ import {
   resetPasswordSchema,
   verifyEmailSchema,
   resendVerificationSchema,
+  logoutSchema,
 } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -17,7 +18,7 @@ import {
   registerUser,
   loginUser,
   refreshSession,
-  logoutUser,
+  logoutByRefreshToken,
   requestPasswordReset,
   resetPassword,
   verifyEmail,
@@ -54,10 +55,11 @@ export const refresh: RequestHandler[] = [
   }),
 ];
 
-/** POST /auth/logout */
+/** POST /auth/logout — invalidate the supplied refresh token server-side. */
 export const logout: RequestHandler[] = [
+  validate(logoutSchema),
   asyncHandler(async (req, res) => {
-    if (req.user) await logoutUser(req.user.id);
+    await logoutByRefreshToken(req.body.refreshToken);
     ok(res, null, "Logged out");
   }),
 ];

@@ -1,5 +1,5 @@
 import type { RequestHandler } from "express";
-import { createWithdrawalSchema, withdrawalListQuerySchema } from "@zaminex/shared";
+import { createWithdrawalSchema, withdrawalListQuerySchema, withdrawalIdParamSchema } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
@@ -37,6 +37,7 @@ export const list: RequestHandler[] = [
 
 /** GET /withdrawals/:id — single withdrawal (ownership-checked). */
 export const detail: RequestHandler[] = [
+  validate(withdrawalIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
     if (!req.user) throw ApiError.unauthorized();
     const id = (req.params as { id?: string }).id;
@@ -48,6 +49,7 @@ export const detail: RequestHandler[] = [
 
 /** POST /withdrawals/:id/cancel — user cancel (pending/under_review). */
 export const cancel: RequestHandler[] = [
+  validate(withdrawalIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
     if (!req.user) throw ApiError.unauthorized();
     const id = (req.params as { id?: string }).id;

@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
-import { env, isNowpaymentsConfigured } from "../config/env.js";
+import { env, isNowpaymentsConfigured, isProd } from "../config/env.js";
 import { logger } from "../config/logger.js";
+import { ApiError } from "../utils/ApiError.js";
 import { getSetting } from "./setting.service.js";
 import type { Request } from "express";
 
@@ -47,6 +48,11 @@ export async function createInvoice(input: {
   description: string;
 }): Promise<InvoiceResult> {
   const cfg = await getNowpaymentsConfig();
+  // Production must never silently route deposits through the sandbox mock
+  // when the gateway credentials are missing — that would create fake invoices.
+  if (isProd && !isNowpaymentsConfigured()) {
+    throw ApiError.badRequest("Payment gateway not configured");
+  }
   if (cfg.sandbox || !isNowpaymentsConfigured()) {
     // Sandbox: no network. 1:1 USD→USDT for the mock amount.
     return {
@@ -111,7 +117,7 @@ export async function createInvoice(input: {
  * endpoint is the trusted entry point instead.
  */
 export function verifyWebhookSignature(req: Request): boolean {
-  if (!isNowpaymentsConfigured()) return true; // sandbox: dev simulate path is trusted
+  if (!isNowpaymentsConfigured()) return !isProd; // dev trusts the simulate path; prod rejects unsigned payloads
 
   const sig = req.headers["x-nowpayments-sig"];
   if (!sig || typeof sig !== "string" || !req.rawBody) return false;

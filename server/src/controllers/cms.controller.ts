@@ -1,7 +1,7 @@
 import type { RequestHandler } from "express";
 import { siteConfigSchema, contactSchema, type SiteConfig } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
-import { authLimiter } from "../middlewares/rateLimit.js";
+import { contactLimiter } from "../middlewares/rateLimit.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
@@ -73,7 +73,7 @@ export const getPage: RequestHandler[] = [
 
 /** POST /contact — store a contact message (email delivery in Phase 13). */
 export const submitContact: RequestHandler[] = [
-  authLimiter,
+  contactLimiter,
   validate(contactSchema),
   asyncHandler(async (req, res) => {
     await ContactMessage.create({

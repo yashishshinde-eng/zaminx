@@ -1,4 +1,5 @@
 import mongoose, { Schema, type InferSchemaType, type Model } from "mongoose";
+import { ApiError } from "../utils/ApiError.js";
 
 /**
  * The immutable wallet ledger (`wallet_transactions`, Phase 17). Append-only:
@@ -50,6 +51,24 @@ walletTransactionSchema.index({ user: 1, createdAt: -1 });
 walletTransactionSchema.index({ user: 1, wallet: 1, createdAt: -1 });
 /** Idempotency lookup: at most one entry per (user, type, reference.resourceId). */
 walletTransactionSchema.index({ "reference.resourceId": 1, type: 1 });
+
+/**
+ * Append-only enforcement (Phase 15). The ledger is the financial source of
+ * truth — rows must never be edited or deleted. No service mutates them (all
+ * writes use `create`); these hooks block any future update/delete at the model
+ * level so a mistake fails loudly instead of silently corrupting history.
+ * Reads (`find`/`findOne`/`aggregate`) are unaffected.
+ */
+function blockMutation(): never {
+  throw ApiError.badRequest("Wallet ledger entries are immutable and cannot be modified or deleted");
+}
+walletTransactionSchema.pre("findOneAndUpdate", blockMutation);
+walletTransactionSchema.pre("findOneAndDelete", blockMutation);
+walletTransactionSchema.pre("updateOne", blockMutation);
+walletTransactionSchema.pre("updateMany", blockMutation);
+walletTransactionSchema.pre("replaceOne", blockMutation);
+walletTransactionSchema.pre("deleteOne", blockMutation);
+walletTransactionSchema.pre("deleteMany", blockMutation);
 
 export type WalletTransactionDocument = InferSchemaType<typeof walletTransactionSchema> & mongoose.Document;
 export const WalletTransaction = mongoose.model<WalletTransactionDocument, Model<WalletTransactionDocument>>(

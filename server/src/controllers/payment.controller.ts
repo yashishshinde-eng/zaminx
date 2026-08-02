@@ -1,10 +1,11 @@
 import type { RequestHandler } from "express";
-import { authenticate } from "../middlewares/auth.js";
+import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { isProd, isNowpaymentsConfigured } from "../config/env.js";
 import { logger } from "../config/logger.js";
+import { depositIdParamSchema } from "@zaminex/shared";
 import {
   getDeposits,
   getDepositForUser,
@@ -18,7 +19,6 @@ const meta = (req: Parameters<RequestHandler>[0]) => ({ ip: req.ip, userAgent: r
 
 /** GET /payments/deposits — the user's deposits. */
 export const myDeposits: RequestHandler[] = [
-  authenticate,
   asyncHandler(async (req, res) => {
     const deposits = await getDeposits(req.user!.id);
     ok(res, { deposits }, "Your deposits");
@@ -27,7 +27,7 @@ export const myDeposits: RequestHandler[] = [
 
 /** GET /payments/deposits/:id — single deposit status (ownership-checked). */
 export const depositStatus: RequestHandler[] = [
-  authenticate,
+  validate(depositIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
     const id = (req.params as { id?: string }).id;
     if (!id) throw ApiError.badRequest("Deposit id is required");
@@ -79,7 +79,7 @@ export const nowpaymentsWebhook: RequestHandler[] = [
  * gateway is configured.
  */
 export const devSimulatePayment: RequestHandler[] = [
-  authenticate,
+  validate(depositIdParamSchema, "params"),
   asyncHandler(async (req, res) => {
     if (isProd || isNowpaymentsConfigured()) throw ApiError.notFound("Not found");
 

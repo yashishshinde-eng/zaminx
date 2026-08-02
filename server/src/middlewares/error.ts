@@ -44,7 +44,10 @@ export const errorHandler: ErrorRequestHandler = (err, req, res, _next) => {
     message = `Duplicate value for ${key}`;
     operational = true;
   } else if (err instanceof Error) {
-    message = err.message || message;
+    // Non-operational errors are unexpected (DB driver, upstream JSON parse,
+    // a thrown Error in a service) — never leak their internal message to
+    // clients in production. The full message is still logged server-side.
+    message = isProd ? message : err.message || message;
     operational = false;
   }
 
