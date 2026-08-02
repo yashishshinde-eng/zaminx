@@ -6,6 +6,7 @@ import { logger } from "../config/logger.js";
 import { env } from "../config/env.js";
 import { sendEmail } from "./email.service.js";
 import { verifyEmailTemplate, welcomeTemplate, resetPasswordTemplate } from "./emailTemplates.js";
+import { evaluateBonanzasForUser } from "./compensation.service.js";
 import type { PublicUser } from "@zaminex/shared";
 
 /** Lifetime of verification/reset tokens, derived from env. */
@@ -82,6 +83,12 @@ export async function registerUser(input: RegisterInput) {
   // must never be blocked by an email outage (resend is available later).
   await issueVerificationToken(user);
   logger.info("User registered", { userId: user._id, email: user.email, referredBy: user.referredBy });
+
+  // Phase 10: a new referral raised the sponsor's direct count, which may
+  // qualify them for a bonanza reward. Best-effort — never blocks signup.
+  if (user.sponsorId) {
+    evaluateBonanzasForUser(user.sponsorId.toString()).catch(() => undefined);
+  }
 
   return { user, tokens };
 }

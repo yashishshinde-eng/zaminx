@@ -1,0 +1,163 @@
+paths:
+  /bonanzas:
+    get:
+      tags: [Bonanza]
+      summary: Active bonanza offers + the viewer's progress
+      description: >
+        Returns the viewer's direct-referral count and every active offer with
+        their progress (`directCount` vs `requiredDirects`) and award state.
+        Phase 10.
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Bonanza overview
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      bonanzas:
+                        type: object
+                        properties:
+                          directCount: { type: integer }
+                          offers:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id: { type: string }
+                                name: { type: string }
+                                requiredDirects: { type: integer }
+                                rewardAmount: { type: number }
+                                startDate: { type: string, format: date-time }
+                                endDate: { type: string, format: date-time }
+                                terms: { type: string, nullable: true }
+                                directCount: { type: integer }
+                                qualified: { type: boolean }
+                                awarded: { type: boolean }
+        "401": { description: Unauthorized }
+
+  /bonanzas/admin:
+    get:
+      tags: [Bonanza]
+      summary: List all bonanza offers (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: status
+          schema: { type: string, enum: [active, inactive] }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        "200":
+          description: A page of offers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      bonanzas:
+                        type: object
+                        properties:
+                          items: { type: array, items: { type: object } }
+                          page: { type: integer }
+                          limit: { type: integer }
+                          total: { type: integer }
+                          totalPages: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+    post:
+      tags: [Bonanza]
+      summary: Create a bonanza offer (admin)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, requiredDirects, rewardAmount, startDate, endDate]
+              properties:
+                name: { type: string, maxLength: 120 }
+                requiredDirects: { type: integer, minimum: 1 }
+                rewardAmount: { type: number, minimum: 0 }
+                startDate: { type: string, format: date-time }
+                endDate: { type: string, format: date-time }
+                status: { type: string, enum: [active, inactive], default: active }
+                terms: { type: string, maxLength: 1000 }
+      responses:
+        "201": { description: Offer created }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+
+  /bonanzas/admin/{id}:
+    get:
+      tags: [Bonanza]
+      summary: Get a single offer (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: The offer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+        "404": { description: Offer not found }
+    patch:
+      tags: [Bonanza]
+      summary: Update an offer (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string, maxLength: 120 }
+                requiredDirects: { type: integer, minimum: 1 }
+                rewardAmount: { type: number, minimum: 0 }
+                startDate: { type: string, format: date-time }
+                endDate: { type: string, format: date-time }
+                status: { type: string, enum: [active, inactive] }
+                terms: { type: string, maxLength: 1000 }
+      responses:
+        "200": { description: Offer updated }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+        "404": { description: Offer not found }
+    delete:
+      tags: [Bonanza]
+      summary: Delete an offer (admin)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Offer deleted }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+        "404": { description: Offer not found }

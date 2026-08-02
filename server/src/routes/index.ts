@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authenticate } from "../middlewares/auth.js";
+import { authenticate, authorize } from "../middlewares/auth.js";
 import healthRoutes from "./health.routes.js";
 import authRoutes from "./auth.routes.js";
 import cmsRoutes from "./cms.routes.js";
@@ -10,6 +10,8 @@ import paymentRoutes from "./payment.routes.js";
 import walletRoutes from "./wallet.routes.js";
 import withdrawalRoutes from "./withdrawal.routes.js";
 import referralRoutes from "./referral.routes.js";
+import bonanzaRoutes from "./bonanza.routes.js";
+import compensationRoutes from "./compensation.routes.js";
 
 const router = Router();
 
@@ -26,6 +28,9 @@ router.use("/payments", paymentRoutes);
 router.use("/wallet", authenticate, walletRoutes);
 router.use("/withdrawals", authenticate, withdrawalRoutes);
 router.use("/referrals", authenticate, referralRoutes);
+router.use("/bonanzas", authenticate, bonanzaRoutes);
+// Compensation triggers are admin-only (Phase 10): yield run + bonanza eval.
+router.use("/compensation", authenticate, authorize("admin"), compensationRoutes);
 
 // Future phases mount here:
 // router.use("/users", authenticate, authorize("admin"), userRoutes);

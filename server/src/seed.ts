@@ -1,7 +1,7 @@
 import { connectDB } from "./config/db.js";
 import { env } from "./config/env.js";
 import { logger } from "./config/logger.js";
-import { User, Setting, CmsPage, Package } from "./models/index.js";
+import { User, Setting, CmsPage, Package, BonanzaOffer } from "./models/index.js";
 import { isSmtpConfigured } from "./services/email.service.js";
 import type { ContentBlock } from "@zaminex/shared";
 
@@ -79,6 +79,9 @@ async function seed() {
     { key: "general.maintenanceMode", value: { enabled: false, message: "" }, category: "general", isPublic: true },
     { key: "smtp.configured", value: isSmtpConfigured(), category: "smtp", isPublic: false },
     { key: "payment.configured", value: false, category: "payment", isPublic: false },
+    // Phase 10 compensation defaults (private — admin-tunable).
+    { key: "compensation.directBonusPct", value: 10, category: "compensation", isPublic: false },
+    { key: "compensation.yieldEnabled", value: true, category: "compensation", isPublic: false },
   ];
 
   for (const d of defaults) {
@@ -107,6 +110,14 @@ async function seed() {
   );
   logger.info(`✅ Default package tiers ensured (${DEFAULT_PACKAGES.length} tiers)`);
 
+  // --- Example bonanza offer (Phase 10), idempotent on name ---
+  await (async () => {
+    const exists = await BonanzaOffer.findOne({ name: DEFAULT_BONANZA.name });
+    if (exists) return;
+    await BonanzaOffer.create(DEFAULT_BONANZA);
+  })();
+  logger.info("✅ Default bonanza offer ensured");
+
   logger.info("Seed complete.");
   process.exit(0);
 }
@@ -132,6 +143,17 @@ const cta = (title: string, description: string, ctaLabel: string, ctaHref: stri
   ctaLabel,
   ctaHref,
 });
+
+/** Example bonanza offer so the engine is exercisable in dev (Phase 10). */
+const DEFAULT_BONANZA = {
+  name: "Quick Start",
+  requiredDirects: 3,
+  rewardAmount: 10,
+  startDate: new Date(),
+  endDate: new Date(Date.now() + 90 * 86_400_000),
+  status: "active",
+  terms: "Refer 3 direct members during the offer window to earn a $10 bonus reward.",
+};
 
 const DEFAULT_PACKAGES = [
   {

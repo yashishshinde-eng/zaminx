@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Wallet, ArrowDownToLine, Package, Users, Settings, ShieldCheck } from "lucide-react";
+import { LayoutDashboard, Wallet, ArrowDownToLine, Package, Users, Gift, Settings, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 
@@ -16,6 +16,7 @@ const NAV: NavItem[] = [
   { label: "Withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
   { label: "Packages", to: "/app/packages", icon: Package },
   { label: "Team", to: "/app/team", icon: Users },
+  { label: "Bonanza", to: "/app/bonanzas", icon: Gift },
   { label: "Settings", to: "/app/settings", icon: Settings },
   { label: "Admin", to: "/app/admin", icon: ShieldCheck, adminOnly: true },
 ];

@@ -1,0 +1,101 @@
+paths:
+  /compensation/run-yield:
+    post:
+      tags: [Compensation]
+      summary: Run the daily trade-yield credit (admin)
+      description: >
+        Credits each active, in-window UserPackage `snapshot.priceUsd ×
+        snapshot.dailyReturnPct / 100` to its trading wallet, idempotent per
+        package per UTC day. Packages past `expiresAt` are flipped to expired.
+        No cron yet (Phase 18) — admins trigger this. Phase 10.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: date
+          schema: { type: string, pattern: '^\d{4}-\d{2}-\d{2}$' }
+          description: Optional backfill day (YYYY-MM-DD UTC); defaults to today.
+      responses:
+        "200":
+          description: Yield run summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      yield:
+                        type: object
+                        properties:
+                          asOf: { type: string, format: date-time }
+                          processed: { type: integer }
+                          credited: { type: integer }
+                          skipped: { type: integer }
+                          expired: { type: integer }
+                          errors: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+
+  /compensation/evaluate-bonanzas:
+    post:
+      tags: [Compensation]
+      summary: Evaluate bonanza offers (admin)
+      description: >
+        Awards any pending bonanza rewards to qualifying sponsors. Pass `userId`
+        to evaluate a single sponsor; omit to evaluate every sponsor. Idempotent
+        per offer per user. Phase 10.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: userId
+          schema: { type: string }
+          description: Optional single-sponsor scope; omit for all sponsors.
+      responses:
+        "200":
+          description: Evaluation summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      bonanza:
+                        type: object
+                        properties:
+                          evaluated: { type: integer }
+                          awarded: { type: integer }
+                          errors: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }
+
+  /compensation/overview:
+    get:
+      tags: [Compensation]
+      summary: Compensation overview counts (admin)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Overview counts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      overview:
+                        type: object
+                        properties:
+                          activePackages: { type: integer }
+                          totalUsers: { type: integer }
+                          sponsors: { type: integer }
+                          activeOffers: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Insufficient permissions (admin only) }

@@ -5,3 +5,4 @@ export * from "./package.schema";
 export * from "./wallet.schema";
 export * from "./withdrawal.schema";
 export * from "./referral.schema";
+export * from "./compensation.schema";

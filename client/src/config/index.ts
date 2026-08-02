@@ -27,6 +27,9 @@ export const queryKeys = {
     direct: (params?: unknown) => ["referrals", "direct", params ?? {}] as const,
     children: (id: string, params?: unknown) => ["referrals", "children", id, params ?? {}] as const,
   },
+  bonanzas: {
+    overview: ["bonanzas", "overview"] as const,
+  },
   users: {
     all: ["users"] as const,
     list: (params?: Record<string, unknown>) => ["users", "list", params ?? {}] as const,

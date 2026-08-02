@@ -20,3 +20,5 @@ export { WalletTransaction } from "./WalletTransaction.model.js";
 export type { WalletTransactionDocument } from "./WalletTransaction.model.js";
 export { Withdrawal } from "./Withdrawal.model.js";
 export type { WithdrawalDocument } from "./Withdrawal.model.js";
+export { BonanzaOffer } from "./BonanzaOffer.model.js";
+export type { BonanzaOfferDocument } from "./BonanzaOffer.model.js";

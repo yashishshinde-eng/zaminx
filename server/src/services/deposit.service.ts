@@ -5,6 +5,7 @@ import { sendEmail } from "./email.service.js";
 import { depositSuccessTemplate } from "./emailTemplates.js";
 import { createInvoice } from "./nowpayments.service.js";
 import { applyLedgerEntry } from "./wallet.service.js";
+import { awardDirectBonus } from "./compensation.service.js";
 import type { DepositRow, PackageTier, UserPackageRow } from "@zaminex/shared";
 
 interface Meta {
@@ -280,6 +281,20 @@ export async function confirmDeposit(
     meta: { packageId: deposit.package?.toString() },
   }).catch((err) => {
     logger.error("Wallet credit failed for deposit", {
+      depositId: deposit._id.toString(),
+      error: err instanceof Error ? err.message : String(err),
+    });
+  });
+
+  // 3b. Direct Connect Bonus — the buyer's sponsor earns a percentage of the
+  //     package price to their bonus wallet (Phase 10). Best-effort + idempotent
+  //     (keyed by the deposit id); a bonus failure must not break confirmation.
+  await awardDirectBonus(
+    deposit.user.toString(),
+    up?.snapshot?.priceUsd ?? deposit.amountUsd,
+    deposit._id.toString(),
+  ).catch((err) => {
+    logger.error("Direct bonus failed for deposit", {
       depositId: deposit._id.toString(),
       error: err instanceof Error ? err.message : String(err),
     });

@@ -2,6 +2,23 @@ import type { UserRole } from "./index";
 import type { WalletBalances } from "./wallet";
 
 /**
+ * The six-stream income summary shown on the dashboard. Per-stream totals are
+ * summed from the immutable wallet ledger (Phase 10); `series` is a 30-day
+ * daily-totals set for the area chart. Team / community / rankReward stay 0
+ * until Phase 10A wires those streams.
+ */
+export interface IncomeSummary {
+  trading: number;
+  direct: number;
+  team: number;
+  community: number;
+  rankReward: number;
+  bonanza: number;
+  total: number;
+  series: { date: string; value: number }[];
+}
+
+/**
  * Aggregated dashboard payload returned by `GET /dashboard/summary`.
  * Most slices are zero/empty until their owning phase wires real data:
  * wallets → Phase 8, package → Phase 6, income → Phase 10,
@@ -36,17 +53,7 @@ export interface DashboardSummary {
     /** Subscriptions awaiting payment (created in Phase 6, confirmed in Phase 7). */
     pending: number;
   };
-  income: {
-    trading: number;
-    direct: number;
-    team: number;
-    community: number;
-    rankReward: number;
-    bonanza: number;
-    total: number;
-    /** Daily totals for the area chart. Empty until Phase 10 → empty-state chart. */
-    series: { date: string; value: number }[];
-  };
+  income: IncomeSummary;
   notifications: {
     unread: number;
     items: { id: string; title: string; createdAt: string }[];

@@ -27,6 +27,7 @@ const PackagesPage = lazy(() => import("@/pages/PackagesPage").then((m) => ({ de
 const WalletPage = lazy(() => import("@/pages/WalletPage").then((m) => ({ default: m.WalletPage })));
 const WithdrawalsPage = lazy(() => import("@/pages/WithdrawalsPage").then((m) => ({ default: m.WithdrawalsPage })));
 const TeamPage = lazy(() => import("@/pages/TeamPage").then((m) => ({ default: m.TeamPage })));
+const BonanzaPage = lazy(() => import("@/pages/BonanzaPage").then((m) => ({ default: m.BonanzaPage })));
 const PlaceholderPage = lazy(() => import("@/pages/PlaceholderPage").then((m) => ({ default: m.PlaceholderPage })));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
@@ -60,6 +61,7 @@ export function AppRouter() {
             <Route path="/app/withdrawals" element={<WithdrawalsPage />} />
             <Route path="/app/packages" element={<PackagesPage />} />
             <Route path="/app/team" element={<TeamPage />} />
+            <Route path="/app/bonanzas" element={<BonanzaPage />} />
             <Route path="/app/settings" element={<SettingsPage />} />
           </Route>
 
