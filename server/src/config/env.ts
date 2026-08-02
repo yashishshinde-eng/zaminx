@@ -35,6 +35,10 @@ const envSchema = z.object({
   NOWPAYMENTS_IPN_SECRET: z.string().optional(),
   NOWPAYMENTS_BASE_URL: z.string().url().default("https://api.nowpayments.io/v1"),
   NOWPAYMENTS_PAY_CURRENCY: z.string().default("usdtbsc"), // USDT on BNB Smart Chain
+
+  // In-process scheduler (Phase 18). Disable to run a worker that shouldn't fire
+  // jobs (e.g. a dedicated API-only instance) while the schema keeps compiling.
+  CRON_ENABLED: z.coerce.boolean().default(true),
 });
 
 const parsed = envSchema.safeParse(process.env);

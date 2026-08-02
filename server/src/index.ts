@@ -2,9 +2,11 @@ import { createApp } from "./app.js";
 import { env } from "./config/env.js";
 import { logger } from "./config/logger.js";
 import { connectDB } from "./config/db.js";
+import { startScheduler, stopScheduler } from "./jobs/scheduler.js";
 
 async function bootstrap() {
   await connectDB();
+  if (env.CRON_ENABLED) startScheduler();
 
   const app = createApp();
   const server = app.listen(env.PORT, () => {
@@ -14,6 +16,7 @@ async function bootstrap() {
 
   const shutdown = (signal: string) => {
     logger.info(`${signal} received — shutting down gracefully`);
+    stopScheduler();
     server.close(() => {
       logger.info("HTTP server closed");
       process.exit(0);

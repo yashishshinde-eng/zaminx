@@ -137,3 +137,32 @@ export function verifyWebhookSignature(req: Request): boolean {
 
 /** IPN payment statuses that count as a confirmed/completed payment. */
 export const PAID_STATUSES = new Set(["confirmed", "sending", "finished"]);
+
+/**
+ * Fetch the live payment status of a NOWPayments invoice (Phase 18
+ * payment-verification poller). Used to catch deposits whose IPN webhook was
+ * missed — the webhook remains the primary confirmation path. Only meaningful
+ * when the gateway is configured; callers guard with `isNowpaymentsConfigured()`.
+ * Returns the gateway `payment_status` (e.g. "finished", "waiting") or `null`
+ * when absent; throws on a non-OK response so the poller can count it as an error.
+ */
+export async function getInvoiceStatus(invoiceId: string): Promise<string | null> {
+  const cfg = await getNowpaymentsConfig();
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10_000);
+  try {
+    const res = await fetch(`${cfg.baseUrl}/invoice/${invoiceId}`, {
+      method: "GET",
+      headers: { "x-api-key": env.NOWPAYMENTS_API_KEY! },
+      signal: controller.signal,
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(`NOWPayments invoice status API ${res.status}: ${text.slice(0, 200)}`);
+    }
+    const body = (await res.json()) as { payment_status?: string };
+    return body.payment_status ?? null;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
