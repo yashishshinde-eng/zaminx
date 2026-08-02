@@ -2,6 +2,8 @@ import { Rank, User, WalletTransaction, ActivityLog } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { logger } from "../config/logger.js";
 import { applyLedgerEntry } from "./wallet.service.js";
+import { sendNotificationEmail } from "./email.service.js";
+import { rankAchievementTemplate } from "./emailTemplates.js";
 import { getTeamCounts, type TeamCounts } from "./referral.service.js";
 import type { RankRow, RankInfo, RankStatus, RankEvalSummary } from "@zaminex/shared";
 
@@ -240,6 +242,9 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
   if (ladder.length === 0) return { awarded: 0, errors: 0 };
 
   const { directCount, teamCount } = await getTeamCounts(userId);
+  // Fetched once so each new award can fire a notification email without an
+  // extra query per rank in the loop.
+  const user = await User.findById(userId).lean();
   let awarded = 0;
   let errors = 0;
 
@@ -268,6 +273,13 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
         resourceId: rankId,
         meta: { name: rank.name, amount: rank.rewardAmount, directCount, teamCount },
       }).catch(() => undefined);
+      // Fire-and-forget: bulk "run for all" would otherwise serialize SMTP sends.
+      if (user) {
+        void sendNotificationEmail(
+          user,
+          rankAchievementTemplate({ name: user.name, rankName: rank.name, rewardAmount: rank.rewardAmount }),
+        );
+      }
     } catch (err) {
       errors++;
       logger.error("Rank award failed", {

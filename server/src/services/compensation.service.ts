@@ -1,6 +1,8 @@
 import { User, UserPackage, BonanzaOffer, ActivityLog, WalletTransaction } from "../models/index.js";
 import { logger } from "../config/logger.js";
 import { applyLedgerEntry } from "./wallet.service.js";
+import { sendNotificationEmail } from "./email.service.js";
+import { bonanzaEarnedTemplate } from "./emailTemplates.js";
 import {
   getDirectBonusPct,
   isYieldEnabled,
@@ -480,6 +482,9 @@ export async function evaluateBonanzasForUser(userId: string): Promise<{ awarded
   if (offers.length === 0) return { awarded: 0, errors: 0 };
 
   const directCount = await User.countDocuments({ sponsorId: userId });
+  // Fetched once so each new award can fire a notification email without an
+  // extra query per offer in the loop.
+  const user = await User.findById(userId).lean();
   let awarded = 0;
   let errors = 0;
 
@@ -508,6 +513,13 @@ export async function evaluateBonanzasForUser(userId: string): Promise<{ awarded
         resourceId: offerId,
         meta: { name: offer.name, amount: offer.rewardAmount, directCount },
       }).catch(() => undefined);
+      // Fire-and-forget: bulk "run for all" would otherwise serialize SMTP sends.
+      if (user) {
+        void sendNotificationEmail(
+          user,
+          bonanzaEarnedTemplate({ name: user.name, offerName: offer.name, rewardAmount: offer.rewardAmount }),
+        );
+      }
     } catch (err) {
       errors++;
       logger.error("Bonanza award failed", {

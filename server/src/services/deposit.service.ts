@@ -1,7 +1,7 @@
 import { Package, UserPackage, Deposit, ActivityLog, User } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { logger } from "../config/logger.js";
-import { sendEmail } from "./email.service.js";
+import { sendNotificationEmail } from "./email.service.js";
 import { depositSuccessTemplate } from "./emailTemplates.js";
 import { createInvoice } from "./nowpayments.service.js";
 import { applyLedgerEntry } from "./wallet.service.js";
@@ -306,13 +306,13 @@ export async function confirmDeposit(
     Package.findById(deposit.package).lean(),
   ]);
   if (user) {
-    const { subject, html, text } = depositSuccessTemplate({
+    const content = depositSuccessTemplate({
       name: user.name,
       packageName: pkg?.name ?? up?.snapshot?.name ?? "your package",
       amountUsd: deposit.amountUsd,
       txId: nowpaymentsPaymentId ?? deposit.nowpaymentsInvoiceId ?? deposit._id.toString(),
     });
-    await sendEmail({ to: user.email, subject, html, text });
+    await sendNotificationEmail(user, content);
   }
 
   const updated = await Deposit.findById(deposit._id).lean();

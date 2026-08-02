@@ -2,6 +2,8 @@ import { Withdrawal, User, ActivityLog } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { logger } from "../config/logger.js";
 import { applyLedgerMove, applyLedgerEntry, getWalletBalances } from "./wallet.service.js";
+import { sendNotificationEmail } from "./email.service.js";
+import { withdrawalUpdateTemplate } from "./emailTemplates.js";
 import type { WithdrawalPage, WithdrawalRow, WithdrawalStatus, WalletType } from "@zaminex/shared";
 
 /** Minimum withdrawal in USD. Phase 14 will make this admin-configurable. */
@@ -183,6 +185,23 @@ export async function cancelWithdrawal(userId: string, id: string, meta?: Meta):
     userAgent: meta?.userAgent,
   }).catch(() => undefined);
 
+  // Best-effort cancellation email (gated on the user's email preference).
+  const cancelUser = await User.findById(w.user).lean();
+  if (cancelUser) {
+    await sendNotificationEmail(
+      cancelUser,
+      withdrawalUpdateTemplate({
+        name: cancelUser.name,
+        status: "cancelled",
+        amount: w.amount,
+        currency: w.currency,
+        wallet: w.wallet,
+        address: w.address,
+        remarks: "Cancelled by user",
+      }),
+    );
+  }
+
   const updated = await Withdrawal.findById(id).lean();
   return toWithdrawalRow(updated as never);
 }
@@ -233,6 +252,25 @@ async function adminTransition({ adminId, id, fromStatuses, toStatus, action, re
     resourceId: id,
     meta: { from: w.status, to: toStatus, remarks: remarks ?? null },
   }).catch(() => undefined);
+
+  // Best-effort status email for the user-visible outcomes (review is internal).
+  if (toStatus === "approved" || toStatus === "rejected" || toStatus === "paid") {
+    const owner = await User.findById(w.user).lean();
+    if (owner) {
+      await sendNotificationEmail(
+        owner,
+        withdrawalUpdateTemplate({
+          name: owner.name,
+          status: toStatus,
+          amount: w.amount,
+          currency: w.currency,
+          wallet: w.wallet,
+          address: w.address,
+          remarks: remarks ?? undefined,
+        }),
+      );
+    }
+  }
 
   const updated = await Withdrawal.findById(id).lean();
   return toWithdrawalRow(updated as never);

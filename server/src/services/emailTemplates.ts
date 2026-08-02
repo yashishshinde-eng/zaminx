@@ -1,6 +1,7 @@
 /**
  * Plain HTML/text email templates (no template engine required).
- * Phase 13 will migrate these to a DB-backed `email_templates` collection.
+ * DB-backed / admin-editable templates are deferred to Phase 14 (Admin Panel);
+ * Phase 13 keeps these as plain TS so all 7 Blueprint email events fire.
  */
 
 export const BRAND_NAME = "Zaminex";
@@ -26,6 +27,32 @@ interface DepositSuccessEmailArgs {
   packageName: string;
   amountUsd: number;
   txId: string;
+}
+
+/** The withdrawal statuses that trigger a user email (review is internal). */
+export type WithdrawalEmailStatus = "approved" | "rejected" | "paid" | "cancelled";
+
+interface WithdrawalUpdateEmailArgs {
+  name: string;
+  status: WithdrawalEmailStatus;
+  amount: number;
+  currency: string;
+  wallet: string;
+  address: string;
+  remarks?: string;
+  txId?: string;
+}
+
+interface RankAchievementEmailArgs {
+  name: string;
+  rankName: string;
+  rewardAmount: number;
+}
+
+interface BonanzaEarnedEmailArgs {
+  name: string;
+  offerName: string;
+  rewardAmount: number;
 }
 
 /** Shared wrapper for a branded transactional email. */
@@ -106,5 +133,76 @@ export function depositSuccessTemplate({
      <p style="margin:0 0 8px;font-size:15px;color:#334155;">Amount: <strong>$${amountUsd.toFixed(2)}</strong> (USDT-BEP20)</p>
      <p style="margin:0;font-size:14px;color:#64748b;">Transaction: <span style="font-family:monospace;word-break:break-all;">${txId}</span></p>`,
     `Hi ${name},\n\nYour deposit has been confirmed and your ${packageName} package is now active.\nAmount: $${amountUsd.toFixed(2)} (USDT-BEP20)\nTransaction: ${txId}`,
+  );
+}
+
+/** Shared withdrawal detail block (amount / wallet / address) + optional remarks. */
+function withdrawalDetails({ amount, currency, wallet, address, remarks, txId }: Omit<WithdrawalUpdateEmailArgs, "name" | "status">): { html: string; text: string } {
+  const amt = `${amount.toFixed(2)} ${currency}`;
+  const html = [
+    `<p style="margin:0 0 8px;font-size:15px;color:#334155;">Amount: <strong>${amt}</strong></p>`,
+    `<p style="margin:0 0 8px;font-size:15px;color:#334155;">Wallet: <strong>${wallet}</strong></p>`,
+    `<p style="margin:0 0 8px;font-size:14px;color:#64748b;">Address: <span style="font-family:monospace;word-break:break-all;">${address}</span></p>`,
+    txId ? `<p style="margin:0 0 8px;font-size:14px;color:#64748b;">Reference: <span style="font-family:monospace;word-break:break-all;">${txId}</span></p>` : "",
+    remarks ? `<p style="margin:0;font-size:14px;color:#64748b;">Note: ${remarks}</p>` : "",
+  ].filter(Boolean).join("\n     ");
+  const text = [
+    `Amount: ${amt}`,
+    `Wallet: ${wallet}`,
+    `Address: ${address}`,
+    txId ? `Reference: ${txId}` : "",
+    remarks ? `Note: ${remarks}` : "",
+  ].filter(Boolean).join("\n");
+  return { html, text };
+}
+
+/**
+ * Withdrawal status update — one template for approved / rejected / paid /
+ * cancelled. (`under_review` is an internal admin step and does not email.)
+ */
+export function withdrawalUpdateTemplate({
+  name,
+  status,
+  amount,
+  currency,
+  wallet,
+  address,
+  remarks,
+  txId,
+}: WithdrawalUpdateEmailArgs): EmailContent {
+  const detail = withdrawalDetails({ amount, currency, wallet, address, remarks, txId });
+  const headline: Record<WithdrawalEmailStatus, string> = {
+    approved: "Your withdrawal request has been approved and is being processed. You'll receive another email once the payment has been sent.",
+    rejected: "Your withdrawal request was rejected. The held funds have been returned to your available balance.",
+    paid: "Your withdrawal has been sent. The held funds have been paid out to your wallet address.",
+    cancelled: "Your withdrawal request was cancelled. The held funds have been returned to your available balance.",
+  };
+  const subject = `${BRAND_NAME} — Withdrawal ${status}`;
+  return wrap(
+    subject,
+    `<h1 style="margin:0 0 16px;font-size:22px;font-weight:700;">Hi ${name},</h1>
+     <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#334155;">${headline[status]}</p>
+     ${detail.html}`,
+    `Hi ${name},\n\n${headline[status]}\n${detail.text}`,
+  );
+}
+
+/** Rank achievement — a rank ladder run awarded a new rank + reward. */
+export function rankAchievementTemplate({ name, rankName, rewardAmount }: RankAchievementEmailArgs): EmailContent {
+  return wrap(
+    `${BRAND_NAME} — Rank achieved: ${rankName}`,
+    `<h1 style="margin:0 0 16px;font-size:22px;font-weight:700;">Congratulations, ${name}! 🏆</h1>
+     <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#334155;">You've achieved the <strong>${rankName}</strong> rank. A reward of <strong>$${rewardAmount.toFixed(2)}</strong> has been credited to your bonus wallet. Keep growing your team to unlock the next rank.</p>`,
+    `Congratulations, ${name}!\n\nYou've achieved the ${rankName} rank. A reward of $${rewardAmount.toFixed(2)} has been credited to your bonus wallet.`,
+  );
+}
+
+/** Bonanza earned — a bonanza offer's reward was credited to the bonus wallet. */
+export function bonanzaEarnedTemplate({ name, offerName, rewardAmount }: BonanzaEarnedEmailArgs): EmailContent {
+  return wrap(
+    `${BRAND_NAME} — Bonanza reward earned`,
+    `<h1 style="margin:0 0 16px;font-size:22px;font-weight:700;">Great work, ${name}! 🎉</h1>
+     <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#334155;">You've earned the <strong>${offerName}</strong> bonanza reward. <strong>$${rewardAmount.toFixed(2)}</strong> has been credited to your bonus wallet.</p>`,
+    `Great work, ${name}!\n\nYou've earned the ${offerName} bonanza reward. $${rewardAmount.toFixed(2)} has been credited to your bonus wallet.`,
   );
 }

@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import nodemailer, { type Transporter } from "nodemailer";
 import { env, isProd } from "../config/env.js";
 import { logger } from "../config/logger.js";
+import type { EmailContent } from "./emailTemplates.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 /** Directory where dev-file-transport emails are written. */
@@ -14,6 +15,13 @@ export interface SendEmailInput {
   subject: string;
   html: string;
   text: string;
+}
+
+/** Minimal user shape needed to send a notification email (with opt-out gate). */
+export interface NotifiableUser {
+  email: string;
+  name?: string;
+  notificationPreference?: { email?: boolean } | null;
 }
 
 /** True when SMTP credentials have been provided (real outbound mail). */
@@ -86,4 +94,18 @@ export async function sendEmail(input: SendEmailInput): Promise<void> {
       error: err instanceof Error ? err.message : String(err),
     });
   }
+}
+
+/**
+ * Send a notification email (deposit success, withdrawal update, rank
+ * achievement, bonanza earned). Skipped when the user has opted out of email
+ * notifications (`notificationPreference.email === false`). Never throws —
+ * delegates to `sendEmail`, which swallows and logs all failures. Auth emails
+ * (verify-email, welcome, reset-password) bypass this and use `sendEmail`
+ * directly, since security/transactional mail must reach the user regardless
+ * of their notification preference.
+ */
+export async function sendNotificationEmail(user: NotifiableUser, content: EmailContent): Promise<void> {
+  if (user.notificationPreference?.email === false) return;
+  await sendEmail({ to: user.email, subject: content.subject, html: content.html, text: content.text });
 }
