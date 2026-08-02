@@ -15,7 +15,8 @@ const LIMIT = 20;
 
 /** /app/admin/bonanzas — admin CRUD for bonanza offers. */
 export function AdminBonanzasPage() {
-  const { data, isLoading, isError, refetch } = useAdminBonanzas({ page: 1, limit: LIMIT });
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isError, refetch } = useAdminBonanzas({ page, limit: LIMIT });
   const offers = data?.items ?? [];
   const pagination = data && { page: data.page, totalPages: data.totalPages };
 
@@ -55,6 +56,7 @@ export function AdminBonanzasPage() {
           }
           page={pagination?.page ?? 1}
           pageCount={pagination?.totalPages ?? 1}
+          onPageChange={setPage}
         />
       </div>
 

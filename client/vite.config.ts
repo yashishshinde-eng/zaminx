@@ -22,5 +22,23 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: true,
+    // apexcharts (in its own `charts` chunk below) is inherently ~580kB; it's
+    // isolated so it only loads on chart pages and caches independently. Raise
+    // the limit so this expected, intentional chunk doesn't trip the warning.
+    chunkSizeWarningLimit: 700,
+    rollupOptions: {
+      output: {
+        // Split heavy vendor groups into stable, long-term-cacheable chunks so
+        // an app-code change doesn't re-download apexcharts/react/etc., and so
+        // the big chart lib lives in its own chunk instead of bloating a route
+        // chunk (the apexcharts chunk-size warning).
+        manualChunks: {
+          react: ["react", "react-dom", "react-router-dom"],
+          query: ["@tanstack/react-query"],
+          charts: ["apexcharts", "react-apexcharts"],
+          motion: ["framer-motion"],
+        },
+      },
+    },
   },
 });

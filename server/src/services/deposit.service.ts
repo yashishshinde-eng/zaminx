@@ -323,9 +323,9 @@ export async function confirmDeposit(
 /*  Reads                                                              */
 /* ------------------------------------------------------------------ */
 
-/** GET /payments/deposits — the user's deposits (newest first). */
+/** GET /payments/deposits — the user's deposits (newest first, capped). */
 export async function getDeposits(userId: string): Promise<DepositRow[]> {
-  const rows = await Deposit.find({ user: userId }).sort({ createdAt: -1 }).lean();
+  const rows = await Deposit.find({ user: userId }).sort({ createdAt: -1 }).limit(100).lean();
   return rows.map(toDepositRow);
 }
 
@@ -345,8 +345,8 @@ export async function findDepositByInvoice(invoiceId: string) {
 /** GET /packages/mine — the user's subscriptions with joined payment info. */
 export async function getMyPackagesWithPayment(userId: string): Promise<UserPackageRow[]> {
   const [rows, deposits] = await Promise.all([
-    UserPackage.find({ user: userId }).sort({ createdAt: -1 }).lean(),
-    Deposit.find({ user: userId }).sort({ createdAt: -1 }).lean(),
+    UserPackage.find({ user: userId }).sort({ createdAt: -1 }).limit(200).lean(),
+    Deposit.find({ user: userId }).sort({ createdAt: -1 }).limit(200).lean(),
   ]);
   // Most recent deposit per subscription → joined `payment` field.
   const paymentByPackage = new Map<string, Payment>();

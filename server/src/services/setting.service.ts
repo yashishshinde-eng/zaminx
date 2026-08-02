@@ -1,5 +1,6 @@
 import { Setting } from "../models/index.js";
 import { env, isNowpaymentsConfigured } from "../config/env.js";
+import { cached, invalidate } from "../utils/cache.js";
 import type {
   CompensationSettings,
   CompensationSettingsBody,
@@ -30,14 +31,18 @@ const CMS_SETTING_KEYS: Record<keyof SiteConfigUpdate, string> = {
 
 /**
  * Generic key/value configuration store (Phase 10). Wraps the `Setting` model
- * with typed read/upsert helpers. No cache — dev simplicity; reads are one
- * indexed lookup on `key`.
+ * with typed read/upsert helpers. Reads are cached in-process for `SETTING_TTL_MS`
+ * (Phase 16) — every request flow reads settings (compensation ~7 keys, admin
+ * site config 10, SMTP 3), so the cache removes a MongoDB round-trip per read.
+ * `setSetting` invalidates the affected key (and the public-site-config cache
+ * for public writes), so same-process admin edits apply immediately.
  */
+const SETTING_TTL_MS = 30_000;
 
 /** Read a setting, falling back to `fallback` when unset (or null). */
 export async function getSetting<T>(key: string, fallback: T): Promise<T> {
-  const doc = await Setting.findOne({ key }).lean();
-  return (doc?.value ?? fallback) as T;
+  const doc = await cached(`setting:${key}`, SETTING_TTL_MS, () => Setting.findOne({ key }).lean());
+  return ((doc as { value?: unknown } | null)?.value ?? fallback) as T;
 }
 
 /** Upsert a setting (creates it if missing, otherwise overwrites the value). */
@@ -52,6 +57,10 @@ export async function setSetting(
     { $set: { key, value, category, isPublic, updatedAt: new Date() } },
     { upsert: true },
   );
+  // Invalidate the cached read for this key, and (for public settings) the
+  // assembled public site-config cache consumed by the website.
+  invalidate(`setting:${key}`);
+  if (isPublic) invalidate("cms:public-site-config");
 }
 
 /* ---- Compensation convenience reads ---- */

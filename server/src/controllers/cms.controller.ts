@@ -6,7 +6,12 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { logger } from "../config/logger.js";
+import { cached } from "../utils/cache.js";
 import { Setting, CmsPage, ContactMessage } from "../models/index.js";
+
+/** TTL for the public CMS reads (Phase 16). Public pages/site config change
+ * rarely and are read on every site load; admin edits invalidate immediately. */
+const CMS_CACHE_TTL = 30_000;
 
 /** Raw settings rows mapped to SiteConfig field keys. */
 const SETTING_KEYS = {
@@ -26,7 +31,9 @@ const SETTING_KEYS = {
 /** GET /cms/site — assemble public settings into a validated SiteConfig. */
 export const getSiteConfig: RequestHandler[] = [
   asyncHandler(async (_req, res) => {
-    const rows = await Setting.find({ isPublic: true });
+    const rows = await cached("cms:public-site-config", CMS_CACHE_TTL, () =>
+      Setting.find({ isPublic: true }).lean(),
+    );
     const byKey = new Map(rows.map((r) => [r.key, r.value]));
 
     const raw: Record<string, unknown> = {};
@@ -44,10 +51,12 @@ export const getSiteConfig: RequestHandler[] = [
 /** GET /cms/pages — published page list (slug + title). */
 export const listPages: RequestHandler[] = [
   asyncHandler(async (_req, res) => {
-    const pages = await CmsPage.find({ status: "published" })
-      .sort("title")
-      .select("slug title -_id")
-      .lean();
+    const pages = await cached("cms:pages:list", CMS_CACHE_TTL, () =>
+      CmsPage.find({ status: "published" })
+        .sort("title")
+        .select("slug title -_id")
+        .lean(),
+    );
     ok(res, pages, "Published pages");
   }),
 ];
@@ -56,7 +65,9 @@ export const listPages: RequestHandler[] = [
 export const getPage: RequestHandler[] = [
   asyncHandler(async (req, res) => {
     const slug = req.params.slug?.toLowerCase();
-    const page = await CmsPage.findOne({ slug, status: "published" }).lean();
+    const page = await cached(`cms:page:${slug}`, CMS_CACHE_TTL, () =>
+      CmsPage.findOne({ slug, status: "published" }).lean(),
+    );
     if (!page) throw ApiError.notFound("Page not found");
     ok(
       res,

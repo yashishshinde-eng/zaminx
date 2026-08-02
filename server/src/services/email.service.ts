@@ -73,8 +73,7 @@ ${input.html}`;
   logger.info(`📧 Dev email written → ${filename}`, { to: input.to, subject: input.subject });
 }
 
-/** Build a real SMTP transporter from the live (Settings + env) config. Not
- * cached — admin config changes apply on the next send without a restart. */
+/** Build a real SMTP transporter from the live (Settings + env) config. */
 function buildTransporter(cfg: SmtpConfig): Transporter {
   return nodemailer.createTransport({
     host: cfg.host,
@@ -82,6 +81,29 @@ function buildTransporter(cfg: SmtpConfig): Transporter {
     secure: cfg.port === 465,
     auth: cfg.user ? { user: cfg.user, pass: cfg.pass } : undefined,
   });
+}
+
+/**
+ * Cached SMTP transporter (Phase 16). Rebuilding a transporter (and its
+ * connection pool) on every outbound email is wasteful. The transporter is
+ * reused as long as the resolved config is unchanged; any change to host /
+ * port / from / user / pass produces a new signature, so the next send rebuilds
+ * it — preserving the "config changes apply on the next send without a restart"
+ * guarantee. The signature includes the env `pass` so an env credential
+ * rotation is also picked up on the next send.
+ */
+let cachedTransporter: { sig: string; transporter: Transporter } | null = null;
+
+function transporterSignature(cfg: SmtpConfig): string {
+  return `${cfg.host}|${cfg.port}|${cfg.from ?? ""}|${cfg.user ?? ""}|${cfg.pass ?? ""}`;
+}
+
+function getTransporter(cfg: SmtpConfig): Transporter {
+  const sig = transporterSignature(cfg);
+  if (cachedTransporter && cachedTransporter.sig === sig) return cachedTransporter.transporter;
+  const transporter = buildTransporter(cfg);
+  cachedTransporter = { sig, transporter };
+  return transporter;
 }
 
 /**
@@ -96,7 +118,7 @@ export async function sendEmail(input: SendEmailInput): Promise<void> {
       await writeDevEmail(input);
       return;
     }
-    const info = await buildTransporter(cfg).sendMail({
+    const info = await getTransporter(cfg).sendMail({
       from: cfg.from,
       to: input.to,
       subject: input.subject,
@@ -132,7 +154,7 @@ export async function sendTestEmail(to: string): Promise<{ dev: boolean }> {
     return { dev: true };
   }
   // Throws on failure (surfaced to the admin as a 4xx/5xx with the SMTP message).
-  await buildTransporter(cfg).sendMail({ from: cfg.from, ...input });
+  await getTransporter(cfg).sendMail({ from: cfg.from, ...input });
   return { dev: false };
 }
 

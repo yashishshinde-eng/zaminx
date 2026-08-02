@@ -1,5 +1,6 @@
 import { CmsPage, ActivityLog } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
+import { invalidate, invalidatePrefix } from "../utils/cache.js";
 import { cmsPageSchema } from "@zaminex/shared";
 import type {
   AdminCmsPage,
@@ -126,6 +127,11 @@ export async function createAdminPage(adminId: string, body: CreateCmsPageBody):
     meta: { title: parsed.title, status: parsed.status },
   });
 
+  // Invalidate the public page caches (list + all cached pages — slug case may
+  // differ from the lowercased read key, so clear the whole page prefix).
+  invalidate("cms:pages:list");
+  invalidatePrefix("cms:page:");
+
   return toAdminPage(created.toObject() as never);
 }
 
@@ -152,6 +158,9 @@ export async function updateAdminPage(adminId: string, slug: string, patch: Upda
     meta: { fields: Object.keys(patch) },
   });
 
+  invalidate("cms:pages:list");
+  invalidatePrefix("cms:page:");
+
   return toAdminPage(page.toObject() as never);
 }
 
@@ -166,4 +175,7 @@ export async function deleteAdminPage(adminId: string, slug: string): Promise<vo
     resource: "CmsPage",
     resourceId: slug,
   });
+
+  invalidate("cms:pages:list");
+  invalidatePrefix("cms:page:");
 }
