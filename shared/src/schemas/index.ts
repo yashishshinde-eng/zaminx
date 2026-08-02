@@ -8,3 +8,4 @@ export * from "./referral.schema";
 export * from "./compensation.schema";
 export * from "./report.schema";
 export * from "./adminUser.schema";
+export * from "./adminLogs.schema";

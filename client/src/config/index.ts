@@ -59,4 +59,7 @@ export const queryKeys = {
   adminSiteConfig: ["admin", "site-config"] as const,
   smtpSettings: ["admin", "smtp-settings"] as const,
   nowpaymentsSettings: ["admin", "nowpayments-settings"] as const,
+  // Phase 14C operations.
+  adminMaintenance: ["admin", "maintenance"] as const,
+  adminLogs: (params: unknown) => ["admin", "logs", params] as const,
 } as const;

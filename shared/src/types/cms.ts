@@ -11,6 +11,7 @@ import {
   smtpSettingsSchema,
   smtpTestEmailSchema,
   nowpaymentsSettingsSchema,
+  maintenanceSettingsSchema,
 } from "../schemas/cms.schema";
 
 /** A single CMS content block. */
@@ -99,3 +100,13 @@ export interface NowpaymentsSettings {
 }
 
 export type NowpaymentsSettingsBody = z.infer<typeof nowpaymentsSettingsSchema>["body"];
+
+/* ---- Phase 14C maintenance settings ---- */
+
+/** Maintenance-mode flag + the message shown to non-admins (public setting). */
+export interface MaintenanceSettings {
+  enabled: boolean;
+  message: string;
+}
+
+export type MaintenanceSettingsBody = z.infer<typeof maintenanceSettingsSchema>["body"];

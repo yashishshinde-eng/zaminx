@@ -10,6 +10,10 @@ import {
   testSmtpEmail,
   nowpaymentsSettings,
   updateNowpaymentsSettings,
+  maintenanceSettings,
+  updateMaintenanceSettings,
+  forceLogoutAllHandler,
+  adminLogs,
 } from "../controllers/admin.controller.js";
 import adminUserRoutes from "./adminUser.routes.js";
 import adminCmsRoutes from "./adminCms.routes.js";
@@ -46,5 +50,18 @@ router.post("/settings/smtp/test", ...testSmtpEmail);
 // NOWPayments settings (hybrid) — non-secret fields editable; secrets env-only.
 router.get("/settings/payment", ...nowpaymentsSettings);
 router.patch("/settings/payment", ...updateNowpaymentsSettings);
+
+// Maintenance settings (Phase 14C) — the public `general.maintenanceMode`
+// flag. The server-side enforcement middleware 503s non-admin API traffic when
+// enabled; this is the admin toggle.
+router.get("/settings/maintenance", ...maintenanceSettings);
+router.patch("/settings/maintenance", ...updateMaintenanceSettings);
+
+// Force-logout-all (Phase 14C) — bulk-invalidate every refresh token except the
+// acting admin's. Access tokens expire on their own; refresh is what's blocked.
+router.post("/sessions/invalidate-all", ...forceLogoutAllHandler);
+
+// App logs viewer (Phase 14C) — tail a Winston log file.
+router.get("/logs", ...adminLogs);
 
 export default router;

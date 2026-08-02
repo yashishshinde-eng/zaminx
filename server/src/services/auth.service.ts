@@ -1,4 +1,4 @@
-import { User, type UserDocument } from "../models/index.js";
+import { User, ActivityLog, type UserDocument } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { generateOpaqueToken } from "../utils/tokens.js";
 import { issueTokens, verifyRefreshToken } from "./token.service.js";
@@ -185,6 +185,26 @@ export async function logoutUser(userId: string) {
   if (!user) return;
   user.refreshTokenHash = null;
   await user.save();
+}
+
+/**
+ * Force-logout everyone except the acting admin (Phase 14C). Bulk-nulls
+ * `refreshTokenHash` across all users. Access tokens stay valid until their
+ * short JWT expiry (per the user's "clear refresh only" decision); refresh is
+ * what's blocked, so affected sessions can't renew.
+ */
+export async function forceLogoutAll(adminId: string): Promise<{ count: number }> {
+  const result = await User.updateMany(
+    { _id: { $ne: adminId } },
+    { $set: { refreshTokenHash: null } },
+  );
+  await ActivityLog.create({
+    actor: adminId,
+    action: "user.force_logout_all",
+    resource: "User",
+    meta: { count: result.modifiedCount },
+  }).catch(() => undefined);
+  return { count: result.modifiedCount };
 }
 
 /** Forgot-password: create a short-lived reset token and email the link. */

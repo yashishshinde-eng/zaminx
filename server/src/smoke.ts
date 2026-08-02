@@ -86,6 +86,12 @@ const server = app.listen(0, async () => {
   await check("unauthorized /admin/settings/cms", "/api/v1/admin/settings/cms", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
   await check("unauthorized /admin/settings/smtp", "/api/v1/admin/settings/smtp", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
   await check("unauthorized /admin/settings/payment", "/api/v1/admin/settings/payment", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
+  await check("unauthorized /admin/settings/maintenance", "/api/v1/admin/settings/maintenance", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
+  await check("unauthorized /admin/sessions/invalidate-all", "/api/v1/admin/sessions/invalidate-all", { method: "POST" }, { status: 401, bodyMatch: "Missing access token" });
+  await check("unauthorized /admin/logs", "/api/v1/admin/logs", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
+  await check("unauthorized /admin/users/:id/wallet/adjust", "/api/v1/admin/users/507f1f77bcf86cd799439011/wallet/adjust", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ wallet: "main", direction: "credit", amount: 10 }),
+  }, { status: 401, bodyMatch: "Missing access token" });
   await check("payments webhook ack", "/api/v1/payments/nowpayments/webhook", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: "no-such-invoice" }),
   }, { status: 200, bodyMatch: "received" });

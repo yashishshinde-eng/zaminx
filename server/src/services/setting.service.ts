@@ -8,6 +8,8 @@ import type {
   SmtpSettingsBody,
   NowpaymentsSettings,
   NowpaymentsSettingsBody,
+  MaintenanceSettings,
+  MaintenanceSettingsBody,
 } from "@zaminex/shared";
 
 /** Canonical field → Setting-key map for the 9 admin-editable `cms.*` fields.
@@ -201,4 +203,19 @@ export async function updateNowpaymentsSettings(body: NowpaymentsSettingsBody): 
   if (body.payCurrency !== undefined) await setSetting("payment.payCurrency", body.payCurrency, "payment");
   if (body.sandbox !== undefined) await setSetting("payment.sandbox", body.sandbox, "payment");
   return getNowpaymentsSettings();
+}
+
+/* ---- Phase 14C — maintenance settings (public `general.maintenanceMode`) ---- */
+
+const MAINTENANCE_DEFAULT: MaintenanceSettings = { enabled: false, message: "" };
+
+/** Read the maintenance-mode flag + message (public; defaults to off). */
+export async function getMaintenanceSettings(): Promise<MaintenanceSettings> {
+  return getSetting<MaintenanceSettings>("general.maintenanceMode", MAINTENANCE_DEFAULT);
+}
+
+/** Update maintenance mode (public — feeds the website + server enforcement). */
+export async function updateMaintenanceSettings(body: MaintenanceSettingsBody): Promise<MaintenanceSettings> {
+  await setSetting("general.maintenanceMode", { enabled: body.enabled, message: body.message }, "general", true);
+  return getMaintenanceSettings();
 }

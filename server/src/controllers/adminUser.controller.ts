@@ -4,8 +4,9 @@ import {
   adminUserIdParamSchema,
   adminUserStatusSchema,
   adminResetPasswordSchema,
+  adminWalletAdjustSchema,
 } from "@zaminex/shared";
-import type { AdminUserListQuery, UserStatus, AdminResetPasswordBody } from "@zaminex/shared";
+import type { AdminUserListQuery, UserStatus, AdminResetPasswordBody, AdminWalletAdjustBody } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";
@@ -18,6 +19,7 @@ import {
   forceLogoutUser,
   adminResetPassword,
 } from "../services/adminUser.service.js";
+import { adminAdjustWallet } from "../services/adminWallet.service.js";
 
 /** GET /admin/users — paginated, searchable, filterable admin user list. */
 export const list: RequestHandler[] = [
@@ -90,5 +92,17 @@ export const resetPassword: RequestHandler[] = [
     const id = (req.params as { id: string }).id;
     await adminResetPassword(req.user.id, id, (req.body as AdminResetPasswordBody).password);
     ok(res, {}, "Password reset");
+  }),
+];
+
+/** POST /admin/users/:id/wallet/adjust — admin credit/debit a wallet field (Phase 14C). */
+export const adjustWallet: RequestHandler[] = [
+  validate(adminUserIdParamSchema, "params"),
+  validate(adminWalletAdjustSchema),
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    const id = (req.params as { id: string }).id;
+    const result = await adminAdjustWallet(req.user.id, id, req.body as AdminWalletAdjustBody);
+    ok(res, { balance: result.balance, wallet: result.wallet }, "Wallet adjusted");
   }),
 ];

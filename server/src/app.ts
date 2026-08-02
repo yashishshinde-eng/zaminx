@@ -9,6 +9,7 @@ import { env, isProd } from "./config/env.js";
 import { stream } from "./config/logger.js";
 import { swaggerSpec } from "./config/swagger.js";
 import { apiLimiter } from "./middlewares/rateLimit.js";
+import { enforceMaintenance } from "./middlewares/maintenance.js";
 import { notFoundHandler, errorHandler } from "./middlewares/error.js";
 import v1Router from "./routes/index.js";
 
@@ -46,8 +47,12 @@ export function createApp(): Express {
   // --- API documentation ---
   app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-  // --- Rate limit + routes ---
-  app.use("/api/v1", apiLimiter, v1Router);
+  // --- Rate limit + maintenance gate + routes ---
+  // `enforceMaintenance` runs before the sub-routers: when maintenance is on,
+  // non-admin API requests 503 (auth login/refresh/logout bypass so an admin
+  // can get back in). When the DB is unreachable maintenance reads as off, so
+  // existing auth/401 behaviour is unchanged.
+  app.use("/api/v1", apiLimiter, enforceMaintenance, v1Router);
 
   // --- 404 + error handler (must be last) ---
   app.use(notFoundHandler);

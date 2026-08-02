@@ -5,6 +5,8 @@ import {
   smtpSettingsSchema,
   smtpTestEmailSchema,
   nowpaymentsSettingsSchema,
+  maintenanceSettingsSchema,
+  adminLogsQuerySchema,
 } from "@zaminex/shared";
 import type {
   CompensationSettingsBody,
@@ -12,6 +14,8 @@ import type {
   SmtpSettingsBody,
   SmtpTestEmailBody,
   NowpaymentsSettingsBody,
+  MaintenanceSettingsBody,
+  AdminLogsQuery,
 } from "@zaminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -27,8 +31,12 @@ import {
   updateSmtpSettings as updateSmtpSettingsSvc,
   getNowpaymentsSettings,
   updateNowpaymentsSettings as updateNowpaymentsSettingsSvc,
+  getMaintenanceSettings,
+  updateMaintenanceSettings as updateMaintenanceSettingsSvc,
 } from "../services/setting.service.js";
 import { sendTestEmail } from "../services/email.service.js";
+import { forceLogoutAll } from "../services/auth.service.js";
+import { readLogTail } from "../services/adminLogs.service.js";
 
 /** GET /admin/dashboard — platform-wide admin dashboard (KPIs + series + activity). */
 export const dashboard: RequestHandler[] = [
@@ -123,5 +131,45 @@ export const updateNowpaymentsSettings: RequestHandler[] = [
     if (!req.user) throw ApiError.unauthorized();
     const nowpayments = await updateNowpaymentsSettingsSvc(req.body as NowpaymentsSettingsBody);
     ok(res, { nowpayments }, "NOWPayments settings updated");
+  }),
+];
+
+/* ---- Phase 14C — maintenance / force-logout-all / logs ---- */
+
+/** GET /admin/settings/maintenance — read the maintenance flag + message. */
+export const maintenanceSettings: RequestHandler[] = [
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    const maintenance = await getMaintenanceSettings();
+    ok(res, { maintenance }, "Maintenance settings");
+  }),
+];
+
+/** PATCH /admin/settings/maintenance — toggle maintenance + set message. */
+export const updateMaintenanceSettings: RequestHandler[] = [
+  validate(maintenanceSettingsSchema),
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    const maintenance = await updateMaintenanceSettingsSvc(req.body as MaintenanceSettingsBody);
+    ok(res, { maintenance }, "Maintenance settings updated");
+  }),
+];
+
+/** POST /admin/sessions/invalidate-all — force-logout everyone except the acting admin. */
+export const forceLogoutAllHandler: RequestHandler[] = [
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    const { count } = await forceLogoutAll(req.user.id);
+    ok(res, { count }, "Sessions invalidated");
+  }),
+];
+
+/** GET /admin/logs — tail of a Winston log file. */
+export const adminLogs: RequestHandler[] = [
+  validate(adminLogsQuerySchema, "query"),
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    const logs = await readLogTail(req.query as unknown as AdminLogsQuery);
+    ok(res, { logs }, "Log tail");
   }),
 ];

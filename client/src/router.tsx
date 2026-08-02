@@ -39,6 +39,8 @@ const AdminCmsPagesPage = lazy(() => import("@/pages/AdminCmsPagesPage").then((m
 const AdminSiteConfigPage = lazy(() => import("@/pages/AdminSiteConfigPage").then((m) => ({ default: m.AdminSiteConfigPage })));
 const AdminSmtpSettingsPage = lazy(() => import("@/pages/AdminSmtpSettingsPage").then((m) => ({ default: m.AdminSmtpSettingsPage })));
 const AdminNowpaymentsSettingsPage = lazy(() => import("@/pages/AdminNowpaymentsSettingsPage").then((m) => ({ default: m.AdminNowpaymentsSettingsPage })));
+const AdminSecurityPage = lazy(() => import("@/pages/AdminSecurityPage").then((m) => ({ default: m.AdminSecurityPage })));
+const AdminLogsPage = lazy(() => import("@/pages/AdminLogsPage").then((m) => ({ default: m.AdminLogsPage })));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
 export function AppRouter() {
@@ -87,6 +89,8 @@ export function AppRouter() {
             <Route path="/app/admin/site-config" element={<AdminSiteConfigPage />} />
             <Route path="/app/admin/smtp" element={<AdminSmtpSettingsPage />} />
             <Route path="/app/admin/payments" element={<AdminNowpaymentsSettingsPage />} />
+            <Route path="/app/admin/security" element={<AdminSecurityPage />} />
+            <Route path="/app/admin/logs" element={<AdminLogsPage />} />
             <Route path="/app/admin/reports" element={<AdminReportsPage />} />
           </Route>
 

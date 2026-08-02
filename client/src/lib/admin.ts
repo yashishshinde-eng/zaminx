@@ -11,6 +11,12 @@ import type {
   SmtpSettingsBody,
   NowpaymentsSettings,
   NowpaymentsSettingsBody,
+  MaintenanceSettings,
+  MaintenanceSettingsBody,
+  AdminLogsQuery,
+  AdminLogsResult,
+  AdminWalletAdjustBody,
+  WalletBalance,
 } from "@zaminex/shared";
 
 /** A paginated page of rows (matches every list endpoint in this module). */
@@ -156,6 +162,57 @@ export async function fetchNowpaymentsSettings(): Promise<NowpaymentsSettings> {
 export async function updateNowpaymentsSettingsRequest(body: NowpaymentsSettingsBody): Promise<NowpaymentsSettings> {
   const { data } = await api.patch<NowpaymentsResponse>("/admin/settings/payment", body);
   return data.data.nowpayments;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Maintenance / force-logout-all / logs (Phase 14C)                  */
+/* ------------------------------------------------------------------ */
+
+interface MaintenanceResponse {
+  data: { maintenance: MaintenanceSettings };
+}
+interface LogsResponse {
+  data: { logs: AdminLogsResult };
+}
+
+/** GET /admin/settings/maintenance — read the maintenance flag + message. */
+export async function fetchMaintenanceSettings(): Promise<MaintenanceSettings> {
+  const { data } = await api.get<MaintenanceResponse>("/admin/settings/maintenance");
+  return data.data.maintenance;
+}
+
+/** PATCH /admin/settings/maintenance — toggle maintenance + set message. */
+export async function updateMaintenanceSettingsRequest(body: MaintenanceSettingsBody): Promise<MaintenanceSettings> {
+  const { data } = await api.patch<MaintenanceResponse>("/admin/settings/maintenance", body);
+  return data.data.maintenance;
+}
+
+/** POST /admin/sessions/invalidate-all — force-logout everyone except the admin. */
+export async function forceLogoutAllRequest(): Promise<{ count: number }> {
+  const { data } = await api.post<{ data: { count: number } }>("/admin/sessions/invalidate-all");
+  return data.data;
+}
+
+/** GET /admin/logs — tail a Winston log file. */
+export async function fetchAdminLogs(params: AdminLogsQuery): Promise<AdminLogsResult> {
+  const { data } = await api.get<LogsResponse>("/admin/logs", { params });
+  return data.data.logs;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Admin wallet adjustment (Phase 14C)                               */
+/* ------------------------------------------------------------------ */
+
+/** POST /admin/users/:id/wallet/adjust — admin credit/debit a wallet field. */
+export async function adjustUserWalletRequest(
+  id: string,
+  body: AdminWalletAdjustBody,
+): Promise<{ wallet: AdminWalletAdjustBody["wallet"]; balance: WalletBalance }> {
+  const { data } = await api.post<{ data: { wallet: AdminWalletAdjustBody["wallet"]; balance: WalletBalance } }>(
+    `/admin/users/${id}/wallet/adjust`,
+    body,
+  );
+  return data.data;
 }
 
 /* ------------------------------------------------------------------ */

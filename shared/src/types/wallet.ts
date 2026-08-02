@@ -11,6 +11,9 @@
  * `Wallet` document materialises balances for fast reads.
  */
 
+import { z } from "zod";
+import { adminWalletAdjustSchema } from "../schemas/wallet.schema";
+
 export type WalletType = "main" | "bonus" | "trading";
 
 /** Which balance field a ledger entry affected. */
@@ -82,3 +85,8 @@ export interface WalletLedgerPage {
   total: number;
   totalPages: number;
 }
+
+/* ---- Phase 14C admin wallet adjustment ---- */
+
+/** Body for `POST /admin/users/:id/wallet/adjust`. */
+export type AdminWalletAdjustBody = z.infer<typeof adminWalletAdjustSchema>["body"];

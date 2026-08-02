@@ -244,3 +244,16 @@ export const nowpaymentsSettingsSchema = z.object({
     sandbox: z.boolean().optional(),
   }),
 });
+
+/* ----------------------------------------------------------------------------
+ * Admin maintenance settings (Phase 14C). `general.maintenanceMode` lives in
+ * the Setting collection (category "general", public). Server-side enforcement
+ * middleware 503s non-admin API requests when `enabled` is true.
+ * ------------------------------------------------------------------------- */
+
+export const maintenanceSettingsSchema = z.object({
+  body: z.object({
+    enabled: z.boolean(),
+    message: z.string().max(500).default(""),
+  }),
+});

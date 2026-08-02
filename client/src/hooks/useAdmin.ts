@@ -17,6 +17,11 @@ import {
   sendTestEmailRequest,
   fetchNowpaymentsSettings,
   updateNowpaymentsSettingsRequest,
+  fetchMaintenanceSettings,
+  updateMaintenanceSettingsRequest,
+  forceLogoutAllRequest,
+  fetchAdminLogs,
+  adjustUserWalletRequest,
   type AdminUsersParams,
   type Page,
 } from "@/lib/admin";
@@ -32,6 +37,11 @@ import type {
   SmtpSettingsBody,
   NowpaymentsSettings,
   NowpaymentsSettingsBody,
+  MaintenanceSettings,
+  MaintenanceSettingsBody,
+  AdminLogsQuery,
+  AdminLogsResult,
+  AdminWalletAdjustBody,
   UserStatus,
 } from "@zaminex/shared";
 
@@ -254,6 +264,75 @@ export function useUpdateNowpaymentsSettings() {
     mutationFn: (body: NowpaymentsSettingsBody) => updateNowpaymentsSettingsRequest(body),
     onSuccess: (nowpayments) => {
       qc.setQueryData(queryKeys.nowpaymentsSettings, nowpayments);
+    },
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/*  Maintenance / force-logout-all / logs (Phase 14C)                  */
+/* ------------------------------------------------------------------ */
+
+/** Maintenance flag + message (public setting). */
+export function useMaintenanceSettings() {
+  return useQuery<MaintenanceSettings>({
+    queryKey: queryKeys.adminMaintenance,
+    queryFn: fetchMaintenanceSettings,
+    staleTime: 30_000,
+    gcTime: 5 * 60_000,
+    retry: 1,
+  });
+}
+
+/** PATCH /admin/settings/maintenance — toggle maintenance + set message. */
+export function useUpdateMaintenanceSettings() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: MaintenanceSettingsBody) => updateMaintenanceSettingsRequest(body),
+    onSuccess: (maintenance) => {
+      qc.setQueryData(queryKeys.adminMaintenance, maintenance);
+    },
+  });
+}
+
+/** POST /admin/sessions/invalidate-all — force-logout everyone except the admin. */
+export function useForceLogoutAll() {
+  return useMutation({
+    mutationFn: () => forceLogoutAllRequest(),
+    onSuccess: (r) => {
+      toast.success(`Invalidated ${r.count} session${r.count === 1 ? "" : "s"}`);
+    },
+    onError: () => {
+      /* interceptor toasts */
+    },
+  });
+}
+
+/** GET /admin/logs — tail a Winston log file (always fresh on demand). */
+export function useAdminLogs(params: AdminLogsQuery) {
+  return useQuery<AdminLogsResult>({
+    queryKey: queryKeys.adminLogs(params),
+    queryFn: () => fetchAdminLogs(params),
+    staleTime: 0,
+    gcTime: 60_000,
+    retry: 1,
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/*  Admin wallet adjustment (Phase 14C)                                */
+/* ------------------------------------------------------------------ */
+
+/** POST /admin/users/:id/wallet/adjust — invalidate the user's detail after. */
+export function useAdjustUserWallet(id?: string) {
+  const invalidate = useInvalidateUser(id);
+  return useMutation({
+    mutationFn: (body: AdminWalletAdjustBody) => adjustUserWalletRequest(id as string, body),
+    onSuccess: async () => {
+      toast.success("Wallet adjusted");
+      await invalidate();
+    },
+    onError: () => {
+      /* interceptor toasts (409 insufficient / 404 user) */
     },
   });
 }

@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ConfirmModal } from "@/components/ui/dialog";
 import { formatCurrency, formatDate } from "@/lib/utils";
-import { useAdminUserDetail, useSetUserStatus, useVerifyUserEmail, useForceLogout, useAdminResetPassword } from "@/hooks/useAdmin";
+import { useAdminUserDetail, useSetUserStatus, useVerifyUserEmail, useForceLogout, useAdminResetPassword, useAdjustUserWallet } from "@/hooks/useAdmin";
 import { userStatusBadge } from "@/pages/AdminUsersPage";
 import type { AdminUserActivityRow, AdminUserDetail, UserStatus } from "@zaminex/shared";
 
@@ -62,6 +62,7 @@ export function AdminUserDetailPage() {
         <div className="space-y-6 lg:col-span-2">
           <ProfileCard user={user} />
           <WalletsCard user={user} />
+          <WalletAdjustCard userId={user.id} />
           <PackageCard user={user} />
           <ActivityCard activity={user.recentActivity} onRetry={refetch} />
         </div>
@@ -172,6 +173,94 @@ function Stat({ label, value }: { label: string; value: string }) {
       <p className="text-xs text-muted-foreground">{label}</p>
       <p className="mt-1 text-lg font-bold tabular-nums">{value}</p>
     </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Adjust wallet (Phase 14C)                                            */
+/* ------------------------------------------------------------------ */
+
+function WalletAdjustCard({ userId }: { userId: string }) {
+  const [wallet, setWallet] = useState<"main" | "bonus" | "trading">("main");
+  const [field, setField] = useState<"available" | "onHold">("available");
+  const [direction, setDirection] = useState<"credit" | "debit">("credit");
+  const [amount, setAmount] = useState("");
+  const [memo, setMemo] = useState("");
+  const [confirm, setConfirm] = useState(false);
+
+  const adjustMut = useAdjustUserWallet(userId);
+  const amt = Number(amount);
+  const valid = Number.isFinite(amt) && amt > 0;
+  const isDebit = direction === "debit";
+
+  function submit() {
+    if (!valid) return;
+    adjustMut.mutate({ wallet, field, direction, amount: amt, memo: memo || undefined }, { onSettled: () => setConfirm(false) });
+  }
+
+  return (
+    <Card>
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-base">Adjust wallet</CardTitle>
+        <CardDescription>Credit or debit a wallet balance field. Each adjustment is recorded as an immutable ledger row and audited.</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="grid gap-3 sm:grid-cols-3">
+          <div className="space-y-1">
+            <Label htmlFor="adjWallet" className="text-xs text-muted-foreground">Wallet</Label>
+            <select id="adjWallet" value={wallet} onChange={(e) => setWallet(e.target.value as "main" | "bonus" | "trading")} className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
+              <option value="main">Main</option>
+              <option value="trading">Trading</option>
+              <option value="bonus">Bonus</option>
+            </select>
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="adjField" className="text-xs text-muted-foreground">Field</Label>
+            <select id="adjField" value={field} onChange={(e) => setField(e.target.value as "available" | "onHold")} className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
+              <option value="available">Available</option>
+              <option value="onHold">On hold</option>
+            </select>
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="adjDirection" className="text-xs text-muted-foreground">Direction</Label>
+            <select id="adjDirection" value={direction} onChange={(e) => setDirection(e.target.value as "credit" | "debit")} className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
+              <option value="credit">Credit (+)</option>
+              <option value="debit">Debit (−)</option>
+            </select>
+          </div>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="space-y-1">
+            <Label htmlFor="adjAmount" className="text-xs text-muted-foreground">Amount (USDT)</Label>
+            <Input id="adjAmount" type="number" min="0" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="adjMemo" className="text-xs text-muted-foreground">Memo (optional)</Label>
+            <Input id="adjMemo" value={memo} onChange={(e) => setMemo(e.target.value)} placeholder="Reason for adjustment" />
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <Button variant={isDebit ? "destructive" : "default"} disabled={!valid || adjustMut.isPending} onClick={() => setConfirm(true)}>
+            {adjustMut.isPending ? "Applying…" : `${direction === "credit" ? "Credit" : "Debit"} ${amt || 0} USDT`}
+          </Button>
+        </div>
+      </CardContent>
+
+      <ConfirmModal
+        open={confirm}
+        onClose={() => setConfirm(false)}
+        onConfirm={submit}
+        title={`${direction === "credit" ? "Credit" : "Debit"} ${amt} USDT to ${wallet}/${field}?`}
+        description={
+          isDebit
+            ? "A debit that would take the balance negative is rejected (no overdraft). This is recorded as an immutable ledger row."
+            : "This credit is recorded as an immutable ledger row and audited to the activity log."
+        }
+        confirmLabel={isDebit ? "Debit" : "Credit"}
+        destructive={isDebit}
+        loading={adjustMut.isPending}
+      />
+    </Card>
   );
 }
 

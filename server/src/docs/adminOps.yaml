@@ -1,0 +1,186 @@
+paths:
+  /admin/settings/maintenance:
+    get:
+      tags: [Admin, Operations]
+      summary: Read maintenance-mode settings
+      description: >
+        Phase 14C. Returns the public `general.maintenanceMode` flag + message.
+        When `enabled` is true the maintenance middleware 503s non-admin API
+        requests (except `/auth/login|refresh|logout`). Requires the `admin` role.
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Maintenance settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      maintenance:
+                        type: object
+                        properties:
+                          enabled: { type: boolean }
+                          message: { type: string }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+    patch:
+      tags: [Admin, Operations]
+      summary: Update maintenance-mode settings
+      description: >
+        Phase 14C. Toggle maintenance on/off and set the message shown to
+        non-admins. Takes effect within 5s (cached enforcement read). Requires
+        the `admin` role.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [enabled]
+              properties:
+                enabled: { type: boolean }
+                message: { type: string, maxLength: 500 }
+      responses:
+        "200":
+          description: Updated maintenance settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      maintenance:
+                        type: object
+                        properties:
+                          enabled: { type: boolean }
+                          message: { type: string }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+
+  /admin/sessions/invalidate-all:
+    post:
+      tags: [Admin, Operations]
+      summary: Force-logout every user except the acting admin
+      description: >
+        Phase 14C. Bulk-nulls `refreshTokenHash` across all users. Access tokens
+        stay valid until their short JWT expiry; refresh is what's blocked, so
+        affected sessions can't renew. The acting admin's own session is
+        preserved. Returns the number of sessions invalidated. Requires the
+        `admin` role.
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Sessions invalidated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      count: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+
+  /admin/logs:
+    get:
+      tags: [Admin, Operations]
+      summary: Tail a Winston log file
+      description: >
+        Phase 14C. Returns the last `lines` lines of a Winston log file. In dev
+        the file transport is inactive, so `exists` is false. `file` is
+        enum-validated (no path traversal). Requires the `admin` role.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: file
+          schema: { type: string, enum: [combined, error, exceptions, rejections], default: combined }
+        - in: query
+          name: lines
+          schema: { type: integer, minimum: 1, maximum: 500, default: 200 }
+      responses:
+        "200":
+          description: Log tail
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      logs:
+                        type: object
+                        properties:
+                          file: { type: string }
+                          exists: { type: boolean }
+                          lines:
+                            type: array
+                            items: { type: string }
+                          truncated: { type: boolean }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+
+  /admin/users/{id}/wallet/adjust:
+    post:
+      tags: [Admin, Operations]
+      summary: Admin credit/debit a user's wallet balance field
+      description: >
+        Phase 14C. Applies an immutable `adjustment` ledger row to one of a
+        user's wallet balance fields. Debits that would go negative are
+        rejected (409 Insufficient balance — no overdraft). Audited to
+        `ActivityLog` as `wallet.adjust`. Requires the `admin` role.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [wallet, direction, amount]
+              properties:
+                wallet: { type: string, enum: [main, bonus, trading] }
+                field: { type: string, enum: [available, onHold], default: available }
+                direction: { type: string, enum: [credit, debit] }
+                amount: { type: number, exclusiveMinimum: 0 }
+                memo: { type: string, maxLength: 280 }
+      responses:
+        "200":
+          description: Wallet adjusted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      wallet: { type: string }
+                      balance:
+                        type: object
+                        properties:
+                          available: { type: number }
+                          onHold: { type: number }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+        "404": { description: User not found }
+        "409": { description: Insufficient balance (debit exceeds available) }
