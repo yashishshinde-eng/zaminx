@@ -1,8 +1,7 @@
 import { connectDB } from "./config/db.js";
-import { env } from "./config/env.js";
+import { env, isNowpaymentsConfigured } from "./config/env.js";
 import { logger } from "./config/logger.js";
 import { User, Setting, CmsPage, Package, BonanzaOffer, Rank } from "./models/index.js";
-import { isSmtpConfigured } from "./services/email.service.js";
 import type { ContentBlock } from "@zaminex/shared";
 
 async function seed() {
@@ -77,8 +76,15 @@ async function seed() {
     },
     { key: "cms.announcementBar", value: { enabled: false, message: "" }, category: "cms", isPublic: true },
     { key: "general.maintenanceMode", value: { enabled: false, message: "" }, category: "general", isPublic: true },
-    { key: "smtp.configured", value: isSmtpConfigured(), category: "smtp", isPublic: false },
-    { key: "payment.configured", value: false, category: "payment", isPublic: false },
+    // Phase 14B: non-secret SMTP fields (admin-editable; secrets stay env-only).
+    // Seeded from env so existing env-driven setups keep working unchanged.
+    { key: "smtp.host", value: env.SMTP_HOST ?? "", category: "smtp", isPublic: false },
+    { key: "smtp.port", value: env.SMTP_PORT, category: "smtp", isPublic: false },
+    { key: "smtp.from", value: env.SMTP_FROM, category: "smtp", isPublic: false },
+    // Phase 14B: non-secret NOWPayments fields (admin-editable; secrets env-only).
+    { key: "payment.baseUrl", value: env.NOWPAYMENTS_BASE_URL, category: "payment", isPublic: false },
+    { key: "payment.payCurrency", value: env.NOWPAYMENTS_PAY_CURRENCY, category: "payment", isPublic: false },
+    { key: "payment.sandbox", value: !isNowpaymentsConfigured(), category: "payment", isPublic: false },
     // Phase 10 compensation defaults (private — admin-tunable).
     { key: "compensation.directBonusPct", value: 10, category: "compensation", isPublic: false },
     { key: "compensation.yieldEnabled", value: true, category: "compensation", isPublic: false },

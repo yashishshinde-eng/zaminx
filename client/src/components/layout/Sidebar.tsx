@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Wallet, ArrowDownToLine, Package, Users, Gift, FileText, Settings, ShieldCheck, BarChart3, SlidersHorizontal } from "lucide-react";
+import { LayoutDashboard, Wallet, ArrowDownToLine, Package, Users, Gift, FileText, Settings, ShieldCheck, BarChart3, SlidersHorizontal, Mail, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 
@@ -23,6 +23,10 @@ const NAV: NavItem[] = [
   { label: "Users", to: "/app/admin/users", icon: Users, adminOnly: true },
   { label: "Compensation", to: "/app/admin/compensation", icon: SlidersHorizontal, adminOnly: true },
   { label: "Bonanzas", to: "/app/admin/bonanzas", icon: Gift, adminOnly: true },
+  { label: "CMS Pages", to: "/app/admin/cms", icon: FileText, adminOnly: true },
+  { label: "Site Config", to: "/app/admin/site-config", icon: Settings, adminOnly: true },
+  { label: "SMTP", to: "/app/admin/smtp", icon: Mail, adminOnly: true },
+  { label: "NOWPayments", to: "/app/admin/payments", icon: CreditCard, adminOnly: true },
   { label: "Admin Reports", to: "/app/admin/reports", icon: BarChart3, adminOnly: true },
 ];
 

@@ -141,3 +141,106 @@ export const contactSchema = z.object({
     message: z.string().trim().min(10, { message: "Message must be at least 10 characters" }).max(5000),
   }),
 });
+
+/* ----------------------------------------------------------------------------
+ * Admin CMS page CRUD (Phase 14B)
+ * ------------------------------------------------------------------------- */
+
+const pageStatus = z.enum(["published", "draft"]);
+
+/** List query for the admin page index (includes drafts). */
+export const cmsPageListQuerySchema = z.object({
+  query: z.object({
+    q: z.string().trim().optional(),
+    status: pageStatus.optional(),
+    page: z.coerce.number().int().positive().default(1),
+    limit: z.coerce.number().int().positive().max(50).default(20),
+  }),
+});
+
+/** `:slug` route param. */
+export const cmsSlugParamSchema = z.object({
+  params: z.object({
+    slug: z.string().min(1).max(120).regex(/^[a-z0-9-]+$/),
+  }),
+});
+
+/** Body for creating a page (slug is immutable after create). */
+export const createCmsPageSchema = z.object({
+  body: z.object({
+    slug: cmsPageSchema.shape.slug,
+    title: cmsPageSchema.shape.title,
+    blocks: cmsPageSchema.shape.blocks,
+    seo: cmsPageSchema.shape.seo.optional(),
+    status: pageStatus.default("draft"),
+  }),
+});
+
+/** Body for updating a page (everything optional; slug never changes). */
+export const updateCmsPageSchema = z.object({
+  body: z.object({
+    title: cmsPageSchema.shape.title.optional(),
+    blocks: cmsPageSchema.shape.blocks.optional(),
+    seo: cmsPageSchema.shape.seo.optional(),
+    status: pageStatus.optional(),
+  }),
+});
+
+/* ----------------------------------------------------------------------------
+ * Admin site-config update (Phase 14B) — the 9 `cms.*` fields only.
+ * `general.maintenanceMode` is intentionally excluded (Phase 14C).
+ * ------------------------------------------------------------------------- */
+
+const navLinkField = navLink;
+const contactDetailsField = siteConfigSchema.shape.contactDetails;
+const socialLinksField = siteConfigSchema.shape.socialLinks;
+const seoDefaultsField = siteConfigSchema.shape.seoDefaults;
+const announcementBarField = siteConfigSchema.shape.announcementBar;
+
+export const siteConfigUpdateSchema = z.object({
+  body: z.object({
+    siteName: z.string().optional(),
+    tagline: z.string().optional(),
+    logoLight: z.string().optional(),
+    logoDark: z.string().optional(),
+    navLinks: z.array(navLinkField).optional(),
+    footerText: z.string().optional(),
+    contactDetails: contactDetailsField.optional(),
+    socialLinks: socialLinksField.optional(),
+    seoDefaults: seoDefaultsField.optional(),
+    announcementBar: announcementBarField.optional(),
+  }),
+});
+
+/* ----------------------------------------------------------------------------
+ * Admin SMTP settings (Phase 14B, hybrid). Non-secret fields only; the
+ * SMTP user/password stay env-only and are surfaced as a `configured` flag.
+ * ------------------------------------------------------------------------- */
+
+export const smtpSettingsSchema = z.object({
+  body: z.object({
+    host: z.string().trim().optional(),
+    port: z.coerce.number().int().positive().optional(),
+    from: z.string().trim().optional(),
+  }),
+});
+
+export const smtpTestEmailSchema = z.object({
+  body: z.object({
+    to: z.string().trim().toLowerCase().email({ message: "Invalid email address" }),
+  }),
+});
+
+/* ----------------------------------------------------------------------------
+ * Admin NOWPayments settings (Phase 14B, hybrid). Non-secret fields only;
+ * the API key + IPN secret stay env-only and are surfaced as a `configured`
+ * flag. `sandbox` forces the mock path even when credentials are present.
+ * ------------------------------------------------------------------------- */
+
+export const nowpaymentsSettingsSchema = z.object({
+  body: z.object({
+    baseUrl: z.string().trim().url().optional(),
+    payCurrency: z.string().trim().min(1).optional(),
+    sandbox: z.boolean().optional(),
+  }),
+});

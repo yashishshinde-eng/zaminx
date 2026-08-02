@@ -51,4 +51,12 @@ export const queryKeys = {
     detail: (id: string) => ["admin", "users", "detail", id] as const,
   },
   compensationSettings: ["admin", "compensation-settings"] as const,
+  // Phase 14B content & config.
+  adminCmsPages: {
+    list: (params?: unknown) => ["admin", "cms-pages", "list", params ?? {}] as const,
+    detail: (slug: string) => ["admin", "cms-pages", "detail", slug] as const,
+  },
+  adminSiteConfig: ["admin", "site-config"] as const,
+  smtpSettings: ["admin", "smtp-settings"] as const,
+  nowpaymentsSettings: ["admin", "nowpayments-settings"] as const,
 } as const;

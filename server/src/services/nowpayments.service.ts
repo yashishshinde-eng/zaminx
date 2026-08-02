@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import { env, isNowpaymentsConfigured } from "../config/env.js";
 import { logger } from "../config/logger.js";
+import { getSetting } from "./setting.service.js";
 import type { Request } from "express";
 
 /** Result of creating an invoice — payment instructions for the user. */
@@ -14,10 +15,28 @@ export interface InvoiceResult {
 
 const SANDBOX_PAY_ADDRESS = "0xSANDBOX000000000000000000000000000000dEaD";
 
+/** Resolved NOWPayments non-secret config (Settings with env fallback). The
+ * API key + IPN secret stay env-only (secret). */
+export interface NowpaymentsConfig {
+  baseUrl: string;
+  payCurrency: string;
+  sandbox: boolean;
+}
+
+/** Read the live NOWPayments config. `sandbox` defaults to "no credentials"
+ * so a fresh install runs the mock flow until the admin flips it. */
+export async function getNowpaymentsConfig(): Promise<NowpaymentsConfig> {
+  const baseUrl = await getSetting<string>("payment.baseUrl", env.NOWPAYMENTS_BASE_URL);
+  const payCurrency = await getSetting<string>("payment.payCurrency", env.NOWPAYMENTS_PAY_CURRENCY);
+  const sandbox = await getSetting<boolean>("payment.sandbox", !isNowpaymentsConfigured());
+  return { baseUrl, payCurrency, sandbox };
+}
+
 /**
  * Create a NOWPayments invoice for a deposit. When credentials are configured
- * this calls the live gateway; otherwise a sandbox mock is returned so the full
- * activate → pay → confirm flow runs locally without a NOWPayments account.
+ * AND sandbox mode is off this calls the live gateway; otherwise a sandbox
+ * mock is returned so the full activate → pay → confirm flow runs locally
+ * without a NOWPayments account.
  *
  * @param amountUsd  Deposit amount in USD (= package price snapshot)
  * @param orderId   Stable id linking the IPN webhook back to this deposit
@@ -27,7 +46,8 @@ export async function createInvoice(input: {
   orderId: string;
   description: string;
 }): Promise<InvoiceResult> {
-  if (!isNowpaymentsConfigured()) {
+  const cfg = await getNowpaymentsConfig();
+  if (cfg.sandbox || !isNowpaymentsConfigured()) {
     // Sandbox: no network. 1:1 USD→USDT for the mock amount.
     return {
       nowpaymentsInvoiceId: `sandbox-${input.orderId}`,
@@ -41,7 +61,7 @@ export async function createInvoice(input: {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10_000);
   try {
-    const res = await fetch(`${env.NOWPAYMENTS_BASE_URL}/invoice`, {
+    const res = await fetch(`${cfg.baseUrl}/invoice`, {
       method: "POST",
       headers: {
         "x-api-key": env.NOWPAYMENTS_API_KEY!,
@@ -51,7 +71,7 @@ export async function createInvoice(input: {
       body: JSON.stringify({
         price_amount: input.amountUsd,
         price_currency: "usd",
-        pay_currency: env.NOWPAYMENTS_PAY_CURRENCY,
+        pay_currency: cfg.payCurrency,
         order_id: input.orderId,
         order_description: input.description,
       }),

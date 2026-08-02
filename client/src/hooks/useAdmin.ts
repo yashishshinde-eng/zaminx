@@ -10,6 +10,13 @@ import {
   adminResetPasswordRequest,
   fetchCompensationSettings,
   updateCompensationSettingsRequest,
+  fetchSiteConfigAdmin,
+  updateSiteConfigAdminRequest,
+  fetchSmtpSettings,
+  updateSmtpSettingsRequest,
+  sendTestEmailRequest,
+  fetchNowpaymentsSettings,
+  updateNowpaymentsSettingsRequest,
   type AdminUsersParams,
   type Page,
 } from "@/lib/admin";
@@ -20,6 +27,11 @@ import type {
   AdminUserReportRow,
   CompensationSettings,
   CompensationSettingsBody,
+  SiteConfigUpdate,
+  SmtpSettings,
+  SmtpSettingsBody,
+  NowpaymentsSettings,
+  NowpaymentsSettingsBody,
   UserStatus,
 } from "@zaminex/shared";
 
@@ -159,6 +171,89 @@ export function useUpdateCompensationSettings() {
     mutationFn: (body: CompensationSettingsBody) => updateCompensationSettingsRequest(body),
     onSuccess: (compensation) => {
       qc.setQueryData(queryKeys.compensationSettings, compensation);
+    },
+  });
+}
+
+/* ------------------------------------------------------------------ */
+/*  Site config + SMTP + NOWPayments settings (Phase 14B)              */
+/* ------------------------------------------------------------------ */
+
+/** The 9 admin-editable cms.* fields. */
+export function useSiteConfigAdmin() {
+  return useQuery<SiteConfigUpdate>({
+    queryKey: queryKeys.adminSiteConfig,
+    queryFn: fetchSiteConfigAdmin,
+    staleTime: 60_000,
+    gcTime: 5 * 60_000,
+    retry: 1,
+  });
+}
+
+/** PATCH /admin/settings/cms — update the provided cms.* fields. */
+export function useUpdateSiteConfig() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: SiteConfigUpdate) => updateSiteConfigAdminRequest(body),
+    onSuccess: (siteConfig) => {
+      qc.setQueryData(queryKeys.adminSiteConfig, siteConfig);
+    },
+  });
+}
+
+/** Non-secret SMTP fields + configured flag. */
+export function useSmtpSettings() {
+  return useQuery<SmtpSettings>({
+    queryKey: queryKeys.smtpSettings,
+    queryFn: fetchSmtpSettings,
+    staleTime: 60_000,
+    gcTime: 5 * 60_000,
+    retry: 1,
+  });
+}
+
+/** PATCH /admin/settings/smtp — update non-secret SMTP fields. */
+export function useUpdateSmtpSettings() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: SmtpSettingsBody) => updateSmtpSettingsRequest(body),
+    onSuccess: (smtp) => {
+      qc.setQueryData(queryKeys.smtpSettings, smtp);
+    },
+  });
+}
+
+/** POST /admin/settings/smtp/test — send a test email. */
+export function useSendTestEmail() {
+  return useMutation({
+    mutationFn: (to: string) => sendTestEmailRequest(to),
+    onSuccess: (r) => {
+      toast.success(r.dev ? "Test email written to the dev folder" : "Test email sent");
+    },
+    onError: () => {
+      /* interceptor toasts the SMTP error */
+    },
+  });
+}
+
+/** Non-secret NOWPayments fields + configured flag. */
+export function useNowpaymentsSettings() {
+  return useQuery<NowpaymentsSettings>({
+    queryKey: queryKeys.nowpaymentsSettings,
+    queryFn: fetchNowpaymentsSettings,
+    staleTime: 60_000,
+    gcTime: 5 * 60_000,
+    retry: 1,
+  });
+}
+
+/** PATCH /admin/settings/payment — update non-secret NOWPayments fields. */
+export function useUpdateNowpaymentsSettings() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (body: NowpaymentsSettingsBody) => updateNowpaymentsSettingsRequest(body),
+    onSuccess: (nowpayments) => {
+      qc.setQueryData(queryKeys.nowpaymentsSettings, nowpayments);
     },
   });
 }

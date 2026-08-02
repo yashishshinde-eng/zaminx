@@ -6,6 +6,11 @@ import type {
   CompensationSettings,
   CompensationSettingsBody,
   UserStatus,
+  SiteConfigUpdate,
+  SmtpSettings,
+  SmtpSettingsBody,
+  NowpaymentsSettings,
+  NowpaymentsSettingsBody,
 } from "@zaminex/shared";
 
 /** A paginated page of rows (matches every list endpoint in this module). */
@@ -95,6 +100,62 @@ export async function fetchCompensationSettings(): Promise<CompensationSettings>
 export async function updateCompensationSettingsRequest(body: CompensationSettingsBody): Promise<CompensationSettings> {
   const { data } = await api.patch<CompensationResponse>("/admin/settings/compensation", body);
   return data.data.compensation;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Site config + SMTP + NOWPayments settings (Phase 14B)              */
+/* ------------------------------------------------------------------ */
+
+interface SiteConfigResponse {
+  data: { siteConfig: SiteConfigUpdate };
+}
+interface SmtpResponse {
+  data: { smtp: SmtpSettings };
+}
+interface NowpaymentsResponse {
+  data: { nowpayments: NowpaymentsSettings };
+}
+
+/** GET /admin/settings/cms — read the 9 admin-editable cms.* fields. */
+export async function fetchSiteConfigAdmin(): Promise<SiteConfigUpdate> {
+  const { data } = await api.get<SiteConfigResponse>("/admin/settings/cms");
+  return data.data.siteConfig;
+}
+
+/** PATCH /admin/settings/cms — update the provided cms.* fields. */
+export async function updateSiteConfigAdminRequest(body: SiteConfigUpdate): Promise<SiteConfigUpdate> {
+  const { data } = await api.patch<SiteConfigResponse>("/admin/settings/cms", body);
+  return data.data.siteConfig;
+}
+
+/** GET /admin/settings/smtp — read non-secret SMTP fields + configured flag. */
+export async function fetchSmtpSettings(): Promise<SmtpSettings> {
+  const { data } = await api.get<SmtpResponse>("/admin/settings/smtp");
+  return data.data.smtp;
+}
+
+/** PATCH /admin/settings/smtp — update non-secret SMTP fields (secrets env-only). */
+export async function updateSmtpSettingsRequest(body: SmtpSettingsBody): Promise<SmtpSettings> {
+  const { data } = await api.patch<SmtpResponse>("/admin/settings/smtp", body);
+  return data.data.smtp;
+}
+
+/** POST /admin/settings/smtp/test — send a test email. Returns { sent, dev }. */
+export async function sendTestEmailRequest(to: string): Promise<{ sent: boolean; dev: boolean }> {
+  const { data } = await api.post<{ data: { sent: boolean; dev: boolean } }>("/admin/settings/smtp/test", { to });
+  return data.data;
+}
+
+/** GET /admin/settings/payment — read non-secret NOWPayments fields + configured flag. */
+export async function fetchNowpaymentsSettings(): Promise<NowpaymentsSettings> {
+  const { data } = await api.get<NowpaymentsResponse>("/admin/settings/payment");
+  return data.data.nowpayments;
+}
+
+/** PATCH /admin/settings/payment — update non-secret NOWPayments fields (secrets env-only). */
+export async function updateNowpaymentsSettingsRequest(body: NowpaymentsSettingsBody): Promise<NowpaymentsSettings> {
+  const { data } = await api.patch<NowpaymentsResponse>("/admin/settings/payment", body);
+  return data.data.nowpayments;
 }
 
 /* ------------------------------------------------------------------ */

@@ -1,0 +1,334 @@
+paths:
+  /admin/cms/pages:
+    get:
+      tags: [Admin, CMS]
+      summary: Admin CMS page list (paginated, searchable; includes drafts)
+      description: >
+        Phase 14B. Lists every CMS page regardless of status. Filter by status
+        or free-text search over title/slug. Requires the `admin` role.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: q
+          schema: { type: string, description: "title / slug search" }
+        - in: query
+          name: status
+          schema: { type: string, enum: [published, draft] }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        "200":
+          description: A page of CMS page rows
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      pages:
+                        type: object
+                        properties:
+                          items:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                slug: { type: string }
+                                title: { type: string }
+                                status: { type: string, enum: [published, draft] }
+                                publishedAt: { type: string, nullable: true }
+                                updatedAt: { type: string }
+                          page: { type: integer }
+                          limit: { type: integer }
+                          total: { type: integer }
+                          totalPages: { type: integer }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+    post:
+      tags: [Admin, CMS]
+      summary: Create a CMS page
+      description: >
+        Phase 14B. Content blocks are validated against the shared
+        `contentBlockSchema` (no raw HTML). `publishedAt` is set when status is
+        `published`. Requires the `admin` role.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [slug, title, blocks]
+              properties:
+                slug: { type: string, pattern: "^[a-z0-9-]+$", maxLength: 120 }
+                title: { type: string, maxLength: 200 }
+                blocks: { type: array, items: { type: object } }
+                seo:
+                  type: object
+                  properties:
+                    title: { type: string, maxLength: 200 }
+                    description: { type: string, maxLength: 300 }
+                status: { type: string, enum: [published, draft], default: draft }
+      responses:
+        "201": { description: CMS page created }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+        "409": { description: A page with that slug already exists }
+
+  /admin/cms/pages/{slug}:
+    get:
+      tags: [Admin, CMS]
+      summary: Get a single CMS page (any status)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: The CMS page }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+        "404": { description: Page not found }
+    patch:
+      tags: [Admin, CMS]
+      summary: Update a CMS page
+      description: >
+        All fields optional; slug is immutable. Flipping status to
+        `published` sets `publishedAt`; flipping to `draft` clears it.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string, maxLength: 200 }
+                blocks: { type: array, items: { type: object } }
+                seo:
+                  type: object
+                  properties:
+                    title: { type: string, maxLength: 200 }
+                    description: { type: string, maxLength: 300 }
+                status: { type: string, enum: [published, draft] }
+      responses:
+        "200": { description: CMS page updated }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+        "404": { description: Page not found }
+    delete:
+      tags: [Admin, CMS]
+      summary: Delete a CMS page
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: CMS page deleted }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+        "404": { description: Page not found }
+
+  /admin/settings/cms:
+    get:
+      tags: [Admin, CMS]
+      summary: Read the admin-editable site config (9 cms.* fields)
+      description: >
+        Phase 14B. Returns the 9 admin-editable `cms.*` fields (siteName, tagline,
+        logos, navLinks, footerText, contactDetails, socialLinks, seoDefaults,
+        announcementBar). `general.maintenanceMode` is NOT included (Phase 14C).
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Site configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      siteConfig: { type: object }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+    patch:
+      tags: [Admin, CMS]
+      summary: Update the provided cms.* site-config fields
+      description: Only provided fields are written; all are public (feed the website).
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                siteName: { type: string }
+                tagline: { type: string }
+                logoLight: { type: string }
+                logoDark: { type: string }
+                navLinks:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      label: { type: string }
+                      href: { type: string }
+                footerText: { type: string }
+                contactDetails: { type: object }
+                socialLinks: { type: object }
+                seoDefaults: { type: object }
+                announcementBar: { type: object }
+      responses:
+        "200": { description: Site configuration updated }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+
+  /admin/settings/smtp:
+    get:
+      tags: [Admin, Settings]
+      summary: Read non-secret SMTP settings + a configured flag
+      description: >
+        Phase 14B (hybrid). Non-secret fields (host, port, from) read from the
+        `Setting` collection with env fallback. `passwordConfigured` and
+        `configured` are derived from env (SMTP_USER + SMTP_PASS) — secrets are
+        never stored in or returned from the DB.
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: SMTP settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      smtp:
+                        type: object
+                        properties:
+                          host: { type: string }
+                          port: { type: integer }
+                          from: { type: string }
+                          passwordConfigured: { type: boolean }
+                          configured: { type: boolean }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+    patch:
+      tags: [Admin, Settings]
+      summary: Update non-secret SMTP settings (secrets stay env-only)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                host: { type: string }
+                port: { type: integer, minimum: 1 }
+                from: { type: string }
+      responses:
+        "200": { description: SMTP settings updated }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+
+  /admin/settings/smtp/test:
+    post:
+      tags: [Admin, Settings]
+      summary: Send a test email
+      description: >
+        Sends a small test message to the given address using the live SMTP
+        config. Throws (returns an error) on real SMTP failure so the admin
+        sees the underlying error. With SMTP unconfigured it writes a dev file
+        instead and returns `{ dev: true }`.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [to]
+              properties:
+                to: { type: string, format: email }
+      responses:
+        "200": { description: Test email sent (or written to dev folder) }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+        "500": { description: SMTP send failure }
+
+  /admin/settings/payment:
+    get:
+      tags: [Admin, Settings]
+      summary: Read non-secret NOWPayments settings + a configured flag
+      description: >
+        Phase 14B (hybrid). Non-secret fields (baseUrl, payCurrency, sandbox)
+        read from the `Setting` collection with env fallback. `configured` is
+        derived from env (NOWPAYMENTS_API_KEY + IPN_SECRET) — secrets are
+        never stored in or returned from the DB.
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: NOWPayments settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      nowpayments:
+                        type: object
+                        properties:
+                          baseUrl: { type: string }
+                          payCurrency: { type: string }
+                          sandbox: { type: boolean }
+                          configured: { type: boolean }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
+    patch:
+      tags: [Admin, Settings]
+      summary: Update non-secret NOWPayments settings (secrets stay env-only)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                baseUrl: { type: string, format: uri }
+                payCurrency: { type: string }
+                sandbox: { type: boolean }
+      responses:
+        "200": { description: NOWPayments settings updated }
+        "400": { description: Validation failed }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (non-admin) }
