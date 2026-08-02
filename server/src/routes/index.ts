@@ -8,6 +8,7 @@ import profileRoutes from "./profile.routes.js";
 import packageRoutes from "./package.routes.js";
 import paymentRoutes from "./payment.routes.js";
 import walletRoutes from "./wallet.routes.js";
+import withdrawalRoutes from "./withdrawal.routes.js";
 
 const router = Router();
 
@@ -22,6 +23,7 @@ router.use("/profile", authenticate, profileRoutes);
 router.use("/packages", authenticate, packageRoutes);
 router.use("/payments", paymentRoutes);
 router.use("/wallet", authenticate, walletRoutes);
+router.use("/withdrawals", authenticate, withdrawalRoutes);
 
 // Future phases mount here:
 // router.use("/users", authenticate, authorize("admin"), userRoutes);

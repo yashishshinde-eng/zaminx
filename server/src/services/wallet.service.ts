@@ -128,6 +128,98 @@ export async function applyLedgerEntry(args: ApplyLedgerEntryArgs): Promise<Appl
   return { wallet, balance: { available: availableAfter, onHold: onHoldAfter }, tx: toTxRow(created.toObject()) };
 }
 
+export interface ApplyLedgerMoveArgs {
+  userId: string;
+  wallet: WalletType;
+  amount: number;
+  /** Field to debit (e.g. "available" for a hold, "onHold" for a release). */
+  fromField: WalletBalanceField;
+  /** Field to credit (e.g. "onHold" for a hold, "available" for a release). */
+  toField: WalletBalanceField;
+  type: WalletTxType;
+  reference?: WalletTxRef | null;
+  memo?: string | null;
+  meta?: Record<string, unknown> | null;
+}
+
+export interface ApplyLedgerMoveResult {
+  wallet: WalletType;
+  balance: WalletBalance;
+  txs: WalletTxRow[];
+}
+
+/**
+ * Move funds between the two balance fields of a wallet atomically, appending
+ * two ledger rows (a debit on `fromField` and a credit on `toField`). Used by
+ * Phase 8A withdrawals: `withdrawal_hold` (available→onHold) and
+ * `withdrawal_release` (onHold→available).
+ *
+ * The balance move is a **single atomic two-field `$inc`** (no crash-gap between
+ * the legs) guarded so `fromField` cannot go negative; only the two ledger
+ * appends are non-transactional, and the move is idempotent via the
+ * `fromField`-debit reference guard. Phase 15 wraps the whole thing in a
+ * transaction on the production replica set.
+ */
+export async function applyLedgerMove(args: ApplyLedgerMoveArgs): Promise<ApplyLedgerMoveResult> {
+  const { userId, wallet, amount, fromField, toField, type } = args;
+  if (amount <= 0) throw ApiError.badRequest("Amount must be positive");
+
+  const resourceId = args.reference?.resourceId ?? null;
+
+  // 1. Idempotency guard: if the debit leg already exists, the move was applied.
+  if (resourceId) {
+    const prior = await WalletTransaction.findOne({
+      user: userId,
+      type,
+      "reference.resourceId": resourceId,
+      field: fromField,
+      direction: "debit",
+    }).lean();
+    if (prior) {
+      const balances = await getWalletBalances(userId);
+      return { wallet, balance: balances[wallet], txs: [toTxRow(prior)] };
+    }
+  }
+
+  // 2. Atomic two-field move with a guard preventing a negative `fromField`.
+  await ensureWallet(userId);
+  const fromPath = `balances.${wallet}.${fromField}`;
+  const toPath = `balances.${wallet}.${toField}`;
+  const updated = await Wallet.findOneAndUpdate(
+    { user: userId, [fromPath]: { $gte: amount } },
+    { $inc: { [fromPath]: -amount, [toPath]: amount } },
+    { new: true },
+  ).lean();
+  if (!updated) throw ApiError.conflict("Insufficient balance");
+
+  const b = (updated.balances as Record<WalletType, WalletBalance>)[wallet];
+  const availableAfter = b?.available ?? 0;
+  const onHoldAfter = b?.onHold ?? 0;
+
+  // 3. Append the two immutable ledger rows (both share the post-move snapshot).
+  const base = {
+    user: userId,
+    wallet,
+    type,
+    amount,
+    availableAfter,
+    onHoldAfter,
+    reference: { resource: args.reference?.resource ?? null, resourceId },
+    memo: args.memo ?? null,
+    meta: args.meta ?? {},
+  };
+  const [debit, credit] = await Promise.all([
+    WalletTransaction.create({ ...base, direction: "debit", field: fromField }),
+    WalletTransaction.create({ ...base, direction: "credit", field: toField }),
+  ]);
+
+  return {
+    wallet,
+    balance: { available: availableAfter, onHold: onHoldAfter },
+    txs: [toTxRow(debit.toObject()), toTxRow(credit.toObject())],
+  };
+}
+
 /* ------------------------------------------------------------------ */
 /*  Ledger reads (history)                                             */
 /* ------------------------------------------------------------------ */

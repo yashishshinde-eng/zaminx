@@ -1,0 +1,137 @@
+paths:
+  /withdrawals:
+    post:
+      tags: [Withdrawals]
+      summary: Submit a withdrawal (available → onHold; manual admin approval)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [wallet, amount]
+              properties:
+                wallet: { type: string, enum: [main, bonus, trading] }
+                amount: { type: number, exclusiveMinimum: 0 }
+      responses:
+        "201": { description: Withdrawal submitted (pending) }
+        "400": { description: Validation failed / no payout address / below minimum / insufficient }
+        "401": { description: Unauthorized }
+    get:
+      tags: [Withdrawals]
+      summary: The user's withdrawals (paginated, filterable)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: status
+          schema: { type: string, enum: [pending, under_review, approved, rejected, paid, cancelled] }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        "200": { description: Paginated withdrawals }
+        "401": { description: Unauthorized }
+
+  /withdrawals/{id}:
+    get:
+      tags: [Withdrawals]
+      summary: Single withdrawal (ownership-checked)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Withdrawal row }
+        "401": { description: Unauthorized }
+        "404": { description: Not found / not owned }
+
+  /withdrawals/{id}/cancel:
+    post:
+      tags: [Withdrawals]
+      summary: Cancel a pending/under_review withdrawal (onHold → available)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Withdrawal cancelled }
+        "401": { description: Unauthorized }
+        "404": { description: Not found / not owned }
+        "409": { description: Cannot cancel (not pending/under_review) }
+
+  /withdrawals/admin:
+    get:
+      tags: [Withdrawals, Admin]
+      summary: All withdrawals (admin only)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: query
+          name: status
+          schema: { type: string, enum: [pending, under_review, approved, rejected, paid, cancelled] }
+        - in: query
+          name: page
+          schema: { type: integer, minimum: 1, default: 1 }
+        - in: query
+          name: limit
+          schema: { type: integer, minimum: 1, maximum: 50, default: 20 }
+      responses:
+        "200": { description: Paginated withdrawals }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (admin only) }
+
+  /withdrawals/admin/{id}:
+    get:
+      tags: [Withdrawals, Admin]
+      summary: Any withdrawal (admin only)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: Withdrawal row }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (admin only) }
+        "404": { description: Not found }
+
+  /withdrawals/admin/{id}/{action}:
+    post:
+      tags: [Withdrawals, Admin]
+      summary: Admin action (review / approve / reject / pay)
+      description: >
+        action ∈ {review, approve, reject, pay}. review: pending→under_review.
+        approve: pending|under_review→approved. reject: →rejected (returns
+        onHold→available). pay: approved→paid (deducts onHold permanently).
+        Idempotent via status-from guards. Admin only.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+        - in: path
+          name: action
+          required: true
+          schema: { type: string, enum: [review, approve, reject, pay] }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                remarks: { type: string, maxLength: 500 }
+      responses:
+        "200": { description: Updated withdrawal row }
+        "401": { description: Unauthorized }
+        "403": { description: Forbidden (admin only) }
+        "404": { description: Not found }
+        "409": { description: Invalid state transition }

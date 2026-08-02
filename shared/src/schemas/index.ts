@@ -3,3 +3,4 @@ export * from "./cms.schema";
 export * from "./profile.schema";
 export * from "./package.schema";
 export * from "./wallet.schema";
+export * from "./withdrawal.schema";
