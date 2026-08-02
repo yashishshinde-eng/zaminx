@@ -1,5 +1,6 @@
 import type { UserRole } from "./index";
 import type { WalletBalances } from "./wallet";
+import type { WithdrawalStatus } from "./withdrawal";
 
 /**
  * The six-stream income summary shown on the dashboard. Per-stream totals are
@@ -59,4 +60,62 @@ export interface DashboardSummary {
   };
   /** Real rows from the ActivityLog collection (most recent first). */
   recentActivity: { id: string; action: string; createdAt: string }[];
+}
+
+/* ------------------------------------------------------------------ */
+/*  Phase 14A — platform-wide admin dashboard                            */
+/* ------------------------------------------------------------------ */
+
+/** Counts of users grouped by status. */
+export interface AdminUsersByStatus {
+  active: number;
+  suspended: number;
+  banned: number;
+}
+
+/** Aggregate deposit volume (paid deposits only). */
+export interface AdminDepositTotals {
+  count: number;
+  sumUsd: number;
+}
+
+/** Aggregate withdrawal volume broken down by status. */
+export interface AdminWithdrawalTotals {
+  count: number;
+  sumUsd: number;
+  byStatus: Record<WithdrawalStatus, number>;
+}
+
+/** Headline KPIs for the admin dashboard landing. */
+export interface AdminDashboardKpis {
+  totalUsers: number;
+  byStatus: AdminUsersByStatus;
+  totalDeposits: AdminDepositTotals;
+  totalWithdrawals: AdminWithdrawalTotals;
+  /** Total platform liabilities — all wallets, available + onHold. */
+  aum: number;
+  activePackages: number;
+  sponsors: number;
+}
+
+/** 30-day daily volume for the deposits-vs-withdrawals chart. */
+export interface AdminDashboardSeriesPoint {
+  date: string; // YYYY-MM-DD
+  deposits: number;
+  withdrawals: number;
+}
+
+/** A recent audit-log entry with the actor's name (null for system events). */
+export interface AdminDashboardActivityRow {
+  id: string;
+  actorName: string | null;
+  action: string;
+  createdAt: string;
+}
+
+/** `GET /admin/dashboard` payload — platform-wide KPIs + series + activity. */
+export interface AdminDashboardSummary {
+  kpis: AdminDashboardKpis;
+  series: AdminDashboardSeriesPoint[];
+  recentActivity: AdminDashboardActivityRow[];
 }

@@ -16,9 +16,13 @@ import {
   updateNotificationPreferenceSchema,
 } from "../schemas/profile.schema";
 import { activatePackageSchema } from "../schemas/package.schema";
+import type { WalletBalances } from "./wallet";
 
 /** Role attached to an authenticated request. */
 export type UserRole = "user" | "admin";
+
+/** Account status lifecycle (active / suspended / banned). */
+export type UserStatus = "active" | "suspended" | "banned";
 
 /** Per-user crypto payout/deposit addresses. USDT-BEP20 is the only supported currency. */
 export interface WalletAddresses {
@@ -46,6 +50,46 @@ export interface AuthTokens {
   accessToken: string;
   refreshToken: string;
   user: PublicUser;
+}
+
+/** A recent audit-log entry for a single user (admin detail view). */
+export interface AdminUserActivityRow {
+  id: string;
+  action: string;
+  resource: string | null;
+  resourceId: string | null;
+  createdAt: string;
+}
+
+/**
+ * Full admin view of a single user — profile fields plus wallet balances, the
+ * user's active package, direct-referral count, and recent activity. Admin is
+ * authorised to see this PII (the no-PII rule applies only to user-facing
+ * downline views). Returned by `GET /admin/users/:id`.
+ */
+export interface AdminUserDetail {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  role: UserRole;
+  status: UserStatus;
+  referralCode: string;
+  referredBy: string | null;
+  sponsorId: string | null;
+  isEmailVerified: boolean;
+  walletAddresses: WalletAddresses;
+  notificationPreference: { email: boolean; dashboard: boolean };
+  directCount: number;
+  walletBalances: WalletBalances;
+  activePackage: {
+    name: string;
+    activatedAt: string;
+    expiresAt: string;
+  } | null;
+  joinedAt: string;
+  lastLoginAt: string | null;
+  recentActivity: AdminUserActivityRow[];
 }
 
 /** Inferred request-body types from the Zod schemas. */

@@ -133,6 +133,27 @@ export const runRankCheckSchema = z.object({
   }),
 });
 
+/* ------------------------------------------------------------------ */
+/*  Phase 14A — compensation settings (read/update)                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * PATCH /admin/settings/compensation — update the global compensation knobs.
+ * All fields optional; only provided fields are written via `setSetting`.
+ * Percentages are 0..100; `teamEnergyPct` is the per-depth weight array.
+ */
+export const compensationSettingsSchema = z.object({
+  body: z.object({
+    directBonusPct: z.coerce.number().min(0).max(100).optional(),
+    yieldEnabled: z.boolean().optional(),
+    teamEnergyEnabled: z.boolean().optional(),
+    teamEnergyDepth: z.coerce.number().int().min(0).max(10).optional(),
+    teamEnergyPct: z.array(z.coerce.number().min(0).max(100)).max(10).optional(),
+    communityEnabled: z.boolean().optional(),
+    communityPct: z.coerce.number().min(0).max(100).optional(),
+  }),
+});
+
 export type CreateBonanzaBody = z.infer<typeof createBonanzaSchema>["body"];
 export type UpdateBonanzaBody = z.infer<typeof updateBonanzaSchema>["body"];
 export type BonanzaListQuery = z.infer<typeof bonanzaListQuerySchema>["query"];
@@ -144,3 +165,4 @@ export type RankListQuery = z.infer<typeof rankListQuerySchema>["query"];
 export type RunTeamEnergyQuery = z.infer<typeof runTeamEnergySchema>["query"];
 export type RunCommunityQuery = z.infer<typeof runCommunitySchema>["query"];
 export type RunRankCheckQuery = z.infer<typeof runRankCheckSchema>["query"];
+export type CompensationSettingsBody = z.infer<typeof compensationSettingsSchema>["body"];

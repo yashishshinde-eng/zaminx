@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Wallet, ArrowDownToLine, Package, Users, Gift, FileText, Settings, ShieldCheck, BarChart3 } from "lucide-react";
+import { LayoutDashboard, Wallet, ArrowDownToLine, Package, Users, Gift, FileText, Settings, ShieldCheck, BarChart3, SlidersHorizontal } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 
@@ -20,6 +20,9 @@ const NAV: NavItem[] = [
   { label: "Reports", to: "/app/reports", icon: FileText },
   { label: "Settings", to: "/app/settings", icon: Settings },
   { label: "Admin", to: "/app/admin", icon: ShieldCheck, adminOnly: true },
+  { label: "Users", to: "/app/admin/users", icon: Users, adminOnly: true },
+  { label: "Compensation", to: "/app/admin/compensation", icon: SlidersHorizontal, adminOnly: true },
+  { label: "Bonanzas", to: "/app/admin/bonanzas", icon: Gift, adminOnly: true },
   { label: "Admin Reports", to: "/app/admin/reports", icon: BarChart3, adminOnly: true },
 ];
 

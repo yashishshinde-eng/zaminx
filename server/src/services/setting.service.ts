@@ -1,4 +1,5 @@
 import { Setting } from "../models/index.js";
+import type { CompensationSettings, CompensationSettingsBody } from "@zaminex/shared";
 
 /**
  * Generic key/value configuration store (Phase 10). Wraps the `Setting` model
@@ -63,4 +64,33 @@ export async function isCommunityEnabled(): Promise<boolean> {
 /** Community bonus percentage of the team's monthly trade yield (default 5 = 5%). */
 export async function getCommunityPct(): Promise<number> {
   return getSetting<number>("compensation.communityPct", 5);
+}
+
+/* ---- Phase 14A — compensation settings read/update ---- */
+
+/** Read the 7 compensation knobs as a single snapshot (Phase 14A admin UI). */
+export async function getCompensationSettings(): Promise<CompensationSettings> {
+  const [directBonusPct, yieldEnabled, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct] =
+    await Promise.all([
+      getDirectBonusPct(),
+      isYieldEnabled(),
+      isTeamEnergyEnabled(),
+      getTeamEnergyDepth(),
+      getTeamEnergyPct(),
+      isCommunityEnabled(),
+      getCommunityPct(),
+    ]);
+  return { directBonusPct, yieldEnabled, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct };
+}
+
+/** Update only the provided compensation knobs, then return the new snapshot. */
+export async function updateCompensationSettings(body: CompensationSettingsBody): Promise<CompensationSettings> {
+  if (body.directBonusPct !== undefined) await setSetting("compensation.directBonusPct", body.directBonusPct, "compensation");
+  if (body.yieldEnabled !== undefined) await setSetting("compensation.yieldEnabled", body.yieldEnabled, "compensation");
+  if (body.teamEnergyEnabled !== undefined) await setSetting("compensation.teamEnergyEnabled", body.teamEnergyEnabled, "compensation");
+  if (body.teamEnergyDepth !== undefined) await setSetting("compensation.teamEnergyDepth", body.teamEnergyDepth, "compensation");
+  if (body.teamEnergyPct !== undefined) await setSetting("compensation.teamEnergyPct", body.teamEnergyPct, "compensation");
+  if (body.communityEnabled !== undefined) await setSetting("compensation.communityEnabled", body.communityEnabled, "compensation");
+  if (body.communityPct !== undefined) await setSetting("compensation.communityPct", body.communityPct, "compensation");
+  return getCompensationSettings();
 }

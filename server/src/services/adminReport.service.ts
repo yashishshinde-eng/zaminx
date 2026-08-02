@@ -188,8 +188,9 @@ function usersFilter(q: ReportQueryArgs): Record<string, unknown> {
   return filter;
 }
 
-/** Fetch + join a page/export of users → admin user rows. */
-async function fetchUsersRows(filter: Record<string, unknown>, limit: number, skip: number): Promise<AdminUserReportRow[]> {
+/** Fetch + join a page/export of users → admin user rows. Exported for reuse
+ *  by the Phase 14A admin user-management list (same joined row shape). */
+export async function fetchUsersRows(filter: Record<string, unknown>, limit: number, skip: number): Promise<AdminUserReportRow[]> {
   const users = (await User.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean()) as LeanUser[];
   const pageIds = users.map((u) => u._id.toString());
   const [directAgg, wallets] = await Promise.all([

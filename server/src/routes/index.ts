@@ -14,6 +14,7 @@ import bonanzaRoutes from "./bonanza.routes.js";
 import compensationRoutes from "./compensation.routes.js";
 import rankRoutes from "./rank.routes.js";
 import reportRoutes from "./report.routes.js";
+import adminRoutes from "./admin.routes.js";
 
 const router = Router();
 
@@ -39,8 +40,13 @@ router.use("/ranks", authenticate, authorize("admin"), rankRoutes);
 // Per-user reports (Phase 11): 9 kinds over 3 data sources + CSV/Excel export.
 router.use("/reports", authenticate, reportRoutes);
 
+// Admin panel (Phase 14A): platform dashboard, user management, compensation
+// settings. Whole-tree admin-only. Existing admin endpoints (bonanzas/admin,
+// withdrawals/admin, reports/admin, /compensation, /ranks) stay on their own
+// routers; this new /admin tree is additive.
+router.use("/admin", authenticate, authorize("admin"), adminRoutes);
+
 // Future phases mount here:
 // router.use("/users", authenticate, authorize("admin"), userRoutes);
-// router.use("/admin", authenticate, authorize("admin"), adminRoutes);
 
 export default router;

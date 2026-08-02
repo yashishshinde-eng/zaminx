@@ -29,6 +29,8 @@ export const queryKeys = {
   },
   bonanzas: {
     overview: ["bonanzas", "overview"] as const,
+    list: (params?: unknown) => ["bonanzas", "admin-list", params ?? {}] as const,
+    detail: (id: string) => ["bonanzas", "admin-detail", id] as const,
   },
   reports: {
     list: (kind: string, params?: unknown) => ["reports", kind, params ?? {}] as const,
@@ -41,4 +43,12 @@ export const queryKeys = {
     list: (params?: Record<string, unknown>) => ["users", "list", params ?? {}] as const,
     detail: (id: string) => ["users", "detail", id] as const,
   },
+  // Admin-only namespaces (Phase 14A). Kept separate from the user-scoped
+  // `users` keys above to avoid cache collisions.
+  adminDashboard: ["admin", "dashboard"] as const,
+  adminUsers: {
+    list: (params?: unknown) => ["admin", "users", "list", params ?? {}] as const,
+    detail: (id: string) => ["admin", "users", "detail", id] as const,
+  },
+  compensationSettings: ["admin", "compensation-settings"] as const,
 } as const;

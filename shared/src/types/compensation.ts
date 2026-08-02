@@ -117,3 +117,22 @@ export interface RankEvalSummary {
   awarded: number;
   errors: number;
 }
+
+/* ------------------------------------------------------------------ */
+/*  Phase 14A — compensation settings snapshot                          */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The 7 global compensation knobs, as returned by `GET /admin/settings/
+ * compensation` and updated by `PATCH /admin/settings/compensation`. Stored
+ * in the `Setting` collection under the `compensation` category.
+ */
+export interface CompensationSettings {
+  directBonusPct: number;
+  yieldEnabled: boolean;
+  teamEnergyEnabled: boolean;
+  teamEnergyDepth: number;
+  teamEnergyPct: number[];
+  communityEnabled: boolean;
+  communityPct: number;
+}
