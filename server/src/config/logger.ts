@@ -1,0 +1,41 @@
+import { createLogger, format, transports } from "winston";
+import { isProd } from "./env.js";
+
+const { combine, timestamp, printf, colorize, errors, splat } = format;
+
+const logFormat = printf(({ level, message, timestamp: ts, stack, ...meta }) => {
+  const metaStr = Object.keys(meta).length ? ` ${JSON.stringify(meta)}` : "";
+  return `${ts} [${level}] ${stack ?? message}${metaStr}`;
+});
+
+export const logger = createLogger({
+  level: isProd ? "info" : "debug",
+  format: combine(
+    errors({ stack: true }),
+    splat(),
+    timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+    logFormat,
+  ),
+  defaultMeta: { service: "zaminex-api" },
+  transports: [
+    new transports.Console({
+      format: combine(colorize(), logFormat),
+    }),
+    ...(isProd
+      ? [
+          new transports.File({ filename: "logs/error.log", level: "error" }),
+          new transports.File({ filename: "logs/combined.log" }),
+        ]
+      : []),
+  ],
+  exceptionHandlers: isProd
+    ? [new transports.File({ filename: "logs/exceptions.log" })]
+    : undefined,
+  rejectionHandlers: isProd
+    ? [new transports.File({ filename: "logs/rejections.log" })]
+    : undefined,
+});
+
+export const stream = {
+  write: (message: string) => logger.http(message.trim()),
+};

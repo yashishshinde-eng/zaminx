@@ -1,0 +1,128 @@
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Service health check
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: object
+                    properties:
+                      status: { type: string }
+                      uptime: { type: integer }
+                      database: { type: string }
+
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name: { type: string }
+                email: { type: string, format: email }
+                password: { type: string, minLength: 8 }
+                phone: { type: string }
+                referralCode: { type: string }
+      responses:
+        "201": { description: Account created, returns tokens }
+        "409": { description: Email already in use }
+        "400": { description: Validation failed }
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Log in with email + password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email }
+                password: { type: string }
+      responses:
+        "200": { description: Logged in, returns tokens }
+        "401": { description: Invalid credentials }
+
+  /auth/refresh:
+    post:
+      tags: [Auth]
+      summary: Exchange a refresh token for a new token pair
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refreshToken]
+              properties:
+                refreshToken: { type: string }
+      responses:
+        "200": { description: New token pair }
+        "401": { description: Invalid refresh token }
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Invalidate the current refresh token
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: Logged out }
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Get the authenticated user
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: Current user }
+        "401": { description: Unauthorized }
+
+  /auth/forgot-password:
+    post:
+      tags: [Auth]
+      summary: Request a password reset link (stubbed email in Phase 1)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email: { type: string, format: email }
+      responses:
+        "200": { description: Always 200 — does not leak account existence }
+
+  /auth/reset-password:
+    post:
+      tags: [Auth]
+      summary: Reset password with a token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token, password]
+              properties:
+                token: { type: string }
+                password: { type: string, minLength: 8 }
+      responses:
+        "200": { description: Password updated }
+        "400": { description: Invalid or expired token }
