@@ -42,6 +42,7 @@ export function useActivatePackage() {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: queryKeys.packages.mine }),
         queryClient.invalidateQueries({ queryKey: queryKeys.dashboard }),
+        queryClient.invalidateQueries({ queryKey: queryKeys.wallet.balance }),
       ]);
     },
     onError: () => {
@@ -60,6 +61,8 @@ export function useSimulatePayment() {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: queryKeys.packages.mine }),
         queryClient.invalidateQueries({ queryKey: queryKeys.dashboard }),
+        queryClient.invalidateQueries({ queryKey: queryKeys.wallet.balance }),
+        queryClient.invalidateQueries({ queryKey: ["wallet", "ledger"] }),
       ]);
     },
     onError: () => {

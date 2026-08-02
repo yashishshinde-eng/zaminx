@@ -4,6 +4,7 @@ import { logger } from "../config/logger.js";
 import { sendEmail } from "./email.service.js";
 import { depositSuccessTemplate } from "./emailTemplates.js";
 import { createInvoice } from "./nowpayments.service.js";
+import { applyLedgerEntry } from "./wallet.service.js";
 import type { DepositRow, PackageTier, UserPackageRow } from "@zaminex/shared";
 
 interface Meta {
@@ -262,7 +263,29 @@ export async function confirmDeposit(
     userAgent: meta?.userAgent,
   }).catch(() => undefined);
 
-  // 3. Best-effort deposit-success email.
+  // 3. Credit the Main wallet (immutable ledger entry). Best-effort: a ledger
+  //    write failure must not break the (already-flipped) deposit confirmation
+  //    — Phase 7's contract is webhook-always-200. Idempotent via the deposit id
+  //    reference, so retries after a crash do not double-credit.
+  const packageName = up?.snapshot?.name ?? "package";
+  await applyLedgerEntry({
+    userId: deposit.user.toString(),
+    wallet: "main",
+    field: "available",
+    direction: "credit",
+    amount: deposit.amountUsd,
+    type: "deposit",
+    reference: { resource: "Deposit", resourceId: deposit._id.toString() },
+    memo: `Deposit — ${packageName} activation`,
+    meta: { packageId: deposit.package?.toString() },
+  }).catch((err) => {
+    logger.error("Wallet credit failed for deposit", {
+      depositId: deposit._id.toString(),
+      error: err instanceof Error ? err.message : String(err),
+    });
+  });
+
+  // 4. Best-effort deposit-success email.
   const [user, pkg] = await Promise.all([
     User.findById(deposit.user).lean(),
     Package.findById(deposit.package).lean(),

@@ -1,4 +1,5 @@
 import type { UserRole } from "./index";
+import type { WalletBalances } from "./wallet";
 
 /**
  * Aggregated dashboard payload returned by `GET /dashboard/summary`.
@@ -18,7 +19,8 @@ export interface DashboardSummary {
     rank: { name: string; nextRank: string | null; progress: number }; // 0..1
   };
   referral: { code: string; link: string };
-  wallets: { main: number; bonus: number; trading: number; total: number };
+  /** Phase 8 (Wallet) — real Main/Bonus/Trading balances + totals. */
+  wallets: WalletBalances;
   package: {
     active: boolean;
     name: string | null;

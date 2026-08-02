@@ -66,3 +66,4 @@ export * from "./cms";
 export * from "./dashboard";
 export * from "./package";
 export * from "./deposit";
+export * from "./wallet";

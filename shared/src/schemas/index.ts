@@ -2,3 +2,4 @@ export * from "./auth.schema";
 export * from "./cms.schema";
 export * from "./profile.schema";
 export * from "./package.schema";
+export * from "./wallet.schema";

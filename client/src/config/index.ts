@@ -14,6 +14,10 @@ export const queryKeys = {
     catalog: ["packages", "catalog"] as const,
     mine: ["packages", "mine"] as const,
   },
+  wallet: {
+    balance: ["wallet", "balance"] as const,
+    ledger: (params?: unknown) => ["wallet", "ledger", params ?? {}] as const,
+  },
   users: {
     all: ["users"] as const,
     list: (params?: Record<string, unknown>) => ["users", "list", params ?? {}] as const,

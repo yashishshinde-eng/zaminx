@@ -1,6 +1,7 @@
 import { User, ActivityLog, UserPackage } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { env } from "../config/env.js";
+import { getWalletBalances } from "./wallet.service.js";
 import type { DashboardSummary } from "@zaminex/shared";
 
 /**
@@ -24,10 +25,12 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
   }));
 
   // Real (Phase 6): the user's active package, pending count, and history total.
-  const [activePkg, pendingCount, historyCount] = await Promise.all([
+  // Real (Phase 8): the user's wallet balances (Main / Bonus / Trading + totals).
+  const [activePkg, pendingCount, historyCount, wallets] = await Promise.all([
     UserPackage.findOne({ user: userId, status: "active" }).sort({ activatedAt: -1 }).lean(),
     UserPackage.countDocuments({ user: userId, status: "pending" }),
     UserPackage.countDocuments({ user: userId }),
+    getWalletBalances(userId),
   ]);
 
   return {
@@ -45,8 +48,8 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
       code: user.referralCode,
       link: `${env.CLIENT_URL}/?ref=${user.referralCode}`,
     },
-    // Phase 8 (Wallet) fills these in.
-    wallets: { main: 0, bonus: 0, trading: 0, total: 0 },
+    // Phase 8 (Wallet) — real Main/Bonus/Trading balances + totals.
+    wallets,
     // Phase 6 (Package) — real active package + pending/history counts.
     package: {
       active: !!activePkg,
