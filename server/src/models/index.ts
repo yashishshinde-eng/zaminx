@@ -4,3 +4,7 @@ export { Setting } from "./Setting.model.js";
 export type { SettingDocument } from "./Setting.model.js";
 export { ActivityLog } from "./ActivityLog.model.js";
 export type { ActivityLogDocument } from "./ActivityLog.model.js";
+export { CmsPage } from "./CmsPage.model.js";
+export type { CmsPageDocument } from "./CmsPage.model.js";
+export { ContactMessage } from "./ContactMessage.model.js";
+export type { ContactMessageDocument } from "./ContactMessage.model.js";

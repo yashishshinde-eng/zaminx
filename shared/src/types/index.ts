@@ -39,3 +39,4 @@ export type RefreshBody = z.infer<typeof refreshSchema>["body"];
 export type ForgotPasswordBody = z.infer<typeof forgotPasswordSchema>["body"];
 export type ResetPasswordBody = z.infer<typeof resetPasswordSchema>["body"];
 export type ChangePasswordBody = z.infer<typeof changePasswordSchema>["body"];
+export * from "./cms";

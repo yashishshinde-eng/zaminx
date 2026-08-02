@@ -1,8 +1,32 @@
-// Phase 1 smoke test — exercises the Express app without MongoDB.
-// Run: npx tsx src/smoke.ts  (from server/)
+// Phase 2 smoke test — exercises the Express app.
+// Non-DB endpoints always run. CMS/page/contact checks require MongoDB; if a
+// short connection attempt fails, those are skipped with a note (and the
+// smoke test still validates the rest). Run: npx tsx src/smoke.ts  (from server/)
+import mongoose from "mongoose";
 import { createApp } from "./app.js";
+import { CmsPage } from "./models/index.js";
+import { env } from "./config/env.js";
 
 const app = createApp();
+
+async function tryConnectMongo(): Promise<boolean> {
+  try {
+    await mongoose.connect(env.MONGO_URI, { serverSelectionTimeoutMS: 2000 });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+const TEST_PAGE = {
+  slug: "smoke-about",
+  title: "Smoke About",
+  status: "published",
+  publishedAt: new Date(),
+  seo: { title: "About — smoke", description: "smoke desc" },
+  blocks: [{ type: "heading", level: 1, text: "About" }],
+};
+
 const server = app.listen(0, async () => {
   const port = (server.address() as { port: number }).port;
   const base = `http://localhost:${port}`;
@@ -27,22 +51,39 @@ const server = app.listen(0, async () => {
     }
   };
 
+  // --- Always-on (no DB) checks ---
   await check("health", "/api/v1/health", { method: "GET" }, { status: 200, bodyMatch: "ok" });
   await check("swagger ui", "/api/docs", { method: "GET" }, { status: 200, bodyMatch: "swagger" });
   await check("404 route", "/api/v1/nope", { method: "GET" }, { status: 404, bodyMatch: "Route not found" });
   await check("unauthorized /me", "/api/v1/auth/me", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
-  await check(
-    "validation error",
-    "/api/v1/auth/register",
-    { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: "bad" }) },
-    { status: 400, bodyMatch: "Validation failed" },
-  );
-  await check(
-    "missing fields",
-    "/api/v1/auth/login",
-    { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}) },
-    { status: 400, bodyMatch: "Validation failed" },
-  );
+  await check("register validation", "/api/v1/auth/register", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: "bad" }),
+  }, { status: 400, bodyMatch: "Validation failed" });
+  await check("login validation", "/api/v1/auth/login", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({}),
+  }, { status: 400, bodyMatch: "Validation failed" });
+
+  // --- DB-dependent CMS checks (skipped without MongoDB) ---
+  const connected = await tryConnectMongo();
+  if (!connected) {
+    console.log("ⓘ MongoDB not reachable — skipping CMS/page/contact checks (they need a DB).");
+  } else {
+    await CmsPage.create(TEST_PAGE).catch(() => undefined); // ignore if already present
+    await check("cms site", "/api/v1/cms/site", { method: "GET" }, { status: 200, bodyMatch: "maintenanceMode" });
+    await check("cms page list", "/api/v1/cms/pages", { method: "GET" }, { status: 200, bodyMatch: "slug" });
+    await check("cms page by slug", `/api/v1/cms/pages/${TEST_PAGE.slug}`, { method: "GET" }, { status: 200, bodyMatch: "blocks" });
+    await check("cms page missing", "/api/v1/cms/pages/does-not-exist", { method: "GET" }, { status: 404, bodyMatch: "Page not found" });
+    await check("contact valid", "/api/v1/cms/contact", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "Jane", email: "jane@example.com", message: "Hello from smoke test" }),
+    }, { status: 201, bodyMatch: "received" });
+    await check("contact invalid", "/api/v1/cms/contact", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "J" }),
+    }, { status: 400, bodyMatch: "Validation failed" });
+    await CmsPage.deleteOne({ slug: TEST_PAGE.slug }).catch(() => undefined);
+    await mongoose.disconnect().catch(() => undefined);
+  }
 
   console.log(failures === 0 ? "\n✅ All smoke checks passed" : `\n❌ ${failures} check(s) failed`);
   server.close();
