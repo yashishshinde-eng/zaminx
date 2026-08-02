@@ -13,7 +13,7 @@ import {
   confirmDeposit,
 } from "../services/deposit.service.js";
 import { verifyWebhookSignature, PAID_STATUSES } from "../services/nowpayments.service.js";
-import { Deposit } from "../models/index.js";
+import { Deposit, PaymentLog } from "../models/index.js";
 
 const meta = (req: Parameters<RequestHandler>[0]) => ({ ip: req.ip, userAgent: req.headers["user-agent"] });
 
@@ -43,17 +43,25 @@ export const depositStatus: RequestHandler[] = [
  */
 export const nowpaymentsWebhook: RequestHandler[] = [
   asyncHandler(async (req, res) => {
-    if (!verifyWebhookSignature(req)) {
-      logger.warn("NOWPayments webhook: invalid signature");
-      return res.status(200).json({ success: true, received: false });
-    }
-
     const body = req.body as {
       id?: string;
       order_id?: string;
       payment_id?: string;
       payment_status?: string;
     };
+
+    if (!verifyWebhookSignature(req)) {
+      logger.warn("NOWPayments webhook: invalid signature");
+      // Fire-and-forget: log the rejected event without ever blocking the 200.
+      void PaymentLog.create({
+        event: "webhook_received",
+        received: false,
+        invoiceId: body.order_id ?? body.id ?? null,
+        status: body.payment_status ?? null,
+        meta: { reason: "invalid_signature" },
+      }).catch(() => undefined);
+      return res.status(200).json({ success: true, received: false });
+    }
 
     // Resolve the deposit by order_id (our deposit _id) or by invoice id.
     let deposit = body.order_id ? await findDepositByInvoice(body.order_id).catch(() => null) : null;
@@ -65,9 +73,22 @@ export const nowpaymentsWebhook: RequestHandler[] = [
       deposit = await Deposit.findById(body.order_id).lean().catch(() => null);
     }
 
-    if (deposit && body.payment_status && PAID_STATUSES.has(body.payment_status)) {
+    const confirmed = Boolean(deposit && body.payment_status && PAID_STATUSES.has(body.payment_status));
+    if (confirmed && deposit) {
       await confirmDeposit(deposit._id.toString(), body.payment_id ?? null, meta(req));
     }
+
+    // Fire-and-forget: record the gateway event (deposit/user resolved, outcome).
+    void PaymentLog.create({
+      event: "webhook_received",
+      received: true,
+      deposit: deposit?._id ?? null,
+      user: deposit?.user ?? null,
+      paymentId: body.payment_id ?? null,
+      invoiceId: body.order_id ?? body.id ?? null,
+      status: body.payment_status ?? null,
+      meta: { confirmed, order_id: body.order_id ?? null, payment_id: body.payment_id ?? null },
+    }).catch(() => undefined);
 
     return res.status(200).json({ success: true, received: true });
   }),
