@@ -1,4 +1,28 @@
-import rateLimit from "express-rate-limit";
+import rateLimit, { type Options } from "express-rate-limit";
+import { ApiError } from "../utils/ApiError.js";
+
+/**
+ * Shared 429 handler (Phase 19). Instead of express-rate-limit's default inline
+ * `res.status(429).json(...)`, route the limit through `next(ApiError)` so the
+ * central `errorHandler` owns the envelope, logs it, and attaches
+ * `Retry-After` (derived from the limiter's per-window reset time). The standard
+ * `RateLimit-*` headers are still set by the limiter middleware itself before
+ * this handler runs.
+ */
+function limitHandler(
+  req: Parameters<NonNullable<Options["handler"]>>[0],
+  _res: Parameters<NonNullable<Options["handler"]>>[1],
+  next: Parameters<NonNullable<Options["handler"]>>[2],
+  options: Parameters<NonNullable<Options["handler"]>>[3],
+): void {
+  const reset = (req as { rateLimit?: { resetTime?: Date } }).rateLimit?.resetTime;
+  const retryAfter = reset ? Math.max(1, Math.ceil((reset.getTime() - Date.now()) / 1000)) : undefined;
+  const msg =
+    typeof options.message === "string"
+      ? options.message
+      : (options.message as { message?: string } | undefined)?.message ?? "Too many requests, please try again later.";
+  next(ApiError.tooManyRequests(msg, retryAfter));
+}
 
 /** General API rate limiter. */
 export const apiLimiter = rateLimit({
@@ -7,6 +31,7 @@ export const apiLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: "Too many requests, please try again later." },
+  handler: limitHandler,
 });
 
 const authMessage = { success: false, message: "Too many attempts, please try again later." };
@@ -17,11 +42,11 @@ const authMessage = { success: false, message: "Too many attempts, please try ag
  * previous shared `authLimiter` let login + register + forgot + reset + verify
  * + resend all draw from a single 20/15min counter.
  */
-export const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: authMessage });
-export const registerLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: authMessage });
-export const refreshLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 30, standardHeaders: true, legacyHeaders: false, message: authMessage });
-export const forgotResetLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 3, standardHeaders: true, legacyHeaders: false, message: authMessage });
-export const verifyLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: authMessage });
+export const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
+export const registerLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
+export const refreshLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 30, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
+export const forgotResetLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 3, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
+export const verifyLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
 
 /** Withdrawal submission limiter — a high-value mutation worth throttling. */
 export const withdrawalLimiter = rateLimit({
@@ -30,6 +55,7 @@ export const withdrawalLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: "Too many withdrawal requests, please try again later." },
+  handler: limitHandler,
 });
 
 /** Public contact-form limiter — anti-spam on an unauthenticated endpoint. */
@@ -39,4 +65,5 @@ export const contactLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: "Too many submissions, please try again later." },
+  handler: limitHandler,
 });

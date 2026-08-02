@@ -5,6 +5,7 @@ import {
   getPage,
   submitContact,
 } from "../controllers/cms.controller.js";
+import { contactLimiter } from "../middlewares/rateLimit.js";
 
 const router = Router();
 
@@ -13,6 +14,6 @@ router.get("/pages", ...listPages);
 router.get("/pages/:slug", ...getPage);
 
 // Contact form (public, rate-limited).
-router.post("/contact", ...submitContact);
+router.post("/contact", contactLimiter, ...submitContact);
 
 export default router;

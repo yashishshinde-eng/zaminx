@@ -1,5 +1,6 @@
 import { User, Deposit, Withdrawal, WalletTransaction, Wallet, BonanzaOffer, ActivityLog } from "../models/index.js";
 import { buildCsv, buildExcelHtml } from "../utils/csv.js";
+import { ApiError } from "../utils/ApiError.js";
 import {
   dateRangeFilter,
   paginate,
@@ -619,7 +620,7 @@ export async function getAdminReport(kind: AdminReportKind, q: ReportQueryArgs):
     case "activity":
       return getAdminActivityReport(q);
   }
-  throw new Error(`Unknown admin report kind: ${kind}`);
+  throw ApiError.badRequest(`Unknown admin report kind: ${kind}`);
 }
 
 /* ------------------------------------------------------------------ */
@@ -649,7 +650,7 @@ async function fetchAdminExportRows(kind: AdminReportKind, q: ReportExportArgs):
     case "activity":
       return fetchActivityRows(activityFilter(f), EXPORT_CAP, 0);
   }
-  throw new Error(`Unknown admin report kind: ${kind}`);
+  throw ApiError.badRequest(`Unknown admin report kind: ${kind}`);
 }
 
 /** Column spec for a kind → (headers, cell rows). */
@@ -699,7 +700,7 @@ function toAdminSheet(kind: AdminReportKind, rows: unknown[]): { headers: string
         data: (rows as AdminActivityReportRow[]).map((r) => [r.createdAt, r.actorName ?? "", r.action, r.resource ?? "", r.resourceId ?? "", r.ip ?? ""]),
       };
   }
-  throw new Error(`Unknown admin report kind: ${kind}`);
+  throw ApiError.badRequest(`Unknown admin report kind: ${kind}`);
 }
 
 /** Build the export body for an admin report kind (CSV or Excel). */

@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { env, isNowpaymentsConfigured, isProd } from "../config/env.js";
 import { logger } from "../config/logger.js";
 import { ApiError } from "../utils/ApiError.js";
+import { withRetry } from "../utils/retry.js";
 import { getSetting } from "./setting.service.js";
 import type { Request } from "express";
 
@@ -15,6 +16,23 @@ export interface InvoiceResult {
 }
 
 const SANDBOX_PAY_ADDRESS = "0xSANDBOX000000000000000000000000000000dEaD";
+
+/**
+ * A failure from the NOWPayments gateway. Carries the HTTP `status` (0 for a
+ * non-HTTP failure such as a malformed response) and an `isTimeout` flag so the
+ * retry helper (`utils/retry.isTransientError`) can decide retryability without
+ * import coupling — it duck-types on `status`/`isTimeout`/`name`.
+ */
+export class GatewayError extends Error {
+  public readonly status: number;
+  public readonly isTimeout: boolean;
+  constructor(message: string, status: number, isTimeout = false) {
+    super(message);
+    this.name = "GatewayError";
+    this.status = status;
+    this.isTimeout = isTimeout;
+  }
+}
 
 /** Resolved NOWPayments non-secret config (Settings with env fallback). The
  * API key + IPN secret stay env-only (secret). */
@@ -85,7 +103,7 @@ export async function createInvoice(input: {
 
     if (!res.ok) {
       const text = await res.text().catch(() => "");
-      throw new Error(`NOWPayments invoice API ${res.status}: ${text.slice(0, 200)}`);
+      throw new GatewayError(`NOWPayments invoice API ${res.status}: ${text.slice(0, 200)}`, res.status);
     }
 
     const body = (await res.json()) as {
@@ -96,7 +114,8 @@ export async function createInvoice(input: {
     };
 
     if (!body.id || !body.pay_address) {
-      throw new Error("NOWPayments invoice response missing id or pay_address");
+      // Malformed response — not a transient gateway error. status 0 ⇒ not retried.
+      throw new GatewayError("NOWPayments invoice response missing id or pay_address", 0);
     }
 
     return {
@@ -144,25 +163,49 @@ export const PAID_STATUSES = new Set(["confirmed", "sending", "finished"]);
  * missed — the webhook remains the primary confirmation path. Only meaningful
  * when the gateway is configured; callers guard with `isNowpaymentsConfigured()`.
  * Returns the gateway `payment_status` (e.g. "finished", "waiting") or `null`
- * when absent; throws on a non-OK response so the poller can count it as an error.
+ * when absent; throws a `GatewayError` on a non-OK response so the poller can
+ * count it as an error.
+ *
+ * This is a safe idempotent GET, so the fetch is wrapped in `withRetry` (3
+ * attempts, exponential backoff) — a transient 5xx/timeout is absorbed within
+ * the poll tick instead of waiting 15 minutes for the next run. `createInvoice`
+ * (a POST) is deliberately NOT retried to avoid duplicate invoices.
  */
 export async function getInvoiceStatus(invoiceId: string): Promise<string | null> {
   const cfg = await getNowpaymentsConfig();
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000);
-  try {
-    const res = await fetch(`${cfg.baseUrl}/invoice/${invoiceId}`, {
-      method: "GET",
-      headers: { "x-api-key": env.NOWPAYMENTS_API_KEY! },
-      signal: controller.signal,
-    });
-    if (!res.ok) {
-      const text = await res.text().catch(() => "");
-      throw new Error(`NOWPayments invoice status API ${res.status}: ${text.slice(0, 200)}`);
-    }
-    const body = (await res.json()) as { payment_status?: string };
-    return body.payment_status ?? null;
-  } finally {
-    clearTimeout(timeout);
-  }
+  // Each attempt gets its own AbortController + 10s timeout; `withRetry` runs the
+  // inner fn fresh per attempt so a timeout on attempt 1 doesn't poison attempt 2.
+  return withRetry(
+    async () => {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10_000);
+      try {
+        const res = await fetch(`${cfg.baseUrl}/invoice/${invoiceId}`, {
+          method: "GET",
+          headers: { "x-api-key": env.NOWPAYMENTS_API_KEY! },
+          signal: controller.signal,
+        });
+        if (!res.ok) {
+          const text = await res.text().catch(() => "");
+          throw new GatewayError(
+            `NOWPayments invoice status API ${res.status}: ${text.slice(0, 200)}`,
+            res.status,
+          );
+        }
+        const body = (await res.json()) as { payment_status?: string };
+        return body.payment_status ?? null;
+      } catch (err) {
+        // Surface fetch timeouts (AbortError) as a retryable GatewayError so
+        // `isTransientError` sees a uniform shape; otherwise rethrow as-is
+        // (AbortError is already transient by name, so this is mostly cosmetic).
+        if (err instanceof Error && err.name === "AbortError") {
+          throw new GatewayError(`NOWPayments invoice status timeout: ${invoiceId}`, 0, true);
+        }
+        throw err;
+      } finally {
+        clearTimeout(timeout);
+      }
+    },
+    { attempts: 3, baseDelayMs: 1000, maxDelayMs: 8000 },
+  );
 }

@@ -39,6 +39,11 @@ const envSchema = z.object({
   // In-process scheduler (Phase 18). Disable to run a worker that shouldn't fire
   // jobs (e.g. a dedicated API-only instance) while the schema keeps compiling.
   CRON_ENABLED: z.coerce.boolean().default(true),
+
+  // Trust the first N proxy hops for `req.ip` / X-Forwarded-For (Phase 19).
+  // 0 = trust none (default; dev/standalone). Set to 1+ behind a reverse proxy
+  // so rate-limit keys and audit `meta.ip` reflect the real client, not the proxy.
+  TRUST_PROXY: z.coerce.number().int().min(0).default(0),
 });
 
 const parsed = envSchema.safeParse(process.env);

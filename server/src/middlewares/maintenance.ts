@@ -59,12 +59,15 @@ export async function enforceMaintenance(req: Request, res: Response, next: Next
   }
   if (role === "admin") return next();
 
+  // Inline (not via errorHandler) so a planned maintenance 503 isn't logged at
+  // error level on every request. Standardised envelope + cache headers:
+  // `Retry-After` tells clients when to retry; `no-store` stops a CDN/proxy
+  // from caching the maintenance response. The client's MaintenanceGate keys
+  // off the public site-config, not this body, so the shape change is safe.
+  res.setHeader("Retry-After", "300");
+  res.setHeader("Cache-Control", "no-store");
   res.status(503).json({
     success: false,
-    error: {
-      code: "MAINTENANCE",
-      message: "Service under maintenance",
-      details: { message: message || "We'll be right back." },
-    },
+    message: message || "We'll be right back.",
   });
 }

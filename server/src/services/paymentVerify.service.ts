@@ -40,7 +40,14 @@ export async function verifyPendingDeposits(): Promise<PaymentVerifySummary> {
     createdAt: { $lte: cutoff },
   })
     .lean()
-    .catch(() => []);
+    .catch((err: unknown) => {
+      // A DB failure here used to be swallowed silently, making the poller look
+      // healthy while processing nothing. Surface it so it's visible in logs.
+      logger.warn("payment_verify: pending-deposit query failed", {
+        error: err instanceof Error ? err.message : String(err),
+      });
+      return [];
+    });
 
   let confirmed = 0;
   let errors = 0;

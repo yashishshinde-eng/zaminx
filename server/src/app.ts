@@ -10,11 +10,20 @@ import { stream } from "./config/logger.js";
 import { swaggerSpec } from "./config/swagger.js";
 import { apiLimiter } from "./middlewares/rateLimit.js";
 import { enforceMaintenance } from "./middlewares/maintenance.js";
+import { requestId } from "./middlewares/requestId.js";
 import { notFoundHandler, errorHandler } from "./middlewares/error.js";
 import v1Router from "./routes/index.js";
 
 export function createApp(): Express {
   const app = express();
+
+  // `req.ip` (rate-limit keys, audit `meta.ip`) must reflect the real client
+  // when behind a reverse proxy; 0 = trust none (dev/standalone, unchanged).
+  app.set("trust proxy", env.TRUST_PROXY);
+
+  // Correlation id — mounted first so it covers every response path, including
+  // errors. Sets `req.id` + the `X-Request-Id` response header.
+  app.use(requestId);
 
   // --- Security & parsing ---
   app.use(helmet());
