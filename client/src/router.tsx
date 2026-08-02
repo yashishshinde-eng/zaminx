@@ -23,6 +23,7 @@ const VerifyEmailPage = lazy(() => import("@/pages/VerifyEmailPage").then((m) =>
 // App (protected)
 const DashboardPage = lazy(() => import("@/pages/DashboardPage").then((m) => ({ default: m.DashboardPage })));
 const SettingsPage = lazy(() => import("@/pages/SettingsPage").then((m) => ({ default: m.SettingsPage })));
+const PackagesPage = lazy(() => import("@/pages/PackagesPage").then((m) => ({ default: m.PackagesPage })));
 const PlaceholderPage = lazy(() => import("@/pages/PlaceholderPage").then((m) => ({ default: m.PlaceholderPage })));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
@@ -53,7 +54,7 @@ export function AppRouter() {
           <Route element={<ProtectedRoute />}>
             <Route path="/app" element={<DashboardPage />} />
             <Route path="/app/wallet" element={<PlaceholderPage title="Wallet" description="Main, bonus & trading wallets." />} />
-            <Route path="/app/packages" element={<PlaceholderPage title="Packages" description="Activation, history & status." />} />
+            <Route path="/app/packages" element={<PackagesPage />} />
             <Route path="/app/team" element={<PlaceholderPage title="Team" description="Referral tree & statistics." />} />
             <Route path="/app/settings" element={<SettingsPage />} />
           </Route>

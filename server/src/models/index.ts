@@ -8,3 +8,7 @@ export { CmsPage } from "./CmsPage.model.js";
 export type { CmsPageDocument } from "./CmsPage.model.js";
 export { ContactMessage } from "./ContactMessage.model.js";
 export type { ContactMessageDocument } from "./ContactMessage.model.js";
+export { Package } from "./Package.model.js";
+export type { PackageDocument } from "./Package.model.js";
+export { UserPackage } from "./UserPackage.model.js";
+export type { UserPackageDocument } from "./UserPackage.model.js";

@@ -19,7 +19,14 @@ export interface DashboardSummary {
   };
   referral: { code: string; link: string };
   wallets: { main: number; bonus: number; trading: number; total: number };
-  package: { active: boolean; name: string | null; activatedAt: string | null; historyCount: number };
+  package: {
+    active: boolean;
+    name: string | null;
+    activatedAt: string | null; // ISO — set when a subscription flips to active (Phase 7)
+    historyCount: number;
+    /** Subscriptions awaiting payment (created in Phase 6, confirmed in Phase 7). */
+    pending: number;
+  };
   income: {
     trading: number;
     direct: number;

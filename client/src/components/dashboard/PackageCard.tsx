@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
 import type { DashboardSummary } from "@zaminex/shared";
 
-/** Current package status — empty state until a package is activated (Phase 6). */
+/** Current package status — activation status, pending count, and history. */
 export function PackageCard({ pkg }: { pkg: DashboardSummary["package"] }) {
   return (
     <Card>
@@ -17,7 +17,9 @@ export function PackageCard({ pkg }: { pkg: DashboardSummary["package"] }) {
           </CardTitle>
           <CardDescription>Activation status & history</CardDescription>
         </div>
-        <Badge variant={pkg.active ? "success" : "outline"}>{pkg.active ? "Active" : "Inactive"}</Badge>
+        <Badge variant={pkg.active ? "success" : pkg.pending > 0 ? "warning" : "outline"}>
+          {pkg.active ? "Active" : pkg.pending > 0 ? "Pending" : "Inactive"}
+        </Badge>
       </CardHeader>
       <CardContent>
         {pkg.active ? (
@@ -25,6 +27,15 @@ export function PackageCard({ pkg }: { pkg: DashboardSummary["package"] }) {
             <p className="font-medium">{pkg.name}</p>
             <p className="text-sm text-muted-foreground">Activated {formatDate(pkg.activatedAt)}</p>
             <p className="text-sm text-muted-foreground">{pkg.historyCount} activation(s) on record</p>
+          </div>
+        ) : pkg.pending > 0 ? (
+          <div className="flex flex-col items-center gap-3 py-4 text-center">
+            <p className="text-sm text-muted-foreground">
+              {pkg.pending} package{pkg.pending > 1 ? "s" : ""} pending — awaiting payment.
+            </p>
+            <Button asChild size="sm" variant="outline">
+              <Link to="/app/packages">View packages</Link>
+            </Button>
           </div>
         ) : (
           <div className="flex flex-col items-center gap-3 py-4 text-center">

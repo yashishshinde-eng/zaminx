@@ -10,6 +10,10 @@ export const STORAGE_KEYS = {
 export const queryKeys = {
   me: ["auth", "me"] as const,
   dashboard: ["dashboard", "summary"] as const,
+  packages: {
+    catalog: ["packages", "catalog"] as const,
+    mine: ["packages", "mine"] as const,
+  },
   users: {
     all: ["users"] as const,
     list: (params?: Record<string, unknown>) => ["users", "list", params ?? {}] as const,

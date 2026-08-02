@@ -1,7 +1,7 @@
 import { connectDB } from "./config/db.js";
 import { env } from "./config/env.js";
 import { logger } from "./config/logger.js";
-import { User, Setting, CmsPage } from "./models/index.js";
+import { User, Setting, CmsPage, Package } from "./models/index.js";
 import { isSmtpConfigured } from "./services/email.service.js";
 import type { ContentBlock } from "@zaminex/shared";
 
@@ -97,6 +97,16 @@ async function seed() {
   );
   logger.info(`✅ Default CMS pages ensured (${DEFAULT_PAGES.length} pages)`);
 
+  // --- Default package tiers (investment catalog), idempotent on slug ---
+  await Promise.all(
+    DEFAULT_PACKAGES.map(async (p) => {
+      const exists = await Package.findOne({ slug: p.slug });
+      if (exists) return;
+      await Package.create(p);
+    }),
+  );
+  logger.info(`✅ Default package tiers ensured (${DEFAULT_PACKAGES.length} tiers)`);
+
   logger.info("Seed complete.");
   process.exit(0);
 }
@@ -122,6 +132,53 @@ const cta = (title: string, description: string, ctaLabel: string, ctaHref: stri
   ctaLabel,
   ctaHref,
 });
+
+const DEFAULT_PACKAGES = [
+  {
+    name: "Starter",
+    slug: "starter",
+    description: "The lowest entry into daily trading yields.",
+    priceUsd: 50,
+    dailyReturnPct: 1.0,
+    durationDays: 100,
+    features: ["1% daily yield", "100-day term", "Lowest entry"],
+    sort: 1,
+    status: "active",
+  },
+  {
+    name: "Silver",
+    slug: "silver",
+    description: "A balanced tier with a higher daily return.",
+    priceUsd: 200,
+    dailyReturnPct: 1.2,
+    durationDays: 120,
+    features: ["1.2% daily yield", "120-day term", "Balanced rewards"],
+    sort: 2,
+    status: "active",
+  },
+  {
+    name: "Gold",
+    slug: "gold",
+    description: "Premium tier for committed investors.",
+    priceUsd: 500,
+    dailyReturnPct: 1.5,
+    durationDays: 150,
+    features: ["1.5% daily yield", "150-day term", "Priority support"],
+    sort: 3,
+    status: "active",
+  },
+  {
+    name: "Platinum",
+    slug: "platinum",
+    description: "The top tier with the maximum daily return.",
+    priceUsd: 1000,
+    dailyReturnPct: 2.0,
+    durationDays: 180,
+    features: ["2% daily yield", "180-day term", "Maximum rewards"],
+    sort: 4,
+    status: "active",
+  },
+];
 
 const DEFAULT_PAGES = [
   {

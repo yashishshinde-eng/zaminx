@@ -15,6 +15,7 @@ import {
   updateThemeSchema,
   updateNotificationPreferenceSchema,
 } from "../schemas/profile.schema";
+import { activatePackageSchema } from "../schemas/package.schema";
 
 /** Role attached to an authenticated request. */
 export type UserRole = "user" | "admin";
@@ -60,5 +61,7 @@ export type UpdateProfileBody = z.infer<typeof updateProfileSchema>["body"];
 export type UpdateWalletAddressesBody = z.infer<typeof updateWalletAddressesSchema>["body"];
 export type UpdateThemeBody = z.infer<typeof updateThemeSchema>["body"];
 export type UpdateNotificationPreferenceBody = z.infer<typeof updateNotificationPreferenceSchema>["body"];
+export type ActivatePackageBody = z.infer<typeof activatePackageSchema>["body"];
 export * from "./cms";
 export * from "./dashboard";
+export * from "./package";

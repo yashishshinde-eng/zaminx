@@ -1,11 +1,12 @@
-import { User, ActivityLog } from "../models/index.js";
+import { User, ActivityLog, UserPackage } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { env } from "../config/env.js";
 import type { DashboardSummary } from "@zaminex/shared";
 
 /**
  * Assemble the user dashboard. Slices backed by later phases return zeros /
- * empty arrays today; `account`, `referral`, and `recentActivity` are real.
+ * empty arrays today; `account`, `referral`, `package`, and `recentActivity`
+ * are real.
  */
 export async function getDashboardSummary(userId: string): Promise<DashboardSummary> {
   const user = await User.findById(userId);
@@ -21,6 +22,13 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
     action: l.action,
     createdAt: l.createdAt.toISOString(),
   }));
+
+  // Real (Phase 6): the user's active package, pending count, and history total.
+  const [activePkg, pendingCount, historyCount] = await Promise.all([
+    UserPackage.findOne({ user: userId, status: "active" }).sort({ activatedAt: -1 }).lean(),
+    UserPackage.countDocuments({ user: userId, status: "pending" }),
+    UserPackage.countDocuments({ user: userId }),
+  ]);
 
   return {
     account: {
@@ -39,8 +47,14 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
     },
     // Phase 8 (Wallet) fills these in.
     wallets: { main: 0, bonus: 0, trading: 0, total: 0 },
-    // Phase 6 (Package) fills this in.
-    package: { active: false, name: null, activatedAt: null, historyCount: 0 },
+    // Phase 6 (Package) — real active package + pending/history counts.
+    package: {
+      active: !!activePkg,
+      name: activePkg?.snapshot?.name ?? null,
+      activatedAt: activePkg?.activatedAt instanceof Date ? activePkg.activatedAt.toISOString() : null,
+      historyCount,
+      pending: pendingCount,
+    },
     // Phase 10 (Compensation) fills these in.
     income: {
       trading: 0,

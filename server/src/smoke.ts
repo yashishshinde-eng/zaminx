@@ -58,6 +58,10 @@ const server = app.listen(0, async () => {
   await check("unauthorized /me", "/api/v1/auth/me", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
   await check("unauthorized /dashboard/summary", "/api/v1/dashboard/summary", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
   await check("unauthorized /profile", "/api/v1/profile", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: "x" }) }, { status: 401, bodyMatch: "Missing access token" });
+  await check("unauthorized /packages", "/api/v1/packages", { method: "GET" }, { status: 401, bodyMatch: "Missing access token" });
+  await check("unauthorized /packages/activate", "/api/v1/packages/activate", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ packageId: "507f1f77bcf86cd799439011" }),
+  }, { status: 401, bodyMatch: "Missing access token" });
   await check("register validation", "/api/v1/auth/register", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: "bad" }),
   }, { status: 400, bodyMatch: "Validation failed" });
