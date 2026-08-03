@@ -65,7 +65,7 @@ export function AdminCmsPagesPage() {
 
       <div className="mt-6 space-y-6">
         {/* Filters */}
-        <Card>
+        <Card className="border-0">
           <CardContent className="flex flex-col gap-3 py-4 sm:flex-row sm:flex-wrap sm:items-end">
             <div className="space-y-1">
               <label className="text-xs text-muted-foreground">Search</label>
@@ -86,7 +86,7 @@ export function AdminCmsPagesPage() {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as StatusFilter)}
-                className="h-9 w-[150px] rounded-md border border-input bg-background px-3 text-sm"
+                className="glass-input h-9 w-[150px] px-3 text-sm"
               >
                 {STATUSES.map((s) => (
                   <option key={s} value={s}>

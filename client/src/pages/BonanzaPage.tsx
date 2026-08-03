@@ -92,7 +92,7 @@ function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCoun
       <CardHeader className="space-y-2">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
-            <div className="flex size-9 items-center justify-center rounded-md bg-fuchsia-500/10 text-fuchsia-600">
+            <div className="flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
               <Gift className="size-5" />
             </div>
             <CardTitle className="text-base">{offer.name}</CardTitle>

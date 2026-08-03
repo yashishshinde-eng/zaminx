@@ -36,7 +36,7 @@ export function AdminLogsPage() {
 
       <div className="mt-6 space-y-6">
         {/* Filters */}
-        <Card>
+        <Card className="border-0">
           <CardContent className="flex flex-col gap-3 py-4 sm:flex-row sm:flex-wrap sm:items-end">
             <div className="space-y-1">
               <Label htmlFor="logFile" className="text-xs text-muted-foreground">File</Label>
@@ -44,7 +44,7 @@ export function AdminLogsPage() {
                 id="logFile"
                 value={file}
                 onChange={(e) => setFile(e.target.value as AdminLogFile)}
-                className="h-9 w-[180px] rounded-md border border-input bg-background px-3 text-sm"
+                className="glass-input h-9 w-[180px] px-3 text-sm"
               >
                 {FILES.map((f) => (
                   <option key={f} value={f}>{f}.log</option>
@@ -73,7 +73,7 @@ export function AdminLogsPage() {
         </Card>
 
         {/* Output */}
-        <Card>
+        <Card className="border-0">
           <CardHeader className="space-y-1">
             <CardTitle className="flex items-center gap-2 text-base">
               <FileText className="size-4 text-primary" /> {applied.file}.log
@@ -94,7 +94,7 @@ export function AdminLogsPage() {
             ) : data.lines.length === 0 ? (
               <p className="text-sm text-muted-foreground">The file is empty.</p>
             ) : (
-              <pre className="max-h-[60vh] overflow-auto rounded-lg border bg-zinc-950 p-4 text-xs leading-relaxed text-zinc-300">
+              <pre className="max-h-[60vh] overflow-auto rounded-[14px] border border-white/[0.08] bg-popover p-4 text-xs leading-relaxed text-muted-foreground">
                 {data.lines.join("\n")}
               </pre>
             )}

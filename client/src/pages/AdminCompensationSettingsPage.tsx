@@ -84,7 +84,7 @@ export function AdminCompensationSettingsPage() {
 
       <div className="mt-6 space-y-6">
         {/* Settings form */}
-        <Card>
+        <Card className="border-0">
           <CardHeader className="space-y-1">
             <CardTitle className="flex items-center gap-2 text-base">
               <SlidersHorizontal className="size-4 text-primary" /> Compensation knobs
@@ -217,7 +217,7 @@ function TriggersCard() {
   }
 
   return (
-    <Card>
+    <Card className="border-0">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
           <Zap className="size-4 text-primary" /> Engine triggers

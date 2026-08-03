@@ -31,7 +31,7 @@ export function AdminDashboardPage() {
         {/* KPI grid */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {isLoading || !kpis ? (
-            Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-[88px] w-full rounded-lg" />)
+            Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-[88px] w-full rounded-xl" />)
           ) : (
             <>
               <StatTile icon={Users} label="Total users" value={String(kpis.totalUsers)} />
@@ -64,7 +64,7 @@ export function AdminDashboardPage() {
         <VolumeChart series={series} loading={isLoading} />
 
         {/* Recent activity */}
-        <Card>
+        <Card className="border-0">
           <CardHeader className="space-y-1">
             <CardTitle className="flex items-center gap-2 text-base">
               <Activity className="size-4 text-primary" /> Recent activity
@@ -95,11 +95,13 @@ export function AdminDashboardPage() {
 
 function StatTile({ icon: Icon, label, value, sub }: { icon: typeof Users; label: string; value: string; sub?: string }) {
   return (
-    <Card>
+    <Card className="card-hover card-shimmer overflow-hidden border-0">
       <CardContent className="py-4">
         <div className="flex items-center justify-between">
           <p className="text-sm text-muted-foreground">{label}</p>
-          <Icon className="size-4 text-muted-foreground" />
+          <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <Icon className="size-4" />
+          </div>
         </div>
         <p className="mt-1 text-2xl font-bold tabular-nums">{value}</p>
         {sub && <p className="mt-0.5 text-xs text-muted-foreground">{sub}</p>}
@@ -116,19 +118,19 @@ function VolumeChart({ series, loading }: { series: { date: string; deposits: nu
   const options: ApexOptions = useMemo(
     () => ({
       chart: { type: "bar", height: 260, toolbar: { show: false }, background: "transparent", fontFamily: "inherit" },
-      colors: [themeColor("primary", "hsl(222 47% 45%)"), themeColor("destructive", "hsl(0 72% 51%)")],
+      colors: [themeColor("primary", "hsl(45 100% 48%)"), themeColor("destructive", "hsl(0 84% 60%)")],
       dataLabels: { enabled: false },
       stroke: { curve: "smooth", width: 2 },
-      grid: { borderColor: themeColor("border", "hsl(214 32% 91%)"), strokeDashArray: 4 },
+      grid: { borderColor: themeColor("border", "hsl(215 30% 16%)"), strokeDashArray: 4 },
       xaxis: {
         categories: series.map((s) => s.date),
-        labels: { style: { colors: themeColor("muted-foreground", "#64748b") } },
+        labels: { style: { colors: themeColor("muted-foreground", "hsl(210 16% 55%)") } },
         axisBorder: { show: false },
         axisTicks: { show: false },
       },
-      yaxis: { labels: { style: { colors: themeColor("muted-foreground", "#64748b") }, formatter: (v: number) => formatCurrency(v) } },
-      tooltip: { theme: "light", y: { formatter: (v: number) => formatCurrency(v) } },
-      legend: { position: "top", labels: { colors: themeColor("muted-foreground", "#64748b") } },
+      yaxis: { labels: { style: { colors: themeColor("muted-foreground", "hsl(210 16% 55%)") }, formatter: (v: number) => formatCurrency(v) } },
+      tooltip: { theme: "dark", y: { formatter: (v: number) => formatCurrency(v) } },
+      legend: { position: "top", labels: { colors: themeColor("muted-foreground", "hsl(210 16% 55%)") } },
     }),
     [series],
   );
@@ -139,7 +141,7 @@ function VolumeChart({ series, loading }: { series: { date: string; deposits: nu
   const hasData = series.length > 0;
 
   return (
-    <Card className="flex flex-col">
+    <Card className="border-0 flex flex-col">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
           <TrendingUp className="size-4 text-primary" /> Deposits vs withdrawals
@@ -153,7 +155,7 @@ function VolumeChart({ series, loading }: { series: { date: string; deposits: nu
           <Chart options={options} series={chartSeries} type="bar" height={260} />
         ) : (
           <div className="flex h-[260px] flex-col items-center justify-center text-center">
-            <div className="flex size-10 items-center justify-center rounded-full bg-muted text-muted-foreground">
+            <div className="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
               <TrendingUp className="size-5" />
             </div>
             <p className="mt-2 text-sm font-medium">No volume in range</p>

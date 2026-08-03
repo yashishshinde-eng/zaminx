@@ -48,7 +48,7 @@ export function TabsList({ children, className }: { children: ReactNode; classNa
     <div
       role="tablist"
       className={cn(
-        "inline-flex items-center gap-1 rounded-lg bg-muted p-1 text-muted-foreground",
+        "inline-flex items-center gap-1 rounded-[14px] bg-muted p-1 text-muted-foreground",
         className,
       )}
     >
@@ -72,10 +72,9 @@ export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
       role="tab"
       id={`${baseId}-tab-${value}`}
       aria-selected={selected}
-      aria-controls={`${baseId}-panel-${value}`}
       onClick={() => setValue(value)}
       className={cn(
-        "relative inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [&_svg]:size-4 [&_svg]:shrink-0",
+        "relative inline-flex items-center justify-center gap-1.5 rounded-[10px] px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 [&_svg]:size-4 [&_svg]:shrink-0",
         selected ? "text-foreground" : "hover:text-foreground",
         className,
       )}
@@ -83,7 +82,7 @@ export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
       {selected && (
         <motion.span
           layoutId={`${baseId}-tab-active`}
-          className="absolute inset-0 rounded-md bg-card shadow-sm"
+          className="absolute inset-0 rounded-[10px] bg-card shadow-sm"
           transition={{ type: "spring", stiffness: 400, damping: 32 }}
         />
       )}
@@ -124,7 +123,7 @@ export function SegmentedControl({ value, onValueChange, options, className }: S
   return (
     <div
       role="tablist"
-      className={cn("inline-flex items-center rounded-md border border-border bg-muted/50 p-0.5", className)}
+      className={cn("inline-flex items-center rounded-[10px] border border-white/[0.08] bg-muted/50 p-0.5", className)}
     >
       {options.map((opt) => {
         const selected = opt.value === value;
@@ -136,14 +135,14 @@ export function SegmentedControl({ value, onValueChange, options, className }: S
             aria-selected={selected}
             onClick={() => onValueChange(opt.value)}
             className={cn(
-              "relative inline-flex items-center justify-center rounded-[5px] px-2.5 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "relative inline-flex items-center justify-center rounded-[7px] px-2.5 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
               selected ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground",
             )}
           >
             {selected && (
               <motion.span
                 layoutId={`${baseId}-segment-active`}
-                className="absolute inset-0 rounded-[5px] brand-gradient shadow-sm"
+                className="absolute inset-0 rounded-[7px] brand-gradient shadow-sm"
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
               />
             )}

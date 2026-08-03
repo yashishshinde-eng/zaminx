@@ -144,7 +144,7 @@ export function ReportsPage() {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="h-9 w-[150px] rounded-md border border-input bg-background px-3 text-sm"
+                  className="glass-input h-9 w-[150px] px-3 text-sm"
                 >
                   <option value="">All</option>
                   {statusOptions.map((s) => (

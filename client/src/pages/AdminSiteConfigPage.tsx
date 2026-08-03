@@ -75,7 +75,7 @@ export function AdminSiteConfigPage() {
         ) : (
           <>
             {/* Branding */}
-            <Card>
+            <Card className="border-0">
               <CardHeader className="space-y-1">
                 <CardTitle className="flex items-center gap-2 text-base">
                   <SettingsIcon className="size-4 text-primary" /> Branding
@@ -103,7 +103,7 @@ export function AdminSiteConfigPage() {
             </Card>
 
             {/* Navigation */}
-            <Card>
+            <Card className="border-0">
               <CardHeader className="space-y-1">
                 <CardTitle className="text-base">Navigation links</CardTitle>
                 <CardDescription>The header navigation. Reorder by removing and re-adding.</CardDescription>
@@ -140,7 +140,7 @@ export function AdminSiteConfigPage() {
 
             {/* Footer + contact + social */}
             <div className="grid gap-6 lg:grid-cols-2">
-              <Card>
+              <Card className="border-0">
                 <CardHeader className="space-y-1">
                   <CardTitle className="text-base">Footer & contact</CardTitle>
                 </CardHeader>
@@ -162,7 +162,7 @@ export function AdminSiteConfigPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-0">
                 <CardHeader className="space-y-1">
                   <CardTitle className="text-base">Social links</CardTitle>
                   <CardDescription>Full profile URLs. Leave blank to hide an icon.</CardDescription>
@@ -185,7 +185,7 @@ export function AdminSiteConfigPage() {
 
             {/* SEO + announcement */}
             <div className="grid gap-6 lg:grid-cols-2">
-              <Card>
+              <Card className="border-0">
                 <CardHeader className="space-y-1">
                   <CardTitle className="text-base">SEO defaults</CardTitle>
                   <CardDescription>Fallback title & description for pages without explicit SEO.</CardDescription>
@@ -202,7 +202,7 @@ export function AdminSiteConfigPage() {
                 </CardContent>
               </Card>
 
-              <Card>
+              <Card className="border-0">
                 <CardHeader className="space-y-1">
                   <CardTitle className="text-base">Announcement bar</CardTitle>
                   <CardDescription>A dismissible banner shown at the top of the public site.</CardDescription>

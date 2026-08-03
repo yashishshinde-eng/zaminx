@@ -118,7 +118,7 @@ function DropdownMenuContent({ children, side = "bottom", align = "end", classNa
           transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
           style={{ position: "absolute", top: coords.top, left: coords.left, zIndex: 60 }}
           className={cn(
-            "min-w-[12rem] origin-top-right overflow-hidden rounded-lg border border-border/70 bg-popover p-1 text-popover-foreground shadow-xl",
+            "glass-card min-w-[12rem] origin-top-right overflow-hidden p-1 text-popover-foreground",
             align === "end" && (side === "bottom" || side === "top") && "-translate-x-[calc(100%-0px)]",
             className,
           )}
@@ -160,7 +160,7 @@ export function DropdownMenuItem({
     close();
   };
   const classes = cn(
-    "flex w-full cursor-pointer items-center gap-2 rounded-md px-2.5 py-2 text-sm outline-none transition-colors focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+    "flex w-full cursor-pointer items-center gap-2 rounded-[10px] px-2.5 py-2 text-sm outline-none transition-colors focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
     destructive ? "text-destructive hover:bg-destructive/10 focus-visible:bg-destructive/10" : "hover:bg-accent",
     className,
   );

@@ -12,7 +12,7 @@ interface ProgressProps {
 
 /**
  * An accessible progress bar. Uses the brand gradient by default so it pairs
- * with the violet token system. Honours `prefers-reduced-motion` via the global
+ * with the gold token system. Honours `prefers-reduced-motion` via the global
  * CSS guard (the shimmer animation is nullified there).
  */
 export function Progress({ value, indicatorClassName, glow, className }: ProgressProps) {
@@ -23,7 +23,7 @@ export function Progress({ value, indicatorClassName, glow, className }: Progres
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(clamped)}
-      className={cn("relative h-2 w-full overflow-hidden rounded-full bg-muted", className)}
+      className={cn("relative h-2.5 w-full overflow-hidden rounded-full bg-muted", className)}
     >
       <div
         className={cn(

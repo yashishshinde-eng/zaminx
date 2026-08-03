@@ -25,7 +25,7 @@ export function WalletCard({ wallets }: { wallets: DashboardSummary["wallets"] }
       <CardContent>
         <div className="grid grid-cols-3 gap-3">
           {tiles.map((t) => (
-            <div key={t.label} className="rounded-lg border bg-muted/30 p-3 text-center">
+            <div key={t.label} className="glass-card card-shimmer p-3 text-center">
               <p className="text-xs font-medium text-muted-foreground">{t.label}</p>
               <p className="mt-1 text-sm font-semibold tabular-nums sm:text-base">{formatCurrency(t.balance.available)}</p>
               {t.balance.onHold > 0 && (
@@ -34,10 +34,10 @@ export function WalletCard({ wallets }: { wallets: DashboardSummary["wallets"] }
             </div>
           ))}
         </div>
-        <div className="mt-4 space-y-1 border-t pt-3">
+        <div className="mt-4 space-y-1 border-t border-white/[0.06] pt-3">
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Available</span>
-            <span className="text-base font-semibold tabular-nums">{formatCurrency(wallets.totalAvailable)}</span>
+            <span className="text-base font-semibold tabular-nums text-gradient-gold">{formatCurrency(wallets.totalAvailable)}</span>
           </div>
           {anyOnHold && (
             <div className="flex items-center justify-between">

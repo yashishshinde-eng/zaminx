@@ -85,17 +85,19 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
   })).filter((g) => g.items.length > 0);
 
   return (
-    <div className="flex h-full flex-col glass text-sidebar-foreground">
-      {/* Brand header */}
-      <div className={cn("flex h-16 items-center gap-2.5 border-b border-sidebar-border", isCollapsed ? "justify-center px-3" : "px-5")}>
-        <div className="brand-gradient flex size-9 shrink-0 items-center justify-center rounded-lg text-primary-foreground font-bold shadow-sm">
+    <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
+      {/* Brand header with gold accent line */}
+      <div className={cn("relative flex h-16 items-center gap-2.5 border-b border-sidebar-border", isCollapsed ? "justify-center px-3" : "px-5")}>
+        {/* Gold accent line on left */}
+        <div className="absolute left-0 top-0 bottom-0 w-0.5 brand-gradient" />
+        <div className="brand-gradient flex size-9 shrink-0 items-center justify-center rounded-xl text-primary-foreground font-bold shadow-glow-gold">
           Z
         </div>
         {!isCollapsed && <span className="text-lg font-bold tracking-tight text-gradient">Zaminex</span>}
       </div>
 
       {/* Nav */}
-      <nav className="scrollbar-thin flex-1 space-y-4 overflow-y-auto p-3">
+      <nav className="scrollbar-thin flex-1 space-y-4 overflow-y-auto px-3 py-4">
         {groups.map((group) => (
           <div key={group.label} className="space-y-1">
             {!isCollapsed && (
@@ -115,11 +117,11 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
                 title={isCollapsed ? item.label : undefined}
                 className={({ isActive }) =>
                   cn(
-                    "relative flex min-h-[44px] items-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                    "relative flex min-h-[44px] items-center rounded-xl text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
                     isCollapsed ? "justify-center px-2" : "gap-3 px-3",
                     isActive
                       ? "text-primary-foreground"
-                      : "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-foreground",
+                      : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground",
                   )
                 }
               >
@@ -128,7 +130,7 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
                     {isActive && (
                       <motion.span
                         layoutId="sidebar-active"
-                        className="brand-gradient absolute inset-0 rounded-md shadow-sm"
+                        className="brand-gradient absolute inset-0 rounded-xl shadow-glow-gold"
                         transition={{ type: "spring", stiffness: 400, damping: 32 }}
                       />
                     )}
@@ -142,9 +144,9 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
         ))}
       </nav>
 
-      {/* User mini-profile footer + collapse toggle */}
+      {/* User mini-profile footer */}
       <div className="border-t border-sidebar-border p-3">
-        <div className={cn("flex items-center", isCollapsed ? "justify-center" : "gap-2.5")}>
+        <div className={cn("flex items-center gap-2.5 rounded-xl bg-sidebar-accent/50 p-2", isCollapsed ? "justify-center" : "")}>
           <Avatar
             src={null}
             alt={user?.name ?? "User"}
@@ -162,7 +164,7 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
               type="button"
               onClick={toggle}
               aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              className="flex size-7 shrink-0 items-center justify-center rounded-md text-sidebar-foreground/60 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+              className="flex size-7 shrink-0 items-center justify-center rounded-lg text-sidebar-foreground/60 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
             >
               <ChevronLeft className={cn("size-4 transition-transform", isCollapsed && "rotate-180")} />
             </button>

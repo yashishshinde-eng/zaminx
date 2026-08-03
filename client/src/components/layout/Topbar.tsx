@@ -45,7 +45,10 @@ export function Topbar({ onOpenSidebar }: TopbarProps) {
   const title = usePageTitle();
 
   return (
-    <header className="glass sticky top-0 z-30 flex h-16 items-center justify-between gap-3 px-4 sm:px-6">
+    <header className="glass sticky top-0 z-30 flex h-16 items-center justify-between gap-3 border-b border-white/[0.06] px-4 sm:px-6">
+      {/* Gold accent line at top */}
+      <div className="absolute inset-x-0 top-0 h-px brand-gradient opacity-60" />
+
       <div className="flex min-w-0 items-center gap-2">
         {/* Mobile menu trigger */}
         <Button variant="ghost" size="icon" className="lg:hidden" onClick={onOpenSidebar} aria-label="Open navigation">
@@ -60,7 +63,7 @@ export function Topbar({ onOpenSidebar }: TopbarProps) {
           type="button"
           onClick={toggleTheme}
           aria-label="Toggle theme"
-          className="relative flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="relative flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.span

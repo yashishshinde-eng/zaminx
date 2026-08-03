@@ -59,7 +59,7 @@ export function AdminNowpaymentsSettingsPage() {
         {isLoading || !data ? (
           <Skeleton className="h-80 w-full" />
         ) : (
-          <Card>
+          <Card className="border-0">
             <CardHeader className="space-y-1">
               <CardTitle className="flex items-center gap-2 text-base">
                 <CreditCard className="size-4 text-primary" /> Gateway

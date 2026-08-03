@@ -24,3 +24,13 @@ export function formatDate(input: string | Date | null | undefined): string {
     minute: "2-digit",
   });
 }
+
+/** Format a number with compact notation (e.g., 1.2K, 3.4M). */
+export function formatCompact(value: number): string {
+  return new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(value);
+}
+
+/** Format a percentage value. */
+export function formatPercent(value: number, decimals = 1): string {
+  return `${value >= 0 ? "+" : ""}${value.toFixed(decimals)}%`;
+}

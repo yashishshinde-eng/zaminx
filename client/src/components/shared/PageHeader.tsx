@@ -14,7 +14,7 @@ export function PageHeader({ title, description, breadcrumbs, actions }: PageHea
       <div className="space-y-2">
         {breadcrumbs && breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
         <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">{title}</h1>
+          <h1 className="text-h1 text-2xl font-bold tracking-tight sm:text-3xl">{title}</h1>
           {description && <p className="mt-1 text-sm text-muted-foreground sm:text-base">{description}</p>}
         </div>
       </div>

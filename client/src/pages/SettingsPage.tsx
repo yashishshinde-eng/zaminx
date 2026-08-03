@@ -81,7 +81,7 @@ function ProfileHeader() {
   const { user } = useAuth();
   if (!user) return null;
   return (
-    <Card className="glass overflow-hidden">
+    <Card className="overflow-hidden border-0 shadow-card">
       <div className="brand-gradient h-1.5 w-full" />
       <CardContent className="flex flex-wrap items-center gap-4 p-5">
         <Avatar src={null} alt={user.name} fallback={user.name} size="lg" />

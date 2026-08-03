@@ -27,12 +27,12 @@ export function RecentActivityCard({ activity }: { activity: DashboardSummary["r
       </CardHeader>
       <CardContent className="flex-1">
         {activity.length > 0 ? (
-          <ul className="divide-y">
+          <ul className="divide-y divide-white/[0.06]">
             {activity.map((a) => {
               const { label, icon: Icon } = resolve(a.action);
               return (
                 <li key={a.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Icon className="size-4" />
                   </span>
                   <div className="min-w-0 flex-1">
@@ -45,7 +45,7 @@ export function RecentActivityCard({ activity }: { activity: DashboardSummary["r
           </ul>
         ) : (
           <div className="flex h-[200px] flex-col items-center justify-center text-center">
-            <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+            <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
               <History className="size-6" />
             </div>
             <p className="mt-3 text-sm font-medium">No activity yet</p>

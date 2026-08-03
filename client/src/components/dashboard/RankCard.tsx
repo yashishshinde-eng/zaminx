@@ -1,6 +1,6 @@
 import { Award } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { Progress } from "@/components/ui/progress";
 import type { DashboardSummary } from "@zaminex/shared";
 
 /** Current rank + progress to the next rank. Placeholder until Phase 10. */
@@ -30,12 +30,7 @@ export function RankCard({ rank }: { rank: DashboardSummary["account"]["rank"] }
               <span>Progress to {rank.nextRank}</span>
               <span className="tabular-nums">{pct}%</span>
             </div>
-            <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-muted">
-              <div
-                className={cn("h-full rounded-full bg-primary transition-all")}
-                style={{ width: `${pct}%` }}
-              />
-            </div>
+            <Progress value={pct} className="mt-1.5" />
           </div>
         )}
       </CardContent>

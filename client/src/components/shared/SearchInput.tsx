@@ -12,7 +12,7 @@ interface SearchInputProps {
 export function SearchInput({ value, onChange, placeholder = "Search…", className, icon: Icon = Search }: SearchInputProps) {
   return (
     <div className={`relative ${className ?? ""}`}>
-      <Icon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+      <Icon className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-primary/60" />
       <Input
         type="search"
         value={value}

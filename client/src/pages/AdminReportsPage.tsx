@@ -203,7 +203,7 @@ export function AdminReportsPage() {
         </div>
 
         {/* Filters */}
-        <Card>
+        <Card className="border-0">
           <CardContent className="flex flex-col gap-3 py-4 sm:flex-row sm:flex-wrap sm:items-end">
             <div className="space-y-1">
               <label className="text-xs text-muted-foreground">From</label>
@@ -219,7 +219,7 @@ export function AdminReportsPage() {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="h-9 w-[150px] rounded-md border border-input bg-background px-3 text-sm"
+                  className="glass-input h-9 w-[150px] px-3 text-sm"
                 >
                   <option value="">All</option>
                   {statuses.map((s) => (

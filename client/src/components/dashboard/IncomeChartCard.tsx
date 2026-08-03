@@ -33,28 +33,35 @@ export function IncomeChartCard({ income }: { income: DashboardSummary["income"]
         background: "transparent",
         fontFamily: "inherit",
       },
-      colors: [themeColor("primary", "hsl(222 47% 45%)")],
-      stroke: { curve: "smooth", width: 2 },
+      colors: [themeColor("primary", "hsl(45 100% 48%)")],
+      stroke: { curve: "smooth", width: 2.5 },
       dataLabels: { enabled: false },
-      grid: { borderColor: themeColor("border", "hsl(214 32% 91%)"), strokeDashArray: 4 },
+      grid: { borderColor: themeColor("border", "hsl(215 30% 16%)"), strokeDashArray: 4 },
       xaxis: {
         categories: seriesData.map((s) => s.date),
-        labels: { style: { colors: themeColor("muted-foreground", "#64748b") } },
+        labels: { style: { colors: themeColor("muted-foreground", "hsl(210 16% 55%)") } },
         axisBorder: { show: false },
         axisTicks: { show: false },
       },
       yaxis: {
         labels: {
-          style: { colors: themeColor("muted-foreground", "#64748b") },
+          style: { colors: themeColor("muted-foreground", "hsl(210 16% 55%)") },
           formatter: (v: number) => formatCurrency(v),
         },
       },
       fill: {
         type: "gradient",
-        gradient: { shadeIntensity: 1, opacityFrom: 0.35, opacityTo: 0.05, stops: [0, 100] },
+        gradient: {
+          shadeIntensity: 1,
+          opacityFrom: 0.4,
+          opacityTo: 0.02,
+          stops: [0, 100],
+          gradientToColors: [themeColor("primary", "hsl(45 100% 48%)")],
+        },
       },
       tooltip: {
-        theme: "light",
+        theme: "dark",
+        style: { fontSize: "12px" },
         y: { formatter: (v: number) => formatCurrency(v) },
       },
       responsive: [{ breakpoint: 640, options: { chart: { height: 220 } } }],
@@ -88,7 +95,7 @@ export function IncomeChartCard({ income }: { income: DashboardSummary["income"]
           <Chart options={options} series={series} type="area" height={260} />
         ) : (
           <div className="flex h-[260px] flex-col items-center justify-center text-center">
-            <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+            <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
               <TrendingUp className="size-6" />
             </div>
             <p className="mt-3 text-sm font-medium">No data yet</p>

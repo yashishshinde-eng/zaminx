@@ -19,11 +19,11 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
   ];
 
   return (
-    <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur-sm">
+    <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-background/85 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between gap-3">
         <Link to="/" className="flex items-center gap-2" aria-label={config.siteName}>
           <Logo className="size-9" />
-          <span className="text-lg font-bold tracking-tight">{config.siteName}</span>
+          <span className="text-lg font-bold tracking-tight text-gradient">{config.siteName}</span>
         </Link>
 
         {/* Desktop nav */}
@@ -35,7 +35,7 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
               end={link.href === "/"}
               className={({ isActive }) =>
                 cn(
-                  "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "rounded-[10px] px-3 py-2 text-sm font-medium transition-colors",
                   isActive ? "text-primary" : "text-foreground/70 hover:text-foreground",
                 )
               }
@@ -46,7 +46,7 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme">
+          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle theme" className="rounded-full">
             {theme === "dark" ? <Sun className="size-5" /> : <Moon className="size-5" />}
           </Button>
           <div className="hidden sm:flex sm:items-center sm:gap-2">
@@ -69,8 +69,8 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
       {/* Mobile drawer */}
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true">
-          <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
-          <div className="absolute right-0 top-0 h-full w-72 bg-background p-4 shadow-xl">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute right-0 top-0 h-full w-72 bg-background p-4 shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
               <span className="font-semibold">Menu</span>
               <Button variant="ghost" size="icon" onClick={() => setOpen(false)} aria-label="Close menu">
@@ -86,7 +86,7 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      "rounded-md px-3 py-2.5 text-sm font-medium",
+                      "rounded-[10px] px-3 py-2.5 text-sm font-medium",
                       isActive ? "bg-primary text-primary-foreground" : "hover:bg-accent",
                     )
                   }
@@ -94,7 +94,7 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
                   {link.label}
                 </NavLink>
               ))}
-              <hr className="my-2" />
+              <hr className="my-2 border-white/[0.06]" />
               <Button asChild variant="outline">
                 <Link to="/login" onClick={() => setOpen(false)}>Sign in</Link>
               </Button>

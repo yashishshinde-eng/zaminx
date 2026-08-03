@@ -32,13 +32,13 @@ export function ReferralLinkCard({ referral }: { referral: DashboardSummary["ref
       <CardContent className="flex flex-1 flex-col gap-4">
         <div>
           <p className="text-xs font-medium text-muted-foreground">Referral code</p>
-          <p className="mt-0.5 font-mono text-lg font-semibold tracking-wide">{referral.code}</p>
+          <p className="mt-0.5 font-mono text-lg font-semibold tracking-wide text-gradient-gold">{referral.code}</p>
         </div>
         <div className="flex-1">
           <p className="text-xs font-medium text-muted-foreground">Referral link</p>
           <div
             className={cn(
-              "mt-1 flex items-center gap-2 rounded-lg border bg-muted/30 p-2.5",
+              "glass-input mt-1 flex items-center gap-2 p-2.5",
             )}
           >
             <code className="min-w-0 flex-1 truncate text-xs">{referral.link}</code>

@@ -58,7 +58,7 @@ export function AdminSecurityPage() {
         ) : (
           <>
             {/* Maintenance */}
-            <Card>
+            <Card className="border-0">
               <CardHeader className="space-y-1">
                 <CardTitle className="flex items-center gap-2 text-base">
                   <ShieldAlert className="size-4 text-primary" /> Maintenance mode
@@ -93,7 +93,7 @@ export function AdminSecurityPage() {
             </Card>
 
             {/* Force logout all */}
-            <Card>
+            <Card className="border-0">
               <CardHeader className="space-y-1">
                 <CardTitle className="flex items-center gap-2 text-base">
                   <LogOut className="size-4 text-primary" /> Force logout all

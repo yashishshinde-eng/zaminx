@@ -161,7 +161,7 @@ export function WalletPage() {
                 <select
                   value={typeFilter}
                   onChange={(e) => setTypeFilter(e.target.value)}
-                  className="h-9 rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="glass-input h-9 px-3 text-sm"
                   aria-label="Filter by type"
                 >
                   {TX_TYPES.map((t) => (
@@ -221,7 +221,7 @@ function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefi
   }
 
   const cards: WalletCardDef[] = [
-    { label: "Main Wallet", icon: PiggyBank, balance: wallets.main, strip: "from-violet-500 to-indigo-500" },
+    { label: "Main Wallet", icon: PiggyBank, balance: wallets.main, strip: "from-[#F6B400] to-[#0D6EFD]" },
     { label: "Bonus Wallet", icon: Coins, balance: wallets.bonus, strip: "from-emerald-500 to-teal-500" },
     { label: "Trading Wallet", icon: TrendingUp, balance: wallets.trading, strip: "from-amber-500 to-orange-500" },
   ];
@@ -256,7 +256,7 @@ function WalletBalanceCard({ label, icon: Icon, balance, strip }: WalletCardDef)
   const availablePct = total > 0 ? Math.round((balance.available / total) * 100) : 100;
 
   return (
-    <Card className="card-hover relative overflow-hidden">
+    <Card className="card-hover overflow-hidden border-0">
       {/* Accent gradient strip */}
       <div className={cn("h-1 w-full bg-gradient-to-r", strip)} />
       <CardContent className="space-y-3 p-5">

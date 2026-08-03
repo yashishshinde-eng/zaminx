@@ -16,9 +16,9 @@ export default function App() {
             <Toaster
               position="top-right"
               toastOptions={{
-                className: "bg-card text-card-foreground border border-border rounded-md text-sm",
-                success: { iconTheme: { primary: "hsl(142 71% 45%)", secondary: "#fff" } },
-                error: { iconTheme: { primary: "hsl(0 84% 60%)", secondary: "#fff" } },
+                className: "bg-card text-card-foreground border border-white/[0.08] rounded-[14px] text-sm shadow-card backdrop-blur-xl",
+                success: { iconTheme: { primary: "hsl(153 100% 42%)", secondary: "#fff" } },
+                error: { iconTheme: { primary: "hsl(0 100% 65%)", secondary: "#fff" } },
               }}
             />
           </MotionProvider>

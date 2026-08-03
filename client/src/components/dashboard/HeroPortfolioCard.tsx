@@ -18,13 +18,9 @@ import toast from "react-hot-toast";
 import type { DashboardSummary } from "@zaminex/shared";
 
 /**
- * Blueprint section 1 — Hero Portfolio Card. The showpiece of the user
- * dashboard: a brand-gradient surface with floating particles, an animated
- * count-up portfolio balance, a today's-profit chip, package + rank chips, and
- * the Deposit / Withdraw / Invest / Refer quick actions. All figures come from
- * the real `DashboardSummary` (wallets + income series + package + rank).
- *
- * Floating particles are pure decoration and freeze for reduced-motion users.
+ * Hero Portfolio Card — the showpiece of the user dashboard.
+ * Features a gold-to-blue brand gradient, floating particles, animated count-up,
+ * and quick action buttons. All figures come from the real DashboardSummary.
  */
 export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
   const prefersReduced = useReducedMotion();
@@ -46,11 +42,13 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
   ];
 
   return (
-    <Card className="card-hover relative overflow-hidden border-0">
+    <Card className="card-hover card-shimmer relative overflow-hidden border-0">
       {/* Brand gradient base */}
       <div className="brand-gradient absolute inset-0" />
       {/* Soft radial sheen for depth */}
       <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_80%_0%,rgba(255,255,255,0.22),transparent_55%)]" />
+      {/* Subtle glass overlay */}
+      <div className="absolute inset-0 backdrop-blur-[1px]" />
 
       {/* Floating particles */}
       {particles.map((p, i) => (
@@ -90,7 +88,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
           {/* Quick actions */}
           <div className="flex flex-wrap gap-2">
             {actions.map((a) => (
-              <Button key={a.label} asChild size="sm" variant="outline" className="border-white/25 bg-white/10 text-primary-foreground hover:bg-white/20 hover:text-primary-foreground">
+              <Button key={a.label} asChild size="sm" variant="outline" className="border-white/25 bg-white/10 text-primary-foreground hover:bg-white/20 hover:text-primary-foreground backdrop-blur-sm">
                 <Link to={a.to}>
                   <a.icon className="size-4" /> {a.label}
                 </Link>
@@ -99,7 +97,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
             <Button
               size="sm"
               variant="outline"
-              className="border-white/25 bg-white/10 text-primary-foreground hover:bg-white/20 hover:text-primary-foreground"
+              className="border-white/25 bg-white/10 text-primary-foreground hover:bg-white/20 hover:text-primary-foreground backdrop-blur-sm"
               onClick={() => {
                 navigator.clipboard.writeText(data.referral.link).then(
                   () => toast.success("Referral link copied"),

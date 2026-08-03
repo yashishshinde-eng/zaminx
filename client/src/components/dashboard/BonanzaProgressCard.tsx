@@ -16,10 +16,10 @@ export function BonanzaProgressCard({ data }: { data: DashboardSummary }) {
   const earned = useCountUp(data.income.bonanza, 1000);
 
   return (
-    <Card className="card-hover flex h-full flex-col overflow-hidden">
+    <Card className="card-hover card-shimmer flex h-full flex-col overflow-hidden border-0">
       <CardContent className="flex h-full flex-col p-5">
         <div className="flex items-center gap-3">
-          <div className="brand-gradient flex size-10 shrink-0 items-center justify-center rounded-lg text-primary-foreground shadow-sm">
+          <div className="brand-gradient flex size-10 shrink-0 items-center justify-center rounded-xl text-primary-foreground shadow-glow-gold">
             <Gift className="size-5" />
           </div>
           <div>

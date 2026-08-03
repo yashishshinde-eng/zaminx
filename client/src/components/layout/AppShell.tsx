@@ -4,12 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
+import { MobileBottomNav } from "./MobileBottomNav";
 import { VerifyEmailBanner } from "./VerifyEmailBanner";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { pageTransition } from "@/lib/motion";
 
 /**
- * Responsive app shell: collapsible sidebar on lg+, off-canvas drawer on mobile.
+ * Responsive app shell: collapsible sidebar on lg+, off-canvas drawer on
+ * mobile, and a floating bottom tab bar for quick navigation on small screens.
  * Touch targets are ≥44x44px and the layout never produces horizontal scroll.
  * Page bodies animate in/out keyed by the current pathname.
  */
@@ -27,7 +29,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div className="flex h-full min-h-screen bg-background">
+    <div className="flex h-full min-h-screen bg-background bg-depth">
       {/* Desktop sidebar — width responds to collapse state */}
       <aside
         className={cn(
@@ -47,7 +49,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/60 backdrop-blur-md"
               onClick={() => setMobileOpen(false)}
             />
             <motion.aside
@@ -67,7 +69,8 @@ export function AppShell({ children }: { children: ReactNode }) {
       <div className="flex min-w-0 flex-1 flex-col">
         <Topbar onOpenSidebar={() => setMobileOpen(true)} />
         <VerifyEmailBanner />
-        <main className="flex-1 overflow-x-hidden p-4 sm:p-6">
+        {/* pb-28 on mobile gives room for the floating bottom nav (mb-3 + nav height ~80px + safe area) */}
+        <main className="flex-1 overflow-x-hidden p-4 pb-28 sm:p-6 lg:pb-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -81,6 +84,9 @@ export function AppShell({ children }: { children: ReactNode }) {
           </AnimatePresence>
         </main>
       </div>
+
+      {/* Floating bottom tab bar — mobile only */}
+      <MobileBottomNav onOpenMenu={() => setMobileOpen(true)} />
     </div>
   );
 }

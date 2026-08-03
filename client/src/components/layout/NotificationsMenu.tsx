@@ -28,7 +28,7 @@ export function NotificationsMenu() {
         >
           <Bell className="size-5" />
           {unread > 0 && (
-            <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-bold text-destructive-foreground">
+            <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full brand-gradient px-1 text-[10px] font-bold text-primary-foreground">
               {unread > 9 ? "9+" : unread}
             </span>
           )}

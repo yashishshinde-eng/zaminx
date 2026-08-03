@@ -112,7 +112,7 @@ export function AdminUsersPage() {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as "all" | UserStatus)}
-                  className="h-9 w-[150px] rounded-md border border-input bg-background px-3 text-sm"
+                  className="glass-input h-9 w-[150px] px-3 text-sm"
                 >
                   {STATUSES.map((s) => (
                     <option key={s} value={s}>
@@ -126,7 +126,7 @@ export function AdminUsersPage() {
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value as (typeof ROLES)[number])}
-                  className="h-9 w-[140px] rounded-md border border-input bg-background px-3 text-sm"
+                  className="glass-input h-9 w-[140px] px-3 text-sm"
                 >
                   {ROLES.map((r) => (
                     <option key={r} value={r}>

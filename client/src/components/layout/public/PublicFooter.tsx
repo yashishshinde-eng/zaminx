@@ -15,12 +15,12 @@ export function PublicFooter({ config }: { config: SiteConfig }) {
   const { contactDetails, socialLinks, navLinks, footerText, siteName } = config;
 
   return (
-    <footer className="border-t bg-card">
+    <footer className="border-t border-white/[0.06] bg-card/50">
       <div className="container grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-3">
           <Link to="/" className="flex items-center gap-2">
             <Logo className="size-8" />
-            <span className="text-lg font-bold">{siteName}</span>
+            <span className="text-lg font-bold text-gradient">{siteName}</span>
           </Link>
           <p className="text-sm text-muted-foreground">{config.tagline}</p>
         </div>
@@ -30,7 +30,7 @@ export function PublicFooter({ config }: { config: SiteConfig }) {
           <ul className="space-y-2 text-sm text-muted-foreground">
             {navLinks.map((l) => (
               <li key={l.href}>
-                <Link to={l.href} className="hover:text-foreground">
+                <Link to={l.href} className="hover:text-primary transition-colors">
                   {l.label}
                 </Link>
               </li>
@@ -44,7 +44,7 @@ export function PublicFooter({ config }: { config: SiteConfig }) {
             {contactDetails.email && (
               <li className="flex items-center gap-2">
                 <Mail className="size-4 shrink-0" />
-                <a href={`mailto:${contactDetails.email}`} className="hover:text-foreground">{contactDetails.email}</a>
+                <a href={`mailto:${contactDetails.email}`} className="hover:text-primary transition-colors">{contactDetails.email}</a>
               </li>
             )}
             {contactDetails.phone && (
@@ -76,7 +76,7 @@ export function PublicFooter({ config }: { config: SiteConfig }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={key}
-                    className="flex size-10 items-center justify-center rounded-md border text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    className="flex size-10 items-center justify-center rounded-[14px] border border-white/[0.08] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary hover:border-primary/30"
                   >
                     <Icon className="size-4" />
                   </a>
@@ -86,12 +86,12 @@ export function PublicFooter({ config }: { config: SiteConfig }) {
         </div>
       </div>
 
-      <div className="border-t py-6">
+      <div className="border-t border-white/[0.06] py-6">
         <div className="container flex flex-col items-center justify-between gap-2 text-sm text-muted-foreground sm:flex-row">
           <p>{footerText ?? `© ${new Date().getFullYear()} ${siteName}.`}</p>
           <div className="flex gap-4">
-            <Link to="/terms" className="hover:text-foreground">Terms</Link>
-            <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
+            <Link to="/terms" className="hover:text-primary transition-colors">Terms</Link>
+            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy</Link>
           </div>
         </div>
       </div>

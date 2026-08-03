@@ -17,14 +17,14 @@ interface StatCardProps {
 /** Compact metric tile reused across the dashboard (income + wallet tiles). */
 export function StatCard({ icon: Icon, label, value, subtitle, accent, gradient, className }: StatCardProps) {
   return (
-    <Card className={cn("card-hover overflow-hidden", className)}>
+    <Card className={cn("card-hover card-shimmer overflow-hidden border-0", className)}>
       <CardContent className="p-4 sm:p-5">
         <div className="flex items-center gap-3">
           <div
             className={cn(
-              "flex size-10 shrink-0 items-center justify-center rounded-lg shadow-sm",
+              "flex size-10 shrink-0 items-center justify-center rounded-xl",
               gradient
-                ? "brand-gradient text-primary-foreground"
+                ? "brand-gradient text-primary-foreground shadow-glow-gold"
                 : accent ?? "bg-primary/10 text-primary",
             )}
           >

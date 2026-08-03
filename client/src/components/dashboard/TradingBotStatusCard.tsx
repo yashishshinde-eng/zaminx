@@ -18,11 +18,11 @@ export function TradingBotStatusCard({ data }: { data: DashboardSummary }) {
   const series = data.income.series.map((s) => s.value);
 
   return (
-    <Card className="card-hover flex h-full flex-col overflow-hidden">
+    <Card className="card-hover card-shimmer flex h-full flex-col overflow-hidden border-0">
       <CardContent className="flex h-full flex-col p-5">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="brand-gradient flex size-10 shrink-0 items-center justify-center rounded-lg text-primary-foreground shadow-sm">
+            <div className="brand-gradient flex size-10 shrink-0 items-center justify-center rounded-xl text-primary-foreground shadow-glow-gold">
               <Bot className="size-5" />
             </div>
             <div>

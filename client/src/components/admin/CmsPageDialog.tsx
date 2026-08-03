@@ -136,7 +136,7 @@ export function CmsPageDialog({ open, mode, slug, onClose }: CmsPageDialogProps)
                     id="cms-status"
                     value={status}
                     onChange={(e) => setStatus(e.target.value as "published" | "draft")}
-                    className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
+                    className="glass-input h-9 w-full px-3 text-sm"
                   >
                     <option value="draft">Draft</option>
                     <option value="published">Published</option>
@@ -248,7 +248,7 @@ function BlockEditor({ blocks, onChange }: { blocks: ContentBlock[]; onChange: (
             id="add-block"
             value={addType}
             onChange={(e) => setAddType(e.target.value as BlockType)}
-            className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
+            className="glass-input h-9 w-full px-3 text-sm"
           >
             {BLOCK_TYPES.map((t) => (
               <option key={t} value={t} className="capitalize">
@@ -286,7 +286,7 @@ function BlockFields({ block, onChange }: { block: ContentBlock; onChange: (patc
           <select
             value={block.level}
             onChange={(e) => onChange({ level: Number(e.target.value) as 1 | 2 | 3 })}
-            className="h-9 rounded-md border border-input bg-background px-3 text-sm"
+            className="glass-input h-9 px-3 text-sm"
           >
             <option value={1}>H1</option>
             <option value={2}>H2</option>

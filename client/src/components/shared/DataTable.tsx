@@ -47,10 +47,10 @@ export function DataTable<T>({
   const alignClass = (a?: string) => (a === "right" ? "text-right" : a === "center" ? "text-center" : "text-left");
 
   return (
-    <div className={cn("w-full overflow-hidden rounded-lg border bg-card", className)}>
+    <div className={cn("glass-card card-shimmer relative overflow-hidden w-full", className)}>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="border-b bg-muted/40">
+          <thead className="border-b border-white/[0.06] bg-white/[0.02]">
             <tr>
               {columns.map((col) => (
                 <th key={col.key} className={cn("px-4 py-3 font-semibold text-muted-foreground", alignClass(col.align), col.className)}>
@@ -62,7 +62,7 @@ export function DataTable<T>({
           <tbody>
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
-                <tr key={`skel-${i}`} className="border-b last:border-0">
+                <tr key={`skel-${i}`} className="border-b border-white/[0.04] last:border-0">
                   {columns.map((col) => (
                     <td key={col.key} className={cn("px-4 py-3", alignClass(col.align))}>
                       <Skeleton className="h-5 w-full max-w-[160px]" />
@@ -84,7 +84,7 @@ export function DataTable<T>({
               </tr>
             ) : (
               data.map((row) => (
-                <tr key={rowKey(row)} className="border-b last:border-0 hover:bg-muted/30 transition-colors">
+                <tr key={rowKey(row)} className="border-b border-white/[0.04] last:border-0 hover:bg-white/[0.02] transition-colors">
                   {columns.map((col) => (
                     <td key={col.key} className={cn("px-4 py-3", alignClass(col.align), col.className)}>
                       {col.cell(row)}
@@ -97,7 +97,7 @@ export function DataTable<T>({
         </table>
       </div>
       {onPageChange && (
-        <div className="flex items-center justify-between gap-4 border-t px-4 py-3">
+        <div className="flex items-center justify-between gap-4 border-t border-white/[0.06] px-4 py-3">
           <p className="text-xs text-muted-foreground">
             Page {page} of {pageCount}
           </p>

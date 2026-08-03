@@ -23,7 +23,7 @@ export function AnnouncementBar({ bar }: { bar: SiteConfig["announcementBar"] })
   };
 
   return (
-    <div className="relative bg-primary px-4 py-2 text-center text-sm text-primary-foreground">
+    <div className="relative brand-gradient px-4 py-2 text-center text-sm text-primary-foreground">
       <span>
         {bar.message}
         {bar.link && bar.linkLabel && (

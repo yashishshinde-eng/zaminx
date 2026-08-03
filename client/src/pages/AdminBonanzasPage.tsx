@@ -241,7 +241,7 @@ function BonanzaDialog({ open, initial, onClose }: { open: boolean; initial: Bon
             id="b-status"
             value={status}
             onChange={(e) => setStatus(e.target.value as BonanzaStatus)}
-            className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
+            className="glass-input h-9 w-full px-3 text-sm"
           >
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>

@@ -37,11 +37,11 @@ export function KpiCard({ icon: Icon, label, value, series, trend, format = "cur
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay }}
     >
-      <Card className={cn("card-hover overflow-hidden", className)}>
+      <Card className={cn("card-hover card-shimmer overflow-hidden border-0", className)}>
         <div className="p-4 sm:p-5">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="brand-gradient flex size-10 shrink-0 items-center justify-center rounded-lg text-primary-foreground shadow-sm">
+              <div className="brand-gradient flex size-10 shrink-0 items-center justify-center rounded-xl text-primary-foreground shadow-glow-gold">
                 <Icon className="size-5" />
               </div>
               <p className="truncate text-xs font-medium text-muted-foreground">{label}</p>

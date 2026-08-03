@@ -19,10 +19,10 @@ export function NotificationsCard({ notifications }: { notifications: DashboardS
       </CardHeader>
       <CardContent className="flex-1">
         {notifications.items.length > 0 ? (
-          <ul className="divide-y">
+          <ul className="divide-y divide-white/[0.06]">
             {notifications.items.map((n) => (
               <li key={n.id} className="flex items-start gap-3 py-3 first:pt-0 last:pb-0">
-                <span className="mt-1.5 size-2 shrink-0 rounded-full bg-primary" />
+                <span className="mt-1.5 size-2 shrink-0 rounded-full bg-primary shadow-glow-gold" />
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium leading-snug">{n.title}</p>
                   <p className="text-xs text-muted-foreground">{formatRelative(n.createdAt)}</p>
@@ -32,7 +32,7 @@ export function NotificationsCard({ notifications }: { notifications: DashboardS
           </ul>
         ) : (
           <div className="flex h-[200px] flex-col items-center justify-center text-center">
-            <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+            <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
               <Bell className="size-6" />
             </div>
             <p className="mt-3 text-sm font-medium">No notifications yet</p>

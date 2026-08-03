@@ -122,7 +122,7 @@ export function AdminUserDetailPage() {
 
 function ProfileCard({ user }: { user: AdminUserDetail }) {
   return (
-    <Card className="glass overflow-hidden">
+    <Card className="border-0 glass overflow-hidden">
       {/* Brand-gradient header strip with avatar + identity + status chips */}
       <div className="relative overflow-hidden">
         <div className="brand-gradient absolute inset-0 opacity-90" />
@@ -136,10 +136,10 @@ function ProfileCard({ user }: { user: AdminUserDetail }) {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             {userStatusBadge(user.status)}
-            <Badge variant={user.isEmailVerified ? "success" : "secondary"} className="bg-white/20 text-primary-foreground">
+            <Badge variant={user.isEmailVerified ? "success" : "secondary"} className="bg-primary/20 text-primary-foreground">
               {user.isEmailVerified ? "Verified" : "Unverified"}
             </Badge>
-            <Badge variant="secondary" className="bg-white/20 capitalize text-primary-foreground">
+            <Badge variant="secondary" className="bg-primary/20 capitalize text-primary-foreground">
               {user.role}
             </Badge>
           </div>
@@ -203,7 +203,7 @@ function WalletsCard({ user }: { user: AdminUserDetail }) {
     { name: "Bonus", available: w.bonus.available, onHold: w.bonus.onHold },
   ];
   return (
-    <Card>
+    <Card className="border-0">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
           <Wallet className="size-4 text-primary" /> Wallet balances
@@ -263,7 +263,7 @@ function WalletAdjustCard({ userId }: { userId: string }) {
   }
 
   return (
-    <Card>
+    <Card className="border-0">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
           <Banknote className="size-4 text-primary" /> Adjust wallet
@@ -276,7 +276,7 @@ function WalletAdjustCard({ userId }: { userId: string }) {
             <Label htmlFor="adjWallet" className="text-xs text-muted-foreground">
               Wallet
             </Label>
-            <select id="adjWallet" value={wallet} onChange={(e) => setWallet(e.target.value as "main" | "bonus" | "trading")} className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
+            <select id="adjWallet" value={wallet} onChange={(e) => setWallet(e.target.value as "main" | "bonus" | "trading")} className="glass-input h-9 w-full px-3 text-sm">
               <option value="main">Main</option>
               <option value="trading">Trading</option>
               <option value="bonus">Bonus</option>
@@ -286,7 +286,7 @@ function WalletAdjustCard({ userId }: { userId: string }) {
             <Label htmlFor="adjField" className="text-xs text-muted-foreground">
               Field
             </Label>
-            <select id="adjField" value={field} onChange={(e) => setField(e.target.value as "available" | "onHold")} className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
+            <select id="adjField" value={field} onChange={(e) => setField(e.target.value as "available" | "onHold")} className="glass-input h-9 w-full px-3 text-sm">
               <option value="available">Available</option>
               <option value="onHold">On hold</option>
             </select>
@@ -299,7 +299,7 @@ function WalletAdjustCard({ userId }: { userId: string }) {
               id="adjDirection"
               value={direction}
               onChange={(e) => setDirection(e.target.value as "credit" | "debit")}
-              className={cn("h-9 w-full rounded-md border border-input bg-background px-3 text-sm", isDebit && "border-destructive/40")}
+              className={cn("glass-input h-9 w-full px-3 text-sm", isDebit && "border-destructive/40")}
             >
               <option value="credit">Credit (+)</option>
               <option value="debit">Debit (−)</option>
@@ -351,7 +351,7 @@ function WalletAdjustCard({ userId }: { userId: string }) {
 
 function PackageCard({ user }: { user: AdminUserDetail }) {
   return (
-    <Card>
+    <Card className="border-0">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
           <PackageIcon className="size-4 text-primary" /> Active package
@@ -384,7 +384,7 @@ const activityColumns: Column<AdminUserActivityRow>[] = [
 
 function ActivityCard({ activity, onRetry }: { activity: AdminUserActivityRow[]; onRetry: () => void }) {
   return (
-    <Card>
+    <Card className="border-0">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
           <ActivityIcon className="size-4 text-primary" /> Recent activity
@@ -425,7 +425,7 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
   const statusChanged = status !== currentStatus;
 
   return (
-    <Card className="glass">
+    <Card className="border-0 glass">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
           <ShieldCheck className="size-4 text-primary" /> Manage user
@@ -440,7 +440,7 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
             id="status"
             value={status}
             onChange={(e) => setStatus(e.target.value as UserStatus)}
-            className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
+            className="glass-input h-9 w-full px-3 text-sm"
           >
             {STATUSES.map((s) => (
               <option key={s} value={s} className="capitalize">

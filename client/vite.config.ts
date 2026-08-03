@@ -7,8 +7,13 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@shared": path.resolve(__dirname, "../shared/src"),
+      "@zaminex/shared": path.resolve(__dirname, "../shared/src/index.ts"),
+      "@zaminex/shared/schemas": path.resolve(__dirname, "../shared/src/schemas/index.ts"),
+      "@zaminex/shared/types": path.resolve(__dirname, "../shared/src/types/index.ts"),
     },
+  },
+  optimizeDeps: {
+    exclude: ["@zaminex/shared"],
   },
   server: {
     port: 5173,

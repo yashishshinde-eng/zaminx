@@ -31,7 +31,7 @@ export function PublicLayout() {
 
   return (
     <MaintenanceGate config={config}>
-      <div className="flex min-h-screen flex-col bg-background">
+      <div className="flex min-h-screen flex-col bg-background bg-depth">
         <AnnouncementBar bar={config.announcementBar} />
         <PublicHeader config={config} />
         <main className="flex-1">

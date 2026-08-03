@@ -71,7 +71,7 @@ export function AdminSmtpSettingsPage() {
           <Skeleton className="h-64 w-full" />
         ) : (
           <>
-            <Card>
+            <Card className="border-0">
               <CardHeader className="space-y-1">
                 <CardTitle className="flex items-center gap-2 text-base">
                   <Mail className="size-4 text-primary" /> SMTP server
@@ -116,7 +116,7 @@ export function AdminSmtpSettingsPage() {
             </Card>
 
             {/* Test email */}
-            <Card>
+            <Card className="border-0">
               <CardHeader className="space-y-1">
                 <CardTitle className="flex items-center gap-2 text-base">
                   <Send className="size-4 text-primary" /> Send test email

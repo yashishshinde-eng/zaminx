@@ -29,17 +29,18 @@ export function Dialog({ open, onClose, children, className, labelledBy }: Dialo
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby={labelledBy}>
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+      {/* Backdrop with dramatic blur */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div
         className={cn(
-          "relative z-10 w-full max-w-lg rounded-lg border bg-card p-6 shadow-lg animate-in",
+          "glass-card relative z-10 w-full max-w-lg p-6 animate-in",
           className,
         )}
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 rounded-md p-1 text-muted-foreground hover:bg-accent hover:text-foreground"
+          className="absolute right-4 top-4 rounded-[10px] p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
         >
           <X className="size-4" />
         </button>

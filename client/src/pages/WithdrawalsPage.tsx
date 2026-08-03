@@ -179,7 +179,7 @@ export function WithdrawalsPage() {
                 <select
                   id="wallet"
                   {...register("wallet")}
-                  className="h-10 w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="glass-input h-10 w-full px-3 text-sm"
                 >
                   <option value="main">Main</option>
                   <option value="bonus">Bonus</option>
