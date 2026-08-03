@@ -26,7 +26,7 @@ export function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginBody>({ resolver: zodResolver(loginSchema) });
+  } = useForm<LoginBody>({ resolver: zodResolver(loginSchema.shape.body) });
 
   const onSubmit = async (values: LoginBody) => {
     setSubmitting(true);

@@ -12,7 +12,7 @@ import {
   smtpTestEmailSchema,
   nowpaymentsSettingsSchema,
   maintenanceSettingsSchema,
-} from "../schemas/cms.schema";
+} from "../schemas/cms.schema.js";
 
 /** A single CMS content block. */
 export type ContentBlock = z.infer<typeof contentBlockSchema>;

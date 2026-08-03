@@ -38,7 +38,13 @@ const envSchema = z.object({
 
   // In-process scheduler (Phase 18). Disable to run a worker that shouldn't fire
   // jobs (e.g. a dedicated API-only instance) while the schema keeps compiling.
+  // On Vercel this is false (Vercel Cron owns scheduling via /api/cron/tick).
   CRON_ENABLED: z.coerce.boolean().default(true),
+
+  // Shared secret that gates the /api/cron/tick Vercel-Cron endpoint. Optional:
+  // when unset the cron handler falls back to Vercel's `vercel-cron` user-agent
+  // marker. Set on Vercel and mirror it into the cron `path` query string.
+  CRON_SECRET: z.string().optional(),
 
   // Trust the first N proxy hops for `req.ip` / X-Forwarded-For (Phase 19).
   // 0 = trust none (default; dev/standalone). Set to 1+ behind a reverse proxy

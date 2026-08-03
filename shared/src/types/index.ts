@@ -8,14 +8,14 @@ import {
   changePasswordSchema,
   verifyEmailSchema,
   resendVerificationSchema,
-} from "../schemas/auth.schema";
+} from "../schemas/auth.schema.js";
 import {
   updateProfileSchema,
   updateWalletAddressesSchema,
   updateThemeSchema,
   updateNotificationPreferenceSchema,
-} from "../schemas/profile.schema";
-import { activatePackageSchema } from "../schemas/package.schema";
+} from "../schemas/profile.schema.js";
+import { activatePackageSchema } from "../schemas/package.schema.js";
 import type { WalletBalances } from "./wallet";
 
 /** Role attached to an authenticated request. */
@@ -106,13 +106,13 @@ export type UpdateWalletAddressesBody = z.infer<typeof updateWalletAddressesSche
 export type UpdateThemeBody = z.infer<typeof updateThemeSchema>["body"];
 export type UpdateNotificationPreferenceBody = z.infer<typeof updateNotificationPreferenceSchema>["body"];
 export type ActivatePackageBody = z.infer<typeof activatePackageSchema>["body"];
-export * from "./cms";
-export * from "./dashboard";
-export * from "./package";
-export * from "./deposit";
-export * from "./wallet";
-export * from "./withdrawal";
-export * from "./referral";
-export * from "./compensation";
-export * from "./report";
-export * from "./adminLogs";
+export * from "./cms.js";
+export * from "./dashboard.js";
+export * from "./package.js";
+export * from "./deposit.js";
+export * from "./wallet.js";
+export * from "./withdrawal.js";
+export * from "./referral.js";
+export * from "./compensation.js";
+export * from "./report.js";
+export * from "./adminLogs.js";

@@ -110,3 +110,72 @@
     }
   }
 }
+
+/*
+ * Brand gradient tokens (violet → indigo → fuchsia). Used by the dashboard hero,
+ * sidebar brand tile, KPI accent tiles, and the onboarding progress. Defined as
+ * raw CSS gradients (Tailwind has no first-class gradient utility for >2 stops
+ * that we need here) and surfaced as component classes below.
+ */
+:root {
+  --brand-grad-from: 250 84% 54%;
+  --brand-grad-via: 262 83% 58%;
+  --brand-grad-to: 293 84% 61%;
+}
+.dark {
+  --brand-grad-from: 250 84% 66%;
+  --brand-grad-via: 262 83% 68%;
+  --brand-grad-to: 293 84% 70%;
+}
+
+@layer components {
+  /* Frosted-glass surface — sidebar, topbar, floating menus. */
+  .glass {
+    @apply border border-border/60 bg-card/70 backdrop-blur-xl;
+  }
+
+  /* Violet brand gradient as a background or fill. */
+  .brand-gradient {
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--brand-grad-from)) 0%,
+      hsl(var(--brand-grad-via)) 50%,
+      hsl(var(--brand-grad-to)) 100%
+    );
+  }
+
+  /* Violet gradient clipped to text — used for wordmarks and hero numbers. */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--brand-grad-from)) 0%,
+      hsl(var(--brand-grad-via)) 50%,
+      hsl(var(--brand-grad-to)) 100%
+    );
+  }
+
+  /* Interactive card lift: subtle translate + ring on hover. */
+  .card-hover {
+    @apply transition-all duration-200 ease-out;
+  }
+  .card-hover:hover {
+    @apply -translate-y-1 shadow-lg ring-1 ring-primary/20;
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar — thin, theme-aware, used in sidebar + dropdowns. */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+}

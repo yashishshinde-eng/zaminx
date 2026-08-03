@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build --workspace shared && npm run build --workspace client",
+  "outputDirectory": "client/dist",
+  "framework": null,
+  "functions": {
+    "api/[...slug].ts": { "maxDuration": 30, "memory": 512 },
+    "api/cron/tick.ts": { "maxDuration": 60, "memory": 1024 }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/[...slug]?...slug=$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "crons": [{ "path": "/api/cron/tick", "schedule": "3 0 * * *" }]
+}

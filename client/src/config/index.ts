@@ -4,6 +4,8 @@ export const STORAGE_KEYS = {
   accessToken: "zaminex.at",
   refreshToken: "zaminex.rt",
   theme: "zaminex.theme",
+  sidebarCollapsed: "zaminex.sidebar.collapsed",
+  onboardingDismissed: "zaminex.onboarding.dismissed",
 } as const;
 
 /** Centralised TanStack Query key factory. */

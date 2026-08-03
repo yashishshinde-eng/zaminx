@@ -1,6 +1,24 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ShieldCheck, MailCheck, LogOut, KeyRound } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  ShieldCheck,
+  MailCheck,
+  LogOut,
+  KeyRound,
+  Wallet,
+  Lock,
+  Banknote,
+  Phone,
+  Calendar,
+  Hash,
+  Users,
+  Package as PackageIcon,
+  Activity as ActivityIcon,
+  Bell,
+  Gift,
+} from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, type Column } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,9 +27,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar } from "@/components/ui/avatar";
 import { ConfirmModal } from "@/components/ui/dialog";
-import { formatCurrency, formatDate } from "@/lib/utils";
-import { useAdminUserDetail, useSetUserStatus, useVerifyUserEmail, useForceLogout, useAdminResetPassword, useAdjustUserWallet } from "@/hooks/useAdmin";
+import { StatCard } from "@/components/dashboard";
+import { staggerContainer, staggerItem } from "@/lib/motion";
+import { cn, formatCurrency, formatDate } from "@/lib/utils";
+import {
+  useAdminUserDetail,
+  useSetUserStatus,
+  useVerifyUserEmail,
+  useForceLogout,
+  useAdminResetPassword,
+  useAdjustUserWallet,
+} from "@/hooks/useAdmin";
 import { userStatusBadge } from "@/pages/AdminUsersPage";
 import type { AdminUserActivityRow, AdminUserDetail, UserStatus } from "@zaminex/shared";
 
@@ -57,21 +85,33 @@ export function AdminUserDetailPage() {
         breadcrumbs={[{ label: "Admin", to: "/app/admin" }, { label: "Users", to: "/app/admin/users" }, { label: user.name }]}
       />
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-3">
+      <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="mt-6 grid gap-6 lg:grid-cols-3">
         {/* Profile + wallets + package (spans 2) */}
         <div className="space-y-6 lg:col-span-2">
-          <ProfileCard user={user} />
-          <WalletsCard user={user} />
-          <WalletAdjustCard userId={user.id} />
-          <PackageCard user={user} />
-          <ActivityCard activity={user.recentActivity} onRetry={refetch} />
+          <motion.div variants={staggerItem}>
+            <ProfileCard user={user} />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <WalletsCard user={user} />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <WalletAdjustCard userId={user.id} />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <PackageCard user={user} />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <ActivityCard activity={user.recentActivity} onRetry={refetch} />
+          </motion.div>
         </div>
 
         {/* Action panel */}
         <div className="space-y-6">
-          <ActionsPanel userId={user.id} currentStatus={user.status} isEmailVerified={user.isEmailVerified} />
+          <motion.div variants={staggerItem}>
+            <ActionsPanel userId={user.id} currentStatus={user.status} isEmailVerified={user.isEmailVerified} />
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </AppShell>
   );
 }
@@ -82,23 +122,49 @@ export function AdminUserDetailPage() {
 
 function ProfileCard({ user }: { user: AdminUserDetail }) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-base">Profile</CardTitle>
-      </CardHeader>
-      <CardContent className="grid gap-4 sm:grid-cols-2">
-        <Field label="User ID" value={<span className="font-mono text-xs">{user.id}</span>} />
-        <Field label="Status" value={userStatusBadge(user.status)} />
-        <Field label="Role" value={<span className="capitalize">{user.role}</span>} />
-        <Field label="Email verified" value={user.isEmailVerified ? <Badge variant="success">Yes</Badge> : <Badge variant="secondary">No</Badge>} />
-        <Field label="Referral code" value={<span className="font-mono text-xs">{user.referralCode}</span>} />
-        <Field label="Referred by" value={user.referredBy ? <span className="font-mono text-xs">{user.referredBy}</span> : "—"} />
-        <Field label="Phone" value={user.phone ?? "—"} />
-        <Field label="Direct referrals" value={String(user.directCount)} />
-        <Field label="Wallet address (USDT-BEP20)" value={user.walletAddresses.usdtBep20 ? <span className="font-mono text-xs">{user.walletAddresses.usdtBep20}</span> : "—"} />
-        <Field label="Joined" value={formatDate(user.joinedAt)} />
-        <Field label="Last login" value={formatDate(user.lastLoginAt)} />
+    <Card className="glass overflow-hidden">
+      {/* Brand-gradient header strip with avatar + identity + status chips */}
+      <div className="relative overflow-hidden">
+        <div className="brand-gradient absolute inset-0 opacity-90" />
+        <div className="relative flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4">
+            <Avatar alt={user.name} fallback={user.name} size="lg" className="ring-2 ring-white/40" />
+            <div className="min-w-0">
+              <h2 className="truncate text-lg font-bold text-primary-foreground">{user.name}</h2>
+              <p className="truncate font-mono text-xs text-primary-foreground/80">{user.email}</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {userStatusBadge(user.status)}
+            <Badge variant={user.isEmailVerified ? "success" : "secondary"} className="bg-white/20 text-primary-foreground">
+              {user.isEmailVerified ? "Verified" : "Unverified"}
+            </Badge>
+            <Badge variant="secondary" className="bg-white/20 capitalize text-primary-foreground">
+              {user.role}
+            </Badge>
+          </div>
+        </div>
+      </div>
+
+      <CardContent className="grid gap-x-6 gap-y-4 p-5 sm:grid-cols-2">
+        <Field icon={Hash} label="User ID" value={<span className="font-mono text-xs">{user.id}</span>} />
+        <Field icon={Gift} label="Referral code" value={<span className="font-mono text-xs">{user.referralCode}</span>} />
         <Field
+          icon={Users}
+          label="Referred by"
+          value={user.referredBy ? <span className="font-mono text-xs">{user.referredBy}</span> : "—"}
+        />
+        <Field icon={Users} label="Direct referrals" value={String(user.directCount)} />
+        <Field icon={Phone} label="Phone" value={user.phone ?? "—"} />
+        <Field
+          icon={Wallet}
+          label="Wallet (USDT-BEP20)"
+          value={user.walletAddresses.usdtBep20 ? <span className="font-mono text-xs">{user.walletAddresses.usdtBep20}</span> : "—"}
+        />
+        <Field icon={Calendar} label="Joined" value={formatDate(user.joinedAt)} />
+        <Field icon={Calendar} label="Last login" value={formatDate(user.lastLoginAt)} />
+        <Field
+          icon={Bell}
           label="Notifications"
           value={
             <span className="text-xs">
@@ -111,11 +177,16 @@ function ProfileCard({ user }: { user: AdminUserDetail }) {
   );
 }
 
-function Field({ label, value }: { label: string; value: React.ReactNode }) {
+function Field({ icon: Icon, label, value }: { icon: typeof Hash; label: string; value: React.ReactNode }) {
   return (
-    <div className="space-y-1">
-      <p className="text-xs text-muted-foreground">{label}</p>
-      <div className="text-sm">{value}</div>
+    <div className="flex items-start gap-2.5">
+      <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+        <Icon className="size-3.5" />
+      </div>
+      <div className="min-w-0 space-y-0.5">
+        <p className="text-xs text-muted-foreground">{label}</p>
+        <div className="text-sm">{value}</div>
+      </div>
     </div>
   );
 }
@@ -133,14 +204,16 @@ function WalletsCard({ user }: { user: AdminUserDetail }) {
   ];
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-base">Wallet balances</CardTitle>
+      <CardHeader className="space-y-1">
+        <CardTitle className="flex items-center gap-2 text-base">
+          <Wallet className="size-4 text-primary" /> Wallet balances
+        </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3">
-        <div className="grid grid-cols-3 gap-3">
-          <Stat label="Total available" value={formatCurrency(w.totalAvailable)} />
-          <Stat label="Total on hold" value={formatCurrency(w.totalOnHold)} />
-          <Stat label="Total" value={formatCurrency(w.total)} />
+      <CardContent className="space-y-4">
+        <div className="grid gap-4 sm:grid-cols-3">
+          <StatCard icon={Banknote} label="Total available" value={formatCurrency(w.totalAvailable)} gradient />
+          <StatCard icon={Lock} label="Total on hold" value={formatCurrency(w.totalOnHold)} accent="bg-warning/15 text-warning" />
+          <StatCard icon={Wallet} label="Total" value={formatCurrency(w.total)} accent="bg-primary/10 text-primary" />
         </div>
         <div className="overflow-hidden rounded-lg border">
           <table className="w-full text-sm">
@@ -153,10 +226,10 @@ function WalletsCard({ user }: { user: AdminUserDetail }) {
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.name} className="border-b last:border-0">
-                  <td className="px-4 py-2">{r.name}</td>
+                <tr key={r.name} className="border-b last:border-0 transition-colors hover:bg-muted/30">
+                  <td className="px-4 py-2 font-medium">{r.name}</td>
                   <td className="px-4 py-2 text-right tabular-nums">{formatCurrency(r.available)}</td>
-                  <td className="px-4 py-2 text-right tabular-nums">{formatCurrency(r.onHold)}</td>
+                  <td className="px-4 py-2 text-right tabular-nums text-muted-foreground">{formatCurrency(r.onHold)}</td>
                 </tr>
               ))}
             </tbody>
@@ -164,15 +237,6 @@ function WalletsCard({ user }: { user: AdminUserDetail }) {
         </div>
       </CardContent>
     </Card>
-  );
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-lg border p-3">
-      <p className="text-xs text-muted-foreground">{label}</p>
-      <p className="mt-1 text-lg font-bold tabular-nums">{value}</p>
-    </div>
   );
 }
 
@@ -201,13 +265,17 @@ function WalletAdjustCard({ userId }: { userId: string }) {
   return (
     <Card>
       <CardHeader className="space-y-1">
-        <CardTitle className="text-base">Adjust wallet</CardTitle>
+        <CardTitle className="flex items-center gap-2 text-base">
+          <Banknote className="size-4 text-primary" /> Adjust wallet
+        </CardTitle>
         <CardDescription>Credit or debit a wallet balance field. Each adjustment is recorded as an immutable ledger row and audited.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid gap-3 sm:grid-cols-3">
           <div className="space-y-1">
-            <Label htmlFor="adjWallet" className="text-xs text-muted-foreground">Wallet</Label>
+            <Label htmlFor="adjWallet" className="text-xs text-muted-foreground">
+              Wallet
+            </Label>
             <select id="adjWallet" value={wallet} onChange={(e) => setWallet(e.target.value as "main" | "bonus" | "trading")} className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
               <option value="main">Main</option>
               <option value="trading">Trading</option>
@@ -215,15 +283,24 @@ function WalletAdjustCard({ userId }: { userId: string }) {
             </select>
           </div>
           <div className="space-y-1">
-            <Label htmlFor="adjField" className="text-xs text-muted-foreground">Field</Label>
+            <Label htmlFor="adjField" className="text-xs text-muted-foreground">
+              Field
+            </Label>
             <select id="adjField" value={field} onChange={(e) => setField(e.target.value as "available" | "onHold")} className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
               <option value="available">Available</option>
               <option value="onHold">On hold</option>
             </select>
           </div>
           <div className="space-y-1">
-            <Label htmlFor="adjDirection" className="text-xs text-muted-foreground">Direction</Label>
-            <select id="adjDirection" value={direction} onChange={(e) => setDirection(e.target.value as "credit" | "debit")} className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
+            <Label htmlFor="adjDirection" className="text-xs text-muted-foreground">
+              Direction
+            </Label>
+            <select
+              id="adjDirection"
+              value={direction}
+              onChange={(e) => setDirection(e.target.value as "credit" | "debit")}
+              className={cn("h-9 w-full rounded-md border border-input bg-background px-3 text-sm", isDebit && "border-destructive/40")}
+            >
               <option value="credit">Credit (+)</option>
               <option value="debit">Debit (−)</option>
             </select>
@@ -231,11 +308,15 @@ function WalletAdjustCard({ userId }: { userId: string }) {
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="space-y-1">
-            <Label htmlFor="adjAmount" className="text-xs text-muted-foreground">Amount (USDT)</Label>
+            <Label htmlFor="adjAmount" className="text-xs text-muted-foreground">
+              Amount (USDT)
+            </Label>
             <Input id="adjAmount" type="number" min="0" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="adjMemo" className="text-xs text-muted-foreground">Memo (optional)</Label>
+            <Label htmlFor="adjMemo" className="text-xs text-muted-foreground">
+              Memo (optional)
+            </Label>
             <Input id="adjMemo" value={memo} onChange={(e) => setMemo(e.target.value)} placeholder="Reason for adjustment" />
           </div>
         </div>
@@ -271,15 +352,17 @@ function WalletAdjustCard({ userId }: { userId: string }) {
 function PackageCard({ user }: { user: AdminUserDetail }) {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-base">Active package</CardTitle>
+      <CardHeader className="space-y-1">
+        <CardTitle className="flex items-center gap-2 text-base">
+          <PackageIcon className="size-4 text-primary" /> Active package
+        </CardTitle>
       </CardHeader>
       <CardContent>
         {user.activePackage ? (
           <div className="grid gap-4 sm:grid-cols-3">
-            <Field label="Package" value={user.activePackage.name} />
-            <Field label="Activated" value={formatDate(user.activePackage.activatedAt)} />
-            <Field label="Expires" value={formatDate(user.activePackage.expiresAt)} />
+            <Field icon={PackageIcon} label="Package" value={user.activePackage.name} />
+            <Field icon={Calendar} label="Activated" value={formatDate(user.activePackage.activatedAt)} />
+            <Field icon={Calendar} label="Expires" value={formatDate(user.activePackage.expiresAt)} />
           </div>
         ) : (
           <p className="text-sm text-muted-foreground">No active package.</p>
@@ -296,14 +379,16 @@ function PackageCard({ user }: { user: AdminUserDetail }) {
 const activityColumns: Column<AdminUserActivityRow>[] = [
   { key: "createdAt", header: "When", cell: (r) => formatDate(r.createdAt) },
   { key: "action", header: "Action", cell: (r) => <span className="font-mono text-xs">{r.action}</span> },
-  { key: "resource", header: "Resource", cell: (r) => (r.resource ?? "—") },
+  { key: "resource", header: "Resource", cell: (r) => r.resource ?? "—" },
 ];
 
 function ActivityCard({ activity, onRetry }: { activity: AdminUserActivityRow[]; onRetry: () => void }) {
   return (
     <Card>
       <CardHeader className="space-y-1">
-        <CardTitle className="text-base">Recent activity</CardTitle>
+        <CardTitle className="flex items-center gap-2 text-base">
+          <ActivityIcon className="size-4 text-primary" /> Recent activity
+        </CardTitle>
         <CardDescription>The 10 most recent audit-log entries for this user.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -340,7 +425,7 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
   const statusChanged = status !== currentStatus;
 
   return (
-    <Card>
+    <Card className="glass">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
           <ShieldCheck className="size-4 text-primary" /> Manage user
@@ -363,11 +448,7 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
               </option>
             ))}
           </select>
-          <Button
-            className="w-full"
-            disabled={!statusChanged || setStatusMut.isPending}
-            onClick={() => setConfirmStatus(true)}
-          >
+          <Button className="w-full" disabled={!statusChanged || setStatusMut.isPending} onClick={() => setConfirmStatus(true)}>
             {setStatusMut.isPending ? "Saving…" : "Save status"}
           </Button>
         </div>
@@ -375,12 +456,7 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
         {/* Verify email */}
         <div className="space-y-2">
           <Label>Email verification</Label>
-          <Button
-            variant="outline"
-            className="w-full"
-            disabled={isEmailVerified || verifyMut.isPending}
-            onClick={() => verifyMut.mutate()}
-          >
+          <Button variant="outline" className="w-full" disabled={isEmailVerified || verifyMut.isPending} onClick={() => verifyMut.mutate()}>
             <MailCheck className="size-4" /> {isEmailVerified ? "Already verified" : verifyMut.isPending ? "Verifying…" : "Mark email verified"}
           </Button>
         </div>
@@ -388,12 +464,7 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
         {/* Force logout */}
         <div className="space-y-2">
           <Label>Session</Label>
-          <Button
-            variant="outline"
-            className="w-full"
-            disabled={logoutMut.isPending}
-            onClick={() => setConfirmLogout(true)}
-          >
+          <Button variant="outline" className="w-full" disabled={logoutMut.isPending} onClick={() => setConfirmLogout(true)}>
             <LogOut className="size-4" /> {logoutMut.isPending ? "Ending…" : "Force logout"}
           </Button>
         </div>
@@ -409,12 +480,7 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="new-password"
           />
-          <Button
-            variant="destructive"
-            className="w-full"
-            disabled={password.length < 8 || resetMut.isPending}
-            onClick={() => setConfirmReset(true)}
-          >
+          <Button variant="destructive" className="w-full" disabled={password.length < 8 || resetMut.isPending} onClick={() => setConfirmReset(true)}>
             <KeyRound className="size-4" /> {resetMut.isPending ? "Resetting…" : "Reset password"}
           </Button>
           <p className="text-xs text-muted-foreground">Rehashes the password and ends all of the user's sessions.</p>
@@ -428,11 +494,7 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
           setStatusMut.mutate(status, { onSettled: () => setConfirmStatus(false) });
         }}
         title={`Set status to "${status}"?`}
-        description={
-          status === "active"
-            ? "The user will regain access."
-            : "The user will be signed out immediately and lose access."
-        }
+        description={status === "active" ? "The user will regain access." : "The user will be signed out immediately and lose access."}
         confirmLabel="Save"
         destructive={status !== "active"}
         loading={setStatusMut.isPending}

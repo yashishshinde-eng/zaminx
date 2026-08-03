@@ -24,7 +24,7 @@ export function ForgotPasswordPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ForgotPasswordBody>({ resolver: zodResolver(forgotPasswordSchema) });
+  } = useForm<ForgotPasswordBody>({ resolver: zodResolver(forgotPasswordSchema.shape.body) });
 
   const onSubmit = async (values: ForgotPasswordBody) => {
     setSubmitting(true);

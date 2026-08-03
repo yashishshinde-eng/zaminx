@@ -93,8 +93,8 @@ const navLink = z.object({ label: z.string().min(1), href: z.string().min(1) });
 export const siteConfigSchema = z.object({
   siteName: z.string().default("Zaminex"),
   tagline: z.string().optional(),
-  logoLight: z.string().optional(), // url or null (falls back to text logo)
-  logoDark: z.string().optional(),
+  logoLight: z.string().nullable().default(null), // url or null (falls back to text logo)
+  logoDark: z.string().nullable().default(null),
   navLinks: z.array(navLink).default([]),
   footerText: z.string().optional(),
   contactDetails: z
@@ -201,8 +201,8 @@ export const siteConfigUpdateSchema = z.object({
   body: z.object({
     siteName: z.string().optional(),
     tagline: z.string().optional(),
-    logoLight: z.string().optional(),
-    logoDark: z.string().optional(),
+    logoLight: z.string().nullable().optional(),
+    logoDark: z.string().nullable().optional(),
     navLinks: z.array(navLinkField).optional(),
     footerText: z.string().optional(),
     contactDetails: contactDetailsField.optional(),

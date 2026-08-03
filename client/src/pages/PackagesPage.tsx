@@ -1,5 +1,7 @@
+import { useMemo } from "react";
+import { Package as PackageIcon } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
-import { PageHeader, ErrorState } from "@/components/shared";
+import { PageHeader, ErrorState, EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PackageTierCard } from "@/components/packages/PackageTierCard";
 import { UserPackageList } from "@/components/packages/UserPackageList";
@@ -23,6 +25,24 @@ export function PackagesPage() {
   const disabledReason = hasOpen
     ? "You already have a pending or active package"
     : undefined;
+
+  // Auto-highlight the tier whose price is closest to the catalog median as "Popular".
+  const popularId = useMemo(() => {
+    const tiers = catalog.data;
+    if (!tiers || tiers.length < 2) return null;
+    const sorted = [...tiers].sort((a, b) => a.priceUsd - b.priceUsd);
+    const median = sorted[Math.floor(sorted.length / 2)].priceUsd;
+    let best = sorted[0];
+    let bestDist = Infinity;
+    for (const t of tiers) {
+      const d = Math.abs(t.priceUsd - median);
+      if (d < bestDist) {
+        bestDist = d;
+        best = t;
+      }
+    }
+    return best.id;
+  }, [catalog.data]);
 
   return (
     <AppShell>
@@ -56,14 +76,16 @@ export function PackagesPage() {
           )}
 
           {catalog.data && catalog.data.length === 0 && (
-            <p className="text-sm text-muted-foreground">
-              No packages are available right now. Please check back later.
-            </p>
+            <EmptyState
+              icon={PackageIcon}
+              title="No packages available"
+              description="No investment tiers are listed right now. Please check back soon."
+            />
           )}
 
           {catalog.data && catalog.data.length > 0 && (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {catalog.data.map((tier) => (
+              {catalog.data.map((tier, i) => (
                 <PackageTierCard
                   key={tier.id}
                   tier={tier}
@@ -71,6 +93,8 @@ export function PackagesPage() {
                   disabledReason={disabledReason}
                   loading={activate.isPending}
                   onActivate={(id) => activate.mutate(id)}
+                  popular={tier.id === popularId}
+                  delay={i * 0.05}
                 />
               ))}
             </div>

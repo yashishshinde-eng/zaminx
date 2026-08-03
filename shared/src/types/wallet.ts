@@ -12,7 +12,7 @@
  */
 
 import { z } from "zod";
-import { adminWalletAdjustSchema } from "../schemas/wallet.schema";
+import { adminWalletAdjustSchema } from "../schemas/wallet.schema.js";
 
 export type WalletType = "main" | "bonus" | "trading";
 

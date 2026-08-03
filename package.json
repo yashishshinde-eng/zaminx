@@ -2,6 +2,7 @@
   "name": "zaminex",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Investment & referral platform — monorepo (client / server / shared)",
   "workspaces": [
     "client",
@@ -9,6 +10,7 @@
     "shared"
   ],
   "scripts": {
+    "predev": "npm run build --workspace shared",
     "dev": "concurrently -n server,client -c blue,green \"npm:dev:server\" \"npm:dev:client\"",
     "dev:server": "npm run dev --workspace server",
     "dev:client": "npm run dev --workspace client",
@@ -22,6 +24,7 @@
     "test": "npm run test --workspaces --if-present"
   },
   "devDependencies": {
+    "@vercel/node": "^5.2.13",
     "concurrently": "^9.1.0",
     "typescript": "^5.6.3"
   },

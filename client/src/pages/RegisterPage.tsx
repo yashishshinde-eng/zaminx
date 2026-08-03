@@ -27,7 +27,9 @@ export function RegisterPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterBody>({
-    resolver: zodResolver(registerSchema),
+    // Shared request schemas are wrapped as { body, ... } for the server's
+    // validate middleware; the form holds flat body values, so validate .body.
+    resolver: zodResolver(registerSchema.shape.body),
     defaultValues: { referralCode: refCode || undefined },
   });
 

@@ -9,6 +9,8 @@ import type { SiteConfig } from "@zaminex/shared";
 
 const FALLBACK_CONFIG: SiteConfig = {
   siteName: "Zaminex",
+  logoLight: null,
+  logoDark: null,
   navLinks: [{ label: "Home", href: "/" }],
   contactDetails: {},
   socialLinks: {},

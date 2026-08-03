@@ -26,7 +26,7 @@ export function ResetPasswordPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<ResetPasswordBody>({
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(resetPasswordSchema.shape.body),
     defaultValues: { token },
   });
 

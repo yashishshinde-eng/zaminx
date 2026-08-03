@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowDownToLine, AlertTriangle } from "lucide-react";
+import { ArrowDownToLine, AlertTriangle, Check, Clock, X, Info } from "lucide-react";
+import { motion } from "framer-motion";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, type Column } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,7 +15,7 @@ import { useWithdrawals, useCreateWithdrawal, useCancelWithdrawal } from "@/hook
 import { useAuth } from "@/context/AuthContext";
 import { createWithdrawalSchema } from "@zaminex/shared";
 import type { CreateWithdrawalBody, WithdrawalRow, WithdrawalStatus } from "@zaminex/shared";
-import { formatCurrency, formatDate } from "@/lib/utils";
+import { formatCurrency, formatDate, cn } from "@/lib/utils";
 
 const MIN_WITHDRAWAL = 10;
 
@@ -46,6 +47,9 @@ const STATUS_LABEL: Record<WithdrawalStatus, string> = {
   cancelled: "Cancelled",
 };
 
+/** Success-path stages, in order. Terminal off-path statuses (rejected/cancelled) are shown specially. */
+const STAGES: WithdrawalStatus[] = ["pending", "under_review", "approved", "paid"];
+
 /** /app/withdrawals — submit a withdrawal and track its history. */
 export function WithdrawalsPage() {
   const { user } = useAuth();
@@ -62,6 +66,7 @@ export function WithdrawalsPage() {
   const cancel = useCancelWithdrawal();
 
   const hasAddress = Boolean(user?.walletAddresses?.usdtBep20);
+  const latest = list.data?.items?.[0];
 
   const {
     register,
@@ -69,7 +74,7 @@ export function WithdrawalsPage() {
     reset,
     formState: { errors },
   } = useForm<CreateWithdrawalBody>({
-    resolver: zodResolver(createWithdrawalSchema),
+    resolver: zodResolver(createWithdrawalSchema.shape.body),
     defaultValues: { wallet: "main" },
   });
 
@@ -135,6 +140,8 @@ export function WithdrawalsPage() {
     [cancel],
   );
 
+  const available = wallet.data?.totalAvailable ?? 0;
+
   return (
     <AppShell>
       <PageHeader
@@ -144,8 +151,12 @@ export function WithdrawalsPage() {
       />
 
       <div className="mt-6 space-y-6">
+        {/* Latest withdrawal status timeline */}
+        {latest && <StatusTimeline withdrawal={latest} onCancel={() => cancel.mutate(latest.id)} canCancel={cancel.isPending} />}
+
         {/* Withdraw form */}
-        <Card>
+        <Card className="relative overflow-hidden">
+          <div className="brand-gradient h-1 w-full" />
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <ArrowDownToLine className="size-4 text-primary" /> New withdrawal
@@ -181,7 +192,10 @@ export function WithdrawalsPage() {
                 {errors.amount ? (
                   <p className="text-sm text-destructive">{errors.amount.message}</p>
                 ) : (
-                  <p className="text-xs text-muted-foreground">Minimum {formatCurrency(MIN_WITHDRAWAL)}</p>
+                  <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Info className="size-3" />
+                    Minimum {formatCurrency(MIN_WITHDRAWAL)} · Available {formatCurrency(available)}
+                  </p>
                 )}
               </div>
               <div className="flex items-end">
@@ -212,18 +226,6 @@ export function WithdrawalsPage() {
             ))}
           </div>
 
-          {wallet.isError ? null : (
-            <p className="text-sm text-muted-foreground">
-              Available:{" "}
-              <span className="font-medium tabular-nums">{formatCurrency(wallet.data?.totalAvailable ?? 0)}</span>
-              {wallet.data && wallet.data.totalOnHold > 0 && (
-                <span className="ml-2">
-                  · On hold: <span className="font-medium tabular-nums">{formatCurrency(wallet.data.totalOnHold)}</span>
-                </span>
-              )}
-            </p>
-          )}
-
           <DataTable
             columns={columns}
             data={list.data?.items ?? []}
@@ -243,4 +245,91 @@ export function WithdrawalsPage() {
   );
 }
 
-export default WithdrawalsPage;
+/* ------------------------------------------------------------------ */
+/*  Status timeline — horizontal stepper for the latest withdrawal     */
+/* ------------------------------------------------------------------ */
+
+function StatusTimeline({
+  withdrawal,
+  onCancel,
+  canCancel,
+}: {
+  withdrawal: WithdrawalRow;
+  onCancel: () => void;
+  canCancel: boolean;
+}) {
+  const terminal = withdrawal.status === "rejected" || withdrawal.status === "cancelled";
+  const currentIndex = STAGES.indexOf(withdrawal.status);
+
+  return (
+    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+      <Card className="glass">
+        <CardHeader className="flex-row items-center justify-between space-y-0">
+          <div>
+            <CardTitle className="text-base">Latest request — {formatCurrency(withdrawal.amount)}</CardTitle>
+            <CardDescription>
+              {STATUS_LABEL[withdrawal.status]} · {formatDate(withdrawal.createdAt)}
+            </CardDescription>
+          </div>
+          {(withdrawal.status === "pending" || withdrawal.status === "under_review") && (
+            <Button type="button" variant="outline" size="sm" disabled={canCancel} onClick={onCancel}>
+              Cancel request
+            </Button>
+          )}
+        </CardHeader>
+        <CardContent>
+          {terminal ? (
+            <div className="flex items-center gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4">
+              <div className="flex size-9 items-center justify-center rounded-full bg-destructive/15 text-destructive">
+                <X className="size-5" />
+              </div>
+              <div>
+                <p className="font-medium">This request was {STATUS_LABEL[withdrawal.status].toLowerCase()}</p>
+                {withdrawal.remarks && <p className="text-sm text-muted-foreground">{withdrawal.remarks}</p>}
+              </div>
+            </div>
+          ) : (
+            <ol className="flex items-center">
+              {STAGES.map((stage, i) => {
+                const done = i < currentIndex;
+                const active = i === currentIndex;
+                return (
+                  <li key={stage} className="flex flex-1 items-center last:flex-none">
+                    <div className="flex flex-col items-center gap-1.5">
+                      <span
+                        className={cn(
+                          "flex size-9 items-center justify-center rounded-full border-2 transition-colors",
+                          done && "border-success bg-success text-success-foreground",
+                          active && "brand-gradient border-transparent text-primary-foreground shadow-sm",
+                          !done && !active && "border-border bg-card text-muted-foreground",
+                        )}
+                      >
+                        {done ? <Check className="size-4" /> : active ? <Clock className="size-4" /> : i + 1}
+                      </span>
+                      <span
+                        className={cn(
+                          "text-[11px] font-medium capitalize",
+                          (done || active) ? "text-foreground" : "text-muted-foreground",
+                        )}
+                      >
+                        {STATUS_LABEL[stage]}
+                      </span>
+                    </div>
+                    {i < STAGES.length - 1 && (
+                      <div
+                        className={cn(
+                          "mx-1 h-0.5 flex-1 rounded-full transition-colors",
+                          done ? "bg-success" : "bg-border",
+                        )}
+                      />
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          )}
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}

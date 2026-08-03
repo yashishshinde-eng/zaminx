@@ -130,6 +130,7 @@ async function withCronLog(name: string, fn: () => Promise<unknown>): Promise<vo
 
 async function tick(): Promise<void> {
   const now = new Date();
+  const started: Promise<void>[] = [];
   for (const job of REGISTRY) {
     if (job.enabled === false) continue;
     if (running.has(job.name)) continue; // overlap guard
@@ -142,14 +143,29 @@ async function tick(): Promise<void> {
     }
     if (!due) continue;
     running.add(job.name);
-    void (async () => {
-      try {
-        await withCronLog(job.name, job.run);
-      } finally {
-        running.delete(job.name);
-      }
-    })();
+    started.push(
+      (async () => {
+        try {
+          await withCronLog(job.name, job.run);
+        } finally {
+          running.delete(job.name);
+        }
+      })(),
+    );
   }
+  // Await all started jobs so callers that drive a single pass (the Vercel
+  // Cron HTTP handler) don't return — and get killed — before jobs finish. The
+  // in-process setInterval tick also awaits here (harmless; one pass/60s).
+  await Promise.allSettled(started);
+}
+
+/**
+ * Run a single scheduler pass: evaluate every enabled job's due status and run
+ * the ones that are due (idempotent + CronLog-guarded). Used by the Vercel Cron
+ * handler `/api/cron/tick`. Identical to one `tick()` invocation.
+ */
+export async function runDueJobs(): Promise<void> {
+  await tick();
 }
 
 /** Start the scheduler. Idempotent — calling twice does not create a second tick. */

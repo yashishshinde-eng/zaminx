@@ -1,15 +1,28 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Chart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
 import { TrendingUp } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { SegmentedControl } from "@/components/ui/tabs";
 import type { DashboardSummary } from "@zaminex/shared";
 import { themeColor } from "@/lib/chart";
 import { formatCurrency } from "@/lib/utils";
 
-/** Area chart of total income over time. Empty-state overlay until Phase 10. */
+type Period = "7d" | "30d" | "90d";
+const PERIOD_DAYS: Record<Period, number> = { "7d": 7, "30d": 30, "90d": 90 };
+
+/** Area chart of total income over time, with a 7d/30d/90d period toggle. */
 export function IncomeChartCard({ income }: { income: DashboardSummary["income"] }) {
-  const hasData = income.series.length > 0;
+  const [period, setPeriod] = useState<Period>("30d");
+
+  // Slice the server series client-side. The server returns a 30-day set, so 7d
+  // trims to the latest week; 30d/90d show everything available.
+  const seriesData = useMemo(() => {
+    const days = PERIOD_DAYS[period];
+    return income.series.slice(-days);
+  }, [income.series, period]);
+
+  const hasData = seriesData.length > 0 && seriesData.some((s) => s.value > 0);
 
   const options: ApexOptions = useMemo(
     () => ({
@@ -25,7 +38,7 @@ export function IncomeChartCard({ income }: { income: DashboardSummary["income"]
       dataLabels: { enabled: false },
       grid: { borderColor: themeColor("border", "hsl(214 32% 91%)"), strokeDashArray: 4 },
       xaxis: {
-        categories: income.series.map((s) => s.date),
+        categories: seriesData.map((s) => s.date),
         labels: { style: { colors: themeColor("muted-foreground", "#64748b") } },
         axisBorder: { show: false },
         axisTicks: { show: false },
@@ -46,17 +59,28 @@ export function IncomeChartCard({ income }: { income: DashboardSummary["income"]
       },
       responsive: [{ breakpoint: 640, options: { chart: { height: 220 } } }],
     }),
-    [income.series],
+    [seriesData],
   );
 
-  const series = [{ name: "Total income", data: income.series.map((s) => s.value) }];
+  const series = [{ name: "Total income", data: seriesData.map((s) => s.value) }];
 
   return (
     <Card className="flex flex-col">
       <CardHeader className="space-y-1">
-        <CardTitle className="flex items-center gap-2 text-base">
-          <TrendingUp className="size-4 text-primary" /> Income over time
-        </CardTitle>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <CardTitle className="flex items-center gap-2 text-base">
+            <TrendingUp className="size-4 text-primary" /> Income over time
+          </CardTitle>
+          <SegmentedControl
+            value={period}
+            onValueChange={(v) => setPeriod(v as Period)}
+            options={[
+              { value: "7d", label: "7d" },
+              { value: "30d", label: "30d" },
+              { value: "90d", label: "90d" },
+            ]}
+          />
+        </div>
         <CardDescription>Daily total earnings</CardDescription>
       </CardHeader>
       <CardContent className="relative flex-1">

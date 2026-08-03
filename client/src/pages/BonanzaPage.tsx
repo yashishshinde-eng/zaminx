@@ -1,11 +1,15 @@
-import { Gift, Users, CheckCircle2, Lock, Clock } from "lucide-react";
+import { motion } from "framer-motion";
+import { Gift, Users, CheckCircle2, Lock, Clock, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, EmptyState, ErrorState } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Progress } from "@/components/ui/progress";
 import { useBonanzaOverview } from "@/hooks/useBonanzas";
-import { formatCurrency, formatDate } from "@/lib/utils";
+import { useCountUp } from "@/hooks/useCountUp";
+import { staggerContainer, staggerItem } from "@/lib/motion";
+import { formatCurrency, formatDate, cn } from "@/lib/utils";
 import type { BonanzaOfferView } from "@zaminex/shared";
 
 /** /app/bonanzas — active bonanza offers with the viewer's progress. */
@@ -22,17 +26,22 @@ export function BonanzaPage() {
 
       <div className="mt-6 space-y-6">
         {/* Direct-count banner */}
-        <Card>
-          <CardContent className="flex items-center gap-3 py-4">
-            <div className="flex size-10 items-center justify-center rounded-full bg-fuchsia-500/10 text-fuchsia-600">
-              <Users className="size-5" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Your direct referrals</p>
-              <p className="text-2xl font-bold tabular-nums">{data?.directCount ?? 0}</p>
-            </div>
-          </CardContent>
-        </Card>
+        <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+          <Card className="glass overflow-hidden">
+            <div className="brand-gradient h-1 w-full" />
+            <CardContent className="flex items-center gap-3 py-4">
+              <div className="brand-gradient flex size-12 items-center justify-center rounded-full text-primary-foreground shadow-sm">
+                <Users className="size-6" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Your direct referrals</p>
+                <p className="text-2xl font-bold tabular-nums">
+                  <DirectCount value={data?.directCount ?? 0} />
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
 
         {isLoading && <OffersSkeleton />}
 
@@ -49,11 +58,18 @@ export function BonanzaPage() {
                 description="New reward offers will appear here when admins publish them."
               />
             ) : (
-              <div className="grid gap-6 md:grid-cols-2">
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="grid gap-6 md:grid-cols-2"
+              >
                 {data.offers.map((o) => (
-                  <OfferCard key={o.id} offer={o} directCount={data.directCount} />
+                  <motion.div key={o.id} variants={staggerItem}>
+                    <OfferCard offer={o} directCount={data.directCount} />
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             )}
           </>
         )}
@@ -69,9 +85,10 @@ export function BonanzaPage() {
 function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCount: number }) {
   const progress = Math.min(1, directCount / offer.requiredDirects);
   const pct = Math.round(progress * 100);
+  const complete = directCount >= offer.requiredDirects;
 
   return (
-    <Card className="flex h-full flex-col">
+    <Card className={cn("flex h-full flex-col", offer.awarded && "border-success/40")}>
       <CardHeader className="space-y-2">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
@@ -89,6 +106,22 @@ function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCoun
       </CardHeader>
 
       <CardContent className="flex flex-1 flex-col gap-4">
+        {/* Reward reveal */}
+        <div
+          className={cn(
+            "flex items-center justify-between rounded-lg border p-3 transition-colors",
+            complete ? "border-success/40 bg-success/5" : "border-border/60 bg-muted/30",
+          )}
+        >
+          <div className="flex items-center gap-2">
+            <Sparkles className={cn("size-4", complete ? "text-success" : "text-muted-foreground")} />
+            <span className="text-xs text-muted-foreground">Reward</span>
+          </div>
+          <p className={cn("text-lg font-bold tabular-nums", complete && "text-gradient")}>
+            {formatCurrency(offer.rewardAmount)}
+          </p>
+        </div>
+
         {/* Progress */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs">
@@ -97,16 +130,7 @@ function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCoun
               {Math.min(directCount, offer.requiredDirects)} / {offer.requiredDirects}
             </span>
           </div>
-          <div className="h-2 overflow-hidden rounded-full bg-muted">
-            <div
-              className="h-full rounded-full bg-fuchsia-500 transition-all"
-              style={{ width: `${pct}%` }}
-              role="progressbar"
-              aria-valuenow={pct}
-              aria-valuemin={0}
-              aria-valuemax={100}
-            />
-          </div>
+          <Progress value={pct} glow={complete} />
         </div>
 
         {/* Window */}
@@ -121,6 +145,12 @@ function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCoun
       </CardContent>
     </Card>
   );
+}
+
+/** Count-up wrapper for the direct-referral banner. */
+function DirectCount({ value }: { value: number }) {
+  const animated = useCountUp(value, 600);
+  return <>{Math.round(animated)}</>;
 }
 
 function AwardBadge({ offer }: { offer: BonanzaOfferView }) {

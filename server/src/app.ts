@@ -29,7 +29,17 @@ export function createApp(): Express {
   app.use(helmet());
   app.use(
     cors({
-      origin: env.CLIENT_URL,
+      // On Vercel the client and API share an origin, but the deployment
+      // domain varies (production + per-preview). Allow the configured
+      // CLIENT_URL plus any *.vercel.app origin, and pass undefined origins
+      // (same-origin/curl). Off-Vercel, keep the single configured origin
+      // (localhost:5173 in dev).
+      origin: process.env.VERCEL
+        ? (origin: string | undefined) => {
+            if (!origin) return true;
+            return origin === env.CLIENT_URL || /\.vercel\.app$/i.test(origin);
+          }
+        : env.CLIENT_URL,
       credentials: true,
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     }),

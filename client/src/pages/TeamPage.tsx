@@ -1,13 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import { Users, ChevronRight, ChevronDown, Copy, UserCheck } from "lucide-react";
+import { motion } from "framer-motion";
+import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2 } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
-import { PageHeader, DataTable, FilterBar, type Column } from "@/components/shared";
+import { PageHeader, DataTable, FilterBar, EmptyState, type Column } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ReferralLinkCard } from "@/components/dashboard";
 import { useAuth } from "@/context/AuthContext";
 import { useReferralStats, useDirectReferrals, useTreeChildren } from "@/hooks/useReferrals";
+import { useCountUp } from "@/hooks/useCountUp";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatDate } from "@/lib/utils";
 import toast from "react-hot-toast";
 import type { ReferralMemberRow, ReferralMemberStatus } from "@zaminex/shared";
@@ -116,29 +119,78 @@ export function TeamPage() {
 
       <div className="mt-6 space-y-6">
         {/* Link + stats */}
-        <div className="grid gap-6 lg:grid-cols-2">
-          {referral && <ReferralLinkCard referral={referral} />}
-          <StatsCard stats={stats.data} isLoading={stats.isLoading} />
-        </div>
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="grid gap-6 lg:grid-cols-2"
+        >
+          {referral && (
+            <motion.div variants={staggerItem}>
+              <ReferralLinkCard referral={referral} />
+            </motion.div>
+          )}
+          <motion.div variants={staggerItem}>
+            <StatsCard stats={stats.data} isLoading={stats.isLoading} />
+          </motion.div>
+        </motion.div>
 
         {/* Referral tree */}
         <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <Users className="size-4 text-primary" /> Referral tree
-            </CardTitle>
-            <CardDescription>Expand a node to reveal its direct referrals.</CardDescription>
+          <CardHeader className="flex-row items-center justify-between space-y-0">
+            <div className="space-y-1">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Users className="size-4 text-primary" /> Referral tree
+              </CardTitle>
+              <CardDescription>Expand a node to reveal its direct referrals.</CardDescription>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={!stats.data?.link}
+              onClick={() => {
+                const link = stats.data?.link ?? "";
+                if (navigator.share) {
+                  navigator
+                    .share({ title: "Join me on Zaminex", url: link })
+                    .catch(() => undefined);
+                } else {
+                  navigator.clipboard.writeText(link).then(
+                    () => toast.success("Referral link copied"),
+                    () => toast.error("Couldn't copy"),
+                  );
+                }
+              }}
+            >
+              <Share2 className="size-4" /> Share
+            </Button>
           </CardHeader>
           <CardContent className="space-y-1">
             {stats.isLoading ? (
               <div className="h-24 animate-pulse rounded-md bg-muted/30" />
             ) : !stats.data || stats.data.directCount === 0 ? (
-              <div className="rounded-lg border border-dashed p-6 text-center">
-                <p className="text-sm font-medium">No referrals yet</p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Share your referral link above to start building your team.
-                </p>
-              </div>
+              <EmptyState
+                icon={Users}
+                title="No referrals yet"
+                description="Share your referral link above to start building your team."
+                action={
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      if (!stats.data?.link) return;
+                      navigator.clipboard.writeText(stats.data.link).then(
+                        () => toast.success("Referral link copied"),
+                        () => toast.error("Couldn't copy"),
+                      );
+                    }}
+                  >
+                    <Copy className="size-4" /> Copy referral link
+                  </Button>
+                }
+              />
             ) : (
               <TreeRoot rootName={user?.name ?? "You"} rootCode={stats.data.code} />
             )}
@@ -199,7 +251,10 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
     <Card className="flex h-full flex-col">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
-          <UserCheck className="size-4 text-success" /> Team statistics
+          <span className="brand-gradient flex size-7 items-center justify-center rounded-md text-primary-foreground">
+            <UserCheck className="size-4" />
+          </span>
+          Team statistics
         </CardTitle>
         <CardDescription>Direct and all-level referral counts</CardDescription>
       </CardHeader>
@@ -229,10 +284,11 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
 }
 
 function Metric({ label, value }: { label: string; value: number }) {
+  const animated = useCountUp(value, 600);
   return (
     <div className="space-y-0.5">
       <p className="text-xs text-muted-foreground">{label}</p>
-      <p className="text-xl font-bold tabular-nums">{value}</p>
+      <p className="text-xl font-bold tabular-nums">{Math.round(animated)}</p>
     </div>
   );
 }

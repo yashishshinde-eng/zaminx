@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useReport } from "@/hooks/useReports";
 import { downloadReport } from "@/lib/reports";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
@@ -116,23 +117,15 @@ export function ReportsPage() {
 
       <div className="mt-6 space-y-6">
         {/* Tabs */}
-        <div className="flex flex-wrap gap-2">
-          {TABS.map((t) => (
-            <button
-              key={t.kind}
-              type="button"
-              onClick={() => selectKind(t.kind)}
-              className={cn(
-                "rounded-md border px-3 py-1.5 text-sm font-medium transition-colors",
-                t.kind === kind
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-card hover:bg-accent hover:text-accent-foreground",
-              )}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
+        <Tabs value={kind} defaultValue="deposits" onValueChange={(v) => selectKind(v as UserReportKind)}>
+          <TabsList className="flex flex-wrap">
+            {TABS.map((t) => (
+              <TabsTrigger key={t.kind} value={t.kind}>
+                {t.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
 
         {/* Filters */}
         <Card>

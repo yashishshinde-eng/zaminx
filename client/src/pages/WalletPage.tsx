@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
-import { Wallet as WalletIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Wallet as WalletIcon, Coins, TrendingUp, PiggyBank } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, ErrorState, DataTable, FilterBar, type Column } from "@/components/shared";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useWallet, useWalletLedger } from "@/hooks/useWallet";
+import { useCountUp } from "@/hooks/useCountUp";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 import type { WalletBalances, WalletTxRow, WalletType } from "@zaminex/shared";
 
@@ -181,7 +185,7 @@ export function WalletPage() {
             emptyDescription="Your deposits, trading yield, and bonuses will appear here."
             emptyAction={
               <Button asChild size="sm">
-                <a href="/app/packages">Activate a package</a>
+                <Link to="/app/packages">Activate a package</Link>
               </Button>
             }
             page={ledger.data?.page ?? 1}
@@ -194,7 +198,15 @@ export function WalletPage() {
   );
 }
 
-/** Three wallet balance cards + totals. */
+interface WalletCardDef {
+  label: string;
+  icon: typeof WalletIcon;
+  balance: WalletBalances["main"];
+  /** Tailwind classes for the accent gradient strip. */
+  strip: string;
+}
+
+/** Three wallet balance cards + totals, with animated count-ups and on-hold split bars. */
 function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefined; isLoading: boolean }) {
   if (isLoading || !wallets) {
     return (
@@ -208,47 +220,76 @@ function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefi
     );
   }
 
-  const cards: { label: string; balance: WalletBalances["main"]; accent: string }[] = [
-    { label: "Main Wallet", balance: wallets.main, accent: "text-primary" },
-    { label: "Bonus Wallet", balance: wallets.bonus, accent: "text-secondary-foreground" },
-    { label: "Trading Wallet", balance: wallets.trading, accent: "text-warning" },
+  const cards: WalletCardDef[] = [
+    { label: "Main Wallet", icon: PiggyBank, balance: wallets.main, strip: "from-violet-500 to-indigo-500" },
+    { label: "Bonus Wallet", icon: Coins, balance: wallets.bonus, strip: "from-emerald-500 to-teal-500" },
+    { label: "Trading Wallet", icon: TrendingUp, balance: wallets.trading, strip: "from-amber-500 to-orange-500" },
   ];
 
   return (
-    <div className="space-y-4">
+    <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-3">
         {cards.map((c) => (
-          <Card key={c.label}>
-            <CardContent className="space-y-2 p-5">
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <WalletIcon className={cn("size-4", c.accent)} /> {c.label}
-              </div>
-              <p className="text-2xl font-bold tabular-nums">{formatCurrency(c.balance.available)}</p>
-              <p className="text-xs text-muted-foreground">
-                On hold: <span className="font-medium tabular-nums">{formatCurrency(c.balance.onHold)}</span>
-              </p>
-            </CardContent>
-          </Card>
+          <motion.div key={c.label} variants={staggerItem}>
+            <WalletBalanceCard {...c} />
+          </motion.div>
         ))}
       </div>
-      <Card>
-        <CardContent className="flex flex-wrap items-center justify-between gap-4 p-5">
-          <div>
-            <p className="text-xs font-medium uppercase text-muted-foreground">Total available</p>
-            <p className="text-xl font-bold tabular-nums">{formatCurrency(wallets.totalAvailable)}</p>
-          </div>
-          <div>
-            <p className="text-xs font-medium uppercase text-muted-foreground">On hold</p>
-            <p className="text-xl font-bold tabular-nums text-muted-foreground">{formatCurrency(wallets.totalOnHold)}</p>
-          </div>
-          <div>
-            <p className="text-xs font-medium uppercase text-muted-foreground">Grand total</p>
-            <p className="text-xl font-bold tabular-nums">{formatCurrency(wallets.total)}</p>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+
+      {/* Totals strip */}
+      <motion.div variants={staggerItem}>
+        <Card className="glass overflow-hidden">
+          <CardContent className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
+            <TotalStat label="Total available" value={wallets.totalAvailable} accent="text-foreground" />
+            <TotalStat label="On hold" value={wallets.totalOnHold} accent="text-warning" />
+            <TotalStat label="Grand total" value={wallets.total} accent="text-gradient" big />
+          </CardContent>
+        </Card>
+      </motion.div>
+    </motion.div>
   );
 }
 
-export default WalletPage;
+function WalletBalanceCard({ label, icon: Icon, balance, strip }: WalletCardDef) {
+  const animated = useCountUp(balance.available, 700);
+  const total = balance.available + balance.onHold;
+  const availablePct = total > 0 ? Math.round((balance.available / total) * 100) : 100;
+
+  return (
+    <Card className="card-hover relative overflow-hidden">
+      {/* Accent gradient strip */}
+      <div className={cn("h-1 w-full bg-gradient-to-r", strip)} />
+      <CardContent className="space-y-3 p-5">
+        <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+          <Icon className="size-4 text-primary" /> {label}
+        </div>
+        <p className="text-2xl font-bold tabular-nums">{formatCurrency(animated)}</p>
+        {balance.onHold > 0 ? (
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">
+                On hold <span className="font-medium tabular-nums">{formatCurrency(balance.onHold)}</span>
+              </span>
+              <span className="tabular-nums text-muted-foreground">{availablePct}% free</span>
+            </div>
+            <div className="h-1.5 overflow-hidden rounded-full bg-muted">
+              <div className="brand-gradient h-full rounded-full transition-all" style={{ width: `${availablePct}%` }} />
+            </div>
+          </div>
+        ) : (
+          <p className="text-xs text-muted-foreground">Fully available</p>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+function TotalStat({ label, value, accent, big }: { label: string; value: number; accent: string; big?: boolean }) {
+  const animated = useCountUp(value, 800);
+  return (
+    <div>
+      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</p>
+      <p className={cn("font-bold tabular-nums", big ? "text-2xl" : "text-xl", accent)}>{formatCurrency(animated)}</p>
+    </div>
+  );
+}

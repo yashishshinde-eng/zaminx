@@ -25,7 +25,7 @@ export function ContactPage() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ContactBody>({ resolver: zodResolver(contactSchema) });
+  } = useForm<ContactBody>({ resolver: zodResolver(contactSchema.shape.body) });
 
   const onSubmit = async (values: ContactBody) => {
     setSubmitting(true);

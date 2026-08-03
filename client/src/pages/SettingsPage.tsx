@@ -2,8 +2,9 @@ import { forwardRef, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import { Eye, EyeOff, Wallet, KeyRound, Sun, Moon, Bell, UserCog, CheckCircle2 } from "lucide-react";
+import { Eye, EyeOff, Wallet, KeyRound, Sun, Moon, Bell, UserCog, CheckCircle2, Mail, BadgeCheck } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,9 +12,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Avatar } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
+import { staggerContainer, staggerItem } from "@/lib/motion";
 import {
   updateProfileRequest,
   updateWalletAddressesRequest,
@@ -40,15 +44,67 @@ export function SettingsPage() {
       {!user ? (
         <div className="mt-6 text-sm text-muted-foreground">Loading your profile…</div>
       ) : (
-        <div className="mt-6 space-y-6">
-          <PersonalDetailsForm />
-          <WalletAddressForm />
-          <PasswordForm />
-          <ThemeSection />
-          <NotificationsForm />
-        </div>
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="mt-6 space-y-6"
+        >
+          <motion.div variants={staggerItem}>
+            <ProfileHeader />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <PersonalDetailsForm />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <WalletAddressForm />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <PasswordForm />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <ThemeSection />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <NotificationsForm />
+          </motion.div>
+        </motion.div>
       )}
     </AppShell>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  0. Profile header                                                  */
+/* ------------------------------------------------------------------ */
+function ProfileHeader() {
+  const { user } = useAuth();
+  if (!user) return null;
+  return (
+    <Card className="glass overflow-hidden">
+      <div className="brand-gradient h-1.5 w-full" />
+      <CardContent className="flex flex-wrap items-center gap-4 p-5">
+        <Avatar src={null} alt={user.name} fallback={user.name} size="lg" />
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <h2 className="truncate text-lg font-semibold">{user.name}</h2>
+            {user.isEmailVerified ? (
+              <Badge variant="success" className="gap-1">
+                <BadgeCheck className="size-3.5" /> Verified
+              </Badge>
+            ) : (
+              <Badge variant="warning" className="gap-1">
+                Unverified
+              </Badge>
+            )}
+          </div>
+          <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            <Mail className="size-3.5" /> {user.email}
+          </p>
+          <p className="mt-0.5 text-xs capitalize text-muted-foreground">{user.role} account</p>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -65,7 +121,7 @@ function PersonalDetailsForm() {
     reset,
     formState: { errors, isDirty },
   } = useForm<UpdateProfileBody>({
-    resolver: zodResolver(updateProfileSchema),
+    resolver: zodResolver(updateProfileSchema.shape.body),
     defaultValues: { name: user?.name ?? "", phone: user?.phone ?? "" },
   });
 
@@ -130,7 +186,7 @@ function WalletAddressForm() {
     reset,
     formState: { errors, isDirty },
   } = useForm<UpdateWalletAddressesBody>({
-    resolver: zodResolver(updateWalletAddressesSchema),
+    resolver: zodResolver(updateWalletAddressesSchema.shape.body),
     defaultValues: { usdtBep20: user?.walletAddresses?.usdtBep20 ?? "" },
   });
 

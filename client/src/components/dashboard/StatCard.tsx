@@ -9,19 +9,23 @@ interface StatCardProps {
   subtitle?: string;
   /** Tailwind classes for the icon tile background + text. */
   accent?: string;
+  /** Use the brand gradient for the icon tile instead of `accent`. */
+  gradient?: boolean;
   className?: string;
 }
 
 /** Compact metric tile reused across the dashboard (income + wallet tiles). */
-export function StatCard({ icon: Icon, label, value, subtitle, accent, className }: StatCardProps) {
+export function StatCard({ icon: Icon, label, value, subtitle, accent, gradient, className }: StatCardProps) {
   return (
-    <Card className={cn("overflow-hidden", className)}>
+    <Card className={cn("card-hover overflow-hidden", className)}>
       <CardContent className="p-4 sm:p-5">
         <div className="flex items-center gap-3">
           <div
             className={cn(
-              "flex size-10 shrink-0 items-center justify-center rounded-lg",
-              accent ?? "bg-primary/10 text-primary",
+              "flex size-10 shrink-0 items-center justify-center rounded-lg shadow-sm",
+              gradient
+                ? "brand-gradient text-primary-foreground"
+                : accent ?? "bg-primary/10 text-primary",
             )}
           >
             <Icon className="size-5" />

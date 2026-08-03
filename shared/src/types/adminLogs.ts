@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { adminLogsQuerySchema } from "../schemas/adminLogs.schema";
+import { adminLogsQuerySchema } from "../schemas/adminLogs.schema.js";
 
 /* ----------------------------------------------------------------------------
  * Admin logs viewer (Phase 14C) — tail of a Winston log file.

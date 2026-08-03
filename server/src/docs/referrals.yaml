@@ -93,7 +93,7 @@ paths:
           name: userId
           required: true
           schema: { type: string }
-          description: "me" or a downline user id
+          description: '"me" or a downline user id'
         - in: query
           name: page
           schema: { type: integer, minimum: 1, default: 1 }
