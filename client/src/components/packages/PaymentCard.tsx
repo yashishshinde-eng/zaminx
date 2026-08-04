@@ -31,7 +31,7 @@ export function PaymentCard({ payment, packageName }: PaymentCardProps) {
   };
 
   return (
-    <Card className="border-warning/40">
+    <Card className="dash-panel border-warning/40">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <FlaskConical className="size-4 text-warning" /> Complete your payment — {packageName}

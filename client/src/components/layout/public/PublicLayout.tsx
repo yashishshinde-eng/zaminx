@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useSiteConfig } from "@/hooks/useSiteConfig";
 import { AnnouncementBar } from "./AnnouncementBar";
 import { PublicHeader } from "./PublicHeader";
@@ -22,6 +22,11 @@ const FALLBACK_CONFIG: SiteConfig = {
 export function PublicLayout() {
   const { data, isLoading, isError } = useSiteConfig();
   const config = data ?? FALLBACK_CONFIG;
+  const location = useLocation();
+
+  // Home page has a transparent header that overlays the hero section,
+  // so it needs no top padding. Other pages need padding for the fixed header.
+  const isHome = location.pathname === "/";
 
   if (isLoading) return <FullPageLoader />;
 
@@ -34,7 +39,7 @@ export function PublicLayout() {
       <div className="flex min-h-screen flex-col bg-background bg-depth">
         <AnnouncementBar bar={config.announcementBar} />
         <PublicHeader config={config} />
-        <main className="flex-1">
+        <main className={`flex-1 ${isHome ? "" : "pt-20 sm:pt-24"}`}>
           <Outlet />
         </main>
         <PublicFooter config={config} />

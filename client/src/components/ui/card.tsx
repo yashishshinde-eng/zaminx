@@ -6,7 +6,7 @@ export const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     <div
       ref={ref}
       className={cn(
-        "glass-card card-shimmer relative overflow-hidden text-card-foreground",
+        "premium-panel card-shimmer hover-lift text-card-foreground",
         className,
       )}
       {...props}

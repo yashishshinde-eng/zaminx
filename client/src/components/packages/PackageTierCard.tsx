@@ -17,9 +17,7 @@ interface PackageTierCardProps {
 }
 
 /**
- * A single catalog tier — price, projected return, duration, features, and an
- * activate CTA. The "popular" tier gets a gradient ring, a ribbon, and a lifted
- * entrance so the recommended option stands out.
+ * Premium package tier card with glass effect, gradient accent, and popular highlight.
  */
 export function PackageTierCard({
   tier,
@@ -30,8 +28,6 @@ export function PackageTierCard({
   popular = false,
   delay = 0,
 }: PackageTierCardProps) {
-  // Projected gross return over the term (simple, non-compounding, as the plan
-  // describes): price × daily% × days.
   const projectedReturn = tier.priceUsd * (tier.dailyReturnPct / 100) * tier.durationDays;
   const totalAtMaturity = tier.priceUsd + projectedReturn;
 
@@ -44,38 +40,40 @@ export function PackageTierCard({
     >
       <Card
         className={cn(
-          "relative flex h-full flex-col overflow-hidden transition-all duration-200",
-          popular ? "border-primary/50 ring-2 ring-primary/30 shadow-lg" : "card-hover",
+          "relative flex h-full flex-col overflow-hidden transition-all duration-300",
+          popular ? "border-blue/30 ring-2 ring-blue/20 shadow-glow-blue" : "card-hover",
         )}
       >
         {/* Gradient header strip */}
-        <div className={cn("h-1.5 w-full", popular ? "brand-gradient" : "bg-border/60")} />
+        <div className={cn("h-1.5 w-full rounded-t-[20px]", popular ? "gradient-blue" : "bg-white/[0.06]")} />
 
         {popular && (
-          <div className="absolute right-4 top-4">
-            <span className="brand-gradient inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold text-primary-foreground shadow-sm">
+          <div className="absolute right-4 top-4 z-10">
+            <span className="chip-gradient inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold shadow-glow-blue">
               <Sparkles className="size-3" /> Popular
             </span>
           </div>
         )}
 
-        <CardHeader>
-          <CardTitle className="text-base">{tier.name}</CardTitle>
+        <CardHeader className={cn(popular && "pt-10")}>
+          <CardTitle className="font-grotesk text-base font-semibold">{tier.name}</CardTitle>
           {tier.description && <CardDescription>{tier.description}</CardDescription>}
         </CardHeader>
         <CardContent className="flex flex-1 flex-col">
           <div className="space-y-1">
-            <p className="text-3xl font-bold tracking-tight">{formatCurrency(tier.priceUsd)}</p>
+            <p className={cn("font-grotesk text-3xl font-bold tracking-tight", popular && "text-gradient-gold")}>
+              {formatCurrency(tier.priceUsd)}
+            </p>
             <p className="text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">{tier.dailyReturnPct}%</span> daily ·{" "}
+              <span className={cn("font-medium", popular ? "text-gold" : "text-foreground")}>{tier.dailyReturnPct}%</span> daily ·{" "}
               <span className="font-medium text-foreground">{tier.durationDays}</span>-day term
             </p>
           </div>
 
           {/* ROI block */}
-          <div className="mt-4 grid grid-cols-2 gap-3 rounded-lg border border-border/60 bg-muted/30 p-3">
+          <div className="mt-4 grid grid-cols-2 gap-3 rounded-[14px] border border-white/[0.06] bg-white/[0.02] p-3 backdrop-blur-sm">
             <div className="flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-md bg-success/10 text-success">
+              <div className="icon-box size-8 rounded-lg bg-success/10 text-success">
                 <TrendingUp className="size-4" />
               </div>
               <div>
@@ -84,7 +82,7 @@ export function PackageTierCard({
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-md bg-primary/10 text-primary">
+              <div className="icon-box size-8 rounded-lg bg-gold/10 text-gold">
                 <CalendarDays className="size-4" />
               </div>
               <div>
@@ -98,7 +96,7 @@ export function PackageTierCard({
             <ul className="mt-4 space-y-2">
               {tier.features.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-sm">
-                  <Check className={cn("mt-0.5 size-4 shrink-0", popular ? "text-primary" : "text-success")} aria-hidden />
+                  <Check className={cn("mt-0.5 size-4 shrink-0", popular ? "text-gold" : "text-success")} aria-hidden />
                   <span className="text-muted-foreground">{f}</span>
                 </li>
               ))}
@@ -108,8 +106,7 @@ export function PackageTierCard({
           <div className="mt-6 flex-1" />
           <Button
             type="button"
-            className={cn("w-full", popular ? "" : "")}
-            variant={popular ? "default" : "default"}
+            className={cn("w-full h-11", popular ? "btn-premium" : "")}
             disabled={disabled || loading}
             onClick={() => onActivate?.(tier.id)}
             title={disabled ? disabledReason : undefined}

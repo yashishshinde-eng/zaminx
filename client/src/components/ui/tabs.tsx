@@ -142,7 +142,7 @@ export function SegmentedControl({ value, onValueChange, options, className }: S
             {selected && (
               <motion.span
                 layoutId={`${baseId}-segment-active`}
-                className="absolute inset-0 rounded-[7px] brand-gradient shadow-sm"
+                className="absolute inset-0 rounded-[7px] gradient-blue shadow-sm"
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
               />
             )}

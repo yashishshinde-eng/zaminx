@@ -28,9 +28,9 @@ export function BonanzaPage() {
         {/* Direct-count banner */}
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
           <Card className="glass overflow-hidden">
-            <div className="brand-gradient h-1 w-full" />
+            <div className="gradient-blue h-1 w-full" />
             <CardContent className="flex items-center gap-3 py-4">
-              <div className="brand-gradient flex size-12 items-center justify-center rounded-full text-primary-foreground shadow-sm">
+              <div className="gradient-blue flex size-12 items-center justify-center rounded-full text-primary-foreground shadow-sm">
                 <Users className="size-6" />
               </div>
               <div>
@@ -117,7 +117,7 @@ function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCoun
             <Sparkles className={cn("size-4", complete ? "text-success" : "text-muted-foreground")} />
             <span className="text-xs text-muted-foreground">Reward</span>
           </div>
-          <p className={cn("text-lg font-bold tabular-nums", complete && "text-gradient")}>
+          <p className={cn("text-lg font-bold tabular-nums", complete && "text-gradient-gold")}>
             {formatCurrency(offer.rewardAmount)}
           </p>
         </div>

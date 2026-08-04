@@ -1,46 +1,65 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Gift, ArrowRight } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
 import type { DashboardSummary } from "@zaminex/shared";
 
 /**
- * Blueprint section 10 — Bonanza Progress. The dashboard summary carries no
- * live bonanza-target/progress data, so this card stays honest: it shows the
- * real total bonanza income the user has earned and links to the full Bonanza
- * page where active offers + progress live. No fabricated progress bars.
+ * Blueprint section 10 — Bonanza Progress. Shows the real total bonanza income
+ * earned and links to the full Bonanza page. Premium glass card with gold accent.
  */
 export function BonanzaProgressCard({ data }: { data: DashboardSummary }) {
   const earned = useCountUp(data.income.bonanza, 1000);
 
   return (
-    <Card className="card-hover card-shimmer flex h-full flex-col overflow-hidden border-0">
-      <CardContent className="flex h-full flex-col p-5">
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card glass-card-hover relative flex h-full flex-col overflow-hidden"
+    >
+      {/* Gold gradient accent */}
+      <div
+        className="absolute inset-x-0 top-0 h-[2px]"
+        style={{
+          background: "linear-gradient(90deg, hsl(var(--gold)), hsl(var(--gold-light)), hsl(var(--gold)))",
+        }}
+      />
+
+      {/* Decorative gift icon */}
+      <Gift className="pointer-events-none absolute bottom-3 right-3 size-16 text-white/[0.02]" />
+
+      <div className="flex h-full flex-col p-5">
+        {/* Header */}
         <div className="flex items-center gap-3">
-          <div className="brand-gradient flex size-10 shrink-0 items-center justify-center rounded-xl text-primary-foreground shadow-glow-gold">
-            <Gift className="size-5" />
+          <div className="icon-box-gold">
+            <Gift className="size-5 text-gold" />
           </div>
           <div>
-            <p className="text-sm font-semibold">Bonanza</p>
-            <p className="text-xs text-muted-foreground">Bonus offers</p>
+            <p className="section-title text-sm">Bonanza Rewards</p>
+            <p className="text-[11px] text-muted-foreground">Bonus offers</p>
           </div>
         </div>
 
+        {/* Total earned */}
         <div className="mt-4">
-          <p className="text-xs font-medium text-muted-foreground">Bonanza earned</p>
-          <p className="mt-1 text-2xl font-bold tracking-tight tabular-nums">{formatCurrency(earned)}</p>
+          <p className="metric-label">Bonanza earned</p>
+          <p className="metric-value font-grotesk mt-1 text-gradient-gold text-2xl">
+            {formatCurrency(earned)}
+          </p>
         </div>
 
+        {/* CTA */}
         <div className="mt-auto pt-4">
-          <Button asChild variant="outline" size="sm" className="w-full">
-            <Link to="/app/bonanzas">
-              View offers <ArrowRight className="size-3.5" />
-            </Link>
-          </Button>
+          <Link
+            to="/app/bonanzas"
+            className="btn-secondary-premium inline-flex w-full items-center justify-center gap-2 rounded-[14px] px-4 py-2.5 text-sm font-semibold"
+          >
+            View offers <ArrowRight className="size-3.5" />
+          </Link>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </motion.div>
   );
 }

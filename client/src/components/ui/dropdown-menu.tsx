@@ -71,7 +71,7 @@ interface DropdownMenuContentProps {
 
 function DropdownMenuContent({ children, side = "bottom", align = "end", className }: DropdownMenuContentProps) {
   const { open, triggerRef, close, contentId } = useDropdownMenu();
-  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
+  const [coords, setCoords] = useState<{ top: number; left?: number; right?: number } | null>(null);
   const contentRef = useClickOutside<HTMLDivElement>(() => close());
 
   // Position the content under (or beside) the trigger once mounted.
@@ -82,18 +82,26 @@ function DropdownMenuContent({ children, side = "bottom", align = "end", classNa
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
     let top: number;
-    let left: number;
+    let left: number | undefined;
+    let right: number | undefined;
     if (side === "bottom") top = rect.bottom + scrollY + 8;
-    else if (side === "top") top = rect.top + scrollY - 8; // adjusted after measuring height
+    else if (side === "top") top = rect.top + scrollY - 8;
     else top = rect.top + scrollY;
     if (side === "right") left = rect.right + scrollX + 8;
-    else if (side === "left") left = rect.left + scrollX - 8; // adjusted after measuring width
-    else left = rect.left + scrollX;
-    if (side === "bottom" || side === "top") {
-      if (align === "end") left = rect.right + scrollX;
-      else if (align === "center") left = rect.left + scrollX + rect.width / 2;
+    else if (side === "left") left = rect.left + scrollX - 8;
+    else {
+      // side === "bottom" or side === "top"
+      if (align === "end") {
+        // Use right-edge positioning so the dropdown aligns its right edge
+        // with the trigger's right edge and never overflows off-screen
+        right = window.innerWidth - rect.right;
+      } else if (align === "center") {
+        left = rect.left + scrollX + rect.width / 2;
+      } else {
+        left = rect.left + scrollX;
+      }
     }
-    setCoords({ top, left });
+    setCoords({ top, left, right });
   }, [triggerRef, side, align]);
 
   useEffect(() => {
@@ -104,6 +112,14 @@ function DropdownMenuContent({ children, side = "bottom", align = "end", classNa
   }, [open, close]);
 
   if (!coords) return null;
+
+  const positionStyle: React.CSSProperties = { position: "absolute", top: coords.top, zIndex: 60 };
+  if (coords.right !== undefined) {
+    // End-aligned: position from right edge so it stays within viewport
+    positionStyle.right = coords.right;
+  } else if (coords.left !== undefined) {
+    positionStyle.left = coords.left;
+  }
 
   return createPortal(
     <AnimatePresence>
@@ -116,10 +132,10 @@ function DropdownMenuContent({ children, side = "bottom", align = "end", classNa
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: -4 }}
           transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
-          style={{ position: "absolute", top: coords.top, left: coords.left, zIndex: 60 }}
+          style={positionStyle}
           className={cn(
-            "glass-card min-w-[12rem] origin-top-right overflow-hidden p-1 text-popover-foreground",
-            align === "end" && (side === "bottom" || side === "top") && "-translate-x-[calc(100%-0px)]",
+            "glass-card min-w-[12rem] overflow-hidden p-1 text-popover-foreground",
+            align === "center" && (side === "bottom" || side === "top") && "-translate-x-1/2",
             className,
           )}
         >

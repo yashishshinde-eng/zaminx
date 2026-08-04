@@ -71,6 +71,11 @@ const config: Config = {
           light: "hsl(var(--blue-light))",
           dark: "hsl(var(--blue-dark))",
         },
+        purple: {
+          DEFAULT: "hsl(var(--purple))",
+          light: "hsl(var(--purple-light))",
+          dark: "hsl(var(--purple-dark))",
+        },
       },
       borderRadius: {
         lg: "var(--radius-lg)",
@@ -86,6 +91,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        jakarta: ["Plus Jakarta Sans", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+        grotesk: ["Space Grotesk", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

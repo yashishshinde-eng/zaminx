@@ -16,3 +16,5 @@ export { Sparkline } from "./Sparkline";
 export { HeroPortfolioCard } from "./HeroPortfolioCard";
 export { TradingBotStatusCard } from "./TradingBotStatusCard";
 export { BonanzaProgressCard } from "./BonanzaProgressCard";
+export { MarketOverview } from "./MarketOverview";
+export { RecentTransactions } from "./RecentTransactions";

@@ -17,6 +17,8 @@ import {
   ShieldAlert,
   ScrollText,
   ChevronLeft,
+  Sparkles,
+  Crown,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -29,14 +31,15 @@ interface NavItem {
   to: string;
   icon: LucideIcon;
   adminOnly?: boolean;
+  accent?: "gold" | "blue" | "purple";
 }
 
 const NAV: NavItem[] = [
-  { label: "Dashboard", to: "/app", icon: LayoutDashboard },
-  { label: "Wallet", to: "/app/wallet", icon: Wallet },
+  { label: "Dashboard", to: "/app", icon: LayoutDashboard, accent: "gold" },
+  { label: "Wallet", to: "/app/wallet", icon: Wallet, accent: "blue" },
   { label: "Withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
-  { label: "Packages", to: "/app/packages", icon: Package },
-  { label: "Team", to: "/app/team", icon: Users },
+  { label: "Packages", to: "/app/packages", icon: Package, accent: "gold" },
+  { label: "Team", to: "/app/team", icon: Users, accent: "purple" },
   { label: "Bonanza", to: "/app/bonanzas", icon: Gift },
   { label: "Reports", to: "/app/reports", icon: FileText },
   { label: "Settings", to: "/app/settings", icon: Settings },
@@ -69,10 +72,14 @@ const GROUP_BY_LABEL: Record<string, (item: NavItem) => boolean> = {
 
 interface SidebarProps {
   onNavigate?: () => void;
-  /** When rendered in the mobile drawer, force expanded + hide the collapse toggle. */
   mobile?: boolean;
 }
 
+/**
+ * Premium floating glass sidebar with cinematic depth.
+ * Brand accent line, animated active indicator, section labels,
+ * quick-deposit banner, user profile card.
+ */
 export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
   const { user } = useAuth();
   const { collapsed, toggle } = useSidebarState();
@@ -85,28 +92,49 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
   })).filter((g) => g.items.length > 0);
 
   return (
-    <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
-      {/* Brand header with gold accent line */}
-      <div className={cn("relative flex h-16 items-center gap-2.5 border-b border-sidebar-border", isCollapsed ? "justify-center px-3" : "px-5")}>
+    <div className={cn("flex h-full flex-col sidebar-glass", !mobile && "sidebar-float")}>
+      {/* ── Brand header ──────────────────────────────────────── */}
+      <div className={cn("relative flex h-16 items-center gap-2.5 border-b border-white/[0.04]", isCollapsed ? "justify-center px-3" : "px-5")}>
         {/* Gold accent line on left */}
-        <div className="absolute left-0 top-0 bottom-0 w-0.5 brand-gradient" />
-        <div className="brand-gradient flex size-9 shrink-0 items-center justify-center rounded-xl text-primary-foreground font-bold shadow-glow-gold">
+        <div className="absolute left-0 top-0 bottom-0 w-0.5 gradient-blue" />
+
+        {/* Logo mark */}
+        <div className="gradient-blue flex size-9 shrink-0 items-center justify-center rounded-xl text-primary-foreground font-bold shadow-glow-blue">
           Z
         </div>
-        {!isCollapsed && <span className="text-lg font-bold tracking-tight text-gradient">Zaminex</span>}
+        {!isCollapsed && (
+          <span className="font-grotesk text-lg font-bold tracking-tight text-gradient-gold">Zaminex</span>
+        )}
       </div>
 
-      {/* Nav */}
-      <nav className="scrollbar-thin flex-1 space-y-4 overflow-y-auto px-3 py-4">
-        {groups.map((group) => (
-          <div key={group.label} className="space-y-1">
+      {/* ── Quick deposit banner (expanded only) ────────────── */}
+      {!isCollapsed && (
+        <div className="mx-3 mt-3">
+          <div className="rounded-[14px] border border-blue/20 bg-gradient-to-br from-blue/10 via-blue-dark/5 to-purple/5 p-3 shadow-[0_0_24px_-8px_hsl(var(--blue)/0.12)]">
+            <div className="flex items-center gap-2">
+              <div className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-gold/20 to-gold-dark/10 text-gold shadow-[0_0_12px_-3px_hsl(var(--gold)/0.2)]">
+                <Sparkles className="size-3.5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-xs font-semibold text-foreground">Start Earning</p>
+                <p className="truncate text-[10px] text-muted-foreground">Activate a package</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Navigation ──────────────────────────────────────── */}
+      <nav className="scrollbar-thin flex-1 space-y-1 overflow-y-auto px-3 py-4">
+        {groups.map((group, gi) => (
+          <div key={group.label} className="space-y-0.5">
             {!isCollapsed && (
-              <p className="px-3 pb-0.5 pt-1 text-[11px] font-semibold uppercase tracking-wider text-sidebar-foreground/40">
+              <p className="sidebar-section-label" style={gi > 0 ? { paddingTop: undefined } : undefined}>
                 {group.label}
               </p>
             )}
             {isCollapsed && group.label !== "Overview" && (
-              <div className="mx-auto my-1 h-px w-8 bg-sidebar-border/70" />
+              <div className="mx-auto my-2 h-px w-6 bg-white/[0.06]" />
             )}
             {group.items.map((item) => (
               <NavLink
@@ -117,11 +145,11 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
                 title={isCollapsed ? item.label : undefined}
                 className={({ isActive }) =>
                   cn(
-                    "relative flex min-h-[44px] items-center rounded-xl text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
-                    isCollapsed ? "justify-center px-2" : "gap-3 px-3",
+                    "sidebar-nav-item",
+                    isCollapsed ? "justify-center px-2" : "",
                     isActive
-                      ? "text-primary-foreground"
-                      : "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-foreground",
+                      ? "active"
+                      : "text-sidebar-foreground/50 hover:bg-blue/[0.08] hover:text-gold-light",
                   )
                 }
               >
@@ -130,11 +158,16 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
                     {isActive && (
                       <motion.span
                         layoutId="sidebar-active"
-                        className="brand-gradient absolute inset-0 rounded-xl shadow-glow-gold"
+                        className="gradient-blue absolute inset-0 rounded-[12px] shadow-glow-blue"
                         transition={{ type: "spring", stiffness: 400, damping: 32 }}
                       />
                     )}
-                    <item.icon className="relative z-10 size-5 shrink-0" />
+                    <span className={cn(
+                      "relative z-10 flex size-7 items-center justify-center rounded-lg transition-colors duration-200",
+                      isActive ? "text-primary-foreground" : "text-sidebar-foreground/50 group-hover:text-sidebar-foreground/80",
+                    )}>
+                      <item.icon className="size-[17px]" />
+                    </span>
                     {!isCollapsed && <span className="relative z-10">{item.label}</span>}
                   </>
                 )}
@@ -144,9 +177,9 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
         ))}
       </nav>
 
-      {/* User mini-profile footer */}
-      <div className="border-t border-sidebar-border p-3">
-        <div className={cn("flex items-center gap-2.5 rounded-xl bg-sidebar-accent/50 p-2", isCollapsed ? "justify-center" : "")}>
+      {/* ── User profile card ─────────────────────────────────── */}
+      <div className="border-t border-white/[0.04] p-3">
+        <div className={cn("flex items-center gap-2.5 rounded-[14px] bg-white/[0.03] p-2.5 transition-colors hover:bg-blue/[0.06]", isCollapsed ? "justify-center" : "")}>
           <Avatar
             src={null}
             alt={user?.name ?? "User"}
@@ -155,8 +188,11 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
           />
           {!isCollapsed && (
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">{user?.name ?? "—"}</p>
-              <p className="truncate text-xs text-sidebar-foreground/50 capitalize">{user?.role ?? "user"}</p>
+              <p className="truncate text-sm font-semibold">{user?.name ?? "—"}</p>
+              <div className="flex items-center gap-1">
+                <Crown className="size-3 text-gold" />
+                <p className="truncate text-[11px] text-sidebar-foreground/50 capitalize">{user?.role ?? "user"}</p>
+              </div>
             </div>
           )}
           {!mobile && (
@@ -164,9 +200,9 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
               type="button"
               onClick={toggle}
               aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              className="flex size-7 shrink-0 items-center justify-center rounded-lg text-sidebar-foreground/60 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+              className="flex size-7 shrink-0 items-center justify-center rounded-lg text-sidebar-foreground/40 transition-all duration-200 hover:bg-blue/[0.08] hover:text-gold-light"
             >
-              <ChevronLeft className={cn("size-4 transition-transform", isCollapsed && "rotate-180")} />
+              <ChevronLeft className={cn("size-4 transition-transform duration-300", isCollapsed && "rotate-180")} />
             </button>
           )}
         </div>

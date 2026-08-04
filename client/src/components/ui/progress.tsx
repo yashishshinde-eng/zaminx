@@ -27,7 +27,7 @@ export function Progress({ value, indicatorClassName, glow, className }: Progres
     >
       <div
         className={cn(
-          "brand-gradient h-full rounded-full transition-[width] duration-500 ease-out",
+          "gradient-blue h-full rounded-full transition-[width] duration-500 ease-out",
           glow && "shadow-[0_0_12px_-1px_hsl(var(--primary)/0.6)]",
           indicatorClassName,
         )}
