@@ -70,8 +70,6 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
     data.income.series.length > 0
       ? data.income.series[data.income.series.length - 1].value
       : FALLBACK.todayEarnings;
-  const packageName =
-    data.package.active && data.package.name ? data.package.name : FALLBACK.packageName;
   const rankName = data.account.rank.name || FALLBACK.rankName;
   const referralLink = data.referral.link || FALLBACK.referralLink;
   const referralCode = data.referral.code || FALLBACK.referralCode;
