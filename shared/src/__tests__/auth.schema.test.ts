@@ -13,40 +13,49 @@ const body = (b: Record<string, unknown>) => ({ body: b });
 
 describe("registerSchema", () => {
   it("accepts a valid registration", () => {
-    const r = registerSchema.safeParse(body({ name: "Ada", email: "ADA@Example.com", password: "secret123" }));
+    const r = registerSchema.safeParse(body({ name: "Ada", email: "ADA@Example.com", password: "secret123", referralCode: "ZAMROOT" }));
     expect(r.success).toBe(true);
     if (r.success) {
       expect(r.data.body.email).toBe("ada@example.com"); // trimmed + lowercased
       expect(r.data.body.name).toBe("Ada");
+      expect(r.data.body.referralCode).toBe("ZAMROOT");
     }
   });
 
   it("rejects a too-short name", () => {
-    expect(registerSchema.safeParse(body({ name: "A", email: "a@b.com", password: "secret123" })).success).toBe(false);
+    expect(registerSchema.safeParse(body({ name: "A", email: "a@b.com", password: "secret123", referralCode: "ZAMROOT" })).success).toBe(false);
   });
 
   it("rejects an invalid email", () => {
-    expect(registerSchema.safeParse(body({ name: "Ada", email: "not-an-email", password: "secret123" })).success).toBe(false);
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "not-an-email", password: "secret123", referralCode: "ZAMROOT" })).success).toBe(false);
   });
 
   it("rejects a password without a digit", () => {
-    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secretonly" })).success).toBe(false);
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secretonly", referralCode: "ZAMROOT" })).success).toBe(false);
   });
 
   it("rejects a password without a letter", () => {
-    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "12345678" })).success).toBe(false);
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "12345678", referralCode: "ZAMROOT" })).success).toBe(false);
   });
 
   it("rejects a password shorter than 8 chars", () => {
-    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "ab1" })).success).toBe(false);
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "ab1", referralCode: "ZAMROOT" })).success).toBe(false);
   });
 
-  it("treats empty optional strings as undefined", () => {
-    const r = registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", phone: "", referralCode: "" }));
+  it("rejects a missing referral code", () => {
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123" })).success).toBe(false);
+  });
+
+  it("rejects an empty referral code", () => {
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", referralCode: "" })).success).toBe(false);
+  });
+
+  it("treats empty optional strings as undefined (phone still optional; referralCode required)", () => {
+    const r = registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", phone: "", referralCode: "ZAMROOT" }));
     expect(r.success).toBe(true);
     if (r.success) {
       expect(r.data.body.phone).toBeUndefined();
-      expect(r.data.body.referralCode).toBeUndefined();
+      expect(r.data.body.referralCode).toBe("ZAMROOT");
     }
   });
 });

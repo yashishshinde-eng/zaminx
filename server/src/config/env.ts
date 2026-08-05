@@ -18,6 +18,11 @@ const envSchema = z.object({
   SEED_ADMIN_EMAIL: z.string().email().default("admin@zaminex.local"),
   // No default — a known-default seed password must never create a prod admin.
   SEED_ADMIN_PASSWORD: z.string().min(8, { message: "SEED_ADMIN_PASSWORD is required" }),
+  // When true, `npm run seed` upserts (overwrites) settings/packages/ranks/CMS
+  // pages and retires legacy tiers/rungs — use to sync the live DB after a spec
+  // change. When false (default), seed only inserts missing rows and never
+  // clobbers admin edits. Treat a force-sync as a one-time migration step.
+  SEED_FORCE_SYNC: z.coerce.boolean().default(false),
 
   // Email delivery (Phase 3). In dev, omit SMTP_* to fall back to a file
   // transport that writes each message under server/logs/emails/.

@@ -18,10 +18,16 @@ async function fundWallet(amount = 100): Promise<{ accessToken: string; depositI
   return { accessToken, depositId: id };
 }
 
+/** Withdrawal row shape from the API (id may be `_id` or `id`). */
+function widOf(w: { _id?: string; id?: string }): string {
+  return (w._id ?? w.id)!;
+}
+
 /**
- * Phase 20 — withdrawal flow integration test. From a funded main wallet:
- * submit → 201; insufficient balance → 4xx; admin review → approve → pay;
- * plus a user cancel path.
+ * Withdrawal flow — spec-aligned. Submissions auto-approve: the request is born
+ * `paid` (available → onHold → debited) and the on-chain USDT payout is a
+ * deferred manual step. Minimum withdrawal is $15. Legacy admin
+ * review/approve/pay and user-cancel return 409 on already-`paid` rows.
  */
 describe.skipIf(!hasTestDb)("withdrawal flow", () => {
   beforeAll(async () => {
@@ -35,7 +41,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     await clearDb();
   });
 
-  it("submits a withdrawal from a funded main wallet", async () => {
+  it("auto-approves a withdrawal from a funded main wallet (status paid)", async () => {
     const { accessToken } = await fundWallet(100);
     const r = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
@@ -43,6 +49,18 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     });
     expect(r.status).toBe(201);
     expect(r.body.data.withdrawal).toBeTruthy();
+    expect(r.body.data.withdrawal.status).toBe("paid");
+  });
+
+  it("rejects a withdrawal below the $15 minimum", async () => {
+    const { accessToken } = await fundWallet(100);
+    const r = await authed(accessToken, "/api/v1/withdrawals", {
+      method: "POST",
+      body: JSON.stringify({ wallet: "main", amount: 5 }),
+    });
+    expect(r.status).toBe(400);
+    expect(r.body.success).toBe(false);
+    expect(String(r.body.message)).toMatch(/15/);
   });
 
   it("rejects a withdrawal exceeding the available balance", async () => {
@@ -55,7 +73,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     expect(r.body.success).toBe(false);
   });
 
-  it("runs the admin review → approve → pay lifecycle", async () => {
+  it("returns 409 for admin review/approve/pay on an already-paid withdrawal", async () => {
     const { accessToken: userToken } = await fundWallet(100);
     const admin = await seedAdminAndLogin();
 
@@ -64,32 +82,31 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
       body: JSON.stringify({ wallet: "main", amount: 25 }),
     });
     expect(submit.status).toBe(201);
-    const wid = submit.body.data.withdrawal._id ?? submit.body.data.withdrawal.id;
+    expect(submit.body.data.withdrawal.status).toBe("paid");
+    const wid = widOf(submit.body.data.withdrawal);
 
     const adminList = await authed(admin.accessToken, "/api/v1/withdrawals/admin");
     expect(adminList.status).toBe(200);
 
     const review = await authed(admin.accessToken, `/api/v1/withdrawals/admin/${wid}/review`, { method: "POST", body: "{}" });
-    expect(review.status).toBe(200);
+    expect(review.status).toBe(409);
 
     const approve = await authed(admin.accessToken, `/api/v1/withdrawals/admin/${wid}/approve`, { method: "POST", body: "{}" });
-    expect(approve.status).toBe(200);
+    expect(approve.status).toBe(409);
 
     const pay = await authed(admin.accessToken, `/api/v1/withdrawals/admin/${wid}/pay`, { method: "POST", body: "{}" });
-    expect(pay.status).toBe(200);
-    expect(pay.body.data.withdrawal.status).toBe("paid");
+    expect(pay.status).toBe(409);
   });
 
-  it("lets a user cancel their own pending withdrawal", async () => {
+  it("returns 409 when a user tries to cancel an already-paid withdrawal", async () => {
     const { accessToken } = await fundWallet(100);
     const submit = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
-      body: JSON.stringify({ wallet: "main", amount: 10 }),
+      body: JSON.stringify({ wallet: "main", amount: 20 }),
     });
     expect(submit.status).toBe(201);
-    const wid = submit.body.data.withdrawal._id ?? submit.body.data.withdrawal.id;
+    const wid = widOf(submit.body.data.withdrawal);
     const cancel = await authed(accessToken, `/api/v1/withdrawals/${wid}/cancel`, { method: "POST" });
-    expect(cancel.status).toBe(200);
-    expect(cancel.body.data.withdrawal.status).toBe("cancelled");
+    expect(cancel.status).toBe(409);
   });
 });

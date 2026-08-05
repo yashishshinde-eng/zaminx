@@ -88,8 +88,8 @@ export function RegisterPage() {
                 {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="referralCode">Referral code (optional)</Label>
-                <Input id="referralCode" placeholder="ZAM…" {...register("referralCode")} />
+                <Label htmlFor="referralCode">Referral code</Label>
+                <Input id="referralCode" placeholder="ZAM…" autoComplete="off" {...register("referralCode")} />
                 {errors.referralCode && <p className="text-sm text-destructive">{errors.referralCode.message}</p>}
               </div>
               <Button type="submit" className="w-full" disabled={submitting}>

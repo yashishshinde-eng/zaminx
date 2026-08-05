@@ -51,6 +51,10 @@ walletTransactionSchema.index({ user: 1, createdAt: -1 });
 walletTransactionSchema.index({ user: 1, wallet: 1, createdAt: -1 });
 /** Idempotency lookup: at most one entry per (user, type, reference.resourceId). */
 walletTransactionSchema.index({ "reference.resourceId": 1, type: 1 });
+/** Monthly yield-cap aggregate: sum `trading_yield` credits per package for a
+ *  target month, scoped by the yield's for-day (`meta.date` = YYYY-MM-DD) so
+ *  backfills are bounded by the target month's cap. Prefix-regex scannable. */
+walletTransactionSchema.index({ type: 1, direction: 1, "meta.date": 1 });
 
 /**
  * Append-only enforcement (Phase 15). The ledger is the financial source of

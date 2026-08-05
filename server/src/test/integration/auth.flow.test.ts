@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
-import { api, authed, closeApi, registerAndLogin } from "../api.js";
+import { api, authed, closeApi, registerAndLogin, seedUser } from "../api.js";
 import { hasTestDb, connectTestDb, clearDb, disconnectTestDb } from "../db.js";
 
 /**
@@ -23,9 +23,11 @@ describe.skipIf(!hasTestDb)("auth flow", () => {
     const email = `ada-${Math.random().toString(36).slice(2)}@test.local`;
     const password = "secret123";
 
+    // A referral code is compulsory — sponsor under a freshly seeded root.
+    const root = await seedUser({ name: "Root" });
     const reg = await api("/api/v1/auth/register", {
       method: "POST",
-      body: JSON.stringify({ name: "Ada", email, password }),
+      body: JSON.stringify({ name: "Ada", email, password, referralCode: root.referralCode }),
     });
     expect(reg.status).toBe(201);
     expect(reg.body.success).toBe(true);
@@ -84,5 +86,28 @@ describe.skipIf(!hasTestDb)("auth flow", () => {
     const { accessToken } = await registerAndLogin();
     const me = await authed(accessToken, "/api/v1/auth/me");
     expect(me.status).toBe(200);
+  });
+
+  it("rejects registration without a referral code (400)", async () => {
+    const r = await api("/api/v1/auth/register", {
+      method: "POST",
+      body: JSON.stringify({ name: "NoRef", email: `noref-${Math.random().toString(36).slice(2)}@test.local`, password: "secret123" }),
+    });
+    expect(r.status).toBe(400);
+    expect(r.body.success).toBe(false);
+  });
+
+  it("rejects registration with an invalid referral code (400)", async () => {
+    const r = await api("/api/v1/auth/register", {
+      method: "POST",
+      body: JSON.stringify({
+        name: "BadRef",
+        email: `badref-${Math.random().toString(36).slice(2)}@test.local`,
+        password: "secret123",
+        referralCode: "DOES-NOT-EXIST",
+      }),
+    });
+    expect(r.status).toBe(400);
+    expect(r.body.success).toBe(false);
   });
 });

@@ -16,6 +16,7 @@ const CMS_CACHE_TTL = 30_000;
 /** Raw settings rows mapped to SiteConfig field keys. */
 const SETTING_KEYS = {
   siteName: "cms.siteName",
+  website: "cms.website",
   tagline: "cms.tagline",
   logoLight: "cms.logoLight",
   logoDark: "cms.logoDark",

@@ -156,6 +156,21 @@ async function activeLadder(): Promise<LeanRankLadder[]> {
   return Rank.find({ status: "active" }).sort({ order: 1 }).lean();
 }
 
+/** Star level (0..10) for a given all-level team size. Star N requires
+ *  `teamCount >= 3^N` (3,9,27,81,243,729,2187,6561,19683,59049). Returns 0
+ *  below 3 and caps at 10. Pure function — the canonical team-size→star map
+ *  shared by the rank ladder and the monthly community bonus. */
+export function getStarFromTeamSize(teamCount: number): number {
+  if (teamCount < 3) return 0;
+  let star = 0;
+  let threshold = 1; // 3^0
+  while (star < 10 && teamCount >= threshold * 3) {
+    threshold *= 3;
+    star++;
+  }
+  return star;
+}
+
 /** A user's direct + all-level team counts, reusing a caller's slice if given. */
 async function resolveCounts(userId: string, counts?: TeamCounts): Promise<TeamCounts> {
   if (counts) return counts;

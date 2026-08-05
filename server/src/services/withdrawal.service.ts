@@ -7,7 +7,7 @@ import { withdrawalUpdateTemplate } from "./emailTemplates.js";
 import type { WithdrawalPage, WithdrawalRow, WithdrawalStatus, WalletType } from "@zaminex/shared";
 
 /** Minimum withdrawal in USD. Phase 14 will make this admin-configurable. */
-export const MIN_WITHDRAWAL_USD = 10;
+export const MIN_WITHDRAWAL_USD = 15;
 
 interface Meta {
   ip?: string;
@@ -56,11 +56,14 @@ function paginate(total: number, page: number, limit: number) {
 /* ------------------------------------------------------------------ */
 
 /**
- * Submit a withdrawal: validate the address + amount, create a pending request,
- * and move `available → onHold` on the chosen wallet (immutable ledger entry).
- * The atomic hold guard is the source of truth for sufficiency; if it fails
- * (a concurrent op drained `available` after the soft pre-check), the just-
- * created request is rolled back so the user can retry.
+ * Submit a withdrawal: validate the address + amount, move `available → onHold`
+ * (immutable ledger entry), then auto-approve by permanently debiting `onHold`
+ * (`withdrawal_paid`) and marking the request `paid`. The on-chain USDT payout
+ * is a deferred, manual fulfillment step — the row is born `paid` so the user's
+ * balance reflects the withdrawal immediately. The atomic hold guard is the
+ * source of truth for sufficiency; if it fails (a concurrent op drained
+ * `available` after the soft pre-check), the just-created request is rolled
+ * back so the user can retry.
  */
 export async function submitWithdrawal(
   userId: string,
@@ -82,14 +85,18 @@ export async function submitWithdrawal(
     throw ApiError.badRequest("Insufficient available balance");
   }
 
-  // 1. Create the pending request (address snapshotted).
+  // 1. Create the request as already paid (auto-approved; on-chain payout is
+  //    a deferred manual fulfillment step, not a balance movement).
+  const now = new Date();
   const request = await Withdrawal.create({
     user: userId,
     wallet: input.wallet,
     amount,
     currency: "USDT-BEP20",
     address,
-    status: "pending",
+    status: "paid",
+    processedAt: now,
+    remarks: "Auto-approved — pending on-chain payout",
   });
 
   // 2. Move available → onHold (atomic, idempotent via the request id).
@@ -115,6 +122,26 @@ export async function submitWithdrawal(
     throw ApiError.conflict("Insufficient available balance");
   }
 
+  // 3. Auto-approve: permanently debit onHold (idempotent via the request id),
+  //    mirroring `markPaidWithdrawal`. A debit failure here is logged but does
+  //    not unwind the hold — the row stays `paid` and ops reconcile manually.
+  await applyLedgerEntry({
+    userId,
+    wallet: input.wallet,
+    field: "onHold",
+    direction: "debit",
+    amount,
+    type: "withdrawal_paid",
+    reference: { resource: "Withdrawal", resourceId: request._id.toString() },
+    memo: "Withdrawal paid (auto-approved)",
+  }).catch((err) => {
+    logger.error("Withdrawal auto-pay debit failed; onHold left funded for manual reconciliation", {
+      userId,
+      requestId: request._id.toString(),
+      error: err instanceof Error ? err.message : String(err),
+    });
+  });
+
   await ActivityLog.create({
     actor: userId,
     action: "withdrawal.submit",
@@ -124,8 +151,32 @@ export async function submitWithdrawal(
     ip: meta?.ip,
     userAgent: meta?.userAgent,
   }).catch(() => undefined);
+  await ActivityLog.create({
+    actor: userId,
+    action: "withdrawal.pay",
+    resource: "Withdrawal",
+    resourceId: request._id.toString(),
+    meta: { wallet: input.wallet, amount, autoApproved: true },
+    ip: meta?.ip,
+    userAgent: meta?.userAgent,
+  }).catch(() => undefined);
 
-  return toWithdrawalRow(request.toObject());
+  // Best-effort paid email (gated on the user's email preference).
+  await sendNotificationEmail(
+    user,
+    withdrawalUpdateTemplate({
+      name: user.name,
+      status: "paid",
+      amount,
+      currency: "USDT-BEP20",
+      wallet: input.wallet,
+      address,
+      remarks: "Auto-approved — pending on-chain payout",
+    }),
+  ).catch(() => undefined);
+
+  const updated = await Withdrawal.findById(request._id).lean();
+  return toWithdrawalRow(updated as never);
 }
 
 /** GET /withdrawals — the user's withdrawals (newest first). */

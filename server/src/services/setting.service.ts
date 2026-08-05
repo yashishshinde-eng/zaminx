@@ -18,6 +18,7 @@ import type {
  * (Phase 14C territory). Kept in sync with `cms.controller.ts`. */
 const CMS_SETTING_KEYS: Record<keyof SiteConfigUpdate, string> = {
   siteName: "cms.siteName",
+  website: "cms.website",
   tagline: "cms.tagline",
   logoLight: "cms.logoLight",
   logoDark: "cms.logoDark",
@@ -75,6 +76,11 @@ export async function isYieldEnabled(): Promise<boolean> {
   return getSetting<boolean>("compensation.yieldEnabled", true);
 }
 
+/** Max total yield credited per calendar month, as % of package price (default 30 = 30%; 0 = no cap). */
+export async function getMonthlyYieldCapPct(): Promise<number> {
+  return getSetting<number>("compensation.monthlyYieldCapPct", 30);
+}
+
 /* ---- Phase 10A compensation convenience reads ---- */
 
 /** Whether the daily team-energy run is enabled (default true). */
@@ -82,14 +88,15 @@ export async function isTeamEnergyEnabled(): Promise<boolean> {
   return getSetting<boolean>("compensation.teamEnergyEnabled", true);
 }
 
-/** How many ancestor levels a team-energy run pays (default 5). */
+/** How many ancestor levels a team-energy run pays (default 10). */
 export async function getTeamEnergyDepth(): Promise<number> {
-  return getSetting<number>("compensation.teamEnergyDepth", 5);
+  return getSetting<number>("compensation.teamEnergyDepth", 10);
 }
 
-/** Per-level team-energy weights, level 1 = direct sponsor (default [10,5,3,2,1]). */
+/** Per-level team-energy weights, level 1 = direct sponsor
+ *  (default [10,5,4,3,2,1,0.5,0.5,0.25,0.25] — 10 levels). */
 export async function getTeamEnergyPct(): Promise<number[]> {
-  return getSetting<number[]>("compensation.teamEnergyPct", [10, 5, 3, 2, 1]);
+  return getSetting<number[]>("compensation.teamEnergyPct", [10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.25, 0.25]);
 }
 
 /** Whether the monthly community-bonus run is enabled (default true). */
@@ -104,25 +111,27 @@ export async function getCommunityPct(): Promise<number> {
 
 /* ---- Phase 14A — compensation settings read/update ---- */
 
-/** Read the 7 compensation knobs as a single snapshot (Phase 14A admin UI). */
+/** Read the compensation knobs as a single snapshot (Phase 14A admin UI). */
 export async function getCompensationSettings(): Promise<CompensationSettings> {
-  const [directBonusPct, yieldEnabled, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct] =
+  const [directBonusPct, yieldEnabled, monthlyYieldCapPct, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct] =
     await Promise.all([
       getDirectBonusPct(),
       isYieldEnabled(),
+      getMonthlyYieldCapPct(),
       isTeamEnergyEnabled(),
       getTeamEnergyDepth(),
       getTeamEnergyPct(),
       isCommunityEnabled(),
       getCommunityPct(),
     ]);
-  return { directBonusPct, yieldEnabled, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct };
+  return { directBonusPct, yieldEnabled, monthlyYieldCapPct, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct };
 }
 
 /** Update only the provided compensation knobs, then return the new snapshot. */
 export async function updateCompensationSettings(body: CompensationSettingsBody): Promise<CompensationSettings> {
   if (body.directBonusPct !== undefined) await setSetting("compensation.directBonusPct", body.directBonusPct, "compensation");
   if (body.yieldEnabled !== undefined) await setSetting("compensation.yieldEnabled", body.yieldEnabled, "compensation");
+  if (body.monthlyYieldCapPct !== undefined) await setSetting("compensation.monthlyYieldCapPct", body.monthlyYieldCapPct, "compensation");
   if (body.teamEnergyEnabled !== undefined) await setSetting("compensation.teamEnergyEnabled", body.teamEnergyEnabled, "compensation");
   if (body.teamEnergyDepth !== undefined) await setSetting("compensation.teamEnergyDepth", body.teamEnergyDepth, "compensation");
   if (body.teamEnergyPct !== undefined) await setSetting("compensation.teamEnergyPct", body.teamEnergyPct, "compensation");
@@ -133,9 +142,10 @@ export async function updateCompensationSettings(body: CompensationSettingsBody)
 
 /* ---- Phase 14B — admin site-config (the 9 cms.* fields) ---- */
 
-/** Default values for the 9 cms.* fields (mirror the seeded defaults). */
+/** Default values for the admin-editable cms.* fields (mirror the seeded defaults). */
 const CMS_DEFAULTS: SiteConfigUpdate = {
-  siteName: "Zaminex",
+  siteName: "Zeminex Global",
+  website: "https://zeminexglobal.com",
   tagline: "",
   logoLight: "",
   logoDark: "",
@@ -147,11 +157,12 @@ const CMS_DEFAULTS: SiteConfigUpdate = {
   announcementBar: { enabled: false, message: "" },
 };
 
-/** Read the 9 admin-editable cms.* fields (with defaults for missing rows). */
+/** Read the admin-editable cms.* fields (with defaults for missing rows). */
 export async function getAdminSiteConfig(): Promise<SiteConfigUpdate> {
-  const [siteName, tagline, logoLight, logoDark, navLinks, footerText, contactDetails, socialLinks, seoDefaults, announcementBar] =
+  const [siteName, website, tagline, logoLight, logoDark, navLinks, footerText, contactDetails, socialLinks, seoDefaults, announcementBar] =
     await Promise.all([
       getSetting("cms.siteName", CMS_DEFAULTS.siteName),
+      getSetting("cms.website", CMS_DEFAULTS.website),
       getSetting("cms.tagline", CMS_DEFAULTS.tagline),
       getSetting("cms.logoLight", CMS_DEFAULTS.logoLight),
       getSetting("cms.logoDark", CMS_DEFAULTS.logoDark),
@@ -162,7 +173,7 @@ export async function getAdminSiteConfig(): Promise<SiteConfigUpdate> {
       getSetting("cms.seoDefaults", CMS_DEFAULTS.seoDefaults),
       getSetting("cms.announcementBar", CMS_DEFAULTS.announcementBar),
     ]);
-  return { siteName, tagline, logoLight, logoDark, navLinks, footerText, contactDetails, socialLinks, seoDefaults, announcementBar };
+  return { siteName, website, tagline, logoLight, logoDark, navLinks, footerText, contactDetails, socialLinks, seoDefaults, announcementBar };
 }
 
 /** Update only the provided cms.* fields (all public — feed the website). */

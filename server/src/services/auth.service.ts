@@ -49,30 +49,30 @@ interface RegisterInput {
   email: string;
   password: string;
   phone?: string;
-  referralCode?: string;
+  referralCode: string;
 }
 
 export async function registerUser(input: RegisterInput) {
   const existing = await User.findOne({ email: input.email });
   if (existing) throw ApiError.conflict("An account with this email already exists");
 
-  let referrer: UserDocument | null = null;
-  if (input.referralCode) {
-    referrer = await User.findOne({ referralCode: input.referralCode });
-    if (!referrer) throw ApiError.badRequest("Invalid referral code");
-    if (referrer.status !== "active") throw ApiError.badRequest("Referrer account is not active");
-  }
+  // A valid referral code is compulsory — every member joins under an existing
+  // active sponsor (the seeded admin is the root). No self-registration without
+  // a referrer.
+  const referrer = await User.findOne({ referralCode: input.referralCode });
+  if (!referrer) throw ApiError.badRequest("Invalid referral code");
+  if (referrer.status !== "active") throw ApiError.badRequest("Referrer account is not active");
 
   const user = new User({
     name: input.name,
     email: input.email,
     phone: input.phone,
     password: input.password, // virtual hashes it
-    referredBy: referrer ? referrer.referralCode : null,
+    referredBy: referrer.referralCode,
     // Phase 9: materialise the referral graph so descendants are one index hit.
     // lineage = the referrer's ancestor chain + the referrer itself (root → sponsor).
-    sponsorId: referrer ? referrer._id : null,
-    lineage: referrer ? [...referrer.lineage, referrer._id] : [],
+    sponsorId: referrer._id,
+    lineage: [...referrer.lineage, referrer._id],
   });
   await user.save();
 

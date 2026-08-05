@@ -14,8 +14,8 @@ const packageSchema = new Schema(
     priceUsd: { type: Number, required: true, min: 1 },
     /** Daily trading yield, e.g. 1.5 = 1.5%. */
     dailyReturnPct: { type: Number, required: true, min: 0, max: 5 },
-    /** Term length in days. */
-    durationDays: { type: Number, required: true, min: 1 },
+    /** Term length in days. 0 means LIFETIME (no expiry). */
+    durationDays: { type: Number, required: true, min: 0, default: 0 },
     features: [{ type: String, trim: true, maxlength: 120 }],
     sort: { type: Number, default: 0 },
     status: { type: String, enum: ["active", "inactive"], default: "active", index: true },

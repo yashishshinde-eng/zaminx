@@ -30,9 +30,8 @@ export const registerSchema = z.object({
     referralCode: z
       .string()
       .trim()
-      .max(50)
-      .optional()
-      .transform((v) => (v === "" ? undefined : v)),
+      .min(1, { message: "Referral code is required" })
+      .max(50, { message: "Referral code is too long" }),
   }),
 });
 

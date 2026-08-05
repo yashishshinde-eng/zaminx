@@ -46,7 +46,7 @@ const TICK_MS = 60_000;
 const REGISTRY: Job[] = [
   { name: "daily_yield", schedule: { kind: "daily", hourUTC: 0, minuteUTC: 30 }, run: runDailyYield },
   { name: "daily_team_energy", schedule: { kind: "daily", hourUTC: 0, minuteUTC: 45 }, run: runDailyTeamEnergy },
-  { name: "monthly_community_bonus", schedule: { kind: "monthly", dayUTC: 1, hourUTC: 1, minuteUTC: 0 }, run: runMonthlyCommunityBonus },
+  { name: "monthly_community_bonus", schedule: { kind: "monthly", dayUTC: 10, hourUTC: 1, minuteUTC: 0 }, run: runMonthlyCommunityBonus },
   { name: "rank_check", schedule: { kind: "daily", hourUTC: 1, minuteUTC: 15 }, run: runRankCheckAll },
   { name: "bonanza_check", schedule: { kind: "daily", hourUTC: 1, minuteUTC: 30 }, run: runBonanzaEvaluationAll },
   { name: "payment_verify", schedule: { kind: "interval", everyMinutes: 15 }, run: verifyPendingDeposits },

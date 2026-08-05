@@ -130,6 +130,8 @@ export interface RankEvalSummary {
 export interface CompensationSettings {
   directBonusPct: number;
   yieldEnabled: boolean;
+  /** Max total yield credited per calendar month, as % of package price (0 = no cap). */
+  monthlyYieldCapPct: number;
   teamEnergyEnabled: boolean;
   teamEnergyDepth: number;
   teamEnergyPct: number[];

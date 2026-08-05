@@ -92,15 +92,30 @@ export async function seedUser(opts: SeedUserOpts = {}): Promise<{ _id: string; 
   return { _id: String(u._id), email, password, referralCode: u.referralCode };
 }
 
-/** Register via the API then login — returns access + refresh tokens for a fresh user. */
+/** Seed a root referrer directly (bypasses the API, which now requires a
+ *  referral code) so tests can register users under it. Returns its referral
+ *  code. */
+export async function seedRootReferrer(): Promise<{ _id: string; referralCode: string }> {
+  const u = await User.create({
+    name: "Root Referrer",
+    email: `root-${Math.random().toString(36).slice(2)}@test.local`,
+    password: "secret123",
+  });
+  return { _id: String(u._id), referralCode: u.referralCode };
+}
+
+/** Register via the API then login — returns access + refresh tokens for a fresh user.
+ *  A referral code is compulsory at registration; when none is given, a root
+ *  referrer is created on the fly to sponsor the new user. */
 export async function registerAndLogin(
-  creds: { name?: string; email?: string; password?: string } = {},
+  creds: { name?: string; email?: string; password?: string; referralCode?: string } = {},
 ): Promise<{ accessToken: string; refreshToken: string; userId: string }> {
   const email = creds.email ?? `user-${Math.random().toString(36).slice(2)}@test.local`;
   const password = creds.password ?? "secret123";
+  const referralCode = creds.referralCode ?? (await seedRootReferrer()).referralCode;
   const reg = await api<{ data: { user: { id: string }; tokens: { accessToken: string; refreshToken: string } } }>("/api/v1/auth/register", {
     method: "POST",
-    body: JSON.stringify({ name: creds.name ?? "Test User", email, password }),
+    body: JSON.stringify({ name: creds.name ?? "Test User", email, password, referralCode }),
   });
   const { accessToken, refreshToken } = reg.body.data.tokens;
   return { accessToken, refreshToken, userId: reg.body.data.user.id };
@@ -119,7 +134,8 @@ export async function seedPackage(opts: SeedPackageOpts = {}): Promise<{ _id: st
     slug,
     priceUsd: opts.priceUsd ?? 100,
     dailyReturnPct: opts.dailyReturnPct ?? 1.5,
-    durationDays: opts.durationDays ?? 30,
+    // 0 = LIFETIME (no expiry) — the spec-aligned default.
+    durationDays: opts.durationDays ?? 0,
     status: "active",
   });
   return { _id: String(p._id) };

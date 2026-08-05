@@ -156,6 +156,8 @@ export const compensationSettingsSchema = z.object({
   body: z.object({
     directBonusPct: z.coerce.number().min(0).max(100).optional(),
     yieldEnabled: z.boolean().optional(),
+    /** Max total yield credited per calendar month, as % of package price. */
+    monthlyYieldCapPct: z.coerce.number().min(0).max(100).optional(),
     teamEnergyEnabled: z.boolean().optional(),
     teamEnergyDepth: z.coerce.number().int().min(0).max(10).optional(),
     teamEnergyPct: z.array(z.coerce.number().min(0).max(100)).max(10).optional(),

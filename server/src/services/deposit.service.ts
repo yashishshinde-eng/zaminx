@@ -245,9 +245,11 @@ export async function confirmDeposit(
   if (flipped.modifiedCount === 0) return null; // raced / already processed
 
   // 2. Activate the package (compute expiry from the snapshotted term).
+  //    durationDays === 0 means LIFETIME → expiresAt stays null (never expires).
   const up = await UserPackage.findById(deposit.userPackage).lean();
   if (up) {
-    const expiresAt = new Date(now.getTime() + (up.snapshot!.durationDays * DAY_MS));
+    const termDays = up.snapshot!.durationDays;
+    const expiresAt = termDays > 0 ? new Date(now.getTime() + termDays * DAY_MS) : null;
     await UserPackage.updateOne(
       { _id: up._id, status: "pending" },
       { $set: { status: "active", activatedAt: now, expiresAt, paymentStatus: "paid" } },

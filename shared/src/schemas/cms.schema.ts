@@ -92,6 +92,8 @@ const navLink = z.object({ label: z.string().min(1), href: z.string().min(1) });
 
 export const siteConfigSchema = z.object({
   siteName: z.string().default("Zaminex"),
+  /** Public website URL (e.g. https://zeminexglobal.com). */
+  website: z.string().optional(),
   tagline: z.string().optional(),
   logoLight: z.string().nullable().default(null), // url or null (falls back to text logo)
   logoDark: z.string().nullable().default(null),
@@ -200,6 +202,7 @@ const announcementBarField = siteConfigSchema.shape.announcementBar;
 export const siteConfigUpdateSchema = z.object({
   body: z.object({
     siteName: z.string().optional(),
+    website: z.string().optional(),
     tagline: z.string().optional(),
     logoLight: z.string().nullable().optional(),
     logoDark: z.string().nullable().optional(),

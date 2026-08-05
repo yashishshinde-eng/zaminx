@@ -15,7 +15,7 @@ export interface PackageTier {
   priceUsd: number;
   /** Daily trading yield, e.g. 1.5 = 1.5%. */
   dailyReturnPct: number;
-  /** Term length in days. */
+  /** Term length in days. 0 means LIFETIME (no expiry). */
   durationDays: number;
   features: string[];
   sort: number;
@@ -51,6 +51,7 @@ export interface UserPackageRow {
     name: string;
     priceUsd: number;
     dailyReturnPct: number;
+    /** 0 means LIFETIME (no expiry). */
     durationDays: number;
   };
   status: UserPackageStatus;

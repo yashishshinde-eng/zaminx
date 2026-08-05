@@ -1,16 +1,18 @@
-import { User, UserPackage, BonanzaOffer, ActivityLog, WalletTransaction } from "../models/index.js";
+import { User, UserPackage, BonanzaOffer, ActivityLog, WalletTransaction, Rank } from "../models/index.js";
 import { logger } from "../config/logger.js";
 import { applyLedgerEntry } from "./wallet.service.js";
 import { sendNotificationEmail } from "./email.service.js";
 import { bonanzaEarnedTemplate } from "./emailTemplates.js";
+import { getTeamCounts } from "./referral.service.js";
+import { getStarFromTeamSize } from "./rank.service.js";
 import {
   getDirectBonusPct,
   isYieldEnabled,
+  getMonthlyYieldCapPct,
   isTeamEnergyEnabled,
   getTeamEnergyDepth,
   getTeamEnergyPct,
   isCommunityEnabled,
-  getCommunityPct,
 } from "./setting.service.js";
 import type {
   YieldRunSummary,
@@ -127,21 +129,53 @@ export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
   let expired = 0;
   let errors = 0;
 
+  // Monthly yield cap: total yield credited this calendar month must not exceed
+  // `capPct`% of the package price. 0 means no cap. We aggregate this month's
+  // `trading_yield` credits grouped by `meta.userPackageId` once, then bound
+  // each daily credit so the running monthly total never crosses the cap.
+  // The cap is scoped by the yield's for-day (`meta.date` = YYYY-MM-DD), not
+  // `createdAt`, so backfills to a past month are bounded by that month's cap
+  // even though the ledger row is written "now".
+  const capPct = await getMonthlyYieldCapPct();
+  const creditedThisMonthByPkg = new Map<string, number>();
+  if (capPct > 0) {
+    const { key: monthKey } = utcMonthBounds(target);
+    const monthAgg = (await WalletTransaction.aggregate([
+      {
+        $match: {
+          type: "trading_yield",
+          direction: "credit",
+          "meta.date": { $regex: `^${monthKey}` },
+        },
+      },
+      { $group: { _id: "$meta.userPackageId", total: { $sum: "$amount" } } },
+    ])) as { _id: string; total: number }[];
+    for (const row of monthAgg) creditedThisMonthByPkg.set(row._id, round2(row.total));
+  }
+
   for (const up of packages) {
     try {
       const activatedAt = up.activatedAt instanceof Date ? up.activatedAt.getTime() : null;
       const expiresAt = up.expiresAt instanceof Date ? up.expiresAt.getTime() : null;
-      if (activatedAt == null || expiresAt == null) {
+      if (activatedAt == null) {
         skipped++;
         continue;
       }
       // Eligible when the active interval [activatedAt, expiresAt) overlaps day D.
-      const overlaps = activatedAt < end && expiresAt > start;
+      // expiresAt === null means LIFETIME (eligible indefinitely once activated).
+      const overlaps = activatedAt < end && (expiresAt === null || expiresAt > start);
       if (!overlaps) {
         skipped++;
       } else {
         const s = up.snapshot;
-        const amount = round2((s.priceUsd * s.dailyReturnPct) / 100);
+        const dailyAmount = round2((s.priceUsd * s.dailyReturnPct) / 100);
+        // Bound the daily credit by the remaining monthly cap (if any).
+        let amount = dailyAmount;
+        if (capPct > 0 && dailyAmount > 0) {
+          const capAmount = round2((s.priceUsd * capPct) / 100);
+          const soFar = creditedThisMonthByPkg.get(up._id.toString()) ?? 0;
+          amount = Math.min(dailyAmount, Math.max(0, capAmount - soFar));
+        }
         if (amount > 0) {
           await applyLedgerEntry({
             userId: up.user.toString(),
@@ -154,6 +188,10 @@ export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
             memo: `Daily trade yield — ${s.name} (${s.dailyReturnPct}%)`,
             meta: { userPackageId: up._id.toString(), date: key },
           });
+          // Track the credited amount against this package's monthly running total.
+          if (capPct > 0) {
+            creditedThisMonthByPkg.set(up._id.toString(), round2((creditedThisMonthByPkg.get(up._id.toString()) ?? 0) + amount));
+          }
           credited++;
         } else {
           skipped++;
@@ -161,7 +199,8 @@ export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
       }
 
       // Expiry sweep: a package past its term is no longer yield-eligible.
-      if (expiresAt <= now.getTime()) {
+      // Lifetime packages (expiresAt === null) never expire.
+      if (expiresAt !== null && expiresAt <= now.getTime()) {
         const res = await UserPackage.updateOne({ _id: up._id, status: "active" }, { $set: { status: "expired" } });
         if (res.modifiedCount > 0) expired++;
       }
@@ -252,11 +291,12 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     try {
       const activatedAt = up.activatedAt instanceof Date ? up.activatedAt.getTime() : null;
       const expiresAt = up.expiresAt instanceof Date ? up.expiresAt.getTime() : null;
-      if (activatedAt == null || expiresAt == null) {
+      if (activatedAt == null) {
         skipped++;
         continue;
       }
-      if (!(activatedAt < end && expiresAt > start)) {
+      // expiresAt === null means LIFETIME (eligible indefinitely once activated).
+      if (!(activatedAt < end && (expiresAt === null || expiresAt > start))) {
         skipped++;
         continue;
       }
@@ -349,97 +389,80 @@ function utcMonthBounds(d: Date): { start: Date; end: Date; key: string } {
 }
 
 /**
- * Run the monthly community credit: each sponsor earns `communityPct`% of their
- * entire downline's trade yield for the calendar month. One `community_bonus`
- * credit per sponsor per month, idempotent via `community:<sponsorId>:<YYYY-MM>`.
+ * Run the monthly community credit: each active-package holder earns the reward
+ * for their current star (team-size ladder) — a recurring $ amount per star on
+ * the 10th of each month. One `community_bonus` credit per user per month,
+ * idempotent via `community:<userId>:<YYYY-MM>`.
  *
- * Eligibility (anti-farming): a sponsor only earns if they hold an active
- * UserPackage. No cron yet (Phase 18) — triggered by the admin
- * `POST /compensation/run-community` endpoint. `asOf` targets a specific month
- * for backfills; defaults to the current month.
+ * The star→reward map is the active `Rank` ladder (order === star), so the
+ * monthly $-by-star amounts stay admin-tunable via the /ranks endpoints and
+ * reuse the same 10-star ladder as the one-time rank rewards ($10…$10,000).
+ *
+ * Eligibility (anti-farming): a user only earns while holding an active
+ * UserPackage. Scheduled by the in-process cron on UTC day 10 (Phase 18) and
+ * triggerable on demand via the admin `POST /compensation/run-community`
+ * endpoint. `asOf` targets a specific month for backfills; defaults to the
+ * current month.
  */
 export async function runMonthlyCommunityBonus(asOf?: Date): Promise<CommunityRunSummary> {
   const target = asOf ?? new Date();
-  const { start, end, key: monthKey } = utcMonthBounds(target);
+  const { key: monthKey } = utcMonthBounds(target);
 
   if (!(await isCommunityEnabled())) {
     return { month: monthKey, processed: 0, credited: 0, skipped: 0, errors: 0 };
   }
 
-  const pct = await getCommunityPct();
+  // The 10-star reward ladder (order === star). Star 0 (Starter) pays nothing.
+  const ladder = await Rank.find({ status: "active" }).lean();
+  const rewardByStar = new Map<number, number>();
+  for (const r of ladder) rewardByStar.set(r.order, r.rewardAmount);
 
-  const sponsorIds = (await User.distinct("sponsorId", { sponsorId: { $ne: null } })).map((id) =>
+  // Active-package holders only (anti-farming guard).
+  const activeUserIds = (await UserPackage.find({ status: "active" }).distinct("user")).map((id) =>
     id.toString(),
   );
-  if (sponsorIds.length === 0) {
-    return { month: monthKey, processed: 0, credited: 0, skipped: 0, errors: 0 };
-  }
-
-  // Cache active-package sponsors once for the eligibility guard.
-  const activeUserIds = new Set(
-    (await UserPackage.find({ status: "active" }).distinct("user")).map((id) => id.toString()),
-  );
-  const isActiveSponsor = (id: string): boolean => activeUserIds.has(id);
 
   let credited = 0;
   let skipped = 0;
   let errors = 0;
 
-  for (const sponsorId of sponsorIds) {
+  for (const userId of activeUserIds) {
     try {
-      if (!isActiveSponsor(sponsorId)) {
+      const { teamCount } = await getTeamCounts(userId);
+      const star = getStarFromTeamSize(teamCount);
+      if (star < 1) {
         skipped++;
         continue;
       }
-      // Downline = every user whose lineage contains this sponsor (all levels).
-      const downline = await User.find({ lineage: sponsorId }).select("_id").lean();
-      const downlineIds = downline.map((u) => u._id);
-      if (downlineIds.length === 0) {
-        skipped++;
-        continue;
-      }
-
-      const agg = await WalletTransaction.aggregate<{ _id: null; total: number }>([
-        {
-          $match: {
-            user: { $in: downlineIds },
-            type: "trading_yield",
-            direction: "credit",
-            createdAt: { $gte: start, $lt: end },
-          },
-        },
-        { $group: { _id: null, total: { $sum: "$amount" } } },
-      ]);
-      const total = agg[0]?.total ?? 0;
-      const amount = round2((total * pct) / 100);
-      if (amount <= 0) {
+      const reward = rewardByStar.get(star) ?? 0;
+      if (reward <= 0) {
         skipped++;
         continue;
       }
 
       await applyLedgerEntry({
-        userId: sponsorId,
+        userId,
         wallet: "bonus",
         field: "available",
         direction: "credit",
-        amount,
+        amount: reward,
         type: "community_bonus",
-        reference: { resource: "User", resourceId: `community:${sponsorId}:${monthKey}` },
-        memo: "Community monthly bonus",
-        meta: { month: monthKey, pct, teamYield: total },
+        reference: { resource: "User", resourceId: `community:${userId}:${monthKey}` },
+        memo: `Community monthly bonus — ${star} Star`,
+        meta: { month: monthKey, star, teamCount },
       });
       credited++;
       await ActivityLog.create({
-        actor: sponsorId,
+        actor: userId,
         action: "compensation.community_bonus",
         resource: "User",
-        resourceId: `community:${sponsorId}:${monthKey}`,
-        meta: { amount, month: monthKey, pct, teamYield: total },
+        resourceId: `community:${userId}:${monthKey}`,
+        meta: { amount: reward, month: monthKey, star, teamCount },
       }).catch(() => undefined);
     } catch (err) {
       errors++;
       logger.error("Community bonus credit failed", {
-        sponsorId,
+        userId,
         month: monthKey,
         error: err instanceof Error ? err.message : String(err),
       });
@@ -448,7 +471,7 @@ export async function runMonthlyCommunityBonus(asOf?: Date): Promise<CommunityRu
 
   return {
     month: monthKey,
-    processed: sponsorIds.length,
+    processed: activeUserIds.length,
     credited,
     skipped,
     errors,
