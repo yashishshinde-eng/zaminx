@@ -242,7 +242,7 @@ function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefi
           <CardContent className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
             <TotalStat label="Total available" value={wallets.totalAvailable} accent="text-foreground" />
             <TotalStat label="On hold" value={wallets.totalOnHold} accent="text-warning" />
-            <TotalStat label="Grand total" value={wallets.total} accent="text-gradient" big />
+            <TotalStat label="Grand total" value={wallets.total} accent="text-gradient-gold" big />
           </CardContent>
         </Card>
       </motion.div>
@@ -273,7 +273,7 @@ function WalletBalanceCard({ label, icon: Icon, balance, strip }: WalletCardDef)
               <span className="tabular-nums text-muted-foreground">{availablePct}% free</span>
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-muted">
-              <div className="brand-gradient h-full rounded-full transition-all" style={{ width: `${availablePct}%` }} />
+              <div className="gradient-blue h-full rounded-full transition-all" style={{ width: `${availablePct}%` }} />
             </div>
           </div>
         ) : (

@@ -5,11 +5,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { resetPasswordSchema } from "@zaminex/shared";
 import type { ResetPasswordBody } from "@zaminex/shared";
 import toast from "react-hot-toast";
+import { ArrowRight } from "lucide-react";
 import { api } from "@/lib/axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Logo } from "@/components/layout/Logo";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 
@@ -45,18 +45,23 @@ export function ResetPasswordPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background bg-depth p-4">
-      <Card className="w-full max-w-md border-0 shadow-card">
-        <CardHeader className="space-y-3 text-center">
-          <div className="mx-auto"><Logo className="size-12" /></div>
-          <CardTitle className="text-2xl">Reset password</CardTitle>
-          <CardDescription>Choose a new password for your account.</CardDescription>
-        </CardHeader>
-        <CardContent>
+      <div className="w-full max-w-md">
+        <div className="mx-auto mb-8 text-center">
+          <Logo className="mx-auto size-12 shadow-glow-blue" />
+        </div>
+
+        <div className="glass-card p-8">
+          <div className="mb-6 text-center">
+            <h1 className="font-grotesk text-2xl font-bold tracking-tight">Reset password</h1>
+            <p className="mt-1 text-sm text-muted-foreground">Choose a new password for your account.</p>
+          </div>
+
           {!token && (
-            <p className="mb-4 rounded-md border border-warning/40 bg-warning/10 p-3 text-sm text-warning">
+            <div className="mb-4 rounded-[14px] border border-warning/30 bg-warning/5 p-3 text-sm text-warning">
               No reset token was found in the link. Use the link from your reset email, or paste the token below.
-            </p>
+            </div>
           )}
+
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
             {!token && (
               <div className="space-y-2">
@@ -70,15 +75,16 @@ export function ResetPasswordPage() {
               <Input id="password" type="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
               {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
             </div>
-            <Button type="submit" className="w-full" disabled={submitting}>
-              {submitting ? "Updating…" : "Update password"}
+            <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
+              {submitting ? "Updating…" : <>Update password <ArrowRight className="size-4" /></>}
             </Button>
           </form>
+
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            <Link to="/login" className="font-medium text-primary hover:underline">Back to sign in</Link>
+            <Link to="/login" className="font-medium text-gold hover:underline">Back to sign in</Link>
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }

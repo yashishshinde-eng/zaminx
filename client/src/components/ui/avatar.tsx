@@ -37,7 +37,7 @@ export function Avatar({ src, alt, fallback, className, size = "md" }: AvatarPro
       {src ? (
         <img src={src} alt={alt} className="h-full w-full object-cover" />
       ) : (
-        <span className="brand-gradient flex h-full w-full items-center justify-center text-primary-foreground">
+        <span className="gradient-blue flex h-full w-full items-center justify-center text-white">
           {initials}
         </span>
       )}

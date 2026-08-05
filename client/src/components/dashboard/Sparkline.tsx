@@ -13,11 +13,11 @@ interface SparklineProps {
 }
 
 /**
- * A tiny axis-less area chart for KPI tiles. Reuses the `lib/chart` theme-aware
- * colour convention. Renders nothing when the data is all-zero/empty so the
- * tile stays clean until real earnings exist.
+ * Premium sparkline — tiny axis-less area chart for KPI tiles.
+ * Gold glow drop shadow, gradient fill (blue to transparent), smooth curve,
+ * and entrance animation. Returns null when data is all-zero.
  */
-export function Sparkline({ data, colorVar = "primary", fallback = "hsl(250 84% 54%)", height = 40, className }: SparklineProps) {
+export function Sparkline({ data, colorVar = "primary", fallback = "hsl(45 100% 48%)", height = 40, className }: SparklineProps) {
   const color = themeColor(colorVar, fallback);
   const hasData = data.some((v) => v > 0);
 
@@ -29,17 +29,34 @@ export function Sparkline({ data, colorVar = "primary", fallback = "hsl(250 84% 
         sparkline: { enabled: true },
         toolbar: { show: false },
         background: "transparent",
-        fontFamily: "inherit",
-        animations: { enabled: hasData, speed: 600 },
+        fontFamily: "Space Grotesk, Inter, ui-sans-serif, system-ui, sans-serif",
+        animations: { enabled: hasData, easing: "easeinout", speed: 600, dynamicAnimation: { enabled: true, speed: 400 } },
+        dropShadow: {
+          enabled: true,
+          top: 4,
+          left: 0,
+          blur: 8,
+          opacity: 0.35,
+          color,
+        },
       },
       colors: [color],
-      stroke: { curve: "smooth", width: 2 },
+      stroke: {
+        curve: "smooth",
+        width: 2.5,
+      },
       dataLabels: { enabled: false },
       grid: { show: false, padding: { left: 0, right: 0, top: 0, bottom: 0 } },
       tooltip: { enabled: false },
       fill: {
         type: "gradient",
-        gradient: { shadeIntensity: 1, opacityFrom: 0.35, opacityTo: 0, stops: [0, 100] },
+        gradient: {
+          shadeIntensity: 1,
+          opacityFrom: 0.45,
+          opacityTo: 0.02,
+          stops: [0, 50, 100],
+          gradientToColors: [color],
+        },
       },
       plotOptions: { area: { fillTo: "origin" } },
       yaxis: { show: false },

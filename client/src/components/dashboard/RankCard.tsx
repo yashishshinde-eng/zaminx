@@ -1,39 +1,60 @@
-import { Award } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { Award, Sparkles } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import type { DashboardSummary } from "@zaminex/shared";
 
-/** Current rank + progress to the next rank. Placeholder until Phase 10. */
+/** Current rank + progress to the next rank. Glass card with gold accent. */
 export function RankCard({ rank }: { rank: DashboardSummary["account"]["rank"] }) {
   const pct = Math.round(Math.max(0, Math.min(1, rank.progress)) * 100);
+  const isMaxRank = !rank.nextRank;
+
   return (
-    <Card>
-      <CardHeader className="space-y-1">
-        <CardTitle className="flex items-center gap-2 text-base">
-          <Award className="size-4 text-primary" /> Rank
-        </CardTitle>
-        <CardDescription>Ranks unlock rewards in the compensation plan</CardDescription>
-      </CardHeader>
-      <CardContent>
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card glass-card-hover relative overflow-hidden"
+    >
+      {/* Gold gradient accent */}
+      <div
+        className="absolute inset-x-0 top-0 h-[2px]"
+        style={{
+          background: "linear-gradient(90deg, hsl(var(--gold)), hsl(var(--gold-light)), hsl(var(--gold)))",
+        }}
+      />
+
+      <div className="p-5">
+        {/* Title */}
         <div className="flex items-center gap-3">
-          <div className="flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <Award className="size-6" />
+          <div className="icon-box-gold">
+            <Award className="size-4 text-gold" />
           </div>
-          <div>
-            <p className="text-lg font-semibold">{rank.name}</p>
-            <p className="text-xs text-muted-foreground">Current rank</p>
-          </div>
+          <h3 className="section-title">Current Rank</h3>
         </div>
-        {rank.nextRank && (
+
+        {/* Rank name */}
+        <div className="mt-4 flex items-center gap-3">
+          {isMaxRank && <Sparkles className="size-5 text-gold" />}
+          <p className="metric-value font-grotesk text-gradient-gold text-xl">
+            {rank.name}
+          </p>
+        </div>
+
+        {isMaxRank ? (
+          <div className="mt-3 flex items-center gap-2">
+            <Sparkles className="size-3.5 text-gold" />
+            <span className="text-xs font-medium text-gold">Max rank achieved</span>
+          </div>
+        ) : (
           <div className="mt-4">
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>Progress to {rank.nextRank}</span>
-              <span className="tabular-nums">{pct}%</span>
+            <div className="flex items-center justify-between">
+              <span className="metric-label">Progress to {rank.nextRank}</span>
+              <span className="text-xs font-semibold tabular-nums text-muted-foreground">{pct}%</span>
             </div>
-            <Progress value={pct} className="mt-1.5" />
+            <Progress value={pct} glow className="mt-2" />
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </motion.div>
   );
 }

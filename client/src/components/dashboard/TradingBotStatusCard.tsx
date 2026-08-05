@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Bot } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Sparkline } from "./Sparkline";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
@@ -18,35 +17,51 @@ export function TradingBotStatusCard({ data }: { data: DashboardSummary }) {
   const series = data.income.series.map((s) => s.value);
 
   return (
-    <Card className="card-hover card-shimmer flex h-full flex-col overflow-hidden border-0">
-      <CardContent className="flex h-full flex-col p-5">
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="glass-card glass-card-hover relative flex h-full flex-col overflow-hidden"
+      style={{
+        boxShadow:
+          "var(--shadow-card), inset 0 1px 0 0 rgba(255,255,255,0.06), 0 0 40px -12px hsl(var(--blue) / 0.06)",
+      }}
+    >
+      <div className="flex flex-1 flex-col p-5">
+        {/* Header */}
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="brand-gradient flex size-10 shrink-0 items-center justify-center rounded-xl text-primary-foreground shadow-glow-gold">
-              <Bot className="size-5" />
+            <div className="icon-box-blue">
+              <Bot className="size-5 text-gold" />
             </div>
             <div>
-              <p className="text-sm font-semibold">Trading Bot</p>
-              <p className="text-xs text-muted-foreground">Auto-yield engine</p>
+              <p className="section-title text-sm">Trading Bot</p>
+              <p className="text-[11px] text-muted-foreground">Auto-yield engine</p>
             </div>
           </div>
           <StatusPill active={active} />
         </div>
 
-        <div className="mt-4">
-          <p className="text-xs font-medium text-muted-foreground">Trading income</p>
-          <p className="mt-1 text-2xl font-bold tracking-tight tabular-nums">{formatCurrency(trading)}</p>
+        {/* Trading income */}
+        <div className="mt-5">
+          <p className="metric-label">Trading income</p>
+          <p className="metric-value font-grotesk mt-1 text-gradient-gold text-2xl">
+            {formatCurrency(trading)}
+          </p>
         </div>
 
-        <div className="mt-auto pt-3">
+        {/* Sparkline */}
+        <div className="mt-auto pt-4">
           {series.length > 0 ? (
             <Sparkline data={series} height={44} />
           ) : (
-            <p className="text-xs text-muted-foreground">{active ? "Earnings will appear once yield is credited." : "Activate a package to start the bot."}</p>
+            <p className="text-xs text-muted-foreground">
+              {active ? "Earnings will appear once yield is credited." : "Activate a package to start the bot."}
+            </p>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </motion.div>
   );
 }
 

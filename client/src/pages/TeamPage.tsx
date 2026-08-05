@@ -251,7 +251,7 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
     <Card className="flex h-full flex-col">
       <CardHeader className="space-y-1">
         <CardTitle className="flex items-center gap-2 text-base">
-          <span className="brand-gradient flex size-7 items-center justify-center rounded-md text-primary-foreground">
+          <span className="gradient-blue flex size-7 items-center justify-center rounded-md text-primary-foreground">
             <UserCheck className="size-4" />
           </span>
           Team statistics

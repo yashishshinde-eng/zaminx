@@ -33,7 +33,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "flex items-center justify-center rounded-xl brand-gradient text-primary-foreground font-extrabold shadow-glow-gold",
+        "flex items-center justify-center rounded-xl gradient-blue text-white font-extrabold shadow-glow-blue",
         className,
       )}
       aria-hidden

@@ -156,7 +156,7 @@ export function WithdrawalsPage() {
 
         {/* Withdraw form */}
         <Card className="relative overflow-hidden">
-          <div className="brand-gradient h-1 w-full" />
+          <div className="gradient-blue h-1 w-full" />
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
               <ArrowDownToLine className="size-4 text-primary" /> New withdrawal
@@ -300,7 +300,7 @@ function StatusTimeline({
                         className={cn(
                           "flex size-9 items-center justify-center rounded-full border-2 transition-colors",
                           done && "border-success bg-success text-success-foreground",
-                          active && "brand-gradient border-transparent text-primary-foreground shadow-sm",
+                          active && "gradient-blue border-transparent text-primary-foreground shadow-sm",
                           !done && !active && "border-border bg-card text-muted-foreground",
                         )}
                       >

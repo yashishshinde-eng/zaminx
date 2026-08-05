@@ -28,7 +28,7 @@ export function CmsPageView({ slug, bare = false }: CmsPageViewProps) {
 
   if (isLoading) {
     return (
-      <div className="container py-12">
+      <div className="container py-16">
         {!bare && <Skeleton className="mb-6 h-10 w-64" />}
         <div className="space-y-4">
           <Skeleton className="h-6 w-3/4" />
@@ -41,7 +41,7 @@ export function CmsPageView({ slug, bare = false }: CmsPageViewProps) {
 
   if (isError || !data) {
     return (
-      <div className="container py-12">
+      <div className="container py-16">
         <ErrorState
           message="We couldn't load this page. Please try again."
           onRetry={() => void refetch()}
@@ -51,9 +51,9 @@ export function CmsPageView({ slug, bare = false }: CmsPageViewProps) {
   }
 
   return (
-    <div className="container py-10 sm:py-12">
+    <div className="container py-16 sm:py-20">
       {!bare && (
-        <div className="mb-8">
+        <div className="mb-10">
           <Breadcrumb
             items={[
               { label: "Home", to: "/" },

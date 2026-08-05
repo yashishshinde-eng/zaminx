@@ -125,7 +125,7 @@ function ProfileCard({ user }: { user: AdminUserDetail }) {
     <Card className="border-0 glass overflow-hidden">
       {/* Brand-gradient header strip with avatar + identity + status chips */}
       <div className="relative overflow-hidden">
-        <div className="brand-gradient absolute inset-0 opacity-90" />
+        <div className="gradient-blue absolute inset-0 opacity-90" />
         <div className="relative flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
             <Avatar alt={user.name} fallback={user.name} size="lg" className="ring-2 ring-white/40" />

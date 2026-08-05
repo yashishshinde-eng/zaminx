@@ -1,5 +1,5 @@
-import { CmsPageView } from "./CmsPageView";
+import { LandingPage } from "./LandingPage";
 
 export function HomePage() {
-  return <CmsPageView slug="home" bare />;
+  return <LandingPage />;
 }

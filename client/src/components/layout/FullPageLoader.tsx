@@ -8,7 +8,7 @@ export function FullPageLoader() {
           <Logo className="size-12" />
         </div>
         <div className="h-2 w-32 overflow-hidden rounded-full bg-muted">
-          <div className="h-full w-1/2 animate-[loading_1.2s_ease-in-out_infinite] brand-gradient" />
+          <div className="h-full w-1/2 animate-[loading_1.2s_ease-in-out_infinite] gradient-blue" />
         </div>
       </div>
       <style>{`@keyframes loading { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }`}</style>

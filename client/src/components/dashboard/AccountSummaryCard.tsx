@@ -7,15 +7,15 @@ import type { DashboardSummary } from "@zaminex/shared";
 /** Account summary tile — name, verification + role badges, member-since. */
 export function AccountSummaryCard({ account }: { account: DashboardSummary["account"] }) {
   return (
-    <Card className="flex h-full flex-col">
+    <Card className="premium-panel flex h-full flex-col">
       <CardContent className="flex flex-1 flex-col gap-4 p-5">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <h2 className="truncate text-xl font-semibold tracking-tight">{account.name}</h2>
+            <h2 className="font-grotesk truncate text-xl font-semibold tracking-tight">{account.name}</h2>
             <p className="truncate text-sm text-muted-foreground">{account.email}</p>
           </div>
           {account.isEmailVerified ? (
-            <span className="inline-flex items-center gap-1 text-sm font-medium text-emerald-600">
+            <span className="chip-success inline-flex items-center gap-1 text-sm font-medium">
               <BadgeCheck className="size-4" /> Verified
             </span>
           ) : (

@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -10,67 +10,71 @@ import { useSidebarState } from "@/hooks/useSidebarState";
 import { pageTransition } from "@/lib/motion";
 
 /**
- * Responsive app shell: collapsible sidebar on lg+, off-canvas drawer on
- * mobile, and a floating bottom tab bar for quick navigation on small screens.
- * Touch targets are ≥44x44px and the layout never produces horizontal scroll.
- * Page bodies animate in/out keyed by the current pathname.
+ * Premium cinematic app shell — floating glass sidebar + topbar,
+ * dashboard background with cinematic depth (gradients, glow orbs,
+ * noise, grid). Every pixel intentional.
  */
 export function AppShell({ children }: { children: ReactNode }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const { collapsed } = useSidebarState();
   const location = useLocation();
 
-  // Close the drawer on viewport growth to avoid a stuck overlay.
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const onChange = () => setMobileOpen(false);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
   return (
-    <div className="flex h-full min-h-screen bg-background bg-depth">
-      {/* Desktop sidebar — width responds to collapse state */}
+    <div className="flex h-full min-h-screen dashboard-bg">
+      {/* ── Cinematic background layers ────────────────────── */}
+      <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
+        {/* Grid pattern */}
+        <div className="absolute inset-0 grid-pattern opacity-40" />
+        {/* Noise texture */}
+        <div className="absolute inset-0 noise-overlay" />
+        {/* Blue glow orb — top left */}
+        <div
+          className="glow-orb animate-float"
+          style={{
+            width: 700, height: 700, left: "-12%", top: "-8%",
+            background: "radial-gradient(circle, hsl(var(--blue) / 0.12), transparent 70%)",
+          }}
+        />
+        {/* Gold glow orb — top right */}
+        <div
+          className="glow-orb animate-float-delayed"
+          style={{
+            width: 500, height: 500, right: "-5%", top: "5%",
+            background: "radial-gradient(circle, hsl(var(--gold) / 0.06), transparent 70%)",
+          }}
+        />
+        {/* Purple glow orb — bottom center */}
+        <div
+          className="glow-orb animate-pulse-glow"
+          style={{
+            width: 500, height: 500, left: "45%", bottom: "5%",
+            background: "radial-gradient(circle, hsl(var(--purple) / 0.06), transparent 70%)",
+          }}
+        />
+        {/* Deep blue glow orb — bottom left */}
+        <div
+          className="glow-orb animate-float-slow"
+          style={{
+            width: 600, height: 600, left: "5%", bottom: "-10%",
+            background: "radial-gradient(circle, hsl(var(--blue-dark) / 0.06), transparent 70%)",
+          }}
+        />
+      </div>
+
+      {/* ── Desktop sidebar ─────────────────────────────── */}
       <aside
         className={cn(
-          "hidden shrink-0 border-r border-sidebar-border transition-[width] duration-300 ease-out lg:block",
-          collapsed ? "w-[72px]" : "w-64",
+          "relative z-20 hidden shrink-0 transition-[width] duration-300 ease-out lg:block",
+          collapsed ? "w-[78px]" : "w-64",
         )}
       >
         <Sidebar />
       </aside>
 
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/60 backdrop-blur-md"
-              onClick={() => setMobileOpen(false)}
-            />
-            <motion.aside
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
-              className="absolute left-0 top-0 h-full w-72 shadow-xl"
-            >
-              <Sidebar mobile onNavigate={() => setMobileOpen(false)} />
-            </motion.aside>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* Main column */}
-      <div className="flex min-w-0 flex-1 flex-col">
-        <Topbar onOpenSidebar={() => setMobileOpen(true)} />
+      {/* ── Main content ────────────────────────────────── */}
+      <div className="relative z-10 flex min-w-0 flex-1 flex-col">
+        <Topbar />
         <VerifyEmailBanner />
-        {/* pb-28 on mobile gives room for the floating bottom nav (mb-3 + nav height ~80px + safe area) */}
-        <main className="flex-1 overflow-x-hidden p-4 pb-28 sm:p-6 lg:pb-6">
+        <main className="flex-1 overflow-x-hidden px-4 pb-28 pt-5 sm:px-6 lg:px-8 lg:pb-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
@@ -85,8 +89,8 @@ export function AppShell({ children }: { children: ReactNode }) {
         </main>
       </div>
 
-      {/* Floating bottom tab bar — mobile only */}
-      <MobileBottomNav onOpenMenu={() => setMobileOpen(true)} />
+      {/* ── Floating bottom nav — mobile only ──────────── */}
+      <MobileBottomNav />
     </div>
   );
 }

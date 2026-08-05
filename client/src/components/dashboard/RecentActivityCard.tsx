@@ -18,10 +18,10 @@ function resolve(action: string) {
 /** Real recent activity sourced from the ActivityLog collection. */
 export function RecentActivityCard({ activity }: { activity: DashboardSummary["recentActivity"] }) {
   return (
-    <Card className="flex flex-col">
+    <Card className="premium-panel flex flex-col">
       <CardHeader className="space-y-1">
-        <CardTitle className="flex items-center gap-2 text-base">
-          <History className="size-4 text-primary" /> Recent activity
+        <CardTitle className="flex items-center gap-2 text-base font-grotesk">
+          <div className="icon-box-blue"><History className="size-4 text-gold" /></div> Recent activity
         </CardTitle>
         <CardDescription>Latest events on your account</CardDescription>
       </CardHeader>
@@ -32,7 +32,7 @@ export function RecentActivityCard({ activity }: { activity: DashboardSummary["r
               const { label, icon: Icon } = resolve(a.action);
               return (
                 <li key={a.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
-                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
                     <Icon className="size-4" />
                   </span>
                   <div className="min-w-0 flex-1">

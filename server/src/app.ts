@@ -27,21 +27,13 @@ export function createApp(): Express {
 
   // --- Security & parsing ---
   app.use(helmet());
-  app.use(
-    cors({
-      // The frontend may be served from the configured CLIENT_URL (local dev
-      // or a custom domain) or from any *.vercel.app deployment (production
-      // alias + per-preview URLs). Allow both, and pass undefined origins
-      // (same-origin/curl). This is host-agnostic, so the same build works
-      // whether the API runs on Vercel, Render, or locally.
-      origin: (origin: string | undefined) => {
-        if (!origin) return true;
-        return origin === env.CLIENT_URL || /\.vercel\.app$/i.test(origin);
-      },
-      credentials: true,
-      methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    }),
-  );
+ app.use(
+  cors({
+    origin: true, // Allow all origins
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  }),
+);
   app.use(compression());
   app.use(
     express.json({
