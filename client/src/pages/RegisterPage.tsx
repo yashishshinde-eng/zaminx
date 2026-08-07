@@ -4,18 +4,23 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "@zeminex/shared";
 import type { RegisterBody } from "@zeminex/shared";
+import type { PublicUser } from "@zeminex/shared";
 import toast from "react-hot-toast";
-import { ArrowRight, ShieldCheck, Wallet, TrendingUp } from "lucide-react";
+import { ArrowRight, ShieldCheck, Wallet, TrendingUp, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/layout/Logo";
+import { Dialog } from "@/components/ui/dialog";
 import { useAuth } from "@/context/AuthContext";
 
 export function RegisterPage() {
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
+  const [registeredUser, setRegisteredUser] = useState<PublicUser | null>(null);
+  const [registeredPassword, setRegisteredPassword] = useState("");
+  const [copiedField, setCopiedField] = useState<string | null>(null);
 
   // Auto-capture the ?ref=<code> share link (generated on the dashboard) so
   // referrals register under the right sponsor without pasting the code.
@@ -35,13 +40,28 @@ export function RegisterPage() {
     setSubmitting(true);
     try {
       const user = await registerUser(values);
-      toast.success(`Account created — welcome, ${user.name}`);
-      navigate("/app", { replace: true });
+      setRegisteredUser(user);
+      setRegisteredPassword(values.password);
+      toast.success("Account created successfully!");
     } catch {
       // Toast handled by the axios interceptor.
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const copyToClipboard = async (text: string, field: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedField(field);
+      setTimeout(() => setCopiedField(null), 2000);
+    } catch {
+      toast.error("Failed to copy");
+    }
+  };
+
+  const handleGoToLogin = () => {
+    navigate("/login", { replace: true });
   };
 
   return (
@@ -54,7 +74,7 @@ export function RegisterPage() {
 
         <div className="relative z-10 max-w-md text-center text-primary-foreground">
           <Logo className="mx-auto size-16 shadow-glow-blue" />
-          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">Join Zeminex</h1>
+          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">Join Zeminex Global</h1>
           <p className="mt-3 text-lg text-primary-foreground/80">
             Start your investment journey today. Grow with a community of forward-thinking investors.
           </p>
@@ -84,7 +104,7 @@ export function RegisterPage() {
           <div className="glass-card p-8">
             <div className="mb-6 text-center">
               <h2 className="font-grotesk text-2xl font-bold tracking-tight">Create your account</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Join the Zeminex investment platform</p>
+              <p className="mt-1 text-sm text-muted-foreground">Join the Zeminex Global investment platform</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
@@ -122,6 +142,92 @@ export function RegisterPage() {
           </div>
         </div>
       </div>
+
+      {/* ── Credentials popup after successful registration ────── */}
+      <Dialog
+        open={!!registeredUser}
+        onClose={handleGoToLogin}
+        labelledBy="credentials-title"
+        className="max-w-md"
+      >
+        <div className="text-center">
+          <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-green-500/10">
+            <Check className="size-7 text-green-500" />
+          </div>
+          <h2 id="credentials-title" className="font-grotesk text-xl font-bold tracking-tight">
+            Account Created Successfully!
+          </h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Save your login credentials. You&apos;ll need them to sign in.
+          </p>
+        </div>
+
+        <div className="mt-6 space-y-3">
+          {/* Email / Login ID */}
+          <div className="rounded-xl border border-border bg-muted/30 p-3">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Login ID (Email)</p>
+                <p className="mt-1 truncate text-sm font-semibold">{registeredUser?.email}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(registeredUser?.email ?? "", "email")}
+                className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                aria-label="Copy email"
+              >
+                {copiedField === "email" ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Password */}
+          <div className="rounded-xl border border-border bg-muted/30 p-3">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Password</p>
+                <p className="mt-1 truncate text-sm font-semibold font-mono">{registeredPassword}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(registeredPassword, "password")}
+                className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                aria-label="Copy password"
+              >
+                {copiedField === "password" ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Referral Code (their own) */}
+          {registeredUser?.referralCode && (
+            <div className="rounded-xl border border-border bg-muted/30 p-3">
+              <div className="flex items-center justify-between">
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Your Referral Code</p>
+                  <p className="mt-1 truncate text-sm font-semibold">{registeredUser.referralCode}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(registeredUser.referralCode ?? "", "referral")}
+                  className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  aria-label="Copy referral code"
+                >
+                  {copiedField === "referral" ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-6 rounded-xl border border-amber-500/30 bg-amber-500/5 p-3 text-sm text-amber-600 dark:text-amber-400">
+          ⚠️ Please save your credentials before continuing. You will need them to sign in.
+        </div>
+
+        <Button type="button" className="btn-premium mt-5 w-full h-11" onClick={handleGoToLogin}>
+          Continue to Sign In <ArrowRight className="ml-2 size-4" />
+        </Button>
+      </Dialog>
     </div>
   );
 }

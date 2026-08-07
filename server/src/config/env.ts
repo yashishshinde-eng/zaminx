@@ -30,7 +30,7 @@ const envSchema = z.object({
   SMTP_PORT: z.coerce.number().int().positive().default(587),
   SMTP_USER: z.string().optional(),
   SMTP_PASS: z.string().optional(),
-  SMTP_FROM: z.string().default("Zeminex <noreply@zeminex.io>"),
+  SMTP_FROM: z.string().default("Zeminex Global <noreply@zeminexglobal.com>"),
   EMAIL_TOKEN_EXPIRY_HOURS: z.coerce.number().int().positive().default(24),
 
   // NOWPayments deposit gateway (Phase 7). When API_KEY + IPN_SECRET are both

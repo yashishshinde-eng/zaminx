@@ -145,9 +145,9 @@ export async function sendTestEmail(to: string): Promise<{ dev: boolean }> {
   const cfg = await getSmtpConfig();
   const input: SendEmailInput = {
     to,
-    subject: "Zeminex SMTP test",
-    text: "This is a test email from the Zeminex admin panel. If you received it, SMTP is working.",
-    html: "<p>This is a test email from the Zeminex admin panel. If you received it, SMTP is working.</p>",
+    subject: "Zeminex Global SMTP test",
+    text: "This is a test email from the Zeminex Global admin panel. If you received it, SMTP is working.",
+    html: "<p>This is a test email from the Zeminex Global admin panel. If you received it, SMTP is working.</p>",
   };
   if (!cfg.host || (!isProd && !isSmtpConfigured())) {
     await writeDevEmail(input);

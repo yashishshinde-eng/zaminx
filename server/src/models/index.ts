@@ -90,3 +90,9 @@ export { Wallet } from "./Wallet.model.js";
 export type { WalletDocument } from "./Wallet.model.js";
 export { ContactMessage } from "./ContactMessage.model.js";
 export type { ContactMessageDocument } from "./ContactMessage.model.js";
+
+/* ------------------------------------------------------------------ */
+/*  P2P Transfers (Phase: wallet-to-wallet)                            */
+/* ------------------------------------------------------------------ */
+export { P2PTransfer } from "./P2PTransfer.model.js";
+export type { P2PTransferDocument } from "./P2PTransfer.model.js";

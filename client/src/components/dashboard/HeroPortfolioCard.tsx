@@ -25,12 +25,12 @@ import type { DashboardSummary } from "@zeminex/shared";
  *  so the design can be previewed. Will be commented out later.
  * ═══════════════════════════════════════════════════════════════════════ */
 const FALLBACK = {
-  totalBalance: 12_450.75,
-  todayEarnings: 86.32,
+  totalBalance: 0,
+  todayEarnings: 0,
   packageName: "Gold Plan",
   rankName: "Gold",
   referralCode: "ZAM-X9K2",
-  referralLink: "https://zeminex.com/ref/ZAM-X9K2",
+  referralLink: "https://zeminexglobal.com/ref/ZAM-X9K2",
 };
 
 /* ── Entrance animation variants ──────────────────────────────── */
@@ -66,10 +66,8 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
 
   // Use real data, fall back to static when zero/empty
   const totalBalance = data.wallets.total || FALLBACK.totalBalance;
-  const todayEarnings =
-    data.income.series.length > 0
-      ? data.income.series[data.income.series.length - 1].value
-      : FALLBACK.todayEarnings;
+  // Total of all income streams (trading + direct + team + community + rankReward + bonanza)
+  const todayEarnings = data.income.total || FALLBACK.todayEarnings;
   const rankName = data.account.rank.name || FALLBACK.rankName;
   const referralLink = data.referral.link || FALLBACK.referralLink;
   const referralCode = data.referral.code || FALLBACK.referralCode;

@@ -4,7 +4,7 @@ import { customAlphabet } from "nanoid";
 const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no ambiguous chars
 const makeCode = customAlphabet(ALPHABET, 8);
 
-/** Short human-readable referral code, e.g. `ZEMINEX-AB3K9QXR`. */
+/** Short human-readable referral code, e.g. `ZAM-AB3K9QXR`. */
 export function generateReferralCode(prefix = "ZAM"): string {
   return `${prefix}${makeCode()}`;
 }

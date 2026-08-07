@@ -11,6 +11,7 @@ import {
   Settings,
   X,
   Sparkles,
+  ArrowRightLeft,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -29,6 +30,7 @@ interface NavItem {
 const MENU_ITEMS: NavItem[] = [
   { label: "Dashboard", to: "/app", icon: LayoutDashboard },
   { label: "Wallet", to: "/app/wallet", icon: Wallet },
+  { label: "P2P", to: "/app/p2p", icon: ArrowRightLeft },
   { label: "Withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
   { label: "Packages", to: "/app/packages", icon: Package },
   { label: "Team", to: "/app/team", icon: Users },
@@ -47,6 +49,7 @@ interface BottomNavItem {
 const BOTTOM_NAV: BottomNavItem[] = [
   { label: "Home", to: "/app", icon: LayoutDashboard },
   { label: "Wallet", to: "/app/wallet", icon: Wallet },
+  { label: "P2P", to: "/app/p2p", icon: ArrowRightLeft },
   { label: "Packages", to: "/app/packages", icon: Package },
   { label: "Team", to: "/app/team", icon: Users },
   { label: "Reports", to: "/app/reports", icon: FileText },
@@ -55,7 +58,7 @@ const BOTTOM_NAV: BottomNavItem[] = [
 /* ── Grouped sections for the full menu ───────────────────── */
 const MENU_GROUPS = [
   { label: "Overview", items: MENU_ITEMS.filter((i) => i.label === "Dashboard" || i.label === "Reports") },
-  { label: "Earnings", items: MENU_ITEMS.filter((i) => ["Wallet", "Withdrawals", "Packages"].includes(i.label)) },
+  { label: "Earnings", items: MENU_ITEMS.filter((i) => ["Wallet", "P2P", "Withdrawals", "Packages"].includes(i.label)) },
   { label: "Network", items: MENU_ITEMS.filter((i) => ["Team", "Bonanza"].includes(i.label)) },
   { label: "Account", items: MENU_ITEMS.filter((i) => i.label === "Settings") },
 ];

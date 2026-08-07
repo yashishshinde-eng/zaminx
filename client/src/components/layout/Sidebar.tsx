@@ -19,6 +19,7 @@ import {
   ChevronLeft,
   Sparkles,
   Crown,
+  ArrowRightLeft,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,12 +32,13 @@ interface NavItem {
   to: string;
   icon: LucideIcon;
   adminOnly?: boolean;
-  accent?: "gold" | "blue" | "purple";
+  accent?: "gold" | "blue" | "purple" | "success";
 }
 
 const NAV: NavItem[] = [
   { label: "Dashboard", to: "/app", icon: LayoutDashboard, accent: "gold" },
   { label: "Wallet", to: "/app/wallet", icon: Wallet, accent: "blue" },
+  { label: "P2P", to: "/app/p2p", icon: ArrowRightLeft, accent: "success" },
   { label: "Withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
   { label: "Packages", to: "/app/packages", icon: Package, accent: "gold" },
   { label: "Team", to: "/app/team", icon: Users, accent: "purple" },
@@ -61,14 +63,21 @@ interface NavGroup {
   items: NavItem[];
 }
 
-const GROUP_ORDER = ["Overview", "Earnings", "Network", "Account", "Admin"] as const;
-const GROUP_BY_LABEL: Record<string, (item: NavItem) => boolean> = {
-  Overview: (i) => i.label === "Dashboard" || i.label === "Reports",
-  Earnings: (i) => ["Wallet", "Withdrawals", "Packages"].includes(i.label),
-  Network: (i) => ["Team", "Bonanza"].includes(i.label),
-  Account: (i) => i.label === "Settings",
-  Admin: (i) => i.adminOnly === true,
-};
+/* ── Grouping rules for each role ─────────────────────────────────── */
+
+const USER_GROUPS: NavGroup[] = [
+  { label: "Overview", items: NAV.filter((i) => i.label === "Dashboard" || i.label === "Reports") },
+  { label: "Earnings", items: NAV.filter((i) => ["Wallet", "P2P", "Withdrawals", "Packages"].includes(i.label)) },
+  { label: "Network", items: NAV.filter((i) => ["Team", "Bonanza"].includes(i.label)) },
+  { label: "Account", items: NAV.filter((i) => i.label === "Settings") },
+];
+
+const ADMIN_GROUPS: NavGroup[] = [
+  { label: "Dashboard", items: NAV.filter((i) => i.label === "Admin") },
+  { label: "Management", items: NAV.filter((i) => ["Users", "Compensation", "Bonanzas", "CMS Pages"].includes(i.label)) },
+  { label: "Configuration", items: NAV.filter((i) => ["Site Config", "SMTP", "NOWPayments", "Security"].includes(i.label)) },
+  { label: "System", items: NAV.filter((i) => ["Logs", "Admin Reports"].includes(i.label)) },
+];
 
 interface SidebarProps {
   onNavigate?: () => void;
@@ -79,17 +88,20 @@ interface SidebarProps {
  * Premium floating glass sidebar with cinematic depth.
  * Brand accent line, animated active indicator, section labels,
  * quick-deposit banner, user profile card.
+ *
+ * When the user is an admin, only admin items are shown.
+ * When the user is a regular user, only user items are shown.
  */
 export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
   const { user } = useAuth();
   const { collapsed, toggle } = useSidebarState();
   const isCollapsed = mobile ? false : collapsed;
 
-  const items = NAV.filter((i) => !i.adminOnly || user?.role === "admin");
-  const groups: NavGroup[] = GROUP_ORDER.map((label) => ({
-    label,
-    items: items.filter(GROUP_BY_LABEL[label]),
-  })).filter((g) => g.items.length > 0);
+  const isAdmin = user?.role === "admin";
+  const items = NAV.filter((i) => (isAdmin ? i.adminOnly : !i.adminOnly));
+  const groups = isAdmin
+    ? ADMIN_GROUPS
+    : USER_GROUPS;
 
   return (
     <div className={cn("flex h-full flex-col sidebar-glass", !mobile && "sidebar-float")}>
@@ -103,12 +115,12 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
           Z
         </div>
         {!isCollapsed && (
-          <span className="font-grotesk text-lg font-bold tracking-tight text-gradient-gold">Zeminex</span>
+          <span className="font-grotesk text-lg font-bold tracking-tight text-gradient-gold">Zeminex Global</span>
         )}
       </div>
 
-      {/* ── Quick deposit banner (expanded only) ────────────── */}
-      {!isCollapsed && (
+      {/* ── Quick deposit banner (expanded only, user only) ─── */}
+      {!isAdmin && !isCollapsed && (
         <div className="mx-3 mt-3">
           <div className="rounded-[14px] border border-blue/20 bg-gradient-to-br from-blue/10 via-blue-dark/5 to-purple/5 p-3 shadow-[0_0_24px_-8px_hsl(var(--blue)/0.12)]">
             <div className="flex items-center gap-2">
@@ -126,55 +138,59 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
 
       {/* ── Navigation ──────────────────────────────────────── */}
       <nav className="scrollbar-thin flex-1 space-y-1 overflow-y-auto px-3 py-4">
-        {groups.map((group, gi) => (
-          <div key={group.label} className="space-y-0.5">
-            {!isCollapsed && (
-              <p className="sidebar-section-label" style={gi > 0 ? { paddingTop: undefined } : undefined}>
-                {group.label}
-              </p>
-            )}
-            {isCollapsed && group.label !== "Overview" && (
-              <div className="mx-auto my-2 h-px w-6 bg-white/[0.06]" />
-            )}
-            {group.items.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.to === "/app"}
-                onClick={onNavigate}
-                title={isCollapsed ? item.label : undefined}
-                className={({ isActive }) =>
-                  cn(
-                    "sidebar-nav-item",
-                    isCollapsed ? "justify-center px-2" : "",
-                    isActive
-                      ? "active"
-                      : "text-sidebar-foreground/50 hover:bg-blue/[0.08] hover:text-gold-light",
-                  )
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {isActive && (
-                      <motion.span
-                        layoutId="sidebar-active"
-                        className="gradient-blue absolute inset-0 rounded-[12px] shadow-glow-blue"
-                        transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                      />
-                    )}
-                    <span className={cn(
-                      "relative z-10 flex size-7 items-center justify-center rounded-lg transition-colors duration-200",
-                      isActive ? "text-primary-foreground" : "text-sidebar-foreground/50 group-hover:text-sidebar-foreground/80",
-                    )}>
-                      <item.icon className="size-[17px]" />
-                    </span>
-                    {!isCollapsed && <span className="relative z-10">{item.label}</span>}
-                  </>
-                )}
-              </NavLink>
-            ))}
-          </div>
-        ))}
+        {groups.map((group, gi) => {
+          const visibleItems = group.items.filter((i) => items.some((v) => v.to === i.to));
+          if (visibleItems.length === 0) return null;
+          return (
+            <div key={group.label} className="space-y-0.5">
+              {!isCollapsed && (
+                <p className="sidebar-section-label" style={gi > 0 ? { paddingTop: undefined } : undefined}>
+                  {group.label}
+                </p>
+              )}
+              {isCollapsed && group.label !== "Overview" && group.label !== "Dashboard" && (
+                <div className="mx-auto my-2 h-px w-6 bg-white/[0.06]" />
+              )}
+              {visibleItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.to === "/app" || item.to === "/app/admin"}
+                  onClick={onNavigate}
+                  title={isCollapsed ? item.label : undefined}
+                  className={({ isActive }) =>
+                    cn(
+                      "sidebar-nav-item",
+                      isCollapsed ? "justify-center px-2" : "",
+                      isActive
+                        ? "active"
+                        : "text-sidebar-foreground/50 hover:bg-blue/[0.08] hover:text-gold-light",
+                    )
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {isActive && (
+                        <motion.span
+                          layoutId="sidebar-active"
+                          className="gradient-blue absolute inset-0 rounded-[12px] shadow-glow-blue"
+                          transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                        />
+                      )}
+                      <span className={cn(
+                        "relative z-10 flex size-7 items-center justify-center rounded-lg transition-colors duration-200",
+                        isActive ? "text-primary-foreground" : "text-sidebar-foreground/50 group-hover:text-sidebar-foreground/80",
+                      )}>
+                        <item.icon className="size-[17px]" />
+                      </span>
+                      {!isCollapsed && <span className="relative z-10">{item.label}</span>}
+                    </>
+                  )}
+                </NavLink>
+              ))}
+            </div>
+          );
+        })}
       </nav>
 
       {/* ── User profile card ─────────────────────────────────── */}

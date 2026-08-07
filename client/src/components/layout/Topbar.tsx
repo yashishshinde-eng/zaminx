@@ -1,7 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Moon, Sun, Search, Wallet, MessageSquare, ArrowDownToLine } from "lucide-react";
+import { Moon, Sun, Search, Wallet, MessageSquare, ArrowDownToLine, Menu } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
+import { useAuth } from "@/context/AuthContext";
 import { useDashboardSummary } from "@/hooks/useDashboardSummary";
 import { formatCurrency } from "@/lib/utils";
 import { NotificationsMenu } from "./NotificationsMenu";
@@ -10,6 +11,7 @@ import { UserMenu } from "./UserMenu";
 const TITLES: Record<string, string> = {
   "/app": "Dashboard",
   "/app/wallet": "Wallet",
+  "/app/p2p": "P2P",
   "/app/withdrawals": "Withdrawals",
   "/app/packages": "Packages",
   "/app/team": "Team",
@@ -36,25 +38,42 @@ function usePageTitle(): string {
   return "Dashboard";
 }
 
+interface TopbarProps {
+  onToggleMobileSidebar?: () => void;
+}
+
 /**
  * Premium crypto-exchange topbar — floating glass with search,
  * wallet balance, messages, notifications, theme toggle, user menu,
  * and a gold "Quick Deposit" CTA.
  *
- * No hamburger menu on mobile — the bottom nav handles mobile navigation.
+ * On mobile, admin users see a hamburger menu button instead of just
+ * the page title, which opens the sidebar drawer.
  */
-export function Topbar() {
+export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
   const { theme, toggleTheme } = useTheme();
+  const { user } = useAuth();
   const title = usePageTitle();
   const { data } = useDashboardSummary();
+  const isAdmin = user?.role === "admin";
 
   return (
     <header className="topbar-glass sticky top-0 z-30 flex h-16 items-center justify-between gap-3 px-4 sm:px-6">
       {/* Gradient accent line */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue/40 to-transparent opacity-80" />
 
-      {/* ── Left: Title ─────────────────────────────────────── */}
+      {/* ── Left: Hamburger (admin mobile) or Title ─────────── */}
       <div className="flex min-w-0 items-center gap-3">
+        {isAdmin && onToggleMobileSidebar && (
+          <button
+            type="button"
+            onClick={onToggleMobileSidebar}
+            className="flex size-9 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-blue/[0.08] hover:text-foreground lg:hidden"
+            aria-label="Open menu"
+          >
+            <Menu className="size-5" />
+          </button>
+        )}
         <h1 className="truncate font-grotesk text-base font-semibold sm:text-lg">{title}</h1>
       </div>
 
@@ -75,8 +94,8 @@ export function Topbar() {
 
       {/* ── Right: Actions ───────────────────────────────── */}
       <div className="flex items-center gap-1.5 sm:gap-2">
-        {/* Wallet balance — desktop */}
-        {data && (
+        {/* Wallet balance — desktop, user only */}
+        {!isAdmin && data && (
           <Link to="/app/wallet" className="wallet-pill hidden sm:flex">
             <Wallet className="size-3.5 text-gold" />
             <span className="text-gradient-gold">{formatCurrency(data.wallets.totalAvailable)}</span>
@@ -115,16 +134,18 @@ export function Topbar() {
         </button>
 
         {/* Notifications */}
-        <NotificationsMenu />
+        {/* <NotificationsMenu /> */}
 
         {/* User menu */}
         <UserMenu />
 
-        {/* Quick Deposit CTA — desktop */}
-        <Link to="/app/packages" className="deposit-cta hidden lg:flex">
-          <ArrowDownToLine className="size-4" />
-          Deposit
-        </Link>
+        {/* Quick Deposit CTA — desktop, user only */}
+        {!isAdmin && (
+          <Link to="/app/packages" className="deposit-cta hidden lg:flex">
+            <ArrowDownToLine className="size-4" />
+            Deposit
+          </Link>
+        )}
       </div>
     </header>
   );

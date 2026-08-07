@@ -76,7 +76,7 @@ async function seed() {
       value: {
         title: "Zeminex Global — AI Arbitrage Investment Platform",
         description:
-          "Earn 1–2% daily trading yield on a one-time $50 lifetime package, plus referral, team, rank, and community rewards.",
+          "Earn 1–2% daily trading yield on a one-time $50 package with a 365-day term, plus referral, team, rank, and community rewards.",
       },
       category: "cms",
       isPublic: true,
@@ -148,7 +148,7 @@ async function seed() {
       }
     }),
   );
-  // Retire legacy tiered packages so the catalog shows only the $50 lifetime package.
+  // Retire legacy tiered packages so the catalog shows only the $50 365-day package.
   // Historical UserPackage snapshots are unaffected (terms are immutable at activation).
   if (forceSync) {
     await Package.updateMany(
@@ -253,11 +253,11 @@ const DEFAULT_PACKAGES = [
   {
     name: "Zeminex Global",
     slug: "zeminex-global",
-    description: "One-time $50 lifetime package with 1–2% daily trading yield.",
+    description: "One-time $50 package with 1–2% daily trading yield for 365 days.",
     priceUsd: 50,
     dailyReturnPct: 2.0,
-    durationDays: 0,
-    features: ["$50 one-time", "1–2% daily yield", "Lifetime — no expiry", "30% monthly cap"],
+    durationDays: 365,
+    features: ["$50 one-time", "1–2% daily yield", "365-day term", "30% monthly cap"],
     sort: 1,
     status: "active",
   },
@@ -277,7 +277,7 @@ const DEFAULT_PAGES = [
     blocks: [
       hero(
         "Invest smarter with an AI arbitrage platform",
-        "One-time $50 lifetime package, 1–2% daily yield, and a 10-star community rewards ladder.",
+        "One-time $50 package, 1–2% daily yield, 365-day term, and a 10-star community rewards ladder.",
         "Create your account",
         "/register",
       ),
@@ -353,7 +353,7 @@ const DEFAULT_PAGES = [
           { question: "How do I start earning?", answer: "Create an account, activate a package, and your daily trading yield begins. Share your referral link to earn bonuses." },
           { question: "How are withdrawals handled?", answer: "Withdrawals are auto-approved on submit (min $15) and credited immediately; the on-chain USDT payout is processed shortly after." },
           { question: "What is the Bonanza engine?", answer: "Bonanza offers are dynamic, admin-configured rewards — e.g. bring 3 direct referrals to earn $10. They run within a start/end window." },
-          { question: "Is there a minimum package?", answer: "There is a single one-time $50 lifetime package — no tiers, no expiry. You'll see it in your dashboard after registration." },
+          { question: "Is there a minimum package?", answer: "There is a single one-time $50 package with a 365-day term. You'll see it in your dashboard after registration." },
           { question: "Do you support light and dark themes?", answer: "Yes — the platform fully supports both, and your preference is saved to your account." },
         ],
       } as ContentBlock,

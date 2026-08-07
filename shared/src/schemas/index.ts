@@ -10,3 +10,4 @@ export * from "./report.schema.js";
 export * from "./adminUser.schema.js";
 export * from "./adminLogs.schema.js";
 export * from "./payment.schema.js";
+export * from "./p2p.schema.js";

@@ -1,6 +1,6 @@
-# Zeminex — Investment & Referral Platform
+# Zeminex Global — Investment & Referral Platform
 
-Monorepo for the Zeminex investment & referral platform built per `Blueprint.md`.
+Monorepo for the Zeminex Global investment & referral platform built per `Blueprint.md`.
 
 ## Workspaces
 

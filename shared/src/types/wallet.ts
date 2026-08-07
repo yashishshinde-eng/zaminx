@@ -37,7 +37,9 @@ export type WalletTxType =
   | "withdrawal_release"
   | "withdrawal_paid"
   | "withdrawal_reject"
-  | "adjustment";
+  | "adjustment"
+  | "p2p_transfer_out"
+  | "p2p_transfer_in";
 
 /** A single wallet's available + on-hold balances. */
 export interface WalletBalance {

@@ -4,7 +4,7 @@
  * Phase 13 keeps these as plain TS so all 7 Blueprint email events fire.
  */
 
-export const BRAND_NAME = "Zeminex";
+export const BRAND_NAME = "Zeminex Global";
 
 export interface EmailContent {
   subject: string;

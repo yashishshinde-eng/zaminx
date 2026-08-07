@@ -10,7 +10,7 @@ async function bootstrap() {
 
   const app = createApp();
   const server = app.listen(env.PORT, () => {
-    logger.info(`🚀 Zeminex API listening on http://localhost:${env.PORT}/api/v1`);
+    logger.info(`🚀 Zeminex Global API listening on http://localhost:${env.PORT}/api/v1`);
     logger.info(`📚 Swagger UI at http://localhost:${env.PORT}/api/docs`);
   });
 

@@ -7,6 +7,7 @@ import dashboardRoutes from "./dashboard.routes.js";
 import profileRoutes from "./profile.routes.js";
 import packageRoutes from "./package.routes.js";
 import paymentRoutes from "./payment.routes.js";
+import p2pRoutes from "./p2p.routes.js";
 import walletRoutes from "./wallet.routes.js";
 import withdrawalRoutes from "./withdrawal.routes.js";
 import referralRoutes from "./referral.routes.js";
@@ -19,7 +20,7 @@ import adminRoutes from "./admin.routes.js";
 const router = Router();
 
 router.get("/", (_req, res) =>
-  res.json({ success: true, message: "Zeminex API", version: "v1" }),
+  res.json({ success: true, message: "Zeminex Global API", version: "v1" }),
 );
 router.use("/health", healthRoutes);
 router.use("/auth", authRoutes);
@@ -29,6 +30,7 @@ router.use("/profile", authenticate, profileRoutes);
 router.use("/packages", authenticate, packageRoutes);
 router.use("/payments", paymentRoutes);
 router.use("/wallet", authenticate, walletRoutes);
+router.use("/p2p", authenticate, p2pRoutes);
 router.use("/withdrawals", authenticate, withdrawalRoutes);
 router.use("/referrals", authenticate, referralRoutes);
 router.use("/bonanzas", authenticate, bonanzaRoutes);

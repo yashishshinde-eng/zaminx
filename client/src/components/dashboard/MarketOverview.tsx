@@ -172,7 +172,7 @@ export function MarketOverview() {
       </motion.div>
 
       {/* ── Watchlist empty state ──────────────────────────────── */}
-      <motion.div
+      {/* <motion.div
         className="flex flex-col items-center justify-center gap-3 rounded-[16px] border border-dashed border-white/[0.08] bg-white/[0.02] py-8"
         variants={prefersReduced ? undefined : itemVariants}
       >
@@ -181,7 +181,7 @@ export function MarketOverview() {
         </div>
         <p className="text-sm font-medium text-muted-foreground">Add coins to your watchlist</p>
         <p className="text-xs text-muted-foreground/60">Track your favorite assets in one place</p>
-      </motion.div>
+      </motion.div> */}
     </motion.div>
   );
 }

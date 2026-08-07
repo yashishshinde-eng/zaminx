@@ -19,7 +19,7 @@ export function ResetPasswordPage() {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
 
-  useDocumentMeta({ title: "Reset password — Zeminex" });
+  useDocumentMeta({ title: "Reset password — Zeminex Global" });
 
   const {
     register,

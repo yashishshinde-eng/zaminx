@@ -18,7 +18,7 @@ export function ContactPage() {
   const { data: config } = useSiteConfig();
   const [submitting, setSubmitting] = useState(false);
 
-  useDocumentMeta({ title: "Contact — Zeminex", description: "Get in touch with the Zeminex team." });
+  useDocumentMeta({ title: "Contact — Zeminex Global", description: "Get in touch with the Zeminex Global team." });
 
   const {
     register,

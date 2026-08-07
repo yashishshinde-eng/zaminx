@@ -75,7 +75,7 @@ export function VerifyEmailPage() {
               <div className="flex size-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
                 <CheckCircle2 className="size-6" />
               </div>
-              <p className="text-sm text-muted-foreground">Your email is verified. Welcome to Zeminex!</p>
+              <p className="text-sm text-muted-foreground">Your email is verified. Welcome to Zeminex Global!</p>
               <Button className="w-full" asChild>
                 <Link to={isAuthenticated ? "/app" : "/login"}>Continue</Link>
               </Button>

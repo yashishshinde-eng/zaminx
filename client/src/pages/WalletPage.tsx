@@ -29,6 +29,8 @@ const TX_TYPES: { value: string; label: string }[] = [
   { value: "community_bonus", label: "Community bonus" },
   { value: "rank_reward", label: "Rank reward" },
   { value: "bonanza", label: "Bonanza" },
+  { value: "p2p_transfer_out", label: "P2P Transfer Out" },
+  { value: "p2p_transfer_in", label: "P2P Transfer In" },
   { value: "adjustment", label: "Adjustment" },
 ];
 

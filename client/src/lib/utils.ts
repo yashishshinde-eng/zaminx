@@ -34,3 +34,8 @@ export function formatCompact(value: number): string {
 export function formatPercent(value: number, decimals = 1): string {
   return `${value >= 0 ? "+" : ""}${value.toFixed(decimals)}%`;
 }
+
+/** Format a package duration: returns "Lifetime" for 0, otherwise "{days}-day". */
+export function durationLabel(days: number): string {
+  return days === 0 ? "Lifetime" : `${days}-day`;
+}

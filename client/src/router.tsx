@@ -25,6 +25,7 @@ const DashboardPage = lazy(() => import("@/pages/DashboardPage").then((m) => ({ 
 const SettingsPage = lazy(() => import("@/pages/SettingsPage").then((m) => ({ default: m.SettingsPage })));
 const PackagesPage = lazy(() => import("@/pages/PackagesPage").then((m) => ({ default: m.PackagesPage })));
 const WalletPage = lazy(() => import("@/pages/WalletPage").then((m) => ({ default: m.WalletPage })));
+const P2PPage = lazy(() => import("@/pages/P2PPage").then((m) => ({ default: m.P2PPage })));
 const WithdrawalsPage = lazy(() => import("@/pages/WithdrawalsPage").then((m) => ({ default: m.WithdrawalsPage })));
 const TeamPage = lazy(() => import("@/pages/TeamPage").then((m) => ({ default: m.TeamPage })));
 const BonanzaPage = lazy(() => import("@/pages/BonanzaPage").then((m) => ({ default: m.BonanzaPage })));
@@ -70,6 +71,7 @@ export function AppRouter() {
           <Route element={<ProtectedRoute />}>
             <Route path="/app" element={<DashboardPage />} />
             <Route path="/app/wallet" element={<WalletPage />} />
+            <Route path="/app/p2p" element={<P2PPage />} />
             <Route path="/app/withdrawals" element={<WithdrawalsPage />} />
             <Route path="/app/packages" element={<PackagesPage />} />
             <Route path="/app/team" element={<TeamPage />} />

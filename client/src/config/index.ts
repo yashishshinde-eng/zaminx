@@ -20,6 +20,9 @@ export const queryKeys = {
     balance: ["wallet", "balance"] as const,
     ledger: (params?: unknown) => ["wallet", "ledger", params ?? {}] as const,
   },
+  p2p: {
+    transfers: (params?: unknown) => ["p2p", "transfers", params ?? {}] as const,
+  },
   withdrawals: {
     list: (params?: unknown) => ["withdrawals", "list", params ?? {}] as const,
     detail: (id: string) => ["withdrawals", "detail", id] as const,

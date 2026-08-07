@@ -53,7 +53,7 @@ export function LoginPage() {
 
         <div className="relative z-10 max-w-md text-center text-primary-foreground">
           <Logo className="mx-auto size-16 shadow-glow-blue" />
-          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">Welcome to Zeminex</h1>
+          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">Welcome to Zeminex Global</h1>
           <p className="mt-3 text-lg text-primary-foreground/80">
             Your premium investment platform. Grow your portfolio with confidence.
           </p>
@@ -83,7 +83,7 @@ export function LoginPage() {
           <div className="glass-card p-8">
             <div className="mb-6 text-center">
               <h2 className="font-grotesk text-2xl font-bold tracking-tight">Welcome back</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Sign in to your Zeminex account</p>
+              <p className="mt-1 text-sm text-muted-foreground">Sign in to your Zeminex Global account</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>

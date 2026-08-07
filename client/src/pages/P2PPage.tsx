@@ -1,0 +1,294 @@
+import { useMemo, useState } from "react";
+import { ArrowRightLeft, Send, Wallet as WalletIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createP2PTransferSchema } from "@zeminex/shared";
+import type { CreateP2PTransferBody, WalletType } from "@zeminex/shared";
+import { AppShell } from "@/components/layout/AppShell";
+import { PageHeader, ErrorState, DataTable, type Column } from "@/components/shared";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useP2PTransfers, useSendP2PTransfer } from "@/hooks/useP2P";
+import { useWallet } from "@/hooks/useWallet";
+import { useAuth } from "@/context/AuthContext";
+import { formatCurrency, formatDate, cn } from "@/lib/utils";
+
+const WALLET_OPTIONS: { value: WalletType; label: string }[] = [
+  { value: "main", label: "Main" },
+  { value: "bonus", label: "Bonus" },
+  { value: "trading", label: "Trading" },
+];
+
+const STATUS_VARIANT: Record<string, "success" | "destructive"> = {
+  completed: "success",
+  failed: "destructive",
+};
+
+/** /app/p2p — P2P wallet-to-wallet transfers. */
+export function P2PPage() {
+  const [walletFilter, setWalletFilter] = useState<"all" | WalletType>("all");
+  const [page, setPage] = useState(1);
+
+  const params = useMemo(
+    () => ({ wallet: walletFilter === "all" ? undefined : walletFilter, page, limit: 20 }),
+    [walletFilter, page],
+  );
+
+  const transfers = useP2PTransfers(params);
+
+  return (
+    <AppShell>
+      <PageHeader
+        title="P2P Transfer"
+        description="Send funds directly to other users on the platform."
+        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "P2P" }]}
+      />
+
+      <div className="mt-6 space-y-6">
+        <TransferForm />
+
+        {/* Transfer history */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="font-grotesk text-lg font-bold">Transfer History</h2>
+            <div className="flex rounded-[10px] border border-white/[0.08] bg-white/[0.02] p-0.5">
+              {(["all", "main", "bonus", "trading"] as const).map((w) => (
+                <button
+                  key={w}
+                  type="button"
+                  onClick={() => { setWalletFilter(w); setPage(1); }}
+                  className={cn(
+                    "rounded-[8px] px-3 py-1.5 text-xs font-semibold transition-all duration-200",
+                    walletFilter === w
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:bg-white/[0.06] hover:text-foreground",
+                  )}
+                >
+                  {w === "all" ? "All" : w.charAt(0).toUpperCase() + w.slice(1)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {transfers.isError ? (
+            <ErrorState message="We couldn't load your transfers." onRetry={() => transfers.refetch()} />
+          ) : (
+            <TransferTable
+              columns={transferColumns}
+              data={transfers.data?.items ?? []}
+              isLoading={transfers.isLoading}
+              page={transfers.data?.page ?? 1}
+              pageCount={transfers.data?.totalPages ?? 1}
+              onPageChange={setPage}
+            />
+          )}
+        </section>
+      </div>
+    </AppShell>
+  );
+}
+
+/* ─── Transfer Form ────────────────────────────────────────────── */
+
+function TransferForm() {
+  const { user } = useAuth();
+  const wallet = useWallet();
+  const send = useSendP2PTransfer();
+  const [selectedWallet, setSelectedWallet] = useState<WalletType>("main");
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<CreateP2PTransferBody>({
+    resolver: zodResolver(createP2PTransferSchema.shape.body),
+    defaultValues: { wallet: "main" },
+  });
+
+  const onSubmit = (values: CreateP2PTransferBody) => {
+    send.mutate(values, { onSuccess: () => reset({ wallet: values.wallet }) });
+  };
+
+  const balances = wallet.data;
+
+  return (
+    <Card className="glass overflow-hidden">
+      <CardHeader className="border-b border-white/[0.06] bg-gradient-to-r from-blue/5 via-transparent to-purple/5">
+        <CardTitle className="flex items-center gap-2 font-grotesk text-base">
+          <div className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-success/20 to-success/10">
+            <Send className="size-3.5 text-success" />
+          </div>
+          Send Transfer
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="p-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          {/* Wallet selector — themed toggle group */}
+          <div className="space-y-2">
+            <Label>From Wallet</Label>
+            <div className="flex rounded-[10px] border border-white/[0.08] bg-white/[0.02] p-0.5">
+              {WALLET_OPTIONS.map((w) => (
+                <button
+                  key={w.value}
+                  type="button"
+                  onClick={() => {
+                    setSelectedWallet(w.value);
+                    register("wallet").onChange({ target: { value: w.value, name: "wallet" } });
+                  }}
+                  className={cn(
+                    "flex flex-1 items-center justify-center gap-1.5 rounded-[8px] px-3 py-2 text-sm font-semibold transition-all duration-200",
+                    selectedWallet === w.value
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:bg-white/[0.06] hover:text-foreground",
+                  )}
+                >
+                  <WalletIcon className="size-3.5" />
+                  <span>{w.label}</span>
+                  {balances && (
+                    <span className={cn(
+                      "text-[10px] font-medium tabular-nums",
+                      selectedWallet === w.value ? "text-primary-foreground/70" : "text-muted-foreground/60",
+                    )}>
+                      {formatCurrency(balances[w.value].available)}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+            <input type="hidden" {...register("wallet")} value={selectedWallet} />
+            {errors.wallet && <p className="text-sm text-destructive">{errors.wallet.message}</p>}
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {/* Amount */}
+            <div className="space-y-2">
+              <Label htmlFor="amount">Amount (USD)</Label>
+              <Input id="amount" type="number" step="0.01" min="0.01" placeholder="0.00" {...register("amount", { valueAsNumber: true })} />
+              {errors.amount && <p className="text-sm text-destructive">{errors.amount.message}</p>}
+            </div>
+
+            {/* Recipient referral code */}
+            <div className="space-y-2">
+              <Label htmlFor="referralCode">Recipient Referral Code</Label>
+              <Input id="referralCode" placeholder="ZAM-XXXX" autoComplete="off" {...register("referralCode")} />
+              {errors.referralCode && <p className="text-sm text-destructive">{errors.referralCode.message}</p>}
+            </div>
+          </div>
+
+          {/* Memo (optional) */}
+          <div className="space-y-2">
+            <Label htmlFor="memo">Memo <span className="text-muted-foreground">(optional)</span></Label>
+            <Input id="memo" placeholder="Payment for..." maxLength={200} {...register("memo")} />
+            {errors.memo && <p className="text-sm text-destructive">{errors.memo.message}</p>}
+          </div>
+
+          <div className="flex items-center justify-between pt-2">
+            <p className="text-xs text-muted-foreground">
+              Your referral code: <span className="font-mono font-semibold text-foreground">{user?.referralCode}</span>
+            </p>
+            <Button type="submit" className="btn-premium" disabled={send.isPending}>
+              {send.isPending ? "Sending…" : <><ArrowRightLeft className="size-4" /> Send Transfer</>}
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}
+
+/* ─── Transfer Table ───────────────────────────────────────────── */
+
+interface TransferRow {
+  id: string;
+  fromUser: string;
+  fromUserName: string;
+  toUser: string;
+  toUserName: string;
+  wallet: string;
+  amount: number;
+  status: string;
+  memo: string | null;
+  createdAt: string;
+}
+
+const transferColumns: Column<TransferRow>[] = [
+  {
+    key: "date",
+    header: "Date",
+    cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
+  },
+  {
+    key: "detail",
+    header: "Detail",
+    cell: (r) => (
+      <div className="min-w-0 space-y-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="font-medium">{r.fromUserName}</span>
+          <ArrowRightLeft className="size-3 text-muted-foreground" />
+          <span className="font-medium">{r.toUserName}</span>
+        </div>
+        {r.memo && <p className="truncate text-xs text-muted-foreground">{r.memo}</p>}
+      </div>
+    ),
+  },
+  {
+    key: "wallet",
+    header: "Wallet",
+    cell: (r) => (
+      <Badge variant="outline" className="capitalize">{r.wallet}</Badge>
+    ),
+  },
+  {
+    key: "amount",
+    header: "Amount",
+    align: "right" as const,
+    cell: (r) => (
+      <span className={cn("whitespace-nowrap font-semibold tabular-nums", r.status === "completed" ? "text-success" : "text-destructive")}>
+        {formatCurrency(r.amount)}
+      </span>
+    ),
+  },
+  {
+    key: "status",
+    header: "Status",
+    cell: (r) => (
+      <Badge variant={STATUS_VARIANT[r.status] ?? "outline"} className="capitalize">
+        {r.status}
+      </Badge>
+    ),
+  },
+];
+
+function TransferTable({
+  columns,
+  data,
+  isLoading,
+  page,
+  pageCount,
+  onPageChange,
+}: {
+  columns: Column<TransferRow>[];
+  data: TransferRow[];
+  isLoading: boolean;
+  page: number;
+  pageCount: number;
+  onPageChange: (page: number) => void;
+}) {
+  return (
+    <DataTable
+      columns={columns}
+      data={data}
+      rowKey={(r) => r.id}
+      isLoading={isLoading}
+      emptyTitle="No transfers yet"
+      emptyDescription="Send funds to another user using their referral code."
+      page={page}
+      pageCount={pageCount}
+      onPageChange={onPageChange}
+    />
+  );
+}

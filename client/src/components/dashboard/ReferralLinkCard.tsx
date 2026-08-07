@@ -21,7 +21,7 @@ export function ReferralLinkCard({ referral }: { referral: DashboardSummary["ref
 
   const share = () => {
     if (navigator.share) {
-      navigator.share({ title: "Join me on Zeminex", url: referral.link }).catch(() => undefined);
+      navigator.share({ title: "Join me on Zeminex Global", url: referral.link }).catch(() => undefined);
     } else {
       copy();
     }

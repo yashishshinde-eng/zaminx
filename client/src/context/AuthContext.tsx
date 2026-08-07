@@ -69,7 +69,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       referralCode?: string;
     }) => {
       const res = await registerRequest(payload);
-      setUser(res.user);
+      // Do NOT set the user — the registration flow shows a credentials popup
+      // and then redirects to the login page for manual authentication.
       return res.user;
     },
     [],

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Check, Sparkles, TrendingUp, CalendarDays } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { cn, formatCurrency } from "@/lib/utils";
+import { cn, formatCurrency, durationLabel } from "@/lib/utils";
 import type { PackageTier } from "@zeminex/shared";
 
 interface PackageTierCardProps {
@@ -28,7 +28,10 @@ export function PackageTierCard({
   popular = false,
   delay = 0,
 }: PackageTierCardProps) {
-  const projectedReturn = tier.priceUsd * (tier.dailyReturnPct / 100) * tier.durationDays;
+  const isLifetime = tier.durationDays === 0;
+  // For lifetime packages, project 30-day yield; for fixed-term, project full-term yield.
+  const projectedDays = isLifetime ? 30 : tier.durationDays;
+  const projectedReturn = tier.priceUsd * (tier.dailyReturnPct / 100) * projectedDays;
   const totalAtMaturity = tier.priceUsd + projectedReturn;
 
   return (
@@ -66,7 +69,7 @@ export function PackageTierCard({
             </p>
             <p className="text-sm text-muted-foreground">
               <span className={cn("font-medium", popular ? "text-gold" : "text-foreground")}>{tier.dailyReturnPct}%</span> daily ·{" "}
-              <span className="font-medium text-foreground">{tier.durationDays}</span>-day term
+              <span className="font-medium text-foreground">365-day</span> term
             </p>
           </div>
 
@@ -77,7 +80,7 @@ export function PackageTierCard({
                 <TrendingUp className="size-4" />
               </div>
               <div>
-                <p className="text-[11px] text-muted-foreground">Projected</p>
+                <p className="text-[11px] text-muted-foreground">{isLifetime ? "30-Day yield" : "Projected"}</p>
                 <p className="text-sm font-semibold tabular-nums">{formatCurrency(projectedReturn)}</p>
               </div>
             </div>
@@ -86,7 +89,7 @@ export function PackageTierCard({
                 <CalendarDays className="size-4" />
               </div>
               <div>
-                <p className="text-[11px] text-muted-foreground">At maturity</p>
+                <p className="text-[11px] text-muted-foreground">{isLifetime ? "Monthly" : "At maturity"}</p>
                 <p className="text-sm font-semibold tabular-nums">{formatCurrency(totalAtMaturity)}</p>
               </div>
             </div>

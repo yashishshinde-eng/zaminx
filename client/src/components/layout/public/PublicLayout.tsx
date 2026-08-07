@@ -8,7 +8,7 @@ import { FullPageLoader } from "@/components/layout/FullPageLoader";
 import type { SiteConfig } from "@zeminex/shared";
 
 const FALLBACK_CONFIG: SiteConfig = {
-  siteName: "Zeminex",
+  siteName: "Zeminex Global",
   logoLight: null,
   logoDark: null,
   navLinks: [{ label: "Home", href: "/" }],

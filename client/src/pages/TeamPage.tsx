@@ -18,8 +18,8 @@ import type { ReferralMemberRow, ReferralMemberStatus } from "@zeminex/shared";
 const STATUS_FILTERS: { value: "all" | ReferralMemberStatus; label: string }[] = [
   { value: "all", label: "All" },
   { value: "active", label: "Active" },
-  { value: "suspended", label: "Suspended" },
-  { value: "banned", label: "Banned" },
+  // { value: "suspended", label: "Suspended" },
+  // { value: "banned", label: "Banned" },
 ];
 
 const STATUS_VARIANT: Record<ReferralMemberStatus, "success" | "warning" | "destructive"> = {
@@ -153,7 +153,7 @@ export function TeamPage() {
                 const link = stats.data?.link ?? "";
                 if (navigator.share) {
                   navigator
-                    .share({ title: "Join me on Zeminex", url: link })
+                    .share({ title: "Join me on Zeminex Global", url: link })
                     .catch(() => undefined);
                 } else {
                   navigator.clipboard.writeText(link).then(

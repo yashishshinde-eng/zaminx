@@ -128,10 +128,10 @@ function DashboardContent({ data }: { data: SummaryData }) {
       </motion.div>
 
       {/* ═══ CHARTS: Portfolio Performance + Asset Allocation ═ */}
-      <motion.div variants={staggerItem} className="grid gap-4 lg:grid-cols-[1fr_380px]">
+      {/* <motion.div variants={staggerItem} className="grid gap-4 lg:grid-cols-[1fr_380px]">
         <IncomeChartCard income={data.income} />
         <IncomeDistributionCard income={data.income} />
-      </motion.div>
+      </motion.div> */}
 
       {/* ═══ QUICK ACTIONS ═════════════════════════════════ */}
       <motion.div variants={staggerItem}>
@@ -143,8 +143,8 @@ function DashboardContent({ data }: { data: SummaryData }) {
             <QuickAction icon={ArrowDownToLine} label="Deposit" to="/app/packages" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" />
             <QuickAction icon={ArrowUpFromLine} label="Withdraw" to="/app/withdrawals" gradient="from-gold/20 to-gold-dark/10" iconColor="text-gold" />
             <QuickAction icon={Package} label="Invest" to="/app/packages" gradient="from-purple/20 to-purple-dark/10" iconColor="text-purple-light" />
-            <QuickAction icon={Repeat} label="Swap" to="/app/wallet" gradient="from-success/20 to-success/10" iconColor="text-success" />
-            <QuickAction icon={ArrowRightLeft} label="Convert" to="/app/wallet" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" />
+            <QuickAction icon={Repeat} label="P2P" to="/app/p2p" gradient="from-success/20 to-success/10" iconColor="text-success" />
+            <QuickAction icon={ArrowRightLeft} label="Convert" to="/app/p2p" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" />
             <QuickAction icon={Gem} label="Stake" to="/app/packages" gradient="from-gold/20 to-gold-dark/10" iconColor="text-gold" />
             <QuickAction icon={TrendingUp} label="Trade" to="/app/packages" gradient="from-purple/20 to-purple-dark/10" iconColor="text-purple-light" />
             <QuickAction icon={Users} label="Refer" to="/app/team" gradient="from-success/20 to-success/10" iconColor="text-success" />

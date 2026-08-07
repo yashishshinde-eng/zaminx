@@ -24,6 +24,8 @@ const walletTxTypes = [
   "withdrawal_paid",
   "withdrawal_reject",
   "adjustment",
+  "p2p_transfer_out",
+  "p2p_transfer_in",
 ] as const;
 
 const walletTransactionSchema = new Schema(

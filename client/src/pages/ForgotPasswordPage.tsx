@@ -17,7 +17,7 @@ export function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  useDocumentMeta({ title: "Forgot password — Zeminex" });
+  useDocumentMeta({ title: "Forgot password — Zeminex Global" });
 
   const {
     register,

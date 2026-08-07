@@ -37,7 +37,8 @@ export async function registerRequest(payload: {
   referralCode?: string;
 }): Promise<AuthResponse> {
   const { data } = await api.post<{ data: AuthResponse }>("/auth/register", payload);
-  persistTokens(data.data.tokens);
+  // Do NOT persist tokens — the user must log in manually after seeing their
+  // credentials in the post-registration popup.
   return data.data;
 }
 
