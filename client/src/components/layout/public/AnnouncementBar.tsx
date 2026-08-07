@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { SiteConfig } from "@zaminex/shared";
+import type { SiteConfig } from "@zeminex/shared";
 
-const STORAGE_KEY = "zaminex.announcement.dismissed";
+const STORAGE_KEY = "zeminex.announcement.dismissed";
 
 export function AnnouncementBar({ bar }: { bar: SiteConfig["announcementBar"] }) {
   const [dismissed, setDismissed] = useState(false);

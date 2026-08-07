@@ -103,7 +103,7 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
           Z
         </div>
         {!isCollapsed && (
-          <span className="font-grotesk text-lg font-bold tracking-tight text-gradient-gold">Zaminex</span>
+          <span className="font-grotesk text-lg font-bold tracking-tight text-gradient-gold">Zeminex</span>
         )}
       </div>
 

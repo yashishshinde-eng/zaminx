@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { BonanzaOverview } from "@zaminex/shared";
+import type { BonanzaOverview } from "@zeminex/shared";
 
 interface OverviewResponse {
   data: { bonanzas: BonanzaOverview };

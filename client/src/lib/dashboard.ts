@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 export async function fetchDashboardSummary(): Promise<DashboardSummary> {
   const { data } = await api.get<{ data: DashboardSummary }>("/dashboard/summary");

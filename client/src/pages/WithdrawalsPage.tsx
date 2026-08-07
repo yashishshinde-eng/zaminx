@@ -13,8 +13,8 @@ import { Label } from "@/components/ui/label";
 import { useWallet } from "@/hooks/useWallet";
 import { useWithdrawals, useCreateWithdrawal, useCancelWithdrawal } from "@/hooks/useWithdrawals";
 import { useAuth } from "@/context/AuthContext";
-import { createWithdrawalSchema } from "@zaminex/shared";
-import type { CreateWithdrawalBody, WithdrawalRow, WithdrawalStatus } from "@zaminex/shared";
+import { createWithdrawalSchema } from "@zeminex/shared";
+import type { CreateWithdrawalBody, WithdrawalRow, WithdrawalStatus } from "@zeminex/shared";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 
 const MIN_WITHDRAWAL = 10;

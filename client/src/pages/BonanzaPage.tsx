@@ -10,7 +10,7 @@ import { useBonanzaOverview } from "@/hooks/useBonanzas";
 import { useCountUp } from "@/hooks/useCountUp";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
-import type { BonanzaOfferView } from "@zaminex/shared";
+import type { BonanzaOfferView } from "@zeminex/shared";
 
 /** /app/bonanzas — active bonanza offers with the viewer's progress. */
 export function BonanzaPage() {

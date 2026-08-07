@@ -1,7 +1,7 @@
 import { User, ActivityLog, type UserDocument } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { toPublicUser } from "./auth.service.js";
-import type { PublicUser } from "@zaminex/shared";
+import type { PublicUser } from "@zeminex/shared";
 
 async function loadUser(userId: string): Promise<UserDocument> {
   const user = await User.findById(userId).select("+passwordHash");

@@ -26,7 +26,7 @@ import type {
   AdminActivityReportRow,
   DepositStatus,
   WithdrawalStatus,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 const LIMIT = 20;
 

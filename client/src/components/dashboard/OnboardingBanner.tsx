@@ -100,7 +100,7 @@ export function OnboardingBanner() {
                 </p>
                 <h2 className="font-grotesk mt-1 text-lg font-semibold sm:text-xl">Let's get you set up</h2>
                 <p className="mt-0.5 text-sm text-muted-foreground">
-                  Complete these {steps.length} steps to unlock the full Zaminex experience.
+                  Complete these {steps.length} steps to unlock the full Zeminex experience.
                 </p>
               </div>
               <button

@@ -7,7 +7,7 @@ import {
   nowpaymentsSettingsSchema,
   maintenanceSettingsSchema,
   adminLogsQuerySchema,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 import type {
   CompensationSettingsBody,
   SiteConfigUpdate,
@@ -16,7 +16,7 @@ import type {
   NowpaymentsSettingsBody,
   MaintenanceSettingsBody,
   AdminLogsQuery,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";

@@ -1,5 +1,5 @@
 import type { Request, RequestHandler } from "express";
-import { adminActionSchema, withdrawalListQuerySchema, withdrawalIdParamSchema } from "@zaminex/shared";
+import { adminActionSchema, withdrawalListQuerySchema, withdrawalIdParamSchema } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";
@@ -12,7 +12,7 @@ import {
   getAdminWithdrawals,
   getAdminWithdrawal,
 } from "../services/withdrawal.service.js";
-import type { WithdrawalStatus } from "@zaminex/shared";
+import type { WithdrawalStatus } from "@zeminex/shared";
 
 const idParam = (req: Request): string => {
   const id = (req.params as { id?: string }).id;

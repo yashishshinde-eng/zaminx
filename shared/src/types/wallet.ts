@@ -12,7 +12,7 @@
  */
 
 import { z } from "zod";
-import { adminWalletAdjustSchema } from "../schemas/wallet.schema.js";
+import { adminWalletAdjustSchema, adminDepositCreateSchema } from "../schemas/wallet.schema.js";
 
 export type WalletType = "main" | "bonus" | "trading";
 
@@ -90,3 +90,6 @@ export interface WalletLedgerPage {
 
 /** Body for `POST /admin/users/:id/wallet/adjust`. */
 export type AdminWalletAdjustBody = z.infer<typeof adminWalletAdjustSchema>["body"];
+
+/** Body for `POST /admin/users/:id/deposits` (admin manual deposit). */
+export type AdminDepositCreateBody = z.infer<typeof adminDepositCreateSchema>["body"];

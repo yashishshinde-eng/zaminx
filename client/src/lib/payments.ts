@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { DepositRow } from "@zaminex/shared";
+import type { DepositRow } from "@zeminex/shared";
 
 interface DepositsResponse {
   data: { deposits: DepositRow[] };

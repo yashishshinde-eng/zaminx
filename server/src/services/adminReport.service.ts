@@ -29,7 +29,7 @@ import type {
   WalletTxType,
   WalletTxDirection,
   WalletTxRef,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /** The 6 income-stream ledger types (credit-only). */
 const INCOME_TYPES: WalletTxType[] = [
@@ -70,8 +70,8 @@ type LeanWallet = {
 type LeanDeposit = {
   _id: { toString(): string };
   user: { toString(): string };
-  userPackage: { toString(): string };
-  package: { toString(): string };
+  userPackage: { toString(): string } | null;
+  package: { toString(): string } | null;
   amountUsd: number;
   currency: string;
   status: string;
@@ -250,8 +250,8 @@ function toAdminDepositRow(d: LeanDeposit, userMap: Map<string, UserName>): Admi
   const userId = d.user.toString();
   return {
     id: d._id.toString(),
-    userPackageId: d.userPackage.toString(),
-    packageId: d.package.toString(),
+    userPackageId: d.userPackage?.toString() ?? null,
+    packageId: d.package?.toString() ?? null,
     amountUsd: d.amountUsd,
     currency: d.currency as AdminDepositReportRow["currency"],
     status: d.status as AdminDepositReportRow["status"],

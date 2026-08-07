@@ -19,7 +19,7 @@ import adminRoutes from "./admin.routes.js";
 const router = Router();
 
 router.get("/", (_req, res) =>
-  res.json({ success: true, message: "Zaminex API", version: "v1" }),
+  res.json({ success: true, message: "Zeminex API", version: "v1" }),
 );
 router.use("/health", healthRoutes);
 router.use("/auth", authRoutes);

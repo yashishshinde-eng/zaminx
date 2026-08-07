@@ -5,10 +5,10 @@ import { PublicHeader } from "./PublicHeader";
 import { PublicFooter } from "./PublicFooter";
 import { MaintenanceGate } from "./MaintenanceGate";
 import { FullPageLoader } from "@/components/layout/FullPageLoader";
-import type { SiteConfig } from "@zaminex/shared";
+import type { SiteConfig } from "@zeminex/shared";
 
 const FALLBACK_CONFIG: SiteConfig = {
-  siteName: "Zaminex",
+  siteName: "Zeminex",
   logoLight: null,
   logoDark: null,
   navLinks: [{ label: "Home", href: "/" }],

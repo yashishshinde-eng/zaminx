@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
 import { motion } from "framer-motion";
 import { PieChart } from "lucide-react";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 import { themeColor, DONUT_COLORS, baseChartOptions } from "@/lib/chart";
 import { formatCurrency, cn } from "@/lib/utils";
 

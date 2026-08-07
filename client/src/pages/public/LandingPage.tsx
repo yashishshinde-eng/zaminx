@@ -1,7 +1,7 @@
 /**
  * LandingPage — Premium FinTech Landing
  *
- * A visually stunning, award-winning landing page for Zaminex.
+ * A visually stunning, award-winning landing page for Zeminex.
  * Every section has visual depth, glassmorphism, animations, and a $100M FinTech feel.
  * Think: Stripe + Binance + Linear + Apple — no flat sections, every pixel has purpose.
  */
@@ -116,7 +116,7 @@ function HeroSection() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="mt-6 max-w-lg text-lg text-muted-foreground sm:text-xl">
-              Zaminex empowers you with institutional-grade investment tools, real-time portfolio analytics, and bank-level security — all in one premium platform.
+              Zeminex empowers you with institutional-grade investment tools, real-time portfolio analytics, and bank-level security — all in one premium platform.
             </motion.p>
 
             <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-4">
@@ -402,7 +402,7 @@ function DashboardPreviewSection() {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <Logo className="size-8" />
-                <span className="font-bold text-gradient">Zaminex</span>
+                <span className="font-bold text-gradient">Zeminex</span>
               </div>
               <div className="flex items-center gap-2">
                 {["Overview", "Analytics", "Reports"].map((tab, i) => (
@@ -488,7 +488,7 @@ function WhyChooseUsSection() {
     <Section id="why" className="section-bg py-20 sm:py-28">
       <div className="container mx-auto">
         <div className="mx-auto max-w-2xl text-center mb-14">
-          <p className="text-sm font-semibold uppercase tracking-wider text-gold mb-3">Why Zaminex</p>
+          <p className="text-sm font-semibold uppercase tracking-wider text-gold mb-3">Why Zeminex</p>
           <h2 className="font-grotesk text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
             Built for <span className="text-gradient">serious investors</span>
           </h2>
@@ -577,9 +577,9 @@ function SecuritySection() {
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function TestimonialsSection() {
   const testimonials = [
-    { name: "Alex M.", role: "Crypto Trader", text: "Zaminex has transformed the way I manage my portfolio. The analytics are unmatched, and the security gives me total peace of mind.", stars: 5 },
-    { name: "Sarah K.", role: "Investment Analyst", text: "The interface is beautiful and intuitive. I've recommended Zaminex to my entire network — the referral rewards are just a bonus.", stars: 5 },
-    { name: "David L.", role: "Entrepreneur", text: "Finally, a platform that combines premium design with serious financial tools. Zaminex feels like it was built for professionals.", stars: 5 },
+    { name: "Alex M.", role: "Crypto Trader", text: "Zeminex has transformed the way I manage my portfolio. The analytics are unmatched, and the security gives me total peace of mind.", stars: 5 },
+    { name: "Sarah K.", role: "Investment Analyst", text: "The interface is beautiful and intuitive. I've recommended Zeminex to my entire network — the referral rewards are just a bonus.", stars: 5 },
+    { name: "David L.", role: "Entrepreneur", text: "Finally, a platform that combines premium design with serious financial tools. Zeminex feels like it was built for professionals.", stars: 5 },
   ];
 
   return (
@@ -623,9 +623,9 @@ function TestimonialsSection() {
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function FaqSection() {
   const faqs = [
-    { q: "What is Zaminex?", a: "Zaminex is a premium investment platform that combines institutional-grade analytics with an intuitive interface, allowing you to grow your wealth with confidence and clarity." },
+    { q: "What is Zeminex?", a: "Zeminex is a premium investment platform that combines institutional-grade analytics with an intuitive interface, allowing you to grow your wealth with confidence and clarity." },
     { q: "How secure is my investment?", a: "We use 256-bit AES encryption, cold storage for all funds, SOC2 compliance, and multi-factor authentication. Your assets are protected at the same level as major financial institutions." },
-    { q: "What wallets are available?", a: "Zaminex provides three separate wallets — Main, Bonus, and Trading — each with full transparency, instant transfers, and real-time balance tracking." },
+    { q: "What wallets are available?", a: "Zeminex provides three separate wallets — Main, Bonus, and Trading — each with full transparency, instant transfers, and real-time balance tracking." },
     { q: "How does the referral program work?", a: "Share your unique referral link and earn commissions on every member of your network. Our multi-tier system rewards you for direct and indirect referrals." },
     { q: "Can I withdraw anytime?", a: "Yes! Available balances can be withdrawn at any time. Requests are processed quickly, and you'll receive confirmation every step of the way." },
     { q: "What payment methods are supported?", a: "We support USDT (BEP-20) and other major cryptocurrencies through our secure payment partner, NOWPayments." },
@@ -689,7 +689,7 @@ function CtaSection() {
                 Ready to grow your <span className="text-gradient">wealth</span>?
               </h2>
               <p className="mt-4 text-lg text-muted-foreground">
-                Join thousands of investors who trust Zaminex for their financial journey. Start today — no hidden fees, no lock-in.
+                Join thousands of investors who trust Zeminex for their financial journey. Start today — no hidden fees, no lock-in.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <Link to="/register" className="btn-premium h-12 px-8 text-base">

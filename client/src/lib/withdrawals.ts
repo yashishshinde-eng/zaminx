@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { WithdrawalPage, WithdrawalRow, WithdrawalStatus, WalletType } from "@zaminex/shared";
+import type { WithdrawalPage, WithdrawalRow, WithdrawalStatus, WalletType } from "@zeminex/shared";
 
 interface ListResponse {
   data: { withdrawals: WithdrawalPage };

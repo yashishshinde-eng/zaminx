@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Award, Sparkles } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /** Current rank + progress to the next rank. Glass card with gold accent. */
 export function RankCard({ rank }: { rank: DashboardSummary["account"]["rank"] }) {

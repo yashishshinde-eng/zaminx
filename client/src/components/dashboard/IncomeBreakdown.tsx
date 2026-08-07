@@ -8,7 +8,7 @@ import {
   Gift,
   type LucideIcon,
 } from "lucide-react";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 import { formatCurrency } from "@/lib/utils";
 
 type IncomeStreamKey = "trading" | "direct" | "team" | "community" | "rankReward" | "bonanza";

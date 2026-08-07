@@ -28,3 +28,16 @@ export const adminWalletAdjustSchema = z.object({
     memo: z.string().max(280).optional(),
   }),
 });
+
+/* ----------------------------------------------------------------------------
+ * Admin deposit (manual). Records a paid, package-less `Deposit` for a user
+ * and credits their Main/available wallet as a `deposit` ledger row (not an
+ * `adjustment`). The optional `memo` is the admin's reference / tx hash / note.
+ * ------------------------------------------------------------------------- */
+
+export const adminDepositCreateSchema = z.object({
+  body: z.object({
+    amount: z.number().positive("Amount must be positive"),
+    memo: z.string().trim().max(280).optional(),
+  }),
+});

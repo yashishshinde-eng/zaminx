@@ -1,6 +1,6 @@
 import { api } from "./axios";
 import { STORAGE_KEYS } from "@/config";
-import type { PublicUser } from "@zaminex/shared";
+import type { PublicUser } from "@zeminex/shared";
 
 export interface TokenPair {
   accessToken: string;

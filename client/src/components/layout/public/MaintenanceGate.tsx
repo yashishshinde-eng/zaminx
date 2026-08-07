@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { SiteConfig } from "@zaminex/shared";
+import type { SiteConfig } from "@zeminex/shared";
 import { useAuth } from "@/context/AuthContext";
 import { Logo } from "@/components/layout/Logo";
 
@@ -17,7 +17,7 @@ export function MaintenanceGate({ config, children }: { config: SiteConfig; chil
       <div className="space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">We&apos;ll be right back</h1>
         <p className="max-w-md text-muted-foreground">
-          {config.maintenanceMode.message || "Zaminex is undergoing scheduled maintenance. Please check back shortly."}
+          {config.maintenanceMode.message || "Zeminex is undergoing scheduled maintenance. Please check back shortly."}
         </p>
       </div>
     </div>

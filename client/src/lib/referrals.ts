@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { ReferralPage, ReferralStats, ReferralMemberStatus } from "@zaminex/shared";
+import type { ReferralPage, ReferralStats, ReferralMemberStatus } from "@zeminex/shared";
 
 interface StatsResponse {
   data: { referral: ReferralStats };

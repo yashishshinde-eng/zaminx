@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link as LinkIcon, Copy, Check, Share2 } from "lucide-react";
 import toast from "react-hot-toast";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /** Referral code + copyable link. Premium glass panel with gold accent. */
 export function ReferralLinkCard({ referral }: { referral: DashboardSummary["referral"] }) {
@@ -21,7 +21,7 @@ export function ReferralLinkCard({ referral }: { referral: DashboardSummary["ref
 
   const share = () => {
     if (navigator.share) {
-      navigator.share({ title: "Join me on Zaminex", url: referral.link }).catch(() => undefined);
+      navigator.share({ title: "Join me on Zeminex", url: referral.link }).catch(() => undefined);
     } else {
       copy();
     }

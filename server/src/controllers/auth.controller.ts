@@ -8,7 +8,7 @@ import {
   verifyEmailSchema,
   resendVerificationSchema,
   logoutSchema,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";

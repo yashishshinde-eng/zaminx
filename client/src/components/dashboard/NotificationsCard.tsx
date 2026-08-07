@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Bell } from "lucide-react";
 import { formatRelative } from "@/lib/chart";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /** Notifications list with premium glass pills. */
 export function NotificationsCard({ notifications }: { notifications: DashboardSummary["notifications"] }) {

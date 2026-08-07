@@ -13,7 +13,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatDate } from "@/lib/utils";
 import toast from "react-hot-toast";
-import type { ReferralMemberRow, ReferralMemberStatus } from "@zaminex/shared";
+import type { ReferralMemberRow, ReferralMemberStatus } from "@zeminex/shared";
 
 const STATUS_FILTERS: { value: "all" | ReferralMemberStatus; label: string }[] = [
   { value: "all", label: "All" },
@@ -153,7 +153,7 @@ export function TeamPage() {
                 const link = stats.data?.link ?? "";
                 if (navigator.share) {
                   navigator
-                    .share({ title: "Join me on Zaminex", url: link })
+                    .share({ title: "Join me on Zeminex", url: link })
                     .catch(() => undefined);
                 } else {
                   navigator.clipboard.writeText(link).then(

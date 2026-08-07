@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { contactSchema } from "@zaminex/shared";
-import type { ContactBody } from "@zaminex/shared";
+import { contactSchema } from "@zeminex/shared";
+import type { ContactBody } from "@zeminex/shared";
 import toast from "react-hot-toast";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ export function ContactPage() {
   const { data: config } = useSiteConfig();
   const [submitting, setSubmitting] = useState(false);
 
-  useDocumentMeta({ title: "Contact — Zaminex", description: "Get in touch with the Zaminex team." });
+  useDocumentMeta({ title: "Contact — Zeminex", description: "Get in touch with the Zeminex team." });
 
   const {
     register,

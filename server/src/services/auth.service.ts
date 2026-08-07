@@ -8,7 +8,7 @@ import { sendEmail } from "./email.service.js";
 import { verifyEmailTemplate, welcomeTemplate, resetPasswordTemplate } from "./emailTemplates.js";
 import { evaluateBonanzasForUser } from "./compensation.service.js";
 import { evaluateRankForUser } from "./rank.service.js";
-import type { PublicUser } from "@zaminex/shared";
+import type { PublicUser } from "@zeminex/shared";
 
 /** Lifetime of verification/reset tokens, derived from env. */
 const tokenExpiryMs = () => env.EMAIL_TOKEN_EXPIRY_HOURS * 60 * 60 * 1000;

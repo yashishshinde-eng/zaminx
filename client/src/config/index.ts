@@ -1,11 +1,11 @@
 export const API_URL = import.meta.env.VITE_API_URL ?? "/api/v1";
 
 export const STORAGE_KEYS = {
-  accessToken: "zaminex.at",
-  refreshToken: "zaminex.rt",
-  theme: "zaminex.theme",
-  sidebarCollapsed: "zaminex.sidebar.collapsed",
-  onboardingDismissed: "zaminex.onboarding.dismissed",
+  accessToken: "zeminex.at",
+  refreshToken: "zeminex.rt",
+  theme: "zeminex.theme",
+  sidebarCollapsed: "zeminex.sidebar.collapsed",
+  onboardingDismissed: "zeminex.onboarding.dismissed",
 } as const;
 
 /** Centralised TanStack Query key factory. */

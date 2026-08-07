@@ -15,7 +15,7 @@ const envSchema = z.object({
   JWT_REFRESH_EXPIRY: z.string().default("7d"),
 
   SEED_ADMIN_NAME: z.string().default("Platform Admin"),
-  SEED_ADMIN_EMAIL: z.string().email().default("admin@zaminex.local"),
+  SEED_ADMIN_EMAIL: z.string().email().default("admin@zeminex.local"),
   // No default — a known-default seed password must never create a prod admin.
   SEED_ADMIN_PASSWORD: z.string().min(8, { message: "SEED_ADMIN_PASSWORD is required" }),
   // When true, `npm run seed` upserts (overwrites) settings/packages/ranks/CMS
@@ -30,7 +30,7 @@ const envSchema = z.object({
   SMTP_PORT: z.coerce.number().int().positive().default(587),
   SMTP_USER: z.string().optional(),
   SMTP_PASS: z.string().optional(),
-  SMTP_FROM: z.string().default("Zaminex <noreply@zaminex.io>"),
+  SMTP_FROM: z.string().default("Zeminex <noreply@zeminex.io>"),
   EMAIL_TOKEN_EXPIRY_HOURS: z.coerce.number().int().positive().default(24),
 
   // NOWPayments deposit gateway (Phase 7). When API_KEY + IPN_SECRET are both

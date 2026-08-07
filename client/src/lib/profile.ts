@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { PublicUser } from "@zaminex/shared";
+import type { PublicUser } from "@zeminex/shared";
 
 /** PUT /profile — personal details. */
 export async function updateProfileRequest(payload: {

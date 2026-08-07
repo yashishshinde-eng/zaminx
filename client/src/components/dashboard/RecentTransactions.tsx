@@ -10,7 +10,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { formatRelative } from "@/lib/chart";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /* ── Action-type metadata ─────────────────────────────────────── */
 const ACTION_META: Record<string, { label: string; icon: typeof ArrowRightToLine; badge: "success" | "info" }> = {

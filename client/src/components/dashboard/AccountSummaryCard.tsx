@@ -2,7 +2,7 @@ import { BadgeCheck, ShieldCheck, CalendarDays } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { formatDate } from "@/lib/utils";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /** Account summary tile — name, verification + role badges, member-since. */
 export function AccountSummaryCard({ account }: { account: DashboardSummary["account"] }) {

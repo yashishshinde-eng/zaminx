@@ -90,7 +90,7 @@ export function AdminSmtpSettingsPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="smtpFrom">From address</Label>
-                    <Input id="smtpFrom" value={from} onChange={(e) => setFrom(e.target.value)} placeholder="Zaminex <noreply@zaminex.io>" />
+                    <Input id="smtpFrom" value={from} onChange={(e) => setFrom(e.target.value)} placeholder="Zeminex <noreply@zeminex.io>" />
                   </div>
                 </div>
 

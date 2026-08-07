@@ -5,8 +5,9 @@ import {
   adminUserStatusSchema,
   adminResetPasswordSchema,
   adminWalletAdjustSchema,
-} from "@zaminex/shared";
-import type { AdminUserListQuery, UserStatus, AdminResetPasswordBody, AdminWalletAdjustBody } from "@zaminex/shared";
+  adminDepositCreateSchema,
+} from "@zeminex/shared";
+import type { AdminUserListQuery, UserStatus, AdminResetPasswordBody, AdminWalletAdjustBody, AdminDepositCreateBody } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";
@@ -20,6 +21,7 @@ import {
   adminResetPassword,
 } from "../services/adminUser.service.js";
 import { adminAdjustWallet } from "../services/adminWallet.service.js";
+import { adminRecordDeposit } from "../services/deposit.service.js";
 
 /** GET /admin/users — paginated, searchable, filterable admin user list. */
 export const list: RequestHandler[] = [
@@ -104,5 +106,17 @@ export const adjustWallet: RequestHandler[] = [
     const id = (req.params as { id: string }).id;
     const result = await adminAdjustWallet(req.user.id, id, req.body as AdminWalletAdjustBody);
     ok(res, { balance: result.balance, wallet: result.wallet }, "Wallet adjusted");
+  }),
+];
+
+/** POST /admin/users/:id/deposits — admin records a paid deposit + credits Main wallet. */
+export const createDeposit: RequestHandler[] = [
+  validate(adminUserIdParamSchema, "params"),
+  validate(adminDepositCreateSchema),
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    const id = (req.params as { id: string }).id;
+    const result = await adminRecordDeposit(req.user.id, id, req.body as AdminDepositCreateBody);
+    ok(res, { deposit: result.deposit, balance: result.balance }, "Deposit recorded");
   }),
 ];

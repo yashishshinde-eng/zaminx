@@ -22,6 +22,7 @@ import {
   forceLogoutAllRequest,
   fetchAdminLogs,
   adjustUserWalletRequest,
+  recordUserDepositRequest,
   type AdminUsersParams,
   type Page,
 } from "@/lib/admin";
@@ -42,8 +43,9 @@ import type {
   AdminLogsQuery,
   AdminLogsResult,
   AdminWalletAdjustBody,
+  AdminDepositCreateBody,
   UserStatus,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /* ------------------------------------------------------------------ */
 /*  Reads                                                               */
@@ -333,6 +335,21 @@ export function useAdjustUserWallet(id?: string) {
     },
     onError: () => {
       /* interceptor toasts (409 insufficient / 404 user) */
+    },
+  });
+}
+
+/** POST /admin/users/:id/deposits — record a paid deposit + credit Main wallet. */
+export function useRecordUserDeposit(id?: string) {
+  const invalidate = useInvalidateUser(id);
+  return useMutation({
+    mutationFn: (body: AdminDepositCreateBody) => recordUserDepositRequest(id as string, body),
+    onSuccess: async () => {
+      toast.success("Deposit recorded");
+      await invalidate();
+    },
+    onError: () => {
+      /* interceptor toasts (400 invalid amount / 404 user) */
     },
   });
 }

@@ -14,7 +14,7 @@ import {
   Globe,
   Zap,
 } from "lucide-react";
-import type { SiteConfig } from "@zaminex/shared";
+import type { SiteConfig } from "@zeminex/shared";
 import { Logo } from "@/components/layout/Logo";
 
 const SOCIAL_ICONS: Record<string, LucideIcon> = {

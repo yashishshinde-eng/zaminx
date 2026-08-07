@@ -6,7 +6,7 @@ import { depositSuccessTemplate } from "./emailTemplates.js";
 import { createInvoice } from "./nowpayments.service.js";
 import { applyLedgerEntry } from "./wallet.service.js";
 import { awardDirectBonus } from "./compensation.service.js";
-import type { DepositRow, PackageTier, UserPackageRow } from "@zaminex/shared";
+import type { DepositRow, PackageTier, UserPackageRow, WalletBalance, AdminDepositCreateBody } from "@zeminex/shared";
 
 interface Meta {
   ip?: string;
@@ -81,8 +81,8 @@ function toUserPackageRow(up: LeanUserPackage, payment?: UserPackageRow["payment
 
 function toDepositRow(d: {
   _id: { toString(): string };
-  userPackage: { toString(): string };
-  package: { toString(): string };
+  userPackage?: { toString(): string } | null;
+  package?: { toString(): string } | null;
   amountUsd: number;
   currency: string;
   status: string;
@@ -95,8 +95,8 @@ function toDepositRow(d: {
 }): DepositRow {
   return {
     id: d._id.toString(),
-    userPackageId: d.userPackage.toString(),
-    packageId: d.package.toString(),
+    userPackageId: d.userPackage?.toString() ?? null,
+    packageId: d.package?.toString() ?? null,
     amountUsd: d.amountUsd,
     currency: d.currency as DepositRow["currency"],
     status: d.status as DepositRow["status"],
@@ -351,10 +351,85 @@ export async function getMyPackagesWithPayment(userId: string): Promise<UserPack
     Deposit.find({ user: userId }).sort({ createdAt: -1 }).limit(200).lean(),
   ]);
   // Most recent deposit per subscription → joined `payment` field.
+  // Admin-recorded standalone deposits (no userPackage) don't belong to any
+  // subscription, so skip them here.
   const paymentByPackage = new Map<string, Payment>();
   for (const d of deposits) {
-    const key = d.userPackage.toString();
+    const key = d.userPackage?.toString();
+    if (!key) continue;
     if (!paymentByPackage.has(key)) paymentByPackage.set(key, depositToPayment(d));
   }
   return rows.map((up) => toUserPackageRow(up as never, paymentByPackage.get(up._id.toString())));
+}
+
+/* ------------------------------------------------------------------ */
+/*  Admin manual deposit                                               */
+/* ------------------------------------------------------------------ */
+
+/**
+ * POST /admin/users/:id/deposits — an admin records a paid, package-less
+ * deposit for a user and credits their Main/available wallet as a `deposit`
+ * ledger row. Unlike `confirmDeposit`, this is not tied to a package
+ * activation and does not award the Direct Connect Bonus; it's a pure wallet
+ * credit that also creates a `Deposit` record so it appears in the user's
+ * deposit history alongside real NOWPayments deposits.
+ *
+ * The ledger credit is idempotent via the deposit id reference, so a crash
+ * between the `Deposit.create` and the ledger write is safe to retry (the
+ * retry credits once, keyed by the deposit id). No DB transaction (Phase 15
+ * TODO); same atomic-per-doc + idempotency-guard contract as `confirmDeposit`.
+ */
+export async function adminRecordDeposit(
+  adminId: string,
+  userId: string,
+  body: AdminDepositCreateBody,
+): Promise<{ deposit: DepositRow; balance: WalletBalance }> {
+  const now = new Date();
+
+  // 1. Create the paid, package-less deposit record.
+  const deposit = await Deposit.create({
+    user: userId,
+    userPackage: null,
+    package: null,
+    amountUsd: body.amount,
+    currency: "USDT-BEP20",
+    status: "paid",
+    paidAt: now,
+    sandbox: false,
+    meta: { adminId, method: "manual_admin", reference: body.memo ?? null },
+  });
+
+  // 2. Credit the Main wallet (immutable `deposit` ledger row, idempotent via
+  //    the deposit id). Best-effort: a ledger failure must not orphan the
+  //    already-created deposit — log and surface a non-2xx so the admin can
+  //    retry; the idempotency guard prevents a double-credit on retry.
+  const result = await applyLedgerEntry({
+    userId,
+    wallet: "main",
+    field: "available",
+    direction: "credit",
+    amount: body.amount,
+    type: "deposit",
+    reference: { resource: "Deposit", resourceId: deposit._id.toString() },
+    memo: body.memo ? `Admin deposit — ${body.memo}` : "Admin deposit",
+    meta: { adminId, depositId: deposit._id.toString() },
+  }).catch((err) => {
+    logger.error("Wallet credit failed for admin deposit", {
+      depositId: deposit._id.toString(),
+      userId,
+      error: err instanceof Error ? err.message : String(err),
+    });
+    throw ApiError.internal("Deposit recorded but wallet credit failed — please retry to reconcile");
+  });
+
+  // 3. Audit log (best-effort).
+  await ActivityLog.create({
+    actor: adminId,
+    action: "deposit.admin_create",
+    resource: "Deposit",
+    resourceId: deposit._id.toString(),
+    meta: { amountUsd: body.amount, userId, memo: body.memo ?? null },
+  }).catch(() => undefined);
+
+  return { deposit: toDepositRow(deposit.toObject()), balance: result.balance };
 }

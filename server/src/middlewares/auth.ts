@@ -2,7 +2,7 @@ import type { NextFunction, Request, RequestHandler, Response } from "express";
 import { verifyAccessToken } from "../services/token.service.js";
 import { User, type UserDocument } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
-import type { UserRole } from "@zaminex/shared";
+import type { UserRole } from "@zeminex/shared";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

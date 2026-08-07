@@ -6,7 +6,7 @@ import type {
   AdminCmsPagesPage,
   CreateCmsPageBody,
   UpdateCmsPageBody,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /** Admin CMS page-list query params (q / status / page / limit). */
 export interface AdminCmsPagesParams {

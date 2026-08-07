@@ -8,8 +8,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { BlockRenderer } from "@/components/cms/BlockRenderer";
 import { useAdminPage, useCreatePage, useUpdatePage } from "@/hooks/useAdminCms";
 import toast from "react-hot-toast";
-import { contentBlockSchema } from "@zaminex/shared";
-import type { ContentBlock, CreateCmsPageBody, UpdateCmsPageBody } from "@zaminex/shared";
+import { contentBlockSchema } from "@zeminex/shared";
+import type { ContentBlock, CreateCmsPageBody, UpdateCmsPageBody } from "@zeminex/shared";
 
 type BlockType = ContentBlock["type"];
 const BLOCK_TYPES: BlockType[] = ["hero", "heading", "paragraph", "features", "steps", "faq", "cta"];

@@ -10,6 +10,7 @@ import {
   Wallet,
   Lock,
   Banknote,
+  ArrowDownToLine,
   Phone,
   Calendar,
   Hash,
@@ -39,9 +40,10 @@ import {
   useForceLogout,
   useAdminResetPassword,
   useAdjustUserWallet,
+  useRecordUserDeposit,
 } from "@/hooks/useAdmin";
 import { userStatusBadge } from "@/pages/AdminUsersPage";
-import type { AdminUserActivityRow, AdminUserDetail, UserStatus } from "@zaminex/shared";
+import type { AdminUserActivityRow, AdminUserDetail, UserStatus } from "@zeminex/shared";
 
 const STATUSES: UserStatus[] = ["active", "suspended", "banned"];
 
@@ -96,6 +98,9 @@ export function AdminUserDetailPage() {
           </motion.div>
           <motion.div variants={staggerItem}>
             <WalletAdjustCard userId={user.id} />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <RecordDepositCard userId={user.id} />
           </motion.div>
           <motion.div variants={staggerItem}>
             <PackageCard user={user} />
@@ -340,6 +345,69 @@ function WalletAdjustCard({ userId }: { userId: string }) {
         confirmLabel={isDebit ? "Debit" : "Credit"}
         destructive={isDebit}
         loading={adjustMut.isPending}
+      />
+    </Card>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Record deposit (admin manual deposit)                              */
+/* ------------------------------------------------------------------ */
+
+function RecordDepositCard({ userId }: { userId: string }) {
+  const [amount, setAmount] = useState("");
+  const [memo, setMemo] = useState("");
+  const [confirm, setConfirm] = useState(false);
+
+  const depositMut = useRecordUserDeposit(userId);
+  const amt = Number(amount);
+  const valid = Number.isFinite(amt) && amt > 0;
+
+  function submit() {
+    if (!valid) return;
+    depositMut.mutate({ amount: amt, memo: memo.trim() || undefined }, { onSettled: () => setConfirm(false) });
+  }
+
+  return (
+    <Card className="border-0">
+      <CardHeader className="space-y-1">
+        <CardTitle className="flex items-center gap-2 text-base">
+          <ArrowDownToLine className="size-4 text-primary" /> Record deposit
+        </CardTitle>
+        <CardDescription>
+          Record a paid deposit and credit the user's Main wallet. Appears in the user's deposit history as a real deposit (not an adjustment).
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="space-y-1">
+            <Label htmlFor="depAmount" className="text-xs text-muted-foreground">
+              Amount (USDT)
+            </Label>
+            <Input id="depAmount" type="number" min="0" step="0.01" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="depMemo" className="text-xs text-muted-foreground">
+              Reference (optional)
+            </Label>
+            <Input id="depMemo" value={memo} onChange={(e) => setMemo(e.target.value)} placeholder="Tx hash / reason / note" />
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <Button disabled={!valid || depositMut.isPending} onClick={() => setConfirm(true)}>
+            {depositMut.isPending ? "Recording…" : `Record deposit of ${amt || 0} USDT`}
+          </Button>
+        </div>
+      </CardContent>
+
+      <ConfirmModal
+        open={confirm}
+        onClose={() => setConfirm(false)}
+        onConfirm={submit}
+        title={`Deposit ${amt} USDT to Main wallet?`}
+        description="This credits the user's Main/Available balance as a paid deposit and is recorded as an immutable ledger row, audited to the activity log, and visible in the user's deposit history."
+        confirmLabel="Record deposit"
+        loading={depositMut.isPending}
       />
     </Card>
   );

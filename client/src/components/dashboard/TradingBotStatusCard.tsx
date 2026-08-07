@@ -3,7 +3,7 @@ import { Bot } from "lucide-react";
 import { Sparkline } from "./Sparkline";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /**
  * Blueprint section 3 — Trading Bot Status. Honest, real-data card: the bot is

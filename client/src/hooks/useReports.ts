@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchReport, fetchAdminReport, type ReportPayload } from "@/lib/reports";
 import { queryKeys } from "@/config";
-import type { UserReportKind, AdminReportKind, ReportQuery, AdminReportPayload } from "@zaminex/shared";
+import type { UserReportKind, AdminReportKind, ReportQuery, AdminReportPayload } from "@zeminex/shared";
 
 /**
  * One user report (paginated rows + summary). Keyed by kind + the full query

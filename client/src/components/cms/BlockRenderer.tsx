@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { ContentBlock } from "@zaminex/shared";
+import type { ContentBlock } from "@zeminex/shared";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 

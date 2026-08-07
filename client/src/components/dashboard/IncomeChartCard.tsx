@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SegmentedControl } from "@/components/ui/tabs";
 import { useCountUp } from "@/hooks/useCountUp";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 import { themeColor, baseChartOptions } from "@/lib/chart";
 import { formatCurrency, cn } from "@/lib/utils";
 

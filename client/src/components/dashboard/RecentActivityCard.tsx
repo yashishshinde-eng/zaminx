@@ -1,7 +1,7 @@
 import { History, LogIn, UserPlus, MailCheck, KeyRound } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatRelative } from "@/lib/chart";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /** Humanize an ActivityLog action string + pick an icon. */
 const ACTION_META: Record<string, { label: string; icon: typeof LogIn }> = {

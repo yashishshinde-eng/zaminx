@@ -27,8 +27,8 @@ import {
 import {
   updateProfileSchema,
   updateWalletAddressesSchema,
-} from "@zaminex/shared";
-import type { UpdateProfileBody, UpdateWalletAddressesBody } from "@zaminex/shared";
+} from "@zeminex/shared";
+import type { UpdateProfileBody, UpdateWalletAddressesBody } from "@zeminex/shared";
 
 export function SettingsPage() {
   const { user } = useAuth();

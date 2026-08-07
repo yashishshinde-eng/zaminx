@@ -1,5 +1,5 @@
 {
-  "name": "@zaminex/client",
+  "name": "@zeminex/client",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -13,7 +13,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@tanstack/react-query": "^5.59.16",
-    "@zaminex/shared": "*",
+    "@zeminex/shared": "*",
     "apexcharts": "^4.0.0",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.1",

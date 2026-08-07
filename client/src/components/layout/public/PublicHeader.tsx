@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X, Moon, Sun, ArrowRight } from "lucide-react";
-import type { SiteConfig } from "@zaminex/shared";
+import type { SiteConfig } from "@zeminex/shared";
 import { Logo } from "@/components/layout/Logo";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/context/ThemeContext";

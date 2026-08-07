@@ -11,7 +11,7 @@ import { useWallet, useWalletLedger } from "@/hooks/useWallet";
 import { useCountUp } from "@/hooks/useCountUp";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
-import type { WalletBalances, WalletTxRow, WalletType } from "@zaminex/shared";
+import type { WalletBalances, WalletTxRow, WalletType } from "@zeminex/shared";
 
 const WALLET_FILTERS: { value: "all" | WalletType; label: string }[] = [
   { value: "all", label: "All" },

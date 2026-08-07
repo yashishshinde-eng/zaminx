@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { forgotPasswordSchema } from "@zaminex/shared";
-import type { ForgotPasswordBody } from "@zaminex/shared";
+import { forgotPasswordSchema } from "@zeminex/shared";
+import type { ForgotPasswordBody } from "@zeminex/shared";
 import toast from "react-hot-toast";
 import { Mail, ArrowRight } from "lucide-react";
 import { api } from "@/lib/axios";
@@ -17,7 +17,7 @@ export function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  useDocumentMeta({ title: "Forgot password — Zaminex" });
+  useDocumentMeta({ title: "Forgot password — Zeminex" });
 
   const {
     register,

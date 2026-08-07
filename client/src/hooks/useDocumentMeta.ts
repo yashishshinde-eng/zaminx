@@ -5,7 +5,7 @@ interface DocumentMeta {
   description?: string;
 }
 
-const DEFAULT_TITLE = "Zaminex";
+const DEFAULT_TITLE = "Zeminex";
 
 function upsertMeta(selector: string, attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(selector);

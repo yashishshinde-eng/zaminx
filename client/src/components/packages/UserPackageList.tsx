@@ -4,7 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { PackageStatusBadge } from "./PackageStatusBadge";
-import type { UserPackageRow } from "@zaminex/shared";
+import type { UserPackageRow } from "@zeminex/shared";
 
 interface UserPackageListProps {
   packages: UserPackageRow[] | undefined;

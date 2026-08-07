@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { WalletBalances, WalletLedgerPage, WalletType } from "@zaminex/shared";
+import type { WalletBalances, WalletLedgerPage, WalletType } from "@zeminex/shared";
 
 interface WalletResponse {
   data: { wallets: WalletBalances };

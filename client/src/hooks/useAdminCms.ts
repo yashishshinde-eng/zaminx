@@ -15,7 +15,7 @@ import type {
   AdminCmsPageListItem,
   CreateCmsPageBody,
   UpdateCmsPageBody,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /* ------------------------------------------------------------------ */
 /*  Reads                                                               */

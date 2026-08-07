@@ -6,7 +6,7 @@ import { formatCurrency } from "@/lib/utils";
 import { useSimulatePayment } from "@/hooks/usePackages";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/config";
-import type { UserPackageRow } from "@zaminex/shared";
+import type { UserPackageRow } from "@zeminex/shared";
 
 interface PaymentCardProps {
   payment: NonNullable<UserPackageRow["payment"]>;

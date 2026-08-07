@@ -3,7 +3,7 @@ import { Check, Sparkles, TrendingUp, CalendarDays } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn, formatCurrency } from "@/lib/utils";
-import type { PackageTier } from "@zaminex/shared";
+import type { PackageTier } from "@zeminex/shared";
 
 interface PackageTierCardProps {
   tier: PackageTier;

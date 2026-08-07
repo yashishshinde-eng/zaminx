@@ -1,6 +1,6 @@
 import { api } from "./axios";
 import type { Page } from "./admin";
-import type { BonanzaOfferRow, BonanzaStatus, CreateBonanzaBody, UpdateBonanzaBody } from "@zaminex/shared";
+import type { BonanzaOfferRow, BonanzaStatus, CreateBonanzaBody, UpdateBonanzaBody } from "@zeminex/shared";
 
 export interface AdminBonanzasParams {
   status?: BonanzaStatus;

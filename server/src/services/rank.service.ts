@@ -5,7 +5,7 @@ import { applyLedgerEntry } from "./wallet.service.js";
 import { sendNotificationEmail } from "./email.service.js";
 import { rankAchievementTemplate } from "./emailTemplates.js";
 import { getTeamCounts, type TeamCounts } from "./referral.service.js";
-import type { RankRow, RankInfo, RankStatus, RankEvalSummary } from "@zaminex/shared";
+import type { RankRow, RankInfo, RankStatus, RankEvalSummary } from "@zeminex/shared";
 
 /* ------------------------------------------------------------------ */
 /*  Mapper                                                             */

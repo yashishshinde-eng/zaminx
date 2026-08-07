@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { ActivatePackageResponse, PackageTier, UserPackageRow } from "@zaminex/shared";
+import type { ActivatePackageResponse, PackageTier, UserPackageRow } from "@zeminex/shared";
 
 interface ListResponse<T> {
   data: { packages: T[] };

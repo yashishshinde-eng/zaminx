@@ -21,7 +21,7 @@ export const logger = createLogger({
     timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
     logFormat,
   ),
-  defaultMeta: { service: "zaminex-api" },
+  defaultMeta: { service: "zeminex-api" },
   transports: [
     new transports.Console({
       format: combine(colorize(), logFormat),

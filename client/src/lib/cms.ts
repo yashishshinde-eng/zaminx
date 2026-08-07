@@ -1,5 +1,5 @@
 import { api } from "./axios";
-import type { CmsPage, PageListItem, SiteConfig, ContactBody } from "@zaminex/shared";
+import type { CmsPage, PageListItem, SiteConfig, ContactBody } from "@zeminex/shared";
 
 export async function fetchSiteConfig(): Promise<SiteConfig> {
   const { data } = await api.get<{ data: SiteConfig }>("/cms/site");

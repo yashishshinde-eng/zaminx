@@ -5,7 +5,7 @@ const options: swaggerJsdoc.Options = {
   definition: {
     openapi: "3.0.3",
     info: {
-      title: "Zaminex API",
+      title: "Zeminex API",
       version: "1.0.0",
       description:
         "Investment & referral platform API. Phase 1 covers authentication and health. " +

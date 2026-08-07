@@ -18,7 +18,7 @@ import { useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
 import toast from "react-hot-toast";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /* ═══════════════════════════════════════════════════════════════════════
  *  Static fallback data — used when backend values are zero/missing
@@ -30,7 +30,7 @@ const FALLBACK = {
   packageName: "Gold Plan",
   rankName: "Gold",
   referralCode: "ZAM-X9K2",
-  referralLink: "https://zaminex.com/ref/ZAM-X9K2",
+  referralLink: "https://zeminex.com/ref/ZAM-X9K2",
 };
 
 /* ── Entrance animation variants ──────────────────────────────── */

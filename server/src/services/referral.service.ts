@@ -7,7 +7,7 @@ import type {
   ReferralMemberStatus,
   ReferralPage,
   ReferralStats,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */

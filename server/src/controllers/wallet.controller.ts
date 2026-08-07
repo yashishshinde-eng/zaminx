@@ -1,11 +1,11 @@
 import type { RequestHandler } from "express";
 import { validate } from "../middlewares/validate.js";
-import { walletLedgerQuerySchema } from "@zaminex/shared";
+import { walletLedgerQuerySchema } from "@zeminex/shared";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { getWalletBalances, getWalletLedger } from "../services/wallet.service.js";
-import type { WalletType } from "@zaminex/shared";
+import type { WalletType } from "@zeminex/shared";
 
 /** GET /wallet — the user's three wallet balances + rolled-up totals. */
 export const balances: RequestHandler[] = [

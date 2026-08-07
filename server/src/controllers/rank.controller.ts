@@ -1,5 +1,5 @@
 import type { Request, RequestHandler } from "express";
-import { createRankSchema, updateRankSchema, rankListQuerySchema, rankIdParamSchema } from "@zaminex/shared";
+import { createRankSchema, updateRankSchema, rankListQuerySchema, rankIdParamSchema } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
@@ -12,7 +12,7 @@ import {
   updateRank,
   deleteRank,
 } from "../services/rank.service.js";
-import type { RankStatus } from "@zaminex/shared";
+import type { RankStatus } from "@zeminex/shared";
 
 const idParam = (req: Request): string => {
   const id = (req.params as { id?: string }).id;

@@ -1,5 +1,5 @@
 import type { RequestHandler } from "express";
-import { activatePackageSchema } from "@zaminex/shared";
+import { activatePackageSchema } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";

@@ -4,7 +4,7 @@ import { logger } from "../config/logger.js";
 import { applyLedgerMove, applyLedgerEntry, getWalletBalances } from "./wallet.service.js";
 import { sendNotificationEmail } from "./email.service.js";
 import { withdrawalUpdateTemplate } from "./emailTemplates.js";
-import type { WithdrawalPage, WithdrawalRow, WithdrawalStatus, WalletType } from "@zaminex/shared";
+import type { WithdrawalPage, WithdrawalRow, WithdrawalStatus, WalletType } from "@zeminex/shared";
 
 /** Minimum withdrawal in USD. Phase 14 will make this admin-configurable. */
 export const MIN_WITHDRAWAL_USD = 15;

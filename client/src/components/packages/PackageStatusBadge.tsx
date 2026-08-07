@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import type { UserPackageRow } from "@zaminex/shared";
+import type { UserPackageRow } from "@zeminex/shared";
 
 /** Status badge for a user's package subscription. */
 export function PackageStatusBadge({ status }: { status: UserPackageRow["status"] }) {

@@ -91,7 +91,7 @@ export const cmsPageSchema = z.object({
 const navLink = z.object({ label: z.string().min(1), href: z.string().min(1) });
 
 export const siteConfigSchema = z.object({
-  siteName: z.string().default("Zaminex"),
+  siteName: z.string().default("Zeminex"),
   /** Public website URL (e.g. https://zeminexglobal.com). */
   website: z.string().optional(),
   tagline: z.string().optional(),

@@ -2,7 +2,7 @@ import { connectDB } from "./config/db.js";
 import { env, isNowpaymentsConfigured } from "./config/env.js";
 import { logger } from "./config/logger.js";
 import { User, Setting, CmsPage, Package, BonanzaOffer, Rank } from "./models/index.js";
-import type { ContentBlock } from "@zaminex/shared";
+import type { ContentBlock } from "@zeminex/shared";
 
 async function seed() {
   await connectDB();

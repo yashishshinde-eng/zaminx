@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSiteConfigAdmin, useUpdateSiteConfig } from "@/hooks/useAdmin";
-import type { SiteConfigUpdate } from "@zaminex/shared";
+import type { SiteConfigUpdate } from "@zeminex/shared";
 
 const EMPTY: SiteConfigUpdate = {
   siteName: "",

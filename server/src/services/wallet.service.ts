@@ -10,7 +10,7 @@ import type {
   WalletTxRow,
   WalletTxType,
   WalletType,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /* ------------------------------------------------------------------ */
 /*  Ensure + read                                                      */

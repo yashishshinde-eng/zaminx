@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { themeColor, formatRelative } from "@/lib/chart";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useAdminDashboard } from "@/hooks/useAdmin";
-import type { AdminDashboardActivityRow } from "@zaminex/shared";
+import type { AdminDashboardActivityRow } from "@zeminex/shared";
 
 /** /app/admin — platform-wide admin landing: KPIs, 30-day volume, recent activity. */
 export function AdminDashboardPage() {

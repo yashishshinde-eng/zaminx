@@ -14,8 +14,10 @@ export type DepositCurrency = "USDT-BEP20";
 /** A deposit record, as returned over the API. */
 export interface DepositRow {
   id: string;
-  userPackageId: string;
-  packageId: string;
+  /** Null for admin-recorded standalone deposits (no package activation). */
+  userPackageId: string | null;
+  /** Null for admin-recorded standalone deposits (no package activation). */
+  packageId: string | null;
   amountUsd: number;
   currency: DepositCurrency;
   status: DepositStatus;

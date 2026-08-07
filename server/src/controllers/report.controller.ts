@@ -1,6 +1,6 @@
 import type { RequestHandler } from "express";
-import { reportKindParamSchema, reportQuerySchema, reportExportQuerySchema } from "@zaminex/shared";
-import type { UserReportKind, ReportQuery, ReportExportQuery } from "@zaminex/shared";
+import { reportKindParamSchema, reportQuerySchema, reportExportQuerySchema } from "@zeminex/shared";
+import type { UserReportKind, ReportQuery, ReportExportQuery } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok } from "../utils/ApiResponse.js";

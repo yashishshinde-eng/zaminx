@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Dialog, ConfirmModal } from "@/components/ui/dialog";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useAdminBonanzas, useCreateBonanza, useUpdateBonanza, useDeleteBonanza } from "@/hooks/useAdminBonanzas";
-import type { BonanzaOfferRow, BonanzaStatus, CreateBonanzaBody, UpdateBonanzaBody } from "@zaminex/shared";
+import type { BonanzaOfferRow, BonanzaStatus, CreateBonanzaBody, UpdateBonanzaBody } from "@zeminex/shared";
 
 const LIMIT = 20;
 

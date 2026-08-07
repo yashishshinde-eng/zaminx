@@ -10,7 +10,7 @@ import { ConfirmModal } from "@/components/ui/dialog";
 import { CmsPageDialog } from "@/components/admin/CmsPageDialog";
 import { formatDate } from "@/lib/utils";
 import { useAdminPages, useDeletePage } from "@/hooks/useAdminCms";
-import type { AdminCmsPageListItem } from "@zaminex/shared";
+import type { AdminCmsPageListItem } from "@zeminex/shared";
 
 const STATUSES = ["all", "published", "draft"] as const;
 type StatusFilter = (typeof STATUSES)[number];

@@ -1,11 +1,11 @@
 import type { Request, RequestHandler } from "express";
 import { validate } from "../middlewares/validate.js";
-import { referralListQuerySchema, referralChildrenQuerySchema, referralUserIdParamSchema } from "@zaminex/shared";
+import { referralListQuerySchema, referralChildrenQuerySchema, referralUserIdParamSchema } from "@zeminex/shared";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ok } from "../utils/ApiResponse.js";
 import { getReferralStats, getDirectReferrals, getTreeChildren } from "../services/referral.service.js";
-import type { ReferralMemberStatus } from "@zaminex/shared";
+import type { ReferralMemberStatus } from "@zeminex/shared";
 
 /** GET /referrals/me — referral code/link + team statistics. */
 export const stats: RequestHandler[] = [

@@ -8,7 +8,7 @@ import {
   type WithdrawalListParams,
 } from "@/lib/withdrawals";
 import { queryKeys } from "@/config";
-import type { WalletType } from "@zaminex/shared";
+import type { WalletType } from "@zeminex/shared";
 
 /** Invalidate everything a withdrawal touches: the list, wallet balances +
  *  ledger, and the dashboard (available/onHold totals change). */

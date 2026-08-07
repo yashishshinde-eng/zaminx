@@ -9,7 +9,7 @@ import {
 } from "@/lib/adminBonanzas";
 import type { Page } from "@/lib/admin";
 import { queryKeys } from "@/config";
-import type { BonanzaOfferRow, CreateBonanzaBody, UpdateBonanzaBody } from "@zaminex/shared";
+import type { BonanzaOfferRow, CreateBonanzaBody, UpdateBonanzaBody } from "@zeminex/shared";
 
 /** Paginated, filterable admin bonanza offer list. */
 export function useAdminBonanzas(params: AdminBonanzasParams) {

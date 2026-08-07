@@ -4,7 +4,7 @@ import {
   cmsSlugParamSchema,
   createCmsPageSchema,
   updateCmsPageSchema,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
@@ -16,7 +16,7 @@ import {
   updateAdminPage,
   deleteAdminPage,
 } from "../services/cmsAdmin.service.js";
-import type { CmsPageListQuery, CreateCmsPageBody, UpdateCmsPageBody } from "@zaminex/shared";
+import type { CmsPageListQuery, CreateCmsPageBody, UpdateCmsPageBody } from "@zeminex/shared";
 
 /** GET /admin/cms/pages — paginated, searchable page list (incl. drafts). */
 export const listPages: RequestHandler[] = [

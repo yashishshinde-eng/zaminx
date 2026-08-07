@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { PublicUser } from "@zaminex/shared";
+import type { PublicUser } from "@zeminex/shared";
 import { queryKeys } from "@/config";
 import {
   fetchMe,

@@ -18,7 +18,7 @@ import {
   runRankCheckTrigger,
   type TriggerResult,
 } from "@/lib/admin";
-import type { CompensationSettings, CompensationSettingsBody } from "@zaminex/shared";
+import type { CompensationSettings, CompensationSettingsBody } from "@zeminex/shared";
 
 /** /app/admin/compensation — edit the 7 compensation knobs + run engine triggers. */
 export function AdminCompensationSettingsPage() {

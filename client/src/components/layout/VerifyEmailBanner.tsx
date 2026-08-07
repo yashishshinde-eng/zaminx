@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { resendVerificationRequest } from "@/lib/auth";
 import { useAuth } from "@/context/AuthContext";
 
-const DISMISS_KEY = "zaminex.verifyBannerDismissed";
+const DISMISS_KEY = "zeminex.verifyBannerDismissed";
 
 /**
  * Persistent "verify your email" banner shown inside the app shell for logged-in

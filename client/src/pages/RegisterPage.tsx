@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerSchema } from "@zaminex/shared";
-import type { RegisterBody } from "@zaminex/shared";
+import { registerSchema } from "@zeminex/shared";
+import type { RegisterBody } from "@zeminex/shared";
 import toast from "react-hot-toast";
 import { ArrowRight, ShieldCheck, Wallet, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -54,7 +54,7 @@ export function RegisterPage() {
 
         <div className="relative z-10 max-w-md text-center text-primary-foreground">
           <Logo className="mx-auto size-16 shadow-glow-blue" />
-          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">Join Zaminex</h1>
+          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">Join Zeminex</h1>
           <p className="mt-3 text-lg text-primary-foreground/80">
             Start your investment journey today. Grow with a community of forward-thinking investors.
           </p>
@@ -84,7 +84,7 @@ export function RegisterPage() {
           <div className="glass-card p-8">
             <div className="mb-6 text-center">
               <h2 className="font-grotesk text-2xl font-bold tracking-tight">Create your account</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Join the Zaminex investment platform</p>
+              <p className="mt-1 text-sm text-muted-foreground">Join the Zeminex investment platform</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>

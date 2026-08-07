@@ -6,7 +6,7 @@ import type {
   BonanzaOfferView,
   BonanzaOverview,
   BonanzaStatus,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /* ------------------------------------------------------------------ */
 /*  Mapper                                                             */

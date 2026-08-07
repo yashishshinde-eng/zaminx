@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { resetPasswordSchema } from "@zaminex/shared";
-import type { ResetPasswordBody } from "@zaminex/shared";
+import { resetPasswordSchema } from "@zeminex/shared";
+import type { ResetPasswordBody } from "@zeminex/shared";
 import toast from "react-hot-toast";
 import { ArrowRight } from "lucide-react";
 import { api } from "@/lib/axios";
@@ -19,7 +19,7 @@ export function ResetPasswordPage() {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
 
-  useDocumentMeta({ title: "Reset password — Zaminex" });
+  useDocumentMeta({ title: "Reset password — Zeminex" });
 
   const {
     register,

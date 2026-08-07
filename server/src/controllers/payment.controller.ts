@@ -5,7 +5,7 @@ import { ok } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { isProd, isNowpaymentsConfigured } from "../config/env.js";
 import { logger } from "../config/logger.js";
-import { depositIdParamSchema } from "@zaminex/shared";
+import { depositIdParamSchema } from "@zeminex/shared";
 import {
   getDeposits,
   getDepositForUser,

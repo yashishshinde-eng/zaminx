@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Users } from "lucide-react";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /** At-a-glance team counts on the dashboard. Compact glass card with purple accent. */
 export function TeamStatsCard({ team }: { team: DashboardSummary["team"] }) {

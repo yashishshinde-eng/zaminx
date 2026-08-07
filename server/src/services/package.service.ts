@@ -7,7 +7,7 @@
  * controller relies on while delegating the payment-heavy work to deposit.
  */
 import { initiateDeposit, getMyPackagesWithPayment, listCatalog as listCatalogImpl } from "./deposit.service.js";
-import type { DepositRow, PackageTier, UserPackageRow } from "@zaminex/shared";
+import type { DepositRow, PackageTier, UserPackageRow } from "@zeminex/shared";
 
 /** GET /packages — active catalog (delegated to deposit service's catalog helper). */
 export const listCatalog = listCatalogImpl;

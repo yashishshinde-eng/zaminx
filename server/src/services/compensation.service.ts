@@ -19,7 +19,7 @@ import type {
   BonanzaEvalSummary,
   TeamEnergyRunSummary,
   CommunityRunSummary,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 const DAY_MS = 86_400_000;
 

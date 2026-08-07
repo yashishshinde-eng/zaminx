@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { list, detail, updateStatus, verifyEmail, forceLogout, resetPassword, adjustWallet } from "../controllers/adminUser.controller.js";
+import { list, detail, updateStatus, verifyEmail, forceLogout, resetPassword, adjustWallet, createDeposit } from "../controllers/adminUser.controller.js";
 
 const router = Router();
 
@@ -12,5 +12,6 @@ router.post("/:id/verify-email", ...verifyEmail);
 router.post("/:id/force-logout", ...forceLogout);
 router.post("/:id/reset-password", ...resetPassword);
 router.post("/:id/wallet/adjust", ...adjustWallet);
+router.post("/:id/deposits", ...createDeposit);
 
 export default router;

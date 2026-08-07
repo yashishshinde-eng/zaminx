@@ -16,8 +16,10 @@ import type {
   AdminLogsQuery,
   AdminLogsResult,
   AdminWalletAdjustBody,
+  AdminDepositCreateBody,
   WalletBalance,
-} from "@zaminex/shared";
+  DepositRow,
+} from "@zeminex/shared";
 
 /** A paginated page of rows (matches every list endpoint in this module). */
 export interface Page<T> {
@@ -210,6 +212,18 @@ export async function adjustUserWalletRequest(
 ): Promise<{ wallet: AdminWalletAdjustBody["wallet"]; balance: WalletBalance }> {
   const { data } = await api.post<{ data: { wallet: AdminWalletAdjustBody["wallet"]; balance: WalletBalance } }>(
     `/admin/users/${id}/wallet/adjust`,
+    body,
+  );
+  return data.data;
+}
+
+/** POST /admin/users/:id/deposits — admin records a paid deposit + credits Main wallet. */
+export async function recordUserDepositRequest(
+  id: string,
+  body: AdminDepositCreateBody,
+): Promise<{ deposit: DepositRow; balance: WalletBalance }> {
+  const { data } = await api.post<{ data: { deposit: DepositRow; balance: WalletBalance } }>(
+    `/admin/users/${id}/deposits`,
     body,
   );
   return data.data;

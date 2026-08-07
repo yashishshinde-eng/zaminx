@@ -11,7 +11,7 @@ import type {
   NowpaymentsSettingsBody,
   MaintenanceSettings,
   MaintenanceSettingsBody,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /** Canonical field → Setting-key map for the 9 admin-editable `cms.*` fields.
  * Mirrors the controller's `SETTING_KEYS` but excludes `maintenanceMode`

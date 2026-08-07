@@ -8,7 +8,7 @@ import type {
   AdminUserDetail,
   UserStatus,
   AdminUserActivityRow,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 interface ListArgs {
   q?: string;

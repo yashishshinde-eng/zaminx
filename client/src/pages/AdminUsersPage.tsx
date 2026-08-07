@@ -14,7 +14,7 @@ import { KpiCard } from "@/components/dashboard";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useAdminUsers, useAdminDashboard } from "@/hooks/useAdmin";
-import type { AdminUserReportRow, UserStatus } from "@zaminex/shared";
+import type { AdminUserReportRow, UserStatus } from "@zeminex/shared";
 
 const STATUSES: ("all" | UserStatus)[] = ["all", "active", "suspended", "banned"];
 const ROLES = ["all", "user", "admin"] as const;

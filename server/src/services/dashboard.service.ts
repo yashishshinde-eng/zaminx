@@ -4,7 +4,7 @@ import { env } from "../config/env.js";
 import { getWalletBalances } from "./wallet.service.js";
 import { getTeamCounts } from "./referral.service.js";
 import { getRankInfo } from "./rank.service.js";
-import type { DashboardSummary, IncomeSummary, WalletTxType } from "@zaminex/shared";
+import type { DashboardSummary, IncomeSummary, WalletTxType } from "@zeminex/shared";
 
 const DAY_MS = 86_400_000;
 

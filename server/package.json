@@ -1,5 +1,5 @@
 {
-  "name": "@zaminex/server",
+  "name": "@zeminex/server",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@zaminex/shared": "*",
+    "@zeminex/shared": "*",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.7",

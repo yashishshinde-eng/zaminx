@@ -2,7 +2,7 @@ import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import path from "node:path";
 import readline from "node:readline";
-import type { AdminLogFile, AdminLogsQuery, AdminLogsResult } from "@zaminex/shared";
+import type { AdminLogFile, AdminLogsQuery, AdminLogsResult } from "@zeminex/shared";
 
 /** Winston writes to `<cwd>/logs/<file>.log` (prod only). */
 const LOG_DIR = path.resolve(process.cwd(), "logs");

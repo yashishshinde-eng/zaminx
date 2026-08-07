@@ -20,7 +20,7 @@ import type {
   WalletTxRow,
   DepositStatus,
   WithdrawalStatus,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 const LIMIT = 20;
 

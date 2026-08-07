@@ -1,7 +1,7 @@
 import type { ApexOptions } from "apexcharts";
 
 /**
- * Zaminex — Premium Crypto Exchange Chart Theme System
+ * Zeminex — Premium Crypto Exchange Chart Theme System
  *
  * All chart colors follow the brand palette (gold/blue/purple)
  * and respect the light/dark theme via CSS custom properties.
@@ -30,7 +30,7 @@ export const CHART_COLORS = {
   border: "hsl(var(--border))",
 } as const;
 
-/** ApexCharts theme-aware defaults for the Zaminex brand. */
+/** ApexCharts theme-aware defaults for the Zeminex brand. */
 export const CHART_THEME = {
   gridBorderColor: "hsl(var(--border))",
   labelColor: "hsl(var(--muted-foreground))",

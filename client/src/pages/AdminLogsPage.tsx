@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAdminLogs } from "@/hooks/useAdmin";
-import type { AdminLogFile, AdminLogsQuery } from "@zaminex/shared";
+import type { AdminLogFile, AdminLogsQuery } from "@zeminex/shared";
 
 const FILES: AdminLogFile[] = ["combined", "error", "exceptions", "rejections"];
 

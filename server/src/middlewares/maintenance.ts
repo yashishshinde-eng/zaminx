@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import { getMaintenanceSettings } from "../services/setting.service.js";
 import { verifyAccessToken } from "../services/token.service.js";
-import type { MaintenanceSettings } from "@zaminex/shared";
+import type { MaintenanceSettings } from "@zeminex/shared";
 
 /**
  * Maintenance enforcement (Phase 14C). When `general.maintenanceMode.enabled`

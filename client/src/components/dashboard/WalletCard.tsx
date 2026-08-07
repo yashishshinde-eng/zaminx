@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Wallet, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 import { formatCurrency } from "@/lib/utils";
 
 /** Premium wallet overview — Main / Bonus / Trading available balances with glass tiles. */

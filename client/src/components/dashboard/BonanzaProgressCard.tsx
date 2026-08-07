@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Gift, ArrowRight } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
-import type { DashboardSummary } from "@zaminex/shared";
+import type { DashboardSummary } from "@zeminex/shared";
 
 /**
  * Blueprint section 10 — Bonanza Progress. Shows the real total bonanza income

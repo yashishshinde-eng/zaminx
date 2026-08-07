@@ -1,14 +1,14 @@
 import { CmsPage, ActivityLog } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { invalidate, invalidatePrefix } from "../utils/cache.js";
-import { cmsPageSchema } from "@zaminex/shared";
+import { cmsPageSchema } from "@zeminex/shared";
 import type {
   AdminCmsPage,
   AdminCmsPageListItem,
   AdminCmsPagesPage,
   CreateCmsPageBody,
   UpdateCmsPageBody,
-} from "@zaminex/shared";
+} from "@zeminex/shared";
 
 /* ------------------------------------------------------------------ */
 /*  Mapper                                                             */

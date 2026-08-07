@@ -1,5 +1,5 @@
 import type { Request, RequestHandler } from "express";
-import { createBonanzaSchema, updateBonanzaSchema, bonanzaListQuerySchema, bonanzaIdParamSchema } from "@zaminex/shared";
+import { createBonanzaSchema, updateBonanzaSchema, bonanzaListQuerySchema, bonanzaIdParamSchema } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
@@ -13,7 +13,7 @@ import {
   updateBonanza,
   deleteBonanza,
 } from "../services/bonanza.service.js";
-import type { BonanzaStatus } from "@zaminex/shared";
+import type { BonanzaStatus } from "@zeminex/shared";
 
 const idParam = (req: Request): string => {
   const id = (req.params as { id?: string }).id;

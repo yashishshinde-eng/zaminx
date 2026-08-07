@@ -1,5 +1,5 @@
 import type { RequestHandler } from "express";
-import { siteConfigSchema, contactSchema, type SiteConfig } from "@zaminex/shared";
+import { siteConfigSchema, contactSchema, type SiteConfig } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { contactLimiter } from "../middlewares/rateLimit.js";
 import { asyncHandler } from "../utils/asyncHandler.js";

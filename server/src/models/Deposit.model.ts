@@ -9,8 +9,9 @@ import mongoose, { Schema, type InferSchemaType, type Model } from "mongoose";
 const depositSchema = new Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true, index: true },
-    userPackage: { type: mongoose.Schema.Types.ObjectId, ref: "UserPackage", required: true, index: true },
-    package: { type: mongoose.Schema.Types.ObjectId, ref: "Package", required: true },
+    // Null for admin-recorded standalone deposits (no package activation).
+    userPackage: { type: mongoose.Schema.Types.ObjectId, ref: "UserPackage", required: false, index: true, default: null },
+    package: { type: mongoose.Schema.Types.ObjectId, ref: "Package", required: false, default: null },
     amountUsd: { type: Number, required: true, min: 0 },
     currency: { type: String, enum: ["USDT-BEP20"], required: true, default: "USDT-BEP20" },
     status: {

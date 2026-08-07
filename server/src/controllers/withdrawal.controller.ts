@@ -1,5 +1,5 @@
 import type { RequestHandler } from "express";
-import { createWithdrawalSchema, withdrawalListQuerySchema, withdrawalIdParamSchema } from "@zaminex/shared";
+import { createWithdrawalSchema, withdrawalListQuerySchema, withdrawalIdParamSchema } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ok, created } from "../utils/ApiResponse.js";
@@ -10,7 +10,7 @@ import {
   getWithdrawalForUser,
   cancelWithdrawal,
 } from "../services/withdrawal.service.js";
-import type { WithdrawalStatus } from "@zaminex/shared";
+import type { WithdrawalStatus } from "@zeminex/shared";
 
 const meta = (req: Parameters<RequestHandler>[0]) => ({ ip: req.ip, userAgent: req.headers["user-agent"] });
 

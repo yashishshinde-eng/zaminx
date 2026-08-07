@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { ActivityLog } from "../models/index.js";
 import { applyLedgerEntry } from "./wallet.service.js";
-import type { AdminWalletAdjustBody, WalletBalance } from "@zaminex/shared";
+import type { AdminWalletAdjustBody, WalletBalance } from "@zeminex/shared";
 
 export interface AdminAdjustResult {
   wallet: AdminWalletAdjustBody["wallet"];
