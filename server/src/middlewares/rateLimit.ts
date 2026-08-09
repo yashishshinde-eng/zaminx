@@ -42,7 +42,7 @@ const authMessage = { success: false, message: "Too many attempts, please try ag
  * previous shared `authLimiter` let login + register + forgot + reset + verify
  * + resend all draw from a single 20/15min counter.
  */
-export const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
+export const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
 export const registerLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
 export const refreshLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 30, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
 export const forgotResetLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 3, standardHeaders: true, legacyHeaders: false, message: authMessage, handler: limitHandler });
