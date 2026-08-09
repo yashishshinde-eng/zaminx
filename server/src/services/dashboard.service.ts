@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { User, ActivityLog, UserPackage, WalletTransaction } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { env } from "../config/env.js";
@@ -35,14 +36,18 @@ const STREAM_BY_TYPE: Record<string, keyof IncomeSummary> = {
  */
 async function getIncomeSummary(userId: string): Promise<IncomeSummary> {
   const since = new Date(Date.now() - 30 * DAY_MS);
+  // Cast to ObjectId: the aggregation `$match` does not auto-cast a string to
+  // the `user` ObjectId field (unlike `findOne`), so a plain string userId
+  // would match nothing and every income stream would read as 0.
+  const userOid = new mongoose.Types.ObjectId(userId);
 
   const [byType, daily] = await Promise.all([
     WalletTransaction.aggregate<{ _id: string; total: number }>([
-      { $match: { user: userId, direction: "credit", type: { $in: INCOME_TYPES } } },
+      { $match: { user: userOid, direction: "credit", type: { $in: INCOME_TYPES } } },
       { $group: { _id: "$type", total: { $sum: "$amount" } } },
     ]),
     WalletTransaction.aggregate<{ _id: string; value: number }>([
-      { $match: { user: userId, direction: "credit", type: { $in: INCOME_TYPES }, createdAt: { $gte: since } } },
+      { $match: { user: userOid, direction: "credit", type: { $in: INCOME_TYPES }, createdAt: { $gte: since } } },
       {
         $group: {
           _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },

@@ -49,7 +49,6 @@ interface BottomNavItem {
 const BOTTOM_NAV: BottomNavItem[] = [
   { label: "Home", to: "/app", icon: LayoutDashboard },
   { label: "Wallet", to: "/app/wallet", icon: Wallet },
-  { label: "P2P", to: "/app/p2p", icon: ArrowRightLeft },
   { label: "Packages", to: "/app/packages", icon: Package },
   { label: "Team", to: "/app/team", icon: Users },
   { label: "Reports", to: "/app/reports", icon: FileText },
