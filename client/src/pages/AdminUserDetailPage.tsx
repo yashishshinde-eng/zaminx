@@ -27,6 +27,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar } from "@/components/ui/avatar";
@@ -547,9 +548,8 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
         {/* Reset password */}
         <div className="space-y-2">
           <Label htmlFor="password">Reset password</Label>
-          <Input
+          <PasswordInput
             id="password"
-            type="password"
             placeholder="New password (min 8 characters)"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

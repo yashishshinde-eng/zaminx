@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { ArrowRight, ShieldCheck, Wallet, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/layout/Logo";
 import { useAuth } from "@/context/AuthContext";
@@ -102,7 +103,7 @@ export function LoginPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" autoComplete="current-password" placeholder="••••••••" {...register("password")} />
+                <PasswordInput id="password" autoComplete="current-password" placeholder="••••••••" {...register("password")} />
                 {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
               </div>
               <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>

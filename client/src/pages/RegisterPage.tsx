@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { ArrowRight, ShieldCheck, Wallet, TrendingUp, Copy, Check, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/layout/Logo";
 import { Dialog } from "@/components/ui/dialog";
@@ -159,7 +160,7 @@ export function RegisterPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
+                <PasswordInput id="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
                 {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
               </div>
               <div className="space-y-2">

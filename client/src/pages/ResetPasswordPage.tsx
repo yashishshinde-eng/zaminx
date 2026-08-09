@@ -9,6 +9,7 @@ import { ArrowRight } from "lucide-react";
 import { api } from "@/lib/axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/layout/Logo";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
@@ -72,7 +73,7 @@ export function ResetPasswordPage() {
             )}
             <div className="space-y-2">
               <Label htmlFor="password">New password</Label>
-              <Input id="password" type="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
+              <PasswordInput id="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
               {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
             </div>
             <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
