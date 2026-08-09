@@ -226,17 +226,17 @@ export function IncomeChartCard({ income }: { income: DashboardSummary["income"]
                 <p className="metric-label">Period Total</p>
                 <p className="metric-value text-xl">{formatCurrency(animatedTotal)}</p>
               </div>
-              <div className="h-8 w-px bg-white/[0.06]" />
+              <div className="hidden h-8 w-px bg-white/[0.06] sm:block" />
               <div className="space-y-0.5">
                 <p className="metric-label">Peak</p>
                 <p className="text-sm font-semibold tabular-nums">{formatCurrency(periodMax)}</p>
               </div>
-              <div className="h-8 w-px bg-white/[0.06]" />
+              <div className="hidden h-8 w-px bg-white/[0.06] sm:block" />
               <div className="space-y-0.5">
                 <p className="metric-label">Low</p>
                 <p className="text-sm font-semibold tabular-nums">{formatCurrency(periodMin)}</p>
               </div>
-              <div className="h-8 w-px bg-white/[0.06]" />
+              <div className="hidden h-8 w-px bg-white/[0.06] sm:block" />
               <div className="space-y-0.5">
                 <p className="metric-label">Trend</p>
                 <div className={cn("flex items-center gap-1 text-sm font-semibold tabular-nums", trendColor)}>

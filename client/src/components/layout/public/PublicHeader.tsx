@@ -8,6 +8,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { AnnouncementBar } from "./AnnouncementBar";
 
 export function PublicHeader({ config }: { config: SiteConfig }) {
   const { theme, toggleTheme } = useTheme();
@@ -40,11 +41,15 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
         {/* Gold accent line at top */}
         <div className="absolute inset-x-0 top-0 h-px gradient-blue opacity-60" />
 
-        <div className="container flex h-18 items-center justify-between gap-3 sm:h-20">
+        {/* Announcement bar lives inside the fixed header so it stays
+            visible above the nav row on every breakpoint. */}
+        <AnnouncementBar bar={config.announcementBar} />
+
+        <div className="container flex h-16 items-center justify-between gap-3 sm:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group" aria-label={config.siteName}>
-            <Logo className="size-9 shadow-glow-blue group-hover:scale-105 transition-transform duration-300" />
-            <span className="text-lg font-bold tracking-tight text-gradient-gold">{config.siteName}</span>
+          <Link to="/" className="flex min-w-0 items-center gap-2.5 group" aria-label={config.siteName}>
+            <Logo className="size-9 shrink-0 shadow-glow-blue group-hover:scale-105 transition-transform duration-300" />
+            <span className="truncate text-lg font-bold tracking-tight text-gradient-gold">{config.siteName}</span>
           </Link>
 
           {/* Desktop nav */}
@@ -130,7 +135,7 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
-              className="absolute right-0 top-0 h-full w-80 glass-card rounded-l-[24px] p-6 shadow-xl overflow-y-auto"
+              className="absolute right-0 top-0 h-full w-[85vw] max-w-[20rem] glass-card rounded-l-[24px] p-6 shadow-xl overflow-y-auto"
             >
               <div className="mb-6 flex items-center justify-between">
                 <div className="flex items-center gap-2">

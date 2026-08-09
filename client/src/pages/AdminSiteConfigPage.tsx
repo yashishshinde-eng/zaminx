@@ -110,20 +110,20 @@ export function AdminSiteConfigPage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 {(form.navLinks ?? []).map((link, i) => (
-                  <div key={i} className="flex items-center gap-2">
+                  <div key={i} className="flex flex-col gap-2 sm:flex-row sm:items-center">
                     <Input
-                      className="h-9 w-[180px]"
+                      className="h-9 w-full sm:w-[180px]"
                       placeholder="Label"
                       value={link.label}
                       onChange={(e) => patchNavLinks(form, setForm, i, { ...link, label: e.target.value })}
                     />
                     <Input
-                      className="h-9 flex-1"
+                      className="h-9 w-full sm:flex-1"
                       placeholder="Href"
                       value={link.href}
                       onChange={(e) => patchNavLinks(form, setForm, i, { ...link, href: e.target.value })}
                     />
-                    <Button size="icon" variant="ghost" onClick={() => patch("navLinks", (form.navLinks ?? []).filter((_, j) => j !== i))}>
+                    <Button size="icon" variant="ghost" className="self-end sm:self-auto" onClick={() => patch("navLinks", (form.navLinks ?? []).filter((_, j) => j !== i))}>
                       <Trash2 className="size-4 text-destructive" />
                     </Button>
                   </div>

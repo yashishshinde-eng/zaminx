@@ -207,11 +207,11 @@ export function AdminReportsPage() {
           <CardContent className="flex flex-col gap-3 py-4 sm:flex-row sm:flex-wrap sm:items-end">
             <div className="space-y-1">
               <label className="text-xs text-muted-foreground">From</label>
-              <Input type="date" value={from} max={to || undefined} onChange={(e) => setFrom(e.target.value)} className="h-9 w-[150px]" />
+              <Input type="date" value={from} max={to || undefined} onChange={(e) => setFrom(e.target.value)} className="h-9 w-full sm:w-[150px]" />
             </div>
             <div className="space-y-1">
               <label className="text-xs text-muted-foreground">To</label>
-              <Input type="date" value={to} min={from || undefined} onChange={(e) => setTo(e.target.value)} className="h-9 w-[150px]" />
+              <Input type="date" value={to} min={from || undefined} onChange={(e) => setTo(e.target.value)} className="h-9 w-full sm:w-[150px]" />
             </div>
             {statuses.length > 0 && (
               <div className="space-y-1">
@@ -219,7 +219,7 @@ export function AdminReportsPage() {
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
-                  className="glass-input h-9 w-[150px] px-3 text-sm"
+                  className="glass-input h-9 w-full sm:w-[150px] px-3 text-sm"
                 >
                   <option value="">All</option>
                   {statuses.map((s) => (
@@ -239,7 +239,7 @@ export function AdminReportsPage() {
                   onChange={(e) => setQ(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && applyFilters()}
                   placeholder={qPlaceholder(kind)}
-                  className="h-9 w-[200px]"
+                  className="h-9 w-full sm:w-[200px]"
                 />
               </div>
             )}

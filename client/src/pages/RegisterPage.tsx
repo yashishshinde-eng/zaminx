@@ -101,7 +101,7 @@ export function RegisterPage() {
   return (
     <div className="flex min-h-screen">
       {/* ── Left panel — brand imagery ────────────────────────── */}
-      <div className="hidden lg:flex lg:w-1/2 gradient-blue relative items-center justify-center p-12">
+      <div className="hidden lg:flex lg:w-1/2 gradient-blue relative overflow-hidden items-center justify-center p-12">
         <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_80%_0%,rgba(255,255,255,0.22),transparent_55%)]" />
         <div className="glow-orb left-[10%] top-[20%] size-[300px] bg-white/10" />
         <div className="glow-orb right-[15%] bottom-[15%] size-[200px] bg-white/5" />
@@ -135,7 +135,7 @@ export function RegisterPage() {
             <Logo className="size-12 shadow-glow-blue" />
           </div>
 
-          <div className="glass-card p-8">
+          <div className="glass-card p-6 sm:p-8">
             <div className="mb-6 text-center">
               <h2 className="font-grotesk text-2xl font-bold tracking-tight">Create your account</h2>
               <p className="mt-1 text-sm text-muted-foreground">Join the Zeminex Global investment platform</p>

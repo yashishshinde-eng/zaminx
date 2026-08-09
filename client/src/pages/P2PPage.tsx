@@ -53,7 +53,7 @@ export function P2PPage() {
 
         {/* Transfer history */}
         <section className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="font-grotesk text-lg font-bold">Transfer History</h2>
             <div className="flex rounded-[10px] border border-white/[0.08] bg-white/[0.02] p-0.5">
               {(["all", "main", "bonus", "trading"] as const).map((w) => (
@@ -204,7 +204,7 @@ function TransferForm() {
             {errors.memo && <p className="text-sm text-destructive">{errors.memo.message}</p>}
           </div>
 
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col items-start gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-muted-foreground">
               Your referral code: <span className="font-mono font-semibold text-foreground">{user?.referralCode}</span>
             </p>

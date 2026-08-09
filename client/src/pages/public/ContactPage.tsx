@@ -57,9 +57,9 @@ export function ContactPage() {
               <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <Mail className="size-5" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-medium">Email</p>
-                <a href={`mailto:${cd.email}`} className="text-sm text-muted-foreground hover:text-foreground">{cd.email}</a>
+                <a href={`mailto:${cd.email}`} className="break-all text-sm text-muted-foreground hover:text-foreground">{cd.email}</a>
               </div>
             </div>
           )}
@@ -68,9 +68,9 @@ export function ContactPage() {
               <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <Phone className="size-5" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-medium">Phone</p>
-                <p className="text-sm text-muted-foreground">{cd.phone}</p>
+                <p className="break-all text-sm text-muted-foreground">{cd.phone}</p>
               </div>
             </div>
           )}
@@ -79,9 +79,9 @@ export function ContactPage() {
               <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <MapPin className="size-5" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="font-medium">Address</p>
-                <p className="text-sm text-muted-foreground">{cd.address}</p>
+                <p className="break-words text-sm text-muted-foreground">{cd.address}</p>
               </div>
             </div>
           )}

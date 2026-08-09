@@ -129,7 +129,7 @@ function HeroSection() {
             </motion.div>
 
             {/* Trust badges */}
-            <motion.div variants={fadeUp} className="mt-8 flex items-center gap-6 text-sm text-muted-foreground">
+            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
               <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-success" /> SOC2 Compliant</span>
               <span className="flex items-center gap-1.5"><Lock className="size-4 text-gold" /> 256-bit Encryption</span>
               <span className="flex items-center gap-1.5"><ShieldCheck className="size-4 text-gold" /> Insured Funds</span>
@@ -335,9 +335,9 @@ function LiveMarketSection() {
           </p>
         </div>
 
-        <div className="glass-card overflow-hidden">
+        <div className="glass-card overflow-x-auto">
           {/* Table header */}
-          <div className="grid grid-cols-[2fr_1fr_1fr_1fr] gap-4 border-b border-white/[0.06] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
+          <div className="grid grid-cols-[2fr_1fr_1fr] gap-4 border-b border-white/[0.06] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:grid-cols-[2fr_1fr_1fr_1fr_1fr] sm:px-6">
             <span>Asset</span>
             <span className="hidden sm:block">Price</span>
             <span className="text-right sm:text-left">24h</span>
@@ -345,7 +345,7 @@ function LiveMarketSection() {
             <span className="text-right">Trend</span>
           </div>
           {coins.map((c) => (
-            <div key={c.symbol} className="grid grid-cols-[2fr_1fr_1fr_1fr] gap-4 border-b border-white/[0.04] px-6 py-4 items-center transition-colors hover:bg-white/[0.02] sm:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
+            <div key={c.symbol} className="grid grid-cols-[2fr_1fr_1fr] gap-4 border-b border-white/[0.04] px-4 py-4 items-center transition-colors hover:bg-white/[0.02] sm:grid-cols-[2fr_1fr_1fr_1fr_1fr] sm:px-6">
               <div className="flex items-center gap-3">
                 <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue/20 to-blue-dark/20 text-sm font-bold">
                   {c.symbol.charAt(0)}
@@ -399,7 +399,7 @@ function DashboardPreviewSection() {
 
           <div className="mockup-card relative p-6 sm:p-8">
             {/* Top bar */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
               <div className="flex items-center gap-3">
                 <Logo className="size-8" />
                 <span className="font-bold text-gradient">Zeminex Global</span>
@@ -530,7 +530,7 @@ function SecuritySection() {
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20 items-center">
           {/* Left — Visual */}
           <motion.div initial={{ opacity: 1, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative flex items-center justify-center">
-            <div className="relative size-80 sm:size-96">
+            <div className="relative size-64 sm:size-80 lg:size-96">
               {/* Outer ring */}
               <div className="animate-rotate-slow absolute inset-0 rounded-full border-2 border-dashed border-blue/20" />
               {/* Inner ring */}

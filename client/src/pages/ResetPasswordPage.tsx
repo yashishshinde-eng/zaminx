@@ -50,7 +50,7 @@ export function ResetPasswordPage() {
           <Logo className="mx-auto size-12 shadow-glow-blue" />
         </div>
 
-        <div className="glass-card p-8">
+        <div className="glass-card p-6 sm:p-8">
           <div className="mb-6 text-center">
             <h1 className="font-grotesk text-2xl font-bold tracking-tight">Reset password</h1>
             <p className="mt-1 text-sm text-muted-foreground">Choose a new password for your account.</p>

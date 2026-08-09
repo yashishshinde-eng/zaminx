@@ -33,7 +33,7 @@ export function Dialog({ open, onClose, children, className, labelledBy }: Dialo
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div
         className={cn(
-          "glass-card relative z-10 w-full max-w-lg p-6 animate-in",
+          "glass-card relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto p-6 animate-in",
           className,
         )}
       >

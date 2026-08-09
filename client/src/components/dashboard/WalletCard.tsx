@@ -46,7 +46,7 @@ export function WalletCard({ wallets }: { wallets: DashboardSummary["wallets"] }
 
       {/* Wallet tiles */}
       <div className="px-5">
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {tiles.map((t, i) => (
             <motion.div
               key={t.label}

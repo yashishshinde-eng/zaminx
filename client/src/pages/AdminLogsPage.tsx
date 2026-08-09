@@ -44,7 +44,7 @@ export function AdminLogsPage() {
                 id="logFile"
                 value={file}
                 onChange={(e) => setFile(e.target.value as AdminLogFile)}
-                className="glass-input h-9 w-[180px] px-3 text-sm"
+                className="glass-input h-9 w-full sm:w-[180px] px-3 text-sm"
               >
                 {FILES.map((f) => (
                   <option key={f} value={f}>{f}.log</option>
@@ -60,7 +60,7 @@ export function AdminLogsPage() {
                 max={500}
                 value={linesInput}
                 onChange={(e) => setLinesInput(Number(e.target.value))}
-                className="h-9 w-[150px]"
+                className="h-9 w-full sm:w-[150px]"
               />
             </div>
             <div className="flex gap-2">

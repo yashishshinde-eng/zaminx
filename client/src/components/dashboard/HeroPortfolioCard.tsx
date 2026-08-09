@@ -103,7 +103,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
 
   return (
     <motion.div
-      className="premium-hero-panel card-shimmer card-glow-animate gradient-border-animated relative"
+      className="premium-hero-panel card-shimmer card-glow-animate gradient-border-animated relative overflow-hidden"
       initial="hidden"
       animate="visible"
       variants={prefersReduced ? undefined : containerVariants}

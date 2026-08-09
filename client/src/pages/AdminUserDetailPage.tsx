@@ -223,7 +223,7 @@ function WalletsCard({ user }: { user: AdminUserDetail }) {
           <StatCard icon={Lock} label="Total on hold" value={formatCurrency(w.totalOnHold)} accent="bg-warning/15 text-warning" />
           <StatCard icon={Wallet} label="Total" value={formatCurrency(w.total)} accent="bg-primary/10 text-primary" />
         </div>
-        <div className="overflow-hidden rounded-lg border">
+        <div className="overflow-x-auto rounded-lg border">
           <table className="w-full text-sm">
             <thead className="border-b bg-muted/40">
               <tr>

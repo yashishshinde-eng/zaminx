@@ -437,7 +437,7 @@ function TreeNode({ node, depth }: { node: TreeNodeData; depth: number }) {
     <div>
       <div
         className="flex min-h-[44px] items-center gap-2 rounded-md px-2 py-1.5 hover:bg-muted/40"
-        style={{ paddingLeft: `${depth * 1.5 + 0.5}rem` }}
+        style={{ paddingLeft: `min(${depth * 1.5 + 0.5}rem, 40%)` }}
       >
         {hasChildren ? (
           <button
@@ -452,11 +452,11 @@ function TreeNode({ node, depth }: { node: TreeNodeData; depth: number }) {
           <span className="size-6 shrink-0" />
         )}
         <span className="min-w-0 truncate font-medium">{node.name}</span>
-        <Badge variant="outline" className="font-mono text-xs">
+        <Badge variant="outline" className="shrink-0 font-mono text-xs">
           {node.referralCode}
         </Badge>
         {node.id !== "me" && (
-          <Badge variant={STATUS_VARIANT[node.status]} className="capitalize">
+          <Badge variant={STATUS_VARIANT[node.status]} className="shrink-0 capitalize">
             {node.status}
           </Badge>
         )}

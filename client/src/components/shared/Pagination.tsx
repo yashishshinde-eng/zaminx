@@ -13,11 +13,11 @@ export function Pagination({ page, pageCount, onPageChange, className }: Paginat
   const pages = buildPageList(page, pageCount);
 
   return (
-    <nav aria-label="Pagination" className={`flex items-center gap-1 ${className ?? ""}`}>
+    <nav aria-label="Pagination" className={`flex max-w-full items-center gap-1 overflow-x-auto no-scrollbar ${className ?? ""}`}>
       <Button
         variant="outline"
         size="icon"
-        className="size-11"
+        className="size-9 shrink-0 sm:size-11"
         onClick={() => onPageChange(Math.max(1, page - 1))}
         disabled={page <= 1}
         aria-label="Previous page"
@@ -27,7 +27,7 @@ export function Pagination({ page, pageCount, onPageChange, className }: Paginat
 
       {pages.map((p, i) =>
         p === "…" ? (
-          <span key={`gap-${i}`} className="px-2 text-muted-foreground">
+          <span key={`gap-${i}`} className="px-1 text-muted-foreground sm:px-2">
             …
           </span>
         ) : (
@@ -35,7 +35,7 @@ export function Pagination({ page, pageCount, onPageChange, className }: Paginat
             key={p}
             variant={p === page ? "default" : "outline"}
             size="icon"
-            className="size-11 text-sm"
+            className="size-9 shrink-0 text-sm sm:size-11"
             onClick={() => onPageChange(p)}
             aria-current={p === page ? "page" : undefined}
           >
@@ -47,7 +47,7 @@ export function Pagination({ page, pageCount, onPageChange, className }: Paginat
       <Button
         variant="outline"
         size="icon"
-        className="size-11"
+        className="size-9 shrink-0 sm:size-11"
         onClick={() => onPageChange(Math.min(pageCount, page + 1))}
         disabled={page >= pageCount}
         aria-label="Next page"

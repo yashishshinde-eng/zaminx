@@ -97,7 +97,7 @@ export function DataTable<T>({
         </table>
       </div>
       {onPageChange && (
-        <div className="flex items-center justify-between gap-4 border-t border-white/[0.06] px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/[0.06] px-4 py-3">
           <p className="text-xs text-muted-foreground">
             Page {page} of {pageCount}
           </p>

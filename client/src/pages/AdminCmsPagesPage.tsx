@@ -77,7 +77,7 @@ export function AdminCmsPagesPage() {
                   onChange={(e) => setQ(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && applyFilters()}
                   placeholder="Title or slug"
-                  className="h-9 w-[220px] pl-8"
+                  className="h-9 w-full sm:w-[220px] pl-8"
                 />
               </div>
             </div>
@@ -86,7 +86,7 @@ export function AdminCmsPagesPage() {
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as StatusFilter)}
-                className="glass-input h-9 w-[150px] px-3 text-sm"
+                className="glass-input h-9 w-full sm:w-[150px] px-3 text-sm"
               >
                 {STATUSES.map((s) => (
                   <option key={s} value={s}>
