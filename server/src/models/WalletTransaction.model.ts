@@ -26,6 +26,7 @@ const walletTxTypes = [
   "adjustment",
   "p2p_transfer_out",
   "p2p_transfer_in",
+  "package_activation",
 ] as const;
 
 const walletTransactionSchema = new Schema(

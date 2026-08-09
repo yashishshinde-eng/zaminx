@@ -1,11 +1,10 @@
 import { useLocation, Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Moon, Sun, Search, Wallet, MessageSquare, ArrowDownToLine, Menu } from "lucide-react";
+import { Moon, Sun, Search, Wallet, ArrowDownToLine, Menu } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { useAuth } from "@/context/AuthContext";
 import { useDashboardSummary } from "@/hooks/useDashboardSummary";
 import { formatCurrency } from "@/lib/utils";
-import { NotificationsMenu } from "./NotificationsMenu";
 import { UserMenu } from "./UserMenu";
 
 const TITLES: Record<string, string> = {
@@ -44,8 +43,7 @@ interface TopbarProps {
 
 /**
  * Premium crypto-exchange topbar — floating glass with search,
- * wallet balance, messages, notifications, theme toggle, user menu,
- * and a gold "Quick Deposit" CTA.
+ * wallet balance, theme toggle, user menu, and a gold "Quick Deposit" CTA.
  *
  * On mobile, admin users see a hamburger menu button instead of just
  * the page title, which opens the sidebar drawer.
@@ -101,16 +99,6 @@ export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
             <span className="text-gradient-gold">{formatCurrency(data.wallets.totalAvailable)}</span>
           </Link>
         )}
-
-        {/* Messages — desktop */}
-        <button
-          type="button"
-          className="relative hidden size-9 items-center justify-center rounded-xl text-muted-foreground transition-all duration-200 hover:bg-blue/[0.08] hover:text-gold-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 sm:flex"
-          aria-label="Messages"
-        >
-          <MessageSquare className="size-[18px]" />
-          <span className="absolute right-1.5 top-1.5 size-2 rounded-full bg-blue badge-pulse" />
-        </button>
 
         {/* Theme toggle */}
         <button

@@ -9,7 +9,7 @@ import { z } from "zod";
  * manual email verify, force-logout, admin reset-password).
  */
 
-const USER_STATUSES = ["active", "suspended", "banned"] as const;
+const USER_STATUSES = ["active", "inactive", "blocked"] as const;
 const USER_ROLES = ["user", "admin"] as const;
 
 /** GET /admin/users — paginated, searchable, filterable admin user list. */

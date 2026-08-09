@@ -31,6 +31,10 @@ export interface DepositRow {
   sandbox: boolean;
   createdAt: string;
   paidAt: string | null;
+  /** When the payment link/address expires (10 min after creation). Null for
+   *  non-expiring deposits (admin manual / package activation). The client shows
+   *  a live countdown to this; once passed the deposit is lazily marked expired. */
+  expiresAt: string | null;
 }
 
 /** Response to POST /packages/activate — the pending subscription + its payment. */

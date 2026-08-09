@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { fetchPackageCatalog, fetchMyPackages, activatePackageRequest } from "@/lib/packages";
-import { simulatePaymentRequest } from "@/lib/payments";
 import { queryKeys } from "@/config";
 
 /** Active package catalog (investment tiers). */
@@ -32,41 +31,23 @@ export function useHasOpenPackage(): boolean {
   return Boolean(data?.some((p) => p.status === "pending" || p.status === "active"));
 }
 
-/** Initiate a package activation (creates a pending subscription + invoice). */
+/** Initiate a package activation from wallet balance (debit + active subscription). */
 export function useActivatePackage() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (packageId: string) => activatePackageRequest(packageId),
     onSuccess: async (res) => {
-      toast.success(`${res.package.snapshot.name} activation started — complete the payment to activate.`);
+      toast.success(`${res.package.snapshot.name} activated — $${res.package.snapshot.priceUsd} debited from your Main wallet.`);
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: queryKeys.packages.mine }),
         queryClient.invalidateQueries({ queryKey: queryKeys.dashboard }),
         queryClient.invalidateQueries({ queryKey: queryKeys.wallet.balance }),
-      ]);
-    },
-    onError: () => {
-      /* interceptor toasts (e.g. 409 already has a package) */
-    },
-  });
-}
-
-/** Simulate a paid sandbox deposit (dev only) — flips the package to active. */
-export function useSimulatePayment() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (depositId: string) => simulatePaymentRequest(depositId),
-    onSuccess: async () => {
-      toast.success("Payment confirmed — your package is now active.");
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: queryKeys.packages.mine }),
-        queryClient.invalidateQueries({ queryKey: queryKeys.dashboard }),
-        queryClient.invalidateQueries({ queryKey: queryKeys.wallet.balance }),
+        queryClient.invalidateQueries({ queryKey: queryKeys.payments.deposits }),
         queryClient.invalidateQueries({ queryKey: ["wallet", "ledger"] }),
       ]);
     },
     onError: () => {
-      /* interceptor toasts */
+      /* interceptor toasts (e.g. 409 insufficient balance / already has a package) */
     },
   });
 }

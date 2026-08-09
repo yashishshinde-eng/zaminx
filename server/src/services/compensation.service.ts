@@ -504,6 +504,13 @@ export async function evaluateBonanzasForUser(userId: string): Promise<{ awarded
   const offers = await activeOffersNow();
   if (offers.length === 0) return { awarded: 0, errors: 0 };
 
+  // Anti-farming: only active-package holders earn bonanzas — the same guard
+  // the direct, community, and rank rewards apply. Without it, a
+  // non-package-holding upline member (e.g. the root admin) could claim a
+  // bonanza purely on direct count.
+  const activePkg = await UserPackage.exists({ user: userId, status: "active" });
+  if (!activePkg) return { awarded: 0, errors: 0 };
+
   const directCount = await User.countDocuments({ sponsorId: userId });
   // Fetched once so each new award can fire a notification email without an
   // extra query per offer in the loop.

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authenticate } from "../middlewares/auth.js";
-import { myDeposits, depositStatus, nowpaymentsWebhook, devSimulatePayment } from "../controllers/payment.controller.js";
+import { depositLimiter } from "../middlewares/rateLimit.js";
+import { myDeposits, depositStatus, createDeposit, nowpaymentsWebhook, devSimulatePayment } from "../controllers/payment.controller.js";
 
 const router = Router();
 
@@ -14,6 +15,9 @@ router.post("/nowpayments/webhook", ...nowpaymentsWebhook);
 router.use(authenticate);
 router.get("/deposits", ...myDeposits);
 router.get("/deposits/:id", ...depositStatus);
+// Start a wallet deposit (amount → NOWPayments invoice). Rate-limited because
+// each call creates a gateway invoice.
+router.post("/deposit", depositLimiter, ...createDeposit);
 
 // Dev-only sandbox simulate (404 in prod / when the live gateway is configured).
 router.post("/dev/simulate/:id", ...devSimulatePayment);

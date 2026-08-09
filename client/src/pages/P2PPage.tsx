@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createP2PTransferSchema } from "@zeminex/shared";
 import type { CreateP2PTransferBody, WalletType } from "@zeminex/shared";
+import toast from "react-hot-toast";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, ErrorState, DataTable, type Column } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -97,23 +98,37 @@ function TransferForm() {
   const { user } = useAuth();
   const wallet = useWallet();
   const send = useSendP2PTransfer();
-  const [selectedWallet, setSelectedWallet] = useState<WalletType>("main");
 
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<CreateP2PTransferBody>({
     resolver: zodResolver(createP2PTransferSchema.shape.body),
     defaultValues: { wallet: "main" },
   });
 
+  // Single source of truth for the selected wallet — RHF state, not a parallel
+  // useState. The buttons call setValue so the submitted value always matches
+  // the highlighted button (the previous manual register().onChange hack + a
+  // controlled `value` on the hidden input could drift and submit the wrong wallet).
+  const selectedWallet = watch("wallet") ?? "main";
+  const amount = watch("amount");
+  const balances = wallet.data;
+  const available = balances ? balances[selectedWallet].available : 0;
+  const numericAmount = typeof amount === "number" && !Number.isNaN(amount) ? amount : 0;
+  const insufficient = !!balances && numericAmount > 0 && numericAmount > available;
+
   const onSubmit = (values: CreateP2PTransferBody) => {
+    if (numericAmount > available) {
+      toast.error(`Insufficient balance — ${formatCurrency(available)} in ${selectedWallet} wallet`);
+      return;
+    }
     send.mutate(values, { onSuccess: () => reset({ wallet: values.wallet }) });
   };
-
-  const balances = wallet.data;
 
   return (
     <Card className="glass overflow-hidden">
@@ -135,10 +150,7 @@ function TransferForm() {
                 <button
                   key={w.value}
                   type="button"
-                  onClick={() => {
-                    setSelectedWallet(w.value);
-                    register("wallet").onChange({ target: { value: w.value, name: "wallet" } });
-                  }}
+                  onClick={() => setValue("wallet", w.value, { shouldValidate: true })}
                   className={cn(
                     "flex flex-1 items-center justify-center gap-1.5 rounded-[8px] px-3 py-2 text-sm font-semibold transition-all duration-200",
                     selectedWallet === w.value
@@ -159,7 +171,7 @@ function TransferForm() {
                 </button>
               ))}
             </div>
-            <input type="hidden" {...register("wallet")} value={selectedWallet} />
+            <input type="hidden" {...register("wallet")} />
             {errors.wallet && <p className="text-sm text-destructive">{errors.wallet.message}</p>}
           </div>
 
@@ -168,13 +180,19 @@ function TransferForm() {
             <div className="space-y-2">
               <Label htmlFor="amount">Amount (USD)</Label>
               <Input id="amount" type="number" step="0.01" min="0.01" placeholder="0.00" {...register("amount", { valueAsNumber: true })} />
-              {errors.amount && <p className="text-sm text-destructive">{errors.amount.message}</p>}
+              {errors.amount ? (
+                <p className="text-sm text-destructive">{errors.amount.message}</p>
+              ) : insufficient ? (
+                <p className="text-sm text-destructive">
+                  Insufficient balance — {formatCurrency(available)} available in {selectedWallet} wallet
+                </p>
+              ) : null}
             </div>
 
             {/* Recipient referral code */}
             <div className="space-y-2">
               <Label htmlFor="referralCode">Recipient Referral Code</Label>
-              <Input id="referralCode" placeholder="ZAM-XXXX" autoComplete="off" {...register("referralCode")} />
+              <Input id="referralCode" placeholder="ZAMXXXXXXX" autoComplete="off" {...register("referralCode")} />
               {errors.referralCode && <p className="text-sm text-destructive">{errors.referralCode.message}</p>}
             </div>
           </div>
@@ -190,7 +208,7 @@ function TransferForm() {
             <p className="text-xs text-muted-foreground">
               Your referral code: <span className="font-mono font-semibold text-foreground">{user?.referralCode}</span>
             </p>
-            <Button type="submit" className="btn-premium" disabled={send.isPending}>
+            <Button type="submit" className="btn-premium" disabled={send.isPending || insufficient}>
               {send.isPending ? "Sending…" : <><ArrowRightLeft className="size-4" /> Send Transfer</>}
             </Button>
           </div>

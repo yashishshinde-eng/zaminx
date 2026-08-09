@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   LayoutDashboard,
@@ -38,6 +38,7 @@ interface NavItem {
 const NAV: NavItem[] = [
   { label: "Dashboard", to: "/app", icon: LayoutDashboard, accent: "gold" },
   { label: "Wallet", to: "/app/wallet", icon: Wallet, accent: "blue" },
+  { label: "Deposit", to: "/app/deposit", icon: ArrowDownToLine, accent: "blue" },
   { label: "P2P", to: "/app/p2p", icon: ArrowRightLeft, accent: "success" },
   { label: "Withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
   { label: "Packages", to: "/app/packages", icon: Package, accent: "gold" },
@@ -67,7 +68,7 @@ interface NavGroup {
 
 const USER_GROUPS: NavGroup[] = [
   { label: "Overview", items: NAV.filter((i) => i.label === "Dashboard" || i.label === "Reports") },
-  { label: "Earnings", items: NAV.filter((i) => ["Wallet", "P2P", "Withdrawals", "Packages"].includes(i.label)) },
+  { label: "Earnings", items: NAV.filter((i) => ["Wallet", "Deposit", "P2P", "Withdrawals", "Packages"].includes(i.label)) },
   { label: "Network", items: NAV.filter((i) => ["Team", "Bonanza"].includes(i.label)) },
   { label: "Account", items: NAV.filter((i) => i.label === "Settings") },
 ];
@@ -122,17 +123,17 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
       {/* ── Quick deposit banner (expanded only, user only) ─── */}
       {!isAdmin && !isCollapsed && (
         <div className="mx-3 mt-3">
-          <div className="rounded-[14px] border border-blue/20 bg-gradient-to-br from-blue/10 via-blue-dark/5 to-purple/5 p-3 shadow-[0_0_24px_-8px_hsl(var(--blue)/0.12)]">
+          <Link to="/app/deposit" className="block rounded-[14px] border border-blue/20 bg-gradient-to-br from-blue/10 via-blue-dark/5 to-purple/5 p-3 shadow-[0_0_24px_-8px_hsl(var(--blue)/0.12)] transition-colors hover:border-blue/40">
             <div className="flex items-center gap-2">
               <div className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-gold/20 to-gold-dark/10 text-gold shadow-[0_0_12px_-3px_hsl(var(--gold)/0.2)]">
                 <Sparkles className="size-3.5" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-xs font-semibold text-foreground">Start Earning</p>
-                <p className="truncate text-[10px] text-muted-foreground">Activate a package</p>
+                <p className="truncate text-[10px] text-muted-foreground">Deposit to activate a package</p>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       )}
 

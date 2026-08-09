@@ -117,6 +117,7 @@ export async function registerAndLogin(
     method: "POST",
     body: JSON.stringify({ name: creds.name ?? "Test User", email, password, referralCode }),
   });
+  if (reg.status !== 201) console.error("[DEBUG registerAndLogin]", reg.status, JSON.stringify(reg.body), "refCode=", referralCode);
   const { accessToken, refreshToken } = reg.body.data.tokens;
   return { accessToken, refreshToken, userId: reg.body.data.user.id };
 }
@@ -139,4 +140,24 @@ export async function seedPackage(opts: SeedPackageOpts = {}): Promise<{ _id: st
     status: "active",
   });
   return { _id: String(p._id) };
+}
+
+/**
+ * Fund a user's Main wallet via the decoupled wallet-deposit flow: POST
+ * /payments/deposit (amount → sandbox invoice) → dev-simulate the paid webhook
+ * → Main wallet credited. No package is created. When `token` is omitted a fresh
+ * user is registered first. Returns the access token + the confirmed deposit id.
+ */
+export async function fundWallet(
+  amount = 100,
+  token?: string,
+): Promise<{ accessToken: string; depositId: string }> {
+  const accessToken = token ?? (await registerAndLogin()).accessToken;
+  const dep = await authed<{ data: { deposit: { id: string } } }>(accessToken, "/api/v1/payments/deposit", {
+    method: "POST",
+    body: JSON.stringify({ amount }),
+  });
+  const id = dep.body.data.deposit.id;
+  await authed(accessToken, `/api/v1/payments/dev/simulate/${id}`, { method: "POST" });
+  return { accessToken, depositId: id };
 }

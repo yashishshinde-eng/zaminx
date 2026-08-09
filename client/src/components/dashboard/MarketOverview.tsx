@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { TrendingUp, TrendingDown, Sparkles } from "lucide-react";
+import { TrendingUp, TrendingDown } from "lucide-react";
 import { Sparkline } from "@/components/dashboard/Sparkline";
 import { formatCurrency } from "@/lib/utils";
 

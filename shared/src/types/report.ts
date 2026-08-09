@@ -1,13 +1,15 @@
 import type { DepositRow } from "./deposit";
 import type { WithdrawalRow } from "./withdrawal";
 import type { WalletTxRow, WalletTxType } from "./wallet";
+import type { P2PTransferRow } from "./p2p";
 
 /**
  * Reports module — Phase 11.
  *
- * The 9 user report kinds. "Wallet" + the 6 income streams all read the
+ * The 10 user report kinds. "Wallet" + the 6 income streams all read the
  * immutable wallet ledger (the income streams filter by `WalletTxType`);
- * Deposits and Withdrawals read their own collections. Admin report kinds
+ * Deposits and Withdrawals read their own collections; P2P reads the
+ * P2PTransfer collection (sent + received by the user). Admin report kinds
  * arrive in Phase 11A.
  */
 export type UserReportKind =
@@ -19,7 +21,8 @@ export type UserReportKind =
   | "team"
   | "community"
   | "rank"
-  | "bonanza";
+  | "bonanza"
+  | "p2p";
 
 /** Pagination block shared by every report response. */
 export interface ReportPagination {
@@ -46,6 +49,7 @@ export interface ReportResult<TRow> {
 export type DepositReport = ReportResult<DepositRow>;
 export type WithdrawalReport = ReportResult<WithdrawalRow>;
 export type LedgerReport = ReportResult<WalletTxRow>;
+export type P2PReport = ReportResult<P2PTransferRow>;
 
 /** Export format for `GET /reports/:kind/export`. */
 export type ReportExportFormat = "csv" | "xls";
@@ -88,8 +92,9 @@ export interface AdminUserReportRow {
   id: string;
   name: string;
   email: string;
+  phone: string | null;
   role: "user" | "admin";
-  status: "active" | "suspended" | "banned";
+  status: "active" | "inactive" | "blocked";
   referralCode: string;
   referredBy: string | null;
   isEmailVerified: boolean;

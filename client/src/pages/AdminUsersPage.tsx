@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Search, SlidersHorizontal, X, Users, UserCheck, UserX, Ban } from "lucide-react";
+import { Search, SlidersHorizontal, X, Users, UserCheck, UserX, Ban, LogIn } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, type Column } from "@/components/shared";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,10 +13,11 @@ import { Avatar } from "@/components/ui/avatar";
 import { KpiCard } from "@/components/dashboard";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatCurrency, formatDate } from "@/lib/utils";
-import { useAdminUsers, useAdminDashboard } from "@/hooks/useAdmin";
+import { useAdminUsers, useAdminDashboard, useImpersonateUser } from "@/hooks/useAdmin";
+import { useAuth } from "@/context/AuthContext";
 import type { AdminUserReportRow, UserStatus } from "@zeminex/shared";
 
-const STATUSES: ("all" | UserStatus)[] = ["all", "active", "suspended", "banned"];
+const STATUSES: ("all" | UserStatus)[] = ["all", "active", "inactive", "blocked"];
 const ROLES = ["all", "user", "admin"] as const;
 
 const LIMIT = 20;
@@ -83,8 +84,8 @@ export function AdminUsersPage() {
             <>
               <KpiCard icon={Users} label="Total users" value={kpis.totalUsers} format="number" delay={0} />
               <KpiCard icon={UserCheck} label="Active" value={kpis.byStatus.active} format="number" delay={0.05} />
-              <KpiCard icon={UserX} label="Suspended" value={kpis.byStatus.suspended} format="number" delay={0.1} />
-              <KpiCard icon={Ban} label="Banned" value={kpis.byStatus.banned} format="number" delay={0.15} />
+              <KpiCard icon={UserX} label="Inactive" value={kpis.byStatus.inactive} format="number" delay={0.1} />
+              <KpiCard icon={Ban} label="Blocked" value={kpis.byStatus.blocked} format="number" delay={0.15} />
             </>
           )}
         </motion.div>
@@ -186,7 +187,7 @@ const columns: Column<AdminUserReportRow>[] = [
       </div>
     ),
   },
-  { key: "role", header: "Role", cell: (r) => <span className="capitalize">{r.role}</span> },
+  { key: "phone", header: "Mobile", cell: (r) => (r.phone ? <span className="font-mono text-xs">{r.phone}</span> : <span className="text-muted-foreground">—</span>) },
   { key: "status", header: "Status", cell: (r) => userStatusBadge(r.status) },
   {
     key: "isEmailVerified",
@@ -203,15 +204,50 @@ const columns: Column<AdminUserReportRow>[] = [
     header: "",
     align: "right",
     cell: (r) => (
-      <Button asChild size="sm" variant="outline">
-        <Link to={`/app/admin/users/${r.id}`}>View</Link>
-      </Button>
+      <div className="flex items-center justify-end gap-2">
+        <Button asChild size="sm" variant="outline">
+          <Link to={`/app/admin/users/${r.id}`}>View</Link>
+        </Button>
+        <ImpersonateButton user={r} />
+      </div>
     ),
   },
 ];
 
+/** Row-level "Login as this user" button — mints a session for the target and
+ *  switches the admin's client session to them. A proper component so it can
+ *  use hooks (the column `cell` is a plain function). */
+function ImpersonateButton({ user }: { user: AdminUserReportRow }) {
+  const impersonateMut = useImpersonateUser(user.id);
+  const { loginAs } = useAuth();
+  const navigate = useNavigate();
+
+  async function handleLoginAs() {
+    try {
+      const { user: targetUser, tokens } = await impersonateMut.mutateAsync();
+      loginAs(targetUser, tokens);
+      navigate("/app", { replace: true });
+    } catch {
+      /* interceptor toasts the error */
+    }
+  }
+
+  return (
+    <Button
+      size="sm"
+      variant="secondary"
+      disabled={impersonateMut.isPending}
+      onClick={handleLoginAs}
+      title="Login as this user"
+    >
+      <LogIn className="size-3.5" />
+      {impersonateMut.isPending ? "…" : "Login as"}
+    </Button>
+  );
+}
+
 export function userStatusBadge(status: UserStatus) {
-  const variant = status === "active" ? "success" : status === "suspended" ? "warning" : "destructive";
+  const variant = status === "active" ? "success" : status === "inactive" ? "warning" : "destructive";
   return (
     <Badge variant={variant} className="capitalize">
       {status}

@@ -9,6 +9,7 @@ import {
   getDepositReport,
   getWithdrawalReport,
   getLedgerReport,
+  getP2PReport,
   getReportExport,
 } from "../services/report.service.js";
 
@@ -28,7 +29,9 @@ export const report: RequestHandler[] = [
         ? await getDepositReport(req.user.id, args)
         : kind === "withdrawals"
           ? await getWithdrawalReport(req.user.id, args)
-          : await getLedgerReport(req.user.id, kind, args);
+          : kind === "p2p"
+            ? await getP2PReport(req.user.id, args)
+            : await getLedgerReport(req.user.id, kind, args);
     ok(res, { report }, "Report");
   }),
 ];

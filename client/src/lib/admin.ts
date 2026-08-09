@@ -19,7 +19,9 @@ import type {
   AdminDepositCreateBody,
   WalletBalance,
   DepositRow,
+  PublicUser,
 } from "@zeminex/shared";
+import type { TokenPair } from "./auth";
 
 /** A paginated page of rows (matches every list endpoint in this module). */
 export interface Page<T> {
@@ -92,6 +94,14 @@ export async function forceLogoutRequest(id: string): Promise<void> {
 /** POST /admin/users/:id/reset-password — admin sets a new password for a user. */
 export async function adminResetPasswordRequest(id: string, password: string): Promise<void> {
   await api.post(`/admin/users/${id}/reset-password`, { password });
+}
+
+/** POST /admin/users/:id/impersonate — mint a session for the target user so the
+ *  admin can inspect their account. Returns the target's public user + a fresh
+ *  token pair; the admin's own session is stashed + restored client-side. */
+export async function impersonateUserRequest(id: string): Promise<{ user: PublicUser; tokens: TokenPair }> {
+  const { data } = await api.post<{ data: { user: PublicUser; tokens: TokenPair } }>(`/admin/users/${id}/impersonate`);
+  return data.data;
 }
 
 /* ------------------------------------------------------------------ */

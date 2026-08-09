@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-/** The 9 user report kinds (re-used by the server dispatcher + frontend tabs). */
+/** The 10 user report kinds (re-used by the server dispatcher + frontend tabs). */
 export const USER_REPORT_KINDS = [
   "deposits",
   "withdrawals",
@@ -11,6 +11,7 @@ export const USER_REPORT_KINDS = [
   "community",
   "rank",
   "bonanza",
+  "p2p",
 ] as const;
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;

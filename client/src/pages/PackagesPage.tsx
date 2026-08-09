@@ -1,8 +1,10 @@
 import { useMemo } from "react";
-import { Package as PackageIcon } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Package as PackageIcon, ArrowDownToLine, Wallet as WalletIcon } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, ErrorState, EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 import { PackageTierCard } from "@/components/packages/PackageTierCard";
 import { UserPackageList } from "@/components/packages/UserPackageList";
 import { PaymentCard } from "@/components/packages/PaymentCard";
@@ -12,14 +14,20 @@ import {
   useHasOpenPackage,
   useActivatePackage,
 } from "@/hooks/usePackages";
+import { useWallet } from "@/hooks/useWallet";
+import { formatCurrency } from "@/lib/utils";
 
 export function PackagesPage() {
   const catalog = usePackageCatalog();
   const mine = useMyPackages();
   const hasOpen = useHasOpenPackage();
   const activate = useActivatePackage();
+  const wallet = useWallet();
+
+  const mainAvailable = wallet.data?.main.available ?? 0;
 
   // The pending subscription awaiting payment (with joined payment info).
+  // Legacy package-tied pending deposits only — wallet activation is instant.
   const pendingPayment = mine.data?.find((p) => p.status === "pending" && p.payment);
 
   const disabledReason = hasOpen
@@ -58,6 +66,22 @@ export function PackagesPage() {
           <PaymentCard payment={pendingPayment.payment!} packageName={pendingPayment.snapshot.name} />
         )}
 
+        {/* Wallet balance + deposit entry */}
+        <div className="glass-card flex flex-wrap items-center gap-3 p-4">
+          <div className="flex size-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue/20 to-blue-dark/10">
+            <WalletIcon className="size-4 text-blue-light" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs text-muted-foreground">Main wallet balance</p>
+            <p className="font-grotesk text-lg font-bold tabular-nums">
+              {wallet.isLoading ? "—" : formatCurrency(mainAvailable)}
+            </p>
+          </div>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/app/deposit"><ArrowDownToLine className="size-4" /> Deposit funds</Link>
+          </Button>
+        </div>
+
         {/* Catalog */}
         <section className="space-y-4">
           {catalog.isLoading && (
@@ -92,6 +116,7 @@ export function PackagesPage() {
                   disabled={hasOpen}
                   disabledReason={disabledReason}
                   loading={activate.isPending}
+                  canAfford={mainAvailable >= tier.priceUsd}
                   onActivate={(id) => activate.mutate(id)}
                   popular={tier.id === popularId}
                   delay={i * 0.05}

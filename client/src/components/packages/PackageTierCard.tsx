@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, Sparkles, TrendingUp, CalendarDays } from "lucide-react";
+import { Check, Sparkles, TrendingUp, CalendarDays, ArrowDownToLine } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { cn, formatCurrency, durationLabel } from "@/lib/utils";
+import { cn, formatCurrency } from "@/lib/utils";
 import type { PackageTier } from "@zeminex/shared";
 
 interface PackageTierCardProps {
@@ -11,6 +12,8 @@ interface PackageTierCardProps {
   disabledReason?: string;
   onActivate?: (id: string) => void;
   loading?: boolean;
+  /** Whether the user's Main wallet can cover this tier's price. */
+  canAfford?: boolean;
   /** Highlight this tier as the most popular (gradient + ribbon). */
   popular?: boolean;
   delay?: number;
@@ -25,6 +28,7 @@ export function PackageTierCard({
   disabledReason,
   onActivate,
   loading,
+  canAfford = true,
   popular = false,
   delay = 0,
 }: PackageTierCardProps) {
@@ -110,15 +114,22 @@ export function PackageTierCard({
           <Button
             type="button"
             className={cn("w-full h-11", popular ? "btn-premium" : "")}
-            disabled={disabled || loading}
+            disabled={disabled || loading || !canAfford}
             onClick={() => onActivate?.(tier.id)}
-            title={disabled ? disabledReason : undefined}
+            title={disabled ? disabledReason : !canAfford ? "Insufficient wallet balance — deposit first" : undefined}
           >
-            {loading ? "Starting…" : "Activate"}
+            {loading ? "Activating…" : "Activate from wallet"}
           </Button>
-          {disabled && disabledReason && (
+          {disabled && disabledReason ? (
             <p className="mt-2 text-center text-xs text-muted-foreground">{disabledReason}</p>
-          )}
+          ) : !canAfford ? (
+            <p className="mt-2 flex items-center justify-center gap-1 text-center text-xs text-muted-foreground">
+              Insufficient balance —{" "}
+              <Link to="/app/deposit" className="inline-flex items-center gap-0.5 font-semibold text-gold hover:underline">
+                <ArrowDownToLine className="size-3" /> Deposit
+              </Link>
+            </p>
+          ) : null}
         </CardContent>
       </Card>
     </motion.div>

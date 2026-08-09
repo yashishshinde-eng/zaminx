@@ -69,8 +69,8 @@ export interface DashboardSummary {
 /** Counts of users grouped by status. */
 export interface AdminUsersByStatus {
   active: number;
-  suspended: number;
-  banned: number;
+  inactive: number;
+  blocked: number;
 }
 
 /** Aggregate deposit volume (paid deposits only). */

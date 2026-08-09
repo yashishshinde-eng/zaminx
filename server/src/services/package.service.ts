@@ -2,11 +2,14 @@
  * Package service — thin facade over the catalog + deposit services.
  *
  * Phase 6 owned the catalog and bare activation; Phase 7 moved activation +
- * payment into the deposit service (NOWPayments). This module keeps the
+ * payment into the deposit service (NOWPayments). The flow is now decoupled:
+ * a user deposits funds to their wallet (POST /payments/deposit) and then
+ * activates a package from the wallet balance here. This module keeps the
  * stable `listCatalog` / `getMyPackages` / `activatePackage` exports the
- * controller relies on while delegating the payment-heavy work to deposit.
+ * controller relies on while delegating the wallet-debit + activation work to
+ * the deposit service.
  */
-import { initiateDeposit, getMyPackagesWithPayment, listCatalog as listCatalogImpl } from "./deposit.service.js";
+import { activatePackageFromWallet, getMyPackagesWithPayment, listCatalog as listCatalogImpl } from "./deposit.service.js";
 import type { DepositRow, PackageTier, UserPackageRow } from "@zeminex/shared";
 
 /** GET /packages — active catalog (delegated to deposit service's catalog helper). */
@@ -21,16 +24,16 @@ interface Meta {
 }
 
 /**
- * POST /packages/activate — initiate a package activation (Phase 7: also
- * creates the NOWPayments invoice + pending deposit). Returns the pending
- * subscription and its payment instructions.
+ * POST /packages/activate — activate a package from the user's Main wallet
+ * balance (debit + already-active subscription). Returns the active
+ * subscription and its wallet-funded payment record.
  */
 export async function activatePackage(
   userId: string,
   packageId: string,
   meta?: Meta,
 ): Promise<{ pkg: UserPackageRow; payment: DepositRow }> {
-  return initiateDeposit(userId, packageId, meta);
+  return activatePackageFromWallet(userId, packageId, meta);
 }
 
 export type { PackageTier };

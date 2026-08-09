@@ -1,8 +1,9 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useSearchParams } from "react-router-dom";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { FullPageLoader } from "@/components/layout/FullPageLoader";
 import { PublicLayout } from "@/components/layout/public/PublicLayout";
+import { useAuth } from "@/context/AuthContext";
 
 // Public website
 const HomePage = lazy(() => import("@/pages/public/HomePage").then((m) => ({ default: m.HomePage })));
@@ -22,6 +23,7 @@ const VerifyEmailPage = lazy(() => import("@/pages/VerifyEmailPage").then((m) =>
 
 // App (protected)
 const DashboardPage = lazy(() => import("@/pages/DashboardPage").then((m) => ({ default: m.DashboardPage })));
+const DepositPage = lazy(() => import("@/pages/DepositPage").then((m) => ({ default: m.DepositPage })));
 const SettingsPage = lazy(() => import("@/pages/SettingsPage").then((m) => ({ default: m.SettingsPage })));
 const PackagesPage = lazy(() => import("@/pages/PackagesPage").then((m) => ({ default: m.PackagesPage })));
 const WalletPage = lazy(() => import("@/pages/WalletPage").then((m) => ({ default: m.WalletPage })));
@@ -44,6 +46,23 @@ const AdminSecurityPage = lazy(() => import("@/pages/AdminSecurityPage").then((m
 const AdminLogsPage = lazy(() => import("@/pages/AdminLogsPage").then((m) => ({ default: m.AdminLogsPage })));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
+/**
+ * Root entry. A referral link is `/?ref=<code>` — when an unauthenticated visitor
+ * lands here, bounce them to `/register?ref=<code>` so the code is prefilled.
+ * Authenticated members (already signed in) see the homepage as normal.
+ */
+function HomeRoute() {
+  const [searchParams] = useSearchParams();
+  const ref = searchParams.get("ref");
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (ref && isLoading) return <FullPageLoader />;
+  if (ref && !isAuthenticated) {
+    return <Navigate to={`/register?ref=${encodeURIComponent(ref)}`} replace />;
+  }
+  return <HomePage />;
+}
+
 export function AppRouter() {
   return (
     <BrowserRouter>
@@ -51,7 +70,7 @@ export function AppRouter() {
         <Routes>
           {/* Public website (shared layout: header / footer / announcement / maintenance) */}
           <Route element={<PublicLayout />}>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomeRoute />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/compensation-plan" element={<CompensationPlanPage />} />
             <Route path="/faq" element={<FaqPage />} />
@@ -70,6 +89,7 @@ export function AppRouter() {
           {/* User panel (protected) */}
           <Route element={<ProtectedRoute />}>
             <Route path="/app" element={<DashboardPage />} />
+            <Route path="/app/deposit" element={<DepositPage />} />
             <Route path="/app/wallet" element={<WalletPage />} />
             <Route path="/app/p2p" element={<P2PPage />} />
             <Route path="/app/withdrawals" element={<WithdrawalsPage />} />

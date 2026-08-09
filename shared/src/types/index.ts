@@ -21,8 +21,8 @@ import type { WalletBalances } from "./wallet";
 /** Role attached to an authenticated request. */
 export type UserRole = "user" | "admin";
 
-/** Account status lifecycle (active / suspended / banned). */
-export type UserStatus = "active" | "suspended" | "banned";
+/** Account status lifecycle (active / inactive / blocked). */
+export type UserStatus = "active" | "inactive" | "blocked";
 
 /** Per-user crypto payout/deposit addresses. USDT-BEP20 is the only supported currency. */
 export interface WalletAddresses {
@@ -42,7 +42,7 @@ export interface PublicUser {
   themePreference: "light" | "dark";
   notificationPreference: { email: boolean; dashboard: boolean };
   walletAddresses: WalletAddresses;
-  status: "active" | "suspended" | "banned";
+  status: "active" | "inactive" | "blocked";
 }
 
 /** Auth response payload (login / register / refresh). */

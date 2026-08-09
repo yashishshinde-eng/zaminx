@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,13 +6,14 @@ import { registerSchema } from "@zeminex/shared";
 import type { RegisterBody } from "@zeminex/shared";
 import type { PublicUser } from "@zeminex/shared";
 import toast from "react-hot-toast";
-import { ArrowRight, ShieldCheck, Wallet, TrendingUp, Copy, Check } from "lucide-react";
+import { ArrowRight, ShieldCheck, Wallet, TrendingUp, Copy, Check, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Logo } from "@/components/layout/Logo";
 import { Dialog } from "@/components/ui/dialog";
 import { useAuth } from "@/context/AuthContext";
+import { checkReferralCode } from "@/lib/referrals";
 
 export function RegisterPage() {
   const { register: registerUser } = useAuth();
@@ -30,11 +31,44 @@ export function RegisterPage() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<RegisterBody>({
     resolver: zodResolver(registerSchema.shape.body),
     defaultValues: { referralCode: refCode || undefined },
   });
+
+  // Live referral-code validation — debounced, works for both link-prefilled and
+  // manually-entered codes. Shows a small "verified" / "invalid" affordance under
+  // the field before submit. Stale responses are ignored via reqIdRef.
+  const watchedCode = watch("referralCode");
+  const [codeCheck, setCodeCheck] = useState<{ status: "idle" | "checking" | "valid" | "invalid"; name?: string }>(
+    { status: "idle" },
+  );
+  const reqIdRef = useRef(0);
+
+  useEffect(() => {
+    const code = (watchedCode ?? "").trim();
+    if (!code) {
+      reqIdRef.current += 1;
+      setCodeCheck({ status: "idle" });
+      return;
+    }
+    const id = ++reqIdRef.current;
+    setCodeCheck({ status: "checking" });
+    const t = setTimeout(async () => {
+      try {
+        const res = await checkReferralCode(code);
+        if (id !== reqIdRef.current) return; // a newer keystroke superseded this
+        setCodeCheck({ status: res.valid ? "valid" : "invalid", name: res.name });
+      } catch {
+        if (id !== reqIdRef.current) return;
+        // Network/429 — don't claim invalid; let the backend re-check on submit.
+        setCodeCheck({ status: "idle" });
+      }
+    }, 450);
+    return () => clearTimeout(t);
+  }, [watchedCode]);
 
   const onSubmit = async (values: RegisterBody) => {
     setSubmitting(true);
@@ -119,6 +153,11 @@ export function RegisterPage() {
                 {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
               </div>
               <div className="space-y-2">
+                <Label htmlFor="phone">Mobile number</Label>
+                <Input id="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+1 (555) 123-4567" {...register("phone")} />
+                {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
+              </div>
+              <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <Input id="password" type="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
                 {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
@@ -126,7 +165,24 @@ export function RegisterPage() {
               <div className="space-y-2">
                 <Label htmlFor="referralCode">Referral code</Label>
                 <Input id="referralCode" placeholder="ZAM…" autoComplete="off" {...register("referralCode")} />
-                {errors.referralCode && <p className="text-sm text-destructive">{errors.referralCode.message}</p>}
+                {errors.referralCode ? (
+                  <p className="text-sm text-destructive">{errors.referralCode.message}</p>
+                ) : codeCheck.status === "valid" ? (
+                  <p className="flex items-center gap-1.5 text-sm text-green-600 dark:text-green-500">
+                    <Check className="size-3.5" />
+                    Valid referral code{codeCheck.name ? ` — referred by ${codeCheck.name}` : ""}
+                  </p>
+                ) : codeCheck.status === "invalid" ? (
+                  <p className="flex items-center gap-1.5 text-sm text-destructive">
+                    <X className="size-3.5" />
+                    Invalid referral code
+                  </p>
+                ) : codeCheck.status === "checking" ? (
+                  <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <Loader2 className="size-3.5 animate-spin" />
+                    Checking…
+                  </p>
+                ) : null}
               </div>
               <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
                 {submitting ? "Creating account…" : <>Create account <ArrowRight className="size-4" /></>}

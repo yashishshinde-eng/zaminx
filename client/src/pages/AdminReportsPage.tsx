@@ -42,7 +42,7 @@ const TABS: { kind: AdminReportKind; label: string }[] = [
   { kind: "activity", label: "Activity" },
 ];
 
-const USER_STATUSES = ["active", "suspended", "banned"];
+const USER_STATUSES = ["active", "inactive", "blocked"];
 const DEPOSIT_STATUSES: DepositStatus[] = ["pending", "paid", "expired", "failed"];
 const WITHDRAWAL_STATUSES: WithdrawalStatus[] = [
   "pending",
@@ -102,7 +102,7 @@ function statusBadge(status: string) {
       ? "success"
       : status === "pending" || status === "under_review"
         ? "warning"
-        : status === "rejected" || status === "failed" || status === "cancelled" || status === "expired" || status === "banned"
+        : status === "rejected" || status === "failed" || status === "cancelled" || status === "expired" || status === "blocked"
           ? "destructive"
           : "secondary";
   return (

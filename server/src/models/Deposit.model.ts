@@ -34,6 +34,15 @@ const depositSchema = new Schema(
     sandbox: { type: Boolean, default: false },
     meta: { type: Schema.Types.Mixed, default: {} },
     paidAt: { type: Date, default: null },
+    /**
+     * When the payment link/address expires — the deposit is only valid for 10
+     * minutes after creation. A pending deposit whose `expiresAt` has passed is
+     * lazily flipped to `expired` on read (see `getDepositForUser`). A genuine
+     * late webhook can still re-open an expired deposit to credit real funds
+     * (see `confirmDeposit`). Null for non-wallet deposits (admin manual / package
+     * activation), which never expire.
+     */
+    expiresAt: { type: Date, default: null, index: true },
   },
   { timestamps: true },
 );

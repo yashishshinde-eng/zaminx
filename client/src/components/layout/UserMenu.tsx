@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LogOut, Settings as SettingsIcon, User } from "lucide-react";
+import { LogOut, Settings as SettingsIcon, User, ShieldCheck } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -11,10 +11,15 @@ import { useAuth } from "@/context/AuthContext";
 
 /** Avatar-triggered user menu shown in the topbar. */
 export function UserMenu() {
-  const { user, logout } = useAuth();
+  const { user, logout, isImpersonating, endImpersonation } = useAuth();
   const navigate = useNavigate();
 
   if (!user) return null;
+
+  function returnToAdmin() {
+    endImpersonation();
+    navigate("/app/admin/users");
+  }
 
   return (
     <DropdownMenu
@@ -41,6 +46,14 @@ export function UserMenu() {
               </div>
             </div>
           </DropdownMenuLabel>
+          {isImpersonating && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onSelect={returnToAdmin}>
+                <ShieldCheck className="mr-1" /> Return to admin
+              </DropdownMenuItem>
+            </>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem onSelect={() => navigate("/app/settings")}>
             <User className="mr-1" /> Profile

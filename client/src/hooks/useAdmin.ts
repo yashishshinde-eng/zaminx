@@ -8,6 +8,7 @@ import {
   verifyUserEmailRequest,
   forceLogoutRequest,
   adminResetPasswordRequest,
+  impersonateUserRequest,
   fetchCompensationSettings,
   updateCompensationSettingsRequest,
   fetchSiteConfigAdmin,
@@ -166,6 +167,18 @@ export function useAdminResetPassword(id?: string) {
       toast.success("Password reset");
       await invalidate();
     },
+    onError: () => {
+      /* interceptor toasts */
+    },
+  });
+}
+
+/** POST /admin/users/:id/impersonate — mint a session for the target user.
+ *  No cache invalidation: the caller switches the auth session client-side
+ *  (loginAs) and navigates away from the admin view. Returns { user, tokens }. */
+export function useImpersonateUser(id?: string) {
+  return useMutation({
+    mutationFn: () => impersonateUserRequest(id as string),
     onError: () => {
       /* interceptor toasts */
     },

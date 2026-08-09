@@ -20,5 +20,12 @@ export function ProtectedRoute({ adminOnly }: ProtectedRouteProps) {
     return <Navigate to="/app" replace />;
   }
 
+  // Admins have no business in the user panel (dashboard, wallet, team, …).
+  // Send them to the admin dashboard instead. Impersonation is unaffected:
+  // while impersonating, the active user is the target (role "user").
+  if (!adminOnly && user?.role === "admin") {
+    return <Navigate to="/app/admin" replace />;
+  }
+
   return <Outlet />;
 }

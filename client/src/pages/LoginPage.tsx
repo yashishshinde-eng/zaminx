@@ -33,8 +33,16 @@ export function LoginPage() {
     try {
       const user = await login(values.email, values.password);
       toast.success(`Welcome back, ${user.name}`);
-      const from = (location.state as LocationState)?.from ?? "/app";
-      navigate(from, { replace: true });
+      const from = (location.state as LocationState)?.from;
+      const isAdmin = user.role === "admin";
+      const home = isAdmin ? "/app/admin" : "/app";
+      // Only honor a deep-link "from" when it's a valid destination for this
+      // role — admins land on the admin panel, users on the user panel.
+      const target =
+        from && (isAdmin ? from.startsWith("/app/admin") : from.startsWith("/app") && !from.startsWith("/app/admin"))
+          ? from
+          : home;
+      navigate(target, { replace: true });
     } catch {
       // Toast handled by the axios interceptor.
     } finally {

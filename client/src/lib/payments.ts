@@ -7,6 +7,9 @@ interface DepositsResponse {
 interface OneDepositResponse {
   data: { deposit: DepositRow | null };
 }
+interface CreateDepositResponse {
+  data: { deposit: DepositRow };
+}
 
 /** GET /payments/deposits — the user's deposits. */
 export async function fetchDeposits(): Promise<DepositRow[]> {
@@ -17,6 +20,12 @@ export async function fetchDeposits(): Promise<DepositRow[]> {
 /** GET /payments/deposits/:id — single deposit status. */
 export async function fetchDeposit(id: string): Promise<DepositRow | null> {
   const { data } = await api.get<OneDepositResponse>(`/payments/deposits/${id}`);
+  return data.data.deposit;
+}
+
+/** POST /payments/deposit — start a wallet deposit (amount → NOWPayments invoice). */
+export async function createDepositRequest(amount: number): Promise<DepositRow> {
+  const { data } = await api.post<CreateDepositResponse>("/payments/deposit", { amount });
   return data.data.deposit;
 }
 

@@ -1,22 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
-import { authed, closeApi, registerAndLogin, seedPackage, seedAdminAndLogin } from "../api.js";
+import { authed, closeApi, fundWallet, seedAdminAndLogin } from "../api.js";
 import { hasTestDb, connectTestDb, clearDb, disconnectTestDb } from "../db.js";
-
-async function fundWallet(amount = 100): Promise<{ accessToken: string; depositId: string }> {
-  const { accessToken } = await registerAndLogin();
-  const pkg = await seedPackage({ priceUsd: amount });
-  await authed(accessToken, "/api/v1/packages/activate", {
-    method: "POST",
-    body: JSON.stringify({ packageId: pkg._id }),
-  });
-  const list = await authed<{ data: { deposits: { _id: string; status: string }[] } }>(
-    accessToken,
-    "/api/v1/payments/deposits",
-  );
-  const id = list.body.data.deposits.find((d) => d.status === "pending")!._id;
-  await authed(accessToken, `/api/v1/payments/dev/simulate/${id}`, { method: "POST" });
-  return { accessToken, depositId: id };
-}
 
 /** Withdrawal row shape from the API (id may be `_id` or `id`). */
 function widOf(w: { _id?: string; id?: string }): string {

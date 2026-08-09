@@ -18,13 +18,15 @@ import type {
   DepositRow,
   WithdrawalRow,
   WalletTxRow,
+  P2PTransferRow,
+  P2PTransferStatus,
   DepositStatus,
   WithdrawalStatus,
 } from "@zeminex/shared";
 
 const LIMIT = 20;
 
-/** Blueprint order: Deposits, Withdrawals, Wallet, then the 6 income streams. */
+/** Blueprint order: Deposits, Withdrawals, Wallet, the 6 income streams, P2P. */
 const TABS: { kind: UserReportKind; label: string }[] = [
   { kind: "deposits", label: "Deposits" },
   { kind: "withdrawals", label: "Withdrawals" },
@@ -35,6 +37,7 @@ const TABS: { kind: UserReportKind; label: string }[] = [
   { kind: "community", label: "Community" },
   { kind: "rank", label: "Rank" },
   { kind: "bonanza", label: "Bonanza" },
+  { kind: "p2p", label: "P2P" },
 ];
 
 const DEPOSIT_STATUSES: DepositStatus[] = ["pending", "paid", "expired", "failed"];
@@ -46,6 +49,7 @@ const WITHDRAWAL_STATUSES: WithdrawalStatus[] = [
   "paid",
   "cancelled",
 ];
+const P2P_STATUSES: P2PTransferStatus[] = ["completed", "failed"];
 
 /** /app/reports — per-user reports with filters, summary + chart, table, export. */
 export function ReportsPage() {
@@ -69,11 +73,18 @@ export function ReportsPage() {
 
   const { data, isLoading, isError, refetch } = useReport(kind, params);
   const report = data;
-  const rows = (report?.rows ?? []) as DepositRow[] | WithdrawalRow[] | WalletTxRow[];
+  const rows = (report?.rows ?? []) as DepositRow[] | WithdrawalRow[] | WalletTxRow[] | P2PTransferRow[];
   const summary = report?.summary;
   const pagination = report?.pagination;
 
-  const statusOptions = kind === "deposits" ? DEPOSIT_STATUSES : kind === "withdrawals" ? WITHDRAWAL_STATUSES : [];
+  const statusOptions =
+    kind === "deposits"
+      ? DEPOSIT_STATUSES
+      : kind === "withdrawals"
+        ? WITHDRAWAL_STATUSES
+        : kind === "p2p"
+          ? P2P_STATUSES
+          : [];
 
   /** Reset to page 1 whenever the active kind changes (status filter may not apply). */
   function selectKind(next: UserReportKind) {
@@ -224,7 +235,7 @@ function labelFor(kind: UserReportKind): string {
 
 function statusBadge(status: string) {
   const variant =
-    status === "paid" || status === "approved"
+    status === "paid" || status === "approved" || status === "completed"
       ? "success"
       : status === "pending" || status === "under_review"
         ? "warning"
@@ -238,7 +249,7 @@ function statusBadge(status: string) {
   );
 }
 
-function columnsFor(kind: UserReportKind): Column<DepositRow | WithdrawalRow | WalletTxRow>[] {
+function columnsFor(kind: UserReportKind): Column<DepositRow | WithdrawalRow | WalletTxRow | P2PTransferRow>[] {
   if (kind === "deposits") {
     return [
       { key: "createdAt", header: "Date", cell: (r) => formatDate((r as DepositRow).createdAt) },
@@ -256,6 +267,17 @@ function columnsFor(kind: UserReportKind): Column<DepositRow | WithdrawalRow | W
       { key: "address", header: "Address", cell: (r) => <span className="font-mono text-xs">{(r as WithdrawalRow).address}</span> },
       { key: "status", header: "Status", cell: (r) => statusBadge((r as WithdrawalRow).status) },
       { key: "processedAt", header: "Processed at", cell: (r) => formatDate((r as WithdrawalRow).processedAt) },
+    ];
+  }
+  if (kind === "p2p") {
+    return [
+      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as P2PTransferRow).createdAt) },
+      { key: "from", header: "From", cell: (r) => (r as P2PTransferRow).fromUserName },
+      { key: "to", header: "To", cell: (r) => (r as P2PTransferRow).toUserName },
+      { key: "wallet", header: "Wallet", cell: (r) => <span className="capitalize">{(r as P2PTransferRow).wallet}</span> },
+      { key: "amount", header: "Amount", align: "right", cell: (r) => formatCurrency((r as P2PTransferRow).amount) },
+      { key: "status", header: "Status", cell: (r) => statusBadge((r as P2PTransferRow).status) },
+      { key: "memo", header: "Memo", cell: (r) => (r as P2PTransferRow).memo ?? "—" },
     ];
   }
   // Ledger kinds (wallet + 6 income streams).

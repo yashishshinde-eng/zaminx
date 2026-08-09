@@ -2,7 +2,7 @@ import { Package as PackageIcon } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared";
-import { formatCurrency, formatDate, durationLabel } from "@/lib/utils";
+import { formatCurrency, formatDate } from "@/lib/utils";
 import { PackageStatusBadge } from "./PackageStatusBadge";
 import type { UserPackageRow } from "@zeminex/shared";
 

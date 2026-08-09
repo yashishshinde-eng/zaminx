@@ -25,13 +25,13 @@ export const myPackages: RequestHandler[] = [
   }),
 ];
 
-/** POST /packages/activate — initiate a package activation (creates a pending
- *  subscription + NOWPayments invoice + deposit; Phase 7). */
+/** POST /packages/activate — activate a package from the user's Main wallet
+ *  balance (debit + already-active subscription + wallet-funded deposit). */
 export const activate: RequestHandler[] = [
   validate(activatePackageSchema),
   asyncHandler(async (req, res) => {
     if (!req.user) throw ApiError.unauthorized();
     const { pkg, payment } = await activatePackage(req.user.id, req.body.packageId, meta(req));
-    created(res, { package: pkg, payment }, "Package activation started");
+    created(res, { package: pkg, payment }, "Package activated");
   }),
 ];

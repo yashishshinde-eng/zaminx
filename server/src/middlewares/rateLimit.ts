@@ -67,3 +67,31 @@ export const contactLimiter = rateLimit({
   message: { success: false, message: "Too many submissions, please try again later." },
   handler: limitHandler,
 });
+
+/**
+ * Wallet-deposit initiation limiter — each request creates a NOWPayments
+ * invoice (a gateway round-trip when live), so throttle creation to blunt
+ * accidental spam / abuse. Confirmation itself is webhook-driven and unaffected.
+ */
+export const depositLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many deposit requests, please try again later." },
+  handler: limitHandler,
+});
+
+/**
+ * Public referral-code validation limiter. The register form debounces checks
+ * (one per keystroke burst), but the endpoint is unauthenticated, so cap it to
+ * blunt code-enumeration attempts. 30/15min is plenty for normal typing+prefill.
+ */
+export const referralValidateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, message: "Too many checks, please try again later." },
+  handler: limitHandler,
+});

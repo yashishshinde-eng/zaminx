@@ -1,4 +1,4 @@
-import { Rank, User, WalletTransaction, ActivityLog } from "../models/index.js";
+import { Rank, User, UserPackage, WalletTransaction, ActivityLog } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { logger } from "../config/logger.js";
 import { applyLedgerEntry } from "./wallet.service.js";
@@ -256,6 +256,13 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
   const ladder = await activeLadder();
   if (ladder.length === 0) return { awarded: 0, errors: 0 };
 
+  // Anti-farming: a user only earns rank rewards while holding an active
+  // UserPackage — the same guard the direct-connect bonus and the monthly
+  // community bonus apply. Without this, a non-package-holding upline member
+  // (e.g. the root admin) could collect rank rewards purely on team size.
+  const activePkg = await UserPackage.exists({ user: userId, status: "active" });
+  if (!activePkg) return { awarded: 0, errors: 0 };
+
   const { directCount, teamCount } = await getTeamCounts(userId);
   // Fetched once so each new award can fire a notification email without an
   // extra query per rank in the loop.
@@ -313,7 +320,11 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
  * results into a single summary.
  */
 export async function runRankCheckAll(): Promise<RankEvalSummary> {
-  const userIds = await User.distinct("_id");
+  // Only active-package holders are eligible for rank rewards (anti-farming,
+  // consistent with the direct + community bonuses). Mirrors the community run.
+  const userIds = (await UserPackage.find({ status: "active" }).distinct("user")).map((id) =>
+    id.toString(),
+  );
   let awarded = 0;
   let errors = 0;
 

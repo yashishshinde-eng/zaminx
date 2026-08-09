@@ -6,6 +6,11 @@ export const STORAGE_KEYS = {
   theme: "zeminex.theme",
   sidebarCollapsed: "zeminex.sidebar.collapsed",
   onboardingDismissed: "zeminex.onboarding.dismissed",
+  // Admin impersonation: stash the admin's real tokens + user here while the
+  // admin is signed in as another user, so "Return to admin" can restore them.
+  impersonationAccessToken: "zeminex.imp.at",
+  impersonationRefreshToken: "zeminex.imp.rt",
+  impersonationUser: "zeminex.imp.user",
 } as const;
 
 /** Centralised TanStack Query key factory. */
@@ -20,6 +25,10 @@ export const queryKeys = {
     balance: ["wallet", "balance"] as const,
     ledger: (params?: unknown) => ["wallet", "ledger", params ?? {}] as const,
   },
+  payments: {
+    deposits: ["payments", "deposits"] as const,
+    detail: (id: string) => ["payments", "deposit", id] as const,
+  },
   p2p: {
     transfers: (params?: unknown) => ["p2p", "transfers", params ?? {}] as const,
   },
@@ -30,6 +39,7 @@ export const queryKeys = {
   referrals: {
     stats: ["referrals", "stats"] as const,
     direct: (params?: unknown) => ["referrals", "direct", params ?? {}] as const,
+    team: (params?: unknown) => ["referrals", "team", params ?? {}] as const,
     children: (id: string, params?: unknown) => ["referrals", "children", id, params ?? {}] as const,
   },
   bonanzas: {

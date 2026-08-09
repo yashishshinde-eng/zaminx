@@ -1,16 +1,18 @@
 import type { RequestHandler } from "express";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { ok } from "../utils/ApiResponse.js";
+import { ok, created } from "../utils/ApiResponse.js";
 import { ApiError } from "../utils/ApiError.js";
 import { isProd, isNowpaymentsConfigured } from "../config/env.js";
 import { logger } from "../config/logger.js";
-import { depositIdParamSchema } from "@zeminex/shared";
+import { depositIdParamSchema, createDepositSchema } from "@zeminex/shared";
+import type { CreateDepositBody } from "@zeminex/shared";
 import {
   getDeposits,
   getDepositForUser,
   findDepositByInvoice,
   confirmDeposit,
+  initiateWalletDeposit,
 } from "../services/deposit.service.js";
 import { verifyWebhookSignature, PAID_STATUSES } from "../services/nowpayments.service.js";
 import { Deposit, PaymentLog } from "../models/index.js";
@@ -33,6 +35,19 @@ export const depositStatus: RequestHandler[] = [
     if (!id) throw ApiError.badRequest("Deposit id is required");
     const deposit = await getDepositForUser(req.user!.id, id);
     ok(res, { deposit }, "Deposit status");
+  }),
+];
+
+/** POST /payments/deposit — start a wallet deposit (amount → NOWPayments
+ *  invoice). The webhook credits the Main wallet on confirmation; the user
+ *  then activates a package from their wallet balance. */
+export const createDeposit: RequestHandler[] = [
+  validate(createDepositSchema),
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    const { amount } = req.body as CreateDepositBody;
+    const deposit = await initiateWalletDeposit(req.user.id, amount, meta(req));
+    created(res, { deposit }, "Deposit started");
   }),
 ];
 

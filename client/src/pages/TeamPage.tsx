@@ -1,40 +1,39 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2 } from "lucide-react";
+import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2, Phone } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, FilterBar, EmptyState, type Column } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuItem, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { ReferralLinkCard } from "@/components/dashboard";
 import { useAuth } from "@/context/AuthContext";
-import { useReferralStats, useDirectReferrals, useTreeChildren } from "@/hooks/useReferrals";
+import { useReferralStats, useTeamReferrals, useTreeChildren } from "@/hooks/useReferrals";
 import { useCountUp } from "@/hooks/useCountUp";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatDate } from "@/lib/utils";
 import toast from "react-hot-toast";
 import type { ReferralMemberRow, ReferralMemberStatus } from "@zeminex/shared";
 
-const STATUS_FILTERS: { value: "all" | ReferralMemberStatus; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "active", label: "Active" },
-  // { value: "suspended", label: "Suspended" },
-  // { value: "banned", label: "Banned" },
-];
-
 const STATUS_VARIANT: Record<ReferralMemberStatus, "success" | "warning" | "destructive"> = {
   active: "success",
-  suspended: "warning",
-  banned: "destructive",
+  inactive: "warning",
+  blocked: "destructive",
 };
 
-/** /app/team — referral link, team statistics, lazy referral tree, direct list. */
+type TeamScope = "all" | "direct" | "level";
+type StatusFilter = "all" | "active" | "inactive";
+
+/** /app/team — referral link, team statistics, lazy referral tree, member list. */
 export function TeamPage() {
   const { user } = useAuth();
   const stats = useReferralStats();
 
-  // Direct-referrals list state (filter + search + pagination).
-  const [statusFilter, setStatusFilter] = useState<"all" | ReferralMemberStatus>("all");
+  // Team list state — two independent filter groups (scope + status), search, pagination.
+  const [scope, setScope] = useState<TeamScope>("all");
+  const [levelNum, setLevelNum] = useState<number | undefined>(undefined);
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -47,18 +46,30 @@ export function TeamPage() {
     return () => clearTimeout(t);
   }, [search]);
 
-  useEffect(() => setPage(1), [statusFilter]);
+  // Reset to page 1 whenever any filter changes.
+  useEffect(() => setPage(1), [scope, levelNum, statusFilter]);
 
-  const directParams = useMemo(
+  // Deeper levels (L2+) present in the downline — options for the Level picker.
+  const availableLevels = useMemo(
+    () =>
+      (stats.data?.byLevel ?? [])
+        .map((l) => l.level)
+        .filter((l) => l > 1)
+        .sort((a, b) => a - b),
+    [stats.data?.byLevel],
+  );
+
+  const teamParams = useMemo(
     () => ({
+      level: scope === "direct" ? 1 : scope === "level" ? levelNum : undefined,
       status: statusFilter === "all" ? undefined : statusFilter,
       q: debouncedSearch || undefined,
       page,
       limit: 20,
     }),
-    [statusFilter, debouncedSearch, page],
+    [scope, levelNum, statusFilter, debouncedSearch, page],
   );
-  const direct = useDirectReferrals(directParams);
+  const team = useTeamReferrals(teamParams);
 
   const columns: Column<ReferralMemberRow>[] = useMemo(
     () => [
@@ -91,6 +102,31 @@ export function TeamPage() {
             <Copy className="size-3 text-muted-foreground" />
           </button>
         ),
+      },
+      {
+        key: "mobile",
+        header: "Mobile",
+        cell: (r) =>
+          r.level === 1 ? (
+            r.phone ? (
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap font-mono text-xs">
+                <Phone className="size-3 text-muted-foreground" />
+                {r.phone}
+              </span>
+            ) : (
+              <span className="text-muted-foreground">—</span>
+            )
+          ) : (
+            <span className="text-muted-foreground/50" title="Mobile visible for direct referrals only">
+              —
+            </span>
+          ),
+      },
+      {
+        key: "level",
+        header: "Level",
+        align: "right",
+        cell: (r) => <span className="tabular-nums text-muted-foreground">L{r.level}</span>,
       },
       {
         key: "status",
@@ -197,40 +233,100 @@ export function TeamPage() {
           </CardContent>
         </Card>
 
-        {/* Direct referrals table */}
+        {/* Team members table */}
         <section className="space-y-4">
           <FilterBar
             search={search}
             onSearchChange={setSearch}
             searchPlaceholder="Search name or code…"
             filters={
-              <div className="flex rounded-md border p-0.5">
-                {STATUS_FILTERS.map((f) => (
+              <div className="flex flex-wrap items-center gap-2">
+                {/* Scope group — All / Direct / Level picker (combinable with status). */}
+                <div className="flex items-center rounded-md border p-0.5">
                   <Button
-                    key={f.value}
                     type="button"
-                    variant={statusFilter === f.value ? "default" : "ghost"}
+                    variant={scope === "all" ? "default" : "ghost"}
                     size="sm"
-                    className="h-8 px-3 capitalize"
-                    onClick={() => setStatusFilter(f.value)}
+                    className="h-8 px-3"
+                    onClick={() => setScope("all")}
                   >
-                    {f.label}
+                    All
                   </Button>
-                ))}
+                  <Button
+                    type="button"
+                    variant={scope === "direct" ? "default" : "ghost"}
+                    size="sm"
+                    className="h-8 px-3"
+                    onClick={() => setScope("direct")}
+                  >
+                    Direct
+                  </Button>
+                  <DropdownMenu
+                    align="end"
+                    trigger={
+                      <Button
+                        type="button"
+                        variant={scope === "level" ? "default" : "ghost"}
+                        size="sm"
+                        className="h-8 px-3"
+                        disabled={availableLevels.length === 0}
+                      >
+                        {scope === "level" && levelNum ? `Level ${levelNum}` : "Level"}
+                        <ChevronDown className="size-3.5 opacity-70" />
+                      </Button>
+                    }
+                  >
+                    {() => (
+                      <>
+                        <DropdownMenuLabel>Filter by level</DropdownMenuLabel>
+                        {availableLevels.map((l) => (
+                          <DropdownMenuItem
+                            key={l}
+                            onSelect={() => {
+                              setLevelNum(l);
+                              setScope("level");
+                            }}
+                          >
+                            Level {l}
+                            <span className="ml-auto text-xs text-muted-foreground">
+                              {(stats.data?.byLevel ?? []).find((b) => b.level === l)?.count ?? 0}
+                            </span>
+                          </DropdownMenuItem>
+                        ))}
+                      </>
+                    )}
+                  </DropdownMenu>
+                </div>
+
+                {/* Status group — Active / Inactive (toggle off to clear → all statuses). */}
+                <div className="flex items-center rounded-md border p-0.5">
+                  {(["active", "inactive"] as const).map((s) => (
+                    <Button
+                      key={s}
+                      type="button"
+                      variant={statusFilter === s ? "default" : "ghost"}
+                      size="sm"
+                      className="h-8 px-3 capitalize"
+                      onClick={() => setStatusFilter((prev) => (prev === s ? "all" : s))}
+                    >
+                      {s}
+                    </Button>
+                  ))}
+                </div>
               </div>
             }
           />
           <DataTable
             columns={columns}
-            data={direct.data?.items ?? []}
+            data={team.data?.items ?? []}
             rowKey={(r) => r.id}
-            isLoading={direct.isLoading}
-            error={direct.isError ? "We couldn't load your direct referrals." : null}
-            onRetry={() => direct.refetch()}
-            emptyTitle="No direct referrals"
-            emptyDescription="Members you directly refer will appear here."
-            page={direct.data?.page ?? 1}
-            pageCount={Math.max(1, direct.data?.totalPages ?? 1)}
+            isLoading={team.isLoading}
+            error={team.isError ? "We couldn't load your team members." : null}
+            onRetry={() => team.refetch()}
+            emptyTitle="No members match"
+            emptyDescription="Try a different filter, or share your referral link to grow your team."
+            page={team.data?.page ?? 1}
+            pageCount={Math.max(1, team.data?.totalPages ?? 1)}
             onPageChange={setPage}
           />
         </section>

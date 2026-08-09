@@ -49,8 +49,8 @@ export function AdminDashboardPage() {
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-medium text-muted-foreground">Users:</span>
             <Badge variant="success">Active · {kpis.byStatus.active}</Badge>
-            <Badge variant="warning">Suspended · {kpis.byStatus.suspended}</Badge>
-            <Badge variant="destructive">Banned · {kpis.byStatus.banned}</Badge>
+            <Badge variant="warning">Inactive · {kpis.byStatus.inactive}</Badge>
+            <Badge variant="destructive">Blocked · {kpis.byStatus.blocked}</Badge>
             <span className="ml-3 text-xs font-medium text-muted-foreground">Withdrawals:</span>
             {Object.entries(kpis.totalWithdrawals.byStatus).map(([k, v]) => (
               <Badge key={k} variant="secondary" className="capitalize">

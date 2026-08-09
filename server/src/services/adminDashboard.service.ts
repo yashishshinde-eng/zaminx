@@ -98,9 +98,9 @@ export async function getAdminDashboardSummary(): Promise<AdminDashboardSummary>
   ]);
 
   // Users by status (default every bucket to 0).
-  const byStatus: AdminUsersByStatus = { active: 0, suspended: 0, banned: 0 };
+  const byStatus: AdminUsersByStatus = { active: 0, inactive: 0, blocked: 0 };
   for (const b of byStatusAgg) {
-    if (b._id === "active" || b._id === "suspended" || b._id === "banned") {
+    if (b._id === "active" || b._id === "inactive" || b._id === "blocked") {
       byStatus[b._id] = b.count;
     }
   }

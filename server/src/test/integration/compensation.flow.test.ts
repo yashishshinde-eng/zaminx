@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
-import { api, authed, closeApi, seedAdminAndLogin, registerAndLogin, seedPackage } from "../api.js";
+import { api, authed, closeApi, seedAdminAndLogin, registerAndLogin, seedPackage, fundWallet } from "../api.js";
 import { hasTestDb, connectTestDb, clearDb, disconnectTestDb } from "../db.js";
 import { UserPackage, Rank } from "../../models/index.js";
 
@@ -72,16 +72,12 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
     const { accessToken, userId } = await registerAndLogin();
     // $50 package, 2% daily = $1/day; 30% monthly cap = $15.
     const pkg = await seedPackage({ priceUsd: 50, dailyReturnPct: 2, durationDays: 0 });
+    // Fund the wallet, then activate the package from the balance (instant).
+    await fundWallet(50, accessToken);
     await authed(accessToken, "/api/v1/packages/activate", {
       method: "POST",
       body: JSON.stringify({ packageId: pkg._id }),
     });
-    const list = await authed<{ data: { deposits: { _id: string; status: string }[] } }>(
-      accessToken,
-      "/api/v1/payments/deposits",
-    );
-    const id = list.body.data.deposits.find((d) => d.status === "pending")!._id;
-    await authed(accessToken, `/api/v1/payments/dev/simulate/${id}`, { method: "POST" });
 
     // Backdate activation so the package is eligible across the whole target month.
     await UserPackage.updateOne(
@@ -135,16 +131,12 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
 
     // Sponsor must hold an active package (anti-farming guard).
     const pkg = await seedPackage({ priceUsd: 50, dailyReturnPct: 2, durationDays: 0 });
+    // Fund the sponsor's wallet, then activate the package from the balance.
+    await fundWallet(50, sponsor.accessToken);
     await authed(sponsor.accessToken, "/api/v1/packages/activate", {
       method: "POST",
       body: JSON.stringify({ packageId: pkg._id }),
     });
-    const list = await authed<{ data: { deposits: { _id: string; status: string }[] } }>(
-      sponsor.accessToken,
-      "/api/v1/payments/deposits",
-    );
-    const id = list.body.data.deposits.find((d) => d.status === "pending")!._id;
-    await authed(sponsor.accessToken, `/api/v1/payments/dev/simulate/${id}`, { method: "POST" });
 
     const r = await authed(admin.accessToken, "/api/v1/compensation/run-community?month=2024-01", { method: "POST" });
     expect(r.status).toBe(200);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -19,6 +19,7 @@ import {
   Activity as ActivityIcon,
   Bell,
   Gift,
+  LogIn,
 } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, type Column } from "@/components/shared";
@@ -41,11 +42,13 @@ import {
   useAdminResetPassword,
   useAdjustUserWallet,
   useRecordUserDeposit,
+  useImpersonateUser,
 } from "@/hooks/useAdmin";
+import { useAuth } from "@/context/AuthContext";
 import { userStatusBadge } from "@/pages/AdminUsersPage";
 import type { AdminUserActivityRow, AdminUserDetail, UserStatus } from "@zeminex/shared";
 
-const STATUSES: UserStatus[] = ["active", "suspended", "banned"];
+const STATUSES: UserStatus[] = ["active", "inactive", "blocked"];
 
 /** /app/admin/users/:id — full admin view of a single user + management actions. */
 export function AdminUserDetailPage() {
@@ -489,6 +492,10 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
   const verifyMut = useVerifyUserEmail(userId);
   const logoutMut = useForceLogout(userId);
   const resetMut = useAdminResetPassword(userId);
+  const impersonateMut = useImpersonateUser(userId);
+  const { loginAs } = useAuth();
+  const navigate = useNavigate();
+  const [confirmImpersonate, setConfirmImpersonate] = useState(false);
 
   const statusChanged = status !== currentStatus;
 
@@ -553,6 +560,22 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
           </Button>
           <p className="text-xs text-muted-foreground">Rehashes the password and ends all of the user's sessions.</p>
         </div>
+
+        {/* Impersonate (login as this user) */}
+        <div className="space-y-2 border-t pt-4">
+          <Label>Inspect as user</Label>
+          <Button
+            variant="secondary"
+            className="w-full"
+            disabled={impersonateMut.isPending}
+            onClick={() => setConfirmImpersonate(true)}
+          >
+            <LogIn className="size-4" /> {impersonateMut.isPending ? "Signing in…" : "Login as this user"}
+          </Button>
+          <p className="text-xs text-muted-foreground">
+            Switches your session to this user. Use “Return to admin” in the user menu to go back.
+          </p>
+        </div>
       </CardContent>
 
       <ConfirmModal
@@ -597,6 +620,26 @@ function ActionsPanel({ userId, currentStatus, isEmailVerified }: { userId: stri
         confirmLabel="Reset password"
         destructive
         loading={resetMut.isPending}
+      />
+
+      <ConfirmModal
+        open={confirmImpersonate}
+        onClose={() => setConfirmImpersonate(false)}
+        onConfirm={async () => {
+          try {
+            const { user: targetUser, tokens } = await impersonateMut.mutateAsync();
+            loginAs(targetUser, tokens);
+            navigate("/app", { replace: true });
+          } catch {
+            /* interceptor toasts the error */
+          } finally {
+            setConfirmImpersonate(false);
+          }
+        }}
+        title="Login as this user?"
+        description="This switches your session to this user so you can inspect their account from their perspective. Use “Return to admin” in the user menu to go back to your admin session."
+        confirmLabel="Login as user"
+        loading={impersonateMut.isPending}
       />
     </Card>
   );

@@ -171,6 +171,135 @@ export async function getDirectReferrals(userId: string, args: GetReferralsArgs)
 }
 
 /* ------------------------------------------------------------------ */
+/*  Referral code validation (public)                                  */
+/* ------------------------------------------------------------------ */
+
+export interface ReferralCodeCheck {
+  valid: boolean;
+  /** Sponsor display name, only when valid (already semi-public via downline rows). */
+  name?: string;
+}
+
+/**
+ * `GET /referrals/validate?code=` — public pre-submit check that a referral
+ * code belongs to an active sponsor. Used by the register form to show a
+ * "verified" affordance (for both link-prefilled and manually-entered codes).
+ */
+export async function validateReferralCode(code: string): Promise<ReferralCodeCheck> {
+  const trimmed = code.trim();
+  if (!trimmed) return { valid: false };
+  const sponsor = await User.findOne({ referralCode: trimmed }).select("name status").lean();
+  if (!sponsor || sponsor.status !== "active") return { valid: false };
+  return { valid: true, name: sponsor.name };
+}
+
+/* ------------------------------------------------------------------ */
+/*  Team downline (all levels)                                         */
+/* ------------------------------------------------------------------ */
+
+export interface GetTeamReferralsArgs {
+  /** Relative level filter (1 = direct, 2 = second level…); omitted = all. */
+  level?: number;
+  /** `inactive` is a virtual bucket matching inactive OR blocked (any non-active). */
+  status?: "active" | "inactive";
+  q?: string;
+  page: number;
+  limit: number;
+}
+
+/** Shape an aggregation row into a `ReferralMemberRow` for the team view. */
+function toTeamRow(r: {
+  _id: { toString(): string };
+  name: string;
+  referralCode: string;
+  status: string;
+  createdAt?: Date | string;
+  lineage?: unknown[];
+  directCount?: number;
+  phone?: string;
+  relLevel?: number;
+}): ReferralMemberRow {
+  const level =
+    typeof r.relLevel === "number"
+      ? r.relLevel
+      : Array.isArray(r.lineage)
+        ? r.lineage.length
+        : 0;
+  const joinedAt =
+    r.createdAt instanceof Date
+      ? r.createdAt.toISOString()
+      : typeof r.createdAt === "string"
+        ? r.createdAt
+        : new Date().toISOString();
+  return {
+    id: r._id.toString(),
+    name: r.name,
+    referralCode: r.referralCode,
+    status: r.status as ReferralMemberStatus,
+    joinedAt,
+    directCount: typeof r.directCount === "number" ? r.directCount : 0,
+    level,
+    // Phone is a direct-only privilege — never exposed for deeper levels.
+    phone: level === 1 && typeof r.phone === "string" && r.phone ? r.phone : undefined,
+  };
+}
+
+/**
+ * `GET /referrals/team` — the viewer's full downline (every descendant via
+ * `lineage`), filterable by relative level and status. Phone is returned only
+ * for level-1 (direct) rows.
+ */
+export async function getTeamReferrals(userId: string, args: GetTeamReferralsArgs): Promise<ReferralPage> {
+  const page = Math.max(1, args.page);
+  const limit = Math.min(50, Math.max(1, args.limit));
+
+  const filter: Record<string, unknown> = { lineage: toOid(userId) };
+  if (args.status === "active") filter.status = "active";
+  else if (args.status === "inactive") filter.status = { $in: ["inactive", "blocked"] };
+  if (args.q) {
+    const rx = new RegExp(escapeRegex(args.q), "i");
+    filter.$or = [{ name: rx }, { referralCode: rx }];
+  }
+
+  // Relative level = number of lineage entries *after* the viewer's own id.
+  // $indexOfArray is safe because every matched doc has the viewer in lineage.
+  const addRelLevel = {
+    $addFields: {
+      relLevel: { $subtract: [{ $size: "$lineage" }, { $indexOfArray: ["$lineage", toOid(userId)] }] },
+    },
+  };
+  const levelMatch = args.level ? [{ $match: { relLevel: args.level } }] : [];
+
+  const basePipeline: mongoose.PipelineStage[] = [
+    { $match: filter },
+    addRelLevel,
+    ...levelMatch,
+  ];
+
+  const [rows, countRows] = await Promise.all([
+    User.aggregate([
+      ...basePipeline,
+      { $sort: { createdAt: -1 } },
+      { $skip: (page - 1) * limit },
+      { $limit: limit },
+      ...DIRECT_COUNT_LOOKUP,
+      { $project: { name: 1, referralCode: 1, status: 1, createdAt: 1, lineage: 1, directCount: 1, phone: 1, relLevel: 1 } },
+    ]),
+    User.aggregate<{ n: number }>([...basePipeline, { $count: "n" }]),
+  ]);
+
+  const total = countRows[0]?.n ?? 0;
+
+  return {
+    items: rows.map((r) => toTeamRow(r as never)),
+    page,
+    limit,
+    total,
+    totalPages: total === 0 ? 0 : Math.ceil(total / limit),
+  };
+}
+
+/* ------------------------------------------------------------------ */
 /*  Tree children (lazy expansion)                                     */
 /* ------------------------------------------------------------------ */
 

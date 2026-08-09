@@ -1,4 +1,5 @@
-import { Deposit, Withdrawal, WalletTransaction } from "../models/index.js";
+import mongoose from "mongoose";
+import { Deposit, Withdrawal, WalletTransaction, P2PTransfer } from "../models/index.js";
 import { buildCsv, buildExcelHtml } from "../utils/csv.js";
 import type {
   UserReportKind,
@@ -11,6 +12,7 @@ import type {
   WalletTxType,
   WalletTxDirection,
   WalletTxRef,
+  P2PTransferRow,
   ReportExportFormat,
 } from "@zeminex/shared";
 
@@ -32,6 +34,7 @@ const LEDGER_KIND_TO_TYPE: Record<UserReportKind, WalletTxType | undefined> = {
   community: "community_bonus",
   rank: "rank_reward",
   bonanza: "bonanza",
+  p2p: undefined, // P2P reads the P2PTransfer collection, not the wallet ledger.
 };
 
 /* ------------------------------------------------------------------ */
@@ -131,8 +134,8 @@ function ledgerFilter(userId: string, kind: UserReportKind, q: FilterArgs): Reco
 
 type LeanDeposit = {
   _id: { toString(): string };
-  userPackage: { toString(): string };
-  package: { toString(): string };
+  userPackage: { toString(): string } | null;
+  package: { toString(): string } | null;
   amountUsd: number;
   currency: string;
   status: string;
@@ -142,13 +145,14 @@ type LeanDeposit = {
   sandbox: boolean;
   createdAt: Date | string;
   paidAt?: Date | string | null;
+  expiresAt?: Date | string | null;
 };
 
 function toDepositRow(d: LeanDeposit): DepositRow {
   return {
     id: d._id.toString(),
-    userPackageId: d.userPackage.toString(),
-    packageId: d.package.toString(),
+    userPackageId: d.userPackage ? d.userPackage.toString() : null,
+    packageId: d.package ? d.package.toString() : null,
     amountUsd: d.amountUsd,
     currency: d.currency as DepositRow["currency"],
     status: d.status as DepositRow["status"],
@@ -158,6 +162,7 @@ function toDepositRow(d: LeanDeposit): DepositRow {
     sandbox: d.sandbox,
     createdAt: toIso(d.createdAt),
     paidAt: d.paidAt == null ? null : toIso(d.paidAt),
+    expiresAt: d.expiresAt == null ? null : toIso(d.expiresAt),
   };
 }
 
@@ -227,18 +232,37 @@ function toTxRow(d: LeanTx): WalletTxRow {
 /*  Summary aggregations                                               */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Mongoose auto-casts string ids → ObjectId for `find`/`countDocuments`, but
+ * does NOT inside an aggregation `$match`. A user-scoped report filter carries
+ * `user: <string>`, so passing it straight to `$match` silently matches
+ * nothing (the rows still show because they come from `find`, but the Total
+ * stat and the daily series come back 0 / empty). Cast the `user` field to an
+ * ObjectId before aggregating. Platform-wide admin filters have no `user`, so
+ * this is a no-op there.
+ */
+function castFilterForAggregate(filter: Record<string, unknown>): Record<string, unknown> {
+  const out = { ...filter };
+  const u = out.user;
+  if (typeof u === "string" && mongoose.isValidObjectId(u)) {
+    out.user = new mongoose.Types.ObjectId(u);
+  }
+  return out;
+}
+
 /** `$sum` of a signed amount: credits add, debits subtract. For income
  *  streams (all credits) this is a plain sum; for `wallet` it is the net. */
 export const SIGNED_AMOUNT = { $cond: [{ $eq: ["$direction", "credit"] }, "$amount", { $multiply: ["$amount", -1] }] };
 
 export async function ledgerSummary(filter: Record<string, unknown>): Promise<ReportSummary> {
+  const f = castFilterForAggregate(filter);
   const [agg, daily] = await Promise.all([
     WalletTransaction.aggregate<{ _id: null; count: number; total: number }>([
-      { $match: filter },
+      { $match: f },
       { $group: { _id: null, count: { $sum: 1 }, total: { $sum: SIGNED_AMOUNT } } },
     ]),
     WalletTransaction.aggregate<{ _id: string; value: number }>([
-      { $match: filter },
+      { $match: f },
       {
         $group: {
           _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
@@ -260,13 +284,14 @@ export async function amountSummary(
   filter: Record<string, unknown>,
   amountField: "amountUsd" | "amount",
 ): Promise<ReportSummary> {
+  const f = castFilterForAggregate(filter);
   const [agg, daily] = await Promise.all([
     model.aggregate<{ _id: null; count: number; total: number }>([
-      { $match: filter },
+      { $match: f },
       { $group: { _id: null, count: { $sum: 1 }, total: { $sum: `$${amountField}` } } },
     ]),
     model.aggregate<{ _id: string; value: number }>([
-      { $match: filter },
+      { $match: f },
       {
         $group: {
           _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
@@ -333,6 +358,99 @@ export async function getLedgerReport(
 }
 
 /* ------------------------------------------------------------------ */
+/*  P2P transfers                                                      */
+/* ------------------------------------------------------------------ */
+
+type LeanP2PTransfer = {
+  _id: { toString(): string };
+  fromUser: { toString(): string };
+  fromUserName: string;
+  toUser: { toString(): string };
+  toUserName: string;
+  wallet: string;
+  amount: number;
+  status: string;
+  memo?: string | null;
+  createdAt: Date | string;
+};
+
+function toP2PRow(t: LeanP2PTransfer): P2PTransferRow {
+  return {
+    id: t._id.toString(),
+    fromUser: t.fromUser.toString(),
+    fromUserName: t.fromUserName,
+    toUser: t.toUser.toString(),
+    toUserName: t.toUserName,
+    wallet: t.wallet as P2PTransferRow["wallet"],
+    amount: t.amount,
+    status: t.status as P2PTransferRow["status"],
+    memo: t.memo ?? null,
+    createdAt: toIso(t.createdAt),
+  };
+}
+
+/** P2P filter: transfers the user sent OR received, with the shared date-range
+ *  + status filters. `find`/`countDocuments` cast the string `fromUser`/`toUser`
+ *  to ObjectId; the summary aggregation casts them itself (see `p2pSummary`). */
+function p2pFilter(userId: string, q: FilterArgs): Record<string, unknown> {
+  const filter: Record<string, unknown> = { $or: [{ fromUser: userId }, { toUser: userId }], ...dateRangeFilter(q.from, q.to) };
+  if (q.status) filter.status = q.status;
+  if (q.q) filter.memo = { $regex: q.q, $options: "i" };
+  return filter;
+}
+
+/**
+ * P2P summary: `count` = transfers the user sent or received in the window;
+ * `total` = the gross volume (sum of every transfer's amount — both sent and
+ * received), NOT a net, so active usage never reads as "$0". Matches the gross
+ * totals shown for deposits/withdrawals/income. The `$or` from the filter is
+ * rebuilt here with cast ObjectIds because the aggregation `$match` does not
+ * auto-cast.
+ */
+async function p2pSummary(userId: string, filter: Record<string, unknown>): Promise<ReportSummary> {
+  const userOid = new mongoose.Types.ObjectId(userId);
+  // Rebuild a match for the aggregate: keep date range + status + memo, swap
+  // the string `$or` for cast-ObjectId versions.
+  const { $or: _drop, ...rest } = filter;
+  void _drop;
+  const match: Record<string, unknown> = { ...rest, $or: [{ fromUser: userOid }, { toUser: userOid }] };
+  const [agg, daily] = await Promise.all([
+    P2PTransfer.aggregate<{ _id: null; count: number; total: number }>([
+      { $match: match },
+      { $group: { _id: null, count: { $sum: 1 }, total: { $sum: "$amount" } } },
+    ]),
+    P2PTransfer.aggregate<{ _id: string; value: number }>([
+      { $match: match },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          value: { $sum: "$amount" },
+        },
+      },
+      { $sort: { _id: 1 } },
+    ]),
+  ]);
+  return {
+    count: agg[0]?.count ?? 0,
+    total: agg[0]?.total ?? 0,
+    series: daily.map((d) => ({ date: d._id, value: d.value })),
+  };
+}
+
+/** `GET /reports/p2p` — the user's P2P transfers (sent + received), paginated +
+ *  summarised (gross volume total). */
+export async function getP2PReport(userId: string, q: ReportQueryArgs): Promise<ReportResult<P2PTransferRow>> {
+  const { page, limit } = clampPage(q.page, q.limit);
+  const filter = p2pFilter(userId, q);
+  const [rows, total, summary] = await Promise.all([
+    P2PTransfer.find(filter).sort({ createdAt: -1 }).skip((page - 1) * limit).limit(limit).lean(),
+    P2PTransfer.countDocuments(filter),
+    p2pSummary(userId, filter),
+  ]);
+  return { rows: rows.map((r) => toP2PRow(r as never)), pagination: paginate(total, page, limit), summary };
+}
+
+/* ------------------------------------------------------------------ */
 /*  CSV / Excel export                                                 */
 /* ------------------------------------------------------------------ */
 
@@ -351,6 +469,10 @@ async function fetchExportRows(userId: string, kind: UserReportKind, q: ReportEx
   if (kind === "withdrawals") {
     const rows = await Withdrawal.find(withdrawalFilter(userId, f)).sort({ createdAt: -1 }).limit(EXPORT_CAP).lean();
     return rows.map((r) => toWithdrawalRow(r as never));
+  }
+  if (kind === "p2p") {
+    const rows = await P2PTransfer.find(p2pFilter(userId, f)).sort({ createdAt: -1 }).limit(EXPORT_CAP).lean();
+    return rows.map((r) => toP2PRow(r as never));
   }
   const rows = await WalletTransaction.find(ledgerFilter(userId, kind, f))
     .sort({ createdAt: -1 })
@@ -373,6 +495,12 @@ function toSheet(kind: UserReportKind, rows: unknown[]): { headers: string[]; da
     return {
       headers: ["Date", "Wallet", "Amount (USD)", "Currency", "Address", "Status", "Processed at"],
       data: (rows as WithdrawalRow[]).map((r) => [r.createdAt, r.wallet, r.amount, r.currency, r.address, r.status, r.processedAt]),
+    };
+  }
+  if (kind === "p2p") {
+    return {
+      headers: ["Date", "From", "To", "Wallet", "Amount (USD)", "Status", "Memo"],
+      data: (rows as P2PTransferRow[]).map((r) => [r.createdAt, r.fromUserName, r.toUserName, r.wallet, r.amount, r.status, r.memo]),
     };
   }
   return {

@@ -2,8 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import {
   fetchReferralStats,
   fetchDirectReferrals,
+  fetchTeamReferrals,
   fetchTreeChildren,
   type ReferralListParams,
+  type ReferralTeamParams,
   type ReferralChildrenParams,
 } from "@/lib/referrals";
 import { queryKeys } from "@/config";
@@ -24,6 +26,17 @@ export function useDirectReferrals(params: ReferralListParams) {
   return useQuery({
     queryKey: queryKeys.referrals.direct(params),
     queryFn: () => fetchDirectReferrals(params),
+    staleTime: 15_000,
+    gcTime: 5 * 60_000,
+    retry: 1,
+  });
+}
+
+/** The viewer's full downline (all levels) — paginated, filterable by level + status. */
+export function useTeamReferrals(params: ReferralTeamParams) {
+  return useQuery({
+    queryKey: queryKeys.referrals.team(params),
+    queryFn: () => fetchTeamReferrals(params),
     staleTime: 15_000,
     gcTime: 5 * 60_000,
     retry: 1,

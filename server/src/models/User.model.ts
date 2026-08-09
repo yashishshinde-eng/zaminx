@@ -55,7 +55,7 @@ const userSchema = new Schema(
       usdtBep20: { type: String, trim: true, default: "" },
     },
 
-    status: { type: String, enum: ["active", "suspended", "banned"], default: "active", index: true },
+    status: { type: String, enum: ["active", "inactive", "blocked"], default: "active", index: true },
 
     lastLoginAt: { type: Date, default: null },
   },

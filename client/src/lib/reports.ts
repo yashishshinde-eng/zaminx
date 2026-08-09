@@ -7,11 +7,12 @@ import type {
   DepositReport,
   WithdrawalReport,
   LedgerReport,
+  P2PReport,
   AdminReportPayload,
 } from "@zeminex/shared";
 
 /** The report payload returned by `GET /reports/:kind` — narrowed by `kind`. */
-export type ReportPayload = DepositReport | WithdrawalReport | LedgerReport;
+export type ReportPayload = DepositReport | WithdrawalReport | LedgerReport | P2PReport;
 
 interface ReportResponse {
   data: { report: ReportPayload };

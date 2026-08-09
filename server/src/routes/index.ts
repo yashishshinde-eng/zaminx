@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { authenticate, authorize } from "../middlewares/auth.js";
+import { referralValidateLimiter } from "../middlewares/rateLimit.js";
 import healthRoutes from "./health.routes.js";
 import authRoutes from "./auth.routes.js";
 import cmsRoutes from "./cms.routes.js";
@@ -11,6 +12,7 @@ import p2pRoutes from "./p2p.routes.js";
 import walletRoutes from "./wallet.routes.js";
 import withdrawalRoutes from "./withdrawal.routes.js";
 import referralRoutes from "./referral.routes.js";
+import { validateCode as validateReferralCodeHandler } from "../controllers/referral.controller.js";
 import bonanzaRoutes from "./bonanza.routes.js";
 import compensationRoutes from "./compensation.routes.js";
 import rankRoutes from "./rank.routes.js";
@@ -32,6 +34,9 @@ router.use("/payments", paymentRoutes);
 router.use("/wallet", authenticate, walletRoutes);
 router.use("/p2p", authenticate, p2pRoutes);
 router.use("/withdrawals", authenticate, withdrawalRoutes);
+// Public referral-code validation (register form pre-submit check) — mounted
+// BEFORE the authenticated /referrals tree so it stays unauthenticated.
+router.get("/referrals/validate", referralValidateLimiter, ...validateReferralCodeHandler);
 router.use("/referrals", authenticate, referralRoutes);
 router.use("/bonanzas", authenticate, bonanzaRoutes);
 // Compensation triggers are admin-only (Phase 10): yield run + bonanza eval.

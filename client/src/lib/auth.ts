@@ -21,6 +21,11 @@ export function persistTokens(tokens: TokenPair): void {
 export function clearTokens(): void {
   localStorage.removeItem(STORAGE_KEYS.accessToken);
   localStorage.removeItem(STORAGE_KEYS.refreshToken);
+  // Also drop any impersonation stash so logging out fully resets the session
+  // (the admin can't be left "Return to admin"-able after an explicit logout).
+  localStorage.removeItem(STORAGE_KEYS.impersonationAccessToken);
+  localStorage.removeItem(STORAGE_KEYS.impersonationRefreshToken);
+  localStorage.removeItem(STORAGE_KEYS.impersonationUser);
 }
 
 export async function loginRequest(email: string, password: string): Promise<AuthResponse> {

@@ -1,4 +1,5 @@
 import { User, Deposit, Withdrawal, WalletTransaction, Wallet, BonanzaOffer, ActivityLog } from "../models/index.js";
+import mongoose from "mongoose";
 import { buildCsv, buildExcelHtml } from "../utils/csv.js";
 import { ApiError } from "../utils/ApiError.js";
 import {
@@ -49,6 +50,7 @@ type LeanUser = {
   _id: { toString(): string };
   name: string;
   email: string;
+  phone?: string | null;
   role: string;
   status: string;
   referralCode: string;
@@ -82,6 +84,7 @@ type LeanDeposit = {
   sandbox: boolean;
   createdAt: Date | string;
   paidAt?: Date | string | null;
+  expiresAt?: Date | string | null;
 };
 
 type LeanWithdrawal = {
@@ -162,6 +165,7 @@ function toAdminUserRow(
     id: u._id.toString(),
     name: u.name,
     email: u.email,
+    phone: u.phone ?? null,
     role: u.role as AdminUserReportRow["role"],
     status: u.status as AdminUserReportRow["status"],
     referralCode: u.referralCode,
@@ -194,10 +198,14 @@ function usersFilter(q: ReportQueryArgs): Record<string, unknown> {
 export async function fetchUsersRows(filter: Record<string, unknown>, limit: number, skip: number): Promise<AdminUserReportRow[]> {
   const users = (await User.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean()) as LeanUser[];
   const pageIds = users.map((u) => u._id.toString());
+  // Cast to ObjectId — aggregation `$match` does not apply schema casting, so a
+  // string `$in` against the ObjectId `sponsorId` field would match nothing
+  // (which is why the admin users table showed 0 directs for everyone).
+  const pageIdOids = pageIds.map((id) => new mongoose.Types.ObjectId(id));
   const [directAgg, wallets] = await Promise.all([
     pageIds.length
       ? User.aggregate<{ _id: string; count: number }>([
-          { $match: { sponsorId: { $in: pageIds } } },
+          { $match: { sponsorId: { $in: pageIdOids } } },
           { $group: { _id: "$sponsorId", count: { $sum: 1 } } },
         ])
       : Promise.resolve([]),
@@ -261,6 +269,7 @@ function toAdminDepositRow(d: LeanDeposit, userMap: Map<string, UserName>): Admi
     sandbox: d.sandbox,
     createdAt: toIso(d.createdAt),
     paidAt: d.paidAt == null ? null : toIso(d.paidAt),
+    expiresAt: d.expiresAt == null ? null : toIso(d.expiresAt),
     userId,
     userName: userName(userMap, userId),
     userEmail: userEmail(userMap, userId),
@@ -658,16 +667,16 @@ function toAdminSheet(kind: AdminReportKind, rows: unknown[]): { headers: string
   switch (kind) {
     case "users":
       return {
-        headers: ["Joined", "Name", "Email", "Role", "Status", "Referral code", "Referred by", "Verified", "Directs", "Available", "On hold", "Last login"],
+        headers: ["Joined", "Name", "Email", "Mobile", "Role", "Status", "Referral code", "Referred by", "Verified", "Directs", "Available", "On hold", "Last login"],
         data: (rows as AdminUserReportRow[]).map((r) => [
-          r.joinedAt, r.name, r.email, r.role, r.status, r.referralCode, r.referredBy ?? "",
+          r.joinedAt, r.name, r.email, r.phone ?? "", r.role, r.status, r.referralCode, r.referredBy ?? "",
           r.isEmailVerified ? "yes" : "no", r.directCount, r.walletAvailable, r.walletOnHold, r.lastLoginAt ?? "",
         ]),
       };
     case "deposits":
       return {
-        headers: ["Date", "User", "Email", "Amount (USD)", "Currency", "Status", "Paid at"],
-        data: (rows as AdminDepositReportRow[]).map((r) => [r.createdAt, r.userName, r.userEmail, r.amountUsd, r.currency, r.status, r.paidAt ?? ""]),
+        headers: ["Date", "User", "Email", "Amount (USD)", "Currency", "Status", "Paid at", "Expires at"],
+        data: (rows as AdminDepositReportRow[]).map((r) => [r.createdAt, r.userName, r.userEmail, r.amountUsd, r.currency, r.status, r.paidAt ?? "", r.expiresAt ?? ""]),
       };
     case "withdrawals":
       return {

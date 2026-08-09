@@ -4,7 +4,7 @@ import { logger } from "../config/logger.js";
 import { sendNotificationEmail } from "./email.service.js";
 import { depositSuccessTemplate } from "./emailTemplates.js";
 import { createInvoice } from "./nowpayments.service.js";
-import { applyLedgerEntry } from "./wallet.service.js";
+import { applyLedgerEntry, getWalletBalances } from "./wallet.service.js";
 import { awardDirectBonus } from "./compensation.service.js";
 import type { DepositRow, PackageTier, UserPackageRow, WalletBalance, AdminDepositCreateBody } from "@zeminex/shared";
 
@@ -14,6 +14,12 @@ interface Meta {
 }
 
 const DAY_MS = 86_400_000;
+
+/** A wallet-deposit payment link/address is valid for 10 minutes after
+ *  creation. After that the UI marks it expired and the user must start a new
+ *  deposit. A genuine late webhook can still credit real funds (see
+ *  `confirmDeposit`), so expiry is a UI/UX guard, not a hard fund-loss cutoff. */
+const DEPOSIT_EXPIRY_MS = 10 * 60_000;
 
 /** The non-optional payment shape joined onto a subscription row. */
 type Payment = NonNullable<UserPackageRow["payment"]>;
@@ -92,6 +98,7 @@ function toDepositRow(d: {
   sandbox: boolean;
   createdAt: Date;
   paidAt?: Date | null;
+  expiresAt?: Date | null;
 }): DepositRow {
   return {
     id: d._id.toString(),
@@ -106,6 +113,7 @@ function toDepositRow(d: {
     sandbox: d.sandbox,
     createdAt: d.createdAt instanceof Date ? d.createdAt.toISOString() : new Date().toISOString(),
     paidAt: d.paidAt instanceof Date ? d.paidAt.toISOString() : null,
+    expiresAt: d.expiresAt instanceof Date ? d.expiresAt.toISOString() : null,
   };
 }
 
@@ -138,15 +146,90 @@ export async function listCatalog(): Promise<PackageTier[]> {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Activation + payment initiation                                   */
+/*  Wallet deposit (decoupled from any package)                        */
 /* ------------------------------------------------------------------ */
 
 /**
- * Initiate a package activation: create a pending UserPackage, create a
- * NOWPayments invoice, and record the pending Deposit. Returns the pending
- * subscription plus payment instructions. Phase 7's deposit entry point.
+ * Initiate a wallet deposit: the user picks an amount, we create a pending
+ * package-less Deposit and a NOWPayments invoice. The webhook (or dev simulate)
+ * confirms it and credits the Main wallet — no package is created here; the
+ * user activates a package separately from their wallet balance via
+ * `activatePackageFromWallet`. This is the deposit-page entry point.
  */
-export async function initiateDeposit(
+export async function initiateWalletDeposit(
+  userId: string,
+  amountUsd: number,
+  meta?: Meta,
+): Promise<DepositRow> {
+  if (!Number.isFinite(amountUsd) || amountUsd < 1) throw ApiError.badRequest("Minimum deposit is $1");
+
+  // 1. Pending, package-less deposit (a pure wallet top-up). The payment link
+  //    expires after 10 minutes — the client shows a live countdown and flips
+  //    to an expired state once it elapses.
+  const deposit = await Deposit.create({
+    user: userId,
+    userPackage: null,
+    package: null,
+    amountUsd,
+    currency: "USDT-BEP20",
+    status: "pending",
+    expiresAt: new Date(Date.now() + DEPOSIT_EXPIRY_MS),
+  });
+
+  // 2. Create the invoice (live NOWPayments or sandbox mock).
+  let invoice;
+  try {
+    invoice = await createInvoice({
+      amountUsd,
+      orderId: deposit._id.toString(),
+      description: "Wallet deposit",
+    });
+  } catch (err) {
+    // Roll back the pending deposit so the user can retry.
+    await Deposit.deleteOne({ _id: deposit._id }).catch(() => undefined);
+    logger.error("NOWPayments invoice creation failed", { userId, error: err instanceof Error ? err.message : String(err) });
+    throw ApiError.badRequest("Could not start payment. Please try again.");
+  }
+
+  // 3. Store invoice data on the deposit.
+  deposit.nowpaymentsInvoiceId = invoice.nowpaymentsInvoiceId;
+  deposit.payAddress = invoice.payAddress;
+  deposit.payAmount = invoice.payAmount;
+  deposit.hostedUrl = invoice.hostedUrl;
+  deposit.sandbox = invoice.sandbox;
+  await deposit.save();
+
+  await ActivityLog.create({
+    actor: userId,
+    action: "deposit.initiate",
+    resource: "Deposit",
+    resourceId: deposit._id.toString(),
+    meta: { amountUsd },
+    ip: meta?.ip,
+    userAgent: meta?.userAgent,
+  }).catch(() => undefined);
+
+  return toDepositRow(deposit.toObject());
+}
+
+/* ------------------------------------------------------------------ */
+/*  Package activation from wallet balance                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Activate a package using the user's Main wallet balance — the decoupled
+ * deposit→activate flow. Debits the package price from Main/available, creates
+ * an already-active UserPackage, records a paid wallet-funded Deposit for
+ * history, and awards the Direct Connect Bonus to the sponsor. Replaces the
+ * old package-tied NOWPayments invoice path.
+ *
+ * The atomic, idempotent wallet debit is the authoritative primitive: keyed by
+ * the UserPackage id, so a crash between the debit and any later step is safe
+ * to retry (the retry debits once). The UserPackage is created pending first so
+ * its _id is available as the idempotency key, then flipped to active once the
+ * debit succeeds; a failed debit rolls the pending subscription back.
+ */
+export async function activatePackageFromWallet(
   userId: string,
   packageId: string,
   meta?: Meta,
@@ -158,7 +241,16 @@ export async function initiateDeposit(
   const existing = await UserPackage.findOne({ user: userId, status: { $in: ["pending", "active"] } });
   if (existing) throw ApiError.conflict("You already have a pending or active package");
 
-  // 1. Pending subscription (immutable term snapshot).
+  const price = pkg.priceUsd;
+
+  // Pre-check the Main wallet so we can fail fast with a clear message before
+  // creating any records. The authoritative guard is the atomic debit below.
+  const balances = await getWalletBalances(userId);
+  if (balances.main.available < price) {
+    throw ApiError.conflict(`Insufficient balance — $${price} needed, deposit funds first`);
+  }
+
+  // 1. Pending subscription (gives us the idempotency key for the debit).
   const subscription = await UserPackage.create({
     user: userId,
     package: pkg._id,
@@ -167,52 +259,77 @@ export async function initiateDeposit(
     paymentStatus: "pending",
   });
 
-  // 2. Pending deposit.
+  // 2. Atomic, idempotent debit of the package price from Main/available. The
+  //    `$gte` guard prevents an over-debit; if it fails, roll back the pending
+  //    subscription and surface a conflict.
+  try {
+    await applyLedgerEntry({
+      userId,
+      wallet: "main",
+      field: "available",
+      direction: "debit",
+      amount: price,
+      type: "package_activation",
+      reference: { resource: "UserPackage", resourceId: subscription._id.toString() },
+      memo: `Package activation — ${pkg.name}`,
+      meta: { packageId: pkg._id.toString() },
+    });
+  } catch (err) {
+    await UserPackage.deleteOne({ _id: subscription._id }).catch(() => undefined);
+    if (err instanceof ApiError && err.statusCode === 409) {
+      throw ApiError.conflict(`Insufficient balance — $${price} needed, deposit funds first`);
+    }
+    logger.error("Wallet debit failed for package activation", { userId, packageId, error: err instanceof Error ? err.message : String(err) });
+    throw ApiError.internal("Could not activate package. Please try again.");
+  }
+
+  // 3. Flip the subscription to active (compute expiry from the snapshotted
+  //    term). durationDays === 0 means LIFETIME → expiresAt stays null.
+  const now = new Date();
+  const termDays = pkg.durationDays;
+  const expiresAt = termDays > 0 ? new Date(now.getTime() + termDays * DAY_MS) : null;
+  await UserPackage.updateOne(
+    { _id: subscription._id, status: "pending" },
+    { $set: { status: "active", activatedAt: now, expiresAt, paymentStatus: "paid", paymentId: `wallet-${subscription._id}` } },
+  );
+
+  // 4. Record a paid, wallet-funded Deposit so the activation appears in the
+  //    user's deposit history and the package row's joined `payment` info.
   const deposit = await Deposit.create({
     user: userId,
     userPackage: subscription._id,
     package: pkg._id,
-    amountUsd: pkg.priceUsd,
+    amountUsd: price,
     currency: "USDT-BEP20",
-    status: "pending",
+    status: "paid",
+    paidAt: now,
+    sandbox: false,
+    meta: { method: "wallet", packageId: pkg._id.toString() },
   });
-
-  // 3. Create the invoice (live NOWPayments or sandbox mock).
-  let invoice;
-  try {
-    invoice = await createInvoice({
-      amountUsd: pkg.priceUsd,
-      orderId: deposit._id.toString(),
-      description: `${pkg.name} package activation`,
-    });
-  } catch (err) {
-    // Roll back the pending subscription + deposit so the user can retry.
-    await Promise.all([UserPackage.deleteOne({ _id: subscription._id }), Deposit.deleteOne({ _id: deposit._id })]);
-    logger.error("NOWPayments invoice creation failed", { userId, error: err instanceof Error ? err.message : String(err) });
-    throw ApiError.badRequest("Could not start payment. Please try again.");
-  }
-
-  // 4. Store invoice data on the deposit.
-  deposit.nowpaymentsInvoiceId = invoice.nowpaymentsInvoiceId;
-  deposit.payAddress = invoice.payAddress;
-  deposit.payAmount = invoice.payAmount;
-  deposit.hostedUrl = invoice.hostedUrl;
-  deposit.sandbox = invoice.sandbox;
-  await deposit.save();
 
   await ActivityLog.create({
     actor: userId,
     action: "package.activate",
     resource: "Package",
     resourceId: pkg._id.toString(),
-    meta: { name: pkg.name, priceUsd: pkg.priceUsd, depositId: deposit._id.toString() },
+    meta: { name: pkg.name, priceUsd: price, depositId: deposit._id.toString(), method: "wallet" },
     ip: meta?.ip,
     userAgent: meta?.userAgent,
   }).catch(() => undefined);
 
-  const payment = toDepositRow(deposit.toObject());
-  const pkgRow = toUserPackageRow(subscription.toObject() as never, depositToPayment(deposit.toObject()));
-  return { pkg: pkgRow, payment };
+  // 5. Direct Connect Bonus — the buyer's sponsor earns a percentage of the
+  //    package price to their bonus wallet. Best-effort + idempotent (keyed by
+  //    the deposit id); a bonus failure must not break the activation.
+  await awardDirectBonus(userId, price, deposit._id.toString()).catch((err) => {
+    logger.error("Direct bonus failed for wallet activation", {
+      userId, packageId, depositId: deposit._id.toString(),
+      error: err instanceof Error ? err.message : String(err),
+    });
+  });
+
+  const updatedUp = await UserPackage.findById(subscription._id).lean();
+  const pkgRow = toUserPackageRow(updatedUp as never, depositToPayment(deposit.toObject()));
+  return { pkg: pkgRow, payment: toDepositRow(deposit.toObject()) };
 }
 
 /* ------------------------------------------------------------------ */
@@ -220,9 +337,12 @@ export async function initiateDeposit(
 /* ------------------------------------------------------------------ */
 
 /**
- * Confirm a pending deposit: idempotently flip it to paid, activate the
- * associated package, log, and email. Returns the updated DepositRow, or null
- * if the deposit was already processed / not found.
+ * Confirm a pending deposit: idempotently flip it to paid, credit the Main
+ * wallet, and — for package-tied deposits only — activate the associated
+ * UserPackage and award the Direct Connect Bonus. Wallet-only deposits (no
+ * `userPackage`) just credit the wallet; the package is activated separately
+ * from the wallet balance via `activatePackageFromWallet`. Returns the updated
+ * DepositRow, or null if the deposit was already processed / not found.
  *
  * TODO(production): wrap the dual flip in a MongoDB transaction (requires a
  * replica set; standalone dev can't run transactions). Atomic per-document
@@ -234,12 +354,16 @@ export async function confirmDeposit(
   meta?: Meta,
 ): Promise<DepositRow | null> {
   const deposit = await Deposit.findById(depositId).lean();
-  if (!deposit || deposit.status !== "pending") return null;
+  // Accept a late confirmation on an expired deposit too — the 10-minute expiry
+  // is a UI guard, not a reason to lose a user's real funds. A paid/failed
+  // deposit is a no-op (idempotent). `waiting`/`confirmed` webhook retries race
+  // safely against the atomic status flip below.
+  if (!deposit || (deposit.status !== "pending" && deposit.status !== "expired")) return null;
 
   // 1. Idempotent atomic flip of the deposit.
   const now = new Date();
   const flipped = await Deposit.updateOne(
-    { _id: deposit._id, status: "pending" },
+    { _id: deposit._id, status: { $in: ["pending", "expired"] } },
     { $set: { status: "paid", paidAt: now, nowpaymentsPaymentId: nowpaymentsPaymentId ?? deposit.nowpaymentsPaymentId } },
   );
   if (flipped.modifiedCount === 0) return null; // raced / already processed
@@ -289,18 +413,23 @@ export async function confirmDeposit(
   });
 
   // 3b. Direct Connect Bonus — the buyer's sponsor earns a percentage of the
-  //     package price to their bonus wallet (Phase 10). Best-effort + idempotent
-  //     (keyed by the deposit id); a bonus failure must not break confirmation.
-  await awardDirectBonus(
-    deposit.user.toString(),
-    up?.snapshot?.priceUsd ?? deposit.amountUsd,
-    deposit._id.toString(),
-  ).catch((err) => {
-    logger.error("Direct bonus failed for deposit", {
-      depositId: deposit._id.toString(),
-      error: err instanceof Error ? err.message : String(err),
+  //     package price to their bonus wallet (Phase 10). Only package-tied
+  //     deposits award a bonus; a pure wallet top-up (no userPackage) does not —
+  //     the bonus is awarded when the package is activated from the wallet in
+  //     `activatePackageFromWallet`. Best-effort + idempotent (keyed by the
+  //     deposit id); a bonus failure must not break confirmation.
+  if (up) {
+    await awardDirectBonus(
+      deposit.user.toString(),
+      up.snapshot!.priceUsd,
+      deposit._id.toString(),
+    ).catch((err) => {
+      logger.error("Direct bonus failed for deposit", {
+        depositId: deposit._id.toString(),
+        error: err instanceof Error ? err.message : String(err),
+      });
     });
-  });
+  }
 
   // 4. Best-effort deposit-success email.
   const [user, pkg] = await Promise.all([
@@ -310,7 +439,7 @@ export async function confirmDeposit(
   if (user) {
     const content = depositSuccessTemplate({
       name: user.name,
-      packageName: pkg?.name ?? up?.snapshot?.name ?? "your package",
+      packageName: pkg?.name ?? up?.snapshot?.name ?? "Wallet deposit",
       amountUsd: deposit.amountUsd,
       txId: nowpaymentsPaymentId ?? deposit.nowpaymentsInvoiceId ?? deposit._id.toString(),
     });
@@ -336,6 +465,15 @@ export async function getDepositForUser(userId: string, depositId: string): Prom
   const d = await Deposit.findById(depositId).lean();
   if (!d) throw ApiError.notFound("Deposit not found");
   if (d.user.toString() !== userId) throw ApiError.notFound("Deposit not found"); // no leak
+
+  // Lazily expire a pending wallet deposit whose 10-minute window has elapsed.
+  // The atomic `status: "pending"` guard makes this safe against a racing
+  // webhook confirmation (which would win and credit the deposit instead).
+  if (d.status === "pending" && d.expiresAt instanceof Date && d.expiresAt.getTime() <= Date.now()) {
+    await Deposit.updateOne({ _id: d._id, status: "pending" }, { $set: { status: "expired" } }).catch(() => undefined);
+    return toDepositRow({ ...d, status: "expired" });
+  }
+
   return toDepositRow(d);
 }
 

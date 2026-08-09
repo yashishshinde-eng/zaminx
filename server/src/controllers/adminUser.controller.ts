@@ -19,9 +19,11 @@ import {
   verifyUserEmail,
   forceLogoutUser,
   adminResetPassword,
+  impersonateUser,
 } from "../services/adminUser.service.js";
 import { adminAdjustWallet } from "../services/adminWallet.service.js";
 import { adminRecordDeposit } from "../services/deposit.service.js";
+import { toPublicUser } from "../services/auth.service.js";
 
 /** GET /admin/users — paginated, searchable, filterable admin user list. */
 export const list: RequestHandler[] = [
@@ -82,6 +84,19 @@ export const forceLogout: RequestHandler[] = [
     const id = (req.params as { id: string }).id;
     await forceLogoutUser(req.user.id, id);
     ok(res, {}, "User logged out");
+  }),
+];
+
+/** POST /admin/users/:id/impersonate — mint a session for the target user so the
+ *  admin can inspect their account. Returns the target's public user + a fresh
+ *  token pair; the admin's own session is restored client-side ("Return to admin"). */
+export const impersonate: RequestHandler[] = [
+  validate(adminUserIdParamSchema, "params"),
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    const id = (req.params as { id: string }).id;
+    const { user, tokens } = await impersonateUser(req.user.id, id);
+    ok(res, { user: toPublicUser(user), tokens }, "Impersonation session issued");
   }),
 ];
 

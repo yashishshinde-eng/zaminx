@@ -3,7 +3,7 @@ import { Copy, Check, ExternalLink, RefreshCw, FlaskConical } from "lucide-react
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
-import { useSimulatePayment } from "@/hooks/usePackages";
+import { useSimulatePayment } from "@/hooks/usePayments";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/config";
 import type { UserPackageRow } from "@zeminex/shared";

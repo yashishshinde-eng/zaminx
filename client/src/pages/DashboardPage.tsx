@@ -25,13 +25,10 @@ import {
   TradingBotStatusCard,
   BonanzaProgressCard,
   WalletCard,
-  IncomeChartCard,
-  IncomeDistributionCard,
   IncomeBreakdown,
   ReferralLinkCard,
   TeamStatsCard,
   RankCard,
-  NotificationsCard,
   MarketOverview,
   RecentTransactions,
 } from "@/components/dashboard";
@@ -140,7 +137,7 @@ function DashboardContent({ data }: { data: SummaryData }) {
           <div className="pointer-events-none absolute inset-0 rounded-[22px] border-b border-white/[0.06]" />
           <p className="metric-label mb-4 font-grotesk text-xs font-bold uppercase tracking-[0.2em]">Quick Actions</p>
           <div className="grid grid-cols-4 gap-3 sm:grid-cols-4 lg:grid-cols-8">
-            <QuickAction icon={ArrowDownToLine} label="Deposit" to="/app/packages" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" />
+            <QuickAction icon={ArrowDownToLine} label="Deposit" to="/app/deposit" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" />
             <QuickAction icon={ArrowUpFromLine} label="Withdraw" to="/app/withdrawals" gradient="from-gold/20 to-gold-dark/10" iconColor="text-gold" />
             <QuickAction icon={Package} label="Invest" to="/app/packages" gradient="from-purple/20 to-purple-dark/10" iconColor="text-purple-light" />
             <QuickAction icon={Repeat} label="P2P" to="/app/p2p" gradient="from-success/20 to-success/10" iconColor="text-success" />
@@ -171,16 +168,15 @@ function DashboardContent({ data }: { data: SummaryData }) {
         <div className="lg:col-span-2">
           <RecentTransactions activity={data.recentActivity} />
         </div>
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           <TeamStatsCard team={data.team} />
           <RankCard rank={data.account.rank} />
         </div>
       </motion.div>
 
-      {/* ═══ REFERRAL + NOTIFICATIONS ══════════════════════ */}
-      <motion.div variants={staggerItem} className="grid gap-4 lg:grid-cols-2">
+      {/* ═══ REFERRAL ══════════════════════ */}
+      <motion.div variants={staggerItem}>
         <ReferralLinkCard referral={data.referral} />
-        <NotificationsCard notifications={data.notifications} />
       </motion.div>
 
     </motion.div>
@@ -244,11 +240,8 @@ function DashboardSkeleton() {
           <Skeleton className="h-32 rounded-[22px]" />
         </div>
       </div>
-      {/* Referral + Notifications */}
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Skeleton className="h-40 rounded-[22px]" />
-        <Skeleton className="h-40 rounded-[22px]" />
-      </div>
+      {/* Referral */}
+      <Skeleton className="h-40 rounded-[22px]" />
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import { User, ActivityLog, UserPackage } from "../models/index.js";
+import type { UserDocument } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { logoutUser } from "./auth.service.js";
+import { issueTokens } from "./token.service.js";
+import type { TokenPair } from "./token.service.js";
 import { getWalletBalances } from "./wallet.service.js";
 import { fetchUsersRows } from "./adminReport.service.js";
 import type {
@@ -125,7 +128,7 @@ export async function getAdminUserDetail(id: string): Promise<AdminUserDetail> {
   };
 }
 
-/** PATCH /admin/users/:id/status — suspend / ban / activate (admin). */
+/** PATCH /admin/users/:id/status — deactivate / block / activate (admin). */
 export async function setUserStatus(adminId: string, id: string, status: UserStatus): Promise<void> {
   if (id === adminId) throw ApiError.conflict("You cannot change your own status");
   const user = await User.findById(id);
@@ -133,7 +136,7 @@ export async function setUserStatus(adminId: string, id: string, status: UserSta
   const from = user.status;
   if (from === status) return; // idempotent
   user.status = status;
-  // A suspended/banned user cannot hold a live session.
+  // An inactive/blocked user cannot hold a live session.
   if (status !== "active") user.refreshTokenHash = null;
   await user.save();
   await ActivityLog.create({
@@ -174,6 +177,39 @@ export async function forceLogoutUser(adminId: string, id: string): Promise<void
     resource: "User",
     resourceId: id,
   }).catch(() => undefined);
+}
+
+/**
+ * POST /admin/users/:id/impersonate — mint a real session for the target user so
+ * the admin can inspect their account from the user's perspective. Mirrors
+ * `loginUser` (token.service.issueTokens + refreshTokenHash rotation) but is
+ * triggered by an admin, not by the user's password. Audit-logged. Overwriting
+ * `refreshTokenHash` invalidates the target's other refresh sessions (same as a
+ * new-device login); the admin restores their own session client-side.
+ */
+export async function impersonateUser(
+  adminId: string,
+  id: string,
+): Promise<{ user: UserDocument; tokens: TokenPair }> {
+  if (id === adminId) throw ApiError.conflict("Cannot impersonate yourself");
+  const user = await User.findById(id);
+  if (!user) throw ApiError.notFound("User not found");
+  if (user.status !== "active") throw ApiError.forbidden("Account is not active");
+
+  const tokens = issueTokens(String(user._id), user.role);
+  user.refreshTokenHash = User.hashToken(tokens.refreshToken);
+  user.lastLoginAt = new Date();
+  await user.save();
+
+  await ActivityLog.create({
+    actor: adminId,
+    action: "user.impersonate.start",
+    resource: "User",
+    resourceId: id,
+    meta: { targetUser: id },
+  }).catch(() => undefined);
+
+  return { user, tokens };
 }
 
 /** POST /admin/users/:id/reset-password — admin sets a new password (rehashes). */
