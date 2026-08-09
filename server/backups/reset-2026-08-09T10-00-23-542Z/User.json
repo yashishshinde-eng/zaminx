@@ -1,0 +1,1208 @@
+[
+  {
+    "_id": "6a6f5ca7277f8c8f148cba5b",
+    "name": "Zeminex.global",
+    "email": "user1@zaminex.local",
+    "role": "user",
+    "referredBy": "ZAM5XSVGPR7",
+    "sponsorId": "6a6f5adf6213d08c893dde54",
+    "lineage": [
+      "6a6f5adf6213d08c893dde54"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T16:11:38.133Z",
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": "0xdb45ffd78237ccc5875ada95c206320ce98cfb7f"
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-09T09:35:39.265Z",
+    "referralCode": "ZAM5MBBTAXB",
+    "createdAt": "2026-08-02T15:05:12.303Z",
+    "updatedAt": "2026-08-09T09:35:54.699Z",
+    "__v": 0,
+    "phone": ""
+  },
+  {
+    "_id": "6a6f5cba277f8c8f148cba6f",
+    "name": "Test User Two",
+    "email": "user2@zaminex.local",
+    "role": "user",
+    "referredBy": "ZAM5MBBTAXB",
+    "sponsorId": "6a6f5ca7277f8c8f148cba5b",
+    "lineage": [
+      "6a6f5adf6213d08c893dde54",
+      "6a6f5ca7277f8c8f148cba5b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-03T15:05:31.856Z",
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-02T15:22:51.206Z",
+    "referralCode": "ZAMR5NNT5V5",
+    "createdAt": "2026-08-02T15:05:30.551Z",
+    "updatedAt": "2026-08-02T15:26:17.703Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5fb1277f8c8f148cbade",
+    "name": "User Three",
+    "email": "user3@zaminex.local",
+    "role": "user",
+    "referredBy": null,
+    "sponsorId": null,
+    "lineage": [],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-03T15:18:10.819Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM9GVHW6K2",
+    "createdAt": "2026-08-02T15:18:09.936Z",
+    "updatedAt": "2026-08-02T15:18:10.819Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e0061608293105f328f0",
+    "name": "Ok",
+    "email": "user1@zaminex.locall",
+    "role": "user",
+    "referredBy": "ZAMR5NNT5V5",
+    "sponsorId": "6a6f5cba277f8c8f148cba6f",
+    "lineage": [
+      "6a6f5adf6213d08c893dde54",
+      "6a6f5ca7277f8c8f148cba5b",
+      "6a6f5cba277f8c8f148cba6f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-08T13:39:25.485Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMRSTNGQGE",
+    "createdAt": "2026-08-07T13:39:20.601Z",
+    "updatedAt": "2026-08-07T13:39:25.486Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76175b214f3842df2c7795",
+    "name": "saish B",
+    "email": "saishbafna2019@gmail.com",
+    "role": "user",
+    "referredBy": "ZAM5MBBTAXB",
+    "sponsorId": "6a6f5ca7277f8c8f148cba5b",
+    "lineage": [
+      "6a6f5adf6213d08c893dde54",
+      "6a6f5ca7277f8c8f148cba5b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-08T18:08:26.227Z",
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-07T18:24:14.012Z",
+    "referralCode": "ZAM3JBZULLD",
+    "createdAt": "2026-08-07T17:35:23.762Z",
+    "updatedAt": "2026-08-08T08:50:44.092Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f2d193ec9bec0abba2c7",
+    "name": "Ok",
+    "email": "kkgmlmbusiness@gmail.com",
+    "role": "user",
+    "referredBy": "ZAMR5NNT5V5",
+    "sponsorId": "6a6f5cba277f8c8f148cba6f",
+    "lineage": [
+      "6a6f5adf6213d08c893dde54",
+      "6a6f5ca7277f8c8f148cba5b",
+      "6a6f5cba277f8c8f148cba6f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T09:11:52.292Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-08T09:12:24.803Z",
+    "referralCode": "ZAM5UTQRUYN",
+    "createdAt": "2026-08-08T09:11:47.600Z",
+    "updatedAt": "2026-08-08T09:14:33.627Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c1f1d55f2635e81a4e2",
+    "name": "Team Leader",
+    "email": "tl-j0k8qzk239e@scenario.local",
+    "role": "user",
+    "referredBy": "ZAM4EEKE6RS",
+    "sponsorId": "6a779c1e1d55f2635e81a4af",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:08.854Z",
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-09T05:04:25.650Z",
+    "referralCode": "ZAMW2AKHKA7",
+    "createdAt": "2026-08-08T21:14:08.121Z",
+    "updatedAt": "2026-08-09T05:04:25.653Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c211d55f2635e81a4f2",
+    "name": "L1.a",
+    "email": "l1.a-37jzx8ufpeg@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMW2AKHKA7",
+    "sponsorId": "6a779c1f1d55f2635e81a4e2",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:10.470Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM4NU6KEZN",
+    "createdAt": "2026-08-08T21:14:09.675Z",
+    "updatedAt": "2026-08-08T21:14:10.470Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c221d55f2635e81a4fd",
+    "name": "L1.b",
+    "email": "l1.b-9alz9wtuolg@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMW2AKHKA7",
+    "sponsorId": "6a779c1f1d55f2635e81a4e2",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:11.841Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMCS69EPPW",
+    "createdAt": "2026-08-08T21:14:11.010Z",
+    "updatedAt": "2026-08-08T21:14:11.843Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c241d55f2635e81a508",
+    "name": "L1.c",
+    "email": "l1.c-o23hzyg3qr@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMW2AKHKA7",
+    "sponsorId": "6a779c1f1d55f2635e81a4e2",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:13.367Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMKJKHQGJ2",
+    "createdAt": "2026-08-08T21:14:12.483Z",
+    "updatedAt": "2026-08-08T21:14:13.367Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c251d55f2635e81a513",
+    "name": "L2.a",
+    "email": "l2.a-989g7ja3am@scenario.local",
+    "role": "user",
+    "referredBy": "ZAM4NU6KEZN",
+    "sponsorId": "6a779c211d55f2635e81a4f2",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:14.955Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM8LTBKA7P",
+    "createdAt": "2026-08-08T21:14:13.999Z",
+    "updatedAt": "2026-08-08T21:14:14.955Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c271d55f2635e81a51e",
+    "name": "L2.b",
+    "email": "l2.b-ciqmzzsajzb@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMCS69EPPW",
+    "sponsorId": "6a779c221d55f2635e81a4fd",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:16.557Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMK6L3BFWK",
+    "createdAt": "2026-08-08T21:14:15.631Z",
+    "updatedAt": "2026-08-08T21:14:16.557Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c281d55f2635e81a529",
+    "name": "L2.c",
+    "email": "l2.c-q5e6se0l70i@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMKJKHQGJ2",
+    "sponsorId": "6a779c241d55f2635e81a508",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:18.598Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMY538XGNU",
+    "createdAt": "2026-08-08T21:14:17.201Z",
+    "updatedAt": "2026-08-08T21:14:18.599Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c2a1d55f2635e81a534",
+    "name": "L3.a",
+    "email": "l3.a-k1k0ekwd84k@scenario.local",
+    "role": "user",
+    "referredBy": "ZAM8LTBKA7P",
+    "sponsorId": "6a779c251d55f2635e81a513",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2",
+      "6a779c251d55f2635e81a513"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:20.687Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMFBQHKJPY",
+    "createdAt": "2026-08-08T21:14:19.384Z",
+    "updatedAt": "2026-08-08T21:14:20.688Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c2c1d55f2635e81a53f",
+    "name": "L3.b",
+    "email": "l3.b-grke3m5g36u@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMK6L3BFWK",
+    "sponsorId": "6a779c271d55f2635e81a51e",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd",
+      "6a779c271d55f2635e81a51e"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:22.557Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMTDXRFT6T",
+    "createdAt": "2026-08-08T21:14:21.405Z",
+    "updatedAt": "2026-08-08T21:14:22.557Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c2e1d55f2635e81a54a",
+    "name": "L3.c",
+    "email": "l3.c-2j8xrilm031@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMY538XGNU",
+    "sponsorId": "6a779c281d55f2635e81a529",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508",
+      "6a779c281d55f2635e81a529"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:24.616Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMT6WARKRV",
+    "createdAt": "2026-08-08T21:14:23.446Z",
+    "updatedAt": "2026-08-08T21:14:24.616Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c301d55f2635e81a555",
+    "name": "L4.a",
+    "email": "l4.a-9tx85xpraxe@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMFBQHKJPY",
+    "sponsorId": "6a779c2a1d55f2635e81a534",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2",
+      "6a779c251d55f2635e81a513",
+      "6a779c2a1d55f2635e81a534"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:26.559Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMLRAZPEV3",
+    "createdAt": "2026-08-08T21:14:25.403Z",
+    "updatedAt": "2026-08-08T21:14:26.560Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c321d55f2635e81a560",
+    "name": "L4.b",
+    "email": "l4.b-azoazmp4igs@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMTDXRFT6T",
+    "sponsorId": "6a779c2c1d55f2635e81a53f",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd",
+      "6a779c271d55f2635e81a51e",
+      "6a779c2c1d55f2635e81a53f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:28.574Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAME42JVWT2",
+    "createdAt": "2026-08-08T21:14:27.474Z",
+    "updatedAt": "2026-08-08T21:14:28.574Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c341d55f2635e81a56b",
+    "name": "L4.c",
+    "email": "l4.c-fnz99h83q2j@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMT6WARKRV",
+    "sponsorId": "6a779c2e1d55f2635e81a54a",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508",
+      "6a779c281d55f2635e81a529",
+      "6a779c2e1d55f2635e81a54a"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:30.351Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMTE5BDSY9",
+    "createdAt": "2026-08-08T21:14:29.316Z",
+    "updatedAt": "2026-08-08T21:14:30.351Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c361d55f2635e81a576",
+    "name": "L5.a",
+    "email": "l5.a-cpqize7oqw9@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMLRAZPEV3",
+    "sponsorId": "6a779c301d55f2635e81a555",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2",
+      "6a779c251d55f2635e81a513",
+      "6a779c2a1d55f2635e81a534",
+      "6a779c301d55f2635e81a555"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:32.250Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM32UQ66A7",
+    "createdAt": "2026-08-08T21:14:31.098Z",
+    "updatedAt": "2026-08-08T21:14:32.250Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c381d55f2635e81a581",
+    "name": "L5.b",
+    "email": "l5.b-utgxxialjoj@scenario.local",
+    "role": "user",
+    "referredBy": "ZAME42JVWT2",
+    "sponsorId": "6a779c321d55f2635e81a560",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd",
+      "6a779c271d55f2635e81a51e",
+      "6a779c2c1d55f2635e81a53f",
+      "6a779c321d55f2635e81a560"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:34.529Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMMZG9RNJJ",
+    "createdAt": "2026-08-08T21:14:33.285Z",
+    "updatedAt": "2026-08-08T21:14:34.529Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c3a1d55f2635e81a58c",
+    "name": "L5.c",
+    "email": "l5.c-f5cebub550f@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMTE5BDSY9",
+    "sponsorId": "6a779c341d55f2635e81a56b",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508",
+      "6a779c281d55f2635e81a529",
+      "6a779c2e1d55f2635e81a54a",
+      "6a779c341d55f2635e81a56b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:36.856Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM3BUE5D76",
+    "createdAt": "2026-08-08T21:14:35.324Z",
+    "updatedAt": "2026-08-08T21:14:36.857Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c3d1d55f2635e81a597",
+    "name": "L6.a",
+    "email": "l6.a-7iczaqpjlx4@scenario.local",
+    "role": "user",
+    "referredBy": "ZAM32UQ66A7",
+    "sponsorId": "6a779c361d55f2635e81a576",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2",
+      "6a779c251d55f2635e81a513",
+      "6a779c2a1d55f2635e81a534",
+      "6a779c301d55f2635e81a555",
+      "6a779c361d55f2635e81a576"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:38.812Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMCWAPGG3V",
+    "createdAt": "2026-08-08T21:14:37.751Z",
+    "updatedAt": "2026-08-08T21:14:38.813Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c3f1d55f2635e81a5a2",
+    "name": "L6.b",
+    "email": "l6.b-kg1anaioasb@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMMZG9RNJJ",
+    "sponsorId": "6a779c381d55f2635e81a581",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd",
+      "6a779c271d55f2635e81a51e",
+      "6a779c2c1d55f2635e81a53f",
+      "6a779c321d55f2635e81a560",
+      "6a779c381d55f2635e81a581"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:40.658Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM58YWR9SU",
+    "createdAt": "2026-08-08T21:14:39.555Z",
+    "updatedAt": "2026-08-08T21:14:40.659Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c411d55f2635e81a5b0",
+    "name": "L6.c",
+    "email": "l6.c-n3z9q8btnbr@scenario.local",
+    "role": "user",
+    "referredBy": "ZAM3BUE5D76",
+    "sponsorId": "6a779c3a1d55f2635e81a58c",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508",
+      "6a779c281d55f2635e81a529",
+      "6a779c2e1d55f2635e81a54a",
+      "6a779c341d55f2635e81a56b",
+      "6a779c3a1d55f2635e81a58c"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:42.812Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMGCSMJEJY",
+    "createdAt": "2026-08-08T21:14:41.690Z",
+    "updatedAt": "2026-08-08T21:14:42.813Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c431d55f2635e81a5bb",
+    "name": "L7.a",
+    "email": "l7.a-yx4njigx3wm@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMCWAPGG3V",
+    "sponsorId": "6a779c3d1d55f2635e81a597",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2",
+      "6a779c251d55f2635e81a513",
+      "6a779c2a1d55f2635e81a534",
+      "6a779c301d55f2635e81a555",
+      "6a779c361d55f2635e81a576",
+      "6a779c3d1d55f2635e81a597"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:44.729Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMC7MLHRHT",
+    "createdAt": "2026-08-08T21:14:43.632Z",
+    "updatedAt": "2026-08-08T21:14:44.730Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c441d55f2635e81a5c6",
+    "name": "L7.b",
+    "email": "l7.b-eon0617zk9t@scenario.local",
+    "role": "user",
+    "referredBy": "ZAM58YWR9SU",
+    "sponsorId": "6a779c3f1d55f2635e81a5a2",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd",
+      "6a779c271d55f2635e81a51e",
+      "6a779c2c1d55f2635e81a53f",
+      "6a779c321d55f2635e81a560",
+      "6a779c381d55f2635e81a581",
+      "6a779c3f1d55f2635e81a5a2"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:46.666Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAME9XWLFDT",
+    "createdAt": "2026-08-08T21:14:45.492Z",
+    "updatedAt": "2026-08-08T21:14:46.667Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c461d55f2635e81a5d1",
+    "name": "L7.c",
+    "email": "l7.c-kgrdceu9947@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMGCSMJEJY",
+    "sponsorId": "6a779c411d55f2635e81a5b0",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508",
+      "6a779c281d55f2635e81a529",
+      "6a779c2e1d55f2635e81a54a",
+      "6a779c341d55f2635e81a56b",
+      "6a779c3a1d55f2635e81a58c",
+      "6a779c411d55f2635e81a5b0"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:48.561Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMTAA59USQ",
+    "createdAt": "2026-08-08T21:14:47.393Z",
+    "updatedAt": "2026-08-08T21:14:48.562Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c481d55f2635e81a5dc",
+    "name": "L8.a",
+    "email": "l8.a-rayc9atpsf@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMC7MLHRHT",
+    "sponsorId": "6a779c431d55f2635e81a5bb",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2",
+      "6a779c251d55f2635e81a513",
+      "6a779c2a1d55f2635e81a534",
+      "6a779c301d55f2635e81a555",
+      "6a779c361d55f2635e81a576",
+      "6a779c3d1d55f2635e81a597",
+      "6a779c431d55f2635e81a5bb"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:50.422Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM23WMNJU3",
+    "createdAt": "2026-08-08T21:14:49.285Z",
+    "updatedAt": "2026-08-08T21:14:50.422Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c4a1d55f2635e81a5e7",
+    "name": "L8.b",
+    "email": "l8.b-7fb5exvlt3@scenario.local",
+    "role": "user",
+    "referredBy": "ZAME9XWLFDT",
+    "sponsorId": "6a779c441d55f2635e81a5c6",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd",
+      "6a779c271d55f2635e81a51e",
+      "6a779c2c1d55f2635e81a53f",
+      "6a779c321d55f2635e81a560",
+      "6a779c381d55f2635e81a581",
+      "6a779c3f1d55f2635e81a5a2",
+      "6a779c441d55f2635e81a5c6"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:52.321Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMY96TH77X",
+    "createdAt": "2026-08-08T21:14:51.163Z",
+    "updatedAt": "2026-08-08T21:14:52.321Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c4c1d55f2635e81a5f2",
+    "name": "L8.c",
+    "email": "l8.c-p3u07ngdxjr@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMTAA59USQ",
+    "sponsorId": "6a779c461d55f2635e81a5d1",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508",
+      "6a779c281d55f2635e81a529",
+      "6a779c2e1d55f2635e81a54a",
+      "6a779c341d55f2635e81a56b",
+      "6a779c3a1d55f2635e81a58c",
+      "6a779c411d55f2635e81a5b0",
+      "6a779c461d55f2635e81a5d1"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:54.186Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMBK5W5UVY",
+    "createdAt": "2026-08-08T21:14:53.022Z",
+    "updatedAt": "2026-08-08T21:14:54.187Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c4e1d55f2635e81a5fd",
+    "name": "L9.a",
+    "email": "l9.a-akvzikug9nt@scenario.local",
+    "role": "user",
+    "referredBy": "ZAM23WMNJU3",
+    "sponsorId": "6a779c481d55f2635e81a5dc",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2",
+      "6a779c251d55f2635e81a513",
+      "6a779c2a1d55f2635e81a534",
+      "6a779c301d55f2635e81a555",
+      "6a779c361d55f2635e81a576",
+      "6a779c3d1d55f2635e81a597",
+      "6a779c431d55f2635e81a5bb",
+      "6a779c481d55f2635e81a5dc"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:56.125Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM8D89W5BH",
+    "createdAt": "2026-08-08T21:14:54.898Z",
+    "updatedAt": "2026-08-08T21:14:56.126Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c501d55f2635e81a608",
+    "name": "L9.b",
+    "email": "l9.b-8kjsrqf1y7h@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMY96TH77X",
+    "sponsorId": "6a779c4a1d55f2635e81a5e7",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd",
+      "6a779c271d55f2635e81a51e",
+      "6a779c2c1d55f2635e81a53f",
+      "6a779c321d55f2635e81a560",
+      "6a779c381d55f2635e81a581",
+      "6a779c3f1d55f2635e81a5a2",
+      "6a779c441d55f2635e81a5c6",
+      "6a779c4a1d55f2635e81a5e7"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:57.886Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMCCK9KU8G",
+    "createdAt": "2026-08-08T21:14:56.849Z",
+    "updatedAt": "2026-08-08T21:14:57.887Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c521d55f2635e81a613",
+    "name": "L9.c",
+    "email": "l9.c-cmz332j3ggs@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMBK5W5UVY",
+    "sponsorId": "6a779c4c1d55f2635e81a5f2",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508",
+      "6a779c281d55f2635e81a529",
+      "6a779c2e1d55f2635e81a54a",
+      "6a779c341d55f2635e81a56b",
+      "6a779c3a1d55f2635e81a58c",
+      "6a779c411d55f2635e81a5b0",
+      "6a779c461d55f2635e81a5d1",
+      "6a779c4c1d55f2635e81a5f2"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:14:59.954Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMDAGMA8CM",
+    "createdAt": "2026-08-08T21:14:58.630Z",
+    "updatedAt": "2026-08-08T21:14:59.954Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c541d55f2635e81a61e",
+    "name": "L10.a",
+    "email": "l10.a-78u6jj6mamq@scenario.local",
+    "role": "user",
+    "referredBy": "ZAM8D89W5BH",
+    "sponsorId": "6a779c4e1d55f2635e81a5fd",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c211d55f2635e81a4f2",
+      "6a779c251d55f2635e81a513",
+      "6a779c2a1d55f2635e81a534",
+      "6a779c301d55f2635e81a555",
+      "6a779c361d55f2635e81a576",
+      "6a779c3d1d55f2635e81a597",
+      "6a779c431d55f2635e81a5bb",
+      "6a779c481d55f2635e81a5dc",
+      "6a779c4e1d55f2635e81a5fd"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:15:02.559Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMXV6CHPZF",
+    "createdAt": "2026-08-08T21:15:01.031Z",
+    "updatedAt": "2026-08-08T21:15:02.560Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c561d55f2635e81a629",
+    "name": "L10.b",
+    "email": "l10.b-a11pzlt1665@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMCCK9KU8G",
+    "sponsorId": "6a779c501d55f2635e81a608",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c221d55f2635e81a4fd",
+      "6a779c271d55f2635e81a51e",
+      "6a779c2c1d55f2635e81a53f",
+      "6a779c321d55f2635e81a560",
+      "6a779c381d55f2635e81a581",
+      "6a779c3f1d55f2635e81a5a2",
+      "6a779c441d55f2635e81a5c6",
+      "6a779c4a1d55f2635e81a5e7",
+      "6a779c501d55f2635e81a608"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:15:04.671Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM745QRK85",
+    "createdAt": "2026-08-08T21:15:03.445Z",
+    "updatedAt": "2026-08-08T21:15:04.672Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c581d55f2635e81a634",
+    "name": "L10.c",
+    "email": "l10.c-a5lcn8dxrk8@scenario.local",
+    "role": "user",
+    "referredBy": "ZAMDAGMA8CM",
+    "sponsorId": "6a779c521d55f2635e81a613",
+    "lineage": [
+      "6a779c1e1d55f2635e81a4af",
+      "6a779c1f1d55f2635e81a4e2",
+      "6a779c241d55f2635e81a508",
+      "6a779c281d55f2635e81a529",
+      "6a779c2e1d55f2635e81a54a",
+      "6a779c341d55f2635e81a56b",
+      "6a779c3a1d55f2635e81a58c",
+      "6a779c411d55f2635e81a5b0",
+      "6a779c461d55f2635e81a5d1",
+      "6a779c4c1d55f2635e81a5f2",
+      "6a779c521d55f2635e81a613"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-09T21:15:06.884Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-09T07:21:21.736Z",
+    "referralCode": "ZAMHQMKZ73U",
+    "createdAt": "2026-08-08T21:15:05.632Z",
+    "updatedAt": "2026-08-09T07:21:21.737Z",
+    "__v": 0
+  }
+]

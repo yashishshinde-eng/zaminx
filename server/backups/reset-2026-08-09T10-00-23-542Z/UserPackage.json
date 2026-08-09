@@ -1,0 +1,629 @@
+[
+  {
+    "_id": "6a6f8580b93dd3c97f695d1f",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "package": "6a6f5aee6213d08c893ddeda",
+    "snapshot": {
+      "name": "Starter",
+      "priceUsd": 50,
+      "dailyReturnPct": 1,
+      "durationDays": 100
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": null,
+    "activatedAt": "2026-08-04T04:05:23.670Z",
+    "expiresAt": "2026-11-12T04:05:23.670Z",
+    "createdAt": "2026-08-02T17:59:28.092Z",
+    "updatedAt": "2026-08-04T04:05:23.857Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761efe8798230cc4180374",
+    "user": "6a76175b214f3842df2c7795",
+    "package": "6a6f5aee6213d08c893ddeda",
+    "snapshot": {
+      "name": "Starter",
+      "priceUsd": 50,
+      "dailyReturnPct": 1,
+      "durationDays": 100
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": null,
+    "activatedAt": "2026-08-07T18:08:09.682Z",
+    "expiresAt": "2026-11-15T18:08:09.682Z",
+    "createdAt": "2026-08-07T18:07:58.635Z",
+    "updatedAt": "2026-08-07T18:08:09.723Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5c1d55f2635e81a656",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c5c1d55f2635e81a656",
+    "activatedAt": "2026-08-08T21:15:08.771Z",
+    "expiresAt": "2027-08-08T21:15:08.771Z",
+    "createdAt": "2026-08-08T21:15:08.421Z",
+    "updatedAt": "2026-08-08T21:15:08.771Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5e1d55f2635e81a67b",
+    "user": "6a779c211d55f2635e81a4f2",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c5e1d55f2635e81a67b",
+    "activatedAt": "2026-08-08T21:15:10.758Z",
+    "expiresAt": "2027-08-08T21:15:10.758Z",
+    "createdAt": "2026-08-08T21:15:10.340Z",
+    "updatedAt": "2026-08-08T21:15:10.758Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c601d55f2635e81a6ab",
+    "user": "6a779c221d55f2635e81a4fd",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c601d55f2635e81a6ab",
+    "activatedAt": "2026-08-08T21:15:13.284Z",
+    "expiresAt": "2027-08-08T21:15:13.284Z",
+    "createdAt": "2026-08-08T21:15:12.939Z",
+    "updatedAt": "2026-08-08T21:15:13.285Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c631d55f2635e81a6d7",
+    "user": "6a779c241d55f2635e81a508",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c631d55f2635e81a6d7",
+    "activatedAt": "2026-08-08T21:15:15.686Z",
+    "expiresAt": "2027-08-08T21:15:15.686Z",
+    "createdAt": "2026-08-08T21:15:15.243Z",
+    "updatedAt": "2026-08-08T21:15:15.686Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c651d55f2635e81a703",
+    "user": "6a779c251d55f2635e81a513",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c651d55f2635e81a703",
+    "activatedAt": "2026-08-08T21:15:17.951Z",
+    "expiresAt": "2027-08-08T21:15:17.951Z",
+    "createdAt": "2026-08-08T21:15:17.595Z",
+    "updatedAt": "2026-08-08T21:15:17.951Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c671d55f2635e81a72f",
+    "user": "6a779c271d55f2635e81a51e",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c671d55f2635e81a72f",
+    "activatedAt": "2026-08-08T21:15:20.155Z",
+    "expiresAt": "2027-08-08T21:15:20.155Z",
+    "createdAt": "2026-08-08T21:15:19.815Z",
+    "updatedAt": "2026-08-08T21:15:20.156Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6a1d55f2635e81a75b",
+    "user": "6a779c281d55f2635e81a529",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c6a1d55f2635e81a75b",
+    "activatedAt": "2026-08-08T21:15:22.355Z",
+    "expiresAt": "2027-08-08T21:15:22.355Z",
+    "createdAt": "2026-08-08T21:15:22.028Z",
+    "updatedAt": "2026-08-08T21:15:22.355Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6c1d55f2635e81a787",
+    "user": "6a779c2a1d55f2635e81a534",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c6c1d55f2635e81a787",
+    "activatedAt": "2026-08-08T21:15:24.667Z",
+    "expiresAt": "2027-08-08T21:15:24.667Z",
+    "createdAt": "2026-08-08T21:15:24.315Z",
+    "updatedAt": "2026-08-08T21:15:24.667Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6e1d55f2635e81a7b3",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c6e1d55f2635e81a7b3",
+    "activatedAt": "2026-08-08T21:15:26.990Z",
+    "expiresAt": "2027-08-08T21:15:26.990Z",
+    "createdAt": "2026-08-08T21:15:26.669Z",
+    "updatedAt": "2026-08-08T21:15:26.991Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c711d55f2635e81a7df",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c711d55f2635e81a7df",
+    "activatedAt": "2026-08-08T21:15:29.407Z",
+    "expiresAt": "2027-08-08T21:15:29.407Z",
+    "createdAt": "2026-08-08T21:15:29.051Z",
+    "updatedAt": "2026-08-08T21:15:29.408Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c731d55f2635e81a80b",
+    "user": "6a779c301d55f2635e81a555",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c731d55f2635e81a80b",
+    "activatedAt": "2026-08-08T21:15:31.697Z",
+    "expiresAt": "2027-08-08T21:15:31.697Z",
+    "createdAt": "2026-08-08T21:15:31.338Z",
+    "updatedAt": "2026-08-08T21:15:31.697Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c751d55f2635e81a837",
+    "user": "6a779c321d55f2635e81a560",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c751d55f2635e81a837",
+    "activatedAt": "2026-08-08T21:15:33.996Z",
+    "expiresAt": "2027-08-08T21:15:33.996Z",
+    "createdAt": "2026-08-08T21:15:33.606Z",
+    "updatedAt": "2026-08-08T21:15:33.997Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c771d55f2635e81a863",
+    "user": "6a779c341d55f2635e81a56b",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c771d55f2635e81a863",
+    "activatedAt": "2026-08-08T21:15:36.212Z",
+    "expiresAt": "2027-08-08T21:15:36.212Z",
+    "createdAt": "2026-08-08T21:15:35.871Z",
+    "updatedAt": "2026-08-08T21:15:36.212Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7a1d55f2635e81a88f",
+    "user": "6a779c361d55f2635e81a576",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c7a1d55f2635e81a88f",
+    "activatedAt": "2026-08-08T21:15:38.754Z",
+    "expiresAt": "2027-08-08T21:15:38.754Z",
+    "createdAt": "2026-08-08T21:15:38.437Z",
+    "updatedAt": "2026-08-08T21:15:38.754Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7c1d55f2635e81a8be",
+    "user": "6a779c381d55f2635e81a581",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c7c1d55f2635e81a8be",
+    "activatedAt": "2026-08-08T21:15:41.132Z",
+    "expiresAt": "2027-08-08T21:15:41.132Z",
+    "createdAt": "2026-08-08T21:15:40.798Z",
+    "updatedAt": "2026-08-08T21:15:41.132Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7f1d55f2635e81a8ee",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c7f1d55f2635e81a8ee",
+    "activatedAt": "2026-08-08T21:15:43.512Z",
+    "expiresAt": "2027-08-08T21:15:43.512Z",
+    "createdAt": "2026-08-08T21:15:43.205Z",
+    "updatedAt": "2026-08-08T21:15:43.512Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c811d55f2635e81a91a",
+    "user": "6a779c3d1d55f2635e81a597",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c811d55f2635e81a91a",
+    "activatedAt": "2026-08-08T21:15:45.647Z",
+    "expiresAt": "2027-08-08T21:15:45.647Z",
+    "createdAt": "2026-08-08T21:15:45.321Z",
+    "updatedAt": "2026-08-08T21:15:45.648Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c831d55f2635e81a946",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c831d55f2635e81a946",
+    "activatedAt": "2026-08-08T21:15:48.034Z",
+    "expiresAt": "2027-08-08T21:15:48.034Z",
+    "createdAt": "2026-08-08T21:15:47.717Z",
+    "updatedAt": "2026-08-08T21:15:48.034Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c851d55f2635e81a972",
+    "user": "6a779c411d55f2635e81a5b0",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c851d55f2635e81a972",
+    "activatedAt": "2026-08-08T21:15:50.077Z",
+    "expiresAt": "2027-08-08T21:15:50.077Z",
+    "createdAt": "2026-08-08T21:15:49.738Z",
+    "updatedAt": "2026-08-08T21:15:50.077Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c871d55f2635e81a99e",
+    "user": "6a779c431d55f2635e81a5bb",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c871d55f2635e81a99e",
+    "activatedAt": "2026-08-08T21:15:52.239Z",
+    "expiresAt": "2027-08-08T21:15:52.239Z",
+    "createdAt": "2026-08-08T21:15:51.893Z",
+    "updatedAt": "2026-08-08T21:15:52.239Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8a1d55f2635e81a9ca",
+    "user": "6a779c441d55f2635e81a5c6",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c8a1d55f2635e81a9ca",
+    "activatedAt": "2026-08-08T21:15:54.548Z",
+    "expiresAt": "2027-08-08T21:15:54.548Z",
+    "createdAt": "2026-08-08T21:15:54.147Z",
+    "updatedAt": "2026-08-08T21:15:54.549Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8c1d55f2635e81a9f6",
+    "user": "6a779c461d55f2635e81a5d1",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c8c1d55f2635e81a9f6",
+    "activatedAt": "2026-08-08T21:15:56.815Z",
+    "expiresAt": "2027-08-08T21:15:56.815Z",
+    "createdAt": "2026-08-08T21:15:56.471Z",
+    "updatedAt": "2026-08-08T21:15:56.815Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8e1d55f2635e81aa22",
+    "user": "6a779c481d55f2635e81a5dc",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c8e1d55f2635e81aa22",
+    "activatedAt": "2026-08-08T21:15:59.206Z",
+    "expiresAt": "2027-08-08T21:15:59.206Z",
+    "createdAt": "2026-08-08T21:15:58.826Z",
+    "updatedAt": "2026-08-08T21:15:59.207Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c911d55f2635e81aa4e",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c911d55f2635e81aa4e",
+    "activatedAt": "2026-08-08T21:16:01.449Z",
+    "expiresAt": "2027-08-08T21:16:01.449Z",
+    "createdAt": "2026-08-08T21:16:01.121Z",
+    "updatedAt": "2026-08-08T21:16:01.450Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c931d55f2635e81aa7a",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c931d55f2635e81aa7a",
+    "activatedAt": "2026-08-08T21:16:03.726Z",
+    "expiresAt": "2027-08-08T21:16:03.726Z",
+    "createdAt": "2026-08-08T21:16:03.366Z",
+    "updatedAt": "2026-08-08T21:16:03.726Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c951d55f2635e81aaa6",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c951d55f2635e81aaa6",
+    "activatedAt": "2026-08-08T21:16:05.946Z",
+    "expiresAt": "2027-08-08T21:16:05.946Z",
+    "createdAt": "2026-08-08T21:16:05.586Z",
+    "updatedAt": "2026-08-08T21:16:05.946Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c981d55f2635e81aad2",
+    "user": "6a779c501d55f2635e81a608",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c981d55f2635e81aad2",
+    "activatedAt": "2026-08-08T21:16:08.393Z",
+    "expiresAt": "2027-08-08T21:16:08.393Z",
+    "createdAt": "2026-08-08T21:16:08.056Z",
+    "updatedAt": "2026-08-08T21:16:08.394Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9a1d55f2635e81aafe",
+    "user": "6a779c521d55f2635e81a613",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c9a1d55f2635e81aafe",
+    "activatedAt": "2026-08-08T21:16:10.546Z",
+    "expiresAt": "2027-08-08T21:16:10.546Z",
+    "createdAt": "2026-08-08T21:16:10.224Z",
+    "updatedAt": "2026-08-08T21:16:10.546Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9c1d55f2635e81ab2d",
+    "user": "6a779c541d55f2635e81a61e",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c9c1d55f2635e81ab2d",
+    "activatedAt": "2026-08-08T21:16:12.851Z",
+    "expiresAt": "2027-08-08T21:16:12.851Z",
+    "createdAt": "2026-08-08T21:16:12.509Z",
+    "updatedAt": "2026-08-08T21:16:12.851Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9e1d55f2635e81ab5d",
+    "user": "6a779c561d55f2635e81a629",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779c9e1d55f2635e81ab5d",
+    "activatedAt": "2026-08-08T21:16:15.260Z",
+    "expiresAt": "2027-08-08T21:16:15.260Z",
+    "createdAt": "2026-08-08T21:16:14.933Z",
+    "updatedAt": "2026-08-08T21:16:15.260Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca11d55f2635e81ab89",
+    "user": "6a779c581d55f2635e81a634",
+    "package": "6a7789bfd2e462da5662f54c",
+    "snapshot": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "dailyReturnPct": 2,
+      "durationDays": 365
+    },
+    "status": "active",
+    "paymentStatus": "paid",
+    "paymentId": "wallet-6a779ca11d55f2635e81ab89",
+    "activatedAt": "2026-08-08T21:16:17.403Z",
+    "expiresAt": "2027-08-08T21:16:17.403Z",
+    "createdAt": "2026-08-08T21:16:17.095Z",
+    "updatedAt": "2026-08-08T21:16:17.404Z",
+    "__v": 0
+  }
+]

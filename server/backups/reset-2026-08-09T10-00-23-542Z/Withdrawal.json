@@ -1,0 +1,32 @@
+[
+  {
+    "_id": "6a733ecbc3d1405386717632",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "amount": 20,
+    "currency": "USDT-BEP20",
+    "address": "0xdb45ffd78237ccc5875ada95c206320ce98cfb7f",
+    "status": "paid",
+    "remarks": "Auto-approved — pending on-chain payout",
+    "processedBy": null,
+    "processedAt": "2026-08-05T13:46:51.555Z",
+    "createdAt": "2026-08-05T13:46:51.556Z",
+    "updatedAt": "2026-08-05T13:46:51.556Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734cb97246e58e90c5e2e8",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "amount": 30,
+    "currency": "USDT-BEP20",
+    "address": "0xdb45ffd78237ccc5875ada95c206320ce98cfb7f",
+    "status": "paid",
+    "remarks": "Auto-approved — pending on-chain payout",
+    "processedBy": null,
+    "processedAt": "2026-08-05T14:46:17.524Z",
+    "createdAt": "2026-08-05T14:46:17.526Z",
+    "updatedAt": "2026-08-05T14:46:17.526Z",
+    "__v": 0
+  }
+]

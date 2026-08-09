@@ -1,0 +1,6312 @@
+[
+  {
+    "_id": "6a6f5c68277f8c8f148cba35",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-02T15:04:06.254Z",
+    "finishedAt": "2026-08-02T15:04:08.594Z",
+    "durationMs": 2340,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-02T15:04:06.254Z",
+      "processed": 0,
+      "credited": 0,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T15:04:08.604Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5c69277f8c8f148cba40",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T15:04:09.421Z",
+    "finishedAt": "2026-08-02T15:04:09.421Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T15:04:09.422Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5c69277f8c8f148cba42",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-02T15:04:09.334Z",
+    "finishedAt": "2026-08-02T15:04:09.441Z",
+    "durationMs": 107,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "evaluated": 0,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T15:04:09.442Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5c69277f8c8f148cba48",
+    "job": "monthly_community_bonus",
+    "status": "success",
+    "startedAt": "2026-08-02T15:04:08.583Z",
+    "finishedAt": "2026-08-02T15:04:09.453Z",
+    "durationMs": 870,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "month": "2026-08",
+      "processed": 0,
+      "credited": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T15:04:09.454Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5c69277f8c8f148cba4a",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-02T15:04:07.759Z",
+    "finishedAt": "2026-08-02T15:04:09.455Z",
+    "durationMs": 1696,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-02T15:04:07.759Z",
+      "processed": 0,
+      "credited": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T15:04:09.455Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5c69277f8c8f148cba4d",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-02T15:04:09.079Z",
+    "finishedAt": "2026-08-02T15:04:09.613Z",
+    "durationMs": 534,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "evaluated": 1,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T15:04:09.614Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f6025277f8c8f148cbaf3",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T15:20:05.388Z",
+    "finishedAt": "2026-08-02T15:20:05.388Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T15:20:05.390Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f618c277f8c8f148cbb5f",
+    "job": "monthly_community_bonus",
+    "status": "failed",
+    "startedAt": "2026-08-02T15:25:34.769Z",
+    "finishedAt": "2026-08-02T15:26:04.772Z",
+    "durationMs": 30003,
+    "processed": 0,
+    "error": "connect ETIMEDOUT 64:ff9b::9f29:b516:27017, connect ETIMEDOUT 159.41.181.22:27017",
+    "createdAt": "2026-08-02T15:26:04.773Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f618c277f8c8f148cbb60",
+    "job": "monthly_community_bonus",
+    "status": "failed",
+    "startedAt": "2026-08-02T15:26:04.765Z",
+    "finishedAt": "2026-08-02T15:26:04.772Z",
+    "durationMs": 7,
+    "processed": 0,
+    "error": "connect ETIMEDOUT 64:ff9b::9f29:b516:27017, connect ETIMEDOUT 159.41.181.22:27017",
+    "createdAt": "2026-08-02T15:26:04.773Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f61c7277f8c8f148cbb70",
+    "job": "rank_check",
+    "status": "failed",
+    "startedAt": "2026-08-02T15:26:04.771Z",
+    "finishedAt": "2026-08-02T15:27:03.205Z",
+    "durationMs": 58434,
+    "processed": 0,
+    "error": "connect ETIMEDOUT 64:ff9b::9f29:b516:27017, connect ETIMEDOUT 159.41.181.22:27017",
+    "createdAt": "2026-08-02T15:27:03.206Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f63d8d7eb0b2968f51ac9",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T15:35:52.453Z",
+    "finishedAt": "2026-08-02T15:35:52.453Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T15:35:52.454Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f6962d7eb0b2968f51c74",
+    "job": "daily_yield",
+    "status": "failed",
+    "startedAt": "2026-08-02T15:59:00.436Z",
+    "finishedAt": "2026-08-02T15:59:30.440Z",
+    "durationMs": 30004,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-02T15:59:30.441Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f6962d7eb0b2968f51c7a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T15:59:30.449Z",
+    "finishedAt": "2026-08-02T15:59:30.449Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T15:59:30.450Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f6962d7eb0b2968f51c78",
+    "job": "rank_check",
+    "status": "failed",
+    "startedAt": "2026-08-02T15:59:00.437Z",
+    "finishedAt": "2026-08-02T15:59:30.442Z",
+    "durationMs": 30005,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-02T15:59:30.442Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f6962d7eb0b2968f51c7c",
+    "job": "bonanza_check",
+    "status": "failed",
+    "startedAt": "2026-08-02T15:59:00.448Z",
+    "finishedAt": "2026-08-02T15:59:30.450Z",
+    "durationMs": 30002,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-02T15:59:30.451Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f697ed7eb0b2968f51c8b",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-02T15:59:30.438Z",
+    "finishedAt": "2026-08-02T15:59:58.235Z",
+    "durationMs": 27797,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-02T15:59:30.438Z",
+      "processed": 1,
+      "credited": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T15:59:58.236Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f697ed7eb0b2968f51c92",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-02T15:59:30.441Z",
+    "finishedAt": "2026-08-02T15:59:58.490Z",
+    "durationMs": 28049,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T15:59:58.491Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f6cebd7eb0b2968f51d33",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T16:14:35.971Z",
+    "finishedAt": "2026-08-02T16:14:35.971Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T16:14:35.972Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f70a6d7eb0b2968f51da7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T16:30:30.825Z",
+    "finishedAt": "2026-08-02T16:30:30.825Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T16:30:30.826Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f7525b93dd3c97f69588b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T16:49:41.335Z",
+    "finishedAt": "2026-08-02T16:49:41.335Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T16:49:41.337Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f78e5b93dd3c97f695abe",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T17:05:41.379Z",
+    "finishedAt": "2026-08-02T17:05:41.379Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T17:05:41.382Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f7b5bb93dd3c97f695b2b",
+    "job": "rank_check",
+    "status": "failed",
+    "startedAt": "2026-08-02T17:15:41.062Z",
+    "finishedAt": "2026-08-02T17:16:11.066Z",
+    "durationMs": 30004,
+    "processed": 0,
+    "error": "connect ETIMEDOUT 64:ff9b::9f29:b50a:27017, connect ECONNABORTED 159.41.181.10:27017",
+    "createdAt": "2026-08-02T17:16:11.067Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f7b67b93dd3c97f695b3e",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-02T17:16:11.057Z",
+    "finishedAt": "2026-08-02T17:16:23.159Z",
+    "durationMs": 12102,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-02T17:16:11.057Z",
+      "processed": 1,
+      "credited": 1,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T17:16:23.160Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f7b68b93dd3c97f695b46",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-02T17:16:11.065Z",
+    "finishedAt": "2026-08-02T17:16:24.395Z",
+    "durationMs": 13330,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T17:16:24.396Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f7b69b93dd3c97f695b59",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-02T17:16:11.064Z",
+    "finishedAt": "2026-08-02T17:16:25.673Z",
+    "durationMs": 14609,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-02T17:16:25.674Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f7ca9b93dd3c97f695b7f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T17:21:45.915Z",
+    "finishedAt": "2026-08-02T17:21:45.915Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T17:21:45.916Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f8065b93dd3c97f695c7c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T17:37:41.705Z",
+    "finishedAt": "2026-08-02T17:37:41.705Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T17:37:41.708Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f842cb93dd3c97f695cde",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T17:53:48.930Z",
+    "finishedAt": "2026-08-02T17:53:48.930Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T17:53:48.933Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f87e5b93dd3c97f695d8b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-02T18:09:41.650Z",
+    "finishedAt": "2026-08-02T18:09:41.650Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-02T18:09:41.652Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7018cab4fafe655edb51e8",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T04:27:54.413Z",
+    "finishedAt": "2026-08-03T04:27:54.414Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T04:27:54.426Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7018cab4fafe655edb51f3",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-03T04:27:54.202Z",
+    "finishedAt": "2026-08-03T04:27:54.511Z",
+    "durationMs": 309,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-03T04:27:54.202Z",
+      "processed": 1,
+      "credited": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T04:27:54.512Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7018cab4fafe655edb51f6",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-03T04:27:54.161Z",
+    "finishedAt": "2026-08-03T04:27:54.524Z",
+    "durationMs": 363,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-03T04:27:54.161Z",
+      "processed": 1,
+      "credited": 1,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T04:27:54.525Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7018cab4fafe655edb5203",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-03T04:27:54.373Z",
+    "finishedAt": "2026-08-03T04:27:54.752Z",
+    "durationMs": 379,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T04:27:54.755Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7018cbb4fafe655edb5210",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-03T04:27:54.311Z",
+    "finishedAt": "2026-08-03T04:27:55.082Z",
+    "durationMs": 771,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T04:27:55.086Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a701cc066fd9b87142177b7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T04:44:48.723Z",
+    "finishedAt": "2026-08-03T04:44:48.723Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T04:44:48.742Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70208066fd9b871421784a",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-03T05:00:38.364Z",
+    "finishedAt": "2026-08-03T05:00:48.365Z",
+    "durationMs": 10001,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T05:00:48.365Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70207666fd9b8714217840",
+    "job": "rank_check",
+    "status": "failed",
+    "startedAt": "2026-08-03T05:00:28.362Z",
+    "finishedAt": "2026-08-03T05:00:38.365Z",
+    "durationMs": 10003,
+    "processed": 0,
+    "error": "read ECONNRESET",
+    "createdAt": "2026-08-03T05:00:38.366Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70208066fd9b8714217850",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T05:00:48.429Z",
+    "finishedAt": "2026-08-03T05:00:48.429Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T05:00:48.430Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70221066fd9b87142178b0",
+    "job": "monthly_community_bonus",
+    "status": "failed",
+    "startedAt": "2026-08-03T05:07:18.361Z",
+    "finishedAt": "2026-08-03T05:07:28.368Z",
+    "durationMs": 10007,
+    "processed": 0,
+    "error": "read ECONNRESET",
+    "createdAt": "2026-08-03T05:07:28.370Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70221366fd9b87142178cb",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-03T05:07:28.364Z",
+    "finishedAt": "2026-08-03T05:07:31.070Z",
+    "durationMs": 2706,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T05:07:31.071Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70244066fd9b8714217909",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T05:16:48.477Z",
+    "finishedAt": "2026-08-03T05:16:48.477Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T05:16:48.478Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70280066fd9b871421796b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T05:32:48.484Z",
+    "finishedAt": "2026-08-03T05:32:48.484Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T05:32:48.486Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a702bc066fd9b87142179cd",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T05:48:48.492Z",
+    "finishedAt": "2026-08-03T05:48:48.492Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T05:48:48.492Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a702f8066fd9b8714217a2f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T06:04:48.476Z",
+    "finishedAt": "2026-08-03T06:04:48.476Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T06:04:48.477Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70334066fd9b8714217a91",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T06:20:48.486Z",
+    "finishedAt": "2026-08-03T06:20:48.486Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T06:20:48.487Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70370066fd9b8714217af3",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T06:36:48.811Z",
+    "finishedAt": "2026-08-03T06:36:48.811Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T06:36:48.816Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a703ac066fd9b8714217b55",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T06:52:48.812Z",
+    "finishedAt": "2026-08-03T06:52:48.812Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T06:52:48.814Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a703e8066fd9b8714217bb7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T07:08:48.818Z",
+    "finishedAt": "2026-08-03T07:08:48.818Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T07:08:48.819Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70424066fd9b8714217c19",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T07:24:48.833Z",
+    "finishedAt": "2026-08-03T07:24:48.833Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T07:24:48.836Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70460066fd9b8714217c7b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T07:40:48.817Z",
+    "finishedAt": "2026-08-03T07:40:48.817Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T07:40:48.819Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7049c066fd9b8714217cdd",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T07:56:48.831Z",
+    "finishedAt": "2026-08-03T07:56:48.831Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T07:56:48.832Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a704d8166fd9b8714217d3f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T08:12:49.114Z",
+    "finishedAt": "2026-08-03T08:12:49.114Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T08:12:49.118Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70514066fd9b8714217da1",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T08:28:48.829Z",
+    "finishedAt": "2026-08-03T08:28:48.829Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T08:28:48.830Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70550066fd9b8714217e03",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T08:44:48.926Z",
+    "finishedAt": "2026-08-03T08:44:48.926Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T08:44:48.928Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7058c066fd9b8714217e65",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T09:00:48.897Z",
+    "finishedAt": "2026-08-03T09:00:48.897Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T09:00:48.899Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a705e2f66fd9b8714217e7f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T09:23:59.619Z",
+    "finishedAt": "2026-08-03T09:23:59.619Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T09:23:59.620Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7061ec66fd9b8714217ee1",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T09:39:56.408Z",
+    "finishedAt": "2026-08-03T09:39:56.409Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T09:39:56.409Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7065ac66fd9b8714217f43",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T09:55:56.415Z",
+    "finishedAt": "2026-08-03T09:55:56.415Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T09:55:56.418Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70696c66fd9b8714217fa5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T10:11:56.364Z",
+    "finishedAt": "2026-08-03T10:11:56.364Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T10:11:56.365Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a706d2c66fd9b8714218039",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T10:27:56.384Z",
+    "finishedAt": "2026-08-03T10:27:56.384Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T10:27:56.385Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7070ec66fd9b871421809b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T10:43:56.550Z",
+    "finishedAt": "2026-08-03T10:43:56.550Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T10:43:56.551Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7072e166fd9b87142180f8",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-03T10:52:16.024Z",
+    "finishedAt": "2026-08-03T10:52:17.463Z",
+    "durationMs": 1439,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-03T10:52:16.024Z",
+      "processed": 1,
+      "credited": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T10:52:17.466Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7072e066fd9b87142180ee",
+    "job": "daily_yield",
+    "status": "failed",
+    "startedAt": "2026-08-03T10:52:06.023Z",
+    "finishedAt": "2026-08-03T10:52:16.026Z",
+    "durationMs": 10003,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-03T10:52:16.027Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7074ac66fd9b871421812a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T10:59:56.329Z",
+    "finishedAt": "2026-08-03T10:59:56.329Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T10:59:56.330Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7075d466fd9b8714218179",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-03T11:04:46.036Z",
+    "finishedAt": "2026-08-03T11:04:52.777Z",
+    "durationMs": 6741,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T11:04:52.779Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7075ce66fd9b8714218171",
+    "job": "rank_check",
+    "status": "failed",
+    "startedAt": "2026-08-03T11:04:36.033Z",
+    "finishedAt": "2026-08-03T11:04:46.039Z",
+    "durationMs": 10006,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-02.mif1alv.mongodb.net",
+    "createdAt": "2026-08-03T11:04:46.041Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70786c66fd9b87142181ed",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T11:15:56.052Z",
+    "finishedAt": "2026-08-03T11:15:56.052Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T11:15:56.053Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70786c66fd9b87142181ef",
+    "job": "bonanza_check",
+    "status": "failed",
+    "startedAt": "2026-08-03T11:15:46.049Z",
+    "finishedAt": "2026-08-03T11:15:56.054Z",
+    "durationMs": 10005,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-03T11:15:56.055Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a707c2c66fd9b8714218256",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T11:31:56.318Z",
+    "finishedAt": "2026-08-03T11:31:56.318Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T11:31:56.319Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a707e2066fd9b87142182cb",
+    "job": "daily_yield",
+    "status": "failed",
+    "startedAt": "2026-08-03T11:40:06.045Z",
+    "finishedAt": "2026-08-03T11:40:16.050Z",
+    "durationMs": 10005,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-03T11:40:16.052Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a707e2966fd9b87142182d5",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-03T11:40:16.048Z",
+    "finishedAt": "2026-08-03T11:40:25.436Z",
+    "durationMs": 9388,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-03T11:40:16.048Z",
+      "processed": 1,
+      "credited": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-03T11:40:25.438Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a707fec66fd9b8714218307",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T11:47:56.392Z",
+    "finishedAt": "2026-08-03T11:47:56.392Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T11:47:56.393Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7083ab66fd9b871421835d",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T12:03:55.975Z",
+    "finishedAt": "2026-08-03T12:03:55.975Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T12:03:55.977Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70876c66fd9b87142183bf",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T12:19:56.000Z",
+    "finishedAt": "2026-08-03T12:19:56.000Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T12:19:56.001Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a708b2c66fd9b8714218421",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T12:35:56.386Z",
+    "finishedAt": "2026-08-03T12:35:56.386Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T12:35:56.388Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a708eec66fd9b8714218483",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T12:51:56.005Z",
+    "finishedAt": "2026-08-03T12:51:56.005Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T12:51:56.006Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7092ac66fd9b87142184e5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T13:07:56.035Z",
+    "finishedAt": "2026-08-03T13:07:56.035Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T13:07:56.037Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a709656a95c170c5edcf49d",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T13:23:34.005Z",
+    "finishedAt": "2026-08-03T13:23:34.006Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T13:23:34.033Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70c55cb77c8089378a9319",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T16:44:12.282Z",
+    "finishedAt": "2026-08-03T16:44:12.282Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T16:44:12.292Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70c91cb77c8089378a93f9",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T17:00:12.368Z",
+    "finishedAt": "2026-08-03T17:00:12.368Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T17:00:12.369Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70cca0b77c8089378a94bd",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T17:15:12.556Z",
+    "finishedAt": "2026-08-03T17:15:12.556Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T17:15:12.557Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70d060b77c8089378a956b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-03T17:31:12.631Z",
+    "finishedAt": "2026-08-03T17:31:12.631Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-03T17:31:12.632Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7131aded8acf7d51ca3168",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T00:26:21.010Z",
+    "finishedAt": "2026-08-04T00:26:21.010Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T00:26:21.101Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a714249b77c8089378a95bd",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-04T01:37:11.051Z",
+    "finishedAt": "2026-08-04T01:37:13.820Z",
+    "durationMs": 2769,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-04T01:37:11.067Z",
+      "processed": 1,
+      "credited": 1,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-04T01:37:13.835Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a714249b77c8089378a95ca",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T01:37:13.989Z",
+    "finishedAt": "2026-08-04T01:37:13.989Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T01:37:14.008Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71424ab77c8089378a95d2",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-04T01:37:13.846Z",
+    "finishedAt": "2026-08-04T01:37:14.115Z",
+    "durationMs": 269,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-04T01:37:13.846Z",
+      "processed": 1,
+      "credited": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-04T01:37:14.167Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71424ab77c8089378a95e2",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-04T01:37:13.915Z",
+    "finishedAt": "2026-08-04T01:37:14.473Z",
+    "durationMs": 558,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-04T01:37:14.481Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71424ab77c8089378a95ef",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-04T01:37:13.885Z",
+    "finishedAt": "2026-08-04T01:37:14.587Z",
+    "durationMs": 702,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-04T01:37:14.591Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71627fb77c8089378a9604",
+    "job": "monthly_community_bonus",
+    "status": "success",
+    "startedAt": "2026-08-04T03:54:34.556Z",
+    "finishedAt": "2026-08-04T03:54:39.785Z",
+    "durationMs": 5229,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "month": "2026-08",
+      "processed": 2,
+      "credited": 0,
+      "skipped": 2,
+      "errors": 0
+    },
+    "createdAt": "2026-08-04T03:54:39.824Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71627fb77c8089378a9606",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-04T03:54:34.517Z",
+    "finishedAt": "2026-08-04T03:54:39.860Z",
+    "durationMs": 5343,
+    "processed": 1,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-04T03:54:34.517Z",
+      "processed": 1,
+      "credited": 0,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-04T03:54:39.869Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71627fb77c8089378a960a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T03:54:39.952Z",
+    "finishedAt": "2026-08-04T03:54:39.952Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T03:54:39.957Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71663bb77c8089378a971b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T04:10:35.384Z",
+    "finishedAt": "2026-08-04T04:10:35.384Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T04:10:35.391Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7169fde704140019284b91",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T04:26:37.913Z",
+    "finishedAt": "2026-08-04T04:26:37.913Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T04:26:37.931Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a716dbb7c489a2a9eb6c125",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T04:42:35.778Z",
+    "finishedAt": "2026-08-04T04:42:35.779Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T04:42:35.799Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a717786b77c8089378a981f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T05:24:22.132Z",
+    "finishedAt": "2026-08-04T05:24:22.132Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T05:24:22.348Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a717b44b77c8089378a9881",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T05:40:20.442Z",
+    "finishedAt": "2026-08-04T05:40:20.442Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T05:40:20.448Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71840c1c70e5ca2375bf82",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T06:17:48.651Z",
+    "finishedAt": "2026-08-04T06:17:48.651Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T06:17:48.666Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7187cc1c70e5ca2375bfe4",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T06:33:48.628Z",
+    "finishedAt": "2026-08-04T06:33:48.628Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T06:33:48.632Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a718b8c1c70e5ca2375c05e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T06:49:48.648Z",
+    "finishedAt": "2026-08-04T06:49:48.648Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T06:49:48.652Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a718f4c1c70e5ca2375c0c0",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T07:05:48.978Z",
+    "finishedAt": "2026-08-04T07:05:48.978Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T07:05:48.982Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71930c1c70e5ca2375c123",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T07:21:48.658Z",
+    "finishedAt": "2026-08-04T07:21:48.658Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T07:21:48.660Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7196a485e54b0e906d135e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T07:37:08.518Z",
+    "finishedAt": "2026-08-04T07:37:08.519Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T07:37:08.558Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a719a6485e54b0e906d13c0",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T07:53:08.483Z",
+    "finishedAt": "2026-08-04T07:53:08.483Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T07:53:08.485Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a719e2485e54b0e906d1422",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T08:09:08.518Z",
+    "finishedAt": "2026-08-04T08:09:08.518Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T08:09:08.521Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71a1ca26fb2008696ba4cf",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T08:24:42.394Z",
+    "finishedAt": "2026-08-04T08:24:42.394Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T08:24:42.405Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71a563ddb179d3ab204dde",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T08:40:03.807Z",
+    "finishedAt": "2026-08-04T08:40:03.807Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T08:40:03.829Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71a8f4ddb179d3ab204e1c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T08:55:16.221Z",
+    "finishedAt": "2026-08-04T08:55:16.221Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T08:55:16.222Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71ac92c46616bebde7b31e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T09:10:42.364Z",
+    "finishedAt": "2026-08-04T09:10:42.365Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T09:10:42.373Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71b034ddb179d3ab204e36",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T09:26:12.281Z",
+    "finishedAt": "2026-08-04T09:26:12.281Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T09:26:12.282Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71b3f2ddb179d3ab204e98",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T09:42:10.719Z",
+    "finishedAt": "2026-08-04T09:42:10.720Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T09:42:10.725Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71b7b2ddb179d3ab204efa",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T09:58:10.869Z",
+    "finishedAt": "2026-08-04T09:58:10.869Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T09:58:10.873Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71bb72ddb179d3ab204f5c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T10:14:10.658Z",
+    "finishedAt": "2026-08-04T10:14:10.659Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T10:14:10.665Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71bef9a92ad190401b676d",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T10:29:13.679Z",
+    "finishedAt": "2026-08-04T10:29:13.680Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T10:29:13.726Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c2b9a92ad190401b67cf",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T10:45:13.704Z",
+    "finishedAt": "2026-08-04T10:45:13.704Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T10:45:13.707Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c679a92ad190401b6831",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T11:01:13.710Z",
+    "finishedAt": "2026-08-04T11:01:13.710Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T11:01:13.714Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71ca39a92ad190401b6893",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T11:17:13.724Z",
+    "finishedAt": "2026-08-04T11:17:13.724Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T11:17:13.729Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71cdfaa92ad190401b68f5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T11:33:14.008Z",
+    "finishedAt": "2026-08-04T11:33:14.008Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T11:33:14.014Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71d1baa92ad190401b6957",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T11:49:14.615Z",
+    "finishedAt": "2026-08-04T11:49:14.615Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T11:49:14.621Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71d57aa92ad190401b69b9",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T12:05:14.048Z",
+    "finishedAt": "2026-08-04T12:05:14.048Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T12:05:14.051Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71d939a92ad190401b6a1b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T12:21:13.723Z",
+    "finishedAt": "2026-08-04T12:21:13.723Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T12:21:13.727Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71de019f989a2695d69ef6",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T12:41:37.471Z",
+    "finishedAt": "2026-08-04T12:41:37.471Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T12:41:37.484Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f12526497fc4f924e67b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T14:03:17.846Z",
+    "finishedAt": "2026-08-04T14:03:17.846Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T14:03:17.848Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f4e526497fc4f924e822",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T14:19:17.338Z",
+    "finishedAt": "2026-08-04T14:19:17.339Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T14:19:17.340Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a720f5406abcf9494d14c10",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T16:12:04.764Z",
+    "finishedAt": "2026-08-04T16:12:04.764Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T16:12:04.772Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72133ca3d5543277bee97a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T16:28:44.408Z",
+    "finishedAt": "2026-08-04T16:28:44.408Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T16:28:44.410Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7216f4b5cc10434c175a1d",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T16:44:36.038Z",
+    "finishedAt": "2026-08-04T16:44:36.038Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T16:44:36.040Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a721ab4b5cc10434c175b4e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T17:00:36.089Z",
+    "finishedAt": "2026-08-04T17:00:36.089Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T17:00:36.092Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a721e38b5cc10434c175c11",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T17:15:36.203Z",
+    "finishedAt": "2026-08-04T17:15:36.203Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T17:15:36.204Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7221f8b5cc10434c175d01",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T17:31:36.344Z",
+    "finishedAt": "2026-08-04T17:31:36.344Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T17:31:36.358Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7225b8b5cc10434c175dc5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T17:47:36.433Z",
+    "finishedAt": "2026-08-04T17:47:36.433Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T17:47:36.440Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722978b5cc10434c175e53",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T18:03:36.523Z",
+    "finishedAt": "2026-08-04T18:03:36.524Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T18:03:36.536Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722d38b5cc10434c175eb6",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T18:19:36.661Z",
+    "finishedAt": "2026-08-04T18:19:36.662Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T18:19:36.672Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7230bdb5cc10434c175f6e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T18:34:37.060Z",
+    "finishedAt": "2026-08-04T18:34:37.060Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T18:34:37.063Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72347cb5cc10434c17606e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-04T18:50:36.947Z",
+    "finishedAt": "2026-08-04T18:50:36.947Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-04T18:50:36.949Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7286d2b9bcfb1329b38d9f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T00:41:54.042Z",
+    "finishedAt": "2026-08-05T00:41:54.042Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T00:41:54.050Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7286d3b9bcfb1329b38dac",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-05T00:41:51.922Z",
+    "finishedAt": "2026-08-05T00:41:55.041Z",
+    "durationMs": 3119,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-05T00:41:51.923Z",
+      "processed": 2,
+      "credited": 2,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-05T00:41:55.130Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72b9fe80bc83e56913edf6",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T04:20:14.622Z",
+    "finishedAt": "2026-08-05T04:20:14.622Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T04:20:14.655Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72b9ff80bc83e56913ee10",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-05T04:20:14.577Z",
+    "finishedAt": "2026-08-05T04:20:15.010Z",
+    "durationMs": 433,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-05T04:20:15.012Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72b9ff80bc83e56913ee1a",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-05T04:20:14.452Z",
+    "finishedAt": "2026-08-05T04:20:15.107Z",
+    "durationMs": 655,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-05T04:20:14.453Z",
+      "processed": 2,
+      "credited": 1,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-05T04:20:15.109Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72b9ff80bc83e56913ee21",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-05T04:20:14.530Z",
+    "finishedAt": "2026-08-05T04:20:15.336Z",
+    "durationMs": 806,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-05T04:20:15.338Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72bd8ff50a3299883037ba",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T04:35:27.202Z",
+    "finishedAt": "2026-08-05T04:35:27.202Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T04:35:27.220Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72c14c48af264aa8508544",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T04:51:24.501Z",
+    "finishedAt": "2026-08-05T04:51:24.502Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T04:51:24.553Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72c4fdba46ed0cb6062e52",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T05:07:09.810Z",
+    "finishedAt": "2026-08-05T05:07:09.810Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T05:07:09.814Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72c8bdba46ed0cb6062eb4",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T05:23:09.849Z",
+    "finishedAt": "2026-08-05T05:23:09.849Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T05:23:09.851Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72cc12ba46ed0cb6062f14",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-05T05:37:17.792Z",
+    "finishedAt": "2026-08-05T05:37:22.114Z",
+    "durationMs": 4322,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-05T05:37:22.115Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72cc49ba46ed0cb6062f1c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T05:38:17.966Z",
+    "finishedAt": "2026-08-05T05:38:17.966Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T05:38:17.967Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72d00aba46ed0cb6062f7e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T05:54:18.091Z",
+    "finishedAt": "2026-08-05T05:54:18.091Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T05:54:18.096Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72d3caba46ed0cb6062fe0",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T06:10:18.080Z",
+    "finishedAt": "2026-08-05T06:10:18.080Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T06:10:18.083Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72d78aba46ed0cb6063042",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T06:26:18.164Z",
+    "finishedAt": "2026-08-05T06:26:18.164Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T06:26:18.168Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72db4aba46ed0cb60630a4",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T06:42:18.144Z",
+    "finishedAt": "2026-08-05T06:42:18.144Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T06:42:18.147Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72df0aba46ed0cb6063106",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T06:58:18.090Z",
+    "finishedAt": "2026-08-05T06:58:18.091Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T06:58:18.094Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72e2caba46ed0cb6063168",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T07:14:18.143Z",
+    "finishedAt": "2026-08-05T07:14:18.143Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T07:14:18.146Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72e68aba46ed0cb60631ca",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T07:30:18.139Z",
+    "finishedAt": "2026-08-05T07:30:18.139Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T07:30:18.141Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72ea4aba46ed0cb606322c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T07:46:18.606Z",
+    "finishedAt": "2026-08-05T07:46:18.606Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T07:46:18.608Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72ee0bba46ed0cb606328e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T08:02:19.323Z",
+    "finishedAt": "2026-08-05T08:02:19.323Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T08:02:19.327Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72f1caba46ed0cb60632f0",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T08:18:18.433Z",
+    "finishedAt": "2026-08-05T08:18:18.433Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T08:18:18.436Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72f58aba46ed0cb6063352",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T08:34:18.593Z",
+    "finishedAt": "2026-08-05T08:34:18.594Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T08:34:18.596Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72fe34ba46ed0cb6063384",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T09:11:16.831Z",
+    "finishedAt": "2026-08-05T09:11:16.831Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T09:11:16.834Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7301ecba46ed0cb60633e6",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T09:27:08.284Z",
+    "finishedAt": "2026-08-05T09:27:08.284Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T09:27:08.285Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7305acba46ed0cb6063448",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T09:43:08.326Z",
+    "finishedAt": "2026-08-05T09:43:08.326Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T09:43:08.327Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73096cba46ed0cb60634aa",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T09:59:08.299Z",
+    "finishedAt": "2026-08-05T09:59:08.299Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T09:59:08.300Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a730b2aba46ed0cb60634e0",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-05T10:06:26.697Z",
+    "finishedAt": "2026-08-05T10:06:34.329Z",
+    "durationMs": 7632,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-05T10:06:26.697Z",
+      "processed": 2,
+      "credited": 2,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-05T10:06:34.333Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a730d32ba46ed0cb6063518",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T10:15:14.600Z",
+    "finishedAt": "2026-08-05T10:15:14.600Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T10:15:14.603Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7310ecba46ed0cb606357a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T10:31:08.678Z",
+    "finishedAt": "2026-08-05T10:31:08.678Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T10:31:08.683Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7314acba46ed0cb60635dc",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T10:47:08.642Z",
+    "finishedAt": "2026-08-05T10:47:08.642Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T10:47:08.643Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73186cba46ed0cb606363e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T11:03:08.637Z",
+    "finishedAt": "2026-08-05T11:03:08.637Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T11:03:08.638Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a731c2cba46ed0cb60636a0",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T11:19:08.590Z",
+    "finishedAt": "2026-08-05T11:19:08.590Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T11:19:08.591Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a731fecba46ed0cb6063702",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T11:35:08.596Z",
+    "finishedAt": "2026-08-05T11:35:08.596Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T11:35:08.597Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7323acba46ed0cb6063764",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T11:51:08.674Z",
+    "finishedAt": "2026-08-05T11:51:08.674Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T11:51:08.675Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73276cba46ed0cb60637c6",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T12:07:08.742Z",
+    "finishedAt": "2026-08-05T12:07:08.742Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T12:07:08.743Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a732b2cba46ed0cb6063828",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T12:23:08.650Z",
+    "finishedAt": "2026-08-05T12:23:08.650Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T12:23:08.652Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a732eecba46ed0cb606388a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T12:39:08.700Z",
+    "finishedAt": "2026-08-05T12:39:08.700Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T12:39:08.701Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7332926bf81a07203b29df",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T12:54:42.367Z",
+    "finishedAt": "2026-08-05T12:54:42.367Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T12:54:42.384Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7336526bf81a07203b2a41",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T13:10:42.581Z",
+    "finishedAt": "2026-08-05T13:10:42.581Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T13:10:42.586Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733a126bf81a07203b2aa3",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T13:26:42.476Z",
+    "finishedAt": "2026-08-05T13:26:42.477Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T13:26:42.478Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733da3c3d1405386717587",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T13:41:55.551Z",
+    "finishedAt": "2026-08-05T13:41:55.551Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T13:41:55.556Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734163c3d14053867176ea",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T13:57:55.552Z",
+    "finishedAt": "2026-08-05T13:57:55.552Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T13:57:55.553Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734a007246e58e90c5e269",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T14:34:40.117Z",
+    "finishedAt": "2026-08-05T14:34:40.117Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T14:34:40.124Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734dc07246e58e90c5e34a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T14:50:40.116Z",
+    "finishedAt": "2026-08-05T14:50:40.116Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T14:50:40.118Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a735b616bf81a07203b2aea",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T15:48:49.967Z",
+    "finishedAt": "2026-08-05T15:48:49.967Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T15:48:49.969Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a735f116bf81a07203b2b4f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T16:04:33.266Z",
+    "finishedAt": "2026-08-05T16:04:33.266Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T16:04:33.272Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7362d16bf81a07203b2bb1",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T16:20:33.959Z",
+    "finishedAt": "2026-08-05T16:20:33.959Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T16:20:33.961Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7366916bf81a07203b2c13",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T16:36:33.417Z",
+    "finishedAt": "2026-08-05T16:36:33.418Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T16:36:33.425Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a736a516bf81a07203b2c75",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T16:52:33.258Z",
+    "finishedAt": "2026-08-05T16:52:33.258Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T16:52:33.260Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a736e116bf81a07203b2cd7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T17:08:33.294Z",
+    "finishedAt": "2026-08-05T17:08:33.294Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T17:08:33.295Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73bed69d5af2c7ad354427",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T22:53:10.858Z",
+    "finishedAt": "2026-08-05T22:53:10.858Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T22:53:10.860Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73c2969d5af2c7ad354516",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-05T23:09:10.857Z",
+    "finishedAt": "2026-08-05T23:09:10.857Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-05T23:09:10.858Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73d994899788685deb631c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T00:47:16.346Z",
+    "finishedAt": "2026-08-06T00:47:16.346Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T00:47:16.355Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73d995899788685deb6337",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-06T00:47:15.024Z",
+    "finishedAt": "2026-08-06T00:47:17.873Z",
+    "durationMs": 2849,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-06T00:47:15.025Z",
+      "processed": 2,
+      "credited": 1,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-06T00:47:17.874Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73d995899788685deb6339",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-06T00:47:14.166Z",
+    "finishedAt": "2026-08-06T00:47:17.979Z",
+    "durationMs": 3813,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-06T00:47:14.166Z",
+      "processed": 2,
+      "credited": 2,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-06T00:47:18.064Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73dd20af9cc7a47dc0af20",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T01:02:24.443Z",
+    "finishedAt": "2026-08-06T01:02:24.443Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T01:02:24.457Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73e55d6bf81a07203b2d68",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T01:37:33.262Z",
+    "finishedAt": "2026-08-06T01:37:33.262Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T01:37:33.264Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73e55e6bf81a07203b2d76",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-06T01:37:33.192Z",
+    "finishedAt": "2026-08-06T01:37:34.067Z",
+    "durationMs": 875,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-06T01:37:34.068Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73e55e6bf81a07203b2d85",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-06T01:37:24.789Z",
+    "finishedAt": "2026-08-06T01:37:34.739Z",
+    "durationMs": 9950,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-06T01:37:34.742Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73e7be6246bed4f29ec3d1",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-06T01:47:00.413Z",
+    "finishedAt": "2026-08-06T01:47:42.415Z",
+    "durationMs": 42002,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-06T01:47:00.414Z",
+      "processed": 2,
+      "credited": 2,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-06T01:47:42.436Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73e89cd66038d36801e306",
+    "job": "daily_team_energy",
+    "status": "failed",
+    "startedAt": "2026-08-06T01:51:14.215Z",
+    "finishedAt": "2026-08-06T01:51:24.223Z",
+    "durationMs": 10008,
+    "processed": 0,
+    "error": "connect ETIMEDOUT 64:ff9b::9f29:b521:27017, connect ETIMEDOUT 159.41.181.33:27017",
+    "createdAt": "2026-08-06T01:51:24.226Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73e918d66038d36801e31c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T01:53:28.232Z",
+    "finishedAt": "2026-08-06T01:53:28.233Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T01:53:28.235Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73ef40e23c9ce13c12fc82",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T02:19:44.254Z",
+    "finishedAt": "2026-08-06T02:19:44.254Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T02:19:44.262Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a740c85d66038d36801e346",
+    "job": "daily_team_energy",
+    "status": "failed",
+    "startedAt": "2026-08-06T04:24:27.693Z",
+    "finishedAt": "2026-08-06T04:24:37.773Z",
+    "durationMs": 10080,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-06T04:24:37.773Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a740c8dd66038d36801e34c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T04:24:45.145Z",
+    "finishedAt": "2026-08-06T04:24:45.145Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T04:24:45.146Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a741360be7aa90e2bff2966",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T04:53:52.219Z",
+    "finishedAt": "2026-08-06T04:53:52.219Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T04:53:52.221Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a74172645c6d0304f73ad7a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T05:09:58.195Z",
+    "finishedAt": "2026-08-06T05:09:58.195Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T05:09:58.217Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a741ad245c6d0304f73addc",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T05:25:38.831Z",
+    "finishedAt": "2026-08-06T05:25:38.831Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T05:25:38.836Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a741e9245c6d0304f73ae3e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T05:41:38.823Z",
+    "finishedAt": "2026-08-06T05:41:38.823Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T05:41:38.825Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a74225245c6d0304f73aea2",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T05:57:38.829Z",
+    "finishedAt": "2026-08-06T05:57:38.830Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T05:57:38.834Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a74261245c6d0304f73af35",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T06:13:38.839Z",
+    "finishedAt": "2026-08-06T06:13:38.839Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T06:13:38.843Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7429d345c6d0304f73af97",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T06:29:39.150Z",
+    "finishedAt": "2026-08-06T06:29:39.150Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T06:29:39.152Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a742d9245c6d0304f73b017",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T06:45:38.866Z",
+    "finishedAt": "2026-08-06T06:45:38.866Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T06:45:38.870Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a744eb3bda9904666a3d82e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T09:06:59.143Z",
+    "finishedAt": "2026-08-06T09:06:59.143Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T09:06:59.145Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a74562087b36dbc76082d03",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T09:38:40.442Z",
+    "finishedAt": "2026-08-06T09:38:40.442Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T09:38:40.451Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a745a663f3ee3f4199820c1",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-06T09:56:54.632Z",
+    "finishedAt": "2026-08-06T09:56:54.632Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-06T09:56:54.641Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a752b1467b5dbdb5145a4b7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T00:47:16.763Z",
+    "finishedAt": "2026-08-07T00:47:16.764Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T00:47:16.767Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a752b1667b5dbdb5145a4d1",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-07T00:47:15.457Z",
+    "finishedAt": "2026-08-07T00:47:18.095Z",
+    "durationMs": 2638,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-07T00:47:15.457Z",
+      "processed": 2,
+      "credited": 1,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T00:47:18.096Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a752b1667b5dbdb5145a4d3",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-07T00:47:14.614Z",
+    "finishedAt": "2026-08-07T00:47:18.149Z",
+    "durationMs": 3535,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-07T00:47:14.614Z",
+      "processed": 2,
+      "credited": 2,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T00:47:18.190Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7550b684b1351c85b35c36",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T03:27:50.540Z",
+    "finishedAt": "2026-08-07T03:27:50.540Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T03:27:50.548Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7550b784b1351c85b35c49",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-07T03:27:50.304Z",
+    "finishedAt": "2026-08-07T03:27:51.923Z",
+    "durationMs": 1619,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T03:27:51.925Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7550b984b1351c85b35c56",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-07T03:27:50.069Z",
+    "finishedAt": "2026-08-07T03:27:53.601Z",
+    "durationMs": 3532,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T03:27:53.602Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a755ef0a49dc003b8d31d2f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T04:28:32.774Z",
+    "finishedAt": "2026-08-07T04:28:32.774Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T04:28:32.778Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75604fa49dc003b8d31d5d",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-07T04:34:21.605Z",
+    "finishedAt": "2026-08-07T04:34:23.485Z",
+    "durationMs": 1880,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T04:34:23.486Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7562aca49dc003b8d31dcf",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T04:44:28.793Z",
+    "finishedAt": "2026-08-07T04:44:28.793Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T04:44:28.794Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7562a7a49dc003b8d31dc8",
+    "job": "rank_check",
+    "status": "failed",
+    "startedAt": "2026-08-07T04:44:13.483Z",
+    "finishedAt": "2026-08-07T04:44:23.488Z",
+    "durationMs": 10005,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-07T04:44:23.489Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7562ada49dc003b8d31dd7",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-07T04:44:23.486Z",
+    "finishedAt": "2026-08-07T04:44:29.281Z",
+    "durationMs": 5795,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T04:44:29.283Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a756319a49dc003b8d31de6",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-07T04:45:31.576Z",
+    "finishedAt": "2026-08-07T04:46:17.941Z",
+    "durationMs": 46365,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-07T04:45:31.576Z",
+      "processed": 2,
+      "credited": 2,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T04:46:17.942Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75669b428015a75b0e71e7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T05:01:15.819Z",
+    "finishedAt": "2026-08-07T05:01:15.820Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T05:01:15.836Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a756799428015a75b0e720e",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-07T05:05:26.582Z",
+    "finishedAt": "2026-08-07T05:05:29.417Z",
+    "durationMs": 2835,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T05:05:29.429Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a756799428015a75b0e7223",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-07T05:05:26.576Z",
+    "finishedAt": "2026-08-07T05:05:29.954Z",
+    "durationMs": 3378,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T05:05:29.956Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a756a383c40862faac7a6e7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T05:16:40.022Z",
+    "finishedAt": "2026-08-07T05:16:40.023Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T05:16:40.030Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a756e083c40862faac7a7d5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T05:32:56.290Z",
+    "finishedAt": "2026-08-07T05:32:56.290Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T05:32:56.291Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a756e083c40862faac7a7e4",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-07T05:32:49.602Z",
+    "finishedAt": "2026-08-07T05:32:56.796Z",
+    "durationMs": 7194,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T05:32:56.797Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7571c13c40862faac7a846",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T05:48:49.984Z",
+    "finishedAt": "2026-08-07T05:48:49.984Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T05:48:49.986Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7575813c40862faac7a8a8",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T06:04:49.960Z",
+    "finishedAt": "2026-08-07T06:04:49.960Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T06:04:49.962Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75791ce57fad06c7406778",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T06:20:12.363Z",
+    "finishedAt": "2026-08-07T06:20:12.363Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T06:20:12.378Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a757cdce57fad06c74067da",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T06:36:12.387Z",
+    "finishedAt": "2026-08-07T06:36:12.387Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T06:36:12.393Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75809ce57fad06c740683c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T06:52:12.467Z",
+    "finishedAt": "2026-08-07T06:52:12.467Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T06:52:12.468Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75845ce57fad06c740689e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T07:08:12.514Z",
+    "finishedAt": "2026-08-07T07:08:12.514Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T07:08:12.519Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75881ce57fad06c7406902",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T07:24:12.475Z",
+    "finishedAt": "2026-08-07T07:24:12.475Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T07:24:12.476Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758a6ae57fad06c74069b2",
+    "job": "rank_check",
+    "status": "failed",
+    "startedAt": "2026-08-07T07:33:52.145Z",
+    "finishedAt": "2026-08-07T07:34:02.152Z",
+    "durationMs": 10007,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-01.mif1alv.mongodb.net",
+    "createdAt": "2026-08-07T07:34:02.154Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758a74e57fad06c74069bb",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-07T07:34:02.148Z",
+    "finishedAt": "2026-08-07T07:34:12.726Z",
+    "durationMs": 10578,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T07:34:12.729Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758bcae57fad06c7406a0c",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-07T07:38:52.153Z",
+    "finishedAt": "2026-08-07T07:39:54.287Z",
+    "durationMs": 62134,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T07:39:54.289Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758bdce57fad06c7406a14",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T07:40:12.618Z",
+    "finishedAt": "2026-08-07T07:40:12.618Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T07:40:12.620Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758db6e57fad06c7406a6d",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-07T07:47:52.149Z",
+    "finishedAt": "2026-08-07T07:48:06.913Z",
+    "durationMs": 14764,
+    "processed": 4,
+    "error": null,
+    "meta": {
+      "evaluated": 4,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T07:48:06.914Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758f9ce57fad06c7406aa5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T07:56:12.465Z",
+    "finishedAt": "2026-08-07T07:56:12.465Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T07:56:12.470Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75935ce57fad06c7406b07",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T08:12:12.469Z",
+    "finishedAt": "2026-08-07T08:12:12.469Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T08:12:12.474Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75971ce57fad06c7406b69",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T08:28:12.540Z",
+    "finishedAt": "2026-08-07T08:28:12.540Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T08:28:12.546Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a759adce57fad06c7406bcb",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T08:44:12.535Z",
+    "finishedAt": "2026-08-07T08:44:12.535Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T08:44:12.538Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a759e9ce57fad06c7406c2d",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T09:00:12.501Z",
+    "finishedAt": "2026-08-07T09:00:12.501Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T09:00:12.505Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a25ce57fad06c7406c8f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T09:16:12.511Z",
+    "finishedAt": "2026-08-07T09:16:12.511Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T09:16:12.513Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a61ce57fad06c7406cf1",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T09:32:12.559Z",
+    "finishedAt": "2026-08-07T09:32:12.559Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T09:32:12.561Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a9dce57fad06c7406d53",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T09:48:12.560Z",
+    "finishedAt": "2026-08-07T09:48:12.560Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T09:48:12.561Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75ad9ce57fad06c7406db5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T10:04:12.556Z",
+    "finishedAt": "2026-08-07T10:04:12.556Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T10:04:12.559Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75b15ce57fad06c7406e17",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T10:20:12.769Z",
+    "finishedAt": "2026-08-07T10:20:12.769Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T10:20:12.771Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75b51ce57fad06c7406e79",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T10:36:12.589Z",
+    "finishedAt": "2026-08-07T10:36:12.589Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T10:36:12.590Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75b8dce57fad06c7406edb",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T10:52:12.582Z",
+    "finishedAt": "2026-08-07T10:52:12.582Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T10:52:12.585Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75bc9ce57fad06c7406f3d",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T11:08:12.566Z",
+    "finishedAt": "2026-08-07T11:08:12.566Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T11:08:12.569Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75c05ce57fad06c7406f9f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T11:24:12.598Z",
+    "finishedAt": "2026-08-07T11:24:12.598Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T11:24:12.600Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75c41ce57fad06c7407001",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T11:40:12.678Z",
+    "finishedAt": "2026-08-07T11:40:12.678Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T11:40:12.679Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75c5f2e57fad06c7407043",
+    "job": "rank_check",
+    "status": "failed",
+    "startedAt": "2026-08-07T11:47:52.370Z",
+    "finishedAt": "2026-08-07T11:48:02.373Z",
+    "durationMs": 10003,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-07T11:48:02.374Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75c5fbe57fad06c740704b",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-07T11:48:02.372Z",
+    "finishedAt": "2026-08-07T11:48:11.862Z",
+    "durationMs": 9490,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "evaluated": 2,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T11:48:11.863Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75c7dce57fad06c7407083",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T11:56:12.464Z",
+    "finishedAt": "2026-08-07T11:56:12.464Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T11:56:12.467Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75cb9ce57fad06c74070e5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T12:12:12.458Z",
+    "finishedAt": "2026-08-07T12:12:12.458Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T12:12:12.460Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75cf4be57fad06c740711e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T12:27:55.145Z",
+    "finishedAt": "2026-08-07T12:27:55.145Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T12:27:55.146Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75cf4be57fad06c7407127",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-07T12:27:46.790Z",
+    "finishedAt": "2026-08-07T12:27:55.279Z",
+    "durationMs": 8489,
+    "processed": 2,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-07T12:27:46.790Z",
+      "processed": 2,
+      "credited": 1,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-07T12:27:55.280Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75d301e57fad06c7407189",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T12:43:45.782Z",
+    "finishedAt": "2026-08-07T12:43:45.782Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T12:43:45.783Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75d6c1e57fad06c74071eb",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T12:59:45.786Z",
+    "finishedAt": "2026-08-07T12:59:45.786Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T12:59:45.789Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75da81e57fad06c740724d",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T13:15:45.774Z",
+    "finishedAt": "2026-08-07T13:15:45.774Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T13:15:45.775Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75de41e57fad06c74072af",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T13:31:45.853Z",
+    "finishedAt": "2026-08-07T13:31:45.853Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T13:31:45.856Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e1ee1608293105f32989",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T13:47:26.902Z",
+    "finishedAt": "2026-08-07T13:47:26.902Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T13:47:26.904Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e5ae1608293105f32ac1",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T14:03:26.892Z",
+    "finishedAt": "2026-08-07T14:03:26.892Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T14:03:26.893Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e96e1608293105f32c6f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T14:19:26.887Z",
+    "finishedAt": "2026-08-07T14:19:26.887Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T14:19:26.888Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75f7d56c6fcafa0ec3683c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T15:20:53.121Z",
+    "finishedAt": "2026-08-07T15:20:53.121Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T15:20:53.129Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7614dc214f3842df2c774e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T17:24:44.472Z",
+    "finishedAt": "2026-08-07T17:24:44.472Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T17:24:44.509Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76189c214f3842df2c77fc",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T17:40:44.546Z",
+    "finishedAt": "2026-08-07T17:40:44.546Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T17:40:44.548Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761cd48798230cc41802ee",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T17:58:44.912Z",
+    "finishedAt": "2026-08-07T17:58:44.912Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T17:58:44.926Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7620598798230cc41803fe",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T18:13:45.079Z",
+    "finishedAt": "2026-08-07T18:13:45.079Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T18:13:45.083Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7624198798230cc418050b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T18:29:45.141Z",
+    "finishedAt": "2026-08-07T18:29:45.141Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T18:29:45.143Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a764ee56ce1c493a27907fb",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T21:32:21.888Z",
+    "finishedAt": "2026-08-07T21:32:21.888Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T21:32:21.890Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7652a56ce1c493a27908c0",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-07T21:48:21.891Z",
+    "finishedAt": "2026-08-07T21:48:21.891Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-07T21:48:21.892Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76781146eb31ab414ce0bb",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T00:28:01.032Z",
+    "finishedAt": "2026-08-08T00:28:01.032Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T00:28:01.125Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc4180548",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T01:58:34.376Z",
+    "finishedAt": "2026-08-08T01:58:34.376Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T01:58:34.386Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc4180570",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-08T01:58:34.270Z",
+    "finishedAt": "2026-08-08T01:58:34.672Z",
+    "durationMs": 402,
+    "processed": 3,
+    "error": null,
+    "meta": {
+      "evaluated": 3,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-08T01:58:34.682Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc4180584",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-08T01:58:34.148Z",
+    "finishedAt": "2026-08-08T01:58:34.901Z",
+    "durationMs": 753,
+    "processed": 3,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-08T01:58:34.149Z",
+      "processed": 3,
+      "credited": 3,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-08T01:58:34.913Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc4180586",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-08T01:58:34.174Z",
+    "finishedAt": "2026-08-08T01:58:34.920Z",
+    "durationMs": 746,
+    "processed": 3,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-08T01:58:34.175Z",
+      "processed": 3,
+      "credited": 2,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-08T01:58:34.921Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4b8798230cc41805a1",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-08T01:58:34.217Z",
+    "finishedAt": "2026-08-08T01:58:35.202Z",
+    "durationMs": 985,
+    "processed": 6,
+    "error": null,
+    "meta": {
+      "evaluated": 6,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-08T01:58:35.204Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ac0de57fad06c74072cd",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T04:09:49.800Z",
+    "finishedAt": "2026-08-08T04:09:49.800Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T04:09:49.801Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ac05e57fad06c74072c3",
+    "job": "daily_yield",
+    "status": "failed",
+    "startedAt": "2026-08-08T04:09:31.905Z",
+    "finishedAt": "2026-08-08T04:09:41.911Z",
+    "durationMs": 10006,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-08T04:09:41.911Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ac0ee57fad06c74072ea",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-08T04:09:41.912Z",
+    "finishedAt": "2026-08-08T04:09:50.810Z",
+    "durationMs": 8898,
+    "processed": 3,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-08T04:09:41.912Z",
+      "processed": 3,
+      "credited": 2,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-08T04:09:50.811Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ac0ee57fad06c74072ec",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-08T04:09:41.910Z",
+    "finishedAt": "2026-08-08T04:09:50.813Z",
+    "durationMs": 8903,
+    "processed": 3,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-08T04:09:41.910Z",
+      "processed": 3,
+      "credited": 2,
+      "skipped": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-08T04:09:50.814Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76afbce57fad06c740734e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T04:25:32.210Z",
+    "finishedAt": "2026-08-08T04:25:32.210Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T04:25:32.212Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76b4141e7b3f5f4639995a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T04:44:04.607Z",
+    "finishedAt": "2026-08-08T04:44:04.607Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T04:44:04.618Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76b7d41e7b3f5f46399a4f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T05:00:04.569Z",
+    "finishedAt": "2026-08-08T05:00:04.569Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T05:00:04.574Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76bb941e7b3f5f46399ab1",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T05:16:04.637Z",
+    "finishedAt": "2026-08-08T05:16:04.637Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T05:16:04.637Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76bf541e7b3f5f46399b15",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T05:32:04.659Z",
+    "finishedAt": "2026-08-08T05:32:04.659Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T05:32:04.661Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76c3141e7b3f5f46399ba5",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T05:48:04.667Z",
+    "finishedAt": "2026-08-08T05:48:04.667Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T05:48:04.668Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76e37d1e7b3f5f46399bef",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T08:06:21.084Z",
+    "finishedAt": "2026-08-08T08:06:21.084Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T08:06:21.193Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76e73b1e7b3f5f46399c65",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T08:22:19.073Z",
+    "finishedAt": "2026-08-08T08:22:19.074Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T08:22:19.075Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76eafa1e7b3f5f46399cc7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T08:38:18.948Z",
+    "finishedAt": "2026-08-08T08:38:18.948Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T08:38:18.950Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76eeba1e7b3f5f46399d29",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T08:54:18.950Z",
+    "finishedAt": "2026-08-08T08:54:18.950Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T08:54:18.952Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f27a1e7b3f5f46399d8b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T09:10:18.940Z",
+    "finishedAt": "2026-08-08T09:10:18.940Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T09:10:18.941Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f63b1e7b3f5f46399ded",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T09:26:19.271Z",
+    "finishedAt": "2026-08-08T09:26:19.271Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T09:26:19.272Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f9e87fb529bf5f54a298",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T09:42:00.252Z",
+    "finishedAt": "2026-08-08T09:42:00.253Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T09:42:00.271Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76fda87fb529bf5f54a2fa",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T09:58:00.204Z",
+    "finishedAt": "2026-08-08T09:58:00.204Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T09:58:00.208Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7701687fb529bf5f54a35c",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T10:14:00.245Z",
+    "finishedAt": "2026-08-08T10:14:00.245Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T10:14:00.247Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7705287fb529bf5f54a3be",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T10:30:00.224Z",
+    "finishedAt": "2026-08-08T10:30:00.224Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T10:30:00.225Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7708e87fb529bf5f54a489",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T10:46:00.246Z",
+    "finishedAt": "2026-08-08T10:46:00.246Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T10:46:00.248Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a770ca87fb529bf5f54a4eb",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T11:02:00.261Z",
+    "finishedAt": "2026-08-08T11:02:00.262Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T11:02:00.265Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7710450b9b0e41218e5472",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T11:17:25.389Z",
+    "finishedAt": "2026-08-08T11:17:25.389Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T11:17:25.391Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77323df17e91ecf53c72d7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T13:42:21.981Z",
+    "finishedAt": "2026-08-08T13:42:21.981Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T13:42:21.982Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7735fdf17e91ecf53c7386",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T13:58:21.978Z",
+    "finishedAt": "2026-08-08T13:58:21.978Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T13:58:21.979Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77548253ae866bff4599ec",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T16:08:34.074Z",
+    "finishedAt": "2026-08-08T16:08:34.074Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T16:08:34.083Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77584253ae866bff459a9a",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T16:24:34.043Z",
+    "finishedAt": "2026-08-08T16:24:34.043Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T16:24:34.044Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7778e3f656ecf573050834",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T18:43:47.903Z",
+    "finishedAt": "2026-08-08T18:43:47.904Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T18:43:47.910Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a777ca3571d68e19ac6cb56",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T18:59:47.474Z",
+    "finishedAt": "2026-08-08T18:59:47.474Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T18:59:47.498Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7780e58dae217a9da1f8d4",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T19:17:57.902Z",
+    "finishedAt": "2026-08-08T19:17:57.903Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T19:17:57.919Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7784a68dae217a9da1f9dd",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T19:33:58.330Z",
+    "finishedAt": "2026-08-08T19:33:58.330Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T19:33:58.332Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7788424c2ca7c67a9f597f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T19:49:22.607Z",
+    "finishedAt": "2026-08-08T19:49:22.607Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T19:49:22.628Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778beb2f3aad87b64415a7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T20:04:59.963Z",
+    "finishedAt": "2026-08-08T20:04:59.963Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T20:04:59.980Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778fa62f3aad87b64416a2",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T20:20:54.564Z",
+    "finishedAt": "2026-08-08T20:20:54.564Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T20:20:54.567Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7793662f3aad87b6441761",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T20:36:54.973Z",
+    "finishedAt": "2026-08-08T20:36:54.973Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T20:36:54.977Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77975e47f56b827a14fa19",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T20:53:50.080Z",
+    "finishedAt": "2026-08-08T20:53:50.081Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T20:53:50.099Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779af0f3f53c3d465194dd",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T21:09:04.081Z",
+    "finishedAt": "2026-08-08T21:09:04.082Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T21:09:04.088Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779eb1f3f53c3d4651969e",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-08T21:25:05.361Z",
+    "finishedAt": "2026-08-08T21:25:05.362Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-08T21:25:05.364Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d102f0c3e332c7cf9717",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T00:59:46.203Z",
+    "finishedAt": "2026-08-09T00:59:46.204Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T00:59:46.213Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11bf0c3e332c7cf9884",
+    "job": "daily_yield",
+    "status": "success",
+    "startedAt": "2026-08-09T00:59:44.061Z",
+    "finishedAt": "2026-08-09T01:00:11.734Z",
+    "durationMs": 27673,
+    "processed": 34,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-09T00:59:44.062Z",
+      "processed": 34,
+      "credited": 34,
+      "skipped": 0,
+      "expired": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-09T01:00:11.736Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11ef0c3e332c7cf989f",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-09T00:59:44.870Z",
+    "finishedAt": "2026-08-09T01:00:14.933Z",
+    "durationMs": 30063,
+    "processed": 34,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-09T00:59:44.870Z",
+      "processed": 34,
+      "credited": 30,
+      "skipped": 1,
+      "errors": 0
+    },
+    "createdAt": "2026-08-09T01:00:15.026Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77dc43fd17975b7f42a837",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T01:47:47.717Z",
+    "finishedAt": "2026-08-09T01:47:47.717Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T01:47:47.718Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77dc5ffd17975b7f42a9a7",
+    "job": "rank_check",
+    "status": "success",
+    "startedAt": "2026-08-09T01:47:47.249Z",
+    "finishedAt": "2026-08-09T01:48:15.132Z",
+    "durationMs": 27883,
+    "processed": 39,
+    "error": null,
+    "meta": {
+      "evaluated": 39,
+      "awarded": 0,
+      "errors": 0
+    },
+    "createdAt": "2026-08-09T01:48:15.133Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77dc63fd17975b7f42a9ba",
+    "job": "bonanza_check",
+    "status": "success",
+    "startedAt": "2026-08-09T01:47:47.483Z",
+    "finishedAt": "2026-08-09T01:48:19.189Z",
+    "durationMs": 31706,
+    "processed": 32,
+    "error": null,
+    "meta": {
+      "evaluated": 32,
+      "awarded": 1,
+      "errors": 0
+    },
+    "createdAt": "2026-08-09T01:48:19.191Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77e003fd17975b7f42aaf6",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T02:03:47.714Z",
+    "finishedAt": "2026-08-09T02:03:47.714Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T02:03:47.715Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77e8e2f3f53c3d465196cc",
+    "job": "daily_team_energy",
+    "status": "failed",
+    "startedAt": "2026-08-09T02:41:27.997Z",
+    "finishedAt": "2026-08-09T02:41:38.001Z",
+    "durationMs": 10004,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-09T02:41:38.003Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77e8f2f3f53c3d465196d0",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T02:41:54.648Z",
+    "finishedAt": "2026-08-09T02:41:54.648Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T02:41:54.650Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77ec879a9d2f6aa31e8522",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T02:57:11.353Z",
+    "finishedAt": "2026-08-09T02:57:11.354Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T02:57:11.383Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f0499a9d2f6aa31e8584",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T03:13:13.192Z",
+    "finishedAt": "2026-08-09T03:13:13.192Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T03:13:13.199Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f4059a9d2f6aa31e86ac",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T03:29:09.221Z",
+    "finishedAt": "2026-08-09T03:29:09.222Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T03:29:09.226Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f7abbdc13616c842f8c4",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T03:44:43.890Z",
+    "finishedAt": "2026-08-09T03:44:43.890Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T03:44:43.892Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fba714234bf111fca5ef",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T04:01:43.348Z",
+    "finishedAt": "2026-08-09T04:01:43.348Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T04:01:43.387Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77ff5f8bee687b8b5ad409",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T04:17:35.927Z",
+    "finishedAt": "2026-08-09T04:17:35.928Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T04:17:35.933Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7802f1b9eb0e0ed209fd83",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T04:32:49.906Z",
+    "finishedAt": "2026-08-09T04:32:49.907Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T04:32:49.909Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7806b4db6ed5daafb203c0",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T04:48:52.797Z",
+    "finishedAt": "2026-08-09T04:48:52.797Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T04:48:52.800Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780a670bb374263201756b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T05:04:39.626Z",
+    "finishedAt": "2026-08-09T05:04:39.627Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T05:04:39.630Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780be30bb37426320175b0",
+    "job": "daily_yield",
+    "status": "failed",
+    "startedAt": "2026-08-09T05:10:49.282Z",
+    "finishedAt": "2026-08-09T05:10:59.289Z",
+    "durationMs": 10007,
+    "processed": 0,
+    "error": "getaddrinfo ENOTFOUND ac-mfge320-shard-00-00.mif1alv.mongodb.net",
+    "createdAt": "2026-08-09T05:10:59.294Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c630bb374263201766d",
+    "job": "daily_team_energy",
+    "status": "success",
+    "startedAt": "2026-08-09T05:10:59.285Z",
+    "finishedAt": "2026-08-09T05:13:07.204Z",
+    "durationMs": 127919,
+    "processed": 34,
+    "error": null,
+    "meta": {
+      "asOf": "2026-08-09T05:10:59.285Z",
+      "processed": 34,
+      "credited": 30,
+      "skipped": 1,
+      "errors": 0
+    },
+    "createdAt": "2026-08-09T05:13:07.205Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780e270bb374263201769f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T05:20:39.881Z",
+    "finishedAt": "2026-08-09T05:20:39.881Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T05:20:39.883Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7811d2def1c97d9d5e1f3f",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T05:36:18.188Z",
+    "finishedAt": "2026-08-09T05:36:18.189Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T05:36:18.196Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78156cbeb6ee738d7fbfdc",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T05:51:40.738Z",
+    "finishedAt": "2026-08-09T05:51:40.739Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T05:51:40.790Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a781928ba905229ebfe0bf9",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T06:07:36.368Z",
+    "finishedAt": "2026-08-09T06:07:36.369Z",
+    "durationMs": 1,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T06:07:36.396Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a781e381abfe8f3fd580f47",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T06:29:12.340Z",
+    "finishedAt": "2026-08-09T06:29:12.340Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T06:29:12.349Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7828a74ec4fe5d4f087400",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T07:13:43.768Z",
+    "finishedAt": "2026-08-09T07:13:43.768Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T07:13:43.770Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a782c57ba905229ebfe0ca3",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T07:29:27.290Z",
+    "finishedAt": "2026-08-09T07:29:27.290Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T07:29:27.293Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a783017ba905229ebfe0d05",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T07:45:27.271Z",
+    "finishedAt": "2026-08-09T07:45:27.271Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T07:45:27.272Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7833d7ba905229ebfe0d67",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T08:01:27.310Z",
+    "finishedAt": "2026-08-09T08:01:27.310Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T08:01:27.314Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a783797ba905229ebfe0dc9",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T08:17:27.312Z",
+    "finishedAt": "2026-08-09T08:17:27.312Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T08:17:27.314Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a783b57ba905229ebfe0e2b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T08:33:27.308Z",
+    "finishedAt": "2026-08-09T08:33:27.308Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T08:33:27.309Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a783f17ba905229ebfe0e91",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T08:49:27.318Z",
+    "finishedAt": "2026-08-09T08:49:27.318Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T08:49:27.321Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7842d7ba905229ebfe0ef3",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T09:05:27.336Z",
+    "finishedAt": "2026-08-09T09:05:27.336Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T09:05:27.339Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784697ba905229ebfe0f55",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T09:21:27.351Z",
+    "finishedAt": "2026-08-09T09:21:27.351Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T09:21:27.352Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784a57ba905229ebfe0fb7",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T09:37:27.360Z",
+    "finishedAt": "2026-08-09T09:37:27.360Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T09:37:27.363Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784e17ba905229ebfe101b",
+    "job": "payment_verify",
+    "status": "success",
+    "startedAt": "2026-08-09T09:53:27.359Z",
+    "finishedAt": "2026-08-09T09:53:27.359Z",
+    "durationMs": 0,
+    "processed": 0,
+    "error": null,
+    "meta": {
+      "processed": 0,
+      "confirmed": 0,
+      "errors": 0,
+      "skipped": true
+    },
+    "createdAt": "2026-08-09T09:53:27.360Z",
+    "__v": 0
+  }
+]

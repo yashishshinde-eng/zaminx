@@ -1,0 +1,6243 @@
+[
+  {
+    "_id": "6a716504b77c8089378a9688",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a6f8580b93dd3c97f695d21"
+    },
+    "memo": "Deposit — Starter activation",
+    "meta": {
+      "packageId": "6a6f5aee6213d08c893ddeda"
+    },
+    "createdAt": "2026-08-04T04:05:24.388Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7286d2b9bcfb1329b38daa",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.5,
+    "availableAfter": 0.5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a6f8580b93dd3c97f695d1f:2026-08-05"
+    },
+    "memo": "Daily trade yield — Starter (1%)",
+    "meta": {
+      "userPackageId": "6a6f8580b93dd3c97f695d1f",
+      "date": "2026-08-05"
+    },
+    "createdAt": "2026-08-05T00:41:54.852Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733eccc3d1405386717638",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "withdrawal_hold",
+    "direction": "credit",
+    "field": "onHold",
+    "amount": 20,
+    "availableAfter": 30,
+    "onHoldAfter": 20,
+    "reference": {
+      "resource": "Withdrawal",
+      "resourceId": "6a733ecbc3d1405386717632"
+    },
+    "memo": "Withdrawal request",
+    "createdAt": "2026-08-05T13:46:52.512Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733eccc3d1405386717637",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "withdrawal_hold",
+    "direction": "debit",
+    "field": "available",
+    "amount": 20,
+    "availableAfter": 30,
+    "onHoldAfter": 20,
+    "reference": {
+      "resource": "Withdrawal",
+      "resourceId": "6a733ecbc3d1405386717632"
+    },
+    "memo": "Withdrawal request",
+    "createdAt": "2026-08-05T13:46:52.512Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733ecdc3d140538671763e",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "withdrawal_paid",
+    "direction": "debit",
+    "field": "onHold",
+    "amount": 20,
+    "availableAfter": 30,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Withdrawal",
+      "resourceId": "6a733ecbc3d1405386717632"
+    },
+    "memo": "Withdrawal paid (auto-approved)",
+    "createdAt": "2026-08-05T13:46:53.461Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734cba7246e58e90c5e2ee",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "withdrawal_hold",
+    "direction": "credit",
+    "field": "onHold",
+    "amount": 30,
+    "availableAfter": 0,
+    "onHoldAfter": 30,
+    "reference": {
+      "resource": "Withdrawal",
+      "resourceId": "6a734cb97246e58e90c5e2e8"
+    },
+    "memo": "Withdrawal request",
+    "createdAt": "2026-08-05T14:46:18.478Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734cba7246e58e90c5e2ed",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "withdrawal_hold",
+    "direction": "debit",
+    "field": "available",
+    "amount": 30,
+    "availableAfter": 0,
+    "onHoldAfter": 30,
+    "reference": {
+      "resource": "Withdrawal",
+      "resourceId": "6a734cb97246e58e90c5e2e8"
+    },
+    "memo": "Withdrawal request",
+    "createdAt": "2026-08-05T14:46:18.478Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734cbb7246e58e90c5e2f4",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "withdrawal_paid",
+    "direction": "debit",
+    "field": "onHold",
+    "amount": 30,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Withdrawal",
+      "resourceId": "6a734cb97246e58e90c5e2e8"
+    },
+    "memo": "Withdrawal paid (auto-approved)",
+    "createdAt": "2026-08-05T14:46:19.427Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73d995899788685deb6335",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.5,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a6f8580b93dd3c97f695d1f:2026-08-06"
+    },
+    "memo": "Daily trade yield — Starter (1%)",
+    "meta": {
+      "userPackageId": "6a6f8580b93dd3c97f695d1f",
+      "date": "2026-08-06"
+    },
+    "createdAt": "2026-08-06T00:47:17.775Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a752b1567b5dbdb5145a4cf",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.5,
+    "availableAfter": 1.5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a6f8580b93dd3c97f695d1f:2026-08-07"
+    },
+    "memo": "Daily trade yield — Starter (1%)",
+    "meta": {
+      "userPackageId": "6a6f8580b93dd3c97f695d1f",
+      "date": "2026-08-07"
+    },
+    "createdAt": "2026-08-07T00:47:17.961Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761f0a8798230cc41803a3",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a761efe8798230cc4180376"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a76175b214f3842df2c7795",
+      "depositId": "6a761efe8798230cc4180376",
+      "pct": 10
+    },
+    "createdAt": "2026-08-07T18:08:10.059Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc4180577",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.5,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a6f8580b93dd3c97f695d1f:2026-08-08"
+    },
+    "memo": "Daily trade yield — Starter (1%)",
+    "meta": {
+      "userPackageId": "6a6f8580b93dd3c97f695d1f",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T01:58:34.740Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc418057e",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.05,
+    "availableAfter": 5.05,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a6f5ca7277f8c8f148cba5b:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T01:58:34.862Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778377a6534984cd1f5c67",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "p2p_transfer_in",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 10,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "P2PTransfer",
+      "resourceId": "6a778376a6534984cd1f5c5b"
+    },
+    "memo": "P2P transfer from Platform Admin — p2p smoke",
+    "createdAt": "2026-08-08T19:28:55.172Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778378a6534984cd1f5c7a",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "p2p_transfer_out",
+    "direction": "debit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "P2PTransfer",
+      "resourceId": "6a778377a6534984cd1f5c75"
+    },
+    "memo": "P2P transfer to Platform Admin — p2p smoke reversal",
+    "createdAt": "2026-08-08T19:28:56.268Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778e862f3aad87b6441634",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a778e712f3aad87b6441614"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T20:16:06.255Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb81d55f2635e81ad30",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.05,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a6f5ca7277f8c8f148cba5b"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 2
+    },
+    "createdAt": "2026-08-08T21:16:40.359Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd61d55f2635e81af97",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.05,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a6f5ca7277f8c8f148cba5b:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 4
+    },
+    "createdAt": "2026-08-08T21:17:10.594Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d103f0c3e332c7cf9730",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.5,
+    "availableAfter": 2.5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a6f8580b93dd3c97f695d1f:2026-08-09"
+    },
+    "memo": "Daily trade yield — Starter (1%)",
+    "meta": {
+      "userPackageId": "6a6f8580b93dd3c97f695d1f",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:47.427Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d104f0c3e332c7cf9738",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.05,
+    "availableAfter": 115.1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a6f5ca7277f8c8f148cba5b:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:48.149Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784866b6b40ef2e7068c76",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5000,
+    "availableAfter": 5050,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a78484bb6b40ef2e7068c4b"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-09T09:29:10.210Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f2da93ec9bec0abba2dd",
+    "user": "6a6f5cba277f8c8f148cba6f",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 100,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a6f5cba277f8c8f148cba6f"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 2
+    },
+    "createdAt": "2026-08-08T09:11:54.857Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761f098798230cc418039b",
+    "user": "6a76175b214f3842df2c7795",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a761efe8798230cc4180376"
+    },
+    "memo": "Deposit — Starter activation",
+    "meta": {
+      "packageId": "6a6f5aee6213d08c893ddeda"
+    },
+    "createdAt": "2026-08-07T18:08:09.880Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc4180580",
+    "user": "6a76175b214f3842df2c7795",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.5,
+    "availableAfter": 0.5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a761efe8798230cc4180374:2026-08-08"
+    },
+    "memo": "Daily trade yield — Starter (1%)",
+    "meta": {
+      "userPackageId": "6a761efe8798230cc4180374",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T01:58:34.881Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d104f0c3e332c7cf973a",
+    "user": "6a76175b214f3842df2c7795",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.5,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a761efe8798230cc4180374:2026-08-09"
+    },
+    "memo": "Daily trade yield — Starter (1%)",
+    "meta": {
+      "userPackageId": "6a761efe8798230cc4180374",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:48.184Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778ab580648929fc1c6c15",
+    "user": "6a778ab180648929fc1c6bc5",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a778ab480648929fc1c6bf8"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T19:59:49.900Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778ab780648929fc1c6c2a",
+    "user": "6a778ab180648929fc1c6bc5",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a778ab780648929fc1c6c25"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T19:59:51.607Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5b1d55f2635e81a64d",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c5b1d55f2635e81a63b"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:07.919Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5c1d55f2635e81a65b",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c5c1d55f2635e81a656"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:08.705Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5f1d55f2635e81a68d",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c5e1d55f2635e81a683"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c211d55f2635e81a4f2",
+      "depositId": "6a779c5e1d55f2635e81a683",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:11.352Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c611d55f2635e81a6bc",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 10,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c611d55f2635e81a6b3"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c221d55f2635e81a4fd",
+      "depositId": "6a779c611d55f2635e81a6b3",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:13.833Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c641d55f2635e81a6e8",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 15,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c631d55f2635e81a6df"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c241d55f2635e81a508",
+      "depositId": "6a779c631d55f2635e81a6df",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:16.231Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca31d55f2635e81abaf",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c5c1d55f2635e81a656:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c5c1d55f2635e81a656",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:19.372Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cad1d55f2635e81ac5a",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.63,
+    "availableAfter": 15.63,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c1f1d55f2635e81a4e2:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:29.203Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb91d55f2635e81ad40",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 25.630000000000003,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a6f5aee6213d08c893ddee3:6a779c1f1d55f2635e81a4e2"
+    },
+    "memo": "Bonanza reward — Quick Start",
+    "meta": {
+      "offerId": "6a6f5aee6213d08c893ddee3",
+      "requiredDirects": 3,
+      "directCount": 3
+    },
+    "createdAt": "2026-08-08T21:16:41.295Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb91d55f2635e81ad48",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 125.63,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c1f1d55f2635e81a4e2"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 3
+    },
+    "createdAt": "2026-08-08T21:16:41.736Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd71d55f2635e81afa6",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 60,
+    "availableAfter": 185.63,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c1f1d55f2635e81a4e2:2026-08"
+    },
+    "memo": "Community monthly bonus — 3 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 3,
+      "teamCount": 30
+    },
+    "createdAt": "2026-08-08T21:17:11.092Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d104f0c3e332c7cf9744",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c5c1d55f2635e81a656:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c5c1d55f2635e81a656",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:48.954Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d105f0c3e332c7cf9746",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.63,
+    "availableAfter": 186.26,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c1f1d55f2635e81a4e2:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:49.094Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5d1d55f2635e81a672",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c5d1d55f2635e81a665"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:09.862Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5e1d55f2635e81a680",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c5e1d55f2635e81a67b"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:10.617Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c661d55f2635e81a714",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c661d55f2635e81a70b"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c251d55f2635e81a513",
+      "depositId": "6a779c661d55f2635e81a70b",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:18.482Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca31d55f2635e81abb4",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c5e1d55f2635e81a67b:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c5e1d55f2635e81a67b",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:19.655Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cad1d55f2635e81ac61",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c211d55f2635e81a4f2:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:29.544Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cba1d55f2635e81ad54",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c211d55f2635e81a4f2"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:42.366Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd71d55f2635e81afb1",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 25,
+    "availableAfter": 130.20999999999998,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c211d55f2635e81a4f2:2026-08"
+    },
+    "memo": "Community monthly bonus — 2 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 2,
+      "teamCount": 9
+    },
+    "createdAt": "2026-08-08T21:17:11.631Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d105f0c3e332c7cf974f",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c5e1d55f2635e81a67b:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c5e1d55f2635e81a67b",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:49.705Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d106f0c3e332c7cf9753",
+    "user": "6a779c211d55f2635e81a4f2",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 130.42,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c211d55f2635e81a4f2:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:50.055Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c601d55f2635e81a69f",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c5f1d55f2635e81a692"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:12.230Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c611d55f2635e81a6b0",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c601d55f2635e81a6ab"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:13.217Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c681d55f2635e81a740",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c681d55f2635e81a737"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c271d55f2635e81a51e",
+      "depositId": "6a779c681d55f2635e81a737",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:20.657Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca31d55f2635e81abb9",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c601d55f2635e81a6ab:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c601d55f2635e81a6ab",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:19.935Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cad1d55f2635e81ac68",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c221d55f2635e81a4fd:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:29.865Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbb1d55f2635e81ad60",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c221d55f2635e81a4fd"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:43.032Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd81d55f2635e81afbc",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 25,
+    "availableAfter": 130.20999999999998,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c221d55f2635e81a4fd:2026-08"
+    },
+    "memo": "Community monthly bonus — 2 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 2,
+      "teamCount": 9
+    },
+    "createdAt": "2026-08-08T21:17:12.043Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d106f0c3e332c7cf975a",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c601d55f2635e81a6ab:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c601d55f2635e81a6ab",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:50.457Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d106f0c3e332c7cf9760",
+    "user": "6a779c221d55f2635e81a4fd",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 130.42,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c221d55f2635e81a4fd:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:50.995Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c621d55f2635e81a6ce",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c621d55f2635e81a6c1"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:14.783Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c631d55f2635e81a6dc",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c631d55f2635e81a6d7"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:15.617Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6a1d55f2635e81a76c",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c6a1d55f2635e81a763"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c281d55f2635e81a529",
+      "depositId": "6a779c6a1d55f2635e81a763",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:22.907Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca41d55f2635e81abbe",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c631d55f2635e81a6d7:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c631d55f2635e81a6d7",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:20.228Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cae1d55f2635e81ac6f",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c241d55f2635e81a508:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:30.208Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbb1d55f2635e81ad6c",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c241d55f2635e81a508"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:43.712Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd81d55f2635e81afc7",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 25,
+    "availableAfter": 130.20999999999998,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c241d55f2635e81a508:2026-08"
+    },
+    "memo": "Community monthly bonus — 2 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 2,
+      "teamCount": 9
+    },
+    "createdAt": "2026-08-08T21:17:12.471Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d107f0c3e332c7cf9765",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c631d55f2635e81a6d7:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c631d55f2635e81a6d7",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:51.208Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d107f0c3e332c7cf976d",
+    "user": "6a779c241d55f2635e81a508",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 130.42,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c241d55f2635e81a508:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:51.935Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c651d55f2635e81a6fa",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c641d55f2635e81a6ed"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:17.123Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c651d55f2635e81a708",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c651d55f2635e81a703"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:17.876Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6d1d55f2635e81a798",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c6c1d55f2635e81a78f"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c2a1d55f2635e81a534",
+      "depositId": "6a779c6c1d55f2635e81a78f",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:25.211Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca41d55f2635e81abc3",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c651d55f2635e81a703:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c651d55f2635e81a703",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:20.510Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cae1d55f2635e81ac76",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c251d55f2635e81a513:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:30.563Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbc1d55f2635e81ad78",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c251d55f2635e81a513"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:44.423Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd81d55f2635e81afd2",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c251d55f2635e81a513:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 8
+    },
+    "createdAt": "2026-08-08T21:17:12.882Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d107f0c3e332c7cf976f",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c651d55f2635e81a703:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c651d55f2635e81a703",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:51.962Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d108f0c3e332c7cf977b",
+    "user": "6a779c251d55f2635e81a513",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c251d55f2635e81a513:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:52.880Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c671d55f2635e81a726",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c661d55f2635e81a719"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:19.343Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c681d55f2635e81a734",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c671d55f2635e81a72f"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:20.087Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6f1d55f2635e81a7c4",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c6f1d55f2635e81a7bb"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c2c1d55f2635e81a53f",
+      "depositId": "6a779c6f1d55f2635e81a7bb",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:27.646Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca41d55f2635e81abc8",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c671d55f2635e81a72f:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c671d55f2635e81a72f",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:20.795Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cae1d55f2635e81ac7d",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c271d55f2635e81a51e:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:30.894Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbd1d55f2635e81ad87",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c271d55f2635e81a51e"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:45.112Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd91d55f2635e81afdd",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c271d55f2635e81a51e:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 8
+    },
+    "createdAt": "2026-08-08T21:17:13.312Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d108f0c3e332c7cf9779",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c671d55f2635e81a72f:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c671d55f2635e81a72f",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:52.713Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d109f0c3e332c7cf9789",
+    "user": "6a779c271d55f2635e81a51e",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c271d55f2635e81a51e:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:53.851Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c691d55f2635e81a752",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c681d55f2635e81a745"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:21.544Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6a1d55f2635e81a760",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c6a1d55f2635e81a75b"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:22.286Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c711d55f2635e81a7f0",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c711d55f2635e81a7e7"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c2e1d55f2635e81a54a",
+      "depositId": "6a779c711d55f2635e81a7e7",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:29.917Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca51d55f2635e81abcd",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c6a1d55f2635e81a75b:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c6a1d55f2635e81a75b",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:21.064Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779caf1d55f2635e81ac84",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c281d55f2635e81a529:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:31.217Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbd1d55f2635e81ad93",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c281d55f2635e81a529"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:45.769Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd91d55f2635e81afe8",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c281d55f2635e81a529:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 8
+    },
+    "createdAt": "2026-08-08T21:17:13.766Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d109f0c3e332c7cf9784",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c6a1d55f2635e81a75b:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c6a1d55f2635e81a75b",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:53.466Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10af0c3e332c7cf9796",
+    "user": "6a779c281d55f2635e81a529",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c281d55f2635e81a529:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:54.790Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6b1d55f2635e81a77e",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c6b1d55f2635e81a771"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:23.835Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6c1d55f2635e81a78c",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c6c1d55f2635e81a787"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:24.574Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c741d55f2635e81a81c",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c731d55f2635e81a813"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c301d55f2635e81a555",
+      "depositId": "6a779c731d55f2635e81a813",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:32.267Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca51d55f2635e81abd2",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c6c1d55f2635e81a787:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c6c1d55f2635e81a787",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:21.354Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779caf1d55f2635e81ac8b",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c2a1d55f2635e81a534:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:31.560Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbe1d55f2635e81ad9f",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c2a1d55f2635e81a534"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:46.496Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cda1d55f2635e81aff3",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c2a1d55f2635e81a534:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 7
+    },
+    "createdAt": "2026-08-08T21:17:14.207Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10af0c3e332c7cf978e",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c6c1d55f2635e81a787:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c6c1d55f2635e81a787",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:54.225Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10bf0c3e332c7cf97a4",
+    "user": "6a779c2a1d55f2635e81a534",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c2a1d55f2635e81a534:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:55.730Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6e1d55f2635e81a7aa",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c6d1d55f2635e81a79d"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:26.198Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6e1d55f2635e81a7b8",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c6e1d55f2635e81a7b3"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:26.924Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c761d55f2635e81a848",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c761d55f2635e81a83f"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c321d55f2635e81a560",
+      "depositId": "6a779c761d55f2635e81a83f",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:34.553Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca51d55f2635e81abd7",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c6e1d55f2635e81a7b3:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c6e1d55f2635e81a7b3",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:21.593Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779caf1d55f2635e81ac92",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c2c1d55f2635e81a53f:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:31.926Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbf1d55f2635e81adab",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c2c1d55f2635e81a53f"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:47.141Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cda1d55f2635e81affe",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c2c1d55f2635e81a53f:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 7
+    },
+    "createdAt": "2026-08-08T21:17:14.634Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10af0c3e332c7cf9798",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c6e1d55f2635e81a7b3:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c6e1d55f2635e81a7b3",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:54.977Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10cf0c3e332c7cf97b0",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c2c1d55f2635e81a53f:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:56.668Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c701d55f2635e81a7d6",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c6f1d55f2635e81a7c9"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:28.553Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c711d55f2635e81a7e4",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c711d55f2635e81a7df"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:29.336Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c781d55f2635e81a874",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c781d55f2635e81a86b"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c341d55f2635e81a56b",
+      "depositId": "6a779c781d55f2635e81a86b",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:36.869Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca51d55f2635e81abdc",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c711d55f2635e81a7df:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c711d55f2635e81a7df",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:21.928Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb01d55f2635e81ac99",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c2e1d55f2635e81a54a:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:32.308Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbf1d55f2635e81adb7",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c2e1d55f2635e81a54a"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:47.761Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdb1d55f2635e81b009",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c2e1d55f2635e81a54a:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 7
+    },
+    "createdAt": "2026-08-08T21:17:15.065Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10bf0c3e332c7cf97a2",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c711d55f2635e81a7df:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c711d55f2635e81a7df",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:55.728Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10df0c3e332c7cf97be",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c2e1d55f2635e81a54a:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:57.613Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c721d55f2635e81a802",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c721d55f2635e81a7f5"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:30.847Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c731d55f2635e81a810",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c731d55f2635e81a80b"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:31.624Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7b1d55f2635e81a8a0",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c7a1d55f2635e81a897"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c361d55f2635e81a576",
+      "depositId": "6a779c7a1d55f2635e81a897",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:39.265Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca61d55f2635e81abe1",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c731d55f2635e81a80b:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c731d55f2635e81a80b",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:22.209Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb01d55f2635e81aca0",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c301d55f2635e81a555:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:32.666Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc01d55f2635e81adc3",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c301d55f2635e81a555"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:48.439Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdb1d55f2635e81b014",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c301d55f2635e81a555:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 6
+    },
+    "createdAt": "2026-08-08T21:17:15.483Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10cf0c3e332c7cf97ae",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c731d55f2635e81a80b:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c731d55f2635e81a80b",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:56.480Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10ef0c3e332c7cf97cb",
+    "user": "6a779c301d55f2635e81a555",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c301d55f2635e81a555:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:58.553Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c751d55f2635e81a82e",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c741d55f2635e81a821"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:33.154Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c751d55f2635e81a83c",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c751d55f2635e81a837"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:33.910Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7d1d55f2635e81a8d0",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c7d1d55f2635e81a8c6"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c381d55f2635e81a581",
+      "depositId": "6a779c7d1d55f2635e81a8c6",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:41.724Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca61d55f2635e81abe6",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c751d55f2635e81a837:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c751d55f2635e81a837",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:22.507Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb11d55f2635e81aca7",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c321d55f2635e81a560:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:33.010Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc11d55f2635e81adcf",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c321d55f2635e81a560"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:49.121Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdb1d55f2635e81b01f",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c321d55f2635e81a560:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 6
+    },
+    "createdAt": "2026-08-08T21:17:15.904Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10df0c3e332c7cf97b9",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c751d55f2635e81a837:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c751d55f2635e81a837",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:57.231Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10ff0c3e332c7cf97d9",
+    "user": "6a779c321d55f2635e81a560",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c321d55f2635e81a560:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:59.492Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c771d55f2635e81a85a",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c761d55f2635e81a84d"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:35.414Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c781d55f2635e81a868",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c771d55f2635e81a863"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:36.143Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c801d55f2635e81a8ff",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c7f1d55f2635e81a8f6"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c3a1d55f2635e81a58c",
+      "depositId": "6a779c7f1d55f2635e81a8f6",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:44.051Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca61d55f2635e81abeb",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c771d55f2635e81a863:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c771d55f2635e81a863",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:22.779Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb11d55f2635e81acae",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c341d55f2635e81a56b:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:33.382Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc11d55f2635e81addb",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c341d55f2635e81a56b"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:49.795Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdc1d55f2635e81b02a",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c341d55f2635e81a56b:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 6
+    },
+    "createdAt": "2026-08-08T21:17:16.324Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10df0c3e332c7cf97c3",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c771d55f2635e81a863:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c771d55f2635e81a863",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:57.988Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d110f0c3e332c7cf97e6",
+    "user": "6a779c341d55f2635e81a56b",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c341d55f2635e81a56b:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:00.447Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c791d55f2635e81a886",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c791d55f2635e81a879"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:37.961Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7a1d55f2635e81a894",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c7a1d55f2635e81a88f"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:38.683Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c821d55f2635e81a92b",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c811d55f2635e81a922"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c3d1d55f2635e81a597",
+      "depositId": "6a779c811d55f2635e81a922",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:46.194Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca71d55f2635e81abf0",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c7a1d55f2635e81a88f:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c7a1d55f2635e81a88f",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:23.077Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb11d55f2635e81acb5",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c361d55f2635e81a576:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:33.730Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc21d55f2635e81ade7",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c361d55f2635e81a576"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:50.629Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdc1d55f2635e81b035",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c361d55f2635e81a576:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 5
+    },
+    "createdAt": "2026-08-08T21:17:16.753Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10ef0c3e332c7cf97cd",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c7a1d55f2635e81a88f:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c7a1d55f2635e81a88f",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:58.739Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d111f0c3e332c7cf97f3",
+    "user": "6a779c361d55f2635e81a576",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c361d55f2635e81a576:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:01.386Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7c1d55f2635e81a8b5",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c7b1d55f2635e81a8a5"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:40.352Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7d1d55f2635e81a8c3",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c7c1d55f2635e81a8be"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:41.059Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c841d55f2635e81a957",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c841d55f2635e81a94e"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c3f1d55f2635e81a5a2",
+      "depositId": "6a779c841d55f2635e81a94e",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:48.508Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca71d55f2635e81abf5",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c7c1d55f2635e81a8be:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c7c1d55f2635e81a8be",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:23.363Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb21d55f2635e81acbc",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c381d55f2635e81a581:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:34.104Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc31d55f2635e81adf3",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c381d55f2635e81a581"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:51.301Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdd1d55f2635e81b040",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c381d55f2635e81a581:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 5
+    },
+    "createdAt": "2026-08-08T21:17:17.159Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10ff0c3e332c7cf97d7",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c7c1d55f2635e81a8be:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c7c1d55f2635e81a8be",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T00:59:59.490Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d112f0c3e332c7cf9800",
+    "user": "6a779c381d55f2635e81a581",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c381d55f2635e81a581:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:02.325Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7e1d55f2635e81a8e2",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c7d1d55f2635e81a8d5"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:42.593Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7f1d55f2635e81a8f3",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c7f1d55f2635e81a8ee"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:43.461Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c861d55f2635e81a983",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c861d55f2635e81a97a"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c411d55f2635e81a5b0",
+      "depositId": "6a779c861d55f2635e81a97a",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:50.595Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca71d55f2635e81abfa",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c7f1d55f2635e81a8ee:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c7f1d55f2635e81a8ee",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:23.641Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb21d55f2635e81acc3",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 5.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c3a1d55f2635e81a58c:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:34.487Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc31d55f2635e81adff",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c3a1d55f2635e81a58c"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:51.978Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdd1d55f2635e81b04b",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.21,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c3a1d55f2635e81a58c:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 5
+    },
+    "createdAt": "2026-08-08T21:17:17.577Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d110f0c3e332c7cf97e2",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c7f1d55f2635e81a8ee:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c7f1d55f2635e81a8ee",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:00.240Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d113f0c3e332c7cf980e",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.21,
+    "availableAfter": 115.41999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c3a1d55f2635e81a58c:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:03.266Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c801d55f2635e81a911",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c801d55f2635e81a904"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:44.872Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c811d55f2635e81a91f",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c811d55f2635e81a91a"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:45.584Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c881d55f2635e81a9af",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c881d55f2635e81a9a6"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c431d55f2635e81a5bb",
+      "depositId": "6a779c881d55f2635e81a9a6",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:52.789Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca71d55f2635e81abff",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c811d55f2635e81a91a:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c811d55f2635e81a91a",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:23.922Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb21d55f2635e81acca",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.2,
+    "availableAfter": 5.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c3d1d55f2635e81a597:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:34.877Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc41d55f2635e81ae0b",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c3d1d55f2635e81a597"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:52.634Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdd1d55f2635e81b056",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c3d1d55f2635e81a597:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 4
+    },
+    "createdAt": "2026-08-08T21:17:17.966Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d111f0c3e332c7cf97ed",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c811d55f2635e81a91a:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c811d55f2635e81a91a",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:01.005Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d114f0c3e332c7cf981b",
+    "user": "6a779c3d1d55f2635e81a597",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.2,
+    "availableAfter": 115.4,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c3d1d55f2635e81a597:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:04.206Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c831d55f2635e81a93d",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c821d55f2635e81a930"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:47.264Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c831d55f2635e81a94b",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c831d55f2635e81a946"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:47.974Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8b1d55f2635e81a9db",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c8a1d55f2635e81a9d2"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c441d55f2635e81a5c6",
+      "depositId": "6a779c8a1d55f2635e81a9d2",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:55.060Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca81d55f2635e81ac04",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c831d55f2635e81a946:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c831d55f2635e81a946",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:24.195Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb31d55f2635e81acd1",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.2,
+    "availableAfter": 5.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c3f1d55f2635e81a5a2:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:35.266Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc51d55f2635e81ae17",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c3f1d55f2635e81a5a2"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:53.286Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cde1d55f2635e81b061",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c3f1d55f2635e81a5a2:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 4
+    },
+    "createdAt": "2026-08-08T21:17:18.396Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d111f0c3e332c7cf97f8",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c831d55f2635e81a946:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c831d55f2635e81a946",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:01.756Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d115f0c3e332c7cf9828",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.2,
+    "availableAfter": 115.4,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c3f1d55f2635e81a5a2:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:05.145Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c851d55f2635e81a969",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c841d55f2635e81a95c"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:49.301Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c861d55f2635e81a977",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c851d55f2635e81a972"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:50.012Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8d1d55f2635e81aa07",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c8c1d55f2635e81a9fe"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c461d55f2635e81a5d1",
+      "depositId": "6a779c8c1d55f2635e81a9fe",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:57.338Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca81d55f2635e81ac09",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c851d55f2635e81a972:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c851d55f2635e81a972",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:24.480Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb31d55f2635e81acd8",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.2,
+    "availableAfter": 5.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c411d55f2635e81a5b0:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:35.637Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc51d55f2635e81ae23",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c411d55f2635e81a5b0"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:53.936Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cde1d55f2635e81b06c",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c411d55f2635e81a5b0:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 4
+    },
+    "createdAt": "2026-08-08T21:17:18.790Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d112f0c3e332c7cf9802",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c851d55f2635e81a972:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c851d55f2635e81a972",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:02.512Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d116f0c3e332c7cf9835",
+    "user": "6a779c411d55f2635e81a5b0",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.2,
+    "availableAfter": 115.4,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c411d55f2635e81a5b0:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:06.083Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c871d55f2635e81a995",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c861d55f2635e81a988"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:51.444Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c881d55f2635e81a9a3",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c871d55f2635e81a99e"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:52.165Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8f1d55f2635e81aa33",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c8f1d55f2635e81aa2a"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c481d55f2635e81a5dc",
+      "depositId": "6a779c8f1d55f2635e81aa2a",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:59.763Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca81d55f2635e81ac0e",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c871d55f2635e81a99e:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c871d55f2635e81a99e",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:24.769Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb41d55f2635e81acdf",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.18,
+    "availableAfter": 5.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c431d55f2635e81a5bb:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:36.027Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc61d55f2635e81ae2f",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c431d55f2635e81a5bb"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:54.635Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdf1d55f2635e81b077",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c431d55f2635e81a5bb:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 3
+    },
+    "createdAt": "2026-08-08T21:17:19.212Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d113f0c3e332c7cf980c",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c871d55f2635e81a99e:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c871d55f2635e81a99e",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:03.264Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d117f0c3e332c7cf9841",
+    "user": "6a779c431d55f2635e81a5bb",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.18,
+    "availableAfter": 115.36000000000001,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c431d55f2635e81a5bb:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:07.028Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c891d55f2635e81a9c1",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c891d55f2635e81a9b4"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:53.679Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8a1d55f2635e81a9cf",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c8a1d55f2635e81a9ca"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:54.480Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c911d55f2635e81aa5f",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c911d55f2635e81aa56"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c4a1d55f2635e81a5e7",
+      "depositId": "6a779c911d55f2635e81aa56",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:01.987Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca91d55f2635e81ac13",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c8a1d55f2635e81a9ca:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c8a1d55f2635e81a9ca",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:25.039Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb41d55f2635e81ace6",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.18,
+    "availableAfter": 5.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c441d55f2635e81a5c6:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:36.403Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc71d55f2635e81ae3b",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c441d55f2635e81a5c6"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:55.325Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdf1d55f2635e81b082",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c441d55f2635e81a5c6:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 3
+    },
+    "createdAt": "2026-08-08T21:17:19.608Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d114f0c3e332c7cf9817",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c8a1d55f2635e81a9ca:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c8a1d55f2635e81a9ca",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:04.016Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d117f0c3e332c7cf9850",
+    "user": "6a779c441d55f2635e81a5c6",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.18,
+    "availableAfter": 115.36000000000001,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c441d55f2635e81a5c6:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:07.978Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8c1d55f2635e81a9ed",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c8b1d55f2635e81a9e0"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:56.041Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8c1d55f2635e81a9fb",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c8c1d55f2635e81a9f6"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:56.744Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c941d55f2635e81aa8b",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c931d55f2635e81aa82"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c4c1d55f2635e81a5f2",
+      "depositId": "6a779c931d55f2635e81aa82",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:04.272Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca91d55f2635e81ac18",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c8c1d55f2635e81a9f6:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c8c1d55f2635e81a9f6",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:25.360Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb41d55f2635e81aced",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.18,
+    "availableAfter": 5.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c461d55f2635e81a5d1:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:36.784Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc81d55f2635e81ae47",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c461d55f2635e81a5d1"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:56.013Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ce01d55f2635e81b08d",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "bonus",
+    "type": "community_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 10,
+    "availableAfter": 115.18,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "User",
+      "resourceId": "community:6a779c461d55f2635e81a5d1:2026-08"
+    },
+    "memo": "Community monthly bonus — 1 Star",
+    "meta": {
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 3
+    },
+    "createdAt": "2026-08-08T21:17:20.094Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d114f0c3e332c7cf9822",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c8c1d55f2635e81a9f6:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c8c1d55f2635e81a9f6",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:04.767Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d118f0c3e332c7cf985d",
+    "user": "6a779c461d55f2635e81a5d1",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.18,
+    "availableAfter": 115.36000000000001,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c461d55f2635e81a5d1:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:08.917Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8e1d55f2635e81aa19",
+    "user": "6a779c481d55f2635e81a5dc",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c8d1d55f2635e81aa0c"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:15:58.342Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8f1d55f2635e81aa27",
+    "user": "6a779c481d55f2635e81a5dc",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c8e1d55f2635e81aa22"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:15:59.133Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c961d55f2635e81aab7",
+    "user": "6a779c481d55f2635e81a5dc",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c961d55f2635e81aaae"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c4e1d55f2635e81a5fd",
+      "depositId": "6a779c961d55f2635e81aaae",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:06.503Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca91d55f2635e81ac1d",
+    "user": "6a779c481d55f2635e81a5dc",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c8e1d55f2635e81aa22:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c8e1d55f2635e81aa22",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:25.635Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb51d55f2635e81acf4",
+    "user": "6a779c481d55f2635e81a5dc",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.15,
+    "availableAfter": 5.15,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c481d55f2635e81a5dc:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:37.117Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc81d55f2635e81ae53",
+    "user": "6a779c481d55f2635e81a5dc",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.15,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c481d55f2635e81a5dc"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:56.670Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d115f0c3e332c7cf982d",
+    "user": "6a779c481d55f2635e81a5dc",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c8e1d55f2635e81aa22:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c8e1d55f2635e81aa22",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:05.519Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d119f0c3e332c7cf986a",
+    "user": "6a779c481d55f2635e81a5dc",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.15,
+    "availableAfter": 105.30000000000001,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c481d55f2635e81a5dc:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:09.858Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c901d55f2635e81aa45",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c8f1d55f2635e81aa38"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:16:00.667Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c911d55f2635e81aa53",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c911d55f2635e81aa4e"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:16:01.382Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c981d55f2635e81aae3",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c981d55f2635e81aada"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c501d55f2635e81a608",
+      "depositId": "6a779c981d55f2635e81aada",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:08.928Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca91d55f2635e81ac22",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c911d55f2635e81aa4e:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c911d55f2635e81aa4e",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:25.938Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb51d55f2635e81acfb",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.15,
+    "availableAfter": 5.15,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c4a1d55f2635e81a5e7:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:37.474Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc91d55f2635e81ae5f",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.15,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c4a1d55f2635e81a5e7"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:57.331Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d116f0c3e332c7cf9839",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c911d55f2635e81aa4e:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c911d55f2635e81aa4e",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:06.280Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11af0c3e332c7cf9878",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.15,
+    "availableAfter": 105.30000000000001,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c4a1d55f2635e81a5e7:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:10.798Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c921d55f2635e81aa71",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c921d55f2635e81aa64"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:16:02.915Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c931d55f2635e81aa7f",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c931d55f2635e81aa7a"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:16:03.636Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9b1d55f2635e81ab0f",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c9a1d55f2635e81ab06"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c521d55f2635e81a613",
+      "depositId": "6a779c9a1d55f2635e81ab06",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:11.053Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779caa1d55f2635e81ac27",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c931d55f2635e81aa7a:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c931d55f2635e81aa7a",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:26.220Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb51d55f2635e81ad02",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.15,
+    "availableAfter": 5.15,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c4c1d55f2635e81a5f2:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:37.835Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc91d55f2635e81ae6b",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.15,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c4c1d55f2635e81a5f2"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:57.980Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d117f0c3e332c7cf9843",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c931d55f2635e81aa7a:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c931d55f2635e81aa7a",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:07.030Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11bf0c3e332c7cf9886",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.15,
+    "availableAfter": 105.30000000000001,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c4c1d55f2635e81a5f2:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:11.738Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c951d55f2635e81aa9d",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c941d55f2635e81aa90"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:16:05.145Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c951d55f2635e81aaab",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c951d55f2635e81aaa6"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:16:05.874Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9d1d55f2635e81ab3f",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c9c1d55f2635e81ab35"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c541d55f2635e81a61e",
+      "depositId": "6a779c9c1d55f2635e81ab35",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:13.482Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779caa1d55f2635e81ac2c",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c951d55f2635e81aaa6:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c951d55f2635e81aaa6",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:26.512Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb61d55f2635e81ad09",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.1,
+    "availableAfter": 5.1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c4e1d55f2635e81a5fd:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:38.174Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cca1d55f2635e81ae77",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c4e1d55f2635e81a5fd"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:58.640Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d117f0c3e332c7cf984d",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c951d55f2635e81aaa6:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c951d55f2635e81aaa6",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:07.782Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11cf0c3e332c7cf988d",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.1,
+    "availableAfter": 105.19999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c4e1d55f2635e81a5fd:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:12.675Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c971d55f2635e81aac9",
+    "user": "6a779c501d55f2635e81a608",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c961d55f2635e81aabc"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:16:07.442Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c981d55f2635e81aad7",
+    "user": "6a779c501d55f2635e81a608",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c981d55f2635e81aad2"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:16:08.309Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9f1d55f2635e81ab6e",
+    "user": "6a779c501d55f2635e81a608",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779c9f1d55f2635e81ab65"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c561d55f2635e81a629",
+      "depositId": "6a779c9f1d55f2635e81ab65",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:15.766Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779caa1d55f2635e81ac31",
+    "user": "6a779c501d55f2635e81a608",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c981d55f2635e81aad2:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c981d55f2635e81aad2",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:26.795Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb61d55f2635e81ad10",
+    "user": "6a779c501d55f2635e81a608",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.1,
+    "availableAfter": 5.1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c501d55f2635e81a608:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:38.511Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ccb1d55f2635e81ae83",
+    "user": "6a779c501d55f2635e81a608",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c501d55f2635e81a608"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:59.324Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d118f0c3e332c7cf9857",
+    "user": "6a779c501d55f2635e81a608",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c981d55f2635e81aad2:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c981d55f2635e81aad2",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:08.539Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11df0c3e332c7cf9894",
+    "user": "6a779c501d55f2635e81a608",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.1,
+    "availableAfter": 105.19999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c501d55f2635e81a608:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:13.618Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c991d55f2635e81aaf5",
+    "user": "6a779c521d55f2635e81a613",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c991d55f2635e81aae8"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:16:09.743Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9a1d55f2635e81ab03",
+    "user": "6a779c521d55f2635e81a613",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c9a1d55f2635e81aafe"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:16:10.479Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca11d55f2635e81ab9a",
+    "user": "6a779c521d55f2635e81a613",
+    "wallet": "bonus",
+    "type": "direct_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 5,
+    "availableAfter": 5,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "direct-bonus:6a779ca11d55f2635e81ab91"
+    },
+    "memo": "Direct connect bonus — 10% of package activation",
+    "meta": {
+      "buyerId": "6a779c581d55f2635e81a634",
+      "depositId": "6a779ca11d55f2635e81ab91",
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:17.902Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cab1d55f2635e81ac36",
+    "user": "6a779c521d55f2635e81a613",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c9a1d55f2635e81aafe:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c9a1d55f2635e81aafe",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:27.072Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb61d55f2635e81ad17",
+    "user": "6a779c521d55f2635e81a613",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.1,
+    "availableAfter": 5.1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c521d55f2635e81a613:2026-08-08"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:38.825Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ccc1d55f2635e81ae8f",
+    "user": "6a779c521d55f2635e81a613",
+    "wallet": "bonus",
+    "type": "bonanza",
+    "direction": "credit",
+    "field": "available",
+    "amount": 100,
+    "availableAfter": 105.1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "BonanzaOffer",
+      "resourceId": "bonanza:6a76ee26438e2d73adbb1ae8:6a779c521d55f2635e81a613"
+    },
+    "memo": "Bonanza reward — New month",
+    "meta": {
+      "offerId": "6a76ee26438e2d73adbb1ae8",
+      "requiredDirects": 1,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:17:00.016Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d119f0c3e332c7cf9862",
+    "user": "6a779c521d55f2635e81a613",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c9a1d55f2635e81aafe:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c9a1d55f2635e81aafe",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:09.294Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11ef0c3e332c7cf989b",
+    "user": "6a779c521d55f2635e81a613",
+    "wallet": "bonus",
+    "type": "team_bonus",
+    "direction": "credit",
+    "field": "available",
+    "amount": 0.1,
+    "availableAfter": 105.19999999999999,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "team-energy:6a779c521d55f2635e81a613:2026-08-09"
+    },
+    "memo": "Daily team energy bonus",
+    "meta": {
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:14.557Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9c1d55f2635e81ab24",
+    "user": "6a779c541d55f2635e81a61e",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c9b1d55f2635e81ab14"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:16:12.068Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9c1d55f2635e81ab32",
+    "user": "6a779c541d55f2635e81a61e",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c9c1d55f2635e81ab2d"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:16:12.773Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cab1d55f2635e81ac3b",
+    "user": "6a779c541d55f2635e81a61e",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c9c1d55f2635e81ab2d:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c9c1d55f2635e81ab2d",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:27.335Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11af0c3e332c7cf986c",
+    "user": "6a779c541d55f2635e81a61e",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c9c1d55f2635e81ab2d:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c9c1d55f2635e81ab2d",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:10.045Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9e1d55f2635e81ab51",
+    "user": "6a779c561d55f2635e81a629",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c9d1d55f2635e81ab44"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:16:14.333Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9f1d55f2635e81ab62",
+    "user": "6a779c561d55f2635e81a629",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779c9e1d55f2635e81ab5d"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:16:15.177Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cab1d55f2635e81ac40",
+    "user": "6a779c561d55f2635e81a629",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c9e1d55f2635e81ab5d:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c9e1d55f2635e81ab5d",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:27.600Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11af0c3e332c7cf9876",
+    "user": "6a779c561d55f2635e81a629",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779c9e1d55f2635e81ab5d:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779c9e1d55f2635e81ab5d",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:10.797Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca01d55f2635e81ab80",
+    "user": "6a779c581d55f2635e81a634",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 50,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a779c9f1d55f2635e81ab73"
+    },
+    "memo": "Deposit — package activation",
+    "createdAt": "2026-08-08T21:16:16.625Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca11d55f2635e81ab8e",
+    "user": "6a779c581d55f2635e81a634",
+    "wallet": "main",
+    "type": "package_activation",
+    "direction": "debit",
+    "field": "available",
+    "amount": 50,
+    "availableAfter": 0,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "6a779ca11d55f2635e81ab89"
+    },
+    "memo": "Package activation — Zeminex Global",
+    "meta": {
+      "packageId": "6a7789bfd2e462da5662f54c"
+    },
+    "createdAt": "2026-08-08T21:16:17.337Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cab1d55f2635e81ac45",
+    "user": "6a779c581d55f2635e81a634",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 1,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779ca11d55f2635e81ab89:2026-08-08"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779ca11d55f2635e81ab89",
+      "date": "2026-08-08"
+    },
+    "createdAt": "2026-08-08T21:16:27.884Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11bf0c3e332c7cf9881",
+    "user": "6a779c581d55f2635e81a634",
+    "wallet": "trading",
+    "type": "trading_yield",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1,
+    "availableAfter": 2,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "UserPackage",
+      "resourceId": "yield:6a779ca11d55f2635e81ab89:2026-08-09"
+    },
+    "memo": "Daily trade yield — Zeminex Global (2%)",
+    "meta": {
+      "userPackageId": "6a779ca11d55f2635e81ab89",
+      "date": "2026-08-09"
+    },
+    "createdAt": "2026-08-09T01:00:11.547Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fdd88bee687b8b5ad2fa",
+    "user": "6a779c581d55f2635e81a634",
+    "wallet": "main",
+    "type": "deposit",
+    "direction": "credit",
+    "field": "available",
+    "amount": 1000,
+    "availableAfter": 1000,
+    "onHoldAfter": 0,
+    "reference": {
+      "resource": "Deposit",
+      "resourceId": "6a77fdd78bee687b8b5ad2f5"
+    },
+    "memo": "Admin deposit",
+    "meta": {
+      "adminId": "6a6f5adf6213d08c893dde54",
+      "depositId": "6a77fdd78bee687b8b5ad2f5"
+    },
+    "createdAt": "2026-08-09T04:11:04.086Z",
+    "__v": 0
+  }
+]

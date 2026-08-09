@@ -1,0 +1,779 @@
+[
+  {
+    "_id": "6a6f613465bf8e84a9f3d75f",
+    "user": "6a6f5ca7277f8c8f148cba5b",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 5050,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.1,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2.5,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-02T15:27:10.757Z",
+    "updatedAt": "2026-08-09T09:39:37.133Z"
+  },
+  {
+    "_id": "6a6f603165bf8e84a9f3d6f3",
+    "user": "6a6f5cba277f8c8f148cba6f",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 100,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 0,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-02T15:22:52.121Z",
+    "updatedAt": "2026-08-08T09:11:54.632Z"
+  },
+  {
+    "_id": "6a6f6a6965bf8e84a9f3d94d",
+    "user": "6a6f5fb1277f8c8f148cbade",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 0,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 0,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-02T16:06:27.928Z",
+    "updatedAt": "2026-08-07T09:39:47.328Z"
+  },
+  {
+    "_id": "6a75e015d2e462da56629e12",
+    "user": "6a75e0061608293105f328f0",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 0,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 0,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-07T13:39:33.729Z",
+    "updatedAt": "2026-08-07T13:39:58.366Z"
+  },
+  {
+    "_id": "6a761776d2e462da5662b717",
+    "user": "6a76175b214f3842df2c7795",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 50,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 0,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 1,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-07T17:35:51.000Z",
+    "updatedAt": "2026-08-09T00:59:47.995Z"
+  },
+  {
+    "_id": "6a76f2fbd2e462da5662dac8",
+    "user": "6a76f2d193ec9bec0abba2c7",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 0,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 0,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T09:12:27.192Z",
+    "updatedAt": "2026-08-08T21:00:51.803Z"
+  },
+  {
+    "_id": "6a779bc2d2e462da5662f86c",
+    "user": "6a779c1f1d55f2635e81a4e2",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 186.26,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:07.777Z",
+    "updatedAt": "2026-08-09T05:11:34.153Z"
+  },
+  {
+    "_id": "6a779bc4d2e462da5662f86d",
+    "user": "6a779c211d55f2635e81a4f2",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 130.42,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:09.710Z",
+    "updatedAt": "2026-08-09T05:11:39.436Z"
+  },
+  {
+    "_id": "6a779bc6d2e462da5662f86e",
+    "user": "6a779c221d55f2635e81a4fd",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 130.42,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:12.089Z",
+    "updatedAt": "2026-08-09T05:11:45.732Z"
+  },
+  {
+    "_id": "6a779bc9d2e462da5662f86f",
+    "user": "6a779c241d55f2635e81a508",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 130.42,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:14.632Z",
+    "updatedAt": "2026-08-09T05:11:51.556Z"
+  },
+  {
+    "_id": "6a779bcbd2e462da5662f870",
+    "user": "6a779c251d55f2635e81a513",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:16.977Z",
+    "updatedAt": "2026-08-09T05:11:56.647Z"
+  },
+  {
+    "_id": "6a779bcdd2e462da5662f871",
+    "user": "6a779c271d55f2635e81a51e",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:19.221Z",
+    "updatedAt": "2026-08-09T05:12:01.661Z"
+  },
+  {
+    "_id": "6a779bcfd2e462da5662f872",
+    "user": "6a779c281d55f2635e81a529",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:21.403Z",
+    "updatedAt": "2026-08-09T05:12:04.510Z"
+  },
+  {
+    "_id": "6a779bd2d2e462da5662f873",
+    "user": "6a779c2a1d55f2635e81a534",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:23.701Z",
+    "updatedAt": "2026-08-09T05:12:09.723Z"
+  },
+  {
+    "_id": "6a779bd4d2e462da5662f874",
+    "user": "6a779c2c1d55f2635e81a53f",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:26.022Z",
+    "updatedAt": "2026-08-09T05:12:11.617Z"
+  },
+  {
+    "_id": "6a779bd6d2e462da5662f875",
+    "user": "6a779c2e1d55f2635e81a54a",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:28.380Z",
+    "updatedAt": "2026-08-09T05:12:15.275Z"
+  },
+  {
+    "_id": "6a779bd9d2e462da5662f876",
+    "user": "6a779c301d55f2635e81a555",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:30.700Z",
+    "updatedAt": "2026-08-09T05:12:16.663Z"
+  },
+  {
+    "_id": "6a779bdbd2e462da5662f878",
+    "user": "6a779c321d55f2635e81a560",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:33.020Z",
+    "updatedAt": "2026-08-09T05:12:18.542Z"
+  },
+  {
+    "_id": "6a779bddd2e462da5662f879",
+    "user": "6a779c341d55f2635e81a56b",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:35.270Z",
+    "updatedAt": "2026-08-09T05:12:21.711Z"
+  },
+  {
+    "_id": "6a779be0d2e462da5662f87a",
+    "user": "6a779c361d55f2635e81a576",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:37.830Z",
+    "updatedAt": "2026-08-09T05:12:25.665Z"
+  },
+  {
+    "_id": "6a779be2d2e462da5662f87b",
+    "user": "6a779c381d55f2635e81a581",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:40.226Z",
+    "updatedAt": "2026-08-09T05:12:27.253Z"
+  },
+  {
+    "_id": "6a779be5d2e462da5662f87c",
+    "user": "6a779c3a1d55f2635e81a58c",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.41999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:42.449Z",
+    "updatedAt": "2026-08-09T05:12:29.337Z"
+  },
+  {
+    "_id": "6a779be7d2e462da5662f87d",
+    "user": "6a779c3d1d55f2635e81a597",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.4,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:44.740Z",
+    "updatedAt": "2026-08-09T05:12:34.340Z"
+  },
+  {
+    "_id": "6a779be9d2e462da5662f87f",
+    "user": "6a779c3f1d55f2635e81a5a2",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.4,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:47.116Z",
+    "updatedAt": "2026-08-09T05:12:40.377Z"
+  },
+  {
+    "_id": "6a779bebd2e462da5662f880",
+    "user": "6a779c411d55f2635e81a5b0",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.4,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:49.176Z",
+    "updatedAt": "2026-08-09T05:12:45.673Z"
+  },
+  {
+    "_id": "6a779bedd2e462da5662f881",
+    "user": "6a779c431d55f2635e81a5bb",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.36000000000001,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:51.294Z",
+    "updatedAt": "2026-08-09T05:12:47.601Z"
+  },
+  {
+    "_id": "6a779bf0d2e462da5662f884",
+    "user": "6a779c441d55f2635e81a5c6",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.36000000000001,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:53.546Z",
+    "updatedAt": "2026-08-09T05:12:50.882Z"
+  },
+  {
+    "_id": "6a779bf2d2e462da5662f886",
+    "user": "6a779c461d55f2635e81a5d1",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 115.36000000000001,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:55.907Z",
+    "updatedAt": "2026-08-09T05:12:52.538Z"
+  },
+  {
+    "_id": "6a779bf4d2e462da5662f887",
+    "user": "6a779c481d55f2635e81a5dc",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 105.30000000000001,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:15:58.201Z",
+    "updatedAt": "2026-08-09T05:12:53.510Z"
+  },
+  {
+    "_id": "6a779bf7d2e462da5662f888",
+    "user": "6a779c4a1d55f2635e81a5e7",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 105.30000000000001,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:16:00.506Z",
+    "updatedAt": "2026-08-09T05:12:55.340Z"
+  },
+  {
+    "_id": "6a779bf9d2e462da5662f889",
+    "user": "6a779c4c1d55f2635e81a5f2",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 105.30000000000001,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:16:02.773Z",
+    "updatedAt": "2026-08-09T05:12:59.578Z"
+  },
+  {
+    "_id": "6a779bfbd2e462da5662f88a",
+    "user": "6a779c4e1d55f2635e81a5fd",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 105.19999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:16:05.019Z",
+    "updatedAt": "2026-08-09T05:13:00.873Z"
+  },
+  {
+    "_id": "6a779bfdd2e462da5662f88b",
+    "user": "6a779c501d55f2635e81a608",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 105.19999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:16:07.291Z",
+    "updatedAt": "2026-08-09T05:13:02.899Z"
+  },
+  {
+    "_id": "6a779c00d2e462da5662f88c",
+    "user": "6a779c521d55f2635e81a613",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 105.19999999999999,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:16:09.614Z",
+    "updatedAt": "2026-08-09T05:13:06.751Z"
+  },
+  {
+    "_id": "6a779c02d2e462da5662f88d",
+    "user": "6a779c541d55f2635e81a61e",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 0,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:16:11.912Z",
+    "updatedAt": "2026-08-09T01:00:09.856Z"
+  },
+  {
+    "_id": "6a779c04d2e462da5662f88e",
+    "user": "6a779c561d55f2635e81a629",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 0,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 0,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:16:14.187Z",
+    "updatedAt": "2026-08-09T01:00:10.608Z"
+  },
+  {
+    "_id": "6a779c07d2e462da5662f890",
+    "user": "6a779c581d55f2635e81a634",
+    "__v": 0,
+    "balances": {
+      "main": {
+        "available": 1000,
+        "onHold": 0
+      },
+      "bonus": {
+        "available": 0,
+        "onHold": 0
+      },
+      "trading": {
+        "available": 2,
+        "onHold": 0
+      }
+    },
+    "createdAt": "2026-08-08T21:16:16.487Z",
+    "updatedAt": "2026-08-09T07:24:21.090Z"
+  }
+]

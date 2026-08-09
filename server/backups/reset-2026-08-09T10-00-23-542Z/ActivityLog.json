@@ -1,0 +1,6550 @@
+[
+  {
+    "_id": "6a6f5caa277f8c8f148cba62",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.register",
+    "ip": "::1",
+    "userAgent": "curl/8.18.0",
+    "createdAt": "2026-08-02T15:05:14.083Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5cbb277f8c8f148cba73",
+    "actor": "6a6f5cba277f8c8f148cba6f",
+    "action": "auth.register",
+    "ip": "::1",
+    "userAgent": "curl/8.18.0",
+    "createdAt": "2026-08-02T15:05:31.963Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5ccf277f8c8f148cba80",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "curl/8.18.0",
+    "createdAt": "2026-08-02T15:05:51.622Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5d90277f8c8f148cba96",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "curl/8.18.0",
+    "createdAt": "2026-08-02T15:09:04.574Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5d92277f8c8f148cba9d",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "curl/8.18.0",
+    "createdAt": "2026-08-02T15:09:06.138Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5fb1277f8c8f148cbada",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "curl/8.18.0",
+    "createdAt": "2026-08-02T15:18:09.373Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f5fb3277f8c8f148cbae5",
+    "actor": "6a6f5fb1277f8c8f148cbade",
+    "action": "auth.register",
+    "ip": "::1",
+    "userAgent": "curl/8.18.0",
+    "createdAt": "2026-08-02T15:18:11.055Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f60cb277f8c8f148cbb05",
+    "actor": "6a6f5cba277f8c8f148cba6f",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:22:51.304Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f60d0277f8c8f148cbb1a",
+    "actor": "6a6f5cba277f8c8f148cba6f",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:22:56.974Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f61ce277f8c8f148cbb7a",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:27:10.248Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f61d2277f8c8f148cbb8f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:27:14.434Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f6220d7eb0b2968f5196b",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:28:32.563Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f62abd7eb0b2968f51a27",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a6f5aee6213d08c893ddeda",
+    "meta": {
+      "name": "Starter",
+      "priceUsd": 50,
+      "depositId": "6a6f62aad7eb0b2968f51a21"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:30:51.106Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f62bfd7eb0b2968f51a4a",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a6f62aad7eb0b2968f51a21",
+    "meta": {
+      "amountUsd": 50,
+      "packageId": "6a6f5aee6213d08c893ddeda"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:31:11.758Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f63ccd7eb0b2968f51ab2",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:35:40.613Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f63d4d7eb0b2968f51ab7",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:35:48.547Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f63d4d7eb0b2968f51ab9",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:35:48.549Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f63dcd7eb0b2968f51acd",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T15:35:56.502Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f6acbd7eb0b2968f51cb7",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T16:05:31.939Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f74f5b93dd3c97f695870",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T16:48:53.425Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f75feb93dd3c97f6958f0",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T16:53:18.940Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f760eb93dd3c97f695908",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T16:53:34.309Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f76b8b93dd3c97f695976",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T16:56:24.799Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f76b9b93dd3c97f69597b",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T16:56:25.927Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f76bcb93dd3c97f695980",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.notifications",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T16:56:28.273Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f76beb93dd3c97f695986",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.notifications",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T16:56:30.811Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f78c0b93dd3c97f695aa2",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T17:05:04.614Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f7928b93dd3c97f695acc",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-IN) WindowsPowerShell/5.1.19041.6456",
+    "createdAt": "2026-08-02T17:06:48.057Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f7d73b93dd3c97f695b96",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T17:25:07.330Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f8015b93dd3c97f695c6a",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T17:36:21.038Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f8555b93dd3c97f695d01",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-02T17:58:45.594Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f8580b93dd3c97f695d27",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a6f5aee6213d08c893ddeda",
+    "meta": {
+      "name": "Starter",
+      "priceUsd": 50,
+      "depositId": "6a6f8580b93dd3c97f695d21"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T17:59:28.723Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f8597b93dd3c97f695d47",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T17:59:51.974Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a6f85abb93dd3c97f695d4d",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-02T18:00:11.805Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7019d8b4fafe655edb5232",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-03T04:32:24.636Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a706cd966fd9b8714218000",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-03T10:26:33.565Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70c585b77c8089378a931d",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-03T16:44:53.294Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70ca05b77c8089378a9410",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-03T17:04:05.815Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a70cea9b77c8089378a9507",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-03T17:23:53.033Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7164d2b77c8089378a9646",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T04:04:34.687Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a716503b77c8089378a9683",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a6f8580b93dd3c97f695d21",
+    "meta": {
+      "amountUsd": 50,
+      "packageId": "6a6f5aee6213d08c893ddeda"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T04:05:23.906Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a716505b77c8089378a9692",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a6f8580b93dd3c97f695d21",
+    "meta": {
+      "buyerId": "6a6f5ca7277f8c8f148cba5b",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-04T04:05:25.207Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71882b1c70e5ca2375bff0",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-04T06:35:23.615Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71b103559158eb91bddeea",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-04T09:29:39.465Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71b9db2d1ab6e4ba23b572",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-04T10:07:23.922Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71bac12d1ab6e4ba23b5a2",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-04T10:11:13.787Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c7a0190559c19b5d5824",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T11:06:08.123Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c7c8190559c19b5d5842",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T11:06:48.882Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c7ca190559c19b5d5847",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T11:06:50.274Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c856190559c19b5d58ab",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T11:09:10.181Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c864190559c19b5d58b0",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.notifications",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T11:09:24.691Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c868190559c19b5d58b6",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.notifications",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T11:09:28.277Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71c86e190559c19b5d58cd",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T11:09:34.173Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f0fb26497fc4f924e646",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T14:02:35.280Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f23526497fc4f924e6c4",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T14:07:49.477Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f25c26497fc4f924e700",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T14:08:28.622Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f2d926497fc4f924e752",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-04T14:10:33.159Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f2df26497fc4f924e75a",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-04T14:10:39.450Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f30726497fc4f924e780",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-04T14:11:19.321Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f30826497fc4f924e785",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-04T14:11:20.992Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f36726497fc4f924e7f3",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T14:12:55.817Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a71f36826497fc4f924e7f6",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T14:12:56.084Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72130ca3d5543277bee960",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T16:27:56.298Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7213bbb5cc10434c1759ae",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-04T16:30:51.736Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72178cb5cc10434c175a30",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-04T16:47:08.882Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7217f0b5cc10434c175a7b",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-04T16:48:48.905Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7219e8b5cc10434c175ae8",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T16:57:12.722Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a721e56b5cc10434c175c15",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-04T17:16:06.047Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722314b5cc10434c175d1e",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T17:36:20.235Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722386b5cc10434c175d56",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T17:38:14.572Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722392b5cc10434c175d5b",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T17:38:26.375Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722810b5cc10434c175e00",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T17:57:36.208Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722e70b5cc10434c175ed8",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-04T18:24:48.088Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722ecbb5cc10434c175ef7",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T18:26:19.525Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722ed7b5cc10434c175efc",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T18:26:31.481Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722edbb5cc10434c175f01",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T18:26:35.360Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a722edcb5cc10434c175f06",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T18:26:36.367Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7231f9b5cc10434c175fb4",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-04T18:39:53.842Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72b9ff80bc83e56913ee16",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-05",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-05",
+      "depth": 5
+    },
+    "createdAt": "2026-08-05T04:20:15.022Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72c185ba46ed0cb6062db6",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-05T04:52:21.190Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72c9b9ac4401121e80b28a",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-05T05:27:21.299Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72c9f0ac4401121e80b2a8",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 26_5_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/146.0.7680.151 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-05T05:28:16.286Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72ca89ac4401121e80b2eb",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:30:49.989Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72caa0ac4401121e80b304",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:31:12.910Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72caa8ac4401121e80b309",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:31:20.318Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72caceac4401121e80b31f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:31:58.387Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72cae2ac4401121e80b337",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:32:18.686Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72cae4ac4401121e80b33c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:32:20.887Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72cbe4ac4401121e80b3f9",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:36:36.438Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72cbeaac4401121e80b3fe",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:36:42.883Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72cc15ac4401121e80b426",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T05:37:25.487Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72d508a3951063c890b667",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T06:15:36.094Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72dcc0bd0ecb7189d66fd2",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T06:48:32.760Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a72e17eac8cb7d561670a66",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T07:08:46.725Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73037de0f808e1cdaf368e",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T09:33:49.406Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733aa5c3d14053867174ca",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-05T13:29:09.146Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733af0c3d14053867174e6",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-05T13:30:24.155Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733af7c3d14053867174fe",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-05T13:30:31.519Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733decc3d1405386717593",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T13:43:08.853Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733df1c3d14053867175aa",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T13:43:13.592Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733e2dc3d14053867175d1",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.update",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T13:44:13.973Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733e81c3d1405386717608",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.wallet-addresses",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T13:45:37.363Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733ecdc3d1405386717640",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "withdrawal.submit",
+    "resource": "Withdrawal",
+    "resourceId": "6a733ecbc3d1405386717632",
+    "meta": {
+      "wallet": "main",
+      "amount": 20
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T13:46:53.698Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a733ecdc3d1405386717642",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "withdrawal.pay",
+    "resource": "Withdrawal",
+    "resourceId": "6a733ecbc3d1405386717632",
+    "meta": {
+      "wallet": "main",
+      "amount": 20,
+      "autoApproved": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T13:46:53.934Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734c3a7246e58e90c5e2a3",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-05T14:44:10.405Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734cbb7246e58e90c5e2f6",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "withdrawal.submit",
+    "resource": "Withdrawal",
+    "resourceId": "6a734cb97246e58e90c5e2e8",
+    "meta": {
+      "wallet": "main",
+      "amount": 30
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-05T14:46:19.664Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a734cbb7246e58e90c5e2f8",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "withdrawal.pay",
+    "resource": "Withdrawal",
+    "resourceId": "6a734cb97246e58e90c5e2e8",
+    "meta": {
+      "wallet": "main",
+      "amount": 30,
+      "autoApproved": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-05T14:46:19.902Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73bea29d5af2c7ad354407",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-05T22:52:18.765Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a73d995899788685deb6333",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-06",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-06",
+      "depth": 5
+    },
+    "createdAt": "2026-08-06T00:47:17.664Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a74132bbe7aa90e2bff293f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-06T04:52:59.991Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a741337be7aa90e2bff294c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-06T04:53:11.238Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7423d37bb5ed75b4152dc5",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-06T06:04:03.602Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a74249745c6d0304f73aede",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-06T06:07:19.425Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a742b0245c6d0304f73afbb",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-06T06:34:42.264Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a744e81bda9904666a3d814",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-06T09:06:09.867Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a752b1567b5dbdb5145a4cd",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-07",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-07",
+      "depth": 5
+    },
+    "createdAt": "2026-08-07T00:47:17.902Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a755ee2a49dc003b8d31cf6",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T04:28:18.516Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7564b1a49dc003b8d31e17",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T04:53:05.309Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7565a2146f4d8903604cd5",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T04:57:06.346Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7565a3146f4d8903604ce6",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T04:57:07.619Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a756a2c3c40862faac7a6c1",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T05:16:28.432Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7583cef6544ca64c73f565",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T07:05:50.154Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7583d3f6544ca64c73f56f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T07:05:55.053Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758424f6544ca64c73f5b1",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T07:07:16.400Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758426f6544ca64c73f5b6",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T07:07:18.269Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758616f6544ca64c73f6e4",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T07:15:34.213Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758650f6544ca64c73f6f7",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T07:16:32.673Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758682f6544ca64c73f707",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T07:17:22.109Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758682f6544ca64c73f70a",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T07:17:22.382Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758e6db7785151a94f47df",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T07:51:09.787Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a758e74b7785151a94f47f4",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T07:51:16.589Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a1042d8cd48fd1007ce0",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T09:10:28.017Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a2072d8cd48fd1007d1e",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T09:14:47.051Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a2082d8cd48fd1007d23",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T09:14:48.124Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a2092d8cd48fd1007d28",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T09:14:49.394Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a2d62d8cd48fd1007d6c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T09:18:14.870Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a31e2d8cd48fd1007db8",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T09:19:26.953Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a58b2d8cd48fd1007e50",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T09:29:47.156Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a6202d8cd48fd1007e67",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T09:32:16.874Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a70c2d8cd48fd1007f1e",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T09:36:12.053Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a7942d8cd48fd1007f6f",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T09:38:28.227Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75a8642d8cd48fd1008008",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "settings.site_config_update",
+    "resource": "Setting",
+    "meta": {
+      "fields": [
+        "siteName",
+        "tagline",
+        "logoLight",
+        "logoDark",
+        "navLinks",
+        "footerText",
+        "contactDetails",
+        "socialLinks",
+        "seoDefaults",
+        "announcementBar"
+      ]
+    },
+    "createdAt": "2026-08-07T09:41:56.846Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75b8336a3cec35cb2cc86a",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T10:49:23.965Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75b8346a3cec35cb2cc86d",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T10:49:24.098Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75b8496a3cec35cb2cc88e",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T10:49:45.068Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75b8496a3cec35cb2cc893",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T10:49:45.882Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75cf4be57fad06c7407125",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-07",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-07",
+      "depth": 5
+    },
+    "createdAt": "2026-08-07T12:27:55.261Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e00e1608293105f328fc",
+    "actor": "6a75e0061608293105f328f0",
+    "action": "auth.register",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T13:39:26.433Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e0951608293105f32932",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T13:41:41.844Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e0ad1608293105f3294c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T13:42:05.284Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e0ad1608293105f3294f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T13:42:05.759Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e4251608293105f32a10",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T13:56:53.132Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e6f01608293105f32b77",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:08:48.277Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e6f01608293105f32b7b",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:08:48.872Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7031608293105f32b82",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:09:07.488Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7041608293105f32b86",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:09:08.150Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7151608293105f32b8f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:09:25.776Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7161608293105f32b94",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:09:26.250Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7b71608293105f32be6",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:12:07.232Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7e61608293105f32c0d",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:12:54.021Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7e71608293105f32c12",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:12:55.931Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7f81608293105f32c17",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:13:12.923Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a75e7fa1608293105f32c1c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-07T14:13:14.145Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76175c214f3842df2c779c",
+    "actor": "6a76175b214f3842df2c7795",
+    "action": "auth.register",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T17:35:24.849Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761775214f3842df2c77af",
+    "actor": "6a76175b214f3842df2c7795",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T17:35:49.715Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76177a214f3842df2c77c6",
+    "actor": "6a76175b214f3842df2c7795",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Edg/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T17:35:54.031Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761d8d8798230cc4180304",
+    "actor": "6a76175b214f3842df2c7795",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T18:01:49.916Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761efe8798230cc418037c",
+    "actor": "6a76175b214f3842df2c7795",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a6f5aee6213d08c893ddeda",
+    "meta": {
+      "name": "Starter",
+      "priceUsd": 50,
+      "depositId": "6a761efe8798230cc4180376"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T18:07:58.904Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761f098798230cc4180396",
+    "actor": "6a76175b214f3842df2c7795",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a761efe8798230cc4180376",
+    "meta": {
+      "amountUsd": 50,
+      "packageId": "6a6f5aee6213d08c893ddeda"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T18:08:09.785Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761f0a8798230cc41803a5",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a761efe8798230cc4180376",
+    "meta": {
+      "buyerId": "6a76175b214f3842df2c7795",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-07T18:08:10.086Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a761f438798230cc41803c9",
+    "actor": "6a76175b214f3842df2c7795",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T18:09:07.757Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7622ce8798230cc41804bb",
+    "actor": "6a76175b214f3842df2c7795",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-07T18:24:14.054Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a764eb36ce1c493a27907dd",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T21:31:31.866Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a764eb96ce1c493a27907e2",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T21:31:37.472Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a764fdc6ce1c493a279084b",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-07T21:36:28.274Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc4180573",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-08",
+    "meta": {
+      "amount": 0.08,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T01:58:34.701Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a768d4a8798230cc4180582",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5ca7277f8c8f148cba5b:2026-08-08",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T01:58:34.898Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ac0ee57fad06c74072dd",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-08",
+    "meta": {
+      "amount": 0.08,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T04:09:50.491Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ac0ee57fad06c74072db",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-08",
+    "meta": {
+      "amount": 0.08,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T04:09:50.484Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ac0ee57fad06c74072e6",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5ca7277f8c8f148cba5b:2026-08-08",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T04:09:50.760Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ac0ee57fad06c74072e8",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5ca7277f8c8f148cba5b:2026-08-08",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T04:09:50.765Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76b5d21e7b3f5f4639998a",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T04:51:30.899Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76b5d81e7b3f5f463999a1",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T04:51:36.478Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76b5ed1e7b3f5f463999a7",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T04:51:57.760Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76b62b1e7b3f5f463999cc",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T04:52:59.542Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76b61a841170d2f0d3943c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T04:52:42.434Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76b6e81e7b3f5f46399a18",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T04:56:08.138Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76c0d61e7b3f5f46399b3d",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T05:38:30.677Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76e965438e2d73adbb193c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-08T08:31:33.041Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ec28438e2d73adbb19a9",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T08:43:20.749Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ec43438e2d73adbb19c1",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T08:43:47.050Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ec44438e2d73adbb19c6",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T08:43:48.113Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ed75438e2d73adbb1a5d",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T08:48:53.536Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ede4438e2d73adbb1ab9",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "user.force_logout",
+    "resource": "User",
+    "resourceId": "6a76175b214f3842df2c7795",
+    "createdAt": "2026-08-08T08:50:44.328Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ee26438e2d73adbb1aea",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "bonanza.create",
+    "resource": "Bonanza",
+    "meta": {
+      "name": "New month"
+    },
+    "createdAt": "2026-08-08T08:51:50.978Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76ee81438e2d73adbb1b35",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "settings.site_config_update",
+    "resource": "Setting",
+    "meta": {
+      "fields": [
+        "siteName",
+        "tagline",
+        "logoLight",
+        "logoDark",
+        "navLinks",
+        "footerText",
+        "contactDetails",
+        "socialLinks",
+        "seoDefaults",
+        "announcementBar"
+      ]
+    },
+    "createdAt": "2026-08-08T08:53:21.546Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f2d993ec9bec0abba2ce",
+    "actor": "6a76f2d193ec9bec0abba2c7",
+    "action": "auth.register",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T09:11:53.238Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f2db93ec9bec0abba2df",
+    "actor": "6a6f5cba277f8c8f148cba6f",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 2
+    },
+    "createdAt": "2026-08-08T09:11:55.087Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f2f993ec9bec0abba2e3",
+    "actor": "6a76f2d193ec9bec0abba2c7",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T09:12:25.029Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f30693ec9bec0abba301",
+    "actor": "6a76f2d193ec9bec0abba2c7",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T09:12:38.347Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f30793ec9bec0abba306",
+    "actor": "6a76f2d193ec9bec0abba2c7",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T09:12:39.216Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f38493ec9bec0abba318",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T09:14:44.439Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f38893ec9bec0abba331",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T09:14:48.930Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76f38993ec9bec0abba335",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T09:14:49.546Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a76fa4edda507072c158d69",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T09:43:42.251Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77056731f7f8dff88027de",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T10:31:03.382Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77062c7fb529bf5f54a3dc",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T10:34:20.428Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a770e590b9b0e41218e5411",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T11:09:13.713Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77320ef17e91ecf53c72b4",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T13:41:34.471Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a773290f17e91ecf53c7310",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T13:43:44.428Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a773293f17e91ecf53c7315",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T13:43:47.210Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77552953ae866bff4599fc",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-08T16:11:21.879Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7778e1f656ecf57305081e",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T18:43:45.248Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a777d36571d68e19ac6cb68",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T19:02:14.003Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a777e57571d68e19ac6cbda",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T19:07:03.162Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a777e87571d68e19ac6cc1f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T19:07:51.520Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77812d8dae217a9da1f8e4",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T19:19:09.708Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778377a6534984cd1f5c69",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "p2p_transfer.send",
+    "resource": "P2PTransfer",
+    "resourceId": "6a778376a6534984cd1f5c5b",
+    "createdAt": "2026-08-08T19:28:55.261Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778378a6534984cd1f5c81",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "p2p_transfer.send",
+    "resource": "P2PTransfer",
+    "resourceId": "6a778377a6534984cd1f5c75",
+    "createdAt": "2026-08-08T19:28:56.624Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7783b58dae217a9da1f957",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T19:29:57.546Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778e4f2f3aad87b64415e9",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T20:15:11.330Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778e782f3aad87b644161a",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a778e712f3aad87b6441614",
+    "meta": {
+      "amountUsd": 50
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T20:15:52.460Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778e842f3aad87b644162d",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a778e712f3aad87b6441614",
+    "meta": {
+      "amountUsd": 50
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T20:16:04.807Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7791b92f3aad87b64416f7",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T20:29:45.696Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7792172f3aad87b644171b",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T20:31:19.726Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77921e2f3aad87b6441732",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T20:31:26.729Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7798b5f3f53c3d46519401",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T20:59:33.304Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c3cf3f53c3d4651959c",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-08T21:14:36.897Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5b1d55f2635e81a643",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c5b1d55f2635e81a63b",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:07.353Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5b1d55f2635e81a648",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c5b1d55f2635e81a63b",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:07.650Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5c1d55f2635e81a660",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c5c1d55f2635e81a65e",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:08.912Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5d1d55f2635e81a668",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c5d1d55f2635e81a665",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:09.313Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5d1d55f2635e81a66d",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c5d1d55f2635e81a665",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:09.567Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5e1d55f2635e81a685",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c5e1d55f2635e81a683",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:10.896Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5f1d55f2635e81a68f",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c5e1d55f2635e81a683",
+    "meta": {
+      "buyerId": "6a779c211d55f2635e81a4f2",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:11.435Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5f1d55f2635e81a695",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c5f1d55f2635e81a692",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:11.723Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c5f1d55f2635e81a69a",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c5f1d55f2635e81a692",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:11.971Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c611d55f2635e81a6b5",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c611d55f2635e81a6b3",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:13.436Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c611d55f2635e81a6be",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c611d55f2635e81a6b3",
+    "meta": {
+      "buyerId": "6a779c221d55f2635e81a4fd",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:13.901Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c621d55f2635e81a6c4",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c621d55f2635e81a6c1",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:14.194Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c621d55f2635e81a6c9",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c621d55f2635e81a6c1",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:14.482Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c631d55f2635e81a6e1",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c631d55f2635e81a6df",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:15.844Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c641d55f2635e81a6ea",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c631d55f2635e81a6df",
+    "meta": {
+      "buyerId": "6a779c241d55f2635e81a508",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:16.319Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c641d55f2635e81a6f0",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c641d55f2635e81a6ed",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:16.578Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c641d55f2635e81a6f5",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c641d55f2635e81a6ed",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:16.843Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c661d55f2635e81a70d",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c661d55f2635e81a70b",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:18.115Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c661d55f2635e81a716",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c661d55f2635e81a70b",
+    "meta": {
+      "buyerId": "6a779c251d55f2635e81a513",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:18.553Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c661d55f2635e81a71c",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c661d55f2635e81a719",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:18.836Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c671d55f2635e81a721",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c661d55f2635e81a719",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:19.088Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c681d55f2635e81a739",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c681d55f2635e81a737",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:20.287Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c681d55f2635e81a742",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c681d55f2635e81a737",
+    "meta": {
+      "buyerId": "6a779c271d55f2635e81a51e",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:20.745Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c691d55f2635e81a748",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c681d55f2635e81a745",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:21.019Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c691d55f2635e81a74d",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c681d55f2635e81a745",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:21.265Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6a1d55f2635e81a765",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c6a1d55f2635e81a763",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:22.497Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6a1d55f2635e81a76e",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c6a1d55f2635e81a763",
+    "meta": {
+      "buyerId": "6a779c281d55f2635e81a529",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:22.976Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6b1d55f2635e81a774",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c6b1d55f2635e81a771",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:23.287Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6b1d55f2635e81a779",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c6b1d55f2635e81a771",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:23.568Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6c1d55f2635e81a791",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c6c1d55f2635e81a78f",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:24.805Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6d1d55f2635e81a79a",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c6c1d55f2635e81a78f",
+    "meta": {
+      "buyerId": "6a779c2a1d55f2635e81a534",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:25.280Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6d1d55f2635e81a7a0",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c6d1d55f2635e81a79d",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:25.543Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6d1d55f2635e81a7a5",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c6d1d55f2635e81a79d",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:25.781Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6f1d55f2635e81a7bd",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c6f1d55f2635e81a7bb",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:27.134Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6f1d55f2635e81a7c6",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c6f1d55f2635e81a7bb",
+    "meta": {
+      "buyerId": "6a779c2c1d55f2635e81a53f",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:27.716Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c6f1d55f2635e81a7cc",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c6f1d55f2635e81a7c9",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:27.984Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c701d55f2635e81a7d1",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c6f1d55f2635e81a7c9",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:28.249Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c711d55f2635e81a7e9",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c711d55f2635e81a7e7",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:29.546Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c711d55f2635e81a7f2",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c711d55f2635e81a7e7",
+    "meta": {
+      "buyerId": "6a779c2e1d55f2635e81a54a",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:29.999Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c721d55f2635e81a7f8",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c721d55f2635e81a7f5",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:30.289Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c721d55f2635e81a7fd",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c721d55f2635e81a7f5",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:30.559Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c731d55f2635e81a815",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c731d55f2635e81a813",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:31.833Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c741d55f2635e81a81e",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c731d55f2635e81a813",
+    "meta": {
+      "buyerId": "6a779c301d55f2635e81a555",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:32.350Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c741d55f2635e81a824",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c741d55f2635e81a821",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:32.611Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c741d55f2635e81a829",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c741d55f2635e81a821",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:32.888Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c761d55f2635e81a841",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c761d55f2635e81a83f",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:34.145Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c761d55f2635e81a84a",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c761d55f2635e81a83f",
+    "meta": {
+      "buyerId": "6a779c321d55f2635e81a560",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:34.627Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c761d55f2635e81a850",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c761d55f2635e81a84d",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:34.876Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c771d55f2635e81a855",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c761d55f2635e81a84d",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:35.125Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c781d55f2635e81a86d",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c781d55f2635e81a86b",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:36.355Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c781d55f2635e81a876",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c781d55f2635e81a86b",
+    "meta": {
+      "buyerId": "6a779c341d55f2635e81a56b",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:36.973Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c791d55f2635e81a87c",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c791d55f2635e81a879",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:37.293Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c791d55f2635e81a881",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c791d55f2635e81a879",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:37.705Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7a1d55f2635e81a899",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c7a1d55f2635e81a897",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:38.885Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7b1d55f2635e81a8a2",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c7a1d55f2635e81a897",
+    "meta": {
+      "buyerId": "6a779c361d55f2635e81a576",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:39.355Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7b1d55f2635e81a8ab",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c7b1d55f2635e81a8a5",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:39.831Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7c1d55f2635e81a8b0",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c7b1d55f2635e81a8a5",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:40.093Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7d1d55f2635e81a8c8",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c7d1d55f2635e81a8c6",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:41.287Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7d1d55f2635e81a8d2",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c7d1d55f2635e81a8c6",
+    "meta": {
+      "buyerId": "6a779c381d55f2635e81a581",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:41.794Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7e1d55f2635e81a8d8",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c7d1d55f2635e81a8d5",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:42.051Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7e1d55f2635e81a8dd",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c7d1d55f2635e81a8d5",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:42.301Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c7f1d55f2635e81a8f8",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c7f1d55f2635e81a8f6",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:43.643Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c801d55f2635e81a901",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c7f1d55f2635e81a8f6",
+    "meta": {
+      "buyerId": "6a779c3a1d55f2635e81a58c",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:44.118Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c801d55f2635e81a907",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c801d55f2635e81a904",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:44.381Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c801d55f2635e81a90c",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c801d55f2635e81a904",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:44.615Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c811d55f2635e81a924",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c811d55f2635e81a922",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:45.776Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c821d55f2635e81a92d",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c811d55f2635e81a922",
+    "meta": {
+      "buyerId": "6a779c3d1d55f2635e81a597",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:46.263Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c821d55f2635e81a933",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c821d55f2635e81a930",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:46.552Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c821d55f2635e81a938",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c821d55f2635e81a930",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:46.824Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c841d55f2635e81a950",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c841d55f2635e81a94e",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:48.154Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c841d55f2635e81a959",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c841d55f2635e81a94e",
+    "meta": {
+      "buyerId": "6a779c3f1d55f2635e81a5a2",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:48.578Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c841d55f2635e81a95f",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c841d55f2635e81a95c",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:48.824Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c851d55f2635e81a964",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c841d55f2635e81a95c",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:49.064Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c861d55f2635e81a97c",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c861d55f2635e81a97a",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:50.219Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c861d55f2635e81a985",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c861d55f2635e81a97a",
+    "meta": {
+      "buyerId": "6a779c411d55f2635e81a5b0",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:50.670Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c861d55f2635e81a98b",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c861d55f2635e81a988",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:50.926Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c871d55f2635e81a990",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c861d55f2635e81a988",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:51.168Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c881d55f2635e81a9a8",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c881d55f2635e81a9a6",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:52.386Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c881d55f2635e81a9b1",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c881d55f2635e81a9a6",
+    "meta": {
+      "buyerId": "6a779c431d55f2635e81a5bb",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:52.862Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c891d55f2635e81a9b7",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c891d55f2635e81a9b4",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:53.147Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c891d55f2635e81a9bc",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c891d55f2635e81a9b4",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:53.416Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8a1d55f2635e81a9d4",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c8a1d55f2635e81a9d2",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:54.692Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8b1d55f2635e81a9dd",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c8a1d55f2635e81a9d2",
+    "meta": {
+      "buyerId": "6a779c441d55f2635e81a5c6",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:55.139Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8b1d55f2635e81a9e3",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c8b1d55f2635e81a9e0",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:55.424Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8b1d55f2635e81a9e8",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c8b1d55f2635e81a9e0",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:55.760Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8c1d55f2635e81aa00",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c8c1d55f2635e81a9fe",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:56.950Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8d1d55f2635e81aa09",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c8c1d55f2635e81a9fe",
+    "meta": {
+      "buyerId": "6a779c461d55f2635e81a5d1",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:57.416Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8d1d55f2635e81aa0f",
+    "actor": "6a779c481d55f2635e81a5dc",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c8d1d55f2635e81aa0c",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:57.815Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8e1d55f2635e81aa14",
+    "actor": "6a779c481d55f2635e81a5dc",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c8d1d55f2635e81aa0c",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:15:58.067Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8f1d55f2635e81aa2c",
+    "actor": "6a779c481d55f2635e81a5dc",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c8f1d55f2635e81aa2a",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:15:59.344Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c8f1d55f2635e81aa35",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c8f1d55f2635e81aa2a",
+    "meta": {
+      "buyerId": "6a779c481d55f2635e81a5dc",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:15:59.832Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c901d55f2635e81aa3b",
+    "actor": "6a779c4a1d55f2635e81a5e7",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c8f1d55f2635e81aa38",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:00.125Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c901d55f2635e81aa40",
+    "actor": "6a779c4a1d55f2635e81a5e7",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c8f1d55f2635e81aa38",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:00.394Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c911d55f2635e81aa58",
+    "actor": "6a779c4a1d55f2635e81a5e7",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c911d55f2635e81aa56",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:16:01.590Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c921d55f2635e81aa61",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c911d55f2635e81aa56",
+    "meta": {
+      "buyerId": "6a779c4a1d55f2635e81a5e7",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:02.067Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c921d55f2635e81aa67",
+    "actor": "6a779c4c1d55f2635e81a5f2",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c921d55f2635e81aa64",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:02.361Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c921d55f2635e81aa6c",
+    "actor": "6a779c4c1d55f2635e81a5f2",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c921d55f2635e81aa64",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:02.630Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c931d55f2635e81aa84",
+    "actor": "6a779c4c1d55f2635e81a5f2",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c931d55f2635e81aa82",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:16:03.873Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c941d55f2635e81aa8d",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c931d55f2635e81aa82",
+    "meta": {
+      "buyerId": "6a779c4c1d55f2635e81a5f2",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:04.337Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c941d55f2635e81aa93",
+    "actor": "6a779c4e1d55f2635e81a5fd",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c941d55f2635e81aa90",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:04.608Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c941d55f2635e81aa98",
+    "actor": "6a779c4e1d55f2635e81a5fd",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c941d55f2635e81aa90",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:04.885Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c961d55f2635e81aab0",
+    "actor": "6a779c4e1d55f2635e81a5fd",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c961d55f2635e81aaae",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:16:06.099Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c961d55f2635e81aab9",
+    "actor": "6a779c481d55f2635e81a5dc",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c961d55f2635e81aaae",
+    "meta": {
+      "buyerId": "6a779c4e1d55f2635e81a5fd",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:06.578Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c961d55f2635e81aabf",
+    "actor": "6a779c501d55f2635e81a608",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c961d55f2635e81aabc",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:06.872Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c971d55f2635e81aac4",
+    "actor": "6a779c501d55f2635e81a608",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c961d55f2635e81aabc",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:07.148Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c981d55f2635e81aadc",
+    "actor": "6a779c501d55f2635e81a608",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c981d55f2635e81aada",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:16:08.522Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c981d55f2635e81aae5",
+    "actor": "6a779c4a1d55f2635e81a5e7",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c981d55f2635e81aada",
+    "meta": {
+      "buyerId": "6a779c501d55f2635e81a608",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:08.992Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c991d55f2635e81aaeb",
+    "actor": "6a779c521d55f2635e81a613",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c991d55f2635e81aae8",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:09.234Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c991d55f2635e81aaf0",
+    "actor": "6a779c521d55f2635e81a613",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c991d55f2635e81aae8",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:09.487Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9a1d55f2635e81ab08",
+    "actor": "6a779c521d55f2635e81a613",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c9a1d55f2635e81ab06",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:16:10.682Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9b1d55f2635e81ab11",
+    "actor": "6a779c4c1d55f2635e81a5f2",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c9a1d55f2635e81ab06",
+    "meta": {
+      "buyerId": "6a779c521d55f2635e81a613",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:11.115Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9b1d55f2635e81ab1a",
+    "actor": "6a779c541d55f2635e81a61e",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c9b1d55f2635e81ab14",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:11.545Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9b1d55f2635e81ab1f",
+    "actor": "6a779c541d55f2635e81a61e",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c9b1d55f2635e81ab14",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:11.775Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9d1d55f2635e81ab37",
+    "actor": "6a779c541d55f2635e81a61e",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c9c1d55f2635e81ab35",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:16:13.004Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9d1d55f2635e81ab41",
+    "actor": "6a779c4e1d55f2635e81a5fd",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c9c1d55f2635e81ab35",
+    "meta": {
+      "buyerId": "6a779c541d55f2635e81a61e",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:13.556Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9d1d55f2635e81ab47",
+    "actor": "6a779c561d55f2635e81a629",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c9d1d55f2635e81ab44",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:13.822Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9e1d55f2635e81ab4c",
+    "actor": "6a779c561d55f2635e81a629",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c9d1d55f2635e81ab44",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:14.068Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9f1d55f2635e81ab67",
+    "actor": "6a779c561d55f2635e81a629",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779c9f1d55f2635e81ab65",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:16:15.395Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779c9f1d55f2635e81ab70",
+    "actor": "6a779c501d55f2635e81a608",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779c9f1d55f2635e81ab65",
+    "meta": {
+      "buyerId": "6a779c561d55f2635e81a629",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:15.834Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca01d55f2635e81ab76",
+    "actor": "6a779c581d55f2635e81a634",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a779c9f1d55f2635e81ab73",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:16.123Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca01d55f2635e81ab7b",
+    "actor": "6a779c581d55f2635e81a634",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a779c9f1d55f2635e81ab73",
+    "meta": {
+      "amountUsd": 50
+    },
+    "createdAt": "2026-08-08T21:16:16.364Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca11d55f2635e81ab93",
+    "actor": "6a779c581d55f2635e81a634",
+    "action": "package.activate",
+    "resource": "Package",
+    "resourceId": "6a7789bfd2e462da5662f54c",
+    "meta": {
+      "name": "Zeminex Global",
+      "priceUsd": 50,
+      "depositId": "6a779ca11d55f2635e81ab91",
+      "method": "wallet"
+    },
+    "createdAt": "2026-08-08T21:16:17.522Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ca11d55f2635e81ab9c",
+    "actor": "6a779c521d55f2635e81a613",
+    "action": "compensation.direct_bonus",
+    "resource": "Deposit",
+    "resourceId": "6a779ca11d55f2635e81ab91",
+    "meta": {
+      "buyerId": "6a779c581d55f2635e81a634",
+      "amount": 5,
+      "pct": 10
+    },
+    "createdAt": "2026-08-08T21:16:17.968Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cac1d55f2635e81ac50",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-08",
+    "meta": {
+      "amount": 0.08,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:28.563Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cac1d55f2635e81ac55",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5ca7277f8c8f148cba5b:2026-08-08",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:28.806Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cad1d55f2635e81ac5c",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c1f1d55f2635e81a4e2:2026-08-08",
+    "meta": {
+      "amount": 0.63,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:29.267Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cad1d55f2635e81ac63",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c211d55f2635e81a4f2:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:29.616Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cad1d55f2635e81ac6a",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c221d55f2635e81a4fd:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:29.936Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cae1d55f2635e81ac71",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c241d55f2635e81a508:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:30.274Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cae1d55f2635e81ac78",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c251d55f2635e81a513:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:30.630Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cae1d55f2635e81ac7f",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c271d55f2635e81a51e:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:30.955Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779caf1d55f2635e81ac86",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c281d55f2635e81a529:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:31.296Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779caf1d55f2635e81ac8d",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2a1d55f2635e81a534:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:31.631Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb01d55f2635e81ac94",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2c1d55f2635e81a53f:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:32.009Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb01d55f2635e81ac9b",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2e1d55f2635e81a54a:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:32.396Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb01d55f2635e81aca2",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c301d55f2635e81a555:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:32.740Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb11d55f2635e81aca9",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c321d55f2635e81a560:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:33.086Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb11d55f2635e81acb0",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c341d55f2635e81a56b:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:33.446Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb11d55f2635e81acb7",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c361d55f2635e81a576:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:33.797Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb21d55f2635e81acbe",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c381d55f2635e81a581:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:34.181Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb21d55f2635e81acc5",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3a1d55f2635e81a58c:2026-08-08",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:34.564Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb21d55f2635e81accc",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3d1d55f2635e81a597:2026-08-08",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:34.958Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb31d55f2635e81acd3",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3f1d55f2635e81a5a2:2026-08-08",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:35.347Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb31d55f2635e81acda",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c411d55f2635e81a5b0:2026-08-08",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:35.716Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb41d55f2635e81ace1",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c431d55f2635e81a5bb:2026-08-08",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:36.096Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb41d55f2635e81ace8",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c441d55f2635e81a5c6:2026-08-08",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:36.493Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb41d55f2635e81acef",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c461d55f2635e81a5d1:2026-08-08",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:36.857Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb51d55f2635e81acf6",
+    "actor": "6a779c481d55f2635e81a5dc",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c481d55f2635e81a5dc:2026-08-08",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:37.190Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb51d55f2635e81acfd",
+    "actor": "6a779c4a1d55f2635e81a5e7",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4a1d55f2635e81a5e7:2026-08-08",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:37.543Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb51d55f2635e81ad04",
+    "actor": "6a779c4c1d55f2635e81a5f2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4c1d55f2635e81a5f2:2026-08-08",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:37.911Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb61d55f2635e81ad0b",
+    "actor": "6a779c4e1d55f2635e81a5fd",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4e1d55f2635e81a5fd:2026-08-08",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:38.247Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb61d55f2635e81ad12",
+    "actor": "6a779c501d55f2635e81a608",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c501d55f2635e81a608:2026-08-08",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:38.571Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb61d55f2635e81ad19",
+    "actor": "6a779c521d55f2635e81a613",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c521d55f2635e81a613:2026-08-08",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-08",
+      "depth": 5
+    },
+    "createdAt": "2026-08-08T21:16:38.900Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb71d55f2635e81ad26",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:39.777Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb81d55f2635e81ad32",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 2
+    },
+    "createdAt": "2026-08-08T21:16:40.445Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb91d55f2635e81ad42",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a6f5aee6213d08c893ddee3",
+    "meta": {
+      "name": "Quick Start",
+      "amount": 10,
+      "directCount": 3
+    },
+    "createdAt": "2026-08-08T21:16:41.361Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cb91d55f2635e81ad4a",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 3
+    },
+    "createdAt": "2026-08-08T21:16:41.801Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cba1d55f2635e81ad56",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:42.453Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbb1d55f2635e81ad62",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:43.110Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbb1d55f2635e81ad6e",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:43.800Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbc1d55f2635e81ad7a",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:44.490Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbd1d55f2635e81ad89",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:45.179Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbd1d55f2635e81ad95",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:45.836Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbe1d55f2635e81ada1",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:46.567Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbf1d55f2635e81adad",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:47.211Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cbf1d55f2635e81adb9",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:47.824Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc01d55f2635e81adc5",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:48.503Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc11d55f2635e81add1",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:49.210Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc11d55f2635e81addd",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:49.870Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc21d55f2635e81ade9",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:50.699Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc31d55f2635e81adf5",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:51.371Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc41d55f2635e81ae01",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:52.054Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc41d55f2635e81ae0d",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:52.705Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc51d55f2635e81ae19",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:53.356Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc61d55f2635e81ae25",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:54.010Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc61d55f2635e81ae31",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:54.743Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc71d55f2635e81ae3d",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:55.400Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc81d55f2635e81ae49",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:56.093Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc81d55f2635e81ae55",
+    "actor": "6a779c481d55f2635e81a5dc",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:56.748Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cc91d55f2635e81ae61",
+    "actor": "6a779c4a1d55f2635e81a5e7",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:57.398Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cca1d55f2635e81ae6d",
+    "actor": "6a779c4c1d55f2635e81a5f2",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:58.043Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cca1d55f2635e81ae79",
+    "actor": "6a779c4e1d55f2635e81a5fd",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:58.719Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ccb1d55f2635e81ae85",
+    "actor": "6a779c501d55f2635e81a608",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:16:59.407Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ccc1d55f2635e81ae91",
+    "actor": "6a779c521d55f2635e81a613",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-08T21:17:00.085Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd61d55f2635e81af8e",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a6f5adf6213d08c893dde54:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 5
+    },
+    "createdAt": "2026-08-08T21:17:10.254Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd61d55f2635e81af99",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a6f5ca7277f8c8f148cba5b:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 4
+    },
+    "createdAt": "2026-08-08T21:17:10.673Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd71d55f2635e81afa8",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c1f1d55f2635e81a4e2:2026-08",
+    "meta": {
+      "amount": 60,
+      "month": "2026-08",
+      "star": 3,
+      "teamCount": 30
+    },
+    "createdAt": "2026-08-08T21:17:11.291Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd71d55f2635e81afb3",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c211d55f2635e81a4f2:2026-08",
+    "meta": {
+      "amount": 25,
+      "month": "2026-08",
+      "star": 2,
+      "teamCount": 9
+    },
+    "createdAt": "2026-08-08T21:17:11.707Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd81d55f2635e81afbe",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c221d55f2635e81a4fd:2026-08",
+    "meta": {
+      "amount": 25,
+      "month": "2026-08",
+      "star": 2,
+      "teamCount": 9
+    },
+    "createdAt": "2026-08-08T21:17:12.109Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd81d55f2635e81afc9",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c241d55f2635e81a508:2026-08",
+    "meta": {
+      "amount": 25,
+      "month": "2026-08",
+      "star": 2,
+      "teamCount": 9
+    },
+    "createdAt": "2026-08-08T21:17:12.537Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd81d55f2635e81afd4",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c251d55f2635e81a513:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 8
+    },
+    "createdAt": "2026-08-08T21:17:12.947Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd91d55f2635e81afdf",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c271d55f2635e81a51e:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 8
+    },
+    "createdAt": "2026-08-08T21:17:13.396Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cd91d55f2635e81afea",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c281d55f2635e81a529:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 8
+    },
+    "createdAt": "2026-08-08T21:17:13.845Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cda1d55f2635e81aff5",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c2a1d55f2635e81a534:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 7
+    },
+    "createdAt": "2026-08-08T21:17:14.276Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cda1d55f2635e81b000",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c2c1d55f2635e81a53f:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 7
+    },
+    "createdAt": "2026-08-08T21:17:14.698Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdb1d55f2635e81b00b",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c2e1d55f2635e81a54a:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 7
+    },
+    "createdAt": "2026-08-08T21:17:15.128Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdb1d55f2635e81b016",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c301d55f2635e81a555:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 6
+    },
+    "createdAt": "2026-08-08T21:17:15.552Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdb1d55f2635e81b021",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c321d55f2635e81a560:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 6
+    },
+    "createdAt": "2026-08-08T21:17:15.975Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdc1d55f2635e81b02c",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c341d55f2635e81a56b:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 6
+    },
+    "createdAt": "2026-08-08T21:17:16.392Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdc1d55f2635e81b037",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c361d55f2635e81a576:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 5
+    },
+    "createdAt": "2026-08-08T21:17:16.821Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdd1d55f2635e81b042",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c381d55f2635e81a581:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 5
+    },
+    "createdAt": "2026-08-08T21:17:17.233Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdd1d55f2635e81b04d",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c3a1d55f2635e81a58c:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 5
+    },
+    "createdAt": "2026-08-08T21:17:17.645Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cde1d55f2635e81b058",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c3d1d55f2635e81a597:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 4
+    },
+    "createdAt": "2026-08-08T21:17:18.046Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cde1d55f2635e81b063",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c3f1d55f2635e81a5a2:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 4
+    },
+    "createdAt": "2026-08-08T21:17:18.469Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cde1d55f2635e81b06e",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c411d55f2635e81a5b0:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 4
+    },
+    "createdAt": "2026-08-08T21:17:18.852Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdf1d55f2635e81b079",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c431d55f2635e81a5bb:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 3
+    },
+    "createdAt": "2026-08-08T21:17:19.275Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779cdf1d55f2635e81b084",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c441d55f2635e81a5c6:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 3
+    },
+    "createdAt": "2026-08-08T21:17:19.682Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a779ce01d55f2635e81b08f",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "compensation.community_bonus",
+    "resource": "User",
+    "resourceId": "community:6a779c461d55f2635e81a5d1:2026-08",
+    "meta": {
+      "amount": 10,
+      "month": "2026-08",
+      "star": 1,
+      "teamCount": 3
+    },
+    "createdAt": "2026-08-08T21:17:20.177Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d103f0c3e332c7cf972e",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-09",
+    "meta": {
+      "amount": 0.08,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:47.393Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d104f0c3e332c7cf973c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5ca7277f8c8f148cba5b:2026-08-09",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:48.337Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d105f0c3e332c7cf9749",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c1f1d55f2635e81a4e2:2026-08-09",
+    "meta": {
+      "amount": 0.63,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:49.283Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d106f0c3e332c7cf9756",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c211d55f2635e81a4f2:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:50.243Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d107f0c3e332c7cf9763",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c221d55f2635e81a4fd:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:51.183Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d108f0c3e332c7cf9771",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c241d55f2635e81a508:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:52.125Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d109f0c3e332c7cf977e",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c251d55f2635e81a513:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:53.068Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10af0c3e332c7cf978c",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c271d55f2635e81a51e:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:54.040Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10af0c3e332c7cf979a",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c281d55f2635e81a529:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:54.978Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10bf0c3e332c7cf97a7",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2a1d55f2635e81a534:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:55.918Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10cf0c3e332c7cf97b4",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2c1d55f2635e81a53f:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:56.857Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10df0c3e332c7cf97c1",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2e1d55f2635e81a54a:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:57.802Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10ef0c3e332c7cf97cf",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c301d55f2635e81a555:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:58.741Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d10ff0c3e332c7cf97dc",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c321d55f2635e81a560:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T00:59:59.693Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d110f0c3e332c7cf97e9",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c341d55f2635e81a56b:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:00.636Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d111f0c3e332c7cf97f6",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c361d55f2635e81a576:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:01.574Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d112f0c3e332c7cf9804",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c381d55f2635e81a581:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:02.513Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d113f0c3e332c7cf9811",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3a1d55f2635e81a58c:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:03.454Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d114f0c3e332c7cf981e",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3d1d55f2635e81a597:2026-08-09",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:04.394Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d115f0c3e332c7cf982b",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3f1d55f2635e81a5a2:2026-08-09",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:05.333Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d116f0c3e332c7cf9837",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c411d55f2635e81a5b0:2026-08-09",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:06.278Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d117f0c3e332c7cf9845",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c431d55f2635e81a5bb:2026-08-09",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:07.217Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d118f0c3e332c7cf9853",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c441d55f2635e81a5c6:2026-08-09",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:08.166Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d119f0c3e332c7cf9860",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c461d55f2635e81a5d1:2026-08-09",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:09.104Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11af0c3e332c7cf986e",
+    "actor": "6a779c481d55f2635e81a5dc",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c481d55f2635e81a5dc:2026-08-09",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:10.046Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11af0c3e332c7cf987b",
+    "actor": "6a779c4a1d55f2635e81a5e7",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4a1d55f2635e81a5e7:2026-08-09",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:10.986Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11bf0c3e332c7cf9888",
+    "actor": "6a779c4c1d55f2635e81a5f2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4c1d55f2635e81a5f2:2026-08-09",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:11.925Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11cf0c3e332c7cf988f",
+    "actor": "6a779c4e1d55f2635e81a5fd",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4e1d55f2635e81a5fd:2026-08-09",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:12.863Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11df0c3e332c7cf9896",
+    "actor": "6a779c501d55f2635e81a608",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c501d55f2635e81a608:2026-08-09",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:13.806Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77d11ef0c3e332c7cf989d",
+    "actor": "6a779c521d55f2635e81a613",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c521d55f2635e81a613:2026-08-09",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T01:00:14.746Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77dc1afd17975b7f42a81a",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T01:47:06.012Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77dc48fd17975b7f42a878",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "compensation.bonanza",
+    "resource": "BonanzaOffer",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "meta": {
+      "name": "New month",
+      "amount": 100,
+      "directCount": 1
+    },
+    "createdAt": "2026-08-09T01:47:52.408Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77dc56fd17975b7f42a932",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T01:48:06.157Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77dc59fd17975b7f42a95f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T01:48:09.470Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f1459a9d2f6aa31e85a3",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T03:17:25.774Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f1d39a9d2f6aa31e85de",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "curl/8.18.0",
+    "createdAt": "2026-08-09T03:19:47.707Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f2119a9d2f6aa31e85e8",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T03:20:49.518Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f2139a9d2f6aa31e85f3",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "user.impersonate.start",
+    "resource": "User",
+    "resourceId": "6a779c581d55f2635e81a634",
+    "meta": {
+      "targetUser": "6a779c581d55f2635e81a634"
+    },
+    "createdAt": "2026-08-09T03:20:51.464Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f2499a9d2f6aa31e85ff",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T03:21:45.634Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f2b69a9d2f6aa31e8617",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T03:23:34.464Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f50b9a9d2f6aa31e86c8",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T03:33:31.541Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f5ffbdc13616c842f842",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T03:37:35.681Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f760bdc13616c842f879",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T03:43:28.139Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f981bdc13616c842f956",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "deposit.admin_create",
+    "resource": "Deposit",
+    "resourceId": "6a77f980bdc13616c842f94f",
+    "meta": {
+      "amountUsd": 99,
+      "userId": "6a779c1e1d55f2635e81a4af",
+      "memo": "Test"
+    },
+    "createdAt": "2026-08-09T03:52:33.314Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f9efbdc13616c842f96f",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "user.impersonate.start",
+    "resource": "User",
+    "resourceId": "6a779c1e1d55f2635e81a4af",
+    "meta": {
+      "targetUser": "6a779c1e1d55f2635e81a4af"
+    },
+    "createdAt": "2026-08-09T03:54:23.663Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77f9f4bdc13616c842f986",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T03:54:28.647Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fa44bdc13616c842f9d1",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "user.impersonate.start",
+    "resource": "User",
+    "resourceId": "6a779c1f1d55f2635e81a4e2",
+    "meta": {
+      "targetUser": "6a779c1f1d55f2635e81a4e2"
+    },
+    "createdAt": "2026-08-09T03:55:48.682Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77faacbdc13616c842fa11",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a77faabbdc13616c842fa0b",
+    "meta": {
+      "amountUsd": 50
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T03:57:32.611Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fb1cb808c436afa3714d",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T03:59:24.048Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fbc014234bf111fca5f5",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1",
+    "createdAt": "2026-08-09T04:02:08.057Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fcea8bee687b8b5ad224",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T04:07:06.093Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fd1a8bee687b8b5ad25e",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T04:07:54.000Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fd128bee687b8b5ad25a",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T04:07:46.141Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fdd88bee687b8b5ad2fc",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "deposit.admin_create",
+    "resource": "Deposit",
+    "resourceId": "6a77fdd78bee687b8b5ad2f5",
+    "meta": {
+      "amountUsd": 1000,
+      "userId": "6a779c581d55f2635e81a634",
+      "memo": null
+    },
+    "createdAt": "2026-08-09T04:11:04.572Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77fe108bee687b8b5ad356",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "user.impersonate.start",
+    "resource": "User",
+    "resourceId": "6a779c581d55f2635e81a634",
+    "meta": {
+      "targetUser": "6a779c581d55f2635e81a634"
+    },
+    "createdAt": "2026-08-09T04:12:00.144Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77ff478bee687b8b5ad3fd",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T04:17:11.304Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a77ff498bee687b8b5ad401",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T04:17:13.152Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7800938bee687b8b5ad43b",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T04:22:43.624Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7800c78bee687b8b5ad45f",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T04:23:35.982Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7801d0b9eb0e0ed209fd1e",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T04:28:00.446Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7802e6b9eb0e0ed209fd65",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T04:32:38.708Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7804e1db6ed5daafb2036b",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "node",
+    "createdAt": "2026-08-09T04:41:05.613Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7804e2db6ed5daafb20384",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "user.status_change",
+    "resource": "User",
+    "resourceId": "6a779c581d55f2635e81a634",
+    "meta": {
+      "from": "active",
+      "to": "inactive"
+    },
+    "createdAt": "2026-08-09T04:41:06.713Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7804e3db6ed5daafb20389",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "user.status_change",
+    "resource": "User",
+    "resourceId": "6a779c581d55f2635e81a634",
+    "meta": {
+      "from": "inactive",
+      "to": "blocked"
+    },
+    "createdAt": "2026-08-09T04:41:07.116Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7804e3db6ed5daafb2038e",
+    "actor": "6a779c1e1d55f2635e81a4af",
+    "action": "user.status_change",
+    "resource": "User",
+    "resourceId": "6a779c581d55f2635e81a634",
+    "meta": {
+      "from": "blocked",
+      "to": "active"
+    },
+    "createdAt": "2026-08-09T04:41:07.403Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7809ca0bb37426320174db",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T05:02:02.115Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780a590bb3742632017551",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "user.impersonate.start",
+    "resource": "User",
+    "resourceId": "6a779c1f1d55f2635e81a4e2",
+    "meta": {
+      "targetUser": "6a779c1f1d55f2635e81a4e2"
+    },
+    "createdAt": "2026-08-09T05:04:25.739Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780bfd0bb37426320175ce",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5adf6213d08c893dde54:2026-08-09",
+    "meta": {
+      "amount": 0.08,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:11:25.073Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c030bb37426320175d4",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a6f5ca7277f8c8f148cba5b:2026-08-09",
+    "meta": {
+      "amount": 0.05,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:11:31.192Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c090bb37426320175da",
+    "actor": "6a779c1f1d55f2635e81a4e2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c1f1d55f2635e81a4e2:2026-08-09",
+    "meta": {
+      "amount": 0.63,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:11:37.004Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c0e0bb37426320175e2",
+    "actor": "6a779c211d55f2635e81a4f2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c211d55f2635e81a4f2:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:11:42.642Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c140bb37426320175e9",
+    "actor": "6a779c221d55f2635e81a4fd",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c221d55f2635e81a4fd:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:11:48.321Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c1a0bb37426320175ee",
+    "actor": "6a779c241d55f2635e81a508",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c241d55f2635e81a508:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:11:54.340Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c1f0bb37426320175f3",
+    "actor": "6a779c251d55f2635e81a513",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c251d55f2635e81a513:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:11:59.408Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c230bb37426320175f8",
+    "actor": "6a779c271d55f2635e81a51e",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c271d55f2635e81a51e:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:03.447Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c270bb37426320175fd",
+    "actor": "6a779c281d55f2635e81a529",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c281d55f2635e81a529:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:07.143Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c2a0bb3742632017602",
+    "actor": "6a779c2a1d55f2635e81a534",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2a1d55f2635e81a534:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:10.657Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c2c0bb3742632017607",
+    "actor": "6a779c2c1d55f2635e81a53f",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2c1d55f2635e81a53f:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:12.360Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c2f0bb374263201760c",
+    "actor": "6a779c2e1d55f2635e81a54a",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c2e1d55f2635e81a54a:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:15.995Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c310bb3742632017611",
+    "actor": "6a779c301d55f2635e81a555",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c301d55f2635e81a555:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:17.311Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c330bb3742632017616",
+    "actor": "6a779c321d55f2635e81a560",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c321d55f2635e81a560:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:19.128Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c380bb374263201761b",
+    "actor": "6a779c341d55f2635e81a56b",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c341d55f2635e81a56b:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:24.472Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c3a0bb3742632017620",
+    "actor": "6a779c361d55f2635e81a576",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c361d55f2635e81a576:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:26.805Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c3b0bb3742632017625",
+    "actor": "6a779c381d55f2635e81a581",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c381d55f2635e81a581:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:27.912Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c3f0bb374263201762a",
+    "actor": "6a779c3a1d55f2635e81a58c",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3a1d55f2635e81a58c:2026-08-09",
+    "meta": {
+      "amount": 0.21,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:31.171Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c460bb374263201762f",
+    "actor": "6a779c3d1d55f2635e81a597",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3d1d55f2635e81a597:2026-08-09",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:38.339Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c4a0bb3742632017638",
+    "actor": "6a779c3f1d55f2635e81a5a2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c3f1d55f2635e81a5a2:2026-08-09",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:42.920Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c4e0bb374263201763e",
+    "actor": "6a779c411d55f2635e81a5b0",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c411d55f2635e81a5b0:2026-08-09",
+    "meta": {
+      "amount": 0.2,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:46.758Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c500bb3742632017643",
+    "actor": "6a779c431d55f2635e81a5bb",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c431d55f2635e81a5bb:2026-08-09",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:48.526Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c540bb3742632017648",
+    "actor": "6a779c441d55f2635e81a5c6",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c441d55f2635e81a5c6:2026-08-09",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:52.247Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c540bb374263201764d",
+    "actor": "6a779c461d55f2635e81a5d1",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c461d55f2635e81a5d1:2026-08-09",
+    "meta": {
+      "amount": 0.18,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:52.764Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c560bb3742632017652",
+    "actor": "6a779c481d55f2635e81a5dc",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c481d55f2635e81a5dc:2026-08-09",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:54.668Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c590bb3742632017657",
+    "actor": "6a779c4a1d55f2635e81a5e7",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4a1d55f2635e81a5e7:2026-08-09",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:12:57.309Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c5c0bb374263201765c",
+    "actor": "6a779c4c1d55f2635e81a5f2",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4c1d55f2635e81a5f2:2026-08-09",
+    "meta": {
+      "amount": 0.15,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:13:00.418Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c5d0bb3742632017661",
+    "actor": "6a779c4e1d55f2635e81a5fd",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c4e1d55f2635e81a5fd:2026-08-09",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:13:01.282Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c610bb3742632017666",
+    "actor": "6a779c501d55f2635e81a608",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c501d55f2635e81a608:2026-08-09",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:13:05.153Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780c630bb374263201766b",
+    "actor": "6a779c521d55f2635e81a613",
+    "action": "compensation.team_bonus",
+    "resource": "UserPackage",
+    "resourceId": "team-energy:6a779c521d55f2635e81a613:2026-08-09",
+    "meta": {
+      "amount": 0.1,
+      "date": "2026-08-09",
+      "depth": 5
+    },
+    "createdAt": "2026-08-09T05:13:07.083Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a780f2fdef1c97d9d5e1e50",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T05:25:03.157Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7810afdef1c97d9d5e1ed7",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "user.impersonate.start",
+    "resource": "User",
+    "resourceId": "6a779c581d55f2635e81a634",
+    "meta": {
+      "targetUser": "6a779c581d55f2635e81a634"
+    },
+    "createdAt": "2026-08-09T05:31:27.729Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7810c0def1c97d9d5e1ef8",
+    "actor": "6a779c581d55f2635e81a634",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a7810bfdef1c97d9d5e1ef2",
+    "meta": {
+      "amountUsd": 50
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T05:31:44.384Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78289b4ec4fe5d4f0873e5",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T07:13:31.809Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a782a65ba905229ebfe0c17",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T07:21:09.868Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a782a71ba905229ebfe0c3d",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "user.impersonate.start",
+    "resource": "User",
+    "resourceId": "6a779c581d55f2635e81a634",
+    "meta": {
+      "targetUser": "6a779c581d55f2635e81a634"
+    },
+    "createdAt": "2026-08-09T07:21:21.761Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784044e0a1d31aa88c01e6",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T08:54:28.268Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78422ae0a1d31aa88c0240",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:02:34.263Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784334b5750fcc3a6755b6",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:07:00.882Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78473bb6b40ef2e7068b79",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:24:11.912Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7847a6b6b40ef2e7068bce",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "bonanza.delete",
+    "resource": "Bonanza",
+    "resourceId": "6a76ee26438e2d73adbb1ae8",
+    "createdAt": "2026-08-09T09:25:58.472Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78480db6b40ef2e7068c1e",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:27:41.589Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784819b6b40ef2e7068c24",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:27:53.807Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784825b6b40ef2e7068c42",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:28:05.008Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78484cb6b40ef2e7068c51",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a78484bb6b40ef2e7068c4b",
+    "meta": {
+      "amountUsd": 5000
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:28:44.933Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784853b6b40ef2e7068c5a",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:28:51.892Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784865b6b40ef2e7068c71",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "deposit.paid",
+    "resource": "Deposit",
+    "resourceId": "6a78484bb6b40ef2e7068c4b",
+    "meta": {
+      "amountUsd": 5000
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+    "createdAt": "2026-08-09T09:29:09.267Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7849ebb6b40ef2e7068d75",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T09:35:39.502Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7849f7b6b40ef2e7068d8f",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T09:35:51.755Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7849f8b6b40ef2e7068d92",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T09:35:52.128Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7849f9b6b40ef2e7068d97",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T09:35:53.273Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7849fab6b40ef2e7068d9c",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T09:35:54.933Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784a78b6b40ef2e7068ded",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a784a77b6b40ef2e7068de5",
+    "meta": {
+      "amountUsd": 50
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T09:38:00.721Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784a91b6b40ef2e7068e00",
+    "actor": "6a6f5ca7277f8c8f148cba5b",
+    "action": "deposit.initiate",
+    "resource": "Deposit",
+    "resourceId": "6a784a90b6b40ef2e7068dfd",
+    "meta": {
+      "amountUsd": 50
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Mobile Safari/537.36",
+    "createdAt": "2026-08-09T09:38:25.299Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784e70b6b40ef2e7068eda",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "auth.login",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T09:54:56.436Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a784e75b6b40ef2e7068f01",
+    "actor": "6a6f5adf6213d08c893dde54",
+    "action": "profile.theme",
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36 Edg/151.0.0.0",
+    "createdAt": "2026-08-09T09:55:01.462Z",
+    "__v": 0
+  }
+]
