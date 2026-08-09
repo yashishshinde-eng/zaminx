@@ -293,6 +293,11 @@ export async function activatePackageFromWallet(
     { $set: { status: "active", activatedAt: now, expiresAt, paymentStatus: "paid", paymentId: `wallet-${subscription._id}` } },
   );
 
+  // Activating a package promotes an inactive user to active (idempotent —
+  // only writes when not already active). New members start inactive and earn
+  // full access once their first package is live.
+  await User.updateOne({ _id: userId, status: { $ne: "active" } }, { $set: { status: "active" } }).exec();
+
   // 4. Record a paid, wallet-funded Deposit so the activation appears in the
   //    user's deposit history and the package row's joined `payment` info.
   const deposit = await Deposit.create({
@@ -378,6 +383,8 @@ export async function confirmDeposit(
       { _id: up._id, status: "pending" },
       { $set: { status: "active", activatedAt: now, expiresAt, paymentStatus: "paid" } },
     );
+    // A package going live promotes an inactive user to active (idempotent).
+    await User.updateOne({ _id: deposit.user, status: { $ne: "active" } }, { $set: { status: "active" } }).exec();
   }
 
   await ActivityLog.create({

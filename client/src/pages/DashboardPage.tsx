@@ -62,6 +62,7 @@ function greeting(): string {
 
 function DashboardContent({ data }: { data: SummaryData }) {
   const { user } = useAuth();
+  const inactive = user?.status !== "active";
   const earnedTrend = (() => {
     const series = data.income.series;
     if (series.length < 2) return undefined;
@@ -138,10 +139,10 @@ function DashboardContent({ data }: { data: SummaryData }) {
           <p className="metric-label mb-4 font-grotesk text-xs font-bold uppercase tracking-[0.2em]">Quick Actions</p>
           <div className="grid grid-cols-4 gap-3 sm:grid-cols-4 lg:grid-cols-8">
             <QuickAction icon={ArrowDownToLine} label="Deposit" to="/app/deposit" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" />
-            <QuickAction icon={ArrowUpFromLine} label="Withdraw" to="/app/withdrawals" gradient="from-gold/20 to-gold-dark/10" iconColor="text-gold" />
+            <QuickAction icon={ArrowUpFromLine} label="Withdraw" to="/app/withdrawals" gradient="from-gold/20 to-gold-dark/10" iconColor="text-gold" disabled={inactive} />
             <QuickAction icon={Package} label="Invest" to="/app/packages" gradient="from-purple/20 to-purple-dark/10" iconColor="text-purple-light" />
-            <QuickAction icon={Repeat} label="P2P" to="/app/p2p" gradient="from-success/20 to-success/10" iconColor="text-success" />
-            <QuickAction icon={ArrowRightLeft} label="Convert" to="/app/p2p" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" />
+            <QuickAction icon={Repeat} label="P2P" to="/app/p2p" gradient="from-success/20 to-success/10" iconColor="text-success" disabled={inactive} />
+            <QuickAction icon={ArrowRightLeft} label="Convert" to="/app/p2p" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" disabled={inactive} />
             <QuickAction icon={Gem} label="Stake" to="/app/packages" gradient="from-gold/20 to-gold-dark/10" iconColor="text-gold" />
             <QuickAction icon={TrendingUp} label="Trade" to="/app/packages" gradient="from-purple/20 to-purple-dark/10" iconColor="text-purple-light" />
             <QuickAction icon={Users} label="Refer" to="/app/team" gradient="from-success/20 to-success/10" iconColor="text-success" />
@@ -184,7 +185,17 @@ function DashboardContent({ data }: { data: SummaryData }) {
 }
 
 /* ─── Quick Action ──────────────────────────────────────── */
-function QuickAction({ icon: Icon, label, to, gradient, iconColor }: { icon: typeof ArrowDownToLine; label: string; to: string; gradient: string; iconColor: string }) {
+function QuickAction({ icon: Icon, label, to, gradient, iconColor, disabled }: { icon: typeof ArrowDownToLine; label: string; to: string; gradient: string; iconColor: string; disabled?: boolean }) {
+  if (disabled) {
+    return (
+      <div className="premium-action-btn group cursor-not-allowed opacity-40" aria-disabled title="Activate a package to unlock">
+        <div className={`action-icon-lg bg-gradient-to-br ${gradient}`}>
+          <Icon className={`size-5 ${iconColor}`} />
+        </div>
+        <span className="text-xs font-semibold">{label}</span>
+      </div>
+    );
+  }
   return (
     <Link to={to} className="premium-action-btn group">
       <div className={`action-icon-lg bg-gradient-to-br ${gradient}`}>

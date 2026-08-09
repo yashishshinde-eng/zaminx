@@ -19,6 +19,7 @@ async function seed() {
       role: "admin",
       isEmailVerified: true,
       themePreference: "dark",
+      status: "active", // root sponsor + admin must be active (new users default to inactive)
     });
     await admin.save();
     logger.info(`✅ Admin user created: ${admin.email} (referralCode: ${admin.referralCode})`);

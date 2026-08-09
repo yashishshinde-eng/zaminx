@@ -96,6 +96,7 @@ export function P2PPage() {
 
 function TransferForm() {
   const { user } = useAuth();
+  const inactive = user?.status !== "active";
   const wallet = useWallet();
   const send = useSendP2PTransfer();
 
@@ -208,10 +209,15 @@ function TransferForm() {
             <p className="text-xs text-muted-foreground">
               Your referral code: <span className="font-mono font-semibold text-foreground">{user?.referralCode}</span>
             </p>
-            <Button type="submit" className="btn-premium" disabled={send.isPending || insufficient}>
+            <Button type="submit" className="btn-premium" disabled={send.isPending || insufficient || inactive}>
               {send.isPending ? "Sending…" : <><ArrowRightLeft className="size-4" /> Send Transfer</>}
             </Button>
           </div>
+          {inactive && (
+            <p className="text-xs text-muted-foreground">
+              Activate a package to enable transfers.
+            </p>
+          )}
         </form>
       </CardContent>
     </Card>

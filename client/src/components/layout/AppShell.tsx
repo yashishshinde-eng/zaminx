@@ -7,6 +7,7 @@ import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
 import { MobileBottomNav } from "./MobileBottomNav";
 import { VerifyEmailBanner } from "./VerifyEmailBanner";
+import { InactiveUserBanner } from "./InactiveUserBanner";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { pageTransition } from "@/lib/motion";
 
@@ -81,6 +82,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <div className="relative z-10 flex min-w-0 flex-1 flex-col">
         <Topbar onToggleMobileSidebar={isAdmin ? () => setMobileSidebarOpen(true) : undefined} />
         <VerifyEmailBanner />
+        <InactiveUserBanner />
         <main className={cn("flex-1 overflow-x-hidden px-4 pt-5 sm:px-6 lg:px-8", isAdmin ? "pb-8 lg:pb-8" : "pb-28 lg:pb-8")}>
           <AnimatePresence mode="wait">
             <motion.div

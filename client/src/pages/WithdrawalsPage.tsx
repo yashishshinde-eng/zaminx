@@ -53,6 +53,7 @@ const STAGES: WithdrawalStatus[] = ["pending", "under_review", "approved", "paid
 /** /app/withdrawals — submit a withdrawal and track its history. */
 export function WithdrawalsPage() {
   const { user } = useAuth();
+  const inactive = user?.status !== "active";
   const wallet = useWallet();
   const [statusFilter, setStatusFilter] = useState<"all" | WithdrawalStatus>("all");
   const [page, setPage] = useState(1);
@@ -199,10 +200,15 @@ export function WithdrawalsPage() {
                 )}
               </div>
               <div className="flex items-end">
-                <Button type="submit" className="w-full" disabled={create.isPending || !hasAddress}>
+                <Button type="submit" className="w-full" disabled={create.isPending || !hasAddress || inactive}>
                   {create.isPending ? "Submitting…" : "Submit withdrawal"}
                 </Button>
               </div>
+              {inactive && (
+                <p className="text-xs text-muted-foreground">
+                  Activate a package to enable withdrawals.
+                </p>
+              )}
             </form>
           </CardContent>
         </Card>

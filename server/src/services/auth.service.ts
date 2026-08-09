@@ -151,8 +151,10 @@ export async function loginUser(input: LoginInput) {
   if (!match) throw ApiError.unauthorized("Invalid email or password");
 
   // Check status AFTER the password check so an attacker can't enumerate which
-  // emails exist / are active without already knowing the password.
-  if (user.status !== "active") throw ApiError.forbidden("Account is not active");
+  // emails exist / are active without already knowing the password. Inactive
+  // users may log in to deposit funds and activate a package; only blocked
+  // accounts are denied.
+  if (user.status === "blocked") throw ApiError.forbidden("Account is blocked");
 
   const tokens = issueTokens(user._id.toString(), user.role);
   user.refreshTokenHash = User.hashToken(tokens.refreshToken);
@@ -165,7 +167,7 @@ export async function loginUser(input: LoginInput) {
 export async function refreshSession(refreshToken: string) {
   const { sub: userId } = verifyRefreshToken(refreshToken);
   const user = await User.findById(userId).select("+refreshTokenHash");
-  if (!user || user.status !== "active") throw ApiError.unauthorized("Session no longer valid");
+  if (!user || user.status === "blocked") throw ApiError.unauthorized("Session no longer valid");
 
   const valid = user.verifyToken(user.refreshTokenHash, refreshToken);
   if (!valid) {

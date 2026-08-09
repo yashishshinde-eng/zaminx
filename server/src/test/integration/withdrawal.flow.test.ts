@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
-import { authed, closeApi, fundWallet, seedAdminAndLogin } from "../api.js";
+import { authed, closeApi, fundActiveUser, fundWallet, registerAndLogin, seedPackage, seedAdminAndLogin } from "../api.js";
 import { hasTestDb, connectTestDb, clearDb, disconnectTestDb } from "../db.js";
 
 /** Withdrawal row shape from the API (id may be `_id` or `id`). */
@@ -26,7 +26,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
   });
 
   it("auto-approves a withdrawal from a funded main wallet (status paid)", async () => {
-    const { accessToken } = await fundWallet(100);
+    const { accessToken } = await fundActiveUser(100);
     const r = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
       body: JSON.stringify({ wallet: "main", amount: 40 }),
@@ -37,7 +37,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
   });
 
   it("rejects a withdrawal below the $15 minimum", async () => {
-    const { accessToken } = await fundWallet(100);
+    const { accessToken } = await fundActiveUser(100);
     const r = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
       body: JSON.stringify({ wallet: "main", amount: 5 }),
@@ -48,7 +48,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
   });
 
   it("rejects a withdrawal exceeding the available balance", async () => {
-    const { accessToken } = await fundWallet(100);
+    const { accessToken } = await fundActiveUser(100);
     const r = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
       body: JSON.stringify({ wallet: "main", amount: 9999 }),
@@ -58,7 +58,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
   });
 
   it("returns 409 for admin review/approve/pay on an already-paid withdrawal", async () => {
-    const { accessToken: userToken } = await fundWallet(100);
+    const { accessToken: userToken } = await fundActiveUser(100);
     const admin = await seedAdminAndLogin();
 
     const submit = await authed(userToken, "/api/v1/withdrawals", {
@@ -83,7 +83,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
   });
 
   it("returns 409 when a user tries to cancel an already-paid withdrawal", async () => {
-    const { accessToken } = await fundWallet(100);
+    const { accessToken } = await fundActiveUser(100);
     const submit = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
       body: JSON.stringify({ wallet: "main", amount: 20 }),
@@ -92,5 +92,36 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     const wid = widOf(submit.body.data.withdrawal);
     const cancel = await authed(accessToken, `/api/v1/withdrawals/${wid}/cancel`, { method: "POST" });
     expect(cancel.status).toBe(409);
+  });
+
+  it("blocks withdrawals for an inactive user until they activate a package", async () => {
+    // A freshly registered user is inactive (no package yet) but can fund their wallet.
+    const { accessToken } = await registerAndLogin();
+    await fundWallet(100, accessToken);
+
+    // Withdrawal is blocked — the user has not activated a package.
+    const blocked = await authed(accessToken, "/api/v1/withdrawals", {
+      method: "POST",
+      body: JSON.stringify({ wallet: "main", amount: 20 }),
+    });
+    expect(blocked.status).toBe(403);
+    expect(blocked.body.success).toBe(false);
+
+    // Activate a package from the funded wallet → user becomes active.
+    const pkg = await seedPackage({ priceUsd: 50 });
+    const act = await authed(accessToken, "/api/v1/packages/activate", {
+      method: "POST",
+      body: JSON.stringify({ packageId: pkg._id }),
+    });
+    expect(act.status).toBe(201);
+
+    // Withdrawal now succeeds (50 funded − 50 package = 0... so fund more first).
+    // The activation debited $50, leaving $50 — a $20 withdrawal fits.
+    const ok = await authed(accessToken, "/api/v1/withdrawals", {
+      method: "POST",
+      body: JSON.stringify({ wallet: "main", amount: 20 }),
+    });
+    expect(ok.status).toBe(201);
+    expect(ok.body.data.withdrawal.status).toBe("paid");
   });
 });

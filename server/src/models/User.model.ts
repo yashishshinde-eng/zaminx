@@ -55,7 +55,10 @@ const userSchema = new Schema(
       usdtBep20: { type: String, trim: true, default: "" },
     },
 
-    status: { type: String, enum: ["active", "inactive", "blocked"], default: "active", index: true },
+    // New members start inactive until they activate a package (the seeded
+    // admin and admin-created users set "active" explicitly). Existing rows
+    // keep their stored value — only new documents inherit this default.
+    status: { type: String, enum: ["active", "inactive", "blocked"], default: "inactive", index: true },
 
     lastLoginAt: { type: Date, default: null },
   },

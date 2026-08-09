@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authorize } from "../middlewares/auth.js";
+import { authorize, requireActive } from "../middlewares/auth.js";
 import { withdrawalLimiter } from "../middlewares/rateLimit.js";
 import { create, list, detail, cancel } from "../controllers/withdrawal.controller.js";
 import { adminList, adminDetail, review, approve, reject, pay } from "../controllers/adminWithdrawal.controller.js";
@@ -7,7 +7,8 @@ import { adminList, adminDetail, review, approve, reject, pay } from "../control
 const router = Router();
 
 // --- User root routes ---
-router.post("/", withdrawalLimiter, ...create);
+// Withdrawals require an active (package-activated) account.
+router.post("/", withdrawalLimiter, requireActive, ...create);
 router.get("/", ...list);
 
 // --- Admin routes (literal "admin" MUST precede the ":id" param route).

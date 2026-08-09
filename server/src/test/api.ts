@@ -72,7 +72,7 @@ export async function seedAdminAndLogin(
 ): Promise<{ accessToken: string; refreshToken: string; userId: string; email: string; password: string }> {
   const email = opts.email ?? `admin-${Math.random().toString(36).slice(2)}@test.local`;
   const password = opts.password ?? "secret123";
-  const u = await User.create({ name: "Admin", email, password, role: "admin" });
+  const u = await User.create({ name: "Admin", email, password, role: "admin", status: "active" });
   const tokens = await loginApi(email, password);
   return { ...tokens, userId: String(u._id), email, password };
 }
@@ -88,7 +88,9 @@ export interface SeedUserOpts {
 export async function seedUser(opts: SeedUserOpts = {}): Promise<{ _id: string; email: string; password: string; referralCode: string }> {
   const email = opts.email ?? `user-${Math.random().toString(36).slice(2)}@test.local`;
   const password = opts.password ?? "secret123";
-  const u = await User.create({ name: opts.name ?? "Test User", email, password, role: opts.role ?? "user" });
+  // status: "active" — seeded users skip the "inactive until package activated"
+  // lifecycle so tests can exercise earning endpoints without extra setup.
+  const u = await User.create({ name: opts.name ?? "Test User", email, password, role: opts.role ?? "user", status: "active" });
   return { _id: String(u._id), email, password, referralCode: u.referralCode };
 }
 
@@ -100,6 +102,7 @@ export async function seedRootReferrer(): Promise<{ _id: string; referralCode: s
     name: "Root Referrer",
     email: `root-${Math.random().toString(36).slice(2)}@test.local`,
     password: "secret123",
+    status: "active", // sponsors must be active (registerUser rejects inactive referrers)
   });
   return { _id: String(u._id), referralCode: u.referralCode };
 }
@@ -153,6 +156,25 @@ export async function fundWallet(
   token?: string,
 ): Promise<{ accessToken: string; depositId: string }> {
   const accessToken = token ?? (await registerAndLogin()).accessToken;
+  const dep = await authed<{ data: { deposit: { id: string } } }>(accessToken, "/api/v1/payments/deposit", {
+    method: "POST",
+    body: JSON.stringify({ amount }),
+  });
+  const id = dep.body.data.deposit.id;
+  await authed(accessToken, `/api/v1/payments/dev/simulate/${id}`, { method: "POST" });
+  return { accessToken, depositId: id };
+}
+
+/**
+ * Seed an ACTIVE user (status set explicitly) and fund their Main wallet via
+ * the deposit + simulate flow — no package is created. Use this for tests that
+ * exercise earning endpoints (withdrawals, P2P) which now require an active
+ * account. `registerAndLogin` yields inactive users (realistic), so tests that
+ * need to withdraw must use this instead. Returns the same shape as `fundWallet`.
+ */
+export async function fundActiveUser(amount = 100): Promise<{ accessToken: string; depositId: string }> {
+  const u = await seedUser(); // status: "active"
+  const { accessToken } = await loginApi(u.email, u.password);
   const dep = await authed<{ data: { deposit: { id: string } } }>(accessToken, "/api/v1/payments/deposit", {
     method: "POST",
     body: JSON.stringify({ amount }),

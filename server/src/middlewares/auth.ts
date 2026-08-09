@@ -27,7 +27,10 @@ export const authenticate: RequestHandler = async (req: Request, _res: Response,
 
     const user = await User.findById(payload.sub);
     if (!user) throw ApiError.unauthorized("User no longer exists");
-    if (user.status !== "active") throw ApiError.forbidden("Account is not active");
+    // Inactive users may authenticate to reach deposits/dashboard/packages so
+    // they can activate a package; only blocked accounts are denied here.
+    // Earning endpoints (withdrawals, P2P) additionally require `requireActive`.
+    if (user.status === "blocked") throw ApiError.forbidden("Account is blocked");
 
     req.user = user as UserDocument & { id: string };
     req.accessToken = token;
@@ -35,6 +38,19 @@ export const authenticate: RequestHandler = async (req: Request, _res: Response,
   } catch (err) {
     next(err);
   }
+};
+
+/**
+ * Require an active account. Mount after `authenticate` on earning endpoints
+ * (withdrawals, P2P). Inactive (not-yet-package-activated) users are blocked
+ * here with a clear message; blocked users never reach this (authenticate
+ * rejects them first).
+ */
+export const requireActive: RequestHandler = (_req: Request, _res: Response, next: NextFunction) => {
+  if (!_req.user || _req.user.status !== "active") {
+    return next(ApiError.forbidden("Activate a package to unlock this feature"));
+  }
+  next();
 };
 
 /** Restrict a route to one or more roles. Must run after `authenticate`. */
