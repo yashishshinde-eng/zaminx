@@ -28,6 +28,7 @@ export interface ReportExportParams {
   from?: string;
   to?: string;
   status?: string;
+  type?: string;
   q?: string;
   format?: ReportExportFormat;
 }

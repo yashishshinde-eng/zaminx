@@ -432,12 +432,28 @@ function toAdminWalletRow(t: LeanTx, userMap: Map<string, UserName>): AdminWalle
   };
 }
 
-/** Income = credit-only rows of the 6 income types; Wallet = all rows. */
+/** Income = credit-only rows of the 6 income types; Wallet = all rows.
+ *  When `q.type` is set, the rows are narrowed to that single ledger type. */
 function ledgerAdminFilter(q: ReportQueryArgs, income: boolean): Record<string, unknown> {
   const filter: Record<string, unknown> = { ...dateRangeFilter(q.from, q.to) };
   if (income) {
-    filter.type = { $in: INCOME_TYPES };
     filter.direction = "credit";
+    filter.type = q.type ? q.type : { $in: INCOME_TYPES };
+  } else if (q.type) {
+    filter.type = q.type;
+  }
+  if (q.q) filter.memo = { $regex: q.q, $options: "i" };
+  return filter;
+}
+
+/** Breakdown filter for the `byType` summary — always covers ALL income/wallet
+ *  types (ignores `q.type`) so the Type chips remain stable + clickable to
+ *  switch between types while a single type is selected. */
+function ledgerBreakdownFilter(q: ReportQueryArgs, income: boolean): Record<string, unknown> {
+  const filter: Record<string, unknown> = { ...dateRangeFilter(q.from, q.to) };
+  if (income) {
+    filter.direction = "credit";
+    filter.type = { $in: INCOME_TYPES };
   }
   if (q.q) filter.memo = { $regex: q.q, $options: "i" };
   return filter;
@@ -457,11 +473,12 @@ async function fetchLedgerRows(
 async function getAdminIncomeReport(q: ReportQueryArgs): Promise<AdminReportResult<AdminIncomeReportRow>> {
   const { page, limit } = clampPage(q.page, q.limit);
   const filter = ledgerAdminFilter(q, true);
+  const breakdown = ledgerBreakdownFilter(q, true);
   const [rows, total, base, byTypeAgg] = await Promise.all([
     fetchLedgerRows(filter, limit, (page - 1) * limit, true) as Promise<AdminIncomeReportRow[]>,
     WalletTransaction.countDocuments(filter),
     ledgerSummary(filter),
-    WalletTransaction.aggregate<{ _id: string; count: number }>([{ $match: filter }, { $group: { _id: "$type", count: { $sum: 1 } } }]),
+    WalletTransaction.aggregate<{ _id: string; count: number }>([{ $match: breakdown }, { $group: { _id: "$type", count: { $sum: 1 } } }]),
   ]);
   const byType: Record<string, number> = {};
   for (const b of byTypeAgg) byType[b._id] = b.count;
@@ -471,11 +488,12 @@ async function getAdminIncomeReport(q: ReportQueryArgs): Promise<AdminReportResu
 async function getAdminWalletReport(q: ReportQueryArgs): Promise<AdminReportResult<AdminWalletReportRow>> {
   const { page, limit } = clampPage(q.page, q.limit);
   const filter = ledgerAdminFilter(q, false);
+  const breakdown = ledgerBreakdownFilter(q, false);
   const [rows, total, base, byTypeAgg] = await Promise.all([
     fetchLedgerRows(filter, limit, (page - 1) * limit, false) as Promise<AdminWalletReportRow[]>,
     WalletTransaction.countDocuments(filter),
     ledgerSummary(filter),
-    WalletTransaction.aggregate<{ _id: string; count: number }>([{ $match: filter }, { $group: { _id: "$type", count: { $sum: 1 } } }]),
+    WalletTransaction.aggregate<{ _id: string; count: number }>([{ $match: breakdown }, { $group: { _id: "$type", count: { $sum: 1 } } }]),
   ]);
   const byType: Record<string, number> = {};
   for (const b of byTypeAgg) byType[b._id] = b.count;
@@ -640,7 +658,7 @@ type Cell = string | number | null | undefined;
 
 /** Fetch up to EXPORT_CAP mapped rows for a kind (no pagination). */
 async function fetchAdminExportRows(kind: AdminReportKind, q: ReportExportArgs): Promise<unknown[]> {
-  const f: ReportQueryArgs = { from: q.from, to: q.to, status: q.status, q: q.q, page: 1, limit: 1 };
+  const f: ReportQueryArgs = { from: q.from, to: q.to, status: q.status, type: q.type, q: q.q, page: 1, limit: 1 };
   switch (kind) {
     case "users":
       return fetchUsersRows(usersFilter(f), EXPORT_CAP, 0);

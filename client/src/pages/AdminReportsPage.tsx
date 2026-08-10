@@ -118,6 +118,7 @@ export function AdminReportsPage() {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [status, setStatus] = useState("");
+  const [type, setType] = useState("");
   const [q, setQ] = useState("");
   const [page, setPage] = useState(1);
   const [exporting, setExporting] = useState<"" | "csv" | "xls">("");
@@ -127,6 +128,7 @@ export function AdminReportsPage() {
     from: from || undefined,
     to: to || undefined,
     status: status || undefined,
+    type: type || undefined,
     q: q || undefined,
     page,
     limit: LIMIT,
@@ -142,10 +144,11 @@ export function AdminReportsPage() {
   const monetary = MONETARY.includes(kind);
   const showSearch = kind !== "deposits";
 
-  /** Reset to page 1 whenever the active kind changes (status filter may not apply). */
+  /** Reset to page 1 whenever the active kind changes (status/type filters may not apply). */
   function selectKind(next: AdminReportKind) {
     setKind(next);
     setStatus("");
+    setType("");
     setPage(1);
   }
 
@@ -158,14 +161,22 @@ export function AdminReportsPage() {
     setFrom("");
     setTo("");
     setStatus("");
+    setType("");
     setQ("");
+    setPage(1);
+  }
+
+  /** Click a Type chip (income / wallet) to filter by that ledger type; click the
+   *  active one again to clear. Applied immediately. */
+  function toggleType(t: string) {
+    setType((prev) => (prev === t ? "" : t));
     setPage(1);
   }
 
   async function exportReport(format: "csv" | "xls") {
     setExporting(format);
     try {
-      await downloadAdminReport(kind, { from: from || undefined, to: to || undefined, status: status || undefined, q: q || undefined, format });
+      await downloadAdminReport(kind, { from: from || undefined, to: to || undefined, status: status || undefined, type: type || undefined, q: q || undefined, format });
       toast.success(`${format.toUpperCase()} export ready.`);
     } catch {
       /* axios interceptor toasts the error */
@@ -275,7 +286,12 @@ export function AdminReportsPage() {
         </div>
 
         {/* Breakdown chips */}
-        <BreakdownChips summary={summary} />
+        <BreakdownChips
+          summary={summary}
+          kind={kind}
+          activeType={type}
+          onToggleType={toggleType}
+        />
 
         {/* Table */}
         <DataTable
@@ -300,8 +316,21 @@ export function AdminReportsPage() {
 /*  Breakdown chips                                                    */
 /* ------------------------------------------------------------------ */
 
-function BreakdownChips({ summary }: { summary: AdminReportSummary | undefined }) {
+function BreakdownChips({
+  summary,
+  kind,
+  activeType,
+  onToggleType,
+}: {
+  summary: AdminReportSummary | undefined;
+  kind: AdminReportKind;
+  activeType: string;
+  onToggleType: (t: string) => void;
+}) {
   if (!summary) return null;
+  // Income + Wallet reports break down by ledger Type — make those chips
+  // clickable to filter the report to a single type.
+  const typeClickable = kind === "income" || kind === "wallet";
   const buckets: { label: string; map?: Record<string, number> }[] = [
     { label: "Status", map: summary.byStatus },
     { label: "Type", map: summary.byType },
@@ -311,16 +340,36 @@ function BreakdownChips({ summary }: { summary: AdminReportSummary | undefined }
   if (present.length === 0) return null;
   return (
     <div className="flex flex-wrap items-center gap-2">
-      {present.map((b) => (
-        <div key={b.label} className="flex flex-wrap items-center gap-1.5">
-          <span className="text-xs font-medium text-muted-foreground">{b.label}:</span>
-          {Object.entries(b.map!).map(([k, v]) => (
-            <Badge key={k} variant="secondary" className="capitalize">
-              {k.replace(/_/g, " ")} · {v}
-            </Badge>
-          ))}
-        </div>
-      ))}
+      {present.map((b) => {
+        const clickable = typeClickable && b.label === "Type";
+        return (
+          <div key={b.label} className="flex flex-wrap items-center gap-1.5">
+            <span className="text-xs font-medium text-muted-foreground">{b.label}:</span>
+            {Object.entries(b.map!).map(([k, v]) =>
+              clickable ? (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => onToggleType(k)}
+                  title={activeType === k ? "Clear type filter" : `Filter by ${k.replace(/_/g, " ")}`}
+                  className={cn(
+                    "rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize transition-colors",
+                    activeType === k
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-secondary text-secondary-foreground hover:bg-accent hover:text-accent-foreground",
+                  )}
+                >
+                  {k.replace(/_/g, " ")} · {v}
+                </button>
+              ) : (
+                <Badge key={k} variant="secondary" className="capitalize">
+                  {k.replace(/_/g, " ")} · {v}
+                </Badge>
+              ),
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

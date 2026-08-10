@@ -42,3 +42,12 @@ export interface ActivatePackageResponse {
   package: UserPackageRow;
   payment: DepositRow;
 }
+
+/** Response to GET /packages/lookup-target — a resolved beneficiary for an
+ *  "activate for another user" flow. `isSelf` lets the UI block self-targeting. */
+export interface PackageTargetLookup {
+  id: string;
+  name: string;
+  status: "active" | "inactive" | "blocked";
+  isSelf: boolean;
+}

@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2, Phone } from "lucide-react";
+import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2, Phone, UserPlus } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, FilterBar, EmptyState, type Column } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuItem, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { ReferralLinkCard } from "@/components/dashboard";
+import { ActivateForMemberDialog } from "@/components/packages/ActivateForMemberDialog";
 import { useAuth } from "@/context/AuthContext";
 import { useReferralStats, useTeamReferrals, useTreeChildren } from "@/hooks/useReferrals";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -37,6 +38,12 @@ export function TeamPage() {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [page, setPage] = useState(1);
+
+  // "Activate a package for this member" dialog target (team-row action).
+  const [activateTarget, setActivateTarget] = useState<{ id: string; name: string } | null>(null);
+  const openActivateFor = useCallback((row: ReferralMemberRow) => {
+    setActivateTarget({ id: row.id, name: row.name });
+  }, []);
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -139,8 +146,26 @@ export function TeamPage() {
         align: "right",
         cell: (r) => <span className="tabular-nums text-muted-foreground">{r.directCount}</span>,
       },
+      {
+        key: "actions",
+        header: "",
+        align: "right",
+        cell: (r) =>
+          r.status === "inactive" ? (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => openActivateFor(r)}
+            >
+              <UserPlus className="size-3.5" /> Activate
+            </Button>
+          ) : (
+            <span className="text-muted-foreground/40">—</span>
+          ),
+      },
     ],
-    [],
+    [openActivateFor],
   );
 
   const referral = stats.data ? { code: stats.data.code, link: stats.data.link } : undefined;
@@ -331,6 +356,12 @@ export function TeamPage() {
           />
         </section>
       </div>
+
+      <ActivateForMemberDialog
+        open={!!activateTarget}
+        target={activateTarget ?? undefined}
+        onClose={() => setActivateTarget(null)}
+      />
     </AppShell>
   );
 }

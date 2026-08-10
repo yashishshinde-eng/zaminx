@@ -1,6 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Package as PackageIcon, ArrowDownToLine, Wallet as WalletIcon } from "lucide-react";
+import { Package as PackageIcon, ArrowDownToLine, Wallet as WalletIcon, UserPlus } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, ErrorState, EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { PackageTierCard } from "@/components/packages/PackageTierCard";
 import { UserPackageList } from "@/components/packages/UserPackageList";
 import { PaymentCard } from "@/components/packages/PaymentCard";
+import { ActivateForMemberDialog } from "@/components/packages/ActivateForMemberDialog";
+import { ActivationSuccessDialog } from "@/components/packages/ActivationSuccessDialog";
 import {
   usePackageCatalog,
   useMyPackages,
@@ -15,7 +17,9 @@ import {
   useActivatePackage,
 } from "@/hooks/usePackages";
 import { useWallet } from "@/hooks/useWallet";
+import { useAuth } from "@/context/AuthContext";
 import { formatCurrency } from "@/lib/utils";
+import type { ActivatePackageResponse } from "@zeminex/shared";
 
 export function PackagesPage() {
   const catalog = usePackageCatalog();
@@ -23,6 +27,9 @@ export function PackagesPage() {
   const hasOpen = useHasOpenPackage();
   const activate = useActivatePackage();
   const wallet = useWallet();
+  const { user } = useAuth();
+  const [activateForOpen, setActivateForOpen] = useState(false);
+  const [success, setSuccess] = useState<ActivatePackageResponse | null>(null);
 
   const mainAvailable = wallet.data?.main.available ?? 0;
 
@@ -80,6 +87,11 @@ export function PackagesPage() {
           <Button asChild variant="outline" size="sm">
             <Link to="/app/deposit"><ArrowDownToLine className="size-4" /> Deposit funds</Link>
           </Button>
+          {user?.status === "active" && (
+            <Button variant="outline" size="sm" onClick={() => setActivateForOpen(true)}>
+              <UserPlus className="size-4" /> Activate for member
+            </Button>
+          )}
         </div>
 
         {/* Catalog */}
@@ -117,7 +129,7 @@ export function PackagesPage() {
                   disabledReason={disabledReason}
                   loading={activate.isPending}
                   canAfford={mainAvailable >= tier.priceUsd}
-                  onActivate={(id) => activate.mutate(id)}
+                  onActivate={(id) => activate.mutate(id, { onSuccess: (res) => setSuccess(res) })}
                   popular={tier.id === popularId}
                   delay={i * 0.05}
                 />
@@ -138,6 +150,9 @@ export function PackagesPage() {
           )}
         </section>
       </div>
+
+      <ActivateForMemberDialog open={activateForOpen} onClose={() => setActivateForOpen(false)} />
+      <ActivationSuccessDialog open={!!success} result={success} onClose={() => setSuccess(null)} />
     </AppShell>
   );
 }

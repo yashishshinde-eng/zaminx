@@ -45,6 +45,7 @@ export interface ReportQueryArgs {
   from?: string;
   to?: string;
   status?: string;
+  type?: string;
   q?: string;
   page: number;
   limit: number;
@@ -54,6 +55,7 @@ export interface ReportExportArgs {
   from?: string;
   to?: string;
   status?: string;
+  type?: string;
   q?: string;
   format: ReportExportFormat;
 }

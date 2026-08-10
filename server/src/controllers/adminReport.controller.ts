@@ -17,7 +17,7 @@ export const adminReport: RequestHandler[] = [
     // `validate` replaced `req.query` with the parsed value; cast through
     // `unknown` because Express still types it as `ParsedQs`.
     const q = req.query as unknown as ReportQuery;
-    const args = { from: q.from, to: q.to, status: q.status, q: q.q, page: q.page, limit: q.limit };
+    const args = { from: q.from, to: q.to, status: q.status, type: q.type, q: q.q, page: q.page, limit: q.limit };
     const report = await getAdminReport(kind, args);
     ok(res, { report }, "Admin report");
   }),
@@ -35,6 +35,7 @@ export const adminExport: RequestHandler[] = [
       from: q.from,
       to: q.to,
       status: q.status,
+      type: q.type,
       q: q.q,
       format: q.format,
     });

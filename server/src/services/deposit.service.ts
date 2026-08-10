@@ -230,56 +230,88 @@ export async function initiateWalletDeposit(
  * debit succeeds; a failed debit rolls the pending subscription back.
  */
 export async function activatePackageFromWallet(
-  userId: string,
+  actorId: string,
   packageId: string,
   meta?: Meta,
+  targetId?: string,
 ): Promise<{ pkg: UserPackageRow; payment: DepositRow }> {
+  // Self-activation (no target) keeps the original semantics: the actor is both
+  // the payer and the beneficiary. When `targetId` is supplied, the actor pays
+  // from their own Main wallet but the package + active status land on the
+  // target (an "activate for another user" flow).
+  const targetUserId = targetId ?? actorId;
+  const forOther = targetId !== undefined && targetId !== actorId;
+
+  // Explicitly reject self-targeting via the "for other" route with a clear
+  // message, so it doesn't fall through to the double-activation guard below.
+  if (targetId !== undefined && targetId === actorId) {
+    throw ApiError.badRequest("Use the standard activation for your own package");
+  }
+
+  let targetName: string | undefined;
+  if (forOther) {
+    const target = await User.findById(targetId).select("name status").lean();
+    if (!target) throw ApiError.notFound("Target user not found");
+    if (target.status !== "inactive") {
+      throw ApiError.conflict("Target user is not inactive — only inactive users can be activated for");
+    }
+    targetName = target.name;
+  }
+
   const pkg = await Package.findOne({ _id: packageId, status: "active" });
   if (!pkg) throw ApiError.notFound("Package not found");
 
-  // One pending/active subscription per user.
-  const existing = await UserPackage.findOne({ user: userId, status: { $in: ["pending", "active"] } });
-  if (existing) throw ApiError.conflict("You already have a pending or active package");
+  // One pending/active subscription per user — enforced against the beneficiary.
+  const existing = await UserPackage.findOne({ user: targetUserId, status: { $in: ["pending", "active"] } });
+  if (existing) {
+    throw ApiError.conflict(forOther ? "That user already has a pending or active package" : "You already have a pending or active package");
+  }
 
   const price = pkg.priceUsd;
 
-  // Pre-check the Main wallet so we can fail fast with a clear message before
-  // creating any records. The authoritative guard is the atomic debit below.
-  const balances = await getWalletBalances(userId);
+  // Pre-check the actor's Main wallet so we can fail fast with a clear message
+  // before creating any records. The authoritative guard is the atomic debit.
+  const balances = await getWalletBalances(actorId);
   if (balances.main.available < price) {
     throw ApiError.conflict(`Insufficient balance — $${price} needed, deposit funds first`);
   }
 
-  // 1. Pending subscription (gives us the idempotency key for the debit).
+  // 1. Pending subscription (gives us the idempotency key for the debit). The
+  //    subscription belongs to the beneficiary (target), not the payer.
   const subscription = await UserPackage.create({
-    user: userId,
+    user: targetUserId,
     package: pkg._id,
     snapshot: { name: pkg.name, priceUsd: pkg.priceUsd, dailyReturnPct: pkg.dailyReturnPct, durationDays: pkg.durationDays },
     status: "pending",
     paymentStatus: "pending",
   });
 
-  // 2. Atomic, idempotent debit of the package price from Main/available. The
-  //    `$gte` guard prevents an over-debit; if it fails, roll back the pending
-  //    subscription and surface a conflict.
+  // 2. Atomic, idempotent debit of the package price from the actor's
+  //    Main/available. The `$gte` guard prevents an over-debit; if it fails,
+  //    roll back the pending subscription and surface a conflict.
+  const memo = forOther
+    ? `Package activation for ${targetName} — ${pkg.name}`
+    : `Package activation — ${pkg.name}`;
   try {
     await applyLedgerEntry({
-      userId,
+      userId: actorId,
       wallet: "main",
       field: "available",
       direction: "debit",
       amount: price,
       type: "package_activation",
       reference: { resource: "UserPackage", resourceId: subscription._id.toString() },
-      memo: `Package activation — ${pkg.name}`,
-      meta: { packageId: pkg._id.toString() },
+      memo,
+      meta: forOther
+        ? { packageId: pkg._id.toString(), targetUserId, activatedBy: actorId }
+        : { packageId: pkg._id.toString() },
     });
   } catch (err) {
     await UserPackage.deleteOne({ _id: subscription._id }).catch(() => undefined);
     if (err instanceof ApiError && err.statusCode === 409) {
       throw ApiError.conflict(`Insufficient balance — $${price} needed, deposit funds first`);
     }
-    logger.error("Wallet debit failed for package activation", { userId, packageId, error: err instanceof Error ? err.message : String(err) });
+    logger.error("Wallet debit failed for package activation", { userId: actorId, packageId, error: err instanceof Error ? err.message : String(err) });
     throw ApiError.internal("Could not activate package. Please try again.");
   }
 
@@ -293,15 +325,16 @@ export async function activatePackageFromWallet(
     { $set: { status: "active", activatedAt: now, expiresAt, paymentStatus: "paid", paymentId: `wallet-${subscription._id}` } },
   );
 
-  // Activating a package promotes an inactive user to active (idempotent —
-  // only writes when not already active). New members start inactive and earn
+  // Activating a package promotes an inactive beneficiary to active (idempotent
+  // — only writes when not already active). New members start inactive and earn
   // full access once their first package is live.
-  await User.updateOne({ _id: userId, status: { $ne: "active" } }, { $set: { status: "active" } }).exec();
+  await User.updateOne({ _id: targetUserId, status: { $ne: "active" } }, { $set: { status: "active" } }).exec();
 
   // 4. Record a paid, wallet-funded Deposit so the activation appears in the
-  //    user's deposit history and the package row's joined `payment` info.
+  //    beneficiary's deposit history and the package row's joined `payment`
+  //    info. For a "for other" activation the actor is recorded in meta.
   const deposit = await Deposit.create({
-    user: userId,
+    user: targetUserId,
     userPackage: subscription._id,
     package: pkg._id,
     amountUsd: price,
@@ -309,25 +342,32 @@ export async function activatePackageFromWallet(
     status: "paid",
     paidAt: now,
     sandbox: false,
-    meta: { method: "wallet", packageId: pkg._id.toString() },
+    meta: forOther
+      ? { method: "wallet", packageId: pkg._id.toString(), activatedBy: actorId }
+      : { method: "wallet", packageId: pkg._id.toString() },
   });
 
   await ActivityLog.create({
-    actor: userId,
-    action: "package.activate",
+    actor: actorId,
+    action: forOther ? "package.activate_for" : "package.activate",
     resource: "Package",
     resourceId: pkg._id.toString(),
-    meta: { name: pkg.name, priceUsd: price, depositId: deposit._id.toString(), method: "wallet" },
+    meta: forOther
+      ? { name: pkg.name, priceUsd: price, depositId: deposit._id.toString(), method: "wallet", targetUserId, targetName }
+      : { name: pkg.name, priceUsd: price, depositId: deposit._id.toString(), method: "wallet" },
     ip: meta?.ip,
     userAgent: meta?.userAgent,
   }).catch(() => undefined);
 
   // 5. Direct Connect Bonus — the buyer's sponsor earns a percentage of the
-  //    package price to their bonus wallet. Best-effort + idempotent (keyed by
-  //    the deposit id); a bonus failure must not break the activation.
-  await awardDirectBonus(userId, price, deposit._id.toString()).catch((err) => {
+  //    package price to their bonus wallet. For a "for other" activation the
+  //    buyer is the beneficiary, so the bonus flows to the beneficiary's
+  //    sponsor (the actor, if the target is their direct referral). Best-effort
+  //    + idempotent (keyed by the deposit id); a bonus failure must not break
+  //    the activation.
+  await awardDirectBonus(targetUserId, price, deposit._id.toString()).catch((err) => {
     logger.error("Direct bonus failed for wallet activation", {
-      userId, packageId, depositId: deposit._id.toString(),
+      userId: targetUserId, packageId, depositId: deposit._id.toString(),
       error: err instanceof Error ? err.message : String(err),
     });
   });

@@ -16,11 +16,14 @@ export const USER_REPORT_KINDS = [
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
-/** Shared query fields for every report (date range + status + search). */
+/** Shared query fields for every report (date range + status + type + search).
+ *  `type` narrows ledger-based reports (income / wallet) to a single income/wallet
+ *  transaction type; ignored by other report kinds. */
 const reportFilters = {
   from: z.string().regex(DATE_RE, "From must be YYYY-MM-DD").optional(),
   to: z.string().regex(DATE_RE, "To must be YYYY-MM-DD").optional(),
   status: z.string().trim().max(40).optional(),
+  type: z.string().trim().max(40).optional(),
   q: z.string().trim().max(60).optional(),
 };
 

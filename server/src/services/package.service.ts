@@ -36,4 +36,18 @@ export async function activatePackage(
   return activatePackageFromWallet(userId, packageId, meta);
 }
 
+/**
+ * POST /packages/activate-for — an active user pays from their own Main wallet
+ * to activate a package for another inactive user (the beneficiary). The actor
+ * is debited; the target receives the active subscription + active status.
+ */
+export async function activatePackageFor(
+  actorId: string,
+  targetUserId: string,
+  packageId: string,
+  meta?: Meta,
+): Promise<{ pkg: UserPackageRow; payment: DepositRow }> {
+  return activatePackageFromWallet(actorId, packageId, meta, targetUserId);
+}
+
 export type { PackageTier };
