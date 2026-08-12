@@ -17,7 +17,7 @@ import { createWithdrawalSchema } from "@zeminex/shared";
 import type { CreateWithdrawalBody, WithdrawalRow, WithdrawalStatus } from "@zeminex/shared";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 
-const MIN_WITHDRAWAL = 10;
+const MIN_WITHDRAWAL = 15;
 
 const STATUS_FILTERS: { value: "all" | WithdrawalStatus; label: string }[] = [
   { value: "all", label: "All" },
@@ -76,7 +76,7 @@ export function WithdrawalsPage() {
     formState: { errors },
   } = useForm<CreateWithdrawalBody>({
     resolver: zodResolver(createWithdrawalSchema.shape.body),
-    defaultValues: { wallet: "main" },
+    defaultValues: { wallet: "bonus" },
   });
 
   const onSubmit = (values: CreateWithdrawalBody) => {
@@ -182,7 +182,6 @@ export function WithdrawalsPage() {
                   {...register("wallet")}
                   className="glass-input h-10 w-full px-3 text-sm"
                 >
-                  <option value="main">Main</option>
                   <option value="bonus">Bonus</option>
                   <option value="trading">Trading</option>
                 </select>

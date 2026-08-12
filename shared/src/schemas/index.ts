@@ -11,3 +11,4 @@ export * from "./adminUser.schema.js";
 export * from "./adminLogs.schema.js";
 export * from "./payment.schema.js";
 export * from "./p2p.schema.js";
+export * from "./support.schema.js";

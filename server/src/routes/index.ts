@@ -12,6 +12,7 @@ import p2pRoutes from "./p2p.routes.js";
 import walletRoutes from "./wallet.routes.js";
 import withdrawalRoutes from "./withdrawal.routes.js";
 import referralRoutes from "./referral.routes.js";
+import supportRoutes from "./support.routes.js";
 import { validateCode as validateReferralCodeHandler } from "../controllers/referral.controller.js";
 import bonanzaRoutes from "./bonanza.routes.js";
 import compensationRoutes from "./compensation.routes.js";
@@ -34,6 +35,8 @@ router.use("/payments", paymentRoutes);
 router.use("/wallet", authenticate, walletRoutes);
 router.use("/p2p", authenticate, p2pRoutes);
 router.use("/withdrawals", authenticate, withdrawalRoutes);
+// Support tickets — user issues + admin response thread.
+router.use("/support", authenticate, supportRoutes);
 // Public referral-code validation (register form pre-submit check) — mounted
 // BEFORE the authenticated /referrals tree so it stays unauthenticated.
 router.get("/referrals/validate", referralValidateLimiter, ...validateReferralCodeHandler);

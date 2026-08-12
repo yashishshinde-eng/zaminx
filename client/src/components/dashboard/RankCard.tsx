@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Award, Sparkles } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { RankStars } from "./RankStars";
 import type { DashboardSummary } from "@zeminex/shared";
 
 /** Current rank + progress to the next rank. Glass card with gold accent. */
@@ -38,6 +39,11 @@ export function RankCard({ rank }: { rank: DashboardSummary["account"]["rank"] }
           <p className="metric-value font-grotesk text-gradient-gold text-xl">
             {rank.name}
           </p>
+        </div>
+
+        {/* Star-wise level — filled gold stars out of 10 */}
+        <div className="mt-2">
+          <RankStars name={rank.name} size={14} />
         </div>
 
         {isMaxRank ? (

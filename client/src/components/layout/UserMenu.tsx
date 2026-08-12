@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LogOut, Settings as SettingsIcon, User, ShieldCheck } from "lucide-react";
+import { LogOut, Settings as SettingsIcon, User, ShieldCheck, LifeBuoy } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -60,6 +60,9 @@ export function UserMenu() {
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => navigate("/app/settings")}>
             <SettingsIcon className="mr-1" /> Settings
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => navigate("/app/support")}>
+            <LifeBuoy className="mr-1" /> Support
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem destructive onSelect={() => void logout()}>

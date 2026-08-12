@@ -32,6 +32,7 @@ const WithdrawalsPage = lazy(() => import("@/pages/WithdrawalsPage").then((m) =>
 const TeamPage = lazy(() => import("@/pages/TeamPage").then((m) => ({ default: m.TeamPage })));
 const BonanzaPage = lazy(() => import("@/pages/BonanzaPage").then((m) => ({ default: m.BonanzaPage })));
 const ReportsPage = lazy(() => import("@/pages/ReportsPage").then((m) => ({ default: m.ReportsPage })));
+const SupportPage = lazy(() => import("@/pages/SupportPage").then((m) => ({ default: m.SupportPage })));
 const AdminReportsPage = lazy(() => import("@/pages/AdminReportsPage").then((m) => ({ default: m.AdminReportsPage })));
 const AdminDashboardPage = lazy(() => import("@/pages/AdminDashboardPage").then((m) => ({ default: m.AdminDashboardPage })));
 const AdminUsersPage = lazy(() => import("@/pages/AdminUsersPage").then((m) => ({ default: m.AdminUsersPage })));
@@ -44,6 +45,7 @@ const AdminSmtpSettingsPage = lazy(() => import("@/pages/AdminSmtpSettingsPage")
 const AdminNowpaymentsSettingsPage = lazy(() => import("@/pages/AdminNowpaymentsSettingsPage").then((m) => ({ default: m.AdminNowpaymentsSettingsPage })));
 const AdminSecurityPage = lazy(() => import("@/pages/AdminSecurityPage").then((m) => ({ default: m.AdminSecurityPage })));
 const AdminLogsPage = lazy(() => import("@/pages/AdminLogsPage").then((m) => ({ default: m.AdminLogsPage })));
+const AdminSupportPage = lazy(() => import("@/pages/AdminSupportPage").then((m) => ({ default: m.AdminSupportPage })));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage").then((m) => ({ default: m.NotFoundPage })));
 
 /**
@@ -98,6 +100,7 @@ export function AppRouter() {
             <Route path="/app/bonanzas" element={<BonanzaPage />} />
             <Route path="/app/reports" element={<ReportsPage />} />
             <Route path="/app/settings" element={<SettingsPage />} />
+            <Route path="/app/support" element={<SupportPage />} />
           </Route>
 
           {/* Admin panel (protected, admin only) */}
@@ -114,6 +117,7 @@ export function AppRouter() {
             <Route path="/app/admin/security" element={<AdminSecurityPage />} />
             <Route path="/app/admin/logs" element={<AdminLogsPage />} />
             <Route path="/app/admin/reports" element={<AdminReportsPage />} />
+            <Route path="/app/admin/support" element={<AdminSupportPage />} />
           </Route>
 
           {/* Fallback */}

@@ -6,10 +6,13 @@ import {
   Globe,
   Award,
   Gift,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 import type { DashboardSummary } from "@zeminex/shared";
 import { formatCurrency } from "@/lib/utils";
+import { Progress } from "@/components/ui/progress";
+import { RankStars } from "./RankStars";
 
 type IncomeStreamKey = "trading" | "direct" | "team" | "community" | "rankReward" | "bonanza";
 
@@ -22,9 +25,19 @@ const streams: { key: IncomeStreamKey; label: string; icon: LucideIcon; color: s
   { key: "bonanza", label: "Bonanza Reward", icon: Gift, color: "#06b6d4", subtitle: "Time-limited offer rewards" },
 ];
 
-/** Six income-stream tiles with colored accent borders and progress bars. */
-export function IncomeBreakdown({ income }: { income: DashboardSummary["income"] }) {
+/** Six income-stream tiles with colored accent borders and progress bars.
+ *  Also surfaces the user's current rank (level + progress to next) at the top
+ *  of the card, alongside the income breakdown. */
+export function IncomeBreakdown({
+  income,
+  rank,
+}: {
+  income: DashboardSummary["income"];
+  rank: DashboardSummary["account"]["rank"];
+}) {
   const total = income.total;
+  const pct = Math.round(Math.max(0, Math.min(1, rank.progress)) * 100);
+  const isMaxRank = !rank.nextRank;
 
   return (
     <motion.div
@@ -39,6 +52,36 @@ export function IncomeBreakdown({ income }: { income: DashboardSummary["income"]
         <span className="chip chip-gold">
           Total earned: <span className="font-bold tabular-nums">{formatCurrency(total)}</span>
         </span>
+      </div>
+
+      {/* Current rank strip — shows the user's achieved rank + progress to next */}
+      <div className="mx-5 mb-4 flex items-center gap-3 rounded-[14px] border border-gold/15 bg-gold/[0.04] px-4 py-3">
+        <div className="icon-box-gold shrink-0">
+          <Award className="size-4 text-gold" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between gap-2">
+            <span className="metric-label">Current Rank</span>
+            <span className="metric-value font-grotesk text-gradient-gold text-sm">{rank.name}</span>
+          </div>
+          <div className="mt-1.5">
+            <RankStars name={rank.name} size={11} />
+          </div>
+          {isMaxRank ? (
+            <div className="mt-1.5 flex items-center gap-1.5">
+              <Sparkles className="size-3 text-gold" />
+              <span className="text-[11px] font-medium text-gold">Max rank achieved</span>
+            </div>
+          ) : (
+            <div className="mt-2">
+              <Progress value={pct} glow className="h-1.5" />
+              <div className="mt-1 flex items-center justify-between">
+                <span className="text-[11px] text-muted-foreground">Progress to {rank.nextRank}</span>
+                <span className="text-[11px] font-semibold tabular-nums text-muted-foreground">{pct}%</span>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Stream grid */}

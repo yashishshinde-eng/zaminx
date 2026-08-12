@@ -20,6 +20,7 @@ import {
   Sparkles,
   Crown,
   ArrowRightLeft,
+  LifeBuoy,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -45,6 +46,7 @@ const NAV: NavItem[] = [
   { label: "Team", to: "/app/team", icon: Users, accent: "purple" },
   { label: "Bonanza", to: "/app/bonanzas", icon: Gift },
   { label: "Reports", to: "/app/reports", icon: FileText },
+  { label: "Support", to: "/app/support", icon: LifeBuoy },
   { label: "Settings", to: "/app/settings", icon: Settings },
   { label: "Admin", to: "/app/admin", icon: ShieldCheck, adminOnly: true },
   { label: "Users", to: "/app/admin/users", icon: Users, adminOnly: true },
@@ -57,6 +59,7 @@ const NAV: NavItem[] = [
   { label: "Security", to: "/app/admin/security", icon: ShieldAlert, adminOnly: true },
   { label: "Logs", to: "/app/admin/logs", icon: ScrollText, adminOnly: true },
   { label: "Admin Reports", to: "/app/admin/reports", icon: BarChart3, adminOnly: true },
+  { label: "Support", to: "/app/admin/support", icon: LifeBuoy, adminOnly: true },
 ];
 
 interface NavGroup {
@@ -70,12 +73,12 @@ const USER_GROUPS: NavGroup[] = [
   { label: "Overview", items: NAV.filter((i) => i.label === "Dashboard" || i.label === "Reports") },
   { label: "Earnings", items: NAV.filter((i) => ["Wallet", "Deposit", "P2P", "Withdrawals", "Packages"].includes(i.label)) },
   { label: "Network", items: NAV.filter((i) => ["Team", "Bonanza"].includes(i.label)) },
-  { label: "Account", items: NAV.filter((i) => i.label === "Settings") },
+  { label: "Account", items: NAV.filter((i) => i.label === "Support" || i.label === "Settings") },
 ];
 
 const ADMIN_GROUPS: NavGroup[] = [
   { label: "Dashboard", items: NAV.filter((i) => i.label === "Admin") },
-  { label: "Management", items: NAV.filter((i) => ["Users", "Compensation", "Bonanzas", "CMS Pages"].includes(i.label)) },
+  { label: "Management", items: NAV.filter((i) => ["Users", "Compensation", "Bonanzas", "CMS Pages", "Support"].includes(i.label)) },
   { label: "Configuration", items: NAV.filter((i) => ["Site Config", "SMTP", "NOWPayments", "Security"].includes(i.label)) },
   { label: "System", items: NAV.filter((i) => ["Logs", "Admin Reports"].includes(i.label)) },
 ];

@@ -96,3 +96,9 @@ export type { ContactMessageDocument } from "./ContactMessage.model.js";
 /* ------------------------------------------------------------------ */
 export { P2PTransfer } from "./P2PTransfer.model.js";
 export type { P2PTransferDocument } from "./P2PTransfer.model.js";
+
+/* ------------------------------------------------------------------ */
+/*  Support tickets (user-raised issues + admin response thread)       */
+/* ------------------------------------------------------------------ */
+export { SupportTicket } from "./SupportTicket.model.js";
+export type { SupportTicketDocument } from "./SupportTicket.model.js";

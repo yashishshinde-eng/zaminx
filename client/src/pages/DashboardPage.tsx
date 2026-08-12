@@ -31,6 +31,7 @@ import {
   RankCard,
   MarketOverview,
   RecentTransactions,
+  RankStars,
 } from "@/components/dashboard";
 
 export function DashboardPage() {
@@ -91,6 +92,7 @@ function DashboardContent({ data }: { data: SummaryData }) {
             <span className="text-xs font-semibold text-gold">
               {data.account.rank.name} Rank
             </span>
+            <RankStars name={data.account.rank.name} size={10} />
           </div>
         </div>
       </motion.div>
@@ -153,7 +155,7 @@ function DashboardContent({ data }: { data: SummaryData }) {
       {/* ═══ INCOME BREAKDOWN + WALLET ══════════════════════ */}
       <motion.div variants={staggerItem} className="grid gap-4 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <IncomeBreakdown income={data.income} />
+          <IncomeBreakdown income={data.income} rank={data.account.rank} />
         </div>
         <WalletCard wallets={data.wallets} />
       </motion.div>

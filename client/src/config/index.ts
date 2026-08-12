@@ -36,6 +36,10 @@ export const queryKeys = {
     list: (params?: unknown) => ["withdrawals", "list", params ?? {}] as const,
     detail: (id: string) => ["withdrawals", "detail", id] as const,
   },
+  support: {
+    list: (params?: unknown) => ["support", "list", params ?? {}] as const,
+    detail: (id: string) => ["support", "detail", id] as const,
+  },
   referrals: {
     stats: ["referrals", "stats"] as const,
     direct: (params?: unknown) => ["referrals", "direct", params ?? {}] as const,
@@ -77,4 +81,9 @@ export const queryKeys = {
   // Phase 14C operations.
   adminMaintenance: ["admin", "maintenance"] as const,
   adminLogs: (params: unknown) => ["admin", "logs", params] as const,
+  // Admin support inbox (Phase: support tickets).
+  adminSupport: {
+    list: (params?: unknown) => ["admin", "support", "list", params ?? {}] as const,
+    detail: (id: string) => ["admin", "support", "detail", id] as const,
+  },
 } as const;

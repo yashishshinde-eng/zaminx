@@ -9,22 +9,22 @@ import {
 const body = (b: Record<string, unknown>) => ({ body: b });
 
 describe("createWithdrawalSchema", () => {
-  it("accepts a valid main-wallet withdrawal", () => {
-    expect(createWithdrawalSchema.safeParse(body({ wallet: "main", amount: 50 })).success).toBe(true);
-  });
   it("accepts bonus and trading wallets", () => {
     expect(createWithdrawalSchema.safeParse(body({ wallet: "bonus", amount: 10.5 })).success).toBe(true);
     expect(createWithdrawalSchema.safeParse(body({ wallet: "trading", amount: 1 })).success).toBe(true);
+  });
+  it("rejects the main wallet (not withdrawable)", () => {
+    expect(createWithdrawalSchema.safeParse(body({ wallet: "main", amount: 50 })).success).toBe(false);
   });
   it("rejects an unknown wallet", () => {
     expect(createWithdrawalSchema.safeParse(body({ wallet: "savings", amount: 50 })).success).toBe(false);
   });
   it("rejects a non-positive amount", () => {
-    expect(createWithdrawalSchema.safeParse(body({ wallet: "main", amount: 0 })).success).toBe(false);
-    expect(createWithdrawalSchema.safeParse(body({ wallet: "main", amount: -5 })).success).toBe(false);
+    expect(createWithdrawalSchema.safeParse(body({ wallet: "bonus", amount: 0 })).success).toBe(false);
+    expect(createWithdrawalSchema.safeParse(body({ wallet: "trading", amount: -5 })).success).toBe(false);
   });
   it("rejects a missing amount", () => {
-    expect(createWithdrawalSchema.safeParse(body({ wallet: "main" })).success).toBe(false);
+    expect(createWithdrawalSchema.safeParse(body({ wallet: "bonus" })).success).toBe(false);
   });
 });
 

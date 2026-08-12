@@ -18,6 +18,7 @@ import { useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { RankStars } from "./RankStars";
 import type { DashboardSummary } from "@zeminex/shared";
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -210,10 +211,11 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
                 </span>
               </span>
 
-              {/* Membership badge — crown + rank */}
+              {/* Membership badge — crown + rank + star level */}
               <span className="chip-gold inline-flex items-center gap-1.5">
                 <Crown className="size-3.5 text-gold" />
                 {rankName}
+                <RankStars name={rankName} size={10} className="ml-0.5" />
               </span>
 
               {/* Package badge */}

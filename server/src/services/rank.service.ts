@@ -247,10 +247,12 @@ async function isRankAwarded(rankId: string, userId: string): Promise<boolean> {
 }
 
 /**
- * Evaluate the rank ladder for a single user: for each rank they qualify for
- * (in ladder order, stopping at the first non-qualifying rank), award its
- * `rewardAmount` once if not already awarded. Idempotent via
- * `rank:<rankId>:<userId>`. Returns the count of new awards and errors.
+ * Evaluate the rank ladder for a single user: pay ONLY the highest rung the
+ * user qualifies for, once. Lower rungs are never paid — a user who jumps
+ * straight to Star 2 receives only Star 2's reward (Star 1 is skipped). Each
+ * star is paid exactly once, at the moment it first becomes the user's highest
+ * achieved rung; climbing Star 2 → Star 3 later pays only Star 3. Idempotent
+ * via `rank:<rankId>:<userId>`. Returns 0/1 new award and 0/1 error.
  */
 export async function evaluateRankForUser(userId: string): Promise<{ awarded: number; errors: number }> {
   const ladder = await activeLadder();
@@ -264,55 +266,60 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
   if (!activePkg) return { awarded: 0, errors: 0 };
 
   const { directCount, teamCount } = await getTeamCounts(userId);
-  // Fetched once so each new award can fire a notification email without an
-  // extra query per rank in the loop.
+  // Fetched once so the award notification email doesn't need an extra query.
   const user = await User.findById(userId).lean();
-  let awarded = 0;
-  let errors = 0;
 
+  // Find the HIGHEST qualifying rung. The ladder is sorted by `order`; we stop
+  // at the first non-qualifying rung so an out-of-order requirement can't skip a
+  // tier. Starter (0/0) always qualifies, so topRank is non-null in practice.
+  let topRank: LeanRankLadder | null = null;
   for (const rank of ladder) {
-    if (!(directCount >= rank.requiredDirects && teamCount >= rank.requiredTeamSize)) break;
-    if (rank.rewardAmount <= 0) continue; // e.g. Starter pays nothing
-    const rankId = rank._id.toString();
-    if (await isRankAwarded(rankId, userId)) continue;
-    try {
-      await applyLedgerEntry({
-        userId,
-        wallet: "bonus",
-        field: "available",
-        direction: "credit",
-        amount: rank.rewardAmount,
-        type: "rank_reward",
-        reference: { resource: "Rank", resourceId: `rank:${rankId}:${userId}` },
-        memo: `Rank reward — ${rank.name}`,
-        meta: { rankId, name: rank.name, directCount, teamCount },
-      });
-      awarded++;
-      await ActivityLog.create({
-        actor: userId,
-        action: "compensation.rank_reward",
-        resource: "Rank",
-        resourceId: rankId,
-        meta: { name: rank.name, amount: rank.rewardAmount, directCount, teamCount },
-      }).catch(() => undefined);
-      // Fire-and-forget: bulk "run for all" would otherwise serialize SMTP sends.
-      if (user) {
-        void sendNotificationEmail(
-          user,
-          rankAchievementTemplate({ name: user.name, rankName: rank.name, rewardAmount: rank.rewardAmount }),
-        );
-      }
-    } catch (err) {
-      errors++;
-      logger.error("Rank award failed", {
-        userId,
-        rankId,
-        error: err instanceof Error ? err.message : String(err),
-      });
+    if (directCount >= rank.requiredDirects && teamCount >= rank.requiredTeamSize) {
+      topRank = rank;
+    } else {
+      break;
     }
   }
+  if (!topRank || topRank.rewardAmount <= 0) return { awarded: 0, errors: 0 }; // e.g. Starter pays nothing
 
-  return { awarded, errors };
+  const rankId = topRank._id.toString();
+  if (await isRankAwarded(rankId, userId)) return { awarded: 0, errors: 0 };
+
+  try {
+    await applyLedgerEntry({
+      userId,
+      wallet: "bonus",
+      field: "available",
+      direction: "credit",
+      amount: topRank.rewardAmount,
+      type: "rank_reward",
+      reference: { resource: "Rank", resourceId: `rank:${rankId}:${userId}` },
+      memo: `Rank reward — ${topRank.name}`,
+      meta: { rankId, name: topRank.name, directCount, teamCount },
+    });
+    await ActivityLog.create({
+      actor: userId,
+      action: "compensation.rank_reward",
+      resource: "Rank",
+      resourceId: rankId,
+      meta: { name: topRank.name, amount: topRank.rewardAmount, directCount, teamCount },
+    }).catch(() => undefined);
+    // Fire-and-forget: bulk "run for all" would otherwise serialize SMTP sends.
+    if (user) {
+      void sendNotificationEmail(
+        user,
+        rankAchievementTemplate({ name: user.name, rankName: topRank.name, rewardAmount: topRank.rewardAmount }),
+      );
+    }
+    return { awarded: 1, errors: 0 };
+  } catch (err) {
+    logger.error("Rank award failed", {
+      userId,
+      rankId,
+      error: err instanceof Error ? err.message : String(err),
+    });
+    return { awarded: 0, errors: 1 };
+  }
 }
 
 /**

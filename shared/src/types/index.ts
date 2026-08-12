@@ -117,3 +117,4 @@ export * from "./compensation.js";
 export * from "./report.js";
 export * from "./adminLogs.js";
 export * from "./p2p.js";
+export * from "./support.js";

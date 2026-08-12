@@ -5,7 +5,7 @@ const STATUSES = ["pending", "under_review", "approved", "rejected", "paid", "ca
 /** POST /withdrawals — submit a withdrawal request (USDT-BEP20, manual approval). */
 export const createWithdrawalSchema = z.object({
   body: z.object({
-    wallet: z.enum(["main", "bonus", "trading"]),
+    wallet: z.enum(["bonus", "trading"]),
     amount: z.number().positive("Amount must be greater than 0"),
   }),
 });

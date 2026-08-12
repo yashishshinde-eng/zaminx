@@ -3,6 +3,7 @@ export { ReferralLinkCard } from "./ReferralLinkCard";
 export { WalletCard } from "./WalletCard";
 export { PackageCard } from "./PackageCard";
 export { RankCard } from "./RankCard";
+export { RankStars, rankStarCount, MAX_RANK_STARS } from "./RankStars";
 export { IncomeBreakdown } from "./IncomeBreakdown";
 export { IncomeChartCard } from "./IncomeChartCard";
 export { IncomeDistributionCard } from "./IncomeDistributionCard";
