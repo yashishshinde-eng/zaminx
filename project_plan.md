@@ -98,7 +98,13 @@ Star	Position	Team Members	Reward Bonus
 2 Star	2	9	$20
 3 Star	3	27	$50
 4 Star	4	81	$100
-5 Star	5	243	$250
+5 Star	5	243	$
+
+
+
+
+
+
 6 Star	6	729	$500
 7 Star	7	2187	$1,000
 8 Star	8	6561	$2,000

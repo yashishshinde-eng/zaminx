@@ -45,7 +45,6 @@ export function UserPackageList({ packages, isLoading }: UserPackageListProps) {
                   <p className="text-xs text-muted-foreground">
                     Started {formatDate(p.createdAt)}
                     {p.status === "active" && p.activatedAt && <> · Activated {formatDate(p.activatedAt)}</>}
-                    {p.status === "active" && p.expiresAt && <> · Expires {formatDate(p.expiresAt)}</>}
                   </p>
                 </div>
               </li>

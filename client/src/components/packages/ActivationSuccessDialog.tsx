@@ -16,13 +16,12 @@ interface ActivationSuccessDialogProps {
 
 /** "Activation Successful" popup shown after a package is activated — for self
  *  or for another member. Surfaces the package snapshot, the debited amount,
- *  the term/expiry, and (for "for member") the beneficiary. */
+ *  and (for "for member") the beneficiary. */
 export function ActivationSuccessDialog({ open, onClose, result, beneficiaryName }: ActivationSuccessDialogProps) {
   if (!result) return null;
   const { package: pkg, payment } = result;
   const snap = pkg.snapshot;
   const forOther = !!beneficiaryName;
-  const termLabel = snap.durationDays > 0 ? `${snap.durationDays} days` : "Lifetime";
   const debitedFrom = "Your Main wallet";
 
   return (
@@ -58,10 +57,8 @@ export function ActivationSuccessDialog({ open, onClose, result, beneficiaryName
         <dl className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
           <Detail label="Price" value={formatCurrency(snap.priceUsd)} />
           <Detail label="Daily return" value={`${snap.dailyReturnPct}%`} />
-          <Detail label="Term" value={termLabel} />
           <Detail label="Debited from" value={debitedFrom} />
           <Detail label="Activated on" value={formatDate(pkg.activatedAt)} />
-          <Detail label="Expires" value={pkg.expiresAt ? formatDate(pkg.expiresAt) : "Never"} />
         </dl>
       </div>
 

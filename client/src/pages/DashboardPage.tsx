@@ -138,14 +138,14 @@ function DashboardContent({ data }: { data: SummaryData }) {
           <div className="pointer-events-none absolute inset-0 rounded-[22px] border-b border-white/[0.06]" />
           <p className="metric-label mb-4 font-grotesk text-xs font-bold uppercase tracking-[0.2em]">Quick Actions</p>
           <div className="grid grid-cols-4 gap-3 sm:grid-cols-4 lg:grid-cols-8">
-            <QuickAction icon={ArrowDownToLine} label="Deposit" to="/app/deposit" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" />
-            <QuickAction icon={ArrowUpFromLine} label="Withdraw" to="/app/withdrawals" gradient="from-gold/20 to-gold-dark/10" iconColor="text-gold" disabled={inactive} />
-            <QuickAction icon={Package} label="Invest" to="/app/packages" gradient="from-purple/20 to-purple-dark/10" iconColor="text-purple-light" />
-            <QuickAction icon={Repeat} label="P2P" to="/app/p2p" gradient="from-success/20 to-success/10" iconColor="text-success" disabled={inactive} />
-            <QuickAction icon={ArrowRightLeft} label="Convert" to="/app/p2p" gradient="from-blue/20 to-blue-dark/10" iconColor="text-blue-light" disabled={inactive} />
-            <QuickAction icon={Gem} label="Stake" to="/app/packages" gradient="from-gold/20 to-gold-dark/10" iconColor="text-gold" />
-            <QuickAction icon={TrendingUp} label="Trade" to="/app/packages" gradient="from-purple/20 to-purple-dark/10" iconColor="text-purple-light" />
-            <QuickAction icon={Users} label="Refer" to="/app/team" gradient="from-success/20 to-success/10" iconColor="text-success" />
+            <QuickAction icon={ArrowDownToLine} label="Deposit" to="/app/deposit" gradient="linear-gradient(135deg, #60A5FA, #3B82F6 50%, #1D4ED8)" />
+            <QuickAction icon={ArrowUpFromLine} label="Withdraw" to="/app/withdrawals" gradient="linear-gradient(135deg, #F0CD4A, #E8B923 50%, #C89412)" disabled={inactive} />
+            <QuickAction icon={Package} label="Invest" to="/app/packages" gradient="linear-gradient(135deg, #A78BFA, #8B5CF6 50%, #6D3FD1)" />
+            <QuickAction icon={Repeat} label="P2P" to="/app/p2p" gradient="linear-gradient(135deg, #4FC668, #33A852 50%, #237A3B)" disabled={inactive} />
+            <QuickAction icon={ArrowRightLeft} label="Convert" to="/app/p2p" gradient="linear-gradient(135deg, #38BDF8, #0EA5E9 50%, #0284C7)" disabled={inactive} />
+            <QuickAction icon={Gem} label="Stake" to="/app/packages" gradient="linear-gradient(135deg, #FBBF24, #F59E0B 50%, #B45309)" />
+            <QuickAction icon={TrendingUp} label="Trade" to="/app/packages" gradient="linear-gradient(135deg, #818CF8, #6366F1 50%, #4338CA)" />
+            <QuickAction icon={Users} label="Refer" to="/app/team" gradient="linear-gradient(135deg, #2DD4BF, #14B8A6 50%, #0F766E)" />
           </div>
         </div>
       </motion.div>
@@ -179,23 +179,26 @@ function DashboardContent({ data }: { data: SummaryData }) {
 }
 
 /* ─── Quick Action ──────────────────────────────────────── */
-function QuickAction({ icon: Icon, label, to, gradient, iconColor, disabled }: { icon: typeof ArrowDownToLine; label: string; to: string; gradient: string; iconColor: string; disabled?: boolean }) {
+function QuickAction({ icon: Icon, label, to, gradient, disabled }: { icon: typeof ArrowDownToLine; label: string; to: string; gradient: string; disabled?: boolean }) {
+  const className =
+    "group flex flex-col items-center justify-center gap-1.5 rounded-[16px] p-3.5 text-white shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 sm:p-4";
   if (disabled) {
     return (
-      <div className="premium-action-btn group cursor-not-allowed opacity-40" aria-disabled title="Activate a package to unlock">
-        <div className={`action-icon-lg bg-gradient-to-br ${gradient}`}>
-          <Icon className={`size-5 ${iconColor}`} />
-        </div>
-        <span className="text-xs font-semibold">{label}</span>
+      <div
+        style={{ backgroundImage: gradient }}
+        className={`${className} cursor-not-allowed opacity-40`}
+        aria-disabled
+        title="Activate a package to unlock"
+      >
+        <Icon className="size-5 text-white" strokeWidth={2.2} />
+        <span className="text-xs font-bold text-white">{label}</span>
       </div>
     );
   }
   return (
-    <Link to={to} className="premium-action-btn group">
-      <div className={`action-icon-lg bg-gradient-to-br ${gradient}`}>
-        <Icon className={`size-5 ${iconColor}`} />
-      </div>
-      <span className="text-xs font-semibold">{label}</span>
+    <Link to={to} style={{ backgroundImage: gradient }} className={className}>
+      <Icon className="size-5 text-white" strokeWidth={2.2} />
+      <span className="text-xs font-bold text-white">{label}</span>
     </Link>
   );
 }

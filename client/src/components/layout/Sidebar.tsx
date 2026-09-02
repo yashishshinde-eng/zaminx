@@ -21,6 +21,7 @@ import {
   Crown,
   ArrowRightLeft,
   LifeBuoy,
+  UserPlus,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -44,6 +45,7 @@ const NAV: NavItem[] = [
   { label: "Withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
   { label: "Packages", to: "/app/packages", icon: Package, accent: "gold" },
   { label: "Team", to: "/app/team", icon: Users, accent: "purple" },
+  { label: "Activate Member", to: "/app/activate-member", icon: UserPlus, accent: "purple" },
   { label: "Bonanza", to: "/app/bonanzas", icon: Gift },
   { label: "Reports", to: "/app/reports", icon: FileText },
   { label: "Support", to: "/app/support", icon: LifeBuoy },
@@ -72,7 +74,7 @@ interface NavGroup {
 const USER_GROUPS: NavGroup[] = [
   { label: "Overview", items: NAV.filter((i) => i.label === "Dashboard" || i.label === "Reports") },
   { label: "Earnings", items: NAV.filter((i) => ["Wallet", "Deposit", "P2P", "Withdrawals", "Packages"].includes(i.label)) },
-  { label: "Network", items: NAV.filter((i) => ["Team", "Bonanza"].includes(i.label)) },
+  { label: "Network", items: NAV.filter((i) => ["Team", "Activate Member", "Bonanza"].includes(i.label)) },
   { label: "Account", items: NAV.filter((i) => i.label === "Support" || i.label === "Settings") },
 ];
 

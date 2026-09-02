@@ -49,11 +49,14 @@ const itemVariants = {
 };
 
 /* ── Quick action definitions ─────────────────────────────────── */
+/* Solid gradient fills (top→bottom-right). White icon + label sit
+ * directly on the gradient — no inner circle/badge. */
 const actions = [
-  { label: "Deposit", to: "/app/packages", icon: ArrowDownToLine, gradient: "from-blue-500/20 to-blue-600/10" },
-  { label: "Withdraw", to: "/app/withdrawals", icon: ArrowUpFromLine, gradient: "from-purple-500/20 to-purple-600/10" },
-  { label: "Invest", to: "/app/packages", icon: Rocket, gradient: "from-gold/20 to-yellow-600/10" },
+  { label: "Deposit", to: "/app/packages", icon: ArrowDownToLine, gradient: "linear-gradient(135deg, #F0CD4A, #E8B923 50%, #C89412)" },
+  { label: "Withdraw", to: "/app/withdrawals", icon: ArrowUpFromLine, gradient: "linear-gradient(135deg, #4FC668, #33A852 50%, #237A3B)" },
+  { label: "Invest", to: "/app/packages", icon: Rocket, gradient: "linear-gradient(135deg, #A78BFA, #8B5CF6 50%, #6D3FD1)" },
 ] as const;
+const REFER_GRADIENT = "linear-gradient(135deg, #F8905E, #F0703A 50%, #D45A24)";
 
 /**
  * Premium cinematic portfolio hero — crypto exchange quality.
@@ -235,12 +238,11 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
               <Link
                 key={a.label}
                 to={a.to}
-                className="group flex flex-col items-center justify-center gap-2 rounded-[16px] border border-white/[0.06] bg-white/[0.02] p-3.5 text-sm font-medium text-foreground/70 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue/20 hover:bg-white/[0.05] hover:text-foreground sm:p-4"
+                style={{ backgroundImage: a.gradient }}
+                className="group flex flex-col items-center justify-center gap-2 rounded-[16px] p-3.5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 sm:p-4"
               >
-                <div className={`flex size-9 items-center justify-center rounded-xl bg-gradient-to-br ${a.gradient} transition-all duration-300 group-hover:shadow-[0_0_16px_-4px_hsl(var(--blue)/0.25)]`}>
-                  <a.icon className="size-4 text-foreground/80 group-hover:text-foreground" />
-                </div>
-                <span className="text-xs sm:text-sm">{a.label}</span>
+                <a.icon className="size-5 text-white" strokeWidth={2.2} />
+                <span className="text-[13px] font-bold text-white">{a.label}</span>
               </Link>
             ))}
 
@@ -248,12 +250,11 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
             <button
               type="button"
               onClick={copyReferral}
-              className="group flex flex-col items-center justify-center gap-2 rounded-[16px] border border-white/[0.06] bg-white/[0.02] p-3.5 text-sm font-medium text-foreground/70 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/20 hover:bg-gold/[0.04] hover:text-foreground sm:p-4"
+              style={{ backgroundImage: REFER_GRADIENT }}
+              className="group flex flex-col items-center justify-center gap-2 rounded-[16px] p-3.5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 sm:p-4"
             >
-              <div className="flex size-9 items-center justify-center rounded-xl bg-gradient-to-br from-gold/20 to-yellow-600/10 transition-all duration-300 group-hover:shadow-[0_0_16px_-4px_hsl(var(--gold)/0.25)]">
-                <Users className="size-4 text-foreground/80 group-hover:text-gold" />
-              </div>
-              <span className="text-xs sm:text-sm">Refer</span>
+              <Users className="size-5 text-white" strokeWidth={2.2} />
+              <span className="text-[13px] font-bold text-white">Refer</span>
             </button>
           </motion.div>
 

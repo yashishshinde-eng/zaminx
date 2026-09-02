@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { PackageTierCard } from "@/components/packages/PackageTierCard";
 import { UserPackageList } from "@/components/packages/UserPackageList";
 import { PaymentCard } from "@/components/packages/PaymentCard";
-import { ActivateForMemberDialog } from "@/components/packages/ActivateForMemberDialog";
 import { ActivationSuccessDialog } from "@/components/packages/ActivationSuccessDialog";
 import {
   usePackageCatalog,
@@ -28,7 +27,6 @@ export function PackagesPage() {
   const activate = useActivatePackage();
   const wallet = useWallet();
   const { user } = useAuth();
-  const [activateForOpen, setActivateForOpen] = useState(false);
   const [success, setSuccess] = useState<ActivatePackageResponse | null>(null);
 
   const mainAvailable = wallet.data?.main.available ?? 0;
@@ -88,8 +86,8 @@ export function PackagesPage() {
             <Link to="/app/deposit"><ArrowDownToLine className="size-4" /> Deposit funds</Link>
           </Button>
           {user?.status === "active" && (
-            <Button variant="outline" size="sm" onClick={() => setActivateForOpen(true)}>
-              <UserPlus className="size-4" /> Activate for member
+            <Button asChild variant="outline" size="sm">
+              <Link to="/app/activate-member"><UserPlus className="size-4" /> Activate for member</Link>
             </Button>
           )}
         </div>
@@ -151,7 +149,6 @@ export function PackagesPage() {
         </section>
       </div>
 
-      <ActivateForMemberDialog open={activateForOpen} onClose={() => setActivateForOpen(false)} />
       <ActivationSuccessDialog open={!!success} result={success} onClose={() => setSuccess(null)} />
     </AppShell>
   );

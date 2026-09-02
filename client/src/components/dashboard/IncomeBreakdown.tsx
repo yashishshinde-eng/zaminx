@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import {
-  BarChart3,
-  UserPlus,
+  Coins,
+  HandCoins,
   Users,
   Globe,
   Award,
+  Trophy,
   Gift,
   Sparkles,
   type LucideIcon,
@@ -17,13 +18,32 @@ import { RankStars } from "./RankStars";
 type IncomeStreamKey = "trading" | "direct" | "team" | "community" | "rankReward" | "bonanza";
 
 const streams: { key: IncomeStreamKey; label: string; icon: LucideIcon; color: string; subtitle: string }[] = [
-  { key: "trading", label: "TRADE YIELD CASHFLOWS", icon: BarChart3, color: "#f6b400", subtitle: "1-2% daily arbitrage yield" },
-  { key: "direct", label: "DIRECT CONNECT BONUS", icon: UserPlus, color: "#0d6efd", subtitle: "10% on direct activations" },
-  { key: "team", label: "DAILY TEAM ENERGY BONUS", icon: Users, color: "#a855f7", subtitle: "Daily team energy" },
-  { key: "community", label: "COMMUNITY MONTHLY BONUS", icon: Globe, color: "#10b981", subtitle: "Monthly community bonus" },
-  { key: "rankReward", label: "RANK AND REWARD BONUS", icon: Award, color: "#f43f5e", subtitle: "Milestone rank payouts" },
+  { key: "trading", label: "TRADE YIELD CASHFLOWS", icon: Coins, color: "#E8B923", subtitle: "1-2% daily arbitrage yield" },
+  { key: "direct", label: "DIRECT CONNECT BONUS", icon: HandCoins, color: "#3B82F6", subtitle: "10% on direct activations" },
+  { key: "team", label: "DAILY TEAM ENERGY BONUS", icon: Users, color: "#A855F7", subtitle: "Daily team energy" },
+  { key: "community", label: "COMMUNITY MONTHLY BONUS", icon: Globe, color: "#22C55E", subtitle: "Monthly community bonus" },
+  { key: "rankReward", label: "RANK AND REWARD BONUS", icon: Trophy, color: "#f43f5e", subtitle: "Milestone rank payouts" },
   { key: "bonanza", label: "Bonanza Reward", icon: Gift, color: "#06b6d4", subtitle: "Time-limited offer rewards" },
 ];
+
+/* ── Color helpers for per-card accent glow + gradient bars ── */
+function hexToRgba(hex: string, alpha: number): string {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+/** Mix the accent toward white for the light end of the progress gradient. */
+function lighten(hex: string, amount: number): string {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  const mix = (c: number) => Math.round(c + (255 - c) * amount);
+  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
+}
 
 /** Six income-stream tiles with colored accent borders and progress bars.
  *  Also surfaces the user's current rank (level + progress to next) at the top
@@ -97,41 +117,46 @@ export function IncomeBreakdown({
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative overflow-hidden rounded-[16px] border border-white/[0.06] bg-white/[0.02] p-4 backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/[0.12] hover:bg-white/[0.04]"
-              style={{ borderLeftWidth: "4px", borderLeftColor: s.color }}
+              className="group relative overflow-hidden rounded-[18px] p-4 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:brightness-110"
+              style={{
+                backgroundColor: "#0d0f1a",
+                border: `1.5px solid ${s.color}`,
+                boxShadow: `0 0 16px ${hexToRgba(s.color, 0.35)}`,
+              }}
             >
-              {/* Subtle glow on hover */}
+              {/* Icon badge — top-right, accent-bordered circular badge with glow */}
               <div
-                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                className="absolute right-3 top-3 flex size-[60px] items-center justify-center rounded-full"
                 style={{
-                  background: `radial-gradient(ellipse 80% 60% at 0% 0%, ${s.color}10, transparent 60%)`,
+                  border: `1.5px solid ${s.color}`,
+                  backgroundColor: hexToRgba(s.color, 0.08),
+                  color: s.color,
+                  boxShadow: `0 0 14px ${hexToRgba(s.color, 0.4)}, inset 0 0 12px ${hexToRgba(s.color, 0.15)}`,
                 }}
-              />
+              >
+                <Icon className="size-7" strokeWidth={1.8} />
+              </div>
 
-              <div className="relative">
-                <div className="flex items-center gap-2.5">
-                  <div
-                    className="flex size-8 shrink-0 items-center justify-center rounded-lg"
-                    style={{ backgroundColor: `${s.color}15`, color: s.color }}
-                  >
-                    <Icon className="size-4" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="metric-label truncate">{s.label}</p>
-                  </div>
-                </div>
+              <div className="relative pr-[70px]">
+                <p
+                  className="text-[11px] font-bold uppercase tracking-wider"
+                  style={{ color: s.color }}
+                >
+                  {s.label}
+                </p>
 
-                <p className="metric-value font-grotesk mt-2 text-lg">{formatCurrency(value)}</p>
+                <p className="mt-2 text-2xl font-bold tabular-nums text-white">
+                  {formatCurrency(value)}
+                </p>
                 <p className="text-[11px] text-muted-foreground">{s.subtitle}</p>
 
-                {/* Mini progress bar */}
-                <div className="mt-2.5 h-1 w-full overflow-hidden rounded-full bg-white/[0.06]">
+                {/* Mini progress bar — accent light→solid gradient, rounded ends */}
+                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
                       width: `${pct}%`,
-                      backgroundColor: s.color,
-                      opacity: 0.75,
+                      backgroundImage: `linear-gradient(90deg, ${lighten(s.color, 0.45)}, ${s.color})`,
                     }}
                   />
                 </div>

@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2, Phone, UserPlus } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
@@ -8,7 +9,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuItem, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { ReferralLinkCard } from "@/components/dashboard";
-import { ActivateForMemberDialog } from "@/components/packages/ActivateForMemberDialog";
 import { useAuth } from "@/context/AuthContext";
 import { useReferralStats, useTeamReferrals, useTreeChildren } from "@/hooks/useReferrals";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -39,11 +39,8 @@ export function TeamPage() {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  // "Activate a package for this member" dialog target (team-row action).
-  const [activateTarget, setActivateTarget] = useState<{ id: string; name: string } | null>(null);
-  const openActivateFor = useCallback((row: ReferralMemberRow) => {
-    setActivateTarget({ id: row.id, name: row.name });
-  }, []);
+  // "Activate a package for this member" deep-links to the dedicated page with
+  // the member's referral code prefilled (per-row action).
 
   useEffect(() => {
     const t = setTimeout(() => {
@@ -152,20 +149,17 @@ export function TeamPage() {
         align: "right",
         cell: (r) =>
           r.status === "inactive" ? (
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => openActivateFor(r)}
-            >
-              <UserPlus className="size-3.5" /> Activate
+            <Button asChild variant="outline" size="sm">
+              <Link to={`/app/activate-member?code=${encodeURIComponent(r.referralCode)}`}>
+                <UserPlus className="size-3.5" /> Activate
+              </Link>
             </Button>
           ) : (
             <span className="text-muted-foreground/40">—</span>
           ),
       },
     ],
-    [openActivateFor],
+    [],
   );
 
   const referral = stats.data ? { code: stats.data.code, link: stats.data.link } : undefined;
@@ -356,12 +350,6 @@ export function TeamPage() {
           />
         </section>
       </div>
-
-      <ActivateForMemberDialog
-        open={!!activateTarget}
-        target={activateTarget ?? undefined}
-        onClose={() => setActivateTarget(null)}
-      />
     </AppShell>
   );
 }
