@@ -15,6 +15,7 @@ import { Logo } from "@/components/layout/Logo";
 import { Dialog } from "@/components/ui/dialog";
 import { useAuth } from "@/context/AuthContext";
 import { checkReferralCode } from "@/lib/referrals";
+import { sanitizePinEvent } from "@/lib/pin";
 
 /** Dialling codes offered in the registration country-code dropdown. */
 const COUNTRY_CODES = [
@@ -69,6 +70,7 @@ export function RegisterPage() {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<RegisterBody>({
     resolver: zodResolver(registerSchema.shape.body),
@@ -230,9 +232,13 @@ export function RegisterPage() {
                   autoComplete="off"
                   inputMode="numeric"
                   maxLength={4}
+                  pattern="\d*"
                   placeholder="4-digit PIN"
                   className="tracking-[0.5em]"
                   {...register("transactionPassword")}
+                  onChange={(e) =>
+                    setValue("transactionPassword", sanitizePinEvent(e), { shouldValidate: true })
+                  }
                 />
                 <p className="text-xs text-muted-foreground">4-digit PIN used to authorise withdrawals and transfers.</p>
                 {errors.transactionPassword && <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>}

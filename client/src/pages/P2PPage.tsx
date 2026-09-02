@@ -17,6 +17,7 @@ import { useWallet } from "@/hooks/useWallet";
 import { useAuth } from "@/context/AuthContext";
 import { checkReferralCode } from "@/lib/referrals";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
+import { sanitizePinEvent } from "@/lib/pin";
 
 const WALLET_OPTIONS: { value: WalletType; label: string }[] = [
   { value: "main", label: "Main" },
@@ -281,10 +282,14 @@ function TransferForm() {
               type="password"
               inputMode="numeric"
               maxLength={4}
+              pattern="\d*"
               placeholder="••••"
               autoComplete="off"
               className="tracking-[0.5em]"
               {...register("transactionPassword")}
+              onChange={(e) =>
+                setValue("transactionPassword", sanitizePinEvent(e), { shouldValidate: true })
+              }
             />
             {errors.transactionPassword && (
               <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>

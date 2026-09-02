@@ -16,6 +16,7 @@ import { useAuth } from "@/context/AuthContext";
 import { createWithdrawalSchema } from "@zeminex/shared";
 import type { CreateWithdrawalBody, WithdrawalRow, WithdrawalStatus } from "@zeminex/shared";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
+import { sanitizePinEvent } from "@/lib/pin";
 
 const MIN_WITHDRAWAL = 15;
 
@@ -73,6 +74,7 @@ export function WithdrawalsPage() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<CreateWithdrawalBody>({
     resolver: zodResolver(createWithdrawalSchema.shape.body),
@@ -207,10 +209,14 @@ export function WithdrawalsPage() {
                   type="password"
                   inputMode="numeric"
                   maxLength={4}
+                  pattern="\d*"
                   placeholder="••••"
                   autoComplete="off"
                   className="tracking-[0.5em]"
                   {...register("transactionPassword")}
+                  onChange={(e) =>
+                    setValue("transactionPassword", sanitizePinEvent(e), { shouldValidate: true })
+                  }
                 />
                 {errors.transactionPassword && (
                   <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>

@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { staggerContainer, staggerItem } from "@/lib/motion";
+import { sanitizePinEvent } from "@/lib/pin";
 import {
   updateProfileRequest,
   updateWalletAddressesRequest,
@@ -372,6 +373,7 @@ function TransactionPinForm() {
     handleSubmit,
     reset,
     setError,
+    setValue,
     formState: { errors, isDirty },
   } = useForm<PinFormValues>({
     resolver: zodResolver(pinFormSchema),
@@ -420,10 +422,14 @@ function TransactionPinForm() {
               setShow={setShow}
               inputMode="numeric"
               maxLength={4}
+              pattern="\d*"
               autoComplete="off"
               placeholder="••••"
               className="tracking-[0.5em] pr-10"
               {...register("currentTransactionPassword")}
+              onChange={(e) =>
+                setValue("currentTransactionPassword", sanitizePinEvent(e), { shouldValidate: true })
+              }
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -435,10 +441,14 @@ function TransactionPinForm() {
                 setShow={setShow}
                 inputMode="numeric"
                 maxLength={4}
+                pattern="\d*"
                 autoComplete="off"
                 placeholder="••••"
                 className="tracking-[0.5em] pr-10"
                 {...register("transactionPassword")}
+                onChange={(e) =>
+                  setValue("transactionPassword", sanitizePinEvent(e), { shouldValidate: true })
+                }
               />
               {errors.transactionPassword && <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>}
             </div>
@@ -450,10 +460,14 @@ function TransactionPinForm() {
                 setShow={setShow}
                 inputMode="numeric"
                 maxLength={4}
+                pattern="\d*"
                 autoComplete="off"
                 placeholder="••••"
                 className="tracking-[0.5em] pr-10"
                 {...register("confirmTransactionPassword")}
+                onChange={(e) =>
+                  setValue("confirmTransactionPassword", sanitizePinEvent(e), { shouldValidate: true })
+                }
               />
               {errors.confirmTransactionPassword && <p className="text-sm text-destructive">{errors.confirmTransactionPassword.message}</p>}
             </div>
