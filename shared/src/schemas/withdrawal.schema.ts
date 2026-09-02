@@ -7,6 +7,12 @@ export const createWithdrawalSchema = z.object({
   body: z.object({
     wallet: z.enum(["bonus", "trading"]),
     amount: z.number().positive("Amount must be greater than 0"),
+    // 4-digit transaction PIN — authorises the withdrawal.
+    transactionPassword: z
+      .string()
+      .trim()
+      .length(4, { message: "Transaction PIN must be exactly 4 digits" })
+      .regex(/^\d{4}$/, { message: "Transaction PIN must be exactly 4 digits" }),
   }),
 });
 

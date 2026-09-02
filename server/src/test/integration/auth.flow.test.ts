@@ -27,7 +27,7 @@ describe.skipIf(!hasTestDb)("auth flow", () => {
     const root = await seedUser({ name: "Root" });
     const reg = await api("/api/v1/auth/register", {
       method: "POST",
-      body: JSON.stringify({ name: "Ada", email, password, referralCode: root.referralCode }),
+      body: JSON.stringify({ name: "Ada", email, password, countryCode: "+91", transactionPassword: "1234", referralCode: root.referralCode }),
     });
     expect(reg.status).toBe(201);
     expect(reg.body.success).toBe(true);

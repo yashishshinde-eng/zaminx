@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "6a778376a6534984cd1f5c5b",
+    "fromUser": "6a6f5adf6213d08c893dde54",
+    "fromUserName": "Platform Admin",
+    "toUser": "6a6f5ca7277f8c8f148cba5b",
+    "toUserName": "Zeminex.global",
+    "wallet": "main",
+    "amount": 10,
+    "status": "completed",
+    "memo": "p2p smoke",
+    "createdAt": "2026-08-08T19:28:54.625Z",
+    "updatedAt": "2026-08-08T19:28:54.625Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a778377a6534984cd1f5c75",
+    "fromUser": "6a6f5ca7277f8c8f148cba5b",
+    "fromUserName": "Zeminex.global",
+    "toUser": "6a6f5adf6213d08c893dde54",
+    "toUserName": "Platform Admin",
+    "wallet": "main",
+    "amount": 10,
+    "status": "completed",
+    "memo": "p2p smoke reversal",
+    "createdAt": "2026-08-08T19:28:55.984Z",
+    "updatedAt": "2026-08-08T19:28:55.984Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a795d398daac07796c35b88",
+    "fromUser": "6a78536db6b40ef2e7069005",
+    "fromUserName": "Zeminex Global",
+    "toUser": "6a7866f01920879521184adc",
+    "toUserName": "Zeminex",
+    "wallet": "main",
+    "amount": 50,
+    "status": "completed",
+    "memo": "",
+    "createdAt": "2026-08-10T05:10:17.194Z",
+    "updatedAt": "2026-08-10T05:10:17.194Z",
+    "__v": 0
+  }
+]

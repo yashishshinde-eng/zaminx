@@ -30,7 +30,11 @@ export async function fetchWithdrawal(id: string): Promise<WithdrawalRow> {
 }
 
 /** POST /withdrawals — submit a withdrawal (available → onHold). */
-export async function createWithdrawalRequest(input: { wallet: WalletType; amount: number }): Promise<WithdrawalRow> {
+export async function createWithdrawalRequest(input: {
+  wallet: WalletType;
+  amount: number;
+  transactionPassword: string;
+}): Promise<WithdrawalRow> {
   const { data } = await api.post<CreateResponse>("/withdrawals", input);
   return data.data.withdrawal;
 }

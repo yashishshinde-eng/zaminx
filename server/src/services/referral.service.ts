@@ -105,6 +105,9 @@ export async function getReferralStats(userId: string): Promise<ReferralStats> {
           status: 1,
         },
       },
+      // Cap the by-level breakdown at 10 levels — deeper levels aren't shown
+      // in the team statistics section or the Level filter picker.
+      { $match: { level: { $lte: 10 } } },
       {
         $group: {
           _id: "$level",

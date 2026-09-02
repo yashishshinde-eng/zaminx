@@ -27,6 +27,21 @@ export const registerSchema = z.object({
       .max(20)
       .optional()
       .transform((v) => (v === "" ? undefined : v)),
+    // Dialling prefix chosen from the country-code dropdown (e.g. "+1", "+91").
+    // Stored alongside `phone` so the full number is countryCode + phone.
+    countryCode: z
+      .string()
+      .trim()
+      .min(1, { message: "Country code is required" })
+      .max(6, { message: "Country code is too long" })
+      .regex(/^\+\d{1,4}$/, { message: "Country code must start with + and 1–4 digits" }),
+    // 4-digit transaction PIN — required at registration. Hashed server-side
+    // and used to authorise withdrawals / transfers.
+    transactionPassword: z
+      .string()
+      .trim()
+      .length(4, { message: "Transaction PIN must be exactly 4 digits" })
+      .regex(/^\d{4}$/, { message: "Transaction PIN must be exactly 4 digits" }),
     referralCode: z
       .string()
       .trim()
@@ -80,6 +95,23 @@ export const changePasswordSchema = z.object({
   body: z.object({
     currentPassword: z.string().min(1).max(128),
     password,
+  }),
+});
+
+/**
+ * PUT /profile/transaction-password — change the 4-digit transaction PIN.
+ * `currentTransactionPassword` is required only when a PIN is already set; the
+ * server enforces that. A user with no PIN (legacy / pre-feature) may set one
+ * by omitting the current field.
+ */
+export const changeTransactionPasswordSchema = z.object({
+  body: z.object({
+    currentTransactionPassword: z.string().trim().max(4).optional(),
+    transactionPassword: z
+      .string()
+      .trim()
+      .length(4, { message: "Transaction PIN must be exactly 4 digits" })
+      .regex(/^\d{4}$/, { message: "Transaction PIN must be exactly 4 digits" }),
   }),
 });
 

@@ -29,7 +29,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     const { accessToken } = await fundActiveUser(100);
     const r = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
-      body: JSON.stringify({ wallet: "main", amount: 40 }),
+      body: JSON.stringify({ wallet: "main", amount: 40, transactionPassword: "1234" }),
     });
     expect(r.status).toBe(201);
     expect(r.body.data.withdrawal).toBeTruthy();
@@ -40,7 +40,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     const { accessToken } = await fundActiveUser(100);
     const r = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
-      body: JSON.stringify({ wallet: "main", amount: 5 }),
+      body: JSON.stringify({ wallet: "main", amount: 5, transactionPassword: "1234" }),
     });
     expect(r.status).toBe(400);
     expect(r.body.success).toBe(false);
@@ -51,10 +51,21 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     const { accessToken } = await fundActiveUser(100);
     const r = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
-      body: JSON.stringify({ wallet: "main", amount: 9999 }),
+      body: JSON.stringify({ wallet: "main", amount: 9999, transactionPassword: "1234" }),
     });
     expect(r.status).toBeGreaterThanOrEqual(400);
     expect(r.body.success).toBe(false);
+  });
+
+  it("rejects a withdrawal with an incorrect transaction PIN", async () => {
+    const { accessToken } = await fundActiveUser(100);
+    const r = await authed(accessToken, "/api/v1/withdrawals", {
+      method: "POST",
+      body: JSON.stringify({ wallet: "main", amount: 40, transactionPassword: "0000" }),
+    });
+    expect(r.status).toBe(400);
+    expect(r.body.success).toBe(false);
+    expect(String(r.body.message)).toMatch(/PIN/i);
   });
 
   it("returns 409 for admin review/approve/pay on an already-paid withdrawal", async () => {
@@ -63,7 +74,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
 
     const submit = await authed(userToken, "/api/v1/withdrawals", {
       method: "POST",
-      body: JSON.stringify({ wallet: "main", amount: 25 }),
+      body: JSON.stringify({ wallet: "main", amount: 25, transactionPassword: "1234" }),
     });
     expect(submit.status).toBe(201);
     expect(submit.body.data.withdrawal.status).toBe("paid");
@@ -86,7 +97,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     const { accessToken } = await fundActiveUser(100);
     const submit = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
-      body: JSON.stringify({ wallet: "main", amount: 20 }),
+      body: JSON.stringify({ wallet: "main", amount: 20, transactionPassword: "1234" }),
     });
     expect(submit.status).toBe(201);
     const wid = widOf(submit.body.data.withdrawal);
@@ -102,7 +113,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     // Withdrawal is blocked — the user has not activated a package.
     const blocked = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
-      body: JSON.stringify({ wallet: "main", amount: 20 }),
+      body: JSON.stringify({ wallet: "main", amount: 20, transactionPassword: "1234" }),
     });
     expect(blocked.status).toBe(403);
     expect(blocked.body.success).toBe(false);
@@ -119,7 +130,7 @@ describe.skipIf(!hasTestDb)("withdrawal flow", () => {
     // The activation debited $50, leaving $50 — a $20 withdrawal fits.
     const ok = await authed(accessToken, "/api/v1/withdrawals", {
       method: "POST",
-      body: JSON.stringify({ wallet: "main", amount: 20 }),
+      body: JSON.stringify({ wallet: "main", amount: 20, transactionPassword: "1234" }),
     });
     expect(ok.status).toBe(201);
     expect(ok.body.data.withdrawal.status).toBe("paid");

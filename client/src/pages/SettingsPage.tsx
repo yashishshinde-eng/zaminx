@@ -22,6 +22,7 @@ import {
   updateProfileRequest,
   updateWalletAddressesRequest,
   changePasswordRequest,
+  changeTransactionPasswordRequest,
   updateNotificationPreferenceRequest,
 } from "@/lib/profile";
 import {
@@ -61,6 +62,9 @@ export function SettingsPage() {
           </motion.div>
           <motion.div variants={staggerItem}>
             <PasswordForm />
+          </motion.div>
+          <motion.div variants={staggerItem}>
+            <TransactionPinForm />
           </motion.div>
           <motion.div variants={staggerItem}>
             <ThemeSection />
@@ -348,6 +352,122 @@ const PasswordInput = forwardRef<HTMLInputElement, {
   ),
 );
 PasswordInput.displayName = "PasswordInput";
+
+/* ------------------------------------------------------------------ */
+/*  3b. Transaction PIN                                                */
+/* ------------------------------------------------------------------ */
+const pinFormSchema = z.object({
+  currentTransactionPassword: z.string().max(4).optional(),
+  transactionPassword: z.string().length(4, "Transaction PIN must be exactly 4 digits").regex(/^\d{4}$/, "Transaction PIN must be exactly 4 digits"),
+  confirmTransactionPassword: z.string().min(1, "Confirm your new PIN"),
+});
+type PinFormValues = z.infer<typeof pinFormSchema>;
+
+function TransactionPinForm() {
+  const [saving, setSaving] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setError,
+    formState: { errors, isDirty },
+  } = useForm<PinFormValues>({
+    resolver: zodResolver(pinFormSchema),
+    defaultValues: { currentTransactionPassword: "", transactionPassword: "", confirmTransactionPassword: "" },
+  });
+
+  const onSubmit = async (values: PinFormValues) => {
+    if (values.transactionPassword !== values.confirmTransactionPassword) {
+      setError("confirmTransactionPassword", { message: "PINs do not match" });
+      return;
+    }
+    setSaving(true);
+    try {
+      await changeTransactionPasswordRequest({
+        // Omit the current field entirely when blank so the server treats it
+        // as "no current supplied" rather than an empty string.
+        currentTransactionPassword: values.currentTransactionPassword || undefined,
+        transactionPassword: values.transactionPassword,
+      });
+      reset({ currentTransactionPassword: "", transactionPassword: "", confirmTransactionPassword: "" });
+      toast.success("Transaction PIN updated");
+    } catch {
+      /* interceptor toasts (400 on wrong current PIN) */
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-base">
+          <KeyRound className="size-4 text-primary" /> Transaction PIN
+        </CardTitle>
+        <CardDescription>
+          4-digit PIN used to authorise withdrawals and transfers. Leave "Current PIN" blank if you haven&apos;t set one yet.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+          <div className="space-y-2">
+            <Label htmlFor="currentTransactionPassword">Current PIN <span className="text-muted-foreground">(if set)</span></Label>
+            <PasswordInput
+              id="currentTransactionPassword"
+              show={show}
+              setShow={setShow}
+              inputMode="numeric"
+              maxLength={4}
+              autoComplete="off"
+              placeholder="••••"
+              className="tracking-[0.5em] pr-10"
+              {...register("currentTransactionPassword")}
+            />
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="transactionPassword">New PIN</Label>
+              <PasswordInput
+                id="transactionPassword"
+                show={show}
+                setShow={setShow}
+                inputMode="numeric"
+                maxLength={4}
+                autoComplete="off"
+                placeholder="••••"
+                className="tracking-[0.5em] pr-10"
+                {...register("transactionPassword")}
+              />
+              {errors.transactionPassword && <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="confirmTransactionPassword">Confirm new PIN</Label>
+              <PasswordInput
+                id="confirmTransactionPassword"
+                show={show}
+                setShow={setShow}
+                inputMode="numeric"
+                maxLength={4}
+                autoComplete="off"
+                placeholder="••••"
+                className="tracking-[0.5em] pr-10"
+                {...register("confirmTransactionPassword")}
+              />
+              {errors.confirmTransactionPassword && <p className="text-sm text-destructive">{errors.confirmTransactionPassword.message}</p>}
+            </div>
+          </div>
+          <div className="flex justify-end">
+            <Button type="submit" disabled={saving || !isDirty}>
+              {saving ? "Updating…" : "Update PIN"}
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
+  );
+}
 
 /* ------------------------------------------------------------------ */
 /*  4. Theme                                                           */

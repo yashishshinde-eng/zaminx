@@ -39,6 +39,8 @@ export async function registerRequest(payload: {
   email: string;
   password: string;
   phone?: string;
+  countryCode: string;
+  transactionPassword: string;
   referralCode?: string;
 }): Promise<AuthResponse> {
   const { data } = await api.post<{ data: AuthResponse }>("/auth/register", payload);

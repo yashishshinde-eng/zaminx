@@ -19,7 +19,7 @@ export function useP2PTransfers(params: P2PTransferParams) {
 export function useSendP2PTransfer() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (input: { wallet: WalletType; amount: number; referralCode: string; memo?: string }) =>
+    mutationFn: (input: { wallet: WalletType; amount: number; referralCode: string; memo?: string; transactionPassword: string }) =>
       sendP2PTransfer(input),
     onSuccess: async () => {
       toast.success("Transfer sent successfully");

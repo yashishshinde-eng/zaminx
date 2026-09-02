@@ -16,12 +16,48 @@ import { Dialog } from "@/components/ui/dialog";
 import { useAuth } from "@/context/AuthContext";
 import { checkReferralCode } from "@/lib/referrals";
 
+/** Dialling codes offered in the registration country-code dropdown. */
+const COUNTRY_CODES = [
+  { code: "+91", flag: "🇮🇳" },
+  { code: "+1", flag: "🇺🇸" },
+  { code: "+44", flag: "🇬🇧" },
+  { code: "+971", flag: "🇦🇪" },
+  { code: "+61", flag: "🇦🇺" },
+  { code: "+65", flag: "🇸🇬" },
+  { code: "+92", flag: "🇵🇰" },
+  { code: "+880", flag: "🇧🇩" },
+  { code: "+94", flag: "🇱🇰" },
+  { code: "+977", flag: "🇳🇵" },
+  { code: "+966", flag: "🇸🇦" },
+  { code: "+968", flag: "🇴🇲" },
+  { code: "+974", flag: "🇶🇦" },
+  { code: "+973", flag: "🇧🇭" },
+  { code: "+965", flag: "🇰🇼" },
+  { code: "+62", flag: "🇮🇩" },
+  { code: "+60", flag: "🇲🇾" },
+  { code: "+63", flag: "🇵🇭" },
+  { code: "+66", flag: "🇹🇭" },
+  { code: "+27", flag: "🇿🇦" },
+  { code: "+234", flag: "🇳🇬" },
+  { code: "+254", flag: "🇰🇪" },
+  { code: "+49", flag: "🇩🇪" },
+  { code: "+33", flag: "🇫🇷" },
+  { code: "+34", flag: "🇪🇸" },
+  { code: "+39", flag: "🇮🇹" },
+  { code: "+31", flag: "🇳🇱" },
+  { code: "+7", flag: "🇷🇺" },
+  { code: "+86", flag: "🇨🇳" },
+  { code: "+81", flag: "🇯🇵" },
+  { code: "+82", flag: "🇰🇷" },
+];
+
 export function RegisterPage() {
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const [registeredUser, setRegisteredUser] = useState<PublicUser | null>(null);
   const [registeredPassword, setRegisteredPassword] = useState("");
+  const [registeredTransactionPin, setRegisteredTransactionPin] = useState("");
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   // Auto-capture the ?ref=<code> share link (generated on the dashboard) so
@@ -36,7 +72,7 @@ export function RegisterPage() {
     formState: { errors },
   } = useForm<RegisterBody>({
     resolver: zodResolver(registerSchema.shape.body),
-    defaultValues: { referralCode: refCode || undefined },
+    defaultValues: { referralCode: refCode || undefined, countryCode: "+91" },
   });
 
   // Live referral-code validation — debounced, works for both link-prefilled and
@@ -77,6 +113,7 @@ export function RegisterPage() {
       const user = await registerUser(values);
       setRegisteredUser(user);
       setRegisteredPassword(values.password);
+      setRegisteredTransactionPin(values.transactionPassword);
       toast.success("Account created successfully!");
     } catch {
       // Toast handled by the axios interceptor.
@@ -139,7 +176,7 @@ export function RegisterPage() {
           <div className="glass-card p-6 sm:p-8">
             <div className="mb-6 text-center">
               <h2 className="font-grotesk text-2xl font-bold tracking-tight">Create your account</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Join the Zeminex Global investment platform</p>
+              <p className="mt-1 text-sm text-muted-foreground">Join Zeminex Global Now!</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
@@ -155,13 +192,50 @@ export function RegisterPage() {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="phone">Mobile number</Label>
-                <Input id="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+1 (555) 123-4567" {...register("phone")} />
+                <div className="flex gap-2">
+                  <select
+                    id="countryCode"
+                    aria-label="Country code"
+                    className="glass-input h-11 shrink-0 rounded-md px-2 text-sm text-foreground focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/20"
+                    {...register("countryCode")}
+                  >
+                    {COUNTRY_CODES.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.code} {c.flag}
+                      </option>
+                    ))}
+                  </select>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    placeholder="555 123 4567"
+                    className="flex-1"
+                    {...register("phone")}
+                  />
+                </div>
+                {errors.countryCode && <p className="text-sm text-destructive">{errors.countryCode.message}</p>}
                 {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <PasswordInput id="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
                 {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="transactionPassword">Transaction PIN</Label>
+                <PasswordInput
+                  id="transactionPassword"
+                  autoComplete="off"
+                  inputMode="numeric"
+                  maxLength={4}
+                  placeholder="4-digit PIN"
+                  className="tracking-[0.5em]"
+                  {...register("transactionPassword")}
+                />
+                <p className="text-xs text-muted-foreground">4-digit PIN used to authorise withdrawals and transfers.</p>
+                {errors.transactionPassword && <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="referralCode">Referral code</Label>
@@ -256,6 +330,24 @@ export function RegisterPage() {
             </div>
           </div>
 
+          {/* Transaction PIN */}
+          <div className="rounded-xl border border-border bg-muted/30 p-3">
+            <div className="flex items-center justify-between">
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Transaction PIN</p>
+                <p className="mt-1 truncate text-sm font-semibold font-mono tracking-[0.3em]">{registeredTransactionPin}</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(registeredTransactionPin, "txPin")}
+                className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                aria-label="Copy transaction PIN"
+              >
+                {copiedField === "txPin" ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
+              </button>
+            </div>
+          </div>
+
           {/* Referral Code (their own) */}
           {registeredUser?.referralCode && (
             <div className="rounded-xl border border-border bg-muted/30 p-3">
@@ -278,7 +370,7 @@ export function RegisterPage() {
         </div>
 
         <div className="mt-6 rounded-xl border border-amber-500/30 bg-amber-500/5 p-3 text-sm text-amber-600 dark:text-amber-400">
-          ⚠️ Please save your credentials before continuing. You will need them to sign in.
+          ⚠️ Please save your credentials before continuing. You&apos;ll need your email + password to sign in, and your Transaction PIN to authorise withdrawals and transfers.
         </div>
 
         <Button type="button" className="btn-premium mt-5 w-full h-11" onClick={handleGoToLogin}>

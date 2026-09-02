@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { ArrowRightLeft, Send, Wallet as WalletIcon } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowRightLeft, Send, Wallet as WalletIcon, Check, X, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createP2PTransferSchema } from "@zeminex/shared";
@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { useP2PTransfers, useSendP2PTransfer } from "@/hooks/useP2P";
 import { useWallet } from "@/hooks/useWallet";
 import { useAuth } from "@/context/AuthContext";
+import { checkReferralCode } from "@/lib/referrals";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 
 const WALLET_OPTIONS: { value: WalletType; label: string }[] = [
@@ -109,7 +110,7 @@ function TransferForm() {
     formState: { errors },
   } = useForm<CreateP2PTransferBody>({
     resolver: zodResolver(createP2PTransferSchema.shape.body),
-    defaultValues: { wallet: "main" },
+    defaultValues: { wallet: "main", transactionPassword: "" },
   });
 
   // Single source of truth for the selected wallet — RHF state, not a parallel
@@ -118,17 +119,62 @@ function TransferForm() {
   // controlled `value` on the hidden input could drift and submit the wrong wallet).
   const selectedWallet = watch("wallet") ?? "main";
   const amount = watch("amount");
+  const watchedRecipientCode = watch("referralCode");
   const balances = wallet.data;
   const available = balances ? balances[selectedWallet].available : 0;
   const numericAmount = typeof amount === "number" && !Number.isNaN(amount) ? amount : 0;
   const insufficient = !!balances && numericAmount > 0 && numericAmount > available;
 
+  // Live recipient-code verification — debounced, so the sender sees the
+  // resolved recipient name (and a self-transfer warning) before submitting.
+  const [recipientCheck, setRecipientCheck] = useState<{
+    status: "idle" | "checking" | "valid" | "invalid" | "self";
+    name?: string;
+  }>({ status: "idle" });
+  const reqIdRef = useRef(0);
+
+  useEffect(() => {
+    const code = (watchedRecipientCode ?? "").trim();
+    const myCode = (user?.referralCode ?? "").trim();
+    if (!code) {
+      reqIdRef.current += 1;
+      setRecipientCheck({ status: "idle" });
+      return;
+    }
+    // Self-transfer guard short-circuits before any network call.
+    if (myCode && code.toLowerCase() === myCode.toLowerCase()) {
+      reqIdRef.current += 1;
+      setRecipientCheck({ status: "self" });
+      return;
+    }
+    const id = ++reqIdRef.current;
+    setRecipientCheck({ status: "checking" });
+    const t = setTimeout(async () => {
+      try {
+        const res = await checkReferralCode(code);
+        if (id !== reqIdRef.current) return; // a newer keystroke superseded this
+        setRecipientCheck({ status: res.valid ? "valid" : "invalid", name: res.name });
+      } catch {
+        if (id !== reqIdRef.current) return;
+        // Network/429 — don't claim invalid; let the backend re-check on submit.
+        setRecipientCheck({ status: "idle" });
+      }
+    }, 450);
+    return () => clearTimeout(t);
+  }, [watchedRecipientCode, user?.referralCode]);
+
   const onSubmit = (values: CreateP2PTransferBody) => {
+    if (recipientCheck.status !== "valid") {
+      toast.error("Enter a valid recipient referral code before sending.");
+      return;
+    }
     if (numericAmount > available) {
       toast.error(`Insufficient balance — ${formatCurrency(available)} in ${selectedWallet} wallet`);
       return;
     }
-    send.mutate(values, { onSuccess: () => reset({ wallet: values.wallet }) });
+    send.mutate(values, {
+      onSuccess: () => reset({ wallet: values.wallet, transactionPassword: "" }),
+    });
   };
 
   return (
@@ -194,7 +240,29 @@ function TransferForm() {
             <div className="space-y-2">
               <Label htmlFor="referralCode">Recipient Referral Code</Label>
               <Input id="referralCode" placeholder="ZAMXXXXXXX" autoComplete="off" {...register("referralCode")} />
-              {errors.referralCode && <p className="text-sm text-destructive">{errors.referralCode.message}</p>}
+              {errors.referralCode ? (
+                <p className="text-sm text-destructive">{errors.referralCode.message}</p>
+              ) : recipientCheck.status === "valid" ? (
+                <p className="flex items-center gap-1.5 text-sm text-green-600 dark:text-green-500">
+                  <Check className="size-3.5" />
+                  Sending to <span className="font-semibold">{recipientCheck.name}</span>
+                </p>
+              ) : recipientCheck.status === "self" ? (
+                <p className="flex items-center gap-1.5 text-sm text-destructive">
+                  <X className="size-3.5" />
+                  You can&apos;t send to your own referral code
+                </p>
+              ) : recipientCheck.status === "invalid" ? (
+                <p className="flex items-center gap-1.5 text-sm text-destructive">
+                  <X className="size-3.5" />
+                  No active user found with that code
+                </p>
+              ) : recipientCheck.status === "checking" ? (
+                <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <Loader2 className="size-3.5 animate-spin" />
+                  Verifying recipient…
+                </p>
+              ) : null}
             </div>
           </div>
 
@@ -205,11 +273,33 @@ function TransferForm() {
             {errors.memo && <p className="text-sm text-destructive">{errors.memo.message}</p>}
           </div>
 
+          {/* Transaction PIN */}
+          <div className="space-y-2">
+            <Label htmlFor="txPin">Transaction PIN</Label>
+            <Input
+              id="txPin"
+              type="password"
+              inputMode="numeric"
+              maxLength={4}
+              placeholder="••••"
+              autoComplete="off"
+              className="tracking-[0.5em]"
+              {...register("transactionPassword")}
+            />
+            {errors.transactionPassword && (
+              <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>
+            )}
+          </div>
+
           <div className="flex flex-col items-start gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-muted-foreground">
               Your referral code: <span className="font-mono font-semibold text-foreground">{user?.referralCode}</span>
             </p>
-            <Button type="submit" className="btn-premium" disabled={send.isPending || insufficient || inactive}>
+            <Button
+              type="submit"
+              className="btn-premium"
+              disabled={send.isPending || insufficient || inactive || recipientCheck.status !== "valid"}
+            >
               {send.isPending ? "Sending…" : <><ArrowRightLeft className="size-4" /> Send Transfer</>}
             </Button>
           </div>

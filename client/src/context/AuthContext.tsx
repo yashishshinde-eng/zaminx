@@ -33,6 +33,8 @@ interface AuthContextValue {
     email: string;
     password: string;
     phone?: string;
+    countryCode: string;
+    transactionPassword: string;
     referralCode?: string;
   }) => Promise<PublicUser>;
   logout: () => Promise<void>;
@@ -80,6 +82,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       email: string;
       password: string;
       phone?: string;
+      countryCode: string;
+      transactionPassword: string;
       referralCode?: string;
     }) => {
       const res = await registerRequest(payload);

@@ -110,6 +110,8 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
           name: `Downline ${i}`,
           email: `dl-${i}-${Math.random().toString(36).slice(2)}@test.local`,
           password: "secret123",
+          countryCode: "+91",
+          transactionPassword: "1234",
           referralCode,
         }),
       });

@@ -1,5 +1,6 @@
 import { Withdrawal, User, ActivityLog } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
+import { verifyTransactionPassword } from "../utils/transactionPin.js";
 import { logger } from "../config/logger.js";
 import { applyLedgerMove, applyLedgerEntry, getWalletBalances } from "./wallet.service.js";
 import { sendNotificationEmail } from "./email.service.js";
@@ -67,11 +68,15 @@ function paginate(total: number, page: number, limit: number) {
  */
 export async function submitWithdrawal(
   userId: string,
-  input: { wallet: WalletType; amount: number },
+  input: { wallet: WalletType; amount: number; transactionPassword: string },
   meta?: Meta,
 ): Promise<WithdrawalRow> {
   const user = await User.findById(userId);
   if (!user) throw ApiError.notFound("User not found");
+
+  // Authorise the withdrawal with the 4-digit transaction PIN before any
+  // balance check or ledger move.
+  await verifyTransactionPassword(userId, input.transactionPassword);
 
   const address = user.walletAddresses?.usdtBep20?.trim();
   if (!address) throw ApiError.badRequest("Add a USDT-BEP20 withdrawal address in Settings first");

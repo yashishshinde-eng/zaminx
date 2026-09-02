@@ -76,11 +76,13 @@ export function WithdrawalsPage() {
     formState: { errors },
   } = useForm<CreateWithdrawalBody>({
     resolver: zodResolver(createWithdrawalSchema.shape.body),
-    defaultValues: { wallet: "bonus" },
+    defaultValues: { wallet: "bonus", transactionPassword: "" },
   });
 
   const onSubmit = (values: CreateWithdrawalBody) => {
-    create.mutate(values, { onSuccess: () => reset({ wallet: values.wallet }) });
+    create.mutate(values, {
+      onSuccess: () => reset({ wallet: values.wallet, transactionPassword: "" }),
+    });
   };
 
   const columns: Column<WithdrawalRow>[] = useMemo(
@@ -198,8 +200,24 @@ export function WithdrawalsPage() {
                   </p>
                 )}
               </div>
-              <div className="flex items-end">
-                <Button type="submit" className="w-full" disabled={create.isPending || !hasAddress || inactive}>
+              <div className="space-y-2">
+                <Label htmlFor="txPin">Transaction PIN</Label>
+                <Input
+                  id="txPin"
+                  type="password"
+                  inputMode="numeric"
+                  maxLength={4}
+                  placeholder="••••"
+                  autoComplete="off"
+                  className="tracking-[0.5em]"
+                  {...register("transactionPassword")}
+                />
+                {errors.transactionPassword && (
+                  <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>
+                )}
+              </div>
+              <div className="sm:col-span-3 flex items-end">
+                <Button type="submit" className="w-full sm:w-auto" disabled={create.isPending || !hasAddress || inactive}>
                   {create.isPending ? "Submitting…" : "Submit withdrawal"}
                 </Button>
               </div>

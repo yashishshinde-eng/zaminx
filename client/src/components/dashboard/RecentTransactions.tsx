@@ -14,7 +14,6 @@ import type { DashboardSummary } from "@zeminex/shared";
 
 /* ── Action-type metadata ─────────────────────────────────────── */
 const ACTION_META: Record<string, { label: string; icon: typeof ArrowRightToLine; badge: "success" | "info" }> = {
-  "auth.login": { label: "Signed in", icon: ArrowRightToLine, badge: "success" },
   "auth.register": { label: "Account created", icon: UserPlus, badge: "success" },
   "auth.verify-email": { label: "Email verified", icon: MailCheck, badge: "success" },
   "auth.password-reset": { label: "Password reset", icon: KeyRound, badge: "success" },

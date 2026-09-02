@@ -26,6 +26,15 @@ export async function changePasswordRequest(payload: {
   await api.put("/profile/password", payload);
 }
 
+/** PUT /profile/transaction-password — change the 4-digit transaction PIN.
+ *  `currentTransactionPassword` is required only if a PIN is already set. */
+export async function changeTransactionPasswordRequest(payload: {
+  currentTransactionPassword?: string;
+  transactionPassword: string;
+}): Promise<void> {
+  await api.put("/profile/transaction-password", payload);
+}
+
 /** PUT /profile/theme — persist theme preference. */
 export async function updateThemeRequest(theme: "light" | "dark"): Promise<void> {
   await api.put("/profile/theme", { theme });

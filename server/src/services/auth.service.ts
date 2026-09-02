@@ -49,6 +49,8 @@ interface RegisterInput {
   email: string;
   password: string;
   phone?: string;
+  countryCode: string;
+  transactionPassword: string;
   referralCode: string;
 }
 
@@ -67,7 +69,9 @@ export async function registerUser(input: RegisterInput) {
     name: input.name,
     email: input.email,
     phone: input.phone,
+    countryCode: input.countryCode,
     password: input.password, // virtual hashes it
+    transactionPassword: input.transactionPassword, // virtual hashes the 4-digit PIN
     referredBy: referrer.referralCode,
     // Phase 9: materialise the referral graph so descendants are one index hit.
     // lineage = the referrer's ancestor chain + the referrer itself (root → sponsor).

@@ -56,6 +56,34 @@ export async function changePassword(
   await logActivity(userId, "auth.password-change", meta?.ip, meta?.userAgent);
 }
 
+/**
+ * PUT /profile/transaction-password — change the 4-digit transaction PIN.
+ * If a PIN is already set, `currentTransactionPassword` must match it. If no
+ * PIN is set yet (legacy / pre-feature account), the current field is ignored
+ * and a new PIN can be set directly.
+ */
+export async function changeTransactionPassword(
+  userId: string,
+  input: { currentTransactionPassword?: string; transactionPassword: string },
+  meta?: { ip?: string; userAgent?: string },
+): Promise<void> {
+  const user = await User.findById(userId).select("+transactionPasswordHash");
+  if (!user) throw ApiError.notFound("User not found");
+
+  if (user.transactionPasswordHash) {
+    if (!input.currentTransactionPassword) {
+      throw ApiError.badRequest("Current transaction PIN is required");
+    }
+    if (!user.verifyTransactionPassword(input.currentTransactionPassword)) {
+      throw ApiError.badRequest("Current transaction PIN is incorrect");
+    }
+  }
+
+  user.transactionPassword = input.transactionPassword; // virtual hashes the 4-digit PIN
+  await user.save();
+  await logActivity(userId, "profile.transaction-pin-change", meta?.ip, meta?.userAgent);
+}
+
 /** PUT /profile/theme — persist theme preference. */
 export async function updateTheme(
   userId: string,

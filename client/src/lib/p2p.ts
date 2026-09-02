@@ -20,6 +20,7 @@ export async function sendP2PTransfer(input: {
   amount: number;
   referralCode: string;
   memo?: string;
+  transactionPassword: string;
 }): Promise<P2PTransferPage["items"][number]> {
   const { data } = await api.post<TransferResponse>("/p2p", input);
   return data.data.transfer;

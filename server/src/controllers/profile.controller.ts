@@ -5,6 +5,7 @@ import {
   updateThemeSchema,
   updateNotificationPreferenceSchema,
   changePasswordSchema,
+  changeTransactionPasswordSchema,
 } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -14,6 +15,7 @@ import {
   updateProfile,
   updateWalletAddresses,
   changePassword,
+  changeTransactionPassword,
   updateTheme,
   updateNotificationPreference,
 } from "../services/profile.service.js";
@@ -47,6 +49,16 @@ export const changePasswordHandler: RequestHandler[] = [
     if (!req.user) throw ApiError.unauthorized();
     await changePassword(req.user.id, req.body, meta(req));
     ok(res, null, "Password updated");
+  }),
+];
+
+/** PUT /profile/transaction-password — change the 4-digit transaction PIN. */
+export const changeTransactionPasswordHandler: RequestHandler[] = [
+  validate(changeTransactionPasswordSchema),
+  asyncHandler(async (req, res) => {
+    if (!req.user) throw ApiError.unauthorized();
+    await changeTransactionPassword(req.user.id, req.body, meta(req));
+    ok(res, null, "Transaction PIN updated");
   }),
 ];
 

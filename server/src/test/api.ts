@@ -72,7 +72,7 @@ export async function seedAdminAndLogin(
 ): Promise<{ accessToken: string; refreshToken: string; userId: string; email: string; password: string }> {
   const email = opts.email ?? `admin-${Math.random().toString(36).slice(2)}@test.local`;
   const password = opts.password ?? "secret123";
-  const u = await User.create({ name: "Admin", email, password, role: "admin", status: "active" });
+  const u = await User.create({ name: "Admin", email, password, transactionPassword: "1234", role: "admin", status: "active" });
   const tokens = await loginApi(email, password);
   return { ...tokens, userId: String(u._id), email, password };
 }
@@ -90,7 +90,7 @@ export async function seedUser(opts: SeedUserOpts = {}): Promise<{ _id: string; 
   const password = opts.password ?? "secret123";
   // status: "active" — seeded users skip the "inactive until package activated"
   // lifecycle so tests can exercise earning endpoints without extra setup.
-  const u = await User.create({ name: opts.name ?? "Test User", email, password, role: opts.role ?? "user", status: "active" });
+  const u = await User.create({ name: opts.name ?? "Test User", email, password, transactionPassword: "1234", role: opts.role ?? "user", status: "active" });
   return { _id: String(u._id), email, password, referralCode: u.referralCode };
 }
 
@@ -102,6 +102,7 @@ export async function seedRootReferrer(): Promise<{ _id: string; referralCode: s
     name: "Root Referrer",
     email: `root-${Math.random().toString(36).slice(2)}@test.local`,
     password: "secret123",
+    transactionPassword: "1234",
     status: "active", // sponsors must be active (registerUser rejects inactive referrers)
   });
   return { _id: String(u._id), referralCode: u.referralCode };
@@ -118,7 +119,7 @@ export async function registerAndLogin(
   const referralCode = creds.referralCode ?? (await seedRootReferrer()).referralCode;
   const reg = await api<{ data: { user: { id: string }; tokens: { accessToken: string; refreshToken: string } } }>("/api/v1/auth/register", {
     method: "POST",
-    body: JSON.stringify({ name: creds.name ?? "Test User", email, password, referralCode }),
+    body: JSON.stringify({ name: creds.name ?? "Test User", email, password, countryCode: "+91", transactionPassword: "1234", referralCode }),
   });
   if (reg.status !== 201) console.error("[DEBUG registerAndLogin]", reg.status, JSON.stringify(reg.body), "refCode=", referralCode);
   const { accessToken, refreshToken } = reg.body.data.tokens;

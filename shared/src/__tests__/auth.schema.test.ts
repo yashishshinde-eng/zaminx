@@ -13,12 +13,14 @@ const body = (b: Record<string, unknown>) => ({ body: b });
 
 describe("registerSchema", () => {
   it("accepts a valid registration", () => {
-    const r = registerSchema.safeParse(body({ name: "Ada", email: "ADA@Example.com", password: "secret123", referralCode: "ZAMROOT" }));
+    const r = registerSchema.safeParse(body({ name: "Ada", email: "ADA@Example.com", password: "secret123", countryCode: "+91", transactionPassword: "1234", referralCode: "ZAMROOT" }));
     expect(r.success).toBe(true);
     if (r.success) {
       expect(r.data.body.email).toBe("ada@example.com"); // trimmed + lowercased
       expect(r.data.body.name).toBe("Ada");
       expect(r.data.body.referralCode).toBe("ZAMROOT");
+      expect(r.data.body.countryCode).toBe("+91");
+      expect(r.data.body.transactionPassword).toBe("1234");
     }
   });
 
@@ -51,12 +53,27 @@ describe("registerSchema", () => {
   });
 
   it("treats empty optional strings as undefined (phone still optional; referralCode required)", () => {
-    const r = registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", phone: "", referralCode: "ZAMROOT" }));
+    const r = registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", phone: "", countryCode: "+1", transactionPassword: "1234", referralCode: "ZAMROOT" }));
     expect(r.success).toBe(true);
     if (r.success) {
       expect(r.data.body.phone).toBeUndefined();
       expect(r.data.body.referralCode).toBe("ZAMROOT");
     }
+  });
+
+  it("rejects a transaction PIN that is not 4 digits", () => {
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", countryCode: "+91", transactionPassword: "123", referralCode: "ZAMROOT" })).success).toBe(false);
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", countryCode: "+91", transactionPassword: "12345", referralCode: "ZAMROOT" })).success).toBe(false);
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", countryCode: "+91", transactionPassword: "12a4", referralCode: "ZAMROOT" })).success).toBe(false);
+  });
+
+  it("rejects a missing transaction PIN", () => {
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", countryCode: "+91", referralCode: "ZAMROOT" })).success).toBe(false);
+  });
+
+  it("rejects a missing or malformed country code", () => {
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", transactionPassword: "1234", referralCode: "ZAMROOT" })).success).toBe(false);
+    expect(registerSchema.safeParse(body({ name: "Ada", email: "a@b.com", password: "secret123", countryCode: "91", transactionPassword: "1234", referralCode: "ZAMROOT" })).success).toBe(false);
   });
 });
 

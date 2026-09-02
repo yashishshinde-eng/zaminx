@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Check, Sparkles, TrendingUp, CalendarDays, ArrowDownToLine } from "lucide-react";
+import { Sparkles, TrendingUp, CalendarDays, ArrowDownToLine } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn, formatCurrency } from "@/lib/utils";
@@ -98,17 +98,6 @@ export function PackageTierCard({
               </div>
             </div>
           </div>
-
-          {tier.features.length > 0 && (
-            <ul className="mt-4 space-y-2">
-              {tier.features.map((f) => (
-                <li key={f} className="flex items-start gap-2 text-sm">
-                  <Check className={cn("mt-0.5 size-4 shrink-0", popular ? "text-gold" : "text-success")} aria-hidden />
-                  <span className="text-muted-foreground">{f}</span>
-                </li>
-              ))}
-            </ul>
-          )}
 
           <div className="mt-6 flex-1" />
           <Button

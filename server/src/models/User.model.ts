@@ -16,8 +16,16 @@ const userSchema = new Schema(
       index: true,
     },
     phone: { type: String, trim: true, maxlength: 20 },
+    // Dialling prefix (e.g. "+1", "+91") chosen at registration. Optional so
+    // seeds/admin-created users don't need to supply it.
+    countryCode: { type: String, trim: true, default: "" },
 
     passwordHash: { type: String, required: true, select: false },
+
+    // Hashed 4-digit transaction PIN — gates withdrawals / transfers. Optional
+    // on the model so legacy/seeded users aren't forced to set one, but the
+    // public register endpoint requires it.
+    transactionPasswordHash: { type: String, default: null, select: false },
 
     role: { type: String, enum: ["user", "admin"], default: "user", index: true },
 
@@ -80,6 +88,22 @@ userSchema.methods.verifyPassword = function (candidate: string): boolean {
   return bcrypt.compareSync(candidate, this.passwordHash);
 };
 
+/** Plain-text 4-digit transaction PIN setter — hash on assignment, never store raw. */
+userSchema.virtual("transactionPassword").set(function (this: UserDocument, value: string) {
+  this._plainTransactionPassword = value;
+  this.transactionPasswordHash = value ? bcrypt.hashSync(value, SALT_ROUNDS) : null;
+});
+
+userSchema.virtual("transactionPassword").get(function (this: UserDocument) {
+  return this._plainTransactionPassword as string | undefined;
+});
+
+/** Compare a candidate 4-digit PIN against the stored transaction PIN hash. */
+userSchema.methods.verifyTransactionPassword = function (candidate: string): boolean {
+  if (!this.transactionPasswordHash) return false;
+  return bcrypt.compareSync(candidate, this.transactionPasswordHash);
+};
+
 /** Hash an arbitrary token (refresh/reset) before storing it. */
 userSchema.statics.hashToken = function (token: string): string {
   return bcrypt.hashSync(token, SALT_ROUNDS);
@@ -99,10 +123,14 @@ userSchema.pre("validate", function (this: UserDocument, next) {
 export type UserDocument = InferSchemaType<typeof userSchema> &
   mongoose.Document & {
     passwordHash: string;
+    transactionPasswordHash?: string | null;
     _plainPassword?: string;
+    _plainTransactionPassword?: string;
     password?: string;
+    transactionPassword?: string;
     walletAddresses: { usdtBep20?: string };
     verifyPassword(candidate: string): boolean;
+    verifyTransactionPassword(candidate: string): boolean;
     verifyToken(stored: string | null | undefined, candidate: string): boolean;
   };
 

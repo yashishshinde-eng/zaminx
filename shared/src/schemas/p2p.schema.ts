@@ -11,6 +11,12 @@ export const createP2PTransferSchema = z.object({
       .min(1, "Referral code is required")
       .max(50, "Referral code is too long"),
     memo: z.string().trim().max(200).optional(),
+    // 4-digit transaction PIN — authorises the transfer.
+    transactionPassword: z
+      .string()
+      .trim()
+      .length(4, { message: "Transaction PIN must be exactly 4 digits" })
+      .regex(/^\d{4}$/, { message: "Transaction PIN must be exactly 4 digits" }),
   }),
 });
 

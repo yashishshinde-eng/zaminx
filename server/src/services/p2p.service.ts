@@ -1,5 +1,6 @@
 import { P2PTransfer, User, ActivityLog } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
+import { verifyTransactionPassword } from "../utils/transactionPin.js";
 import { applyLedgerEntry, getWalletBalances } from "./wallet.service.js";
 import type { P2PTransferPage, P2PTransferRow, P2PTransferStatus, WalletType } from "@zeminex/shared";
 
@@ -46,6 +47,7 @@ interface SendP2PInput {
   amount: number;
   referralCode: string;
   memo?: string;
+  transactionPassword: string;
 }
 
 export async function sendP2PTransfer(
@@ -55,6 +57,10 @@ export async function sendP2PTransfer(
 ): Promise<P2PTransferRow> {
   const amount = Math.round((input.amount + Number.EPSILON) * 100) / 100;
   if (amount <= 0) throw ApiError.badRequest("Amount must be greater than 0");
+
+  // Authorise the transfer with the 4-digit transaction PIN before any
+  // balance check or ledger move.
+  await verifyTransactionPassword(fromUserId, input.transactionPassword);
 
   // Find the recipient by referral code.
   const recipient = await User.findOne({ referralCode: input.referralCode });

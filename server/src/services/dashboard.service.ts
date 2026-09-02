@@ -92,7 +92,9 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
   if (!user) throw ApiError.notFound("User not found");
 
   // Real: recent activity from the audit log (most recent first, capped at 8).
-  const logs = await ActivityLog.find({ actor: userId })
+  // Exclude `auth.login` — routine sign-ins clutter the list and aren't
+  // "transactions" the user cares to see on their dashboard.
+  const logs = await ActivityLog.find({ actor: userId, action: { $ne: "auth.login" } })
     .sort({ createdAt: -1 })
     .limit(8)
     .lean();

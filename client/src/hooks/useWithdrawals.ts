@@ -48,7 +48,7 @@ export function useWithdrawal(id: string | undefined) {
 export function useCreateWithdrawal() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (input: { wallet: WalletType; amount: number }) => createWithdrawalRequest(input),
+    mutationFn: (input: { wallet: WalletType; amount: number; transactionPassword: string }) => createWithdrawalRequest(input),
     onSuccess: async () => {
       toast.success("Withdrawal submitted — pending admin approval.");
       await invalidateWithdrawalDeps(queryClient);

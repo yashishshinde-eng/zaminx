@@ -1,0 +1,3984 @@
+[
+  {
+    "_id": "6a78536db6b40ef2e7069005",
+    "name": "Zeminex Global",
+    "email": "kkgmlmbusiness@gmail.com",
+    "phone": "+918873185591",
+    "role": "user",
+    "referredBy": "ZAMPNL2NENX",
+    "sponsorId": "6a78516bd2f16ddc48fb0d75",
+    "lineage": [
+      "6a78516bd2f16ddc48fb0d75"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-10T11:34:58.964Z",
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-13T04:19:36.382Z",
+    "referralCode": "ZAMGU8J5ZR8",
+    "createdAt": "2026-08-09T10:16:15.773Z",
+    "updatedAt": "2026-08-13T04:32:24.313Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7866f01920879521184adc",
+    "name": "Zeminex",
+    "email": "kkgmlmbusinesss@gmail.com",
+    "phone": "8873185591",
+    "role": "user",
+    "referredBy": "ZAMGU8J5ZR8",
+    "sponsorId": "6a78536db6b40ef2e7069005",
+    "lineage": [
+      "6a78516bd2f16ddc48fb0d75",
+      "6a78536db6b40ef2e7069005"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-10T11:39:35.364Z",
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-10T05:08:50.094Z",
+    "referralCode": "ZAMQ5P9LKTW",
+    "createdAt": "2026-08-09T11:39:30.758Z",
+    "updatedAt": "2026-08-10T05:09:16.756Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7868341920879521184bc0",
+    "name": "Zeminex",
+    "email": "kkgmlmbusinessss@gmail.com",
+    "phone": "8873185591",
+    "role": "user",
+    "referredBy": "ZAMQ5P9LKTW",
+    "sponsorId": "6a7866f01920879521184adc",
+    "lineage": [
+      "6a78516bd2f16ddc48fb0d75",
+      "6a78536db6b40ef2e7069005",
+      "6a7866f01920879521184adc"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-10T11:44:59.666Z",
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-09T12:04:26.356Z",
+    "referralCode": "ZAM4SYNTYJP",
+    "createdAt": "2026-08-09T11:44:55.062Z",
+    "updatedAt": "2026-08-09T12:04:26.357Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a787cc511d03c911afb382b",
+    "name": "Test",
+    "email": "test@gmail.com",
+    "phone": "1234567890",
+    "role": "user",
+    "referredBy": "ZAMGU8J5ZR8",
+    "sponsorId": "6a78536db6b40ef2e7069005",
+    "lineage": [
+      "6a78516bd2f16ddc48fb0d75",
+      "6a78536db6b40ef2e7069005"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-10T13:12:44.419Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-09T14:18:17.652Z",
+    "referralCode": "ZAMJGVWBGHD",
+    "createdAt": "2026-08-09T13:12:39.612Z",
+    "updatedAt": "2026-08-09T14:19:33.567Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78a93cea0c3a7404f7adf9",
+    "name": "Resp Test",
+    "email": "resptest@zeminex.local",
+    "phone": "9876543210",
+    "role": "user",
+    "referredBy": "ZAMPNL2NENX",
+    "sponsorId": "6a78516bd2f16ddc48fb0d75",
+    "lineage": [
+      "6a78516bd2f16ddc48fb0d75"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-10T16:22:21.529Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "inactive",
+    "lastLoginAt": "2026-08-09T16:26:31.132Z",
+    "referralCode": "ZAMPC2QHPJ7",
+    "createdAt": "2026-08-09T16:22:20.729Z",
+    "updatedAt": "2026-08-09T16:26:31.132Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68534820b06c7bd24fc",
+    "name": "Tree Root",
+    "email": "tree-root@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": null,
+    "sponsorId": null,
+    "lineage": [],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-12T16:04:40.146Z",
+    "referralCode": "ZAMVFQNYUSN",
+    "createdAt": "2026-08-09T17:19:01.611Z",
+    "updatedAt": "2026-08-12T16:04:40.147Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68634820b06c7bd2509",
+    "name": "Tree L1 #1",
+    "email": "tree-l1-1@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVFQNYUSN",
+    "sponsorId": "6a78b68534820b06c7bd24fc",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM3NMXYS4E",
+    "createdAt": "2026-08-09T17:19:02.487Z",
+    "updatedAt": "2026-08-09T17:51:01.984Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68634820b06c7bd2513",
+    "name": "Tree L1 #2",
+    "email": "tree-l1-2@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVFQNYUSN",
+    "sponsorId": "6a78b68534820b06c7bd24fc",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMGVQMN2HG",
+    "createdAt": "2026-08-09T17:19:03.044Z",
+    "updatedAt": "2026-08-09T17:51:04.723Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68734820b06c7bd251b",
+    "name": "Tree L1 #3",
+    "email": "tree-l1-3@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVFQNYUSN",
+    "sponsorId": "6a78b68534820b06c7bd24fc",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMHCNCJWFD",
+    "createdAt": "2026-08-09T17:19:03.470Z",
+    "updatedAt": "2026-08-09T17:51:07.278Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68734820b06c7bd2522",
+    "name": "Tree L2 #1",
+    "email": "tree-l2-1@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3NMXYS4E",
+    "sponsorId": "6a78b68634820b06c7bd2509",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMXZ5AAM7T",
+    "createdAt": "2026-08-09T17:19:03.905Z",
+    "updatedAt": "2026-08-09T17:51:09.924Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68834820b06c7bd2528",
+    "name": "Tree L2 #2",
+    "email": "tree-l2-2@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3NMXYS4E",
+    "sponsorId": "6a78b68634820b06c7bd2509",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM48RJG8KC",
+    "createdAt": "2026-08-09T17:19:04.324Z",
+    "updatedAt": "2026-08-09T17:51:12.805Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68834820b06c7bd252d",
+    "name": "Tree L2 #3",
+    "email": "tree-l2-3@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3NMXYS4E",
+    "sponsorId": "6a78b68634820b06c7bd2509",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMD5J8E6BQ",
+    "createdAt": "2026-08-09T17:19:04.731Z",
+    "updatedAt": "2026-08-09T17:51:15.478Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68834820b06c7bd2530",
+    "name": "Tree L2 #4",
+    "email": "tree-l2-4@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMGVQMN2HG",
+    "sponsorId": "6a78b68634820b06c7bd2513",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMYGBCEASK",
+    "createdAt": "2026-08-09T17:19:05.153Z",
+    "updatedAt": "2026-08-09T17:51:18.063Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68934820b06c7bd2534",
+    "name": "Tree L2 #5",
+    "email": "tree-l2-5@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMGVQMN2HG",
+    "sponsorId": "6a78b68634820b06c7bd2513",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMGZ829TCF",
+    "createdAt": "2026-08-09T17:19:05.565Z",
+    "updatedAt": "2026-08-09T17:51:20.541Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68934820b06c7bd2537",
+    "name": "Tree L2 #6",
+    "email": "tree-l2-6@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMGVQMN2HG",
+    "sponsorId": "6a78b68634820b06c7bd2513",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMJKT8ULS5",
+    "createdAt": "2026-08-09T17:19:05.974Z",
+    "updatedAt": "2026-08-09T17:51:22.980Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68a34820b06c7bd253a",
+    "name": "Tree L2 #7",
+    "email": "tree-l2-7@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMHCNCJWFD",
+    "sponsorId": "6a78b68734820b06c7bd251b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMSRXDZP2B",
+    "createdAt": "2026-08-09T17:19:06.405Z",
+    "updatedAt": "2026-08-09T17:51:25.513Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68a34820b06c7bd253d",
+    "name": "Tree L2 #8",
+    "email": "tree-l2-8@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMHCNCJWFD",
+    "sponsorId": "6a78b68734820b06c7bd251b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMZ8LFJ349",
+    "createdAt": "2026-08-09T17:19:06.851Z",
+    "updatedAt": "2026-08-09T17:51:28.017Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68a34820b06c7bd253f",
+    "name": "Tree L2 #9",
+    "email": "tree-l2-9@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMHCNCJWFD",
+    "sponsorId": "6a78b68734820b06c7bd251b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM98JEDNZQ",
+    "createdAt": "2026-08-09T17:19:07.260Z",
+    "updatedAt": "2026-08-09T17:51:30.717Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68b34820b06c7bd2541",
+    "name": "Tree L3 #1",
+    "email": "tree-l3-1@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMXZ5AAM7T",
+    "sponsorId": "6a78b68734820b06c7bd2522",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM4NTW2P3D",
+    "createdAt": "2026-08-09T17:19:07.657Z",
+    "updatedAt": "2026-08-09T17:51:34.517Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68b34820b06c7bd2543",
+    "name": "Tree L3 #2",
+    "email": "tree-l3-2@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMXZ5AAM7T",
+    "sponsorId": "6a78b68734820b06c7bd2522",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMW8FNHKZH",
+    "createdAt": "2026-08-09T17:19:08.352Z",
+    "updatedAt": "2026-08-09T17:51:37.053Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68c34820b06c7bd2545",
+    "name": "Tree L3 #3",
+    "email": "tree-l3-3@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMXZ5AAM7T",
+    "sponsorId": "6a78b68734820b06c7bd2522",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMUKZZ3G7A",
+    "createdAt": "2026-08-09T17:19:08.848Z",
+    "updatedAt": "2026-08-09T17:51:39.616Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68d34820b06c7bd2547",
+    "name": "Tree L3 #4",
+    "email": "tree-l3-4@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM48RJG8KC",
+    "sponsorId": "6a78b68834820b06c7bd2528",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMS86YBF6K",
+    "createdAt": "2026-08-09T17:19:09.598Z",
+    "updatedAt": "2026-08-09T17:51:42.217Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68d34820b06c7bd2549",
+    "name": "Tree L3 #5",
+    "email": "tree-l3-5@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM48RJG8KC",
+    "sponsorId": "6a78b68834820b06c7bd2528",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMR3LY4VTY",
+    "createdAt": "2026-08-09T17:19:10.287Z",
+    "updatedAt": "2026-08-09T17:51:44.756Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68e34820b06c7bd254b",
+    "name": "Tree L3 #6",
+    "email": "tree-l3-6@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM48RJG8KC",
+    "sponsorId": "6a78b68834820b06c7bd2528",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMBPBZ64NR",
+    "createdAt": "2026-08-09T17:19:11.029Z",
+    "updatedAt": "2026-08-09T17:51:47.395Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68f34820b06c7bd254d",
+    "name": "Tree L3 #7",
+    "email": "tree-l3-7@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMD5J8E6BQ",
+    "sponsorId": "6a78b68834820b06c7bd252d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMVN4MVD5G",
+    "createdAt": "2026-08-09T17:19:11.646Z",
+    "updatedAt": "2026-08-09T17:51:50.441Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b68f34820b06c7bd254f",
+    "name": "Tree L3 #8",
+    "email": "tree-l3-8@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMD5J8E6BQ",
+    "sponsorId": "6a78b68834820b06c7bd252d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMHMZDLSVH",
+    "createdAt": "2026-08-09T17:19:12.365Z",
+    "updatedAt": "2026-08-09T17:51:57.443Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69034820b06c7bd2551",
+    "name": "Tree L3 #9",
+    "email": "tree-l3-9@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMD5J8E6BQ",
+    "sponsorId": "6a78b68834820b06c7bd252d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMVN2H7TR5",
+    "createdAt": "2026-08-09T17:19:13.080Z",
+    "updatedAt": "2026-08-09T17:51:59.963Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69134820b06c7bd2553",
+    "name": "Tree L3 #10",
+    "email": "tree-l3-10@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMYGBCEASK",
+    "sponsorId": "6a78b68834820b06c7bd2530",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMB7MPNRKD",
+    "createdAt": "2026-08-09T17:19:13.632Z",
+    "updatedAt": "2026-08-09T17:52:02.582Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69134820b06c7bd2555",
+    "name": "Tree L3 #11",
+    "email": "tree-l3-11@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMYGBCEASK",
+    "sponsorId": "6a78b68834820b06c7bd2530",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMBWBCHBBT",
+    "createdAt": "2026-08-09T17:19:14.280Z",
+    "updatedAt": "2026-08-09T17:52:05.057Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69234820b06c7bd2557",
+    "name": "Tree L3 #12",
+    "email": "tree-l3-12@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMYGBCEASK",
+    "sponsorId": "6a78b68834820b06c7bd2530",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMB8A69HMH",
+    "createdAt": "2026-08-09T17:19:14.808Z",
+    "updatedAt": "2026-08-09T17:52:07.783Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69234820b06c7bd2559",
+    "name": "Tree L3 #13",
+    "email": "tree-l3-13@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMGZ829TCF",
+    "sponsorId": "6a78b68934820b06c7bd2534",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM3KLMCMGV",
+    "createdAt": "2026-08-09T17:19:15.329Z",
+    "updatedAt": "2026-08-09T17:52:10.396Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69334820b06c7bd255b",
+    "name": "Tree L3 #14",
+    "email": "tree-l3-14@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMGZ829TCF",
+    "sponsorId": "6a78b68934820b06c7bd2534",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM3G76ERLH",
+    "createdAt": "2026-08-09T17:19:15.975Z",
+    "updatedAt": "2026-08-09T17:52:12.821Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69434820b06c7bd255d",
+    "name": "Tree L3 #15",
+    "email": "tree-l3-15@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMGZ829TCF",
+    "sponsorId": "6a78b68934820b06c7bd2534",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMBWX85M4L",
+    "createdAt": "2026-08-09T17:19:16.533Z",
+    "updatedAt": "2026-08-09T17:52:15.013Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69434820b06c7bd255f",
+    "name": "Tree L3 #16",
+    "email": "tree-l3-16@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMJKT8ULS5",
+    "sponsorId": "6a78b68934820b06c7bd2537",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMKT26N5MU",
+    "createdAt": "2026-08-09T17:19:17.009Z",
+    "updatedAt": "2026-08-09T17:52:17.539Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69534820b06c7bd2561",
+    "name": "Tree L3 #17",
+    "email": "tree-l3-17@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMJKT8ULS5",
+    "sponsorId": "6a78b68934820b06c7bd2537",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMBFNEJXPE",
+    "createdAt": "2026-08-09T17:19:17.476Z",
+    "updatedAt": "2026-08-09T17:52:19.991Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69534820b06c7bd2563",
+    "name": "Tree L3 #18",
+    "email": "tree-l3-18@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMJKT8ULS5",
+    "sponsorId": "6a78b68934820b06c7bd2537",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMUJWXR928",
+    "createdAt": "2026-08-09T17:19:18.070Z",
+    "updatedAt": "2026-08-09T17:52:22.851Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69634820b06c7bd2565",
+    "name": "Tree L3 #19",
+    "email": "tree-l3-19@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMSRXDZP2B",
+    "sponsorId": "6a78b68a34820b06c7bd253a",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMCERCL69J",
+    "createdAt": "2026-08-09T17:19:18.498Z",
+    "updatedAt": "2026-08-09T17:52:25.550Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69634820b06c7bd2567",
+    "name": "Tree L3 #20",
+    "email": "tree-l3-20@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMSRXDZP2B",
+    "sponsorId": "6a78b68a34820b06c7bd253a",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM37QNUP58",
+    "createdAt": "2026-08-09T17:19:18.931Z",
+    "updatedAt": "2026-08-09T17:52:28.129Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69734820b06c7bd2569",
+    "name": "Tree L3 #21",
+    "email": "tree-l3-21@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMSRXDZP2B",
+    "sponsorId": "6a78b68a34820b06c7bd253a",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMQKEYKX8P",
+    "createdAt": "2026-08-09T17:19:19.350Z",
+    "updatedAt": "2026-08-09T17:52:30.711Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69734820b06c7bd256b",
+    "name": "Tree L3 #22",
+    "email": "tree-l3-22@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMZ8LFJ349",
+    "sponsorId": "6a78b68a34820b06c7bd253d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMYLMJ39YH",
+    "createdAt": "2026-08-09T17:19:19.758Z",
+    "updatedAt": "2026-08-09T17:52:33.290Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69734820b06c7bd256d",
+    "name": "Tree L3 #23",
+    "email": "tree-l3-23@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMZ8LFJ349",
+    "sponsorId": "6a78b68a34820b06c7bd253d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMF4KVV5Z2",
+    "createdAt": "2026-08-09T17:19:20.167Z",
+    "updatedAt": "2026-08-09T17:52:35.826Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69834820b06c7bd256f",
+    "name": "Tree L3 #24",
+    "email": "tree-l3-24@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMZ8LFJ349",
+    "sponsorId": "6a78b68a34820b06c7bd253d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMLPUACTU9",
+    "createdAt": "2026-08-09T17:19:20.589Z",
+    "updatedAt": "2026-08-09T17:52:38.590Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69834820b06c7bd2571",
+    "name": "Tree L3 #25",
+    "email": "tree-l3-25@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM98JEDNZQ",
+    "sponsorId": "6a78b68a34820b06c7bd253f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMSLCTTC8N",
+    "createdAt": "2026-08-09T17:19:21.007Z",
+    "updatedAt": "2026-08-09T17:52:41.352Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69934820b06c7bd2573",
+    "name": "Tree L3 #26",
+    "email": "tree-l3-26@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM98JEDNZQ",
+    "sponsorId": "6a78b68a34820b06c7bd253f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMK7FWDLDA",
+    "createdAt": "2026-08-09T17:19:21.426Z",
+    "updatedAt": "2026-08-09T17:52:43.896Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69934820b06c7bd2575",
+    "name": "Tree L3 #27",
+    "email": "tree-l3-27@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM98JEDNZQ",
+    "sponsorId": "6a78b68a34820b06c7bd253f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMNKZL9GMV",
+    "createdAt": "2026-08-09T17:19:21.830Z",
+    "updatedAt": "2026-08-09T17:52:46.450Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69934820b06c7bd2577",
+    "name": "Tree L4 #1",
+    "email": "tree-l4-1@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM4NTW2P3D",
+    "sponsorId": "6a78b68b34820b06c7bd2541",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68b34820b06c7bd2541"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMC8ZKCGAE",
+    "createdAt": "2026-08-09T17:19:22.262Z",
+    "updatedAt": "2026-08-09T17:52:49.117Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69a34820b06c7bd2579",
+    "name": "Tree L4 #2",
+    "email": "tree-l4-2@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM4NTW2P3D",
+    "sponsorId": "6a78b68b34820b06c7bd2541",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68b34820b06c7bd2541"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMHVZ7EJZC",
+    "createdAt": "2026-08-09T17:19:22.668Z",
+    "updatedAt": "2026-08-09T17:52:51.733Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69a34820b06c7bd257b",
+    "name": "Tree L4 #3",
+    "email": "tree-l4-3@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM4NTW2P3D",
+    "sponsorId": "6a78b68b34820b06c7bd2541",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68b34820b06c7bd2541"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMY4W8R3JL",
+    "createdAt": "2026-08-09T17:19:23.102Z",
+    "updatedAt": "2026-08-09T17:52:54.384Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69b34820b06c7bd257d",
+    "name": "Tree L4 #4",
+    "email": "tree-l4-4@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMW8FNHKZH",
+    "sponsorId": "6a78b68b34820b06c7bd2543",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68b34820b06c7bd2543"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMDYH78UZB",
+    "createdAt": "2026-08-09T17:19:23.517Z",
+    "updatedAt": "2026-08-09T17:52:56.911Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69b34820b06c7bd257f",
+    "name": "Tree L4 #5",
+    "email": "tree-l4-5@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMW8FNHKZH",
+    "sponsorId": "6a78b68b34820b06c7bd2543",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68b34820b06c7bd2543"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM45Y9AUTH",
+    "createdAt": "2026-08-09T17:19:23.918Z",
+    "updatedAt": "2026-08-09T17:52:59.664Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69c34820b06c7bd2581",
+    "name": "Tree L4 #6",
+    "email": "tree-l4-6@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMW8FNHKZH",
+    "sponsorId": "6a78b68b34820b06c7bd2543",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68b34820b06c7bd2543"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMMJP3TGL7",
+    "createdAt": "2026-08-09T17:19:24.326Z",
+    "updatedAt": "2026-08-09T17:53:02.434Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69c34820b06c7bd2583",
+    "name": "Tree L4 #7",
+    "email": "tree-l4-7@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMUKZZ3G7A",
+    "sponsorId": "6a78b68c34820b06c7bd2545",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68c34820b06c7bd2545"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMKG26HEFZ",
+    "createdAt": "2026-08-09T17:19:24.737Z",
+    "updatedAt": "2026-08-09T17:53:04.969Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69c34820b06c7bd2585",
+    "name": "Tree L4 #8",
+    "email": "tree-l4-8@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMUKZZ3G7A",
+    "sponsorId": "6a78b68c34820b06c7bd2545",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68c34820b06c7bd2545"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMTGD7SZJH",
+    "createdAt": "2026-08-09T17:19:25.169Z",
+    "updatedAt": "2026-08-09T17:53:07.489Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69d34820b06c7bd2587",
+    "name": "Tree L4 #9",
+    "email": "tree-l4-9@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMUKZZ3G7A",
+    "sponsorId": "6a78b68c34820b06c7bd2545",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68734820b06c7bd2522",
+      "6a78b68c34820b06c7bd2545"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMCHKMS5JY",
+    "createdAt": "2026-08-09T17:19:25.591Z",
+    "updatedAt": "2026-08-09T17:53:10.152Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69d34820b06c7bd2589",
+    "name": "Tree L4 #10",
+    "email": "tree-l4-10@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMS86YBF6K",
+    "sponsorId": "6a78b68d34820b06c7bd2547",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68d34820b06c7bd2547"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMWHF68CSV",
+    "createdAt": "2026-08-09T17:19:26.044Z",
+    "updatedAt": "2026-08-09T17:53:12.690Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69e34820b06c7bd258b",
+    "name": "Tree L4 #11",
+    "email": "tree-l4-11@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMS86YBF6K",
+    "sponsorId": "6a78b68d34820b06c7bd2547",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68d34820b06c7bd2547"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM77474W3V",
+    "createdAt": "2026-08-09T17:19:26.558Z",
+    "updatedAt": "2026-08-09T17:53:15.262Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69e34820b06c7bd258d",
+    "name": "Tree L4 #12",
+    "email": "tree-l4-12@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMS86YBF6K",
+    "sponsorId": "6a78b68d34820b06c7bd2547",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68d34820b06c7bd2547"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMBBQWT5UR",
+    "createdAt": "2026-08-09T17:19:27.100Z",
+    "updatedAt": "2026-08-09T17:53:17.781Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69f34820b06c7bd258f",
+    "name": "Tree L4 #13",
+    "email": "tree-l4-13@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMR3LY4VTY",
+    "sponsorId": "6a78b68d34820b06c7bd2549",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68d34820b06c7bd2549"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMNSJC32DC",
+    "createdAt": "2026-08-09T17:19:27.640Z",
+    "updatedAt": "2026-08-09T17:53:19.921Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b69f34820b06c7bd2591",
+    "name": "Tree L4 #14",
+    "email": "tree-l4-14@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMR3LY4VTY",
+    "sponsorId": "6a78b68d34820b06c7bd2549",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68d34820b06c7bd2549"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMV3DCVP6P",
+    "createdAt": "2026-08-09T17:19:28.198Z",
+    "updatedAt": "2026-08-09T17:53:22.146Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a034820b06c7bd2593",
+    "name": "Tree L4 #15",
+    "email": "tree-l4-15@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMR3LY4VTY",
+    "sponsorId": "6a78b68d34820b06c7bd2549",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68d34820b06c7bd2549"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMARVFD7WY",
+    "createdAt": "2026-08-09T17:19:28.795Z",
+    "updatedAt": "2026-08-09T17:53:24.302Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a034820b06c7bd2595",
+    "name": "Tree L4 #16",
+    "email": "tree-l4-16@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBPBZ64NR",
+    "sponsorId": "6a78b68e34820b06c7bd254b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68e34820b06c7bd254b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMS3CF4AQE",
+    "createdAt": "2026-08-09T17:19:29.431Z",
+    "updatedAt": "2026-08-09T17:53:27.275Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a134820b06c7bd2597",
+    "name": "Tree L4 #17",
+    "email": "tree-l4-17@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBPBZ64NR",
+    "sponsorId": "6a78b68e34820b06c7bd254b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68e34820b06c7bd254b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMRMMA52D7",
+    "createdAt": "2026-08-09T17:19:30.286Z",
+    "updatedAt": "2026-08-09T17:53:29.909Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a234820b06c7bd2599",
+    "name": "Tree L4 #18",
+    "email": "tree-l4-18@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBPBZ64NR",
+    "sponsorId": "6a78b68e34820b06c7bd254b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd2528",
+      "6a78b68e34820b06c7bd254b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMG7W587UZ",
+    "createdAt": "2026-08-09T17:19:30.922Z",
+    "updatedAt": "2026-08-09T17:53:32.652Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a334820b06c7bd259b",
+    "name": "Tree L4 #19",
+    "email": "tree-l4-19@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVN4MVD5G",
+    "sponsorId": "6a78b68f34820b06c7bd254d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b68f34820b06c7bd254d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMF45TBD9L",
+    "createdAt": "2026-08-09T17:19:31.572Z",
+    "updatedAt": "2026-08-09T17:53:35.271Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a334820b06c7bd259d",
+    "name": "Tree L4 #20",
+    "email": "tree-l4-20@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVN4MVD5G",
+    "sponsorId": "6a78b68f34820b06c7bd254d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b68f34820b06c7bd254d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMWR6PYNEA",
+    "createdAt": "2026-08-09T17:19:32.335Z",
+    "updatedAt": "2026-08-09T17:53:38.208Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a434820b06c7bd259f",
+    "name": "Tree L4 #21",
+    "email": "tree-l4-21@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVN4MVD5G",
+    "sponsorId": "6a78b68f34820b06c7bd254d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b68f34820b06c7bd254d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMFVSG2Z9R",
+    "createdAt": "2026-08-09T17:19:32.919Z",
+    "updatedAt": "2026-08-09T17:53:41.026Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a534820b06c7bd25a1",
+    "name": "Tree L4 #22",
+    "email": "tree-l4-22@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMHMZDLSVH",
+    "sponsorId": "6a78b68f34820b06c7bd254f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b68f34820b06c7bd254f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMD9FBCJ7X",
+    "createdAt": "2026-08-09T17:19:33.571Z",
+    "updatedAt": "2026-08-09T17:53:43.593Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a534820b06c7bd25a3",
+    "name": "Tree L4 #23",
+    "email": "tree-l4-23@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMHMZDLSVH",
+    "sponsorId": "6a78b68f34820b06c7bd254f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b68f34820b06c7bd254f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMYWXF5SUK",
+    "createdAt": "2026-08-09T17:19:34.273Z",
+    "updatedAt": "2026-08-09T17:53:46.214Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a634820b06c7bd25a5",
+    "name": "Tree L4 #24",
+    "email": "tree-l4-24@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMHMZDLSVH",
+    "sponsorId": "6a78b68f34820b06c7bd254f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b68f34820b06c7bd254f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM4SEXHVQF",
+    "createdAt": "2026-08-09T17:19:34.869Z",
+    "updatedAt": "2026-08-09T17:53:48.804Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a634820b06c7bd25a7",
+    "name": "Tree L4 #25",
+    "email": "tree-l4-25@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVN2H7TR5",
+    "sponsorId": "6a78b69034820b06c7bd2551",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b69034820b06c7bd2551"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMJY64E55G",
+    "createdAt": "2026-08-09T17:19:35.519Z",
+    "updatedAt": "2026-08-09T17:53:51.267Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a734820b06c7bd25a9",
+    "name": "Tree L4 #26",
+    "email": "tree-l4-26@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVN2H7TR5",
+    "sponsorId": "6a78b69034820b06c7bd2551",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b69034820b06c7bd2551"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMB377QEQH",
+    "createdAt": "2026-08-09T17:19:36.042Z",
+    "updatedAt": "2026-08-09T17:53:53.871Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a834820b06c7bd25ab",
+    "name": "Tree L4 #27",
+    "email": "tree-l4-27@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVN2H7TR5",
+    "sponsorId": "6a78b69034820b06c7bd2551",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2509",
+      "6a78b68834820b06c7bd252d",
+      "6a78b69034820b06c7bd2551"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMLE8RQ635",
+    "createdAt": "2026-08-09T17:19:36.577Z",
+    "updatedAt": "2026-08-09T17:53:56.383Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a834820b06c7bd25ad",
+    "name": "Tree L4 #28",
+    "email": "tree-l4-28@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMB7MPNRKD",
+    "sponsorId": "6a78b69134820b06c7bd2553",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69134820b06c7bd2553"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMRWES9YTH",
+    "createdAt": "2026-08-09T17:19:37.168Z",
+    "updatedAt": "2026-08-09T17:53:59.185Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a934820b06c7bd25af",
+    "name": "Tree L4 #29",
+    "email": "tree-l4-29@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMB7MPNRKD",
+    "sponsorId": "6a78b69134820b06c7bd2553",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69134820b06c7bd2553"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM8GF3NWAH",
+    "createdAt": "2026-08-09T17:19:37.813Z",
+    "updatedAt": "2026-08-09T17:54:01.967Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6a934820b06c7bd25b1",
+    "name": "Tree L4 #30",
+    "email": "tree-l4-30@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMB7MPNRKD",
+    "sponsorId": "6a78b69134820b06c7bd2553",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69134820b06c7bd2553"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMDAB9VV9N",
+    "createdAt": "2026-08-09T17:19:38.483Z",
+    "updatedAt": "2026-08-09T17:54:04.533Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6aa34820b06c7bd25b3",
+    "name": "Tree L4 #31",
+    "email": "tree-l4-31@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBWBCHBBT",
+    "sponsorId": "6a78b69134820b06c7bd2555",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69134820b06c7bd2555"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMFE9RY4CL",
+    "createdAt": "2026-08-09T17:19:39.043Z",
+    "updatedAt": "2026-08-09T17:54:07.095Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ab34820b06c7bd25b5",
+    "name": "Tree L4 #32",
+    "email": "tree-l4-32@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBWBCHBBT",
+    "sponsorId": "6a78b69134820b06c7bd2555",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69134820b06c7bd2555"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMAEEFDR48",
+    "createdAt": "2026-08-09T17:19:39.590Z",
+    "updatedAt": "2026-08-09T17:54:09.827Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ab34820b06c7bd25b7",
+    "name": "Tree L4 #33",
+    "email": "tree-l4-33@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBWBCHBBT",
+    "sponsorId": "6a78b69134820b06c7bd2555",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69134820b06c7bd2555"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMJM9MS9VQ",
+    "createdAt": "2026-08-09T17:19:40.184Z",
+    "updatedAt": "2026-08-09T17:54:12.709Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ac34820b06c7bd25b9",
+    "name": "Tree L4 #34",
+    "email": "tree-l4-34@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMB8A69HMH",
+    "sponsorId": "6a78b69234820b06c7bd2557",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69234820b06c7bd2557"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMX8L3R27M",
+    "createdAt": "2026-08-09T17:19:40.741Z",
+    "updatedAt": "2026-08-09T17:54:15.346Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ac34820b06c7bd25bb",
+    "name": "Tree L4 #35",
+    "email": "tree-l4-35@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMB8A69HMH",
+    "sponsorId": "6a78b69234820b06c7bd2557",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69234820b06c7bd2557"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM7L7W3TEZ",
+    "createdAt": "2026-08-09T17:19:41.312Z",
+    "updatedAt": "2026-08-09T17:54:18.072Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ad34820b06c7bd25bd",
+    "name": "Tree L4 #36",
+    "email": "tree-l4-36@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMB8A69HMH",
+    "sponsorId": "6a78b69234820b06c7bd2557",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68834820b06c7bd2530",
+      "6a78b69234820b06c7bd2557"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM3L58E8N8",
+    "createdAt": "2026-08-09T17:19:41.927Z",
+    "updatedAt": "2026-08-09T17:54:20.826Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ae34820b06c7bd25bf",
+    "name": "Tree L4 #37",
+    "email": "tree-l4-37@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3KLMCMGV",
+    "sponsorId": "6a78b69234820b06c7bd2559",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69234820b06c7bd2559"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMGKXSPDWB",
+    "createdAt": "2026-08-09T17:19:42.454Z",
+    "updatedAt": "2026-08-09T17:54:23.466Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ae34820b06c7bd25c1",
+    "name": "Tree L4 #38",
+    "email": "tree-l4-38@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3KLMCMGV",
+    "sponsorId": "6a78b69234820b06c7bd2559",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69234820b06c7bd2559"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMKCKBX9P9",
+    "createdAt": "2026-08-09T17:19:42.989Z",
+    "updatedAt": "2026-08-09T17:54:26.067Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6af34820b06c7bd25c3",
+    "name": "Tree L4 #39",
+    "email": "tree-l4-39@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3KLMCMGV",
+    "sponsorId": "6a78b69234820b06c7bd2559",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69234820b06c7bd2559"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM4Y4VS3LF",
+    "createdAt": "2026-08-09T17:19:43.538Z",
+    "updatedAt": "2026-08-09T17:54:28.668Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6af34820b06c7bd25c5",
+    "name": "Tree L4 #40",
+    "email": "tree-l4-40@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3G76ERLH",
+    "sponsorId": "6a78b69334820b06c7bd255b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69334820b06c7bd255b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMG9DZR6TH",
+    "createdAt": "2026-08-09T17:19:44.156Z",
+    "updatedAt": "2026-08-09T17:54:31.307Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b034820b06c7bd25c7",
+    "name": "Tree L4 #41",
+    "email": "tree-l4-41@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3G76ERLH",
+    "sponsorId": "6a78b69334820b06c7bd255b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69334820b06c7bd255b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM6BRCNTRG",
+    "createdAt": "2026-08-09T17:19:44.723Z",
+    "updatedAt": "2026-08-09T17:54:33.949Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b034820b06c7bd25c9",
+    "name": "Tree L4 #42",
+    "email": "tree-l4-42@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM3G76ERLH",
+    "sponsorId": "6a78b69334820b06c7bd255b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69334820b06c7bd255b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMNLGVU7FJ",
+    "createdAt": "2026-08-09T17:19:45.352Z",
+    "updatedAt": "2026-08-09T17:54:36.567Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b134820b06c7bd25cb",
+    "name": "Tree L4 #43",
+    "email": "tree-l4-43@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBWX85M4L",
+    "sponsorId": "6a78b69434820b06c7bd255d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69434820b06c7bd255d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMRYJRU8M4",
+    "createdAt": "2026-08-09T17:19:45.889Z",
+    "updatedAt": "2026-08-09T17:54:39.206Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b234820b06c7bd25cd",
+    "name": "Tree L4 #44",
+    "email": "tree-l4-44@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBWX85M4L",
+    "sponsorId": "6a78b69434820b06c7bd255d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69434820b06c7bd255d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM5Q23QE8E",
+    "createdAt": "2026-08-09T17:19:46.330Z",
+    "updatedAt": "2026-08-09T17:54:42.126Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b234820b06c7bd25cf",
+    "name": "Tree L4 #45",
+    "email": "tree-l4-45@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBWX85M4L",
+    "sponsorId": "6a78b69434820b06c7bd255d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2534",
+      "6a78b69434820b06c7bd255d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMURJC9NGP",
+    "createdAt": "2026-08-09T17:19:46.745Z",
+    "updatedAt": "2026-08-09T17:54:44.801Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b234820b06c7bd25d1",
+    "name": "Tree L4 #46",
+    "email": "tree-l4-46@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMKT26N5MU",
+    "sponsorId": "6a78b69434820b06c7bd255f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69434820b06c7bd255f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMB2X66W9P",
+    "createdAt": "2026-08-09T17:19:47.174Z",
+    "updatedAt": "2026-08-09T17:54:47.300Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b334820b06c7bd25d3",
+    "name": "Tree L4 #47",
+    "email": "tree-l4-47@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMKT26N5MU",
+    "sponsorId": "6a78b69434820b06c7bd255f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69434820b06c7bd255f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMD5LTNM35",
+    "createdAt": "2026-08-09T17:19:47.588Z",
+    "updatedAt": "2026-08-09T17:54:49.860Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b334820b06c7bd25d5",
+    "name": "Tree L4 #48",
+    "email": "tree-l4-48@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMKT26N5MU",
+    "sponsorId": "6a78b69434820b06c7bd255f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69434820b06c7bd255f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMNDY28LWS",
+    "createdAt": "2026-08-09T17:19:48.026Z",
+    "updatedAt": "2026-08-09T17:54:52.529Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b434820b06c7bd25d7",
+    "name": "Tree L4 #49",
+    "email": "tree-l4-49@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBFNEJXPE",
+    "sponsorId": "6a78b69534820b06c7bd2561",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69534820b06c7bd2561"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMQ2A4PG4K",
+    "createdAt": "2026-08-09T17:19:48.477Z",
+    "updatedAt": "2026-08-09T17:54:55.187Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b434820b06c7bd25d9",
+    "name": "Tree L4 #50",
+    "email": "tree-l4-50@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBFNEJXPE",
+    "sponsorId": "6a78b69534820b06c7bd2561",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69534820b06c7bd2561"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM4NFBFE78",
+    "createdAt": "2026-08-09T17:19:48.906Z",
+    "updatedAt": "2026-08-09T17:54:57.651Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b534820b06c7bd25db",
+    "name": "Tree L4 #51",
+    "email": "tree-l4-51@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMBFNEJXPE",
+    "sponsorId": "6a78b69534820b06c7bd2561",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69534820b06c7bd2561"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAME37SXLDS",
+    "createdAt": "2026-08-09T17:19:49.347Z",
+    "updatedAt": "2026-08-09T17:55:00.115Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b534820b06c7bd25dd",
+    "name": "Tree L4 #52",
+    "email": "tree-l4-52@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMUJWXR928",
+    "sponsorId": "6a78b69534820b06c7bd2563",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69534820b06c7bd2563"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMF7LAHF6D",
+    "createdAt": "2026-08-09T17:19:49.790Z",
+    "updatedAt": "2026-08-09T17:55:02.986Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b534820b06c7bd25df",
+    "name": "Tree L4 #53",
+    "email": "tree-l4-53@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMUJWXR928",
+    "sponsorId": "6a78b69534820b06c7bd2563",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69534820b06c7bd2563"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMCB4THS3Z",
+    "createdAt": "2026-08-09T17:19:50.229Z",
+    "updatedAt": "2026-08-09T17:55:05.769Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b634820b06c7bd25e1",
+    "name": "Tree L4 #54",
+    "email": "tree-l4-54@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMUJWXR928",
+    "sponsorId": "6a78b69534820b06c7bd2563",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68634820b06c7bd2513",
+      "6a78b68934820b06c7bd2537",
+      "6a78b69534820b06c7bd2563"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMC4JH3HQR",
+    "createdAt": "2026-08-09T17:19:50.693Z",
+    "updatedAt": "2026-08-09T17:55:08.482Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b634820b06c7bd25e3",
+    "name": "Tree L4 #55",
+    "email": "tree-l4-55@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMCERCL69J",
+    "sponsorId": "6a78b69634820b06c7bd2565",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69634820b06c7bd2565"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM3X56YBQ7",
+    "createdAt": "2026-08-09T17:19:51.142Z",
+    "updatedAt": "2026-08-09T17:55:11.005Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b734820b06c7bd25e5",
+    "name": "Tree L4 #56",
+    "email": "tree-l4-56@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMCERCL69J",
+    "sponsorId": "6a78b69634820b06c7bd2565",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69634820b06c7bd2565"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMQJEACK7Q",
+    "createdAt": "2026-08-09T17:19:51.566Z",
+    "updatedAt": "2026-08-09T17:55:13.943Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b734820b06c7bd25e7",
+    "name": "Tree L4 #57",
+    "email": "tree-l4-57@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMCERCL69J",
+    "sponsorId": "6a78b69634820b06c7bd2565",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69634820b06c7bd2565"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMFKGNAPJC",
+    "createdAt": "2026-08-09T17:19:52.002Z",
+    "updatedAt": "2026-08-09T17:55:16.493Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b834820b06c7bd25e9",
+    "name": "Tree L4 #58",
+    "email": "tree-l4-58@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM37QNUP58",
+    "sponsorId": "6a78b69634820b06c7bd2567",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69634820b06c7bd2567"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMXLWUGQ48",
+    "createdAt": "2026-08-09T17:19:52.413Z",
+    "updatedAt": "2026-08-09T17:55:19.036Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b834820b06c7bd25eb",
+    "name": "Tree L4 #59",
+    "email": "tree-l4-59@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM37QNUP58",
+    "sponsorId": "6a78b69634820b06c7bd2567",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69634820b06c7bd2567"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMNS3MN67S",
+    "createdAt": "2026-08-09T17:19:52.816Z",
+    "updatedAt": "2026-08-09T17:55:21.577Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b834820b06c7bd25ed",
+    "name": "Tree L4 #60",
+    "email": "tree-l4-60@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAM37QNUP58",
+    "sponsorId": "6a78b69634820b06c7bd2567",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69634820b06c7bd2567"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMXZ8YDCZW",
+    "createdAt": "2026-08-09T17:19:53.267Z",
+    "updatedAt": "2026-08-09T17:55:24.025Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b934820b06c7bd25ef",
+    "name": "Tree L4 #61",
+    "email": "tree-l4-61@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMQKEYKX8P",
+    "sponsorId": "6a78b69734820b06c7bd2569",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69734820b06c7bd2569"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM2D4YS3AF",
+    "createdAt": "2026-08-09T17:19:53.677Z",
+    "updatedAt": "2026-08-09T17:55:26.403Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6b934820b06c7bd25f1",
+    "name": "Tree L4 #62",
+    "email": "tree-l4-62@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMQKEYKX8P",
+    "sponsorId": "6a78b69734820b06c7bd2569",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69734820b06c7bd2569"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMN62W7E7F",
+    "createdAt": "2026-08-09T17:19:54.125Z",
+    "updatedAt": "2026-08-09T17:55:28.821Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ba34820b06c7bd25f3",
+    "name": "Tree L4 #63",
+    "email": "tree-l4-63@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMQKEYKX8P",
+    "sponsorId": "6a78b69734820b06c7bd2569",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253a",
+      "6a78b69734820b06c7bd2569"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMZ5CJU93S",
+    "createdAt": "2026-08-09T17:19:54.529Z",
+    "updatedAt": "2026-08-09T17:55:31.356Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6ba34820b06c7bd25f5",
+    "name": "Tree L4 #64",
+    "email": "tree-l4-64@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMYLMJ39YH",
+    "sponsorId": "6a78b69734820b06c7bd256b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69734820b06c7bd256b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMWPQZWTJM",
+    "createdAt": "2026-08-09T17:19:54.942Z",
+    "updatedAt": "2026-08-09T17:55:34.142Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bb34820b06c7bd25f7",
+    "name": "Tree L4 #65",
+    "email": "tree-l4-65@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMYLMJ39YH",
+    "sponsorId": "6a78b69734820b06c7bd256b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69734820b06c7bd256b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM28G8YRYH",
+    "createdAt": "2026-08-09T17:19:55.337Z",
+    "updatedAt": "2026-08-09T17:55:36.538Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bb34820b06c7bd25f9",
+    "name": "Tree L4 #66",
+    "email": "tree-l4-66@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMYLMJ39YH",
+    "sponsorId": "6a78b69734820b06c7bd256b",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69734820b06c7bd256b"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMDZ2ZSWEW",
+    "createdAt": "2026-08-09T17:19:55.738Z",
+    "updatedAt": "2026-08-09T17:55:39.079Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bb34820b06c7bd25fb",
+    "name": "Tree L4 #67",
+    "email": "tree-l4-67@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMF4KVV5Z2",
+    "sponsorId": "6a78b69734820b06c7bd256d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69734820b06c7bd256d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM629NDWU4",
+    "createdAt": "2026-08-09T17:19:56.138Z",
+    "updatedAt": "2026-08-09T17:55:42.029Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bc34820b06c7bd25fd",
+    "name": "Tree L4 #68",
+    "email": "tree-l4-68@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMF4KVV5Z2",
+    "sponsorId": "6a78b69734820b06c7bd256d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69734820b06c7bd256d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMFH5KFYGS",
+    "createdAt": "2026-08-09T17:19:56.550Z",
+    "updatedAt": "2026-08-09T17:55:44.892Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bc34820b06c7bd25ff",
+    "name": "Tree L4 #69",
+    "email": "tree-l4-69@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMF4KVV5Z2",
+    "sponsorId": "6a78b69734820b06c7bd256d",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69734820b06c7bd256d"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMF6NJKTT6",
+    "createdAt": "2026-08-09T17:19:56.959Z",
+    "updatedAt": "2026-08-09T17:55:47.453Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bd34820b06c7bd2601",
+    "name": "Tree L4 #70",
+    "email": "tree-l4-70@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMLPUACTU9",
+    "sponsorId": "6a78b69834820b06c7bd256f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69834820b06c7bd256f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMSAVSH7JU",
+    "createdAt": "2026-08-09T17:19:57.594Z",
+    "updatedAt": "2026-08-09T17:55:49.994Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bd34820b06c7bd2603",
+    "name": "Tree L4 #71",
+    "email": "tree-l4-71@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMLPUACTU9",
+    "sponsorId": "6a78b69834820b06c7bd256f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69834820b06c7bd256f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMLNZNSM3Q",
+    "createdAt": "2026-08-09T17:19:58.201Z",
+    "updatedAt": "2026-08-09T17:55:52.521Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6be34820b06c7bd2605",
+    "name": "Tree L4 #72",
+    "email": "tree-l4-72@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMLPUACTU9",
+    "sponsorId": "6a78b69834820b06c7bd256f",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253d",
+      "6a78b69834820b06c7bd256f"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM9RMQ7BH9",
+    "createdAt": "2026-08-09T17:19:58.673Z",
+    "updatedAt": "2026-08-09T17:55:55.384Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6be34820b06c7bd2607",
+    "name": "Tree L4 #73",
+    "email": "tree-l4-73@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMSLCTTC8N",
+    "sponsorId": "6a78b69834820b06c7bd2571",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69834820b06c7bd2571"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAM9AN8GH5M",
+    "createdAt": "2026-08-09T17:19:59.203Z",
+    "updatedAt": "2026-08-09T17:55:57.875Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bf34820b06c7bd2609",
+    "name": "Tree L4 #74",
+    "email": "tree-l4-74@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMSLCTTC8N",
+    "sponsorId": "6a78b69834820b06c7bd2571",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69834820b06c7bd2571"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMCN3G49VD",
+    "createdAt": "2026-08-09T17:19:59.666Z",
+    "updatedAt": "2026-08-09T17:56:00.319Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6bf34820b06c7bd260b",
+    "name": "Tree L4 #75",
+    "email": "tree-l4-75@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMSLCTTC8N",
+    "sponsorId": "6a78b69834820b06c7bd2571",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69834820b06c7bd2571"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMH92ZYWVE",
+    "createdAt": "2026-08-09T17:20:00.159Z",
+    "updatedAt": "2026-08-09T17:56:02.757Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6c034820b06c7bd260d",
+    "name": "Tree L4 #76",
+    "email": "tree-l4-76@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMK7FWDLDA",
+    "sponsorId": "6a78b69934820b06c7bd2573",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69934820b06c7bd2573"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAML2DMHA72",
+    "createdAt": "2026-08-09T17:20:00.601Z",
+    "updatedAt": "2026-08-09T17:56:05.353Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6c034820b06c7bd260f",
+    "name": "Tree L4 #77",
+    "email": "tree-l4-77@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMK7FWDLDA",
+    "sponsorId": "6a78b69934820b06c7bd2573",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69934820b06c7bd2573"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMU482P69Y",
+    "createdAt": "2026-08-09T17:20:01.192Z",
+    "updatedAt": "2026-08-09T17:56:07.725Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6c134820b06c7bd2611",
+    "name": "Tree L4 #78",
+    "email": "tree-l4-78@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMK7FWDLDA",
+    "sponsorId": "6a78b69934820b06c7bd2573",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69934820b06c7bd2573"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMD7QXEP7P",
+    "createdAt": "2026-08-09T17:20:01.838Z",
+    "updatedAt": "2026-08-09T17:56:10.130Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6c134820b06c7bd2613",
+    "name": "Tree L4 #79",
+    "email": "tree-l4-79@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMNKZL9GMV",
+    "sponsorId": "6a78b69934820b06c7bd2575",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69934820b06c7bd2575"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMEYNLB27Q",
+    "createdAt": "2026-08-09T17:20:02.494Z",
+    "updatedAt": "2026-08-09T17:56:12.396Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6c234820b06c7bd2615",
+    "name": "Tree L4 #80",
+    "email": "tree-l4-80@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMNKZL9GMV",
+    "sponsorId": "6a78b69934820b06c7bd2575",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69934820b06c7bd2575"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMV9AT5FKG",
+    "createdAt": "2026-08-09T17:20:03.146Z",
+    "updatedAt": "2026-08-09T17:56:14.737Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a78b6c334820b06c7bd2617",
+    "name": "Tree L4 #81",
+    "email": "tree-l4-81@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMNKZL9GMV",
+    "sponsorId": "6a78b69934820b06c7bd2575",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc",
+      "6a78b68734820b06c7bd251b",
+      "6a78b68a34820b06c7bd253f",
+      "6a78b69934820b06c7bd2575"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "dark",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-18T08:38:28.570Z",
+    "referralCode": "ZAMK5GMJJB2",
+    "createdAt": "2026-08-09T17:20:03.807Z",
+    "updatedAt": "2026-08-18T08:38:28.571Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a79c7e92dd785c499e8dd89",
+    "name": "Smoke Target",
+    "email": "smoke-target-01@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVFQNYUSN",
+    "sponsorId": "6a78b68534820b06c7bd24fc",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-11T12:45:30.730Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-10T12:46:01.756Z",
+    "referralCode": "ZAM6UQVPGWY",
+    "createdAt": "2026-08-10T12:45:30.111Z",
+    "updatedAt": "2026-08-10T12:46:01.757Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a79c82d0f596b5c6086122d",
+    "name": "Smoke Two",
+    "email": "smoke-target-02@tree-test.zeminex.dev",
+    "role": "user",
+    "referredBy": "ZAMVFQNYUSN",
+    "sponsorId": "6a78b68534820b06c7bd24fc",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-11T12:46:38.277Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "inactive",
+    "lastLoginAt": "2026-08-10T12:46:39.040Z",
+    "referralCode": "ZAMX4Y8HKQY",
+    "createdAt": "2026-08-10T12:46:37.658Z",
+    "updatedAt": "2026-08-10T12:46:39.041Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a79d10ffda8ef49bc2fc258",
+    "name": "Zeminex",
+    "email": "zeminex.global@gmail.com",
+    "phone": "222222222",
+    "role": "user",
+    "referredBy": "ZAMVFQNYUSN",
+    "sponsorId": "6a78b68534820b06c7bd24fc",
+    "lineage": [
+      "6a78b68534820b06c7bd24fc"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-11T13:24:37.888Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": null,
+    "referralCode": "ZAMPY2W6VEJ",
+    "createdAt": "2026-08-10T13:24:33.390Z",
+    "updatedAt": "2026-08-10T13:25:25.546Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7a10544afdc77005952616",
+    "name": "SAGAR RAZA",
+    "email": "sararraza687@gmail.com",
+    "phone": "9012584545",
+    "role": "user",
+    "referredBy": "ZAMGU8J5ZR8",
+    "sponsorId": "6a78536db6b40ef2e7069005",
+    "lineage": [
+      "6a78516bd2f16ddc48fb0d75",
+      "6a78536db6b40ef2e7069005"
+    ],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": "2026-08-11T17:54:34.759Z",
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "active",
+    "lastLoginAt": "2026-08-12T14:14:43.185Z",
+    "referralCode": "ZAMLFUWUD52",
+    "createdAt": "2026-08-10T17:54:30.061Z",
+    "updatedAt": "2026-08-12T14:15:50.092Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a7c7cad04ded06dae1a57f4",
+    "name": "Support Smoke",
+    "email": "support-smoke@scenario.local",
+    "role": "user",
+    "referredBy": null,
+    "sponsorId": null,
+    "lineage": [],
+    "isEmailVerified": false,
+    "resetTokenExpires": null,
+    "emailVerifyTokenExpires": null,
+    "themePreference": "light",
+    "notificationPreference": {
+      "email": true,
+      "dashboard": true
+    },
+    "walletAddresses": {
+      "usdtBep20": ""
+    },
+    "status": "inactive",
+    "lastLoginAt": "2026-08-12T14:01:32.384Z",
+    "referralCode": "ZAMGB7WYNRS",
+    "createdAt": "2026-08-12T14:01:17.963Z",
+    "updatedAt": "2026-08-12T14:01:32.386Z",
+    "__v": 0
+  }
+]

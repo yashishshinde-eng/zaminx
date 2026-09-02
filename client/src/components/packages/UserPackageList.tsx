@@ -2,7 +2,7 @@ import { Package as PackageIcon } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/shared";
-import { formatCurrency, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { PackageStatusBadge } from "./PackageStatusBadge";
 import type { UserPackageRow } from "@zeminex/shared";
 
@@ -42,10 +42,6 @@ export function UserPackageList({ packages, isLoading }: UserPackageListProps) {
                     <p className="font-medium">{p.snapshot.name}</p>
                     <PackageStatusBadge status={p.status} />
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    {formatCurrency(p.snapshot.priceUsd)} · {p.snapshot.dailyReturnPct}% daily ·{" "}
-                    365-day term
-                  </p>
                   <p className="text-xs text-muted-foreground">
                     Started {formatDate(p.createdAt)}
                     {p.status === "active" && p.activatedAt && <> · Activated {formatDate(p.activatedAt)}</>}

@@ -6,6 +6,7 @@ import {
   forgotPasswordSchema,
   resetPasswordSchema,
   changePasswordSchema,
+  changeTransactionPasswordSchema,
   verifyEmailSchema,
   resendVerificationSchema,
 } from "../schemas/auth.schema.js";
@@ -99,6 +100,7 @@ export type RefreshBody = z.infer<typeof refreshSchema>["body"];
 export type ForgotPasswordBody = z.infer<typeof forgotPasswordSchema>["body"];
 export type ResetPasswordBody = z.infer<typeof resetPasswordSchema>["body"];
 export type ChangePasswordBody = z.infer<typeof changePasswordSchema>["body"];
+export type ChangeTransactionPasswordBody = z.infer<typeof changeTransactionPasswordSchema>["body"];
 export type VerifyEmailBody = z.infer<typeof verifyEmailSchema>["body"];
 export type ResendVerificationBody = z.infer<typeof resendVerificationSchema>["body"];
 export type UpdateProfileBody = z.infer<typeof updateProfileSchema>["body"];
