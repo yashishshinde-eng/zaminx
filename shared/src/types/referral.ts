@@ -41,6 +41,12 @@ export interface ReferralByLevel {
   level: number; // 1 = direct, 2 = second level, …
   count: number;
   active: number;
+  /**
+   * Total active-package business volume at this level — the sum of
+   * `snapshot.priceUsd` across the level's users' currently-active
+   * UserPackages (status === "active"). Excludes pending/expired/cancelled.
+   */
+  business: number;
 }
 
 /** `GET /referrals/me` — referral code/link + team statistics. */
@@ -53,6 +59,8 @@ export interface ReferralStats {
   activeDirectCount: number;
   activeTeamCount: number;
   byLevel: ReferralByLevel[];
+  /** Sum of every level's `business` — total active downline business volume. */
+  teamBusiness: number;
 }
 
 /** `GET /referrals/direct` + `/referrals/children/:userId` — paginated members. */

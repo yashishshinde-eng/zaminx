@@ -27,10 +27,8 @@ import {
   WalletCard,
   IncomeBreakdown,
   ReferralLinkCard,
-  TeamStatsCard,
   RankCard,
   MarketOverview,
-  RecentTransactions,
   RankStars,
 } from "@/components/dashboard";
 
@@ -166,15 +164,9 @@ function DashboardContent({ data }: { data: SummaryData }) {
         <BonanzaProgressCard data={data} />
       </motion.div>
 
-      {/* ═══ RECENT TRANSACTIONS + TEAM + RANK ══════════════ */}
-      <motion.div variants={staggerItem} className="grid gap-4 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <RecentTransactions activity={data.recentActivity} />
-        </div>
-        <div className="flex flex-col gap-4">
-          <TeamStatsCard team={data.team} />
-          <RankCard rank={data.account.rank} />
-        </div>
+      {/* ═══ RANK ═════════════════════════════════════════════ */}
+      <motion.div variants={staggerItem}>
+        <RankCard rank={data.account.rank} />
       </motion.div>
 
       {/* ═══ REFERRAL ══════════════════════ */}
@@ -245,14 +237,8 @@ function DashboardSkeleton() {
           <Skeleton className="h-32 rounded-[22px]" />
         </div>
       </div>
-      {/* Transactions + Team/Rank */}
-      <div className="grid gap-4 lg:grid-cols-3">
-        <Skeleton className="h-64 lg:col-span-2 rounded-[22px]" />
-        <div className="space-y-4">
-          <Skeleton className="h-32 rounded-[22px]" />
-          <Skeleton className="h-32 rounded-[22px]" />
-        </div>
-      </div>
+      {/* Rank */}
+      <Skeleton className="h-32 rounded-[22px]" />
       {/* Referral */}
       <Skeleton className="h-40 rounded-[22px]" />
     </div>

@@ -42,9 +42,9 @@ export function TradingBotStatusCard({ data }: { data: DashboardSummary }) {
           <StatusPill active={active} />
         </div>
 
-        {/* Trading income */}
+        {/* Trade yield cashflows */}
         <div className="mt-5">
-          <p className="metric-label">Trading income</p>
+          <p className="metric-label">TRADE YIELD CASHFLOWS</p>
           <p className="metric-value font-grotesk mt-1 text-gradient-gold text-2xl">
             {formatCurrency(trading)}
           </p>

@@ -89,7 +89,7 @@ export function AdminCompensationSettingsPage() {
             <CardTitle className="flex items-center gap-2 text-base">
               <SlidersHorizontal className="size-4 text-primary" /> Compensation knobs
             </CardTitle>
-            <CardDescription>Direct bonus, trade yield, team energy, and community percentages.</CardDescription>
+            <CardDescription>Direct connect bonus, trade yield, team energy, and community monthly percentages.</CardDescription>
           </CardHeader>
           <CardContent>
             {isLoading || !form ? (
@@ -98,7 +98,7 @@ export function AdminCompensationSettingsPage() {
               <div className="space-y-6">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="directBonusPct">Direct bonus (%)</Label>
+                    <Label htmlFor="directBonusPct">DIRECT CONNECT BONUS (%)</Label>
                     <Input
                       id="directBonusPct"
                       type="number"
@@ -109,7 +109,7 @@ export function AdminCompensationSettingsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="communityPct">Community bonus (%)</Label>
+                    <Label htmlFor="communityPct">COMMUNITY MONTHLY BONUS (%)</Label>
                     <Input
                       id="communityPct"
                       type="number"
@@ -155,7 +155,7 @@ export function AdminCompensationSettingsPage() {
                   onChange={(v) => patch("teamEnergyEnabled", v)}
                 />
                 <Toggle
-                  label="Community bonus enabled"
+                  label="COMMUNITY MONTHLY BONUS enabled"
                   description="Run the monthly community-bonus distribution."
                   checked={form.communityEnabled}
                   onChange={(v) => patch("communityEnabled", v)}

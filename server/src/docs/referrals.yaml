@@ -6,7 +6,9 @@ paths:
       description: >
         Returns the viewer's referral code and share link, direct + all-level
         team counts (with active breakdowns), and a by-level descendant
-        breakdown. Phase 9.
+        breakdown capped at 10 levels. Each level carries a `business` total
+        (sum of active UserPackage snapshot.priceUsd at that level); the
+        `teamBusiness` field sums every level. Phase 9.
       security: [{ bearerAuth: [] }]
       responses:
         "200":
@@ -31,12 +33,15 @@ paths:
                           activeTeamCount: { type: integer }
                           byLevel:
                             type: array
+                            description: Capped at 10 levels
                             items:
                               type: object
                               properties:
                                 level: { type: integer }
                                 count: { type: integer }
                                 active: { type: integer }
+                                business: { type: number, description: Sum of active package priceUsd at this level }
+                          teamBusiness: { type: number, description: Total active downline business volume }
         "401": { description: Unauthorized }
 
   /referrals/direct:

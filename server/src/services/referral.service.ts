@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { User } from "../models/index.js";
+import { User, UserPackage } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
 import { env } from "../config/env.js";
 import type {
@@ -20,6 +20,11 @@ function escapeRegex(s: string): string {
 
 function toOid(id: string): mongoose.Types.ObjectId {
   return new mongoose.Types.ObjectId(id);
+}
+
+/** Round to 2 decimals — guards against float noise from summing currency. */
+function round2(n: number): number {
+  return Math.round((n + Number.EPSILON) * 100) / 100;
 }
 
 /** Counts per row via a $lookup-count pipeline (no child docs loaded). */
@@ -95,7 +100,7 @@ export async function getReferralStats(userId: string): Promise<ReferralStats> {
   const user = await User.findById(userId).select("referralCode").lean();
   if (!user) throw ApiError.notFound("User not found");
 
-  const [counts, byLevelAgg] = await Promise.all([
+  const [counts, byLevelAgg, byLevelBusinessAgg] = await Promise.all([
     getTeamCounts(userId),
     User.aggregate<{ _id: number; count: number; active: number }>([
       { $match: { lineage: toOid(userId) } },
@@ -117,15 +122,42 @@ export async function getReferralStats(userId: string): Promise<ReferralStats> {
       },
       { $sort: { _id: 1 } },
     ]),
+    // Per-level business volume: sum of active UserPackages' snapshot.priceUsd,
+    // bucketed by the owner's relative level in the viewer's downline. Matches
+    // the byLevel cap of 10 levels so the two aggregations stay in sync.
+    UserPackage.aggregate<{ _id: number; business: number }>([
+      { $match: { status: "active" } },
+      { $lookup: { from: "users", localField: "user", foreignField: "_id", as: "_u" } },
+      { $unwind: "$_u" },
+      { $match: { "_u.lineage": toOid(userId) } },
+      {
+        $addFields: {
+          relLevel: {
+            $subtract: [{ $size: "$_u.lineage" }, { $indexOfArray: ["$_u.lineage", toOid(userId)] }],
+          },
+        },
+      },
+      { $match: { relLevel: { $lte: 10 } } },
+      { $group: { _id: "$relLevel", business: { $sum: "$snapshot.priceUsd" } } },
+      { $sort: { _id: 1 } },
+    ]),
   ]);
 
-  const byLevel = byLevelAgg.map((r) => ({ level: r._id, count: r.count, active: r.active }));
+  const businessByLevel = new Map(byLevelBusinessAgg.map((r) => [r._id, round2(r.business)]));
+  const byLevel = byLevelAgg.map((r) => ({
+    level: r._id,
+    count: r.count,
+    active: r.active,
+    business: businessByLevel.get(r._id) ?? 0,
+  }));
+  const teamBusiness = round2(byLevelBusinessAgg.reduce((s, r) => s + r.business, 0));
 
   return {
     code: user.referralCode,
     link: `${env.CLIENT_URL}/?ref=${user.referralCode}`,
     ...counts,
     byLevel,
+    teamBusiness,
   };
 }
 

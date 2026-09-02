@@ -17,11 +17,11 @@ import { RankStars } from "./RankStars";
 type IncomeStreamKey = "trading" | "direct" | "team" | "community" | "rankReward" | "bonanza";
 
 const streams: { key: IncomeStreamKey; label: string; icon: LucideIcon; color: string; subtitle: string }[] = [
-  { key: "trading", label: "Trading Income", icon: BarChart3, color: "#f6b400", subtitle: "1-2% daily arbitrage yield" },
-  { key: "direct", label: "Direct Bonus", icon: UserPlus, color: "#0d6efd", subtitle: "10% on direct activations" },
-  { key: "team", label: "Team Bonus", icon: Users, color: "#a855f7", subtitle: "Daily team energy" },
-  { key: "community", label: "Community Bonus", icon: Globe, color: "#10b981", subtitle: "Monthly community bonus" },
-  { key: "rankReward", label: "Rank Reward", icon: Award, color: "#f43f5e", subtitle: "Milestone rank payouts" },
+  { key: "trading", label: "TRADE YIELD CASHFLOWS", icon: BarChart3, color: "#f6b400", subtitle: "1-2% daily arbitrage yield" },
+  { key: "direct", label: "DIRECT CONNECT BONUS", icon: UserPlus, color: "#0d6efd", subtitle: "10% on direct activations" },
+  { key: "team", label: "DAILY TEAM ENERGY BONUS", icon: Users, color: "#a855f7", subtitle: "Daily team energy" },
+  { key: "community", label: "COMMUNITY MONTHLY BONUS", icon: Globe, color: "#10b981", subtitle: "Monthly community bonus" },
+  { key: "rankReward", label: "RANK AND REWARD BONUS", icon: Award, color: "#f43f5e", subtitle: "Milestone rank payouts" },
   { key: "bonanza", label: "Bonanza Reward", icon: Gift, color: "#06b6d4", subtitle: "Time-limited offer rewards" },
 ];
 

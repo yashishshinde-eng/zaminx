@@ -13,7 +13,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useReferralStats, useTeamReferrals, useTreeChildren } from "@/hooks/useReferrals";
 import { useCountUp } from "@/hooks/useCountUp";
 import { staggerContainer, staggerItem } from "@/lib/motion";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatCurrency } from "@/lib/utils";
 import toast from "react-hot-toast";
 import type { ReferralMemberRow, ReferralMemberStatus } from "@zeminex/shared";
 
@@ -393,15 +393,27 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
           <Metric label="Active team" value={stats.activeTeamCount} />
         </div>
         {stats.byLevel.length > 0 && (
-          <div>
-            <p className="text-xs font-medium text-muted-foreground">By level</p>
-            <div className="mt-1.5 flex flex-wrap gap-2">
-              {stats.byLevel.map((l) => (
-                <Badge key={l.level} variant="outline" className="font-normal">
-                  L{l.level}: <span className="ml-1 font-semibold tabular-nums">{l.count}</span>
-                  <span className="ml-1 text-success">{l.active}</span>
-                </Badge>
-              ))}
+          <div className="rounded-lg border border-border/60">
+            <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              <span>Level</span>
+              <span className="text-right">Members</span>
+              <span className="text-right">Active</span>
+              <span className="text-right">Business</span>
+            </div>
+            {stats.byLevel.map((l) => (
+              <div
+                key={l.level}
+                className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 border-t border-border/40 px-3 py-2 text-sm"
+              >
+                <span className="font-medium">Level {l.level}</span>
+                <span className="text-right tabular-nums text-muted-foreground">{l.count}</span>
+                <span className="text-right tabular-nums text-success">{l.active}</span>
+                <span className="text-right font-semibold tabular-nums">{formatCurrency(l.business)}</span>
+              </div>
+            ))}
+            <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 border-t border-border/60 bg-muted/30 px-3 py-2 text-sm">
+              <span className="col-span-3 font-bold">Total team business</span>
+              <span className="text-right font-bold tabular-nums">{formatCurrency(stats.teamBusiness)}</span>
             </div>
           </div>
         )}
@@ -426,7 +438,8 @@ type ReferralStatsLite = {
   activeDirectCount: number;
   activeTeamCount: number;
   code: string;
-  byLevel: { level: number; count: number; active: number }[];
+  byLevel: { level: number; count: number; active: number; business: number }[];
+  teamBusiness: number;
 };
 
 /* ------------------------------------------------------------------ */

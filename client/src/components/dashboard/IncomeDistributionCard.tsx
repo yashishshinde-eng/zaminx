@@ -11,11 +11,11 @@ import { formatCurrency, cn } from "@/lib/utils";
 export function IncomeDistributionCard({ income }: { income: DashboardSummary["income"] }) {
   const allStreams = useMemo(
     () => [
-      { label: "Trading", value: income.trading, color: DONUT_COLORS[0] },
-      { label: "Direct", value: income.direct, color: DONUT_COLORS[1] },
-      { label: "Team", value: income.team, color: DONUT_COLORS[2] },
-      { label: "Community", value: income.community, color: DONUT_COLORS[3] },
-      { label: "Rank", value: income.rankReward, color: DONUT_COLORS[4] },
+      { label: "TRADE YIELD", value: income.trading, color: DONUT_COLORS[0] },
+      { label: "DIRECT CONNECT", value: income.direct, color: DONUT_COLORS[1] },
+      { label: "TEAM ENERGY", value: income.team, color: DONUT_COLORS[2] },
+      { label: "COMMUNITY", value: income.community, color: DONUT_COLORS[3] },
+      { label: "RANK & REWARD", value: income.rankReward, color: DONUT_COLORS[4] },
       { label: "Bonanza", value: income.bonanza, color: DONUT_COLORS[5] },
     ],
     [income.trading, income.direct, income.team, income.community, income.rankReward, income.bonanza],
