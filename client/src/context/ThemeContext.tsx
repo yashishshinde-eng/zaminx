@@ -1,16 +1,11 @@
 import {
   createContext,
-  useCallback,
   useContext,
   useEffect,
   useMemo,
-  useRef,
-  useState,
   type ReactNode,
 } from "react";
 import { STORAGE_KEYS } from "@/config";
-import { useAuth } from "./AuthContext";
-import { updateThemeRequest } from "@/lib/profile";
 
 type Theme = "light" | "dark";
 
@@ -22,59 +17,31 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-function getInitialTheme(): Theme {
-  const stored = localStorage.getItem(STORAGE_KEYS.theme) as Theme | null;
-  if (stored === "light" || stored === "dark") return stored;
-  return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
+/**
+ * Permanent dark mode.
+ *
+ * The app is always dark — there is no light theme and no toggle. The
+ * `dark` class is forced on <html> for the lifetime of the app and also
+ * baked into index.html so it is present before first paint. The
+ * `toggleTheme` / `setTheme` functions are kept on the API (as no-ops)
+ * so existing callers keep compiling, but they do nothing.
+ */
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
-  const { user, isAuthenticated } = useAuth();
-  const syncedUserId = useRef<string | null>(null);
-
-  /** Apply theme to the DOM + localStorage; persist to the account when authenticated. */
-  const applyTheme = useCallback(
-    (t: Theme, persist: boolean) => {
-      setThemeState(t);
-      if (persist && isAuthenticated) {
-        updateThemeRequest(t).catch(() => undefined);
-      }
-    },
-    [isAuthenticated],
-  );
-
-  // Apply DOM class + persist locally on every change.
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.toggle("dark", theme === "dark");
-    root.style.colorScheme = theme;
-    localStorage.setItem(STORAGE_KEYS.theme, theme);
-  }, [theme]);
-
-  // On login (user id change), the account is the source of truth for theme.
-  // Run once per login, not on every user mutation.
-  useEffect(() => {
-    if (!user || syncedUserId.current === user.id) return;
-    syncedUserId.current = user.id;
-    if (user.themePreference && user.themePreference !== theme) {
-      applyTheme(user.themePreference, false); // no-op server write (already stored)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
-  // Reset the sync tracker on logout so the next login re-applies the account theme.
-  useEffect(() => {
-    if (!user) syncedUserId.current = null;
-  }, [user]);
+    root.classList.add("dark");
+    root.classList.remove("light");
+    root.style.colorScheme = "dark";
+    localStorage.setItem(STORAGE_KEYS.theme, "dark");
+  }, []);
 
   const value = useMemo<ThemeContextValue>(
     () => ({
-      theme,
-      toggleTheme: () => applyTheme(theme === "dark" ? "light" : "dark", true),
-      setTheme: (t) => applyTheme(t, true),
+      theme: "dark",
+      toggleTheme: () => undefined,
+      setTheme: () => undefined,
     }),
-    [theme, applyTheme],
+    [],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

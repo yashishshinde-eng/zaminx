@@ -28,13 +28,13 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex h-full min-h-screen dashboard-bg">
-      {/* ── Cinematic background layers ────────────────────────── */}
+      {/* ── Cinematic background layers — AI color grading ──────── */}
       <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
         {/* Grid pattern */}
         <div className="absolute inset-0 grid-pattern opacity-40" />
         {/* Noise texture */}
         <div className="absolute inset-0 noise-overlay" />
-        {/* Blue glow orb — top left */}
+        {/* Electric blue glow orb — top left */}
         <div
           className="glow-orb animate-float"
           style={{
@@ -48,6 +48,22 @@ export function AppShell({ children }: { children: ReactNode }) {
           style={{
             width: 500, height: 500, right: "-5%", top: "5%",
             background: "radial-gradient(circle, hsl(var(--gold) / 0.06), transparent 70%)",
+          }}
+        />
+        {/* Cyan glow orb — mid right (AI ambient) */}
+        <div
+          className="glow-orb animate-float-slow"
+          style={{
+            width: 520, height: 520, right: "-8%", top: "42%",
+            background: "radial-gradient(circle, rgb(0 213 255 / 0.07), transparent 70%)",
+          }}
+        />
+        {/* Magenta glow orb — bottom left (Web3 ambient) */}
+        <div
+          className="glow-orb animate-pulse-glow"
+          style={{
+            width: 480, height: 480, left: "-6%", bottom: "8%",
+            background: "radial-gradient(circle, rgb(200 90 240 / 0.06), transparent 70%)",
           }}
         />
         {/* Purple glow orb — bottom center */}

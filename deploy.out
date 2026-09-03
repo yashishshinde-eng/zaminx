@@ -1,0 +1,203 @@
+<claude-code-hint v="1" type="plugin" value="vercel@claude-plugins-official" />
+Vercel CLI 58.5.1 (Node.js 24.13.1)
+Retrieving project…
+Deploying ukvalley1/zaminex
+Uploading [--------------------] (0.0B/2.4MB)
+Uploading [=====---------------] (636.7KB/2.4MB)
+Uploading [==========----------] (1.2MB/2.4MB)
+Uploading [===============-----] (1.8MB/2.4MB)
+Uploading [====================] (2.4MB/2.4MB)
+  Inspect         https://vercel.com/ukvalley1/zaminex/UQZWhQLWtVB751zbej3pvErhod9A
+  Production      https://zaminex-pwihfav4s-ukvalley1.vercel.app
+Building…
+Building…
+Running build in Washington, D.C., USA (East) – iad1
+Build machine configuration: 2 cores, 8 GB
+Retrieving list of deployment files...
+Downloading 1302 deployment files...
+Restored build cache from previous deployment (EPzwXvfDdr32AEgp44KE9fBGpARk)
+Running "vercel build"
+Vercel CLI 59.3.0
+Warning: Detected "engines": { "node": ">=18.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+Running "install" command: `npm install`...
+up to date, audited 614 packages in 5s
+103 packages are looking for funding
+run `npm fund` for details
+20 vulnerabilities (9 moderate, 11 high)
+To address issues that do not require attention, run:
+npm audit fix
+To address all issues (including breaking changes), run:
+npm audit fix --force
+Run `npm audit` for details.
+npm warn allow-scripts 5 packages have install scripts not yet covered by allowScripts:
+npm warn allow-scripts   @scarf/scarf@1.4.0 (postinstall: node ./report.js)
+npm warn allow-scripts   esbuild@0.27.0 (postinstall: node install.js)
+npm warn allow-scripts   esbuild@0.28.1 (postinstall: node install.js)
+npm warn allow-scripts   mongodb-memory-server@11.2.0 (postinstall: node ./postinstall.js)
+npm warn allow-scripts   esbuild@0.21.5 (postinstall: node install.js)
+npm warn allow-scripts
+npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+> @zeminex/shared@1.0.0 build
+> tsc -p tsconfig.json
+> @zeminex/client@1.0.0 build
+> tsc --noEmit && vite build
+vite v5.4.21 building for production...
+transforming...
+✓ 2242 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                          0.82 kB │ gzip:   0.41 kB
+dist/assets/index-CIE8tTx_.css                         109.75 kB │ gzip:  16.34 kB
+dist/assets/pin-DvfF4cGH.js                              0.17 kB │ gzip:   0.16 kB │ map:     1.05 kB
+dist/assets/skeleton-BjvHx86q.js                         0.26 kB │ gzip:   0.22 kB │ map:     0.58 kB
+dist/assets/check-xrVV6ohK.js                            0.33 kB │ gzip:   0.27 kB │ map:     0.74 kB
+dist/assets/chevron-down-c3OYZbmL.js                     0.35 kB │ gzip:   0.28 kB │ map:     0.79 kB
+dist/assets/label-DNzDhCOU.js                            0.36 kB │ gzip:   0.28 kB │ map:     0.90 kB
+dist/assets/loader-circle-Hje9UyFJ.js                    0.36 kB │ gzip:   0.29 kB │ map:     0.81 kB
+dist/assets/plus-DTaRaLNw.js                             0.36 kB │ gzip:   0.29 kB │ map:     0.83 kB
+dist/assets/clock-PWqt-ClD.js                            0.39 kB │ gzip:   0.31 kB │ map:     0.89 kB
+dist/assets/circle-check-BlkYhl3f.js                     0.39 kB │ gzip:   0.31 kB │ map:     0.92 kB
+dist/assets/circle-x-DGPsSfrG.js                         0.42 kB │ gzip:   0.32 kB │ map:     0.99 kB
+dist/assets/copy-Ca-_NRdX.js                             0.44 kB │ gzip:   0.34 kB │ map:     0.98 kB
+dist/assets/activity-2GS1RISl.js                         0.45 kB │ gzip:   0.33 kB │ map:     0.90 kB
+dist/assets/eye-BCENsz-e.js                              0.46 kB │ gzip:   0.34 kB │ map:     0.99 kB
+dist/assets/user-check-Cx-N1Yb3.js                       0.47 kB │ gzip:   0.36 kB │ map:     1.05 kB
+dist/assets/pencil-CkjXWOI5.js                           0.49 kB │ gzip:   0.36 kB │ map:     1.00 kB
+dist/assets/coins-B48b2-Pu.js                            0.49 kB │ gzip:   0.36 kB │ map:     1.11 kB
+dist/assets/mail-check-DHS5iqmy.js                       0.50 kB │ gzip:   0.37 kB │ map:     1.06 kB
+dist/assets/referrals-C8CohEsZ.js                        0.52 kB │ gzip:   0.27 kB │ map:     3.57 kB
+dist/assets/users-DxlNKxeb.js                            0.52 kB │ gzip:   0.36 kB │ map:     1.14 kB
+dist/assets/useWallet-BX4x2UXN.js                        0.53 kB │ gzip:   0.32 kB │ map:     2.49 kB
+dist/assets/refresh-cw-B51Jr7Hu.js                       0.54 kB │ gzip:   0.37 kB │ map:     1.16 kB
+dist/assets/mail-warning-DJZlT5L3.js                     0.54 kB │ gzip:   0.38 kB │ map:     1.17 kB
+dist/assets/scroll-text-Csy03zfH.js                      0.57 kB │ gzip:   0.37 kB │ map:     1.22 kB
+dist/assets/input-D-0Ur2J-.js                            0.57 kB │ gzip:   0.38 kB │ map:     1.23 kB
+dist/assets/trash-2-C35z0mU8.js                          0.57 kB │ gzip:   0.39 kB │ map:     1.32 kB
+dist/assets/useCountUp-DMQo4L5m.js                       0.59 kB │ gzip:   0.37 kB │ map:     2.67 kB
+dist/assets/progress-B0vouYLx.js                         0.64 kB │ gzip:   0.44 kB │ map:     2.04 kB
+dist/assets/FaqPage-B2f49SdK.js                          0.64 kB │ gzip:   0.40 kB │ map:     0.36 kB
+dist/assets/eye-off-CLZ4L5KE.js                          0.64 kB │ gzip:   0.41 kB │ map:     1.31 kB
+dist/assets/AboutPage-KzTwpWfZ.js                        0.64 kB │ gzip:   0.40 kB │ map:     0.37 kB
+dist/assets/TermsPage-mvXoDeoC.js                        0.64 kB │ gzip:   0.40 kB │ map:     0.37 kB
+dist/assets/PrivacyPage-CyPgF76N.js                      0.65 kB │ gzip:   0.40 kB │ map:     0.38 kB
+dist/assets/CompensationPlanPage-CRERxtV0.js             0.68 kB │ gzip:   0.41 kB │ map:     0.43 kB
+dist/assets/EmptyState-CcZzQ5z1.js                       0.71 kB │ gzip:   0.40 kB │ map:     1.72 kB
+dist/assets/useDocumentMeta-DYq74t6r.js                  0.72 kB │ gzip:   0.39 kB │ map:     2.25 kB
+dist/assets/NotFoundPage-TLJJO13a.js                     0.75 kB │ gzip:   0.45 kB │ map:     1.20 kB
+dist/assets/badge-C4Zg8PCc.js                            0.77 kB │ gzip:   0.45 kB │ map:     1.78 kB
+dist/assets/star-CLgidpr4.js                             0.82 kB │ gzip:   0.45 kB │ map:     1.74 kB
+dist/assets/wallet-Bul7iSvS.js                           0.82 kB │ gzip:   0.43 kB │ map:     1.79 kB
+dist/assets/key-round-ChQ8zpXA.js                        0.90 kB │ gzip:   0.47 kB │ map:     1.88 kB
+dist/assets/switch-DvIPp695.js                           0.91 kB │ gzip:   0.53 kB │ map:     2.14 kB
+dist/assets/FilterBar-CuGWeLSG.js                        0.93 kB │ gzip:   0.53 kB │ map:     2.70 kB
+dist/assets/card-CHkU-sx_.js                             1.07 kB │ gzip:   0.43 kB │ map:     3.24 kB
+dist/assets/password-input-Ch7kan2R.js                   1.10 kB │ gzip:   0.63 kB │ map:     2.62 kB
+dist/assets/ErrorState-BCHj8jxD.js                       1.24 kB │ gzip:   0.70 kB │ map:     2.71 kB
+dist/assets/CmsPageView-C99pZ7Dc.js                      1.33 kB │ gzip:   0.69 kB │ map:     3.66 kB
+dist/assets/sparkles-DMs_ir2p.js                         1.42 kB │ gzip:   0.59 kB │ map:     3.19 kB
+dist/assets/PageHeader-CzY7sJAR.js                       1.58 kB │ gzip:   0.81 kB │ map:     4.31 kB
+dist/assets/chart-DQbwHBX_.js                            1.62 kB │ gzip:   0.84 kB │ map:     6.37 kB
+dist/assets/dialog-D3rdyfXy.js                           1.78 kB │ gzip:   0.89 kB │ map:     4.77 kB
+dist/assets/usePayments-OSE3kz8d.js                      1.99 kB │ gzip:   0.95 kB │ map:     7.57 kB
+dist/assets/usePackages-CwvvWQlR.js                      2.08 kB │ gzip:   0.72 kB │ map:     9.08 kB
+dist/assets/ActivationSuccessDialog-rPx4227_.js          2.35 kB │ gzip:   0.97 kB │ map:     5.59 kB
+dist/assets/tabs-DKmPz5_f.js                             2.38 kB │ gzip:   0.98 kB │ map:     7.70 kB
+dist/assets/KpiCard-B89GFQ9E.js                          2.53 kB │ gzip:   1.25 kB │ map:     7.16 kB
+dist/assets/ForgotPasswordPage-DNWd0G_p.js               2.69 kB │ gzip:   1.24 kB │ map:     6.21 kB
+dist/assets/ResetPasswordPage-GwY8pTIj.js                2.86 kB │ gzip:   1.32 kB │ map:     6.56 kB
+dist/assets/TradingBotStatusCard-BSz2jpOG.js             2.93 kB │ gzip:   1.34 kB │ map:     7.31 kB
+dist/assets/ReferralLinkCard-mFfRhKxO.js                 3.17 kB │ gzip:   1.37 kB │ map:     7.50 kB
+dist/assets/DataTable-C6hfpZw_.js                        3.17 kB │ gzip:   1.36 kB │ map:     9.75 kB
+dist/assets/VerifyEmailPage-D689En2B.js                  3.27 kB │ gzip:   1.42 kB │ map:     8.31 kB
+dist/assets/AdminLogsPage-CGRZ003y.js                    3.35 kB │ gzip:   1.51 kB │ map:     7.83 kB
+dist/assets/AdminSecurityPage-DWBCsdew.js                3.59 kB │ gzip:   1.63 kB │ map:     9.08 kB
+dist/assets/AdminNowpaymentsSettingsPage-Dbkx5dFk.js     3.86 kB │ gzip:   1.71 kB │ map:     8.89 kB
+dist/assets/ContactPage-CJ97Gyvl.js                      3.96 kB │ gzip:   1.42 kB │ map:     9.37 kB
+dist/assets/LoginPage-DG4hSDeB.js                        3.96 kB │ gzip:   1.70 kB │ map:     9.41 kB
+dist/assets/useReports-QgbC6fl3.js                       4.41 kB │ gzip:   1.85 kB │ map:    15.03 kB
+dist/assets/AdminSmtpSettingsPage-gYVSJ5zy.js            4.46 kB │ gzip:   1.86 kB │ map:    10.98 kB
+dist/assets/BlockRenderer-C6WYCDhj.js                    5.27 kB │ gzip:   1.98 kB │ map:    13.48 kB
+dist/assets/BonanzaPage-D0lf8LRY.js                      5.36 kB │ gzip:   2.02 kB │ map:    13.51 kB
+dist/assets/useAdmin-BA92kiz5.js                         5.95 kB │ gzip:   1.44 kB │ map:    33.80 kB
+dist/assets/AdminDashboardPage-CE2djqNw.js               6.02 kB │ gzip:   2.37 kB │ map:    14.74 kB
+dist/assets/MarketOverview-BljgHLDU.js                   6.45 kB │ gzip:   2.48 kB │ map:    18.53 kB
+dist/assets/AdminCompensationSettingsPage-iAJX9ePf.js    7.30 kB │ gzip:   2.54 kB │ map:    21.51 kB
+dist/assets/ReportsPage-DPpVOd__.js                      7.50 kB │ gzip:   2.68 kB │ map:    21.90 kB
+dist/assets/AdminBonanzasPage-C6Ki8loj.js                7.59 kB │ gzip:   2.85 kB │ map:    24.46 kB
+dist/assets/AdminUsersPage-D-icqOOg.js                   7.62 kB │ gzip:   3.02 kB │ map:    21.14 kB
+dist/assets/WalletPage-BngyK8Z1.js                       7.64 kB │ gzip:   3.15 kB │ map:    20.27 kB
+dist/assets/AdminSupportPage-DmCNaftf.js                 7.89 kB │ gzip:   3.13 kB │ map:    24.20 kB
+dist/assets/AdminSiteConfigPage-B0HHZr60.js              8.84 kB │ gzip:   2.74 kB │ map:    24.18 kB
+dist/assets/ActivateMemberPage-CedDhomx.js               8.96 kB │ gzip:   2.89 kB │ map:    23.87 kB
+dist/assets/SupportPage-DsOpghte.js                      9.61 kB │ gzip:   3.61 kB │ map:    27.80 kB
+dist/assets/WithdrawalsPage-Dkl8gD6Z.js                 10.18 kB │ gzip:   3.91 kB │ map:    30.46 kB
+dist/assets/P2PPage-blzzvW9H.js                         10.43 kB │ gzip:   3.74 kB │ map:    29.80 kB
+dist/assets/TradePage-CSNhR4KQ.js                       10.50 kB │ gzip:   4.00 kB │ map:    29.73 kB
+dist/assets/PackagesPage-C2Ruk_PL.js                    11.27 kB │ gzip:   4.11 kB │ map:    31.19 kB
+dist/assets/AdminReportsPage-D4QyqBCa.js                11.50 kB │ gzip:   3.56 kB │ map:    35.23 kB
+dist/assets/RegisterPage-CAlYcpvp.js                    12.21 kB │ gzip:   3.64 kB │ map:    29.78 kB
+dist/assets/TeamPage-DpHa6sG3.js                        12.46 kB │ gzip:   4.10 kB │ map:    36.21 kB
+dist/assets/SettingsPage-DnMlXFb8.js                    14.87 kB │ gzip:   4.12 kB │ map:    40.81 kB
+dist/assets/AdminCmsPagesPage-BzgRjNBK.js               15.00 kB │ gzip:   4.79 kB │ map:    48.18 kB
+dist/assets/AdminUserDetailPage-bKoRb3Mh.js             20.07 kB │ gzip:   5.65 kB │ map:    53.04 kB
+dist/assets/DepositPage-NJoJali8.js                     28.17 kB │ gzip:  10.11 kB │ map:   102.71 kB
+dist/assets/HomePage-BrNdAicw.js                        28.77 kB │ gzip:   7.15 kB │ map:    61.51 kB
+dist/assets/zod-BEndeFBC.js                             29.68 kB │ gzip:  10.96 kB │ map:   194.36 kB
+dist/assets/DashboardPage-CrCKS_yR.js                   30.36 kB │ gzip:   8.49 kB │ map:    80.31 kB
+dist/assets/AppShell-D1-QVY9V.js                        35.21 kB │ gzip:   9.76 kB │ map:   106.30 kB
+dist/assets/query-CKie-e7z.js                           49.72 kB │ gzip:  15.17 kB │ map:   174.90 kB
+dist/assets/support.schema-CJHqbdjE.js                  68.23 kB │ gzip:  15.55 kB │ map:   284.61 kB
+dist/assets/motion-BWyMhlV5.js                         115.49 kB │ gzip:  38.19 kB │ map:   640.37 kB
+dist/assets/index-BqVkKhOA.js                          127.32 kB │ gzip:  43.72 kB │ map:   497.86 kB
+dist/assets/react-BvpgPopp.js                          157.38 kB │ gzip:  51.57 kB │ map:   692.35 kB
+dist/assets/charts-CADbK3GH.js                         578.59 kB │ gzip: 157.65 kB │ map: 1,256.09 kB
+✓ built in 8.60s
+Warning: Detected "engines": { "node": ">=18.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+Installing dependencies...
+up to date in 1s
+103 packages are looking for funding
+run `npm fund` for details
+npm warn allow-scripts 5 packages have install scripts not yet covered by allowScripts:
+npm warn allow-scripts   @scarf/scarf@1.4.0 (postinstall: node ./report.js)
+npm warn allow-scripts   esbuild@0.27.0 (postinstall: node install.js)
+npm warn allow-scripts   esbuild@0.28.1 (postinstall: node install.js)
+npm warn allow-scripts   mongodb-memory-server@11.2.0 (postinstall: node ./postinstall.js)
+npm warn allow-scripts   esbuild@0.21.5 (postinstall: node install.js)
+npm warn allow-scripts
+npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.
+Using TypeScript 5.9.3 (local user-provided)
+Warning: Detected "engines": { "node": ">=18.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+Using TypeScript 5.9.3 (local user-provided)
+Build Completed in /vercel/output [51s]
+Deploying outputs...
+Warning: Provided `memory` setting in `vercel.json` is ignored on Active CPU billing. You can safely remove this setting from your configuration. Learn more: https://vercel.com/docs/fluid-compute/pricing
+Warning: Provided `memory` setting in `vercel.json` is ignored on Active CPU billing. You can safely remove this setting from your configuration. Learn more: https://vercel.com/docs/fluid-compute/pricing
+[2K[1A[2K[G  Production      https://zaminex-pwihfav4s-ukvalley1.vercel.app
+Completing…
+▲ Aliased         https://zaminex.vercel.app
+{
+  "status": "ok",
+  "deployment": {
+    "id": "dpl_UQZWhQLWtVB751zbej3pvErhod9A",
+    "url": "https://zaminex-pwihfav4s-ukvalley1.vercel.app",
+    "inspectorUrl": "https://vercel.com/ukvalley1/zaminex/UQZWhQLWtVB751zbej3pvErhod9A",
+    "readyState": "READY",
+    "target": "production",
+    "deploymentApiUrl": "https://api.vercel.com/v13/deployments/dpl_UQZWhQLWtVB751zbej3pvErhod9A"
+  },
+  "message": "Deployment zaminex-pwihfav4s-ukvalley1.vercel.app ready.",
+  "next": [
+    {
+      "command": "vercel curl https://zaminex-pwihfav4s-ukvalley1.vercel.app",
+      "when": "Verify deployment, including when Deployment Protection is enabled"
+    },
+    {
+      "command": "vercel inspect zaminex-pwihfav4s-ukvalley1.vercel.app",
+      "when": "Inspect deployment"
+    },
+    {
+      "command": "vercel deploy --prod",
+      "when": "Promote to production"
+    }
+  ]
+}

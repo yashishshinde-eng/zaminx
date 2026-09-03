@@ -18,34 +18,41 @@ export function WalletCard({ wallets }: { wallets: DashboardSummary["wallets"] }
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-      className="glass-card glass-card-hover relative overflow-hidden"
+      className="neon-card neon-cyan relative overflow-hidden"
     >
-      {/* Gradient top border accent */}
+      {/* Cyan top accent line (static, complements the traveling beam) */}
       <div
-        className="absolute inset-x-0 top-0 h-[2px]"
+        className="absolute inset-x-0 top-0 h-[2px] z-10"
         style={{
-          background: "linear-gradient(90deg, hsl(var(--blue)), hsl(var(--gold)), hsl(var(--blue)))",
+          background: "linear-gradient(90deg, transparent, #00E5FF, #2979FF, #00E5FF, transparent)",
         }}
       />
 
       {/* Title row */}
-      <div className="flex items-center justify-between p-5 pb-4">
+      <div className="relative z-10 flex items-center justify-between p-5 pb-4">
         <div className="flex items-center gap-3">
-          <div className="icon-box-blue">
-            <Wallet className="size-4 text-gold" />
+          <div
+            className="flex size-10 items-center justify-center rounded-[12px]"
+            style={{
+              background: "rgb(0 213 255 / 0.12)",
+              boxShadow: "0 0 14px -3px rgb(0 213 255 / 0.4), inset 0 0 10px -4px rgb(0 213 255 / 0.3)",
+              border: "1px solid rgb(0 213 255 / 0.22)",
+            }}
+          >
+            <Wallet className="size-4" style={{ color: "#00E5FF", filter: "drop-shadow(0 0 4px rgb(0 213 255 / 0.5))" }} />
           </div>
           <h3 className="section-title">Wallet</h3>
         </div>
         <Link
           to="/app/wallet"
-          className="flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-gold"
+          className="flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-[#00E5FF]"
         >
           View all <ArrowRight className="size-3" />
         </Link>
       </div>
 
       {/* Wallet tiles */}
-      <div className="px-5">
+      <div className="relative z-10 px-5">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {tiles.map((t, i) => (
             <motion.div
@@ -68,7 +75,7 @@ export function WalletCard({ wallets }: { wallets: DashboardSummary["wallets"] }
       </div>
 
       {/* Summary section */}
-      <div className="mx-5 mt-4 space-y-1.5 border-t border-white/[0.06] pt-3 pb-5">
+      <div className="relative z-10 mx-5 mt-4 space-y-1.5 border-t border-white/[0.06] pt-3 pb-5">
         <div className="flex items-center justify-between">
           <span className="metric-label">Available</span>
           <span className="metric-value font-grotesk text-gradient-gold">{formatCurrency(wallets.totalAvailable)}</span>

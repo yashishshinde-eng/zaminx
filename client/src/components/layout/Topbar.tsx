@@ -1,7 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { Moon, Sun, Search, Wallet, ArrowDownToLine, Menu } from "lucide-react";
-import { useTheme } from "@/context/ThemeContext";
+import { Search, Wallet, ArrowDownToLine, Menu } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useDashboardSummary } from "@/hooks/useDashboardSummary";
 import { formatCurrency } from "@/lib/utils";
@@ -49,7 +47,6 @@ interface TopbarProps {
  * the page title, which opens the sidebar drawer.
  */
 export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
-  const { theme, toggleTheme } = useTheme();
   const { user } = useAuth();
   const title = usePageTitle();
   const { data } = useDashboardSummary();
@@ -99,27 +96,6 @@ export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
             <span className="text-gradient-gold">{formatCurrency(data.wallets.totalAvailable)}</span>
           </Link>
         )}
-
-        {/* Theme toggle */}
-        <button
-          type="button"
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          className="relative flex size-9 items-center justify-center rounded-xl text-muted-foreground transition-all duration-200 hover:bg-white/[0.06] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.span
-              key={theme}
-              initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
-              animate={{ opacity: 1, rotate: 0, scale: 1 }}
-              exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute"
-            >
-              {theme === "dark" ? <Sun className="size-[18px]" /> : <Moon className="size-[18px]" />}
-            </motion.span>
-          </AnimatePresence>
-        </button>
 
         {/* Notifications */}
         {/* <NotificationsMenu /> */}

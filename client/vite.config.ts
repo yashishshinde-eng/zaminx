@@ -19,7 +19,9 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/api": {
-        target: "http://localhost:5000",
+        // Default to :5000. Override with API_TARGET when another project
+        // is already using 5000 (e.g. API_TARGET=http://localhost:5001).
+        target: process.env.API_TARGET ?? "http://localhost:5000",
         changeOrigin: true,
       },
     },

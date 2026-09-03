@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   Wallet as WalletIcon,
@@ -19,6 +18,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
 import toast from "react-hot-toast";
 import { RankStars } from "./RankStars";
+import { NeonActionButton } from "@/components/ui/neon";
 import type { DashboardSummary } from "@zeminex/shared";
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -48,20 +48,19 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-/* ── Quick action definitions ─────────────────────────────────── */
-/* Solid gradient fills (top→bottom-right). White icon + label sit
- * directly on the gradient — no inner circle/badge. */
-const actions = [
-  { label: "Deposit", to: "/app/packages", icon: ArrowDownToLine, gradient: "linear-gradient(135deg, #F0CD4A, #E8B923 50%, #C89412)" },
-  { label: "Withdraw", to: "/app/withdrawals", icon: ArrowUpFromLine, gradient: "linear-gradient(135deg, #4FC668, #33A852 50%, #237A3B)" },
-  { label: "Invest", to: "/app/packages", icon: Rocket, gradient: "linear-gradient(135deg, #A78BFA, #8B5CF6 50%, #6D3FD1)" },
+/* ── Hero quick actions — preserve existing routes exactly ────── */
+const heroActions = [
+  { label: "Deposit", to: "/app/packages", icon: ArrowDownToLine, variant: "gold" },
+  { label: "Withdraw", to: "/app/withdrawals", icon: ArrowUpFromLine, variant: "green" },
+  { label: "Invest", to: "/app/packages", icon: Rocket, variant: "violet" },
 ] as const;
-const REFER_GRADIENT = "linear-gradient(135deg, #F8905E, #F0703A 50%, #D45A24)";
 
 /**
- * Premium cinematic portfolio hero — crypto exchange quality.
- * Animated gradient border, floating orbs, gold accents, glass pills.
- * Falls back to static data when backend values are zero/missing.
+ * Premium cinematic portfolio hero — "Living Neon Wallet" edition.
+ * Gold animated neon border, energy glow behind the balance, glowing
+ * number, and 3D neon action cards. Falls back to static data when
+ * backend values are zero/missing. All data/logic/referral behavior
+ * is unchanged from the previous version.
  */
 export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
   const prefersReduced = useReducedMotion();
@@ -96,33 +95,33 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
     }
   };
 
-  // Floating ambient orbs — blue→purple radial with gold accent
+  // Floating ambient orbs — gold-led with blue/purple accents
   const orbs = [
-    { size: 340, left: "-12%", top: "-18%", dur: 14, delay: 0, color: "var(--blue)", opacity: 0.25 },
-    { size: 260, left: "68%", top: "-12%", dur: 17, delay: 1.5, color: "var(--purple)", opacity: 0.22 },
-    { size: 380, left: "72%", top: "40%", dur: 20, delay: 0.8, color: "var(--blue-dark)", opacity: 0.20 },
-    { size: 180, left: "10%", top: "55%", dur: 12, delay: 2.5, color: "var(--gold)", opacity: 0.15 },
-    { size: 140, left: "40%", top: "75%", dur: 11, delay: 1, color: "var(--purple-light)", opacity: 0.12 },
+    { size: 340, left: "-12%", top: "-18%", dur: 14, delay: 0, color: "var(--gold)", opacity: 0.22 },
+    { size: 260, left: "68%", top: "-12%", dur: 17, delay: 1.5, color: "var(--blue)", opacity: 0.18 },
+    { size: 380, left: "72%", top: "40%", dur: 20, delay: 0.8, color: "var(--blue-dark)", opacity: 0.16 },
+    { size: 180, left: "10%", top: "55%", dur: 12, delay: 2.5, color: "var(--gold)", opacity: 0.14 },
+    { size: 140, left: "40%", top: "75%", dur: 11, delay: 1, color: "var(--purple)", opacity: 0.1 },
   ];
 
   return (
     <motion.div
-      className="premium-hero-panel card-shimmer card-glow-animate gradient-border-animated relative overflow-hidden"
+      className="neon-card neon-gold card-shimmer relative overflow-hidden"
       initial="hidden"
       animate="visible"
       variants={prefersReduced ? undefined : containerVariants}
     >
-      {/* ── Background layers ────────────────────────────────── */}
+      {/* ── Background layers (hero richness) ──────────────────── */}
       {/* Base card fill */}
       <div className="absolute inset-0 bg-[hsl(var(--card))]" />
-      {/* Blue→purple radial with gold accent highlights */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_15%_-10%,hsl(var(--blue)/0.18),transparent_55%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_85%_10%,hsl(var(--purple)/0.14),transparent_55%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_90%,hsl(var(--gold)/0.08),transparent_50%)]" />
+      {/* Gold-led radial with blue/purple accent highlights */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_15%_-10%,hsl(var(--gold)/0.16),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_85%_10%,hsl(var(--blue)/0.14),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_90%,hsl(var(--gold)/0.1),transparent_50%)]" />
       {/* Bottom-left purple glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_5%_100%,hsl(var(--purple)/0.10),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_5%_100%,hsl(var(--purple)/0.1),transparent_55%)]" />
       {/* Subtle grid */}
-      <div className="absolute inset-0 grid-pattern opacity-[0.12]" />
+      <div className="absolute inset-0 grid-pattern opacity-[0.1]" />
 
       {/* Floating ambient orbs */}
       {orbs.map((orb, i) => (
@@ -146,16 +145,16 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
       ))}
 
       {/* Gold accent line at top */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
 
       {/* ── Content ──────────────────────────────────────────── */}
-      <div className="relative px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
+      <div className="relative z-10 px-5 py-6 sm:px-8 sm:py-8 lg:px-10 lg:py-10">
         <div className="flex flex-col gap-6">
 
-          {/* ── Row 1: Balance section ────────────────────── */}
-          <motion.div className="flex flex-col gap-3" variants={prefersReduced ? undefined : itemVariants}>
+          {/* ── Row 1: Balance section (hero) ──────────────── */}
+          <motion.div className="relative flex flex-col gap-3 balance-energy-glow" variants={prefersReduced ? undefined : itemVariants}>
             {/* Label + visibility toggle */}
-            <div className="flex items-center justify-between">
+            <div className="relative z-10 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="icon-box-gold size-7">
                   <WalletIcon className="size-3.5 text-gold" />
@@ -174,8 +173,8 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
               </button>
             </div>
 
-            {/* Balance amount */}
-            <div className="relative">
+            {/* Balance amount — premium glowing number */}
+            <div className="relative z-10">
               <motion.p
                 className="metric-value-lg text-3xl sm:text-4xl lg:text-5xl font-grotesk text-gradient-gold stat-glow"
                 initial={false}
@@ -195,7 +194,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
             </div>
 
             {/* Today's earnings pill + membership badge */}
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="relative z-10 flex flex-wrap items-center gap-2.5">
               {/* Today's earnings pill */}
               <span
                 className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold backdrop-blur-md transition-colors ${
@@ -220,42 +219,31 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
                 {rankName}
                 <RankStars name={rankName} size={10} className="ml-0.5" />
               </span>
-
-              {/* Package badge */}
-              {/* <span className="chip-blue inline-flex items-center gap-1.5">
-                <WalletIcon className="size-3" />
-                {packageName}
-              </span> */}
             </div>
           </motion.div>
 
-          {/* ── Row 2: Quick actions ──────────────────────── */}
+          {/* ── Row 2: Quick actions — 3D neon action cards ──── */}
           <motion.div
             className="grid grid-cols-4 gap-2 sm:gap-3"
             variants={prefersReduced ? undefined : itemVariants}
           >
-            {actions.map((a) => (
-              <Link
+            {heroActions.map((a) => (
+              <NeonActionButton
                 key={a.label}
+                icon={a.icon}
+                label={a.label}
+                variant={a.variant}
                 to={a.to}
-                style={{ backgroundImage: a.gradient }}
-                className="group flex flex-col items-center justify-center gap-2 rounded-[16px] p-3.5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 sm:p-4"
-              >
-                <a.icon className="size-5 text-white" strokeWidth={2.2} />
-                <span className="text-[13px] font-bold text-white">{a.label}</span>
-              </Link>
+              />
             ))}
 
             {/* Refer button — copy referral */}
-            <button
-              type="button"
+            <NeonActionButton
+              icon={Users}
+              label="Refer"
+              variant="orange"
               onClick={copyReferral}
-              style={{ backgroundImage: REFER_GRADIENT }}
-              className="group flex flex-col items-center justify-center gap-2 rounded-[16px] p-3.5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 sm:p-4"
-            >
-              <Users className="size-5 text-white" strokeWidth={2.2} />
-              <span className="text-[13px] font-bold text-white">Refer</span>
-            </button>
+            />
           </motion.div>
 
           {/* ── Row 3: Referral code section ──────────────── */}

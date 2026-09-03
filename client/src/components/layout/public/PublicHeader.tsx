@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, Moon, Sun, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import type { SiteConfig } from "@zeminex/shared";
 import { Logo } from "@/components/layout/Logo";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/context/ThemeContext";
 import { useAuth } from "@/context/AuthContext";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnnouncementBar } from "./AnnouncementBar";
 
 export function PublicHeader({ config }: { config: SiteConfig }) {
-  const { theme, toggleTheme } = useTheme();
   const { isAuthenticated } = useAuth();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -75,26 +73,6 @@ export function PublicHeader({ config }: { config: SiteConfig }) {
 
           {/* Actions */}
           <div className="flex items-center gap-2">
-            {/* Theme toggle */}
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="relative flex size-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={theme}
-                  initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
-                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                  exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="absolute"
-                >
-                  {theme === "dark" ? <Sun className="size-[18px]" /> : <Moon className="size-[18px]" />}
-                </motion.span>
-              </AnimatePresence>
-            </button>
-
             <div className="hidden sm:flex sm:items-center sm:gap-2">
               <Button variant="ghost" asChild className="text-foreground/70 hover:text-foreground">
                 <Link to="/login">Sign in</Link>

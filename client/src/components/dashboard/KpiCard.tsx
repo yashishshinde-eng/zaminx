@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
 import { Sparkline } from "./Sparkline";
+import { NEON_COLORS, type NeonVariant } from "@/components/ui/neon";
 
 interface KpiCardProps {
   icon: LucideIcon;
@@ -14,6 +15,8 @@ interface KpiCardProps {
   format?: "currency" | "number";
   className?: string;
   delay?: number;
+  /** Neon color identity for the animated border. */
+  variant?: NeonVariant;
 }
 
 /**
@@ -30,6 +33,7 @@ export function KpiCard({
   format = "currency",
   className,
   delay = 0,
+  variant = "blue",
 }: KpiCardProps) {
   const animated = useCountUp(value, 900);
   const display =
@@ -38,6 +42,7 @@ export function KpiCard({
       : Math.round(animated).toLocaleString();
   const hasTrend = typeof trend === "number" && Number.isFinite(trend) && trend !== 0;
   const trendPositive = (trend ?? 0) >= 0;
+  const neon = NEON_COLORS[variant];
 
   return (
     <motion.div
@@ -46,7 +51,7 @@ export function KpiCard({
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay }}
       className={cn("group", className)}
     >
-      <div className="glass-card glass-card-hover relative overflow-hidden p-5 sm:p-6">
+      <div className={cn("neon-card", `neon-${variant}`, "relative overflow-hidden p-5 sm:p-6")}>
         {/* ── Inner radial sheen overlay ────────────────── */}
         <div
           className="pointer-events-none absolute inset-0 rounded-[22px]"
@@ -66,11 +71,22 @@ export function KpiCard({
         />
 
         {/* ── Top section: icon + label, trend pill ────── */}
-        <div className="relative flex items-start justify-between gap-3">
+        <div className="relative z-10 flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
-            {/* Gradient icon container */}
-            <div className="flex size-10 shrink-0 items-center justify-center rounded-[12px] bg-gradient-to-br from-blue/20 to-purple/20 shadow-[0_0_12px_-2px_hsl(var(--blue)/0.2)]">
-              <Icon className="size-[18px] text-gold" strokeWidth={2.2} />
+            {/* Neon icon container — tinted by card variant */}
+            <div
+              className="flex size-10 shrink-0 items-center justify-center rounded-[12px]"
+              style={{
+                background: `rgb(${neon.rgb} / 0.12)`,
+                boxShadow: `0 0 14px -3px rgb(${neon.rgb} / 0.4), inset 0 0 10px -4px rgb(${neon.rgb} / 0.3)`,
+                border: `1px solid rgb(${neon.rgb} / 0.22)`,
+              }}
+            >
+              <Icon
+                className="size-[18px]"
+                style={{ color: neon.a, filter: `drop-shadow(0 0 4px rgb(${neon.rgb} / 0.5))` }}
+                strokeWidth={2.2}
+              />
             </div>
             <div>
               <p className="metric-label truncate text-xs font-medium text-muted-foreground">

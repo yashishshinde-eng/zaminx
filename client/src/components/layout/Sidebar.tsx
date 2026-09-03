@@ -7,6 +7,7 @@ import {
   Package,
   Users,
   Gift,
+  TrendingUp,
   FileText,
   Settings,
   ShieldCheck,
@@ -44,6 +45,7 @@ const NAV: NavItem[] = [
   { label: "P2P", to: "/app/p2p", icon: ArrowRightLeft, accent: "success" },
   { label: "Withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
   { label: "Packages", to: "/app/packages", icon: Package, accent: "gold" },
+  { label: "Trade", to: "/app/trade", icon: TrendingUp, accent: "blue" },
   { label: "Team", to: "/app/team", icon: Users, accent: "purple" },
   { label: "Activate Member", to: "/app/activate-member", icon: UserPlus, accent: "purple" },
   { label: "Bonanza", to: "/app/bonanzas", icon: Gift },
@@ -73,7 +75,7 @@ interface NavGroup {
 
 const USER_GROUPS: NavGroup[] = [
   { label: "Overview", items: NAV.filter((i) => i.label === "Dashboard" || i.label === "Reports") },
-  { label: "Earnings", items: NAV.filter((i) => ["Wallet", "Deposit", "P2P", "Withdrawals", "Packages"].includes(i.label)) },
+  { label: "Earnings", items: NAV.filter((i) => ["Wallet", "Deposit", "P2P", "Withdrawals", "Packages", "Trade"].includes(i.label)) },
   { label: "Network", items: NAV.filter((i) => ["Team", "Activate Member", "Bonanza"].includes(i.label)) },
   { label: "Account", items: NAV.filter((i) => i.label === "Support" || i.label === "Settings") },
 ];

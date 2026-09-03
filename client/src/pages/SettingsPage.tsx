@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import { Eye, EyeOff, Wallet, KeyRound, Sun, Moon, Bell, UserCog, CheckCircle2, Mail, BadgeCheck } from "lucide-react";
+import { Eye, EyeOff, Wallet, KeyRound, Bell, UserCog, CheckCircle2, Mail, BadgeCheck } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,9 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
-import { useTheme } from "@/context/ThemeContext";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 import { sanitizePinEvent } from "@/lib/pin";
 import {
@@ -66,9 +64,6 @@ export function SettingsPage() {
           </motion.div>
           <motion.div variants={staggerItem}>
             <TransactionPinForm />
-          </motion.div>
-          <motion.div variants={staggerItem}>
-            <ThemeSection />
           </motion.div>
           <motion.div variants={staggerItem}>
             <NotificationsForm />
@@ -478,52 +473,6 @@ function TransactionPinForm() {
             </Button>
           </div>
         </form>
-      </CardContent>
-    </Card>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  4. Theme                                                           */
-/* ------------------------------------------------------------------ */
-function ThemeSection() {
-  const { theme, setTheme } = useTheme();
-  const options: { value: "light" | "dark"; label: string; icon: typeof Sun }[] = [
-    { value: "light", label: "Light", icon: Sun },
-    { value: "dark", label: "Dark", icon: Moon },
-  ];
-
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-base">
-          <Sun className="size-4 text-primary" /> Theme
-        </CardTitle>
-        <CardDescription>Synced to your account and applied on every device.</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {options.map((o) => {
-            const active = theme === o.value;
-            return (
-              <button
-                key={o.value}
-                type="button"
-                onClick={() => setTheme(o.value)}
-                aria-pressed={active}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg border p-4 text-left transition-colors",
-                  active ? "border-primary bg-primary/5" : "hover:bg-muted/40",
-                )}
-              >
-                <o.icon className={cn("size-5", active ? "text-primary" : "text-muted-foreground")} />
-                <span className={cn("font-medium", active ? "text-foreground" : "text-muted-foreground")}>
-                  {o.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
       </CardContent>
     </Card>
   );

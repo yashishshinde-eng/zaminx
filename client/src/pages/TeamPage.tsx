@@ -170,6 +170,11 @@ export function TeamPage() {
         title="Team"
         description="Your referral network — link, statistics, and the referral tree."
         breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Team" }]}
+        actions={
+          <Button asChild variant="outline" size="sm">
+            <Link to="/app/activate-member"><UserPlus className="size-4" /> Activate for member</Link>
+          </Button>
+        }
       />
 
       <div className="mt-6 space-y-6">

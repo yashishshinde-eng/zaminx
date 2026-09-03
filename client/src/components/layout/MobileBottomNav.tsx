@@ -18,7 +18,8 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
 import { useDashboardSummary } from "@/hooks/useDashboardSummary";
 import { formatCurrency } from "@/lib/utils";
-import { useState } from "react";
+import { NEON_COLORS, type NeonVariant } from "@/components/ui/neon";
+import { useState, type CSSProperties } from "react";
 
 /* ── Navigation items for the full menu ─────────────────────── */
 interface NavItem {
@@ -44,14 +45,15 @@ interface BottomNavItem {
   label: string;
   to: string;
   icon: LucideIcon;
+  variant: NeonVariant;
 }
 
 const BOTTOM_NAV: BottomNavItem[] = [
-  { label: "Home", to: "/app", icon: LayoutDashboard },
-  { label: "Wallet", to: "/app/wallet", icon: Wallet },
-  { label: "Trade", to: "/app/packages", icon: Package },
-  { label: "Team", to: "/app/team", icon: Users },
-  { label: "Reports", to: "/app/reports", icon: FileText },
+  { label: "Home", to: "/app", icon: LayoutDashboard, variant: "gold" },
+  { label: "Wallet", to: "/app/wallet", icon: Wallet, variant: "cyan" },
+  { label: "Trade", to: "/app/trade", icon: Package, variant: "blue" },
+  { label: "Team", to: "/app/team", icon: Users, variant: "magenta" },
+  { label: "Reports", to: "/app/reports", icon: FileText, variant: "goldcyan" },
 ];
 
 /* ── Grouped sections for the full menu ───────────────────── */
@@ -186,7 +188,7 @@ export function MobileBottomNav() {
         )}
       </AnimatePresence>
 
-      {/* ── Bottom navigation bar ──────────────────────────────── */}
+      {/* ── Bottom navigation bar — Living Neon per-item lighting ── */}
       <nav className="fixed inset-x-0 bottom-0 z-40 lg:hidden" aria-label="Mobile navigation">
         {/* Fade gradient above the nav */}
         <div className="pointer-events-none absolute inset-x-0 -top-8 h-8 bg-gradient-to-t from-background via-background/60 to-transparent" />
@@ -198,30 +200,36 @@ export function MobileBottomNav() {
                 item.to === "/app"
                   ? location.pathname === "/app"
                   : location.pathname.startsWith(item.to);
+              const c = NEON_COLORS[item.variant];
+              const activeStyle = {
+                "--nav-glow-rgb": c.rgb,
+                "--nav-neon-a": c.a,
+              } as CSSProperties;
 
               return (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   end={item.to === "/app"}
-                  className="relative flex min-w-0 flex-col items-center gap-0.5 px-2 py-1"
+                  className="relative flex min-w-0 flex-col items-center gap-0.5 rounded-[14px] px-2 py-1 transition-colors duration-200"
+                  style={isActive ? activeStyle : undefined}
                 >
-                  {/* Animated background pill */}
+                  {/* Neon active indicator (per-item color) */}
                   {isActive && (
                     <motion.span
                       layoutId="mobile-nav-active"
-                      className="absolute inset-0 rounded-[14px] gradient-blue"
+                      className="neon-nav-glow"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      style={{ boxShadow: "0 0 16px -2px hsl(var(--blue) / 0.45)" }}
                     />
                   )}
 
                   {/* Icon container */}
                   <span
                     className={cn(
-                      "relative z-10 flex size-7 items-center justify-center rounded-xl transition-transform duration-200 active:scale-[0.88]",
-                      isActive && "text-primary-foreground",
+                      "neon-nav-icon relative z-10 flex size-7 items-center justify-center rounded-xl transition-transform duration-200 active:scale-[0.88]",
+                      isActive ? "is-active" : "",
                     )}
+                    style={{ color: isActive ? c.a : undefined }}
                   >
                     <item.icon className="size-[18px]" />
                   </span>
@@ -230,8 +238,9 @@ export function MobileBottomNav() {
                   <span
                     className={cn(
                       "relative z-10 truncate text-[10px] font-semibold leading-none transition-colors duration-200",
-                      isActive ? "text-primary-foreground" : "text-muted-foreground",
+                      isActive ? "text-foreground" : "text-muted-foreground",
                     )}
+                    style={{ color: isActive ? c.a : undefined }}
                   >
                     {item.label}
                   </span>

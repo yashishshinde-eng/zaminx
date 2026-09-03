@@ -19,6 +19,14 @@
   inherits: false;
 }
 
+/* Living Neon Wallet — traveling light beam angle. Registered so it
+ * can be animated by the browser compositor (GPU-friendly, no JS). */
+@property --neon-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @layer base {
   :root {
     --gold: 45 100% 48%;
@@ -884,6 +892,178 @@
   @keyframes gradient-rotate {
     0% { --gradient-angle: 0deg; }
     100% { --gradient-angle: 360deg; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════
+   *  LIVING NEON WALLET — Signature animated border system
+   *
+   *  Every premium card carries a colorful animated border that reads
+   *  as a soft electric light continuously traveling around its
+   *  perimeter. Each card has its own color identity, set through
+   *  per-variant custom properties:
+   *
+   *    --neon-a / --neon-b     bright arc colors (hex)
+   *    --neon-glow-rgb         "R G B" triplet for box-shadow alpha
+   *
+   *  Layers (back → front):
+   *    1. Dark glass surface (the element itself)
+   *    2. Thin premium static gradient border (element border)
+   *    3. Moving light beam around perimeter (::before, masked conic)
+   *    4. Very soft outer neon glow (box-shadow)
+   *    5. Extremely subtle inner glow (inset box-shadow)
+   *
+   *  Animation: 10s per full cycle — slow and elegant, never flashing.
+   * ═══════════════════════════════════════════════════════════════ */
+
+  .neon-card {
+    @apply relative overflow-hidden rounded-[22px] backdrop-blur-2xl;
+    /* Dark glass surface — premium, readable, not too transparent */
+    background:
+      linear-gradient(150deg, rgba(10, 18, 35, 0.72), rgba(8, 17, 31, 0.62));
+    /* Layer 2: thin static gradient border + layer 4/5: glows */
+    border: 1px solid rgb(var(--neon-glow-rgb) / 0.18);
+    box-shadow:
+      var(--shadow-card),
+      0 0 30px -6px rgb(var(--neon-glow-rgb) / 0.22),     /* outer neon glow */
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.07),           /* upper edge reflection */
+      inset 0 0 22px -10px rgb(var(--neon-glow-rgb) / 0.20);/* inner glow */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s ease, border-color 0.4s ease;
+  }
+
+  /* Layer 3: the traveling light beam.
+   * A conic gradient with a single bright arc, masked down to a thin
+   * ring so only the border shows. The arc rotates slowly around the
+   * perimeter. The transparent regions reveal the static border below. */
+  .neon-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+      from var(--neon-angle),
+      var(--neon-a) 0%,
+      var(--neon-b) 7%,
+      transparent 24%,
+      transparent 100%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+    animation: neon-spin 10s linear infinite;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.95;
+  }
+  @keyframes neon-spin {
+    to { --neon-angle: 360deg; }
+  }
+
+  /* Hover: lift + intensify glow (desktop / fine pointer) */
+  @media (hover: hover) {
+    .neon-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        var(--shadow-card-hover),
+        0 0 44px -6px rgb(var(--neon-glow-rgb) / 0.36),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 26px -10px rgb(var(--neon-glow-rgb) / 0.28);
+      border-color: rgb(var(--neon-glow-rgb) / 0.34);
+    }
+  }
+
+  /* Static-border mode: freeze the beam, keep the glow. */
+  .neon-card-static::before { animation: none; opacity: 0.5; }
+
+  /* ── Color identity variants ──────────────────────────────── */
+  .neon-gold    { --neon-a: #FFD43B; --neon-b: #FFB300; --neon-glow-rgb: 255 196 59; }
+  .neon-green   { --neon-a: #22E676; --neon-b: #00C853; --neon-glow-rgb: 34 230 118; }
+  .neon-violet  { --neon-a: #9B5CFF; --neon-b: #5B5CFF; --neon-glow-rgb: 120 92 255; }
+  .neon-blue    { --neon-a: #00B7FF; --neon-b: #4169FF; --neon-glow-rgb: 0 167 255; }
+  .neon-orange  { --neon-a: #FF8A3D; --neon-b: #FF4D6D; --neon-glow-rgb: 255 110 90; }
+  .neon-cyan    { --neon-a: #00E5FF; --neon-b: #2979FF; --neon-glow-rgb: 0 213 255; }
+  .neon-magenta { --neon-a: #8B5CFF; --neon-b: #FF4FD8; --neon-glow-rgb: 200 90 240; }
+  .neon-goldcyan{ --neon-a: #FFD54A; --neon-b: #00D9FF; --neon-glow-rgb: 255 200 80; }
+
+  /* ── Glow icon: line icon with controlled neon edge glow ──── */
+  .glow-icon {
+    @apply relative flex items-center justify-center rounded-2xl;
+    color: var(--gi-color);
+    background: rgb(var(--gi-glow-rgb) / 0.1);
+    box-shadow:
+      0 0 16px -4px rgb(var(--gi-glow-rgb) / 0.45),
+      inset 0 0 12px -4px rgb(var(--gi-glow-rgb) / 0.25);
+    border: 1px solid rgb(var(--gi-glow-rgb) / 0.22);
+  }
+  .glow-icon svg { filter: drop-shadow(0 0 5px rgb(var(--gi-glow-rgb) / 0.55)); }
+
+  /* ── Neon action button — premium 3D mini action card ─────── */
+  /* Used together with .neon-card (which supplies the glass surface,
+   * border, glows and the traveling-beam ::before). */
+  .neon-action {
+    @apply relative flex flex-col items-center justify-center gap-2 rounded-[18px] p-3.5 sm:p-4;
+    background: linear-gradient(160deg, rgba(12, 20, 38, 0.82), rgba(8, 16, 30, 0.7));
+    will-change: transform;
+  }
+  @media (hover: hover) {
+    .neon-action:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow:
+        var(--shadow-card-hover),
+        0 0 36px -6px rgb(var(--neon-glow-rgb) / 0.5),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 22px -10px rgb(var(--neon-glow-rgb) / 0.34);
+    }
+  }
+  .neon-action:active { transform: scale(0.96); transition-duration: 0.12s; }
+  .neon-action.is-disabled { opacity: 0.42; cursor: not-allowed; }
+  .neon-action.is-disabled::before { animation: none; opacity: 0.4; }
+
+  /* ── Neon bottom-nav active indicator ────────────────────── */
+  .neon-nav-item {
+    @apply relative flex min-w-0 flex-col items-center gap-0.5 rounded-[14px] px-2 py-1 transition-colors duration-200;
+    color: hsl(var(--muted-foreground));
+  }
+  .neon-nav-item.is-active { color: var(--nav-neon-a); }
+  .neon-nav-item .neon-nav-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    border: 1px solid rgb(var(--nav-glow-rgb) / 0.5);
+    background: rgb(var(--nav-glow-rgb) / 0.08);
+    box-shadow:
+      0 0 18px -4px rgb(var(--nav-glow-rgb) / 0.55),
+      inset 0 0 14px -6px rgb(var(--nav-glow-rgb) / 0.4);
+    pointer-events: none;
+  }
+  .neon-nav-item .neon-nav-icon { filter: drop-shadow(0 0 4px rgb(var(--nav-glow-rgb) / 0.5)); }
+
+  /* ── Hero balance energy glow ─────────────────────────────── */
+  .balance-energy-glow::after {
+    content: "";
+    @apply absolute pointer-events-none rounded-full;
+    inset: -30% 10% auto 10%;
+    height: 220%;
+    background: radial-gradient(ellipse 60% 40% at 50% 30%,
+      rgb(var(--neon-glow-rgb) / 0.22), transparent 70%);
+    filter: blur(24px);
+    z-index: 0;
+    animation: neon-breathe 7s ease-in-out infinite;
+  }
+  @keyframes neon-breathe {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.04); }
+  }
+
+  /* ── Reduced motion: kill travel/float/breathe, keep static glow ─ */
+  @media (prefers-reduced-motion: reduce) {
+    .neon-card::before { animation: none; }
+    .neon-action::before { animation: none; }
+    .balance-energy-glow::after { animation: none; }
+    .neon-card,
+    .neon-action { transition: none; }
   }
 
   /* ── Hover lift effect ─────────────────────────────── */

@@ -1,11 +1,21 @@
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full dark" style="color-scheme: dark;">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#07121E" />
     <title>Zeminex Global</title>
+    <script>
+      // Permanent dark mode — force the dark class before first paint to avoid
+      // any light-theme flash. This is belt-and-suspenders to the <html class="dark">
+      // attribute above; the ThemeProvider keeps it applied for the app lifetime.
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("dark");
+        root.style.colorScheme = "dark";
+      })();
+    </script>
   </head>
   <body class="h-full">
     <div id="root" class="h-full"></div>

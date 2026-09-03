@@ -49,24 +49,31 @@ export function MarketOverview() {
 
   return (
     <motion.div
-      className="glass-card relative p-5 sm:p-6"
+      className="neon-card neon-blue relative p-5 sm:p-6"
       initial="hidden"
       animate="visible"
       variants={prefersReduced ? undefined : containerVariants}
     >
       {/* ── Inner highlight ─────────────────────────────────── */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent rounded-[22px]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent rounded-[22px] z-10" />
 
       {/* ── Title row ────────────────────────────────────────── */}
-      <motion.div className="flex items-center gap-3 mb-5" variants={prefersReduced ? undefined : itemVariants}>
-        <div className="icon-box-blue">
-          <TrendingUp className="size-4 text-blue" />
+      <motion.div className="relative z-10 flex items-center gap-3 mb-5" variants={prefersReduced ? undefined : itemVariants}>
+        <div
+          className="flex size-10 items-center justify-center rounded-[12px]"
+          style={{
+            background: "rgb(0 167 255 / 0.12)",
+            boxShadow: "0 0 14px -3px rgb(0 167 255 / 0.4), inset 0 0 10px -4px rgb(0 167 255 / 0.3)",
+            border: "1px solid rgb(0 167 255 / 0.22)",
+          }}
+        >
+          <TrendingUp className="size-4" style={{ color: "#00B7FF", filter: "drop-shadow(0 0 4px rgb(0 167 255 / 0.5))" }} />
         </div>
         <h2 className="section-title">Market Overview</h2>
       </motion.div>
 
       {/* ── Trending Coins ───────────────────────────────────── */}
-      <motion.div className="mb-6" variants={prefersReduced ? undefined : itemVariants}>
+      <motion.div className="relative z-10 mb-6" variants={prefersReduced ? undefined : itemVariants}>
         <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-3">
           Trending Coins
         </h3>
@@ -118,7 +125,7 @@ export function MarketOverview() {
       </motion.div>
 
       {/* ── Top Movers ────────────────────────────────────────── */}
-      <motion.div className="mb-5" variants={prefersReduced ? undefined : itemVariants}>
+      <motion.div className="relative z-10 mb-5" variants={prefersReduced ? undefined : itemVariants}>
         <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-3">
           Top Movers
         </h3>
