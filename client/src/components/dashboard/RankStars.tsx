@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
 /** Max rungs on the ladder above Starter (1 Star … 10 Star). */
@@ -33,12 +34,13 @@ export function RankStars({
   max?: number;
   className?: string;
 }) {
+  const { t } = useTranslation();
   const level = rankStarCount(name);
   return (
     <span
       className={cn("inline-flex items-center", className)}
       role="img"
-      aria-label={`${level} of ${max} stars`}
+      aria-label={t("rankStars.ariaLabel", { level, max })}
     >
       {Array.from({ length: max }).map((_, i) => (
         <Star

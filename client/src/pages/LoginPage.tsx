@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@zeminex/shared";
 import type { LoginBody } from "@zeminex/shared";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { ArrowRight, ShieldCheck, Wallet, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +19,7 @@ interface LocationState {
 }
 
 export function LoginPage() {
+  const { t } = useTranslation();
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,7 +35,7 @@ export function LoginPage() {
     setSubmitting(true);
     try {
       const user = await login(values.email, values.password);
-      toast.success(`Welcome back, ${user.name}`);
+      toast.success(t("login.welcomeBack", { name: user.name }));
       const from = (location.state as LocationState)?.from;
       const isAdmin = user.role === "admin";
       const home = isAdmin ? "/app/admin" : "/app";
@@ -62,15 +64,15 @@ export function LoginPage() {
 
         <div className="relative z-10 max-w-md text-center text-primary-foreground">
           <Logo className="mx-auto size-16 shadow-glow-blue" />
-          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">Welcome to Zeminex Global</h1>
+          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">{t("login.heroTitle")}</h1>
           <p className="mt-3 text-lg text-primary-foreground/80">
-            Your premium investment platform. Grow your portfolio with confidence.
+            {t("login.heroSubtitle")}
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4">
             {[
-              { icon: Wallet, label: "Multi-Wallet" },
-              { icon: TrendingUp, label: "Smart Analytics" },
-              { icon: ShieldCheck, label: "Bank-Level Security" },
+              { icon: Wallet, label: t("login.featureWallet") },
+              { icon: TrendingUp, label: t("login.featureAnalytics") },
+              { icon: ShieldCheck, label: t("login.featureSecurity") },
             ].map((item) => (
               <div key={item.label} className="rounded-2xl bg-white/10 p-4 text-center backdrop-blur-sm">
                 <item.icon className="mx-auto size-6" />
@@ -91,30 +93,35 @@ export function LoginPage() {
 
           <div className="glass-card p-6 sm:p-8">
             <div className="mb-6 text-center">
-              <h2 className="font-grotesk text-2xl font-bold tracking-tight">Welcome back</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Sign in to your Zeminex Global account</p>
+              <h2 className="font-grotesk text-2xl font-bold tracking-tight">{t("login.title")}</h2>
+              <p className="mt-1 text-sm text-muted-foreground">{t("login.subtitle")}</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("login.email")}</Label>
                 <Input id="email" type="email" autoComplete="email" placeholder="you@example.com" {...register("email")} />
                 {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">{t("login.password")}</Label>
+                  <Link to="/forgot-password" className="text-sm font-medium text-gold hover:underline">
+                    {t("login.forgotPassword")}
+                  </Link>
+                </div>
                 <PasswordInput id="password" autoComplete="current-password" placeholder="••••••••" {...register("password")} />
                 {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
               </div>
               <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
-                {submitting ? "Signing in…" : <>Sign in <ArrowRight className="size-4" /></>}
+                {submitting ? t("login.signingIn") : <>{t("login.signIn")} <ArrowRight className="size-4" /></>}
               </Button>
             </form>
 
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              Don&apos;t have an account?{" "}
+              {t("login.noAccount")}{" "}
               <Link to="/register" className="font-medium text-gold hover:underline">
-                Create one
+                {t("login.createOne")}
               </Link>
             </p>
           </div>

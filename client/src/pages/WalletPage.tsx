@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Wallet as WalletIcon, Coins, TrendingUp, PiggyBank } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, ErrorState, DataTable, FilterBar, type Column } from "@/components/shared";
@@ -13,37 +14,39 @@ import { staggerContainer, staggerItem } from "@/lib/motion";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 import type { WalletBalances, WalletTxRow, WalletType } from "@zeminex/shared";
 
-const WALLET_FILTERS: { value: "all" | WalletType; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "main", label: "Main" },
-  { value: "bonus", label: "Bonus" },
-  { value: "trading", label: "Trading" },
+const WALLET_FILTERS: { value: "all" | WalletType; labelKey: string }[] = [
+  { value: "all", labelKey: "common.all" },
+  { value: "main", labelKey: "wallet.main" },
+  { value: "bonus", labelKey: "wallet.bonus" },
+  { value: "trading", labelKey: "wallet.trading" },
 ];
 
-const TX_TYPES: { value: string; label: string }[] = [
-  { value: "", label: "All types" },
-  { value: "deposit", label: "Deposit" },
-  { value: "trading_yield", label: "Trade yield cashflows" },
-  { value: "direct_bonus", label: "Direct connect bonus" },
-  { value: "team_bonus", label: "Daily team energy bonus" },
-  { value: "community_bonus", label: "Community monthly bonus" },
-  { value: "rank_reward", label: "Rank and reward bonus" },
-  { value: "bonanza", label: "Bonanza" },
-  { value: "p2p_transfer_out", label: "P2P Transfer Out" },
-  { value: "p2p_transfer_in", label: "P2P Transfer In" },
-  { value: "adjustment", label: "Adjustment" },
+const TX_TYPES: { value: string; labelKey: string }[] = [
+  { value: "", labelKey: "wallet.allTypes" },
+  { value: "deposit", labelKey: "wallet.typeDeposit" },
+  { value: "trading_yield", labelKey: "wallet.typeTradingYield" },
+  { value: "direct_bonus", labelKey: "wallet.typeDirectBonus" },
+  { value: "team_bonus", labelKey: "wallet.typeTeamBonus" },
+  { value: "community_bonus", labelKey: "wallet.typeCommunityBonus" },
+  { value: "rank_reward", labelKey: "wallet.typeRankReward" },
+  { value: "bonanza", labelKey: "wallet.typeBonanza" },
+  { value: "p2p_transfer_out", labelKey: "wallet.typeP2pOut" },
+  { value: "p2p_transfer_in", labelKey: "wallet.typeP2pIn" },
+  { value: "adjustment", labelKey: "wallet.typeAdjustment" },
 ];
 
 function walletVariant(w: WalletType) {
   return w === "main" ? "default" : w === "bonus" ? "secondary" : "warning";
 }
 
-function typeLabel(t: string): string {
-  return TX_TYPES.find((x) => x.value === t)?.label ?? t;
+function typeLabel(t: (key: string) => string, type: string): string {
+  const entry = TX_TYPES.find((x) => x.value === type);
+  return entry ? t(entry.labelKey) : type;
 }
 
 /** /app/wallet — three wallet balances + immutable ledger history. */
 export function WalletPage() {
+  const { t } = useTranslation();
   const [walletFilter, setWalletFilter] = useState<"all" | WalletType>("all");
   const [typeFilter, setTypeFilter] = useState<string>("");
   const [search, setSearch] = useState("");
@@ -81,11 +84,11 @@ export function WalletPage() {
     () => [
       {
         key: "detail",
-        header: "Detail",
+        header: t("wallet.columnDetail"),
         cell: (r) => (
           <div className="min-w-0 space-y-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-medium">{typeLabel(r.type)}</span>
+              <span className="font-medium">{typeLabel(t, r.type)}</span>
               <Badge variant={walletVariant(r.wallet)} className="capitalize">
                 {r.wallet}
               </Badge>
@@ -96,7 +99,7 @@ export function WalletPage() {
       },
       {
         key: "amount",
-        header: "Amount",
+        header: t("wallet.columnAmount"),
         align: "right",
         cell: (r) => (
           <span className={cn("whitespace-nowrap font-semibold tabular-nums", r.direction === "credit" ? "text-success" : "text-destructive")}>
@@ -107,7 +110,7 @@ export function WalletPage() {
       },
       {
         key: "balance",
-        header: "Balance",
+        header: t("wallet.columnBalance"),
         align: "right",
         cell: (r) => (
           <span className="whitespace-nowrap tabular-nums text-muted-foreground">{formatCurrency(r.availableAfter)}</span>
@@ -115,25 +118,25 @@ export function WalletPage() {
       },
       {
         key: "date",
-        header: "Date",
+        header: t("wallet.columnDate"),
         cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
       },
     ],
-    [],
+    [t],
   );
 
   return (
     <AppShell>
       <PageHeader
-        title="Wallet"
-        description="Your balances and the immutable transaction ledger."
-        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Wallet" }]}
+        title={t("wallet.title")}
+        description={t("wallet.description")}
+        breadcrumbs={[{ label: t("common.home"), to: "/" }, { label: t("common.dashboard"), to: "/app" }, { label: t("wallet.title") }]}
       />
 
       <div className="mt-6 space-y-6">
         {/* Balance cards */}
         {wallet.isError ? (
-          <ErrorState message="We couldn't load your wallet balances." onRetry={() => wallet.refetch()} />
+          <ErrorState message={t("wallet.couldNotLoadBalances")} onRetry={() => wallet.refetch()} />
         ) : (
           <BalanceCards wallets={wallet.data} isLoading={wallet.isLoading} />
         )}
@@ -143,7 +146,7 @@ export function WalletPage() {
           <FilterBar
             search={search}
             onSearchChange={setSearch}
-            searchPlaceholder="Search memo…"
+            searchPlaceholder={t("wallet.searchMemo")}
             filters={
               <>
                 <div className="flex rounded-md border p-0.5">
@@ -156,7 +159,7 @@ export function WalletPage() {
                       className="h-8 px-3"
                       onClick={() => setWalletFilter(f.value)}
                     >
-                      {f.label}
+                      {t(f.labelKey)}
                     </Button>
                   ))}
                 </div>
@@ -164,11 +167,11 @@ export function WalletPage() {
                   value={typeFilter}
                   onChange={(e) => setTypeFilter(e.target.value)}
                   className="glass-input h-9 px-3 text-sm"
-                  aria-label="Filter by type"
+                  aria-label={t("wallet.filterByType")}
                 >
-                  {TX_TYPES.map((t) => (
-                    <option key={t.value} value={t.value}>
-                      {t.label}
+                  {TX_TYPES.map((tx) => (
+                    <option key={tx.value} value={tx.value}>
+                      {t(tx.labelKey)}
                     </option>
                   ))}
                 </select>
@@ -181,13 +184,13 @@ export function WalletPage() {
             data={ledger.data?.items ?? []}
             rowKey={(r) => r.id}
             isLoading={ledger.isLoading}
-            error={ledger.isError ? "We couldn't load your ledger." : null}
+            error={ledger.isError ? t("wallet.couldNotLoadLedger") : null}
             onRetry={() => ledger.refetch()}
-            emptyTitle="No transactions yet"
-            emptyDescription="Your deposits, trading yield, and bonuses will appear here."
+            emptyTitle={t("wallet.noTransactions")}
+            emptyDescription={t("wallet.noTransactionsDesc")}
             emptyAction={
               <Button asChild size="sm">
-                <Link to="/app/packages">Activate a package</Link>
+                <Link to="/app/packages">{t("wallet.activatePackage")}</Link>
               </Button>
             }
             page={ledger.data?.page ?? 1}
@@ -210,6 +213,7 @@ interface WalletCardDef {
 
 /** Three wallet balance cards + totals, with animated count-ups and on-hold split bars. */
 function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefined; isLoading: boolean }) {
+  const { t } = useTranslation();
   if (isLoading || !wallets) {
     return (
       <div className="grid gap-4 sm:grid-cols-3">
@@ -223,9 +227,9 @@ function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefi
   }
 
   const cards: WalletCardDef[] = [
-    { label: "Main Wallet", icon: PiggyBank, balance: wallets.main, strip: "from-[#F6B400] to-[#0D6EFD]" },
-    { label: "Bonus Wallet", icon: Coins, balance: wallets.bonus, strip: "from-emerald-500 to-teal-500" },
-    { label: "Trading Wallet", icon: TrendingUp, balance: wallets.trading, strip: "from-amber-500 to-orange-500" },
+    { label: t("wallet.mainWallet"), icon: PiggyBank, balance: wallets.main, strip: "from-[#F6B400] to-[#0D6EFD]" },
+    { label: t("wallet.bonusWallet"), icon: Coins, balance: wallets.bonus, strip: "from-emerald-500 to-teal-500" },
+    { label: t("wallet.tradingWallet"), icon: TrendingUp, balance: wallets.trading, strip: "from-amber-500 to-orange-500" },
   ];
 
   return (
@@ -242,9 +246,9 @@ function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefi
       <motion.div variants={staggerItem}>
         <Card className="glass overflow-hidden">
           <CardContent className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-3">
-            <TotalStat label="Total available" value={wallets.totalAvailable} accent="text-foreground" />
-            <TotalStat label="On hold" value={wallets.totalOnHold} accent="text-warning" />
-            <TotalStat label="Grand total" value={wallets.total} accent="text-gradient-gold" big />
+            <TotalStat label={t("wallet.totalAvailable")} value={wallets.totalAvailable} accent="text-foreground" />
+            <TotalStat label={t("wallet.onHold")} value={wallets.totalOnHold} accent="text-warning" />
+            <TotalStat label={t("wallet.grandTotal")} value={wallets.total} accent="text-gradient-gold" big />
           </CardContent>
         </Card>
       </motion.div>
@@ -253,6 +257,7 @@ function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefi
 }
 
 function WalletBalanceCard({ label, icon: Icon, balance, strip }: WalletCardDef) {
+  const { t } = useTranslation();
   const animated = useCountUp(balance.available, 700);
   const total = balance.available + balance.onHold;
   const availablePct = total > 0 ? Math.round((balance.available / total) * 100) : 100;
@@ -270,16 +275,16 @@ function WalletBalanceCard({ label, icon: Icon, balance, strip }: WalletCardDef)
           <div className="space-y-1">
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">
-                On hold <span className="font-medium tabular-nums">{formatCurrency(balance.onHold)}</span>
+                {t("wallet.onHold")} <span className="font-medium tabular-nums">{formatCurrency(balance.onHold)}</span>
               </span>
-              <span className="tabular-nums text-muted-foreground">{availablePct}% free</span>
+              <span className="tabular-nums text-muted-foreground">{availablePct}% {t("wallet.free")}</span>
             </div>
             <div className="h-1.5 overflow-hidden rounded-full bg-muted">
               <div className="gradient-blue h-full rounded-full transition-all" style={{ width: `${availablePct}%` }} />
             </div>
           </div>
         ) : (
-          <p className="text-xs text-muted-foreground">Fully available</p>
+          <p className="text-xs text-muted-foreground">{t("wallet.fullyAvailable")}</p>
         )}
       </CardContent>
     </Card>

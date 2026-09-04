@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createP2PTransferSchema } from "@zeminex/shared";
 import type { CreateP2PTransferBody, WalletType } from "@zeminex/shared";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, ErrorState, DataTable, type Column } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,10 +20,10 @@ import { checkReferralCode } from "@/lib/referrals";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 import { sanitizePinEvent } from "@/lib/pin";
 
-const WALLET_OPTIONS: { value: WalletType; label: string }[] = [
-  { value: "main", label: "Main" },
-  { value: "bonus", label: "Bonus" },
-  { value: "trading", label: "Trading" },
+const WALLET_OPTIONS: { value: WalletType; labelKey: string }[] = [
+  { value: "main", labelKey: "wallet.main" },
+  { value: "bonus", labelKey: "wallet.bonus" },
+  { value: "trading", labelKey: "wallet.trading" },
 ];
 
 const STATUS_VARIANT: Record<string, "success" | "destructive"> = {
@@ -31,7 +32,15 @@ const STATUS_VARIANT: Record<string, "success" | "destructive"> = {
 };
 
 /** /app/p2p — P2P wallet-to-wallet transfers. */
+const WALLET_FILTER_LABEL_KEY: Record<"all" | WalletType, string> = {
+  all: "common.all",
+  main: "wallet.main",
+  bonus: "wallet.bonus",
+  trading: "wallet.trading",
+};
+
 export function P2PPage() {
+  const { t } = useTranslation();
   const [walletFilter, setWalletFilter] = useState<"all" | WalletType>("all");
   const [page, setPage] = useState(1);
 
@@ -41,13 +50,14 @@ export function P2PPage() {
   );
 
   const transfers = useP2PTransfers(params);
+  const transferColumns = useMemo(() => buildTransferColumns(t), [t]);
 
   return (
     <AppShell>
       <PageHeader
-        title="P2P Transfer"
-        description="Send funds directly to other users on the platform."
-        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "P2P" }]}
+        title={t("p2p.title")}
+        description={t("p2p.description")}
+        breadcrumbs={[{ label: t("common.home"), to: "/" }, { label: t("common.dashboard"), to: "/app" }, { label: t("nav.p2p") }]}
       />
 
       <div className="mt-6 space-y-6">
@@ -56,7 +66,7 @@ export function P2PPage() {
         {/* Transfer history */}
         <section className="space-y-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="font-grotesk text-lg font-bold">Transfer History</h2>
+            <h2 className="font-grotesk text-lg font-bold">{t("p2p.transferHistory")}</h2>
             <div className="flex rounded-[10px] border border-white/[0.08] bg-white/[0.02] p-0.5">
               {(["all", "main", "bonus", "trading"] as const).map((w) => (
                 <button
@@ -70,14 +80,14 @@ export function P2PPage() {
                       : "text-muted-foreground hover:bg-white/[0.06] hover:text-foreground",
                   )}
                 >
-                  {w === "all" ? "All" : w.charAt(0).toUpperCase() + w.slice(1)}
+                  {t(WALLET_FILTER_LABEL_KEY[w])}
                 </button>
               ))}
             </div>
           </div>
 
           {transfers.isError ? (
-            <ErrorState message="We couldn't load your transfers." onRetry={() => transfers.refetch()} />
+            <ErrorState message={t("p2p.couldNotLoad")} onRetry={() => transfers.refetch()} />
           ) : (
             <TransferTable
               columns={transferColumns}
@@ -97,6 +107,7 @@ export function P2PPage() {
 /* ─── Transfer Form ────────────────────────────────────────────── */
 
 function TransferForm() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const inactive = user?.status !== "active";
   const wallet = useWallet();
@@ -166,11 +177,11 @@ function TransferForm() {
 
   const onSubmit = (values: CreateP2PTransferBody) => {
     if (recipientCheck.status !== "valid") {
-      toast.error("Enter a valid recipient referral code before sending.");
+      toast.error(t("p2p.enterValidRecipient"));
       return;
     }
     if (numericAmount > available) {
-      toast.error(`Insufficient balance — ${formatCurrency(available)} in ${selectedWallet} wallet`);
+      toast.error(t("p2p.insufficientBalanceToast", { available: formatCurrency(available), wallet: t(WALLET_OPTIONS.find((w) => w.value === selectedWallet)?.labelKey ?? "wallet.main") }));
       return;
     }
     send.mutate(values, {
@@ -185,14 +196,14 @@ function TransferForm() {
           <div className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-success/20 to-success/10">
             <Send className="size-3.5 text-success" />
           </div>
-          Send Transfer
+          {t("p2p.sendTransfer")}
         </CardTitle>
       </CardHeader>
       <CardContent className="p-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Wallet selector — themed toggle group */}
           <div className="space-y-2">
-            <Label>From Wallet</Label>
+            <Label>{t("p2p.fromWallet")}</Label>
             <div className="flex rounded-[10px] border border-white/[0.08] bg-white/[0.02] p-0.5">
               {WALLET_OPTIONS.map((w) => (
                 <button
@@ -207,7 +218,7 @@ function TransferForm() {
                   )}
                 >
                   <WalletIcon className="size-3.5" />
-                  <span>{w.label}</span>
+                  <span>{t(w.labelKey)}</span>
                   {balances && (
                     <span className={cn(
                       "text-[10px] font-medium tabular-nums",
@@ -226,42 +237,42 @@ function TransferForm() {
           <div className="grid gap-4 sm:grid-cols-2">
             {/* Amount */}
             <div className="space-y-2">
-              <Label htmlFor="amount">Amount (USD)</Label>
+              <Label htmlFor="amount">{t("p2p.amountUsd")}</Label>
               <Input id="amount" type="number" step="0.01" min="0.01" placeholder="0.00" {...register("amount", { valueAsNumber: true })} />
               {errors.amount ? (
                 <p className="text-sm text-destructive">{errors.amount.message}</p>
               ) : insufficient ? (
                 <p className="text-sm text-destructive">
-                  Insufficient balance — {formatCurrency(available)} available in {selectedWallet} wallet
+                  {t("p2p.insufficientBalance", { available: formatCurrency(available), wallet: t(WALLET_OPTIONS.find((w) => w.value === selectedWallet)?.labelKey ?? "wallet.main") })}
                 </p>
               ) : null}
             </div>
 
             {/* Recipient referral code */}
             <div className="space-y-2">
-              <Label htmlFor="referralCode">Recipient Referral Code</Label>
+              <Label htmlFor="referralCode">{t("p2p.recipientCode")}</Label>
               <Input id="referralCode" placeholder="ZAMXXXXXXX" autoComplete="off" {...register("referralCode")} />
               {errors.referralCode ? (
                 <p className="text-sm text-destructive">{errors.referralCode.message}</p>
               ) : recipientCheck.status === "valid" ? (
                 <p className="flex items-center gap-1.5 text-sm text-green-600 dark:text-green-500">
                   <Check className="size-3.5" />
-                  Sending to <span className="font-semibold">{recipientCheck.name}</span>
+                  {t("p2p.sendingTo")} <span className="font-semibold">{recipientCheck.name}</span>
                 </p>
               ) : recipientCheck.status === "self" ? (
                 <p className="flex items-center gap-1.5 text-sm text-destructive">
                   <X className="size-3.5" />
-                  You can&apos;t send to your own referral code
+                  {t("p2p.selfTransferError")}
                 </p>
               ) : recipientCheck.status === "invalid" ? (
                 <p className="flex items-center gap-1.5 text-sm text-destructive">
                   <X className="size-3.5" />
-                  No active user found with that code
+                  {t("p2p.noUserFound")}
                 </p>
               ) : recipientCheck.status === "checking" ? (
                 <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
                   <Loader2 className="size-3.5 animate-spin" />
-                  Verifying recipient…
+                  {t("p2p.verifying")}
                 </p>
               ) : null}
             </div>
@@ -269,14 +280,14 @@ function TransferForm() {
 
           {/* Memo (optional) */}
           <div className="space-y-2">
-            <Label htmlFor="memo">Memo <span className="text-muted-foreground">(optional)</span></Label>
+            <Label htmlFor="memo">{t("p2p.memo")} <span className="text-muted-foreground">({t("p2p.optional")})</span></Label>
             <Input id="memo" placeholder="Payment for..." maxLength={200} {...register("memo")} />
             {errors.memo && <p className="text-sm text-destructive">{errors.memo.message}</p>}
           </div>
 
           {/* Transaction PIN */}
           <div className="space-y-2">
-            <Label htmlFor="txPin">Transaction PIN</Label>
+            <Label htmlFor="txPin">{t("withdrawals.transactionPin")}</Label>
             <Input
               id="txPin"
               type="password"
@@ -298,19 +309,19 @@ function TransferForm() {
 
           <div className="flex flex-col items-start gap-3 pt-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-muted-foreground">
-              Your referral code: <span className="font-mono font-semibold text-foreground">{user?.referralCode}</span>
+              {t("p2p.yourReferralCode")} <span className="font-mono font-semibold text-foreground">{user?.referralCode}</span>
             </p>
             <Button
               type="submit"
               className="btn-premium"
               disabled={send.isPending || insufficient || inactive || recipientCheck.status !== "valid"}
             >
-              {send.isPending ? "Sending…" : <><ArrowRightLeft className="size-4" /> Send Transfer</>}
+              {send.isPending ? t("p2p.sending") : <><ArrowRightLeft className="size-4" /> {t("p2p.sendTransfer")}</>}
             </Button>
           </div>
           {inactive && (
             <p className="text-xs text-muted-foreground">
-              Activate a package to enable transfers.
+              {t("p2p.activateHint")}
             </p>
           )}
         </form>
@@ -334,53 +345,55 @@ interface TransferRow {
   createdAt: string;
 }
 
-const transferColumns: Column<TransferRow>[] = [
-  {
-    key: "detail",
-    header: "Detail",
-    cell: (r) => (
-      <div className="min-w-0 space-y-1">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="font-medium">{r.fromUserName}</span>
-          <ArrowRightLeft className="size-3 text-muted-foreground" />
-          <span className="font-medium">{r.toUserName}</span>
+function buildTransferColumns(t: (key: string) => string): Column<TransferRow>[] {
+  return [
+    {
+      key: "detail",
+      header: t("p2p.columnDetail"),
+      cell: (r) => (
+        <div className="min-w-0 space-y-1">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-medium">{r.fromUserName}</span>
+            <ArrowRightLeft className="size-3 text-muted-foreground" />
+            <span className="font-medium">{r.toUserName}</span>
+          </div>
+          {r.memo && <p className="truncate text-xs text-muted-foreground">{r.memo}</p>}
         </div>
-        {r.memo && <p className="truncate text-xs text-muted-foreground">{r.memo}</p>}
-      </div>
-    ),
-  },
-  {
-    key: "wallet",
-    header: "Wallet",
-    cell: (r) => (
-      <Badge variant="outline" className="capitalize">{r.wallet}</Badge>
-    ),
-  },
-  {
-    key: "amount",
-    header: "Amount",
-    align: "right" as const,
-    cell: (r) => (
-      <span className={cn("whitespace-nowrap font-semibold tabular-nums", r.status === "completed" ? "text-success" : "text-destructive")}>
-        {formatCurrency(r.amount)}
-      </span>
-    ),
-  },
-  {
-    key: "status",
-    header: "Status",
-    cell: (r) => (
-      <Badge variant={STATUS_VARIANT[r.status] ?? "outline"} className="capitalize">
-        {r.status}
-      </Badge>
-    ),
-  },
-  {
-    key: "date",
-    header: "Date",
-    cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
-  },
-];
+      ),
+    },
+    {
+      key: "wallet",
+      header: t("common.wallet"),
+      cell: (r) => (
+        <Badge variant="outline" className="capitalize">{r.wallet}</Badge>
+      ),
+    },
+    {
+      key: "amount",
+      header: t("common.amount"),
+      align: "right" as const,
+      cell: (r) => (
+        <span className={cn("whitespace-nowrap font-semibold tabular-nums", r.status === "completed" ? "text-success" : "text-destructive")}>
+          {formatCurrency(r.amount)}
+        </span>
+      ),
+    },
+    {
+      key: "status",
+      header: t("common.status"),
+      cell: (r) => (
+        <Badge variant={STATUS_VARIANT[r.status] ?? "outline"} className="capitalize">
+          {r.status}
+        </Badge>
+      ),
+    },
+    {
+      key: "date",
+      header: t("common.date"),
+      cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
+    },
+  ];
+}
 
 function TransferTable({
   columns,
@@ -397,14 +410,15 @@ function TransferTable({
   pageCount: number;
   onPageChange: (page: number) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <DataTable
       columns={columns}
       data={data}
       rowKey={(r) => r.id}
       isLoading={isLoading}
-      emptyTitle="No transfers yet"
-      emptyDescription="Send funds to another user using their referral code."
+      emptyTitle={t("p2p.noTransfers")}
+      emptyDescription={t("p2p.noTransfersDesc")}
       page={page}
       pageCount={pageCount}
       onPageChange={onPageChange}

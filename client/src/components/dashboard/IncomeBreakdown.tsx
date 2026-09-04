@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import {
   Coins,
   HandCoins,
@@ -17,14 +19,19 @@ import { RankStars } from "./RankStars";
 
 type IncomeStreamKey = "trading" | "direct" | "team" | "community" | "rankReward" | "bonanza";
 
-const streams: { key: IncomeStreamKey; label: string; icon: LucideIcon; color: string; subtitle: string }[] = [
-  { key: "trading", label: "TRADE YIELD CASHFLOWS", icon: Coins, color: "#E8B923", subtitle: "1-2% daily arbitrage yield" },
-  { key: "direct", label: "DIRECT CONNECT BONUS", icon: HandCoins, color: "#3B82F6", subtitle: "10% on direct activations" },
-  { key: "team", label: "DAILY TEAM ENERGY BONUS", icon: Users, color: "#A855F7", subtitle: "Daily team energy" },
-  { key: "community", label: "COMMUNITY MONTHLY BONUS", icon: Globe, color: "#22C55E", subtitle: "Monthly community bonus" },
-  { key: "rankReward", label: "RANK AND REWARD BONUS", icon: Trophy, color: "#f43f5e", subtitle: "Milestone rank payouts" },
-  { key: "bonanza", label: "Bonanza Reward", icon: Gift, color: "#06b6d4", subtitle: "Time-limited offer rewards" },
-];
+/** Stream label reuses the existing `wallet.type*` keys (same wording,
+ *  uppercased visually via CSS) so the two views agree; only the subtitle
+ *  is unique to this card. */
+function getStreams(t: TFunction): { key: IncomeStreamKey; label: string; icon: LucideIcon; color: string; subtitle: string }[] {
+  return [
+    { key: "trading", label: t("wallet.typeTradingYield"), icon: Coins, color: "#E8B923", subtitle: t("incomeBreakdown.subtitleTrading") },
+    { key: "direct", label: t("wallet.typeDirectBonus"), icon: HandCoins, color: "#3B82F6", subtitle: t("incomeBreakdown.subtitleDirect") },
+    { key: "team", label: t("wallet.typeTeamBonus"), icon: Users, color: "#A855F7", subtitle: t("incomeBreakdown.subtitleTeam") },
+    { key: "community", label: t("wallet.typeCommunityBonus"), icon: Globe, color: "#22C55E", subtitle: t("incomeBreakdown.subtitleCommunity") },
+    { key: "rankReward", label: t("wallet.typeRankReward"), icon: Trophy, color: "#f43f5e", subtitle: t("incomeBreakdown.subtitleRankReward") },
+    { key: "bonanza", label: t("wallet.typeBonanza"), icon: Gift, color: "#06b6d4", subtitle: t("incomeBreakdown.subtitleBonanza") },
+  ];
+}
 
 /* ── Color helpers for per-card accent glow + gradient bars ── */
 function hexToRgba(hex: string, alpha: number): string {
@@ -55,6 +62,8 @@ export function IncomeBreakdown({
   income: DashboardSummary["income"];
   rank: DashboardSummary["account"]["rank"];
 }) {
+  const { t } = useTranslation();
+  const streams = getStreams(t);
   const total = income.total;
   const pct = Math.round(Math.max(0, Math.min(1, rank.progress)) * 100);
   const isMaxRank = !rank.nextRank;
@@ -68,9 +77,9 @@ export function IncomeBreakdown({
     >
       {/* Title row */}
       <div className="flex items-center justify-between p-5 pb-4">
-        <h3 className="section-title">Income Breakdown</h3>
+        <h3 className="section-title">{t("incomeBreakdown.title")}</h3>
         <span className="chip chip-gold">
-          Total earned: <span className="font-bold tabular-nums">{formatCurrency(total)}</span>
+          {t("incomeBreakdown.totalEarned")} <span className="font-bold tabular-nums">{formatCurrency(total)}</span>
         </span>
       </div>
 
@@ -81,7 +90,7 @@ export function IncomeBreakdown({
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
-            <span className="metric-label">Current Rank</span>
+            <span className="metric-label">{t("incomeBreakdown.currentRank")}</span>
             <span className="metric-value font-grotesk text-gradient-gold text-sm">{rank.name}</span>
           </div>
           <div className="mt-1.5">
@@ -90,13 +99,13 @@ export function IncomeBreakdown({
           {isMaxRank ? (
             <div className="mt-1.5 flex items-center gap-1.5">
               <Sparkles className="size-3 text-gold" />
-              <span className="text-[11px] font-medium text-gold">Max rank achieved</span>
+              <span className="text-[11px] font-medium text-gold">{t("incomeBreakdown.maxRankAchieved")}</span>
             </div>
           ) : (
             <div className="mt-2">
               <Progress value={pct} glow className="h-1.5" />
               <div className="mt-1 flex items-center justify-between">
-                <span className="text-[11px] text-muted-foreground">Progress to {rank.nextRank}</span>
+                <span className="text-[11px] text-muted-foreground">{t("incomeBreakdown.progressTo", { next: rank.nextRank })}</span>
                 <span className="text-[11px] font-semibold tabular-nums text-muted-foreground">{pct}%</span>
               </div>
             </div>

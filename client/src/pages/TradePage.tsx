@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader } from "@/components/shared";
 import {
@@ -37,6 +38,7 @@ import {
  * integration — purely informative. See plan: peaceful-meandering-stearns.md.
  */
 export function TradePage() {
+  const { t } = useTranslation();
   const [activePair, setActivePair] = useState<TradePair>(TRADE_PAIRS[0]);
   const [timeframe, setTimeframe] = useState<Timeframe>(DEFAULT_TIMEFRAME);
 
@@ -69,12 +71,12 @@ export function TradePage() {
   return (
     <AppShell>
       <PageHeader
-        title="Trade"
-        description="Live crypto markets — for display only."
+        title={t("nav.trade")}
+        description={t("trade.description")}
         breadcrumbs={[
-          { label: "Home", to: "/" },
-          { label: "Dashboard", to: "/app" },
-          { label: "Trade" },
+          { label: t("common.home"), to: "/" },
+          { label: t("common.dashboard"), to: "/app" },
+          { label: t("nav.trade") },
         ]}
         actions={<ConnectionBadge status={streamStatus} />}
       />

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Gift, Users, CheckCircle2, Lock, Clock, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, EmptyState, ErrorState } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -14,14 +15,15 @@ import type { BonanzaOfferView } from "@zeminex/shared";
 
 /** /app/bonanzas — active bonanza offers with the viewer's progress. */
 export function BonanzaPage() {
+  const { t } = useTranslation();
   const { data, isLoading, isError, refetch } = useBonanzaOverview();
 
   return (
     <AppShell>
       <PageHeader
-        title="Bonanza"
-        description="Time-limited reward offers — hit the direct-referral target to earn."
-        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Bonanza" }]}
+        title={t("nav.bonanza")}
+        description={t("bonanza.description")}
+        breadcrumbs={[{ label: t("common.home"), to: "/" }, { label: t("common.dashboard"), to: "/app" }, { label: t("nav.bonanza") }]}
       />
 
       <div className="mt-6 space-y-6">
@@ -34,7 +36,7 @@ export function BonanzaPage() {
                 <Users className="size-6" />
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Your direct referrals</p>
+                <p className="text-sm text-muted-foreground">{t("bonanza.yourDirectReferrals")}</p>
                 <p className="text-2xl font-bold tabular-nums">
                   <DirectCount value={data?.directCount ?? 0} />
                 </p>
@@ -46,7 +48,7 @@ export function BonanzaPage() {
         {isLoading && <OffersSkeleton />}
 
         {isError && (
-          <ErrorState message="We couldn't load your bonanza offers. Please try again." onRetry={() => refetch()} />
+          <ErrorState message={t("bonanza.couldNotLoad")} onRetry={() => refetch()} />
         )}
 
         {data && !isLoading && !isError && (
@@ -54,8 +56,8 @@ export function BonanzaPage() {
             {data.offers.length === 0 ? (
               <EmptyState
                 icon={Gift}
-                title="No active bonanza offers"
-                description="New reward offers will appear here when admins publish them."
+                title={t("bonanza.noOffers")}
+                description={t("bonanza.noOffersDesc")}
               />
             ) : (
               <motion.div
@@ -83,6 +85,7 @@ export function BonanzaPage() {
 /* ------------------------------------------------------------------ */
 
 function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCount: number }) {
+  const { t } = useTranslation();
   const progress = Math.min(1, directCount / offer.requiredDirects);
   const pct = Math.round(progress * 100);
   const complete = directCount >= offer.requiredDirects;
@@ -100,7 +103,7 @@ function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCoun
           <AwardBadge offer={offer} />
         </div>
         <CardDescription>
-          Refer <span className="font-semibold text-foreground">{offer.requiredDirects}</span> direct members to earn{" "}
+          {t("bonanza.referPrefix")} <span className="font-semibold text-foreground">{offer.requiredDirects}</span> {t("bonanza.referMiddle")}{" "}
           <span className="font-semibold text-foreground">{formatCurrency(offer.rewardAmount)}</span>
         </CardDescription>
       </CardHeader>
@@ -115,7 +118,7 @@ function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCoun
         >
           <div className="flex items-center gap-2">
             <Sparkles className={cn("size-4", complete ? "text-success" : "text-muted-foreground")} />
-            <span className="text-xs text-muted-foreground">Reward</span>
+            <span className="text-xs text-muted-foreground">{t("bonanza.reward")}</span>
           </div>
           <p className={cn("text-lg font-bold tabular-nums", complete && "text-gradient-gold")}>
             {formatCurrency(offer.rewardAmount)}
@@ -125,7 +128,7 @@ function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCoun
         {/* Progress */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-muted-foreground">Progress</span>
+            <span className="text-muted-foreground">{t("bonanza.progress")}</span>
             <span className="tabular-nums">
               {Math.min(directCount, offer.requiredDirects)} / {offer.requiredDirects}
             </span>
@@ -154,23 +157,24 @@ function DirectCount({ value }: { value: number }) {
 }
 
 function AwardBadge({ offer }: { offer: BonanzaOfferView }) {
+  const { t } = useTranslation();
   if (offer.awarded) {
     return (
       <Badge variant="success" className="gap-1">
-        <CheckCircle2 className="size-3.5" /> Awarded
+        <CheckCircle2 className="size-3.5" /> {t("bonanza.awarded")}
       </Badge>
     );
   }
   if (offer.qualified) {
     return (
       <Badge variant="warning" className="gap-1">
-        <Clock className="size-3.5" /> Awaiting auto-award
+        <Clock className="size-3.5" /> {t("bonanza.awaitingAutoAward")}
       </Badge>
     );
   }
   return (
     <Badge variant="secondary" className="gap-1">
-      <Lock className="size-3.5" /> Locked
+      <Lock className="size-3.5" /> {t("bonanza.locked")}
     </Badge>
   );
 }

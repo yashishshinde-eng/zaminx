@@ -14,6 +14,7 @@ import {
   Users,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
 import toast from "react-hot-toast";
@@ -50,9 +51,9 @@ const itemVariants = {
 
 /* ── Hero quick actions — preserve existing routes exactly ────── */
 const heroActions = [
-  { label: "Deposit", to: "/app/packages", icon: ArrowDownToLine, variant: "gold" },
-  { label: "Withdraw", to: "/app/withdrawals", icon: ArrowUpFromLine, variant: "green" },
-  { label: "Invest", to: "/app/packages", icon: Rocket, variant: "violet" },
+  { id: "deposit", labelKey: "dashboard.actions.deposit", to: "/app/packages", icon: ArrowDownToLine, variant: "gold" },
+  { id: "withdraw", labelKey: "dashboard.actions.withdraw", to: "/app/withdrawals", icon: ArrowUpFromLine, variant: "green" },
+  { id: "invest", labelKey: "dashboard.actions.invest", to: "/app/packages", icon: Rocket, variant: "violet" },
 ] as const;
 
 /**
@@ -63,6 +64,7 @@ const heroActions = [
  * is unchanged from the previous version.
  */
 export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
+  const { t } = useTranslation();
   const prefersReduced = useReducedMotion();
   const [balanceVisible, setBalanceVisible] = useState(true);
   const [copied, setCopied] = useState(false);
@@ -88,10 +90,10 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
     try {
       await navigator.clipboard.writeText(referralLink);
       setCopied(true);
-      toast.success("Referral link copied");
+      toast.success(t("heroCard.referralLinkCopied"));
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Couldn't copy");
+      toast.error(t("heroCard.couldNotCopy"));
     }
   };
 
@@ -160,14 +162,14 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
                   <WalletIcon className="size-3.5 text-gold" />
                 </div>
                 <span className="metric-label text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-                  Total Balance
+                  {t("dashboard.totalBalance")}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setBalanceVisible((v) => !v)}
                 className="inline-flex items-center justify-center size-8 rounded-full border border-white/[0.08] bg-white/[0.03] text-muted-foreground transition-all duration-200 hover:bg-white/[0.08] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-                aria-label={balanceVisible ? "Hide balance" : "Show balance"}
+                aria-label={balanceVisible ? t("heroCard.hideBalance") : t("heroCard.showBalance")}
               >
                 {balanceVisible ? <EyeOff className="size-3.5" /> : <Eye className="size-3.5" />}
               </button>
@@ -205,7 +207,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
               >
                 {todayUp ? <TrendingUp className="size-3.5" /> : <TrendingDown className="size-3.5" />}
                 <span>{todayUp ? "+" : "−"}{formatCurrency(Math.abs(todayEarnings))}</span>
-                <span className="opacity-60">today</span>
+                <span className="opacity-60">{t("heroCard.today")}</span>
                 <span className={`ml-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
                   todayUp ? "bg-success/15 text-success" : "bg-destructive/15 text-destructive"
                 }`}>
@@ -229,9 +231,9 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
           >
             {heroActions.map((a) => (
               <NeonActionButton
-                key={a.label}
+                key={a.id}
                 icon={a.icon}
-                label={a.label}
+                label={t(a.labelKey)}
                 variant={a.variant}
                 to={a.to}
               />
@@ -240,7 +242,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
             {/* Refer button — copy referral */}
             <NeonActionButton
               icon={Users}
-              label="Refer"
+              label={t("dashboard.actions.refer")}
               variant="orange"
               onClick={copyReferral}
             />
@@ -252,7 +254,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
             variants={prefersReduced ? undefined : itemVariants}
           >
             <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-foreground/60">
-              Referral code
+              {t("heroCard.referralCode")}
             </span>
             <div className="flex items-center gap-2 flex-1">
               <div className="glass-input flex items-center gap-2 px-3 py-2 flex-1 min-w-0">
@@ -264,12 +266,12 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
                 type="button"
                 onClick={copyReferral}
                 className="inline-flex items-center justify-center gap-1.5 rounded-[12px] border border-white/[0.08] bg-white/[0.04] px-3 py-2 text-xs font-semibold text-foreground/70 backdrop-blur-sm transition-all duration-200 hover:border-blue/20 hover:bg-white/[0.08] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-                aria-label="Copy referral link"
+                aria-label={t("heroCard.copyReferralLink")}
               >
                 {copied ? (
-                  <><Check className="size-3.5 text-success" /> <span className="text-success">Copied</span></>
+                  <><Check className="size-3.5 text-success" /> <span className="text-success">{t("heroCard.copied")}</span></>
                 ) : (
-                  <><Copy className="size-3.5" /> <span>Copy</span></>
+                  <><Copy className="size-3.5" /> <span>{t("heroCard.copy")}</span></>
                 )}
               </button>
             </div>

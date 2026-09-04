@@ -21,6 +21,7 @@ import { createDepositSchema } from "@zeminex/shared";
 import type { CreateDepositBody, DepositRow } from "@zeminex/shared";
 import toast from "react-hot-toast";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -65,6 +66,7 @@ function formatMSS(ms: number): string {
  * their balance on /app/packages.
  */
 export function DepositPage() {
+  const { t } = useTranslation();
   const wallet = useWallet();
   const create = useCreateDeposit();
   const simulate = useSimulatePayment();
@@ -111,7 +113,7 @@ export function DepositPage() {
   useEffect(() => {
     if (status.data?.status === "paid" && !paidHandledRef.current) {
       paidHandledRef.current = true;
-      toast.success(`Deposit confirmed — ${formatCurrency(status.data.amountUsd)} credited to your Main wallet.`);
+      toast.success(t("deposit.confirmedToast", { amount: formatCurrency(status.data.amountUsd) }));
       void Promise.all([
         queryClient.invalidateQueries({ queryKey: queryKeys.wallet.balance }),
         queryClient.invalidateQueries({ queryKey: queryKeys.payments.deposits }),
@@ -137,9 +139,9 @@ export function DepositPage() {
   return (
     <AppShell>
       <PageHeader
-        title="Deposit"
-        description="Top up your Main wallet with USDT-BEP20, then activate a package from your balance."
-        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Deposit" }]}
+        title={t("nav.deposit")}
+        description={t("deposit.description")}
+        breadcrumbs={[{ label: t("common.home"), to: "/" }, { label: t("common.dashboard"), to: "/app" }, { label: t("nav.deposit") }]}
       />
 
       <div className="mt-6 max-w-2xl space-y-4">
@@ -149,14 +151,14 @@ export function DepositPage() {
             <WalletIcon className="size-4 text-blue-light" />
           </div>
           <div className="flex-1">
-            <p className="text-xs text-muted-foreground">Main wallet balance</p>
+            <p className="text-xs text-muted-foreground">{t("deposit.mainWalletBalance")}</p>
             <p className="font-grotesk text-lg font-bold tabular-nums">
               {wallet.isLoading ? "—" : formatCurrency(wallet.data?.main.available ?? 0)}
             </p>
           </div>
           {isPaid && (
             <Button asChild variant="outline" size="sm">
-              <Link to="/app/packages">Activate a package <ArrowRight className="size-3.5" /></Link>
+              <Link to="/app/packages">{t("deposit.activatePackage")} <ArrowRight className="size-3.5" /></Link>
             </Button>
           )}
         </div>
@@ -176,14 +178,14 @@ export function DepositPage() {
                     <div className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue/20 to-blue-dark/10">
                       <ArrowDownToLine className="size-3.5 text-blue-light" />
                     </div>
-                    Deposit
+                    {t("nav.deposit")}
                   </CardTitle>
-                  <CardDescription>Enter the amount you want to add to your wallet.</CardDescription>
+                  <CardDescription>{t("deposit.cardDescription")}</CardDescription>
                 </CardHeader>
                 <CardContent className="p-6">
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                     <div className="space-y-2">
-                      <Label htmlFor="amount">Amount (USD)</Label>
+                      <Label htmlFor="amount">{t("deposit.amountUsd")}</Label>
                       <Input
                         id="amount"
                         type="number"
@@ -214,10 +216,10 @@ export function DepositPage() {
                     </div>
 
                     <Button type="submit" className="btn-premium w-full h-11" disabled={create.isPending}>
-                      {create.isPending ? "Starting…" : (<>Continue <ArrowRight className="size-4" /></>)}
+                      {create.isPending ? t("deposit.starting") : (<>{t("deposit.continue")} <ArrowRight className="size-4" /></>)}
                     </Button>
                     <p className="text-center text-xs text-muted-foreground">
-                      You&apos;ll get a USDT-BEP20 address and QR code to send funds to.
+                      {t("deposit.qrHint")}
                     </p>
                   </form>
                 </CardContent>
@@ -237,16 +239,16 @@ export function DepositPage() {
                     <CheckCircle2 className="size-8 text-success" />
                   </div>
                   <div className="space-y-1">
-                    <h2 className="font-grotesk text-xl font-bold tracking-tight">Deposit confirmed</h2>
+                    <h2 className="font-grotesk text-xl font-bold tracking-tight">{t("deposit.confirmedTitle")}</h2>
                     <p className="text-sm text-muted-foreground">
-                      {formatCurrency(status.data?.amountUsd ?? createdDeposit?.amountUsd ?? 0)} has been credited to your Main wallet.
+                      {t("deposit.confirmedDesc", { amount: formatCurrency(status.data?.amountUsd ?? createdDeposit?.amountUsd ?? 0) })}
                     </p>
                   </div>
                   <div className="flex flex-wrap justify-center gap-2 pt-2">
                     <Button asChild className="btn-premium">
-                      <Link to="/app/packages">Activate a package <ArrowRight className="size-4" /></Link>
+                      <Link to="/app/packages">{t("deposit.activatePackage")} <ArrowRight className="size-4" /></Link>
                     </Button>
-                    <Button type="button" variant="outline" onClick={reset}>Make another deposit</Button>
+                    <Button type="button" variant="outline" onClick={reset}>{t("deposit.makeAnother")}</Button>
                   </div>
                 </CardContent>
               </NeonCard>
@@ -265,13 +267,13 @@ export function DepositPage() {
                     <TimerOff className="size-8 text-destructive" />
                   </div>
                   <div className="space-y-1">
-                    <h2 className="font-grotesk text-xl font-bold tracking-tight">Payment link expired</h2>
+                    <h2 className="font-grotesk text-xl font-bold tracking-tight">{t("deposit.expiredTitle")}</h2>
                     <p className="text-sm text-muted-foreground">
-                      The 10-minute payment window for this deposit has closed. If you already sent funds, they will still be credited automatically once the network confirms. Start a new deposit to get a fresh address.
+                      {t("deposit.expiredDesc")}
                     </p>
                   </div>
                   <div className="flex flex-wrap justify-center gap-2 pt-2">
-                    <Button type="button" className="btn-premium" onClick={reset}>Start a new deposit</Button>
+                    <Button type="button" className="btn-premium" onClick={reset}>{t("deposit.startNew")}</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -315,6 +317,7 @@ interface DepositInstructionsProps {
 }
 
 function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimulate, simulating }: DepositInstructionsProps) {
+  const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const copyAddress = async () => {
     if (!deposit.payAddress) return;
@@ -336,7 +339,7 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
       <CardHeader className="p-4 sm:p-6">
         <CardTitle className="flex flex-wrap items-center gap-x-2 gap-y-2 text-base">
           <span className="flex items-center gap-2">
-            <Clock className="size-4 shrink-0 text-warning" /> Send your payment
+            <Clock className="size-4 shrink-0 text-warning" /> {t("deposit.sendPayment")}
           </span>
           {remainingMs != null && (
             <span
@@ -344,7 +347,7 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
                 "ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-sm font-semibold tabular-nums",
                 low ? "bg-destructive/10 text-destructive" : "bg-warning/10 text-warning",
               )}
-              title="This payment link expires after 10 minutes"
+              title={t("deposit.expiresTooltip")}
             >
               <Clock className="size-3.5" />
               {formatMSS(remainingMs)}
@@ -352,8 +355,8 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
           )}
         </CardTitle>
         <CardDescription>
-          Scan the QR or copy the address below and send USDT-BEP20. Your wallet is credited automatically once the payment is confirmed. This link expires in 10 minutes.
-          {deposit.sandbox && " (Sandbox mode — use the simulate button to test.)"}
+          {t("deposit.instructions")}
+          {deposit.sandbox && ` ${t("deposit.sandboxNote")}`}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5 p-4 pt-0 sm:p-6 sm:pt-0">
@@ -370,13 +373,13 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
                   style={{ width: "100%", height: "auto" }}
                 />
               </div>
-              <p className="text-xs text-muted-foreground">Scan to get the address</p>
+              <p className="text-xs text-muted-foreground">{t("deposit.scanHint")}</p>
             </div>
           )}
 
           <div className="min-w-0 w-full flex-1 space-y-4">
             <div className="space-y-1">
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Amount due</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{t("deposit.amountDue")}</p>
               <p className="font-grotesk text-2xl font-bold tabular-nums">
                 {deposit.payAmount != null ? formatCurrency(deposit.payAmount) : formatCurrency(deposit.amountUsd)}{" "}
                 <span className="text-sm font-normal text-muted-foreground">USDT-BEP20</span>
@@ -385,7 +388,7 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
 
             {deposit.payAddress && (
               <div className="space-y-1">
-                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Pay-to address</p>
+                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{t("deposit.payToAddress")}</p>
                 <div className="flex items-start gap-2">
                   <code className="min-w-0 flex-1 break-all rounded-md border border-white/[0.08] bg-muted px-3 py-2 font-mono text-xs leading-relaxed">
                     {deposit.payAddress}
@@ -396,7 +399,7 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
                     size="icon"
                     className="mt-0.5 shrink-0"
                     onClick={copyAddress}
-                    aria-label="Copy address"
+                    aria-label={t("deposit.copyAddress")}
                   >
                     {copied ? <Check className="size-4 text-emerald-600" /> : <Copy className="size-4" />}
                   </Button>
@@ -410,12 +413,12 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
           {deposit.hostedUrl && (
             <Button asChild size="sm">
               <a href={deposit.hostedUrl} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="size-4" /> Pay with NOWPayments
+                <ExternalLink className="size-4" /> {t("deposit.payWithNowpayments")}
               </a>
             </Button>
           )}
           <Button type="button" variant="outline" size="sm" onClick={onRefresh}>
-            <RefreshCw className="size-4" /> I&apos;ve paid — refresh
+            <RefreshCw className="size-4" /> {t("deposit.refresh")}
           </Button>
           {deposit.sandbox && (
             <Button
@@ -425,10 +428,10 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
               disabled={simulating}
               onClick={() => onSimulate(deposit.id)}
             >
-              {simulating ? <><FlaskConical className="size-4" /> Simulating…</> : <><FlaskConical className="size-4" /> Simulate payment (dev)</>}
+              {simulating ? <><FlaskConical className="size-4" /> {t("deposit.simulating")}</> : <><FlaskConical className="size-4" /> {t("deposit.simulatePayment")}</>}
             </Button>
           )}
-          <Button type="button" variant="ghost" size="sm" onClick={onReset}>Cancel</Button>
+          <Button type="button" variant="ghost" size="sm" onClick={onReset}>{t("common.cancel")}</Button>
         </div>
       </CardContent>
     </Card>

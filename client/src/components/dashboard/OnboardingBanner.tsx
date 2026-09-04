@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { MailCheck, Package, Wallet, Users, CheckCircle2, ArrowRight, Sparkles, X } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
@@ -11,17 +13,18 @@ import { STORAGE_KEYS } from "@/config";
 import { cn } from "@/lib/utils";
 
 interface OnboardingStep {
+  id: string;
   label: string;
   done: boolean;
   href: string;
   icon: LucideIcon;
 }
 
-function greeting(): string {
+function greeting(t: TFunction): string {
   const h = new Date().getHours();
-  if (h < 12) return "Good morning";
-  if (h < 18) return "Good afternoon";
-  return "Good evening";
+  if (h < 12) return t("dashboard.greetingMorning");
+  if (h < 18) return t("dashboard.greetingAfternoon");
+  return t("dashboard.greetingEvening");
 }
 
 /**
@@ -29,18 +32,19 @@ function greeting(): string {
  * incomplete setup steps. Premium glassmorphism with animated gradient border.
  */
 export function OnboardingBanner() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const hasOpenPackage = useHasOpenPackage();
   const { data } = useDashboardSummary();
 
   const steps: OnboardingStep[] = useMemo(
     () => [
-      { label: "Verify your email", done: Boolean(user?.isEmailVerified), href: "/verify-email", icon: MailCheck },
-      { label: "Activate your first package", done: hasOpenPackage, href: "/app/packages", icon: Package },
-      { label: "Set your USDT-BEP20 address", done: Boolean(user?.walletAddresses?.usdtBep20), href: "/app/settings", icon: Wallet },
-      { label: "Refer your first member", done: Boolean((data?.team.directCount ?? 0) > 0), href: "/app/team", icon: Users },
+      { id: "verifyEmail", label: t("onboarding.stepVerifyEmail"), done: Boolean(user?.isEmailVerified), href: "/verify-email", icon: MailCheck },
+      { id: "activatePackage", label: t("onboarding.stepActivatePackage"), done: hasOpenPackage, href: "/app/packages", icon: Package },
+      { id: "setAddress", label: t("onboarding.stepSetAddress"), done: Boolean(user?.walletAddresses?.usdtBep20), href: "/app/settings", icon: Wallet },
+      { id: "referMember", label: t("onboarding.stepReferMember"), done: Boolean((data?.team.directCount ?? 0) > 0), href: "/app/team", icon: Users },
     ],
-    [user, hasOpenPackage, data],
+    [t, user, hasOpenPackage, data],
   );
 
   const completed = steps.filter((s) => s.done).length;
@@ -90,7 +94,7 @@ export function OnboardingBanner() {
               <div>
                 <p className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Sparkles className="size-4 text-gold" />
-                  {greeting()}, <span className="welcome-greeting font-semibold">{user?.name ?? "there"}</span>
+                  {greeting(t)}, <span className="welcome-greeting font-semibold">{user?.name ?? t("dashboard.there")}</span>
                   {data?.account.rank?.name ? (
                     <>
                       {" "}&middot;{" "}
@@ -98,15 +102,15 @@ export function OnboardingBanner() {
                     </>
                   ) : null}
                 </p>
-                <h2 className="font-grotesk mt-1 text-lg font-semibold sm:text-xl">Let's get you set up</h2>
+                <h2 className="font-grotesk mt-1 text-lg font-semibold sm:text-xl">{t("onboarding.title")}</h2>
                 <p className="mt-0.5 text-sm text-muted-foreground">
-                  Complete these {steps.length} steps to unlock the full Zeminex Global experience.
+                  {t("onboarding.subtitle", { count: steps.length })}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={dismiss}
-                aria-label="Dismiss"
+                aria-label={t("onboarding.dismiss")}
                 className="flex size-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
               >
                 <X className="size-4" />
@@ -125,7 +129,7 @@ export function OnboardingBanner() {
             <div className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
               {steps.map((step, i) => (
                 <motion.div
-                  key={step.label}
+                  key={step.id}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35, delay: 0.1 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
@@ -153,7 +157,7 @@ export function OnboardingBanner() {
                     <span className="min-w-0 flex-1">
                       <span className="block text-sm font-medium leading-tight">{step.label}</span>
                       <span className={cn("text-xs", step.done ? "text-success" : "text-muted-foreground")}>
-                        {step.done ? "Done" : "Pending"}
+                        {step.done ? t("onboarding.done") : t("onboarding.pending")}
                       </span>
                     </span>
                     {!step.done && (
@@ -170,7 +174,7 @@ export function OnboardingBanner() {
                 {nextStep.label} <ArrowRight className="size-4" />
               </Link>
               <span className="text-xs text-muted-foreground">
-                {steps.length - completed} step{steps.length - completed === 1 ? "" : "s"} to go
+                {t("onboarding.stepsToGo", { count: steps.length - completed })}
               </span>
             </div>
           </div>

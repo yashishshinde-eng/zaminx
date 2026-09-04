@@ -208,6 +208,7 @@ type LeanTx = {
   onHoldAfter: number;
   reference?: { resource?: string | null; resourceId?: string | null } | null;
   memo?: string | null;
+  meta?: { fromUserId?: string | null; fromUserName?: string | null; fromReferralCode?: string | null; level?: number | null } | null;
   createdAt: Date | string;
 };
 
@@ -226,6 +227,10 @@ function toTxRow(d: LeanTx): WalletTxRow {
     onHoldAfter: d.onHoldAfter,
     memo: d.memo ?? null,
     reference,
+    fromUserId: d.meta?.fromUserId ?? null,
+    fromUserName: d.meta?.fromUserName ?? null,
+    fromReferralCode: d.meta?.fromReferralCode ?? null,
+    level: d.meta?.level ?? null,
     createdAt: toIso(d.createdAt),
   };
 }
@@ -506,13 +511,16 @@ function toSheet(kind: UserReportKind, rows: unknown[]): { headers: string[]; da
     };
   }
   return {
-    headers: ["Date", "Wallet", "Type", "Direction", "Amount", "Memo", "Reference"],
+    headers: ["Date", "Wallet", "Type", "Direction", "Amount", "From", "Referral Code", "Level", "Memo", "Reference"],
     data: (rows as WalletTxRow[]).map((r) => [
       r.createdAt,
       r.wallet,
       r.type,
       r.direction,
       r.amount,
+      r.fromUserName ?? "",
+      r.fromReferralCode ?? "",
+      r.level ?? "",
       r.memo,
       r.reference?.resourceId ?? "",
     ]),

@@ -1,5 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   LayoutDashboard,
   Wallet,
@@ -32,6 +33,8 @@ import { Avatar } from "@/components/ui/avatar";
 
 interface NavItem {
   label: string;
+  /** i18next key — set on user-panel items only; admin items keep static English (out of i18n scope). */
+  labelKey?: string;
   to: string;
   icon: LucideIcon;
   adminOnly?: boolean;
@@ -39,19 +42,19 @@ interface NavItem {
 }
 
 const NAV: NavItem[] = [
-  { label: "Dashboard", to: "/app", icon: LayoutDashboard, accent: "gold" },
-  { label: "Wallet", to: "/app/wallet", icon: Wallet, accent: "blue" },
-  { label: "Deposit", to: "/app/deposit", icon: ArrowDownToLine, accent: "blue" },
-  { label: "P2P", to: "/app/p2p", icon: ArrowRightLeft, accent: "success" },
-  { label: "Withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
-  { label: "Packages", to: "/app/packages", icon: Package, accent: "gold" },
-  { label: "Trade", to: "/app/trade", icon: TrendingUp, accent: "blue" },
-  { label: "Team", to: "/app/team", icon: Users, accent: "purple" },
-  { label: "Activate Member", to: "/app/activate-member", icon: UserPlus, accent: "purple" },
-  { label: "Bonanza", to: "/app/bonanzas", icon: Gift },
-  { label: "Reports", to: "/app/reports", icon: FileText },
-  { label: "Support", to: "/app/support", icon: LifeBuoy },
-  { label: "Settings", to: "/app/settings", icon: Settings },
+  { label: "Dashboard", labelKey: "nav.dashboard", to: "/app", icon: LayoutDashboard, accent: "gold" },
+  { label: "Wallet", labelKey: "nav.wallet", to: "/app/wallet", icon: Wallet, accent: "blue" },
+  { label: "Deposit", labelKey: "nav.deposit", to: "/app/deposit", icon: ArrowDownToLine, accent: "blue" },
+  { label: "P2P", labelKey: "nav.p2p", to: "/app/p2p", icon: ArrowRightLeft, accent: "success" },
+  { label: "Withdrawals", labelKey: "nav.withdrawals", to: "/app/withdrawals", icon: ArrowDownToLine },
+  { label: "Packages", labelKey: "nav.packages", to: "/app/packages", icon: Package, accent: "gold" },
+  { label: "Trade", labelKey: "nav.trade", to: "/app/trade", icon: TrendingUp, accent: "blue" },
+  { label: "Team", labelKey: "nav.team", to: "/app/team", icon: Users, accent: "purple" },
+  { label: "Activate Member", labelKey: "nav.activateMember", to: "/app/activate-member", icon: UserPlus, accent: "purple" },
+  { label: "Bonanza", labelKey: "nav.bonanza", to: "/app/bonanzas", icon: Gift },
+  { label: "Reports", labelKey: "nav.reports", to: "/app/reports", icon: FileText },
+  { label: "Support", labelKey: "nav.support", to: "/app/support", icon: LifeBuoy },
+  { label: "Settings", labelKey: "nav.settings", to: "/app/settings", icon: Settings },
   { label: "Admin", to: "/app/admin", icon: ShieldCheck, adminOnly: true },
   { label: "Users", to: "/app/admin/users", icon: Users, adminOnly: true },
   { label: "Compensation", to: "/app/admin/compensation", icon: SlidersHorizontal, adminOnly: true },
@@ -68,16 +71,18 @@ const NAV: NavItem[] = [
 
 interface NavGroup {
   label: string;
+  /** i18next key — set for user-panel groups only. */
+  labelKey?: string;
   items: NavItem[];
 }
 
 /* ── Grouping rules for each role ─────────────────────────────────── */
 
 const USER_GROUPS: NavGroup[] = [
-  { label: "Overview", items: NAV.filter((i) => i.label === "Dashboard" || i.label === "Reports") },
-  { label: "Earnings", items: NAV.filter((i) => ["Wallet", "Deposit", "P2P", "Withdrawals", "Packages", "Trade"].includes(i.label)) },
-  { label: "Network", items: NAV.filter((i) => ["Team", "Activate Member", "Bonanza"].includes(i.label)) },
-  { label: "Account", items: NAV.filter((i) => i.label === "Support" || i.label === "Settings") },
+  { label: "Overview", labelKey: "nav.groups.overview", items: NAV.filter((i) => i.label === "Dashboard" || i.label === "Reports") },
+  { label: "Earnings", labelKey: "nav.groups.earnings", items: NAV.filter((i) => ["Wallet", "Deposit", "P2P", "Withdrawals", "Packages", "Trade"].includes(i.label)) },
+  { label: "Network", labelKey: "nav.groups.network", items: NAV.filter((i) => ["Team", "Activate Member", "Bonanza"].includes(i.label)) },
+  { label: "Account", labelKey: "nav.groups.account", items: NAV.filter((i) => i.label === "Support" || i.label === "Settings") },
 ];
 
 const ADMIN_GROUPS: NavGroup[] = [
@@ -102,6 +107,7 @@ interface SidebarProps {
  */
 export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const { collapsed, toggle } = useSidebarState();
   const isCollapsed = mobile ? false : collapsed;
 
@@ -123,7 +129,7 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
           Z
         </div>
         {!isCollapsed && (
-          <span className="font-grotesk text-lg font-bold tracking-tight text-gradient-gold">Zeminex Global</span>
+          <span className="font-grotesk text-lg font-bold tracking-tight text-gradient-gold">{t("sidebar.brand")}</span>
         )}
       </div>
 
@@ -136,8 +142,8 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
                 <Sparkles className="size-3.5" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-xs font-semibold text-foreground">Start Earning</p>
-                <p className="truncate text-[10px] text-muted-foreground">Deposit to activate a package</p>
+                <p className="truncate text-xs font-semibold text-foreground">{t("sidebar.startEarning")}</p>
+                <p className="truncate text-[10px] text-muted-foreground">{t("sidebar.startEarningDesc")}</p>
               </div>
             </div>
           </Link>
@@ -153,19 +159,21 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
             <div key={group.label} className="space-y-0.5">
               {!isCollapsed && (
                 <p className="sidebar-section-label" style={gi > 0 ? { paddingTop: undefined } : undefined}>
-                  {group.label}
+                  {group.labelKey ? t(group.labelKey) : group.label}
                 </p>
               )}
               {isCollapsed && group.label !== "Overview" && group.label !== "Dashboard" && (
                 <div className="mx-auto my-2 h-px w-6 bg-white/[0.06]" />
               )}
-              {visibleItems.map((item) => (
+              {visibleItems.map((item) => {
+                const itemLabel = item.labelKey ? t(item.labelKey) : item.label;
+                return (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   end={item.to === "/app" || item.to === "/app/admin"}
                   onClick={onNavigate}
-                  title={isCollapsed ? item.label : undefined}
+                  title={isCollapsed ? itemLabel : undefined}
                   className={({ isActive }) =>
                     cn(
                       "sidebar-nav-item",
@@ -191,11 +199,12 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
                       )}>
                         <item.icon className="size-[17px]" />
                       </span>
-                      {!isCollapsed && <span className="relative z-10">{item.label}</span>}
+                      {!isCollapsed && <span className="relative z-10">{itemLabel}</span>}
                     </>
                   )}
                 </NavLink>
-              ))}
+                );
+              })}
             </div>
           );
         })}
@@ -223,7 +232,7 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
             <button
               type="button"
               onClick={toggle}
-              aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+              aria-label={isCollapsed ? t("sidebar.expandSidebar") : t("sidebar.collapseSidebar")}
               className="flex size-7 shrink-0 items-center justify-center rounded-lg text-sidebar-foreground/40 transition-all duration-200 hover:bg-blue/[0.08] hover:text-gold-light"
             >
               <ChevronLeft className={cn("size-4 transition-transform duration-300", isCollapsed && "rotate-180")} />

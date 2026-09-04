@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Bot } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Sparkline } from "./Sparkline";
 import { useCountUp } from "@/hooks/useCountUp";
 import { formatCurrency } from "@/lib/utils";
@@ -12,6 +13,7 @@ import type { DashboardSummary } from "@zeminex/shared";
  * real 30-day income series. No fabricated yield percentages or bot telemetry.
  */
 export function TradingBotStatusCard({ data }: { data: DashboardSummary }) {
+  const { t } = useTranslation();
   const active = data.package.active;
   const trading = useCountUp(data.income.trading, 1000);
   const series = data.income.series.map((s) => s.value);
@@ -35,8 +37,8 @@ export function TradingBotStatusCard({ data }: { data: DashboardSummary }) {
               <Bot className="size-5 text-gold" />
             </div>
             <div>
-              <p className="section-title text-sm">Trading Bot</p>
-              <p className="text-[11px] text-muted-foreground">Auto-yield engine</p>
+              <p className="section-title text-sm">{t("botStatus.title")}</p>
+              <p className="text-[11px] text-muted-foreground">{t("botStatus.subtitle")}</p>
             </div>
           </div>
           <StatusPill active={active} />
@@ -44,7 +46,7 @@ export function TradingBotStatusCard({ data }: { data: DashboardSummary }) {
 
         {/* Trade yield cashflows */}
         <div className="mt-5">
-          <p className="metric-label">TRADE YIELD CASHFLOWS</p>
+          <p className="metric-label">{t("wallet.typeTradingYield")}</p>
           <p className="metric-value font-grotesk mt-1 text-gradient-gold text-2xl">
             {formatCurrency(trading)}
           </p>
@@ -56,7 +58,7 @@ export function TradingBotStatusCard({ data }: { data: DashboardSummary }) {
             <Sparkline data={series} height={44} />
           ) : (
             <p className="text-xs text-muted-foreground">
-              {active ? "Earnings will appear once yield is credited." : "Activate a package to start the bot."}
+              {active ? t("botStatus.earningsWillAppear") : t("botStatus.activateToStart")}
             </p>
           )}
         </div>
@@ -66,6 +68,7 @@ export function TradingBotStatusCard({ data }: { data: DashboardSummary }) {
 }
 
 function StatusPill({ active }: { active: boolean }) {
+  const { t } = useTranslation();
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
@@ -77,7 +80,7 @@ function StatusPill({ active }: { active: boolean }) {
         animate={active ? { opacity: [1, 0.3, 1] } : { opacity: 1 }}
         transition={active ? { duration: 1.6, repeat: Infinity, ease: "easeInOut" } : undefined}
       />
-      {active ? "Active" : "Idle"}
+      {active ? t("common.active") : t("botStatus.idle")}
     </span>
   );
 }

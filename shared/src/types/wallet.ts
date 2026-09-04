@@ -77,6 +77,13 @@ export interface WalletTxRow {
   onHoldAfter: number;
   memo: string | null;
   reference: WalletTxRef | null;
+  /** For team-income streams (`direct_bonus` / `team_bonus`): the downline user
+   *  whose activity generated this credit, and which lineage level they sit at
+   *  relative to the earner (1 = direct sponsor). Null for every other type. */
+  fromUserId?: string | null;
+  fromUserName?: string | null;
+  fromReferralCode?: string | null;
+  level?: number | null;
   createdAt: string;
 }
 

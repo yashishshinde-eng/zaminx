@@ -1,20 +1,30 @@
 import { useLocation, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Search, Wallet, ArrowDownToLine, Menu } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useDashboardSummary } from "@/hooks/useDashboardSummary";
 import { formatCurrency } from "@/lib/utils";
 import { UserMenu } from "./UserMenu";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+
+/** User-panel routes map to nav.* translation keys; admin routes stay static English (out of i18n scope). */
+const USER_TITLE_KEYS: Record<string, string> = {
+  "/app": "nav.dashboard",
+  "/app/wallet": "nav.wallet",
+  "/app/deposit": "nav.deposit",
+  "/app/p2p": "nav.p2p",
+  "/app/withdrawals": "nav.withdrawals",
+  "/app/packages": "nav.packages",
+  "/app/trade": "nav.trade",
+  "/app/team": "nav.team",
+  "/app/activate-member": "nav.activateMember",
+  "/app/bonanzas": "nav.bonanza",
+  "/app/reports": "nav.reports",
+  "/app/support": "nav.support",
+  "/app/settings": "nav.settings",
+};
 
 const TITLES: Record<string, string> = {
-  "/app": "Dashboard",
-  "/app/wallet": "Wallet",
-  "/app/p2p": "P2P",
-  "/app/withdrawals": "Withdrawals",
-  "/app/packages": "Packages",
-  "/app/team": "Team",
-  "/app/bonanzas": "Bonanza",
-  "/app/reports": "Reports",
-  "/app/settings": "Settings",
   "/app/admin": "Admin",
   "/app/admin/users": "Users",
   "/app/admin/compensation": "Compensation",
@@ -30,9 +40,11 @@ const TITLES: Record<string, string> = {
 
 function usePageTitle(): string {
   const { pathname } = useLocation();
+  const { t } = useTranslation();
+  if (USER_TITLE_KEYS[pathname]) return t(USER_TITLE_KEYS[pathname]);
   if (TITLES[pathname]) return TITLES[pathname];
   if (pathname.startsWith("/app/admin/users/")) return "User detail";
-  return "Dashboard";
+  return t("nav.dashboard");
 }
 
 interface TopbarProps {
@@ -48,6 +60,7 @@ interface TopbarProps {
  */
 export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
   const { user } = useAuth();
+  const { t } = useTranslation();
   const title = usePageTitle();
   const { data } = useDashboardSummary();
   const isAdmin = user?.role === "admin";
@@ -64,7 +77,7 @@ export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
             type="button"
             onClick={onToggleMobileSidebar}
             className="flex size-9 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-blue/[0.08] hover:text-foreground lg:hidden"
-            aria-label="Open menu"
+            aria-label={t("topbar.openMenu")}
           >
             <Menu className="size-5" />
           </button>
@@ -78,7 +91,7 @@ export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
           <Search className="size-4 shrink-0 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search transactions, pages, settings…"
+            placeholder={t("topbar.searchPlaceholder")}
             className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground/50"
           />
           <kbd className="hidden lg:inline-flex items-center rounded-md border border-white/[0.08] bg-white/[0.03] px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
@@ -100,6 +113,9 @@ export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
         {/* Notifications */}
         {/* <NotificationsMenu /> */}
 
+        {/* Language switcher — user panel only */}
+        {!isAdmin && <LanguageSwitcher />}
+
         {/* User menu */}
         <UserMenu />
 
@@ -107,7 +123,7 @@ export function Topbar({ onToggleMobileSidebar }: TopbarProps) {
         {!isAdmin && (
           <Link to="/app/packages" className="deposit-cta hidden lg:flex">
             <ArrowDownToLine className="size-4" />
-            Deposit
+            {t("topbar.deposit")}
           </Link>
         )}
       </div>

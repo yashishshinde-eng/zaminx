@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 import { LifeBuoy, Plus, Send, MessageSquare, CheckCircle2, Clock, XCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { AppShell } from "@/components/layout/AppShell";
@@ -17,12 +18,11 @@ import { createTicketSchema } from "@zeminex/shared";
 import type { CreateTicketBody, TicketStatus, TicketCategory, TicketRow } from "@zeminex/shared";
 import { formatDate, cn } from "@/lib/utils";
 
-const STATUS_FILTERS: { value: "all" | TicketStatus; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "open", label: "Open" },
-  { value: "answered", label: "Answered" },
-  { value: "closed", label: "Closed" },
-];
+const STATUS_ICON: Record<TicketStatus, typeof Clock> = {
+  open: Clock,
+  answered: CheckCircle2,
+  closed: XCircle,
+};
 
 const STATUS_VARIANT: Record<TicketStatus, "warning" | "success" | "outline"> = {
   open: "warning",
@@ -30,29 +30,38 @@ const STATUS_VARIANT: Record<TicketStatus, "warning" | "success" | "outline"> = 
   closed: "outline",
 };
 
-const STATUS_LABEL: Record<TicketStatus, string> = {
-  open: "Open",
-  answered: "Answered",
-  closed: "Closed",
-};
-
-const STATUS_ICON: Record<TicketStatus, typeof Clock> = {
-  open: Clock,
-  answered: CheckCircle2,
-  closed: XCircle,
-};
-
-const CATEGORY_LABEL: Record<TicketCategory, string> = {
-  account: "Account",
-  payments: "Payments",
-  withdrawals: "Withdrawals",
-  package: "Package",
-  technical: "Technical",
-  other: "Other",
-};
+/** Translated status/category label lookups — built from `t()` so callers just
+ *  index by the enum value instead of re-deriving translation keys inline. */
+function useTicketLabels() {
+  const { t } = useTranslation();
+  const statusLabel: Record<TicketStatus, string> = {
+    open: t("support.statusOpen"),
+    answered: t("support.statusAnswered"),
+    closed: t("support.statusClosed"),
+  };
+  const categoryLabel: Record<TicketCategory, string> = {
+    account: t("support.categoryAccount"),
+    payments: t("support.categoryPayments"),
+    withdrawals: t("support.categoryWithdrawals"),
+    package: t("support.categoryPackage"),
+    technical: t("support.categoryTechnical"),
+    other: t("support.categoryOther"),
+  };
+  return { statusLabel, categoryLabel };
+}
 
 /** /app/support — raise an issue and follow the conversation with admins. */
 export function SupportPage() {
+  const { t } = useTranslation();
+  const { statusLabel: STATUS_LABEL, categoryLabel: CATEGORY_LABEL } = useTicketLabels();
+
+  const STATUS_FILTERS: { value: "all" | TicketStatus; label: string }[] = [
+    { value: "all", label: t("common.all") },
+    { value: "open", label: STATUS_LABEL.open },
+    { value: "answered", label: STATUS_LABEL.answered },
+    { value: "closed", label: STATUS_LABEL.closed },
+  ];
+
   const [statusFilter, setStatusFilter] = useState<"all" | TicketStatus>("all");
   const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
   const [createOpen, setCreateOpen] = useState(false);
@@ -103,12 +112,12 @@ export function SupportPage() {
   return (
     <AppShell>
       <PageHeader
-        title="Support"
-        description="Raise an issue or ask for help — our team will respond here."
-        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Support" }]}
+        title={t("support.title")}
+        description={t("support.description")}
+        breadcrumbs={[{ label: t("common.home"), to: "/" }, { label: t("common.dashboard"), to: "/app" }, { label: t("support.title") }]}
         actions={
           <Button type="button" onClick={() => setCreateOpen(true)}>
-            <Plus className="mr-1 size-4" /> Raise an issue
+            <Plus className="mr-1 size-4" /> {t("support.raiseIssue")}
           </Button>
         }
       />
@@ -147,11 +156,11 @@ export function SupportPage() {
                 <CardContent className="py-10">
                   <EmptyState
                     icon={LifeBuoy}
-                    title="No tickets yet"
-                    description="Raise an issue and track the conversation with our team here."
+                    title={t("support.noTicketsTitle")}
+                    description={t("support.noTicketsDesc")}
                     action={
                       <Button type="button" size="sm" onClick={() => setCreateOpen(true)}>
-                        <Plus className="mr-1 size-4" /> Raise an issue
+                        <Plus className="mr-1 size-4" /> {t("support.raiseIssue")}
                       </Button>
                     }
                   />
@@ -168,8 +177,8 @@ export function SupportPage() {
               <CardContent className="flex h-full min-h-[320px] items-center justify-center py-10">
                 <EmptyState
                   icon={MessageSquare}
-                  title="Select a ticket"
-                  description="Choose a ticket from the list to view the conversation, or raise a new issue."
+                  title={t("support.selectTicketTitle")}
+                  description={t("support.selectTicketDesc")}
                 />
               </CardContent>
             </Card>
@@ -193,7 +202,7 @@ export function SupportPage() {
                     <div key={r.id} className={cn("flex", mine ? "justify-end" : "justify-start")}>
                       <div className={cn("max-w-[80%] space-y-1", mine && "items-end text-right")}>
                         <p className="text-[11px] font-medium text-muted-foreground">
-                          {mine ? "You" : "Support team"} · {formatDate(r.createdAt)}
+                          {mine ? t("support.you") : t("support.supportTeam")} · {formatDate(r.createdAt)}
                         </p>
                         <div
                           className={cn(
@@ -214,19 +223,19 @@ export function SupportPage() {
               <div className="border-t border-white/[0.06] p-3">
                 {isClosed ? (
                   <p className="py-2 text-center text-xs text-muted-foreground">
-                    This ticket is closed. Send a reply to reopen it.
+                    {t("support.ticketClosed")}
                   </p>
                 ) : null}
                 <form onSubmit={onReply} className="flex items-end gap-2">
                   <textarea
                     value={replyText}
                     onChange={(e) => setReplyText(e.target.value)}
-                    placeholder="Write a reply…"
+                    placeholder={t("support.replyPlaceholder")}
                     rows={2}
                     className="glass-input min-h-[44px] flex-1 resize-none px-3 py-2 text-sm"
                   />
                   <Button type="submit" disabled={!replyText.trim() || reply.isPending}>
-                    <Send className="mr-1 size-4" /> Send
+                    <Send className="mr-1 size-4" /> {t("support.send")}
                   </Button>
                 </form>
               </div>
@@ -238,14 +247,14 @@ export function SupportPage() {
       {/* ── Create ticket dialog ────────────────────────────────── */}
       <Dialog open={createOpen} onClose={() => setCreateOpen(false)} className="max-w-lg">
         <h2 className="flex items-center gap-2 text-lg font-semibold">
-          <LifeBuoy className="size-5 text-primary" /> Raise an issue
+          <LifeBuoy className="size-5 text-primary" /> {t("support.dialogTitle")}
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Tell us what you need help with. You'll get a response in this thread.
+          {t("support.dialogDesc")}
         </p>
         <form onSubmit={handleSubmit(onCreate)} className="mt-5 space-y-4" noValidate>
           <div className="space-y-2">
-            <Label htmlFor="category">Category</Label>
+            <Label htmlFor="category">{t("support.category")}</Label>
             <select id="category" {...register("category")} className="glass-input h-10 w-full px-3 text-sm">
               {(Object.keys(CATEGORY_LABEL) as TicketCategory[]).map((c) => (
                 <option key={c} value={c}>
@@ -255,16 +264,16 @@ export function SupportPage() {
             </select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="subject">Subject</Label>
-            <Input id="subject" placeholder="Short summary of your issue" {...register("subject")} />
+            <Label htmlFor="subject">{t("support.subject")}</Label>
+            <Input id="subject" placeholder={t("support.subjectPlaceholder")} {...register("subject")} />
             {errors.subject && <p className="text-sm text-destructive">{errors.subject.message}</p>}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
+            <Label htmlFor="message">{t("support.message")}</Label>
             <textarea
               id="message"
               rows={5}
-              placeholder="Describe your issue in detail…"
+              placeholder={t("support.messagePlaceholder")}
               {...register("message")}
               className="glass-input w-full resize-none px-3 py-2 text-sm"
             />
@@ -272,10 +281,10 @@ export function SupportPage() {
           </div>
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={() => setCreateOpen(false)} disabled={create.isPending}>
-              Cancel
+              {t("common.cancel")}
             </Button>
             <Button type="submit" disabled={create.isPending}>
-              {create.isPending ? "Submitting…" : "Submit ticket"}
+              {create.isPending ? t("support.submitting") : t("support.submitTicket")}
             </Button>
           </div>
         </form>
@@ -297,6 +306,8 @@ function TicketListItem({
   active: boolean;
   onSelect: () => void;
 }) {
+  const { t } = useTranslation();
+  const { statusLabel: STATUS_LABEL, categoryLabel: CATEGORY_LABEL } = useTicketLabels();
   const Icon = STATUS_ICON[ticket.status];
   const lastReply = ticket.replies[ticket.replies.length - 1];
   return (
@@ -320,11 +331,11 @@ function TicketListItem({
           {CATEGORY_LABEL[ticket.category]}
         </Badge>
         <span>·</span>
-        <span>{ticket.replies.length} message{ticket.replies.length === 1 ? "" : "s"}</span>
+        <span>{t("support.messageCount", { count: ticket.replies.length })}</span>
       </div>
       {lastReply && (
         <p className="mt-2 line-clamp-1 text-xs text-muted-foreground">
-          <span className="text-foreground/70">{lastReply.sender === "user" ? "You" : "Support"}:</span>{" "}
+          <span className="text-foreground/70">{lastReply.sender === "user" ? t("support.you") : t("support.supportTeam")}:</span>{" "}
           {lastReply.message}
         </p>
       )}

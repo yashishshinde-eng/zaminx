@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { resetPasswordSchema } from "@zeminex/shared";
 import type { ResetPasswordBody } from "@zeminex/shared";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
 import { api } from "@/lib/axios";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import { Logo } from "@/components/layout/Logo";
 import { useDocumentMeta } from "@/hooks/useDocumentMeta";
 
 export function ResetPasswordPage() {
+  const { t } = useTranslation();
   const [params] = useSearchParams();
   const token = params.get("token") ?? "";
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ export function ResetPasswordPage() {
     setSubmitting(true);
     try {
       await api.post("/auth/reset-password", { token: token || values.token, password: values.password });
-      toast.success("Password updated. Please sign in.");
+      toast.success(t("resetPassword.updatedToast"));
       navigate("/login", { replace: true });
     } catch {
       // Toast handled by the axios interceptor.
@@ -53,36 +55,36 @@ export function ResetPasswordPage() {
 
         <div className="glass-card p-6 sm:p-8">
           <div className="mb-6 text-center">
-            <h1 className="font-grotesk text-2xl font-bold tracking-tight">Reset password</h1>
-            <p className="mt-1 text-sm text-muted-foreground">Choose a new password for your account.</p>
+            <h1 className="font-grotesk text-2xl font-bold tracking-tight">{t("resetPassword.title")}</h1>
+            <p className="mt-1 text-sm text-muted-foreground">{t("resetPassword.subtitle")}</p>
           </div>
 
           {!token && (
             <div className="mb-4 rounded-[14px] border border-warning/30 bg-warning/5 p-3 text-sm text-warning">
-              No reset token was found in the link. Use the link from your reset email, or paste the token below.
+              {t("resetPassword.noTokenWarning")}
             </div>
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
             {!token && (
               <div className="space-y-2">
-                <Label htmlFor="token">Reset token</Label>
+                <Label htmlFor="token">{t("resetPassword.resetToken")}</Label>
                 <Input id="token" placeholder="Paste your token" {...register("token")} />
                 {errors.token && <p className="text-sm text-destructive">{errors.token.message}</p>}
               </div>
             )}
             <div className="space-y-2">
-              <Label htmlFor="password">New password</Label>
+              <Label htmlFor="password">{t("resetPassword.newPassword")}</Label>
               <PasswordInput id="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
               {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
             </div>
             <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
-              {submitting ? "Updating…" : <>Update password <ArrowRight className="size-4" /></>}
+              {submitting ? t("resetPassword.updating") : <>{t("resetPassword.updatePassword")} <ArrowRight className="size-4" /></>}
             </Button>
           </form>
 
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            <Link to="/login" className="font-medium text-gold hover:underline">Back to sign in</Link>
+            <Link to="/login" className="font-medium text-gold hover:underline">{t("resetPassword.backToSignIn")}</Link>
           </p>
         </div>
       </div>

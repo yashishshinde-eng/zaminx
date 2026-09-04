@@ -421,6 +421,21 @@ function adminColumnsFor(kind: AdminReportKind): Column<AdminRow>[] {
       { key: "user", header: "User", cell: (r) => (r as AdminIncomeReportRow).userName },
       { key: "type", header: "Type", cell: (r) => <span className="capitalize">{(r as AdminIncomeReportRow).type.replace(/_/g, " ")}</span> },
       { key: "amount", header: "Amount", align: "right", cell: (r) => formatCurrency((r as AdminIncomeReportRow).amount) },
+      {
+        key: "from",
+        header: "From",
+        cell: (r) => {
+          const row = r as AdminIncomeReportRow;
+          if (!row.fromUserName) return "—";
+          return (
+            <span>
+              {row.fromUserName}
+              {row.fromReferralCode && <span className="ml-1 font-mono text-xs text-muted-foreground">({row.fromReferralCode})</span>}
+            </span>
+          );
+        },
+      },
+      { key: "level", header: "Level", cell: (r) => { const l = (r as AdminIncomeReportRow).level; return l ? `L${l}` : "—"; } },
       { key: "memo", header: "Memo", cell: (r) => (r as AdminIncomeReportRow).memo ?? "—" },
       { key: "date", header: "Date", cell: (r) => formatDate((r as AdminIncomeReportRow).date) },
     ];
@@ -453,6 +468,21 @@ function adminColumnsFor(kind: AdminReportKind): Column<AdminRow>[] {
           );
         },
       },
+      {
+        key: "from",
+        header: "From",
+        cell: (r) => {
+          const row = r as AdminWalletReportRow;
+          if (!row.fromUserName) return "—";
+          return (
+            <span>
+              {row.fromUserName}
+              {row.fromReferralCode && <span className="ml-1 font-mono text-xs text-muted-foreground">({row.fromReferralCode})</span>}
+            </span>
+          );
+        },
+      },
+      { key: "level", header: "Level", cell: (r) => { const l = (r as AdminWalletReportRow).level; return l ? `L${l}` : "—"; } },
       { key: "memo", header: "Memo", cell: (r) => (r as AdminWalletReportRow).memo ?? "—" },
       { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminWalletReportRow).createdAt) },
     ];

@@ -242,6 +242,7 @@ function toTxRow(d: {
   onHoldAfter: number;
   reference?: { resource?: string | null; resourceId?: string | null } | null;
   memo?: string | null;
+  meta?: { fromUserId?: string | null; fromUserName?: string | null; fromReferralCode?: string | null; level?: number | null } | null;
   createdAt: Date;
 }): WalletTxRow {
   return {
@@ -257,6 +258,10 @@ function toTxRow(d: {
       resourceId: d.reference?.resourceId ?? null,
     },
     memo: d.memo ?? null,
+    fromUserId: d.meta?.fromUserId ?? null,
+    fromUserName: d.meta?.fromUserName ?? null,
+    fromReferralCode: d.meta?.fromReferralCode ?? null,
+    level: d.meta?.level ?? null,
     createdAt: d.createdAt instanceof Date ? d.createdAt.toISOString() : new Date().toISOString(),
   };
 }

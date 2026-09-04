@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { Award, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Progress } from "@/components/ui/progress";
 import { RankStars } from "./RankStars";
 import type { DashboardSummary } from "@zeminex/shared";
 
 /** Current rank + progress to the next rank. Glass card with gold accent. */
 export function RankCard({ rank }: { rank: DashboardSummary["account"]["rank"] }) {
+  const { t } = useTranslation();
   const pct = Math.round(Math.max(0, Math.min(1, rank.progress)) * 100);
   const isMaxRank = !rank.nextRank;
 
@@ -30,7 +32,7 @@ export function RankCard({ rank }: { rank: DashboardSummary["account"]["rank"] }
           <div className="icon-box-gold">
             <Award className="size-4 text-gold" />
           </div>
-          <h3 className="section-title">Current Rank</h3>
+          <h3 className="section-title">{t("rankCard.currentRank")}</h3>
         </div>
 
         {/* Rank name */}
@@ -49,12 +51,12 @@ export function RankCard({ rank }: { rank: DashboardSummary["account"]["rank"] }
         {isMaxRank ? (
           <div className="mt-3 flex items-center gap-2">
             <Sparkles className="size-3.5 text-gold" />
-            <span className="text-xs font-medium text-gold">Max rank achieved</span>
+            <span className="text-xs font-medium text-gold">{t("rankCard.maxRankAchieved")}</span>
           </div>
         ) : (
           <div className="mt-4">
             <div className="flex items-center justify-between">
-              <span className="metric-label">Progress to {rank.nextRank}</span>
+              <span className="metric-label">{t("rankCard.progressTo", { rank: rank.nextRank })}</span>
               <span className="text-xs font-semibold tabular-nums text-muted-foreground">{pct}%</span>
             </div>
             <Progress value={pct} glow className="mt-2" />

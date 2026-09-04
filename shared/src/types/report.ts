@@ -119,7 +119,9 @@ export interface AdminWithdrawalReportRow extends WithdrawalRow {
   userEmail: string;
 }
 
-/** One income ledger entry (credit only) with the earning user's name. */
+/** One income ledger entry (credit only) with the earning user's name. For
+ *  team-income streams (`direct_bonus` / `team_bonus`), also carries the
+ *  downline source user's name/referral code and their lineage level. */
 export interface AdminIncomeReportRow {
   id: string;
   date: string;
@@ -128,6 +130,10 @@ export interface AdminIncomeReportRow {
   type: WalletTxType;
   amount: number;
   memo: string | null;
+  fromUserId?: string | null;
+  fromUserName?: string | null;
+  fromReferralCode?: string | null;
+  level?: number | null;
 }
 
 /** A wallet ledger row enriched with the owning user's name/email (admin view). */

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Gift, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useBonanzaOverview } from "@/hooks/useBonanzas";
 import { formatCurrency } from "@/lib/utils";
@@ -11,6 +12,7 @@ import type { DashboardSummary } from "@zeminex/shared";
  * earned and links to the full Bonanza page. Premium glass card with gold accent.
  */
 export function BonanzaProgressCard({ data }: { data: DashboardSummary }) {
+  const { t } = useTranslation();
   const earned = useCountUp(data.income.bonanza, 1000);
   // "View offers" only makes sense when admins have published at least one
   // active offer — fetched from the cached bonanza overview (shared with the
@@ -43,14 +45,14 @@ export function BonanzaProgressCard({ data }: { data: DashboardSummary }) {
             <Gift className="size-5 text-gold" />
           </div>
           <div>
-            <p className="section-title text-sm">Bonanza Rewards</p>
-            <p className="text-[11px] text-muted-foreground">Bonus offers</p>
+            <p className="section-title text-sm">{t("bonanzaProgress.title")}</p>
+            <p className="text-[11px] text-muted-foreground">{t("bonanzaProgress.subtitle")}</p>
           </div>
         </div>
 
         {/* Total earned */}
         <div className="mt-4">
-          <p className="metric-label">Bonanza earned</p>
+          <p className="metric-label">{t("bonanzaProgress.bonanzaEarned")}</p>
           <p className="metric-value font-grotesk mt-1 text-gradient-gold text-2xl">
             {formatCurrency(earned)}
           </p>
@@ -63,7 +65,7 @@ export function BonanzaProgressCard({ data }: { data: DashboardSummary }) {
               to="/app/bonanzas"
               className="btn-secondary-premium inline-flex w-full items-center justify-center gap-2 rounded-[14px] px-4 py-2.5 text-sm font-semibold"
             >
-              View offers <ArrowRight className="size-3.5" />
+              {t("bonanzaProgress.viewOffers")} <ArrowRight className="size-3.5" />
             </Link>
           </div>
         )}

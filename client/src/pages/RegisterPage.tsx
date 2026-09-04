@@ -6,6 +6,7 @@ import { registerSchema } from "@zeminex/shared";
 import type { RegisterBody } from "@zeminex/shared";
 import type { PublicUser } from "@zeminex/shared";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { ArrowRight, ShieldCheck, Wallet, TrendingUp, Copy, Check, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,40 +20,41 @@ import { sanitizePinEvent } from "@/lib/pin";
 
 /** Dialling codes offered in the registration country-code dropdown. */
 const COUNTRY_CODES = [
-  { code: "+91", flag: "🇮🇳" },
-  { code: "+1", flag: "🇺🇸" },
-  { code: "+44", flag: "🇬🇧" },
-  { code: "+971", flag: "🇦🇪" },
-  { code: "+61", flag: "🇦🇺" },
-  { code: "+65", flag: "🇸🇬" },
-  { code: "+92", flag: "🇵🇰" },
-  { code: "+880", flag: "🇧🇩" },
-  { code: "+94", flag: "🇱🇰" },
-  { code: "+977", flag: "🇳🇵" },
-  { code: "+966", flag: "🇸🇦" },
-  { code: "+968", flag: "🇴🇲" },
-  { code: "+974", flag: "🇶🇦" },
-  { code: "+973", flag: "🇧🇭" },
-  { code: "+965", flag: "🇰🇼" },
-  { code: "+62", flag: "🇮🇩" },
-  { code: "+60", flag: "🇲🇾" },
-  { code: "+63", flag: "🇵🇭" },
-  { code: "+66", flag: "🇹🇭" },
-  { code: "+27", flag: "🇿🇦" },
-  { code: "+234", flag: "🇳🇬" },
-  { code: "+254", flag: "🇰🇪" },
-  { code: "+49", flag: "🇩🇪" },
-  { code: "+33", flag: "🇫🇷" },
-  { code: "+34", flag: "🇪🇸" },
-  { code: "+39", flag: "🇮🇹" },
-  { code: "+31", flag: "🇳🇱" },
-  { code: "+7", flag: "🇷🇺" },
-  { code: "+86", flag: "🇨🇳" },
-  { code: "+81", flag: "🇯🇵" },
-  { code: "+82", flag: "🇰🇷" },
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+1", flag: "🇺🇸", name: "United States" },
+  { code: "+44", flag: "🇬🇧", name: "United Kingdom" },
+  { code: "+971", flag: "🇦🇪", name: "United Arab Emirates" },
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+92", flag: "🇵🇰", name: "Pakistan" },
+  { code: "+880", flag: "🇧🇩", name: "Bangladesh" },
+  { code: "+94", flag: "🇱🇰", name: "Sri Lanka" },
+  { code: "+977", flag: "🇳🇵", name: "Nepal" },
+  { code: "+966", flag: "🇸🇦", name: "Saudi Arabia" },
+  { code: "+968", flag: "🇴🇲", name: "Oman" },
+  { code: "+974", flag: "🇶🇦", name: "Qatar" },
+  { code: "+973", flag: "🇧🇭", name: "Bahrain" },
+  { code: "+965", flag: "🇰🇼", name: "Kuwait" },
+  { code: "+62", flag: "🇮🇩", name: "Indonesia" },
+  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+  { code: "+63", flag: "🇵🇭", name: "Philippines" },
+  { code: "+66", flag: "🇹🇭", name: "Thailand" },
+  { code: "+27", flag: "🇿🇦", name: "South Africa" },
+  { code: "+234", flag: "🇳🇬", name: "Nigeria" },
+  { code: "+254", flag: "🇰🇪", name: "Kenya" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+33", flag: "🇫🇷", name: "France" },
+  { code: "+34", flag: "🇪🇸", name: "Spain" },
+  { code: "+39", flag: "🇮🇹", name: "Italy" },
+  { code: "+31", flag: "🇳🇱", name: "Netherlands" },
+  { code: "+7", flag: "🇷🇺", name: "Russia" },
+  { code: "+86", flag: "🇨🇳", name: "China" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
+  { code: "+82", flag: "🇰🇷", name: "South Korea" },
 ];
 
 export function RegisterPage() {
+  const { t } = useTranslation();
   const { register: registerUser } = useAuth();
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
@@ -116,7 +118,7 @@ export function RegisterPage() {
       setRegisteredUser(user);
       setRegisteredPassword(values.password);
       setRegisteredTransactionPin(values.transactionPassword);
-      toast.success("Account created successfully!");
+      toast.success(t("register.accountCreated"));
     } catch {
       // Toast handled by the axios interceptor.
     } finally {
@@ -130,7 +132,7 @@ export function RegisterPage() {
       setCopiedField(field);
       setTimeout(() => setCopiedField(null), 2000);
     } catch {
-      toast.error("Failed to copy");
+      toast.error(t("register.copyFailed"));
     }
   };
 
@@ -148,15 +150,15 @@ export function RegisterPage() {
 
         <div className="relative z-10 max-w-md text-center text-primary-foreground">
           <Logo className="mx-auto size-16 shadow-glow-blue" />
-          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">Join Zeminex Global</h1>
+          <h1 className="font-grotesk mt-6 text-3xl font-bold tracking-tight">{t("register.heroTitle")}</h1>
           <p className="mt-3 text-lg text-primary-foreground/80">
-            Start your investment journey today. Grow with a community of forward-thinking investors.
+            {t("register.heroSubtitle")}
           </p>
           <div className="mt-8 grid grid-cols-3 gap-4">
             {[
-              { icon: Wallet, label: "Multi-Wallet" },
-              { icon: TrendingUp, label: "Smart Analytics" },
-              { icon: ShieldCheck, label: "Bank-Level Security" },
+              { icon: Wallet, label: t("register.featureWallet") },
+              { icon: TrendingUp, label: t("register.featureAnalytics") },
+              { icon: ShieldCheck, label: t("register.featureSecurity") },
             ].map((item) => (
               <div key={item.label} className="rounded-2xl bg-white/10 p-4 text-center backdrop-blur-sm">
                 <item.icon className="mx-auto size-6" />
@@ -177,33 +179,33 @@ export function RegisterPage() {
 
           <div className="glass-card p-6 sm:p-8">
             <div className="mb-6 text-center">
-              <h2 className="font-grotesk text-2xl font-bold tracking-tight">Create your account</h2>
-              <p className="mt-1 text-sm text-muted-foreground">Join Zeminex Global Now!</p>
+              <h2 className="font-grotesk text-2xl font-bold tracking-tight">{t("register.title")}</h2>
+              <p className="mt-1 text-sm text-muted-foreground">{t("register.subtitle")}</p>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
               <div className="space-y-2">
-                <Label htmlFor="name">Full name</Label>
+                <Label htmlFor="name">{t("register.fullName")}</Label>
                 <Input id="name" autoComplete="name" placeholder="Jane Doe" {...register("name")} />
                 {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("register.email")}</Label>
                 <Input id="email" type="email" autoComplete="email" placeholder="you@example.com" {...register("email")} />
                 {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone">Mobile number</Label>
+                <Label htmlFor="phone">{t("register.mobileNumber")}</Label>
                 <div className="flex gap-2">
                   <select
                     id="countryCode"
-                    aria-label="Country code"
-                    className="glass-input h-11 shrink-0 rounded-md px-2 text-sm text-foreground focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/20"
+                    aria-label={t("register.countryCode")}
+                    className="glass-input h-11 w-[9.5rem] shrink-0 truncate rounded-md px-2 text-sm text-foreground focus-visible:border-primary/50 focus-visible:ring-2 focus-visible:ring-primary/20"
                     {...register("countryCode")}
                   >
                     {COUNTRY_CODES.map((c) => (
                       <option key={c.code} value={c.code}>
-                        {c.code} {c.flag}
+                        {c.flag} {c.code} {c.name}
                       </option>
                     ))}
                   </select>
@@ -221,12 +223,12 @@ export function RegisterPage() {
                 {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t("register.password")}</Label>
                 <PasswordInput id="password" autoComplete="new-password" placeholder="At least 8 characters" {...register("password")} />
                 {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="transactionPassword">Transaction PIN</Label>
+                <Label htmlFor="transactionPassword">{t("register.transactionPin")}</Label>
                 <PasswordInput
                   id="transactionPassword"
                   autoComplete="off"
@@ -240,40 +242,40 @@ export function RegisterPage() {
                     setValue("transactionPassword", sanitizePinEvent(e), { shouldValidate: true })
                   }
                 />
-                <p className="text-xs text-muted-foreground">4-digit PIN used to authorise withdrawals and transfers.</p>
+                <p className="text-xs text-muted-foreground">{t("register.transactionPinHint")}</p>
                 {errors.transactionPassword && <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="referralCode">Referral code</Label>
+                <Label htmlFor="referralCode">{t("register.referralCode")}</Label>
                 <Input id="referralCode" placeholder="ZAM…" autoComplete="off" {...register("referralCode")} />
                 {errors.referralCode ? (
                   <p className="text-sm text-destructive">{errors.referralCode.message}</p>
                 ) : codeCheck.status === "valid" ? (
                   <p className="flex items-center gap-1.5 text-sm text-green-600 dark:text-green-500">
                     <Check className="size-3.5" />
-                    Valid referral code
+                    {t("register.referralCodeValid")}
                   </p>
                 ) : codeCheck.status === "invalid" ? (
                   <p className="flex items-center gap-1.5 text-sm text-destructive">
                     <X className="size-3.5" />
-                    Invalid referral code
+                    {t("register.referralCodeInvalid")}
                   </p>
                 ) : codeCheck.status === "checking" ? (
                   <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
                     <Loader2 className="size-3.5 animate-spin" />
-                    Checking…
+                    {t("register.referralCodeChecking")}
                   </p>
                 ) : null}
               </div>
               <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
-                {submitting ? "Creating account…" : <>Create account <ArrowRight className="size-4" /></>}
+                {submitting ? t("register.creatingAccount") : <>{t("register.createAccount")} <ArrowRight className="size-4" /></>}
               </Button>
             </form>
 
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              Already have an account?{" "}
+              {t("register.haveAccount")}{" "}
               <Link to="/login" className="font-medium text-gold hover:underline">
-                Sign in
+                {t("register.signIn")}
               </Link>
             </p>
           </div>
@@ -293,10 +295,10 @@ export function RegisterPage() {
             <Check className="size-7 text-green-500" />
           </div>
           <h2 id="credentials-title" className="font-grotesk text-xl font-bold tracking-tight">
-            Account Created Successfully!
+            {t("register.successTitle")}
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Save your login credentials. You&apos;ll need them to sign in.
+            {t("register.successSubtitle")}
           </p>
         </div>
 
@@ -305,14 +307,14 @@ export function RegisterPage() {
           <div className="rounded-xl border border-border bg-muted/30 p-3">
             <div className="flex items-center justify-between">
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Login ID (Email)</p>
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("register.loginId")}</p>
                 <p className="mt-1 truncate text-sm font-semibold">{registeredUser?.email}</p>
               </div>
               <button
                 type="button"
                 onClick={() => copyToClipboard(registeredUser?.email ?? "", "email")}
                 className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                aria-label="Copy email"
+                aria-label={t("register.copyEmail")}
               >
                 {copiedField === "email" ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
               </button>
@@ -323,14 +325,14 @@ export function RegisterPage() {
           <div className="rounded-xl border border-border bg-muted/30 p-3">
             <div className="flex items-center justify-between">
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Password</p>
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("register.password")}</p>
                 <p className="mt-1 truncate text-sm font-semibold font-mono">{registeredPassword}</p>
               </div>
               <button
                 type="button"
                 onClick={() => copyToClipboard(registeredPassword, "password")}
                 className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                aria-label="Copy password"
+                aria-label={t("register.copyPassword")}
               >
                 {copiedField === "password" ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
               </button>
@@ -341,14 +343,14 @@ export function RegisterPage() {
           <div className="rounded-xl border border-border bg-muted/30 p-3">
             <div className="flex items-center justify-between">
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Transaction PIN</p>
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("register.transactionPin")}</p>
                 <p className="mt-1 truncate text-sm font-semibold font-mono tracking-[0.3em]">{registeredTransactionPin}</p>
               </div>
               <button
                 type="button"
                 onClick={() => copyToClipboard(registeredTransactionPin, "txPin")}
                 className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                aria-label="Copy transaction PIN"
+                aria-label={t("register.copyTransactionPin")}
               >
                 {copiedField === "txPin" ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
               </button>
@@ -360,14 +362,14 @@ export function RegisterPage() {
             <div className="rounded-xl border border-border bg-muted/30 p-3">
               <div className="flex items-center justify-between">
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Your Referral Code</p>
+                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{t("register.yourReferralCode")}</p>
                   <p className="mt-1 truncate text-sm font-semibold">{registeredUser.referralCode}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => copyToClipboard(registeredUser.referralCode ?? "", "referral")}
                   className="ml-2 shrink-0 rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                  aria-label="Copy referral code"
+                  aria-label={t("register.copyReferralCode")}
                 >
                   {copiedField === "referral" ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
                 </button>
@@ -377,11 +379,11 @@ export function RegisterPage() {
         </div>
 
         <div className="mt-6 rounded-xl border border-amber-500/30 bg-amber-500/5 p-3 text-sm text-amber-600 dark:text-amber-400">
-          ⚠️ Please save your credentials before continuing. You&apos;ll need your email + password to sign in, and your Transaction PIN to authorise withdrawals and transfers.
+          ⚠️ {t("register.saveCredentialsWarning")}
         </div>
 
         <Button type="button" className="btn-premium mt-5 w-full h-11" onClick={handleGoToLogin}>
-          Continue to Sign In <ArrowRight className="ml-2 size-4" />
+          {t("register.continueToSignIn")} <ArrowRight className="ml-2 size-4" />
         </Button>
       </Dialog>
     </div>

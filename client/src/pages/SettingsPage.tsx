@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { Eye, EyeOff, Wallet, KeyRound, Bell, UserCog, CheckCircle2, Mail, BadgeCheck } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
@@ -32,17 +33,18 @@ import type { UpdateProfileBody, UpdateWalletAddressesBody } from "@zeminex/shar
 
 export function SettingsPage() {
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   return (
     <AppShell>
       <PageHeader
-        title="Settings"
-        description="Manage your account, security, and preferences."
-        breadcrumbs={[{ label: "Dashboard", to: "/app" }, { label: "Settings" }]}
+        title={t("settings.title")}
+        description={t("settings.description")}
+        breadcrumbs={[{ label: t("common.dashboard"), to: "/app" }, { label: t("settings.title") }]}
       />
 
       {!user ? (
-        <div className="mt-6 text-sm text-muted-foreground">Loading your profile…</div>
+        <div className="mt-6 text-sm text-muted-foreground">{t("settings.loadingProfile")}</div>
       ) : (
         <motion.div
           variants={staggerContainer}
@@ -79,6 +81,7 @@ export function SettingsPage() {
 /* ------------------------------------------------------------------ */
 function ProfileHeader() {
   const { user } = useAuth();
+  const { t } = useTranslation();
   if (!user) return null;
   return (
     <Card className="overflow-hidden border-0 shadow-card">
@@ -90,18 +93,18 @@ function ProfileHeader() {
             <h2 className="truncate text-lg font-semibold">{user.name}</h2>
             {user.isEmailVerified ? (
               <Badge variant="success" className="gap-1">
-                <BadgeCheck className="size-3.5" /> Verified
+                <BadgeCheck className="size-3.5" /> {t("settings.verified")}
               </Badge>
             ) : (
               <Badge variant="warning" className="gap-1">
-                Unverified
+                {t("settings.unverified")}
               </Badge>
             )}
           </div>
           <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <Mail className="size-3.5" /> {user.email}
           </p>
-          <p className="mt-0.5 text-xs capitalize text-muted-foreground">{user.role} account</p>
+          <p className="mt-0.5 text-xs capitalize text-muted-foreground">{t("settings.roleAccount", { role: user.role })}</p>
         </div>
       </CardContent>
     </Card>
@@ -113,6 +116,7 @@ function ProfileHeader() {
 /* ------------------------------------------------------------------ */
 function PersonalDetailsForm() {
   const { user, refreshUser } = useAuth();
+  const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
 
   const {
@@ -134,7 +138,7 @@ function PersonalDetailsForm() {
     try {
       await updateProfileRequest({ name: values.name, phone: values.phone });
       await refreshUser();
-      toast.success("Profile updated");
+      toast.success(t("settings.profileUpdated"));
     } catch {
       /* interceptor toasts */
     } finally {
@@ -146,25 +150,25 @@ function PersonalDetailsForm() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
-          <UserCog className="size-4 text-primary" /> Personal details
+          <UserCog className="size-4 text-primary" /> {t("settings.personalDetails")}
         </CardTitle>
-        <CardDescription>Your name and phone number.</CardDescription>
+        <CardDescription>{t("settings.personalDetailsDesc")}</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-2" noValidate>
           <div className="space-y-2">
-            <Label htmlFor="name">Full name</Label>
+            <Label htmlFor="name">{t("settings.fullName")}</Label>
             <Input id="name" autoComplete="name" {...register("name")} />
             {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phone">Phone (optional)</Label>
+            <Label htmlFor="phone">{t("settings.phoneOptional")}</Label>
             <Input id="phone" autoComplete="tel" placeholder="+1 555 010 0000" {...register("phone")} />
             {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
           </div>
           <div className="sm:col-span-2 flex justify-end">
             <Button type="submit" disabled={saving || !isDirty}>
-              {saving ? "Saving…" : "Save changes"}
+              {saving ? t("settings.saving") : t("common.save")}
             </Button>
           </div>
         </form>
@@ -178,6 +182,7 @@ function PersonalDetailsForm() {
 /* ------------------------------------------------------------------ */
 function WalletAddressForm() {
   const { user, refreshUser } = useAuth();
+  const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
 
   const {
@@ -199,7 +204,7 @@ function WalletAddressForm() {
     try {
       await updateWalletAddressesRequest({ usdtBep20: values.usdtBep20 });
       await refreshUser();
-      toast.success("Wallet address saved");
+      toast.success(t("settings.walletAddressSaved"));
     } catch {
       /* interceptor toasts */
     } finally {
@@ -213,16 +218,16 @@ function WalletAddressForm() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
-          <Wallet className="size-4 text-primary" /> Wallet address
+          <Wallet className="size-4 text-primary" /> {t("settings.walletAddress")}
         </CardTitle>
         <CardDescription>
-          Used for deposits and withdrawals. Only USDT-BEP20 (BNB Smart Chain) is supported.
+          {t("settings.walletAddressDesc")}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
           <div className="space-y-2">
-            <Label htmlFor="usdtBep20">USDT-BEP20 address</Label>
+            <Label htmlFor="usdtBep20">{t("settings.usdtBep20Address")}</Label>
             <div className="flex items-center gap-2">
               <Input
                 id="usdtBep20"
@@ -232,14 +237,14 @@ function WalletAddressForm() {
                 {...register("usdtBep20")}
               />
               {hasAddress && (
-                <CheckCircle2 className="size-5 shrink-0 text-emerald-600" aria-label="Address set" />
+                <CheckCircle2 className="size-5 shrink-0 text-emerald-600" aria-label={t("settings.addressSet")} />
               )}
             </div>
             {errors.usdtBep20 && <p className="text-sm text-destructive">{errors.usdtBep20.message}</p>}
           </div>
           <div className="flex justify-end">
             <Button type="submit" disabled={saving || !isDirty}>
-              {saving ? "Saving…" : "Save address"}
+              {saving ? t("settings.saving") : t("settings.saveAddress")}
             </Button>
           </div>
         </form>
@@ -259,6 +264,7 @@ const passwordFormSchema = z.object({
 type PasswordFormValues = z.infer<typeof passwordFormSchema>;
 
 function PasswordForm() {
+  const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -275,14 +281,14 @@ function PasswordForm() {
 
   const onSubmit = async (values: PasswordFormValues) => {
     if (values.password !== values.confirmPassword) {
-      setError("confirmPassword", { message: "Passwords do not match" });
+      setError("confirmPassword", { message: t("settings.passwordsDoNotMatch") });
       return;
     }
     setSaving(true);
     try {
       await changePasswordRequest({ currentPassword: values.currentPassword, password: values.password });
       reset({ currentPassword: "", password: "", confirmPassword: "" });
-      toast.success("Password updated");
+      toast.success(t("settings.passwordUpdated"));
     } catch {
       /* interceptor toasts (400 on wrong current password) */
     } finally {
@@ -294,32 +300,32 @@ function PasswordForm() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
-          <KeyRound className="size-4 text-primary" /> Password
+          <KeyRound className="size-4 text-primary" /> {t("settings.password")}
         </CardTitle>
-        <CardDescription>Choose a new password. Your session stays active.</CardDescription>
+        <CardDescription>{t("settings.passwordDesc")}</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
           <div className="space-y-2">
-            <Label htmlFor="currentPassword">Current password</Label>
+            <Label htmlFor="currentPassword">{t("settings.currentPassword")}</Label>
             <PasswordInput id="currentPassword" show={show} setShow={setShow} {...register("currentPassword")} />
             {errors.currentPassword && <p className="text-sm text-destructive">{errors.currentPassword.message}</p>}
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="password">New password</Label>
+              <Label htmlFor="password">{t("settings.newPassword")}</Label>
               <PasswordInput id="password" show={show} setShow={setShow} {...register("password")} />
               {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm new password</Label>
+              <Label htmlFor="confirmPassword">{t("settings.confirmNewPassword")}</Label>
               <PasswordInput id="confirmPassword" show={show} setShow={setShow} {...register("confirmPassword")} />
               {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>}
             </div>
           </div>
           <div className="flex justify-end">
             <Button type="submit" disabled={saving || !isDirty}>
-              {saving ? "Updating…" : "Update password"}
+              {saving ? t("settings.updating") : t("settings.updatePassword")}
             </Button>
           </div>
         </form>
@@ -333,19 +339,22 @@ const PasswordInput = forwardRef<HTMLInputElement, {
   show: boolean;
   setShow: (v: boolean) => void;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">>(
-  ({ show, setShow, ...props }, ref) => (
-    <div className="relative">
-      <Input ref={ref} type={show ? "text" : "password"} className="pr-10" {...props} />
-      <button
-        type="button"
-        onClick={() => setShow(!show)}
-        aria-label={show ? "Hide password" : "Show password"}
-        className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-muted-foreground hover:text-foreground"
-      >
-        {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-      </button>
-    </div>
-  ),
+  ({ show, setShow, ...props }, ref) => {
+    const { t } = useTranslation();
+    return (
+      <div className="relative">
+        <Input ref={ref} type={show ? "text" : "password"} className="pr-10" {...props} />
+        <button
+          type="button"
+          onClick={() => setShow(!show)}
+          aria-label={show ? t("settings.hidePassword") : t("settings.showPassword")}
+          className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-muted-foreground hover:text-foreground"
+        >
+          {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+        </button>
+      </div>
+    );
+  },
 );
 PasswordInput.displayName = "PasswordInput";
 
@@ -360,6 +369,7 @@ const pinFormSchema = z.object({
 type PinFormValues = z.infer<typeof pinFormSchema>;
 
 function TransactionPinForm() {
+  const { t } = useTranslation();
   const [saving, setSaving] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -377,7 +387,7 @@ function TransactionPinForm() {
 
   const onSubmit = async (values: PinFormValues) => {
     if (values.transactionPassword !== values.confirmTransactionPassword) {
-      setError("confirmTransactionPassword", { message: "PINs do not match" });
+      setError("confirmTransactionPassword", { message: t("settings.pinsDoNotMatch") });
       return;
     }
     setSaving(true);
@@ -389,7 +399,7 @@ function TransactionPinForm() {
         transactionPassword: values.transactionPassword,
       });
       reset({ currentTransactionPassword: "", transactionPassword: "", confirmTransactionPassword: "" });
-      toast.success("Transaction PIN updated");
+      toast.success(t("settings.transactionPinUpdated"));
     } catch {
       /* interceptor toasts (400 on wrong current PIN) */
     } finally {
@@ -401,16 +411,16 @@ function TransactionPinForm() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
-          <KeyRound className="size-4 text-primary" /> Transaction PIN
+          <KeyRound className="size-4 text-primary" /> {t("settings.transactionPin")}
         </CardTitle>
         <CardDescription>
-          4-digit PIN used to authorise withdrawals and transfers. Leave "Current PIN" blank if you haven&apos;t set one yet.
+          {t("settings.transactionPinDesc")}
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
           <div className="space-y-2">
-            <Label htmlFor="currentTransactionPassword">Current PIN <span className="text-muted-foreground">(if set)</span></Label>
+            <Label htmlFor="currentTransactionPassword">{t("settings.currentPin")} <span className="text-muted-foreground">{t("settings.ifSet")}</span></Label>
             <PasswordInput
               id="currentTransactionPassword"
               show={show}
@@ -429,7 +439,7 @@ function TransactionPinForm() {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="transactionPassword">New PIN</Label>
+              <Label htmlFor="transactionPassword">{t("settings.newPin")}</Label>
               <PasswordInput
                 id="transactionPassword"
                 show={show}
@@ -448,7 +458,7 @@ function TransactionPinForm() {
               {errors.transactionPassword && <p className="text-sm text-destructive">{errors.transactionPassword.message}</p>}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="confirmTransactionPassword">Confirm new PIN</Label>
+              <Label htmlFor="confirmTransactionPassword">{t("settings.confirmNewPin")}</Label>
               <PasswordInput
                 id="confirmTransactionPassword"
                 show={show}
@@ -469,7 +479,7 @@ function TransactionPinForm() {
           </div>
           <div className="flex justify-end">
             <Button type="submit" disabled={saving || !isDirty}>
-              {saving ? "Updating…" : "Update PIN"}
+              {saving ? t("settings.updating") : t("settings.updatePin")}
             </Button>
           </div>
         </form>
@@ -483,6 +493,7 @@ function TransactionPinForm() {
 /* ------------------------------------------------------------------ */
 function NotificationsForm() {
   const { user, refreshUser } = useAuth();
+  const { t } = useTranslation();
   const [prefs, setPrefs] = useState({ email: true, dashboard: true });
   const [saving, setSaving] = useState(false);
 
@@ -497,7 +508,7 @@ function NotificationsForm() {
     try {
       await updateNotificationPreferenceRequest(next);
       await refreshUser();
-      toast.success("Notification preference updated");
+      toast.success(t("settings.notificationPreferenceUpdated"));
     } catch {
       setPrefs(prefs); // revert on failure
     } finally {
@@ -509,22 +520,22 @@ function NotificationsForm() {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
-          <Bell className="size-4 text-primary" /> Notifications
+          <Bell className="size-4 text-primary" /> {t("settings.notifications")}
         </CardTitle>
-        <CardDescription>Choose how you want to hear from us.</CardDescription>
+        <CardDescription>{t("settings.notificationsDesc")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex items-center justify-between gap-4 rounded-lg border p-4">
           <div>
-            <p className="font-medium">Email notifications</p>
-            <p className="text-sm text-muted-foreground">Account, earning, and withdrawal alerts by email.</p>
+            <p className="font-medium">{t("settings.emailNotifications")}</p>
+            <p className="text-sm text-muted-foreground">{t("settings.emailNotificationsDesc")}</p>
           </div>
           <Switch checked={prefs.email} disabled={saving} onCheckedChange={(v) => toggle("email", v)} />
         </div>
         <div className="flex items-center justify-between gap-4 rounded-lg border p-4">
           <div>
-            <p className="font-medium">Dashboard notifications</p>
-            <p className="text-sm text-muted-foreground">Show alerts in your dashboard.</p>
+            <p className="font-medium">{t("settings.dashboardNotifications")}</p>
+            <p className="text-sm text-muted-foreground">{t("settings.dashboardNotificationsDesc")}</p>
           </div>
           <Switch checked={prefs.dashboard} disabled={saving} onCheckedChange={(v) => toggle("dashboard", v)} />
         </div>

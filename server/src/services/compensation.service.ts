@@ -56,7 +56,7 @@ export async function awardDirectBonus(
   packagePriceUsd: number,
   depositId: string,
 ): Promise<void> {
-  const buyer = await User.findById(buyerId).select("sponsorId").lean();
+  const buyer = await User.findById(buyerId).select("sponsorId name referralCode").lean();
   const sponsorId = buyer?.sponsorId;
   if (!sponsorId) return; // no sponsor — root user
 
@@ -79,8 +79,16 @@ export async function awardDirectBonus(
     amount,
     type: "direct_bonus",
     reference: { resource: "Deposit", resourceId: `direct-bonus:${depositId}` },
-    memo: `Direct connect bonus — ${pct}% of package activation`,
-    meta: { buyerId, depositId, pct },
+    memo: `Direct connect bonus — ${pct}% of package activation — from ${buyer?.name ?? "downline"} (L1)`,
+    meta: {
+      buyerId,
+      depositId,
+      pct,
+      level: 1,
+      fromUserId: buyerId,
+      fromUserName: buyer?.name ?? null,
+      fromReferralCode: buyer?.referralCode ?? null,
+    },
   });
 
   await ActivityLog.create({
@@ -231,14 +239,17 @@ export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
 type LeanLineageUser = {
   _id: { toString(): string };
   lineage: { toString(): string }[];
+  name: string;
+  referralCode: string;
 };
 
 /**
  * Run the daily team-energy credit: each active, in-window UserPackage
  * generates a daily yield, and a configurable slice of that yield flows up the
  * buyer's `lineage` to each ancestor (weighted by level, up to `depth`). One
- * `team_bonus` credit per ancestor per day, idempotent via
- * `team-energy:<ancestorId>:<date>`.
+ * `team_bonus` credit per (ancestor, downline source user) per day — kept
+ * separate per source so reports can show whose activity earned it and at
+ * which level — idempotent via `team-energy:<ancestorId>:<sourceUserId>:<date>`.
  *
  * Eligibility (anti-farming): an ancestor only earns if they hold an active
  * UserPackage. No cron yet (Phase 18) — triggered by the admin
@@ -266,14 +277,18 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     return { asOf: target.toISOString(), processed: 0, credited: 0, skipped: 0, errors: 0 };
   }
 
-  // Fetch each buyer's lineage once (map by user id).
+  // Fetch each buyer's lineage + name/referralCode once (map by user id) — the
+  // name/code are denormalised onto each credit so reports can show "earned
+  // from <name> (<code>) at level N" without an extra join.
   const buyerIds = Array.from(new Set(packages.map((p) => p.user.toString())));
-  const lineageUsers = await User.find({ _id: { $in: buyerIds } })
-    .select("lineage")
-    .lean() as LeanLineageUser[];
+  const lineageUsers = (await User.find({ _id: { $in: buyerIds } })
+    .select("lineage name referralCode")
+    .lean()) as LeanLineageUser[];
   const lineageByUser = new Map<string, string[]>();
+  const buyerInfoByUser = new Map<string, { name: string; referralCode: string }>();
   for (const u of lineageUsers) {
     lineageByUser.set(u._id.toString(), (u.lineage ?? []).map((a) => a.toString()));
+    buyerInfoByUser.set(u._id.toString(), { name: u.name, referralCode: u.referralCode });
   }
 
   // Cache the set of users holding an active package so the per-ancestor guard
@@ -283,8 +298,11 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
   );
   const isActiveSponsor = (id: string): boolean => activeUserIds.has(id);
 
-  // Accumulate per-ancestor earnings across all downline packages for the day.
-  const accrual = new Map<string, number>();
+  // Accumulate per-ancestor earnings, broken down by the downline source user
+  // (and their level), across all their packages for the day — keyed
+  // `${ancestorId}:${sourceUserId}` so each credit can name who it came from
+  // and at which level, instead of one opaque daily lump sum per ancestor.
+  const accrual = new Map<string, { amount: number; level: number }>();
 
   let skipped = 0;
   for (const up of packages) {
@@ -318,7 +336,9 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
         if (!ancestorId) continue;
         const share = round2((yieldAmt * weight) / 100);
         if (share <= 0) continue;
-        accrual.set(ancestorId, round2((accrual.get(ancestorId) ?? 0) + share));
+        const accrualKey = `${ancestorId}:${up.user.toString()}`;
+        const prev = accrual.get(accrualKey);
+        accrual.set(accrualKey, { amount: round2((prev?.amount ?? 0) + share), level });
       }
     } catch (err) {
       logger.error("Team energy accrual failed for package", {
@@ -331,12 +351,14 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
 
   let credited = 0;
   let errors = 0;
-  for (const [ancestorId, amount] of accrual) {
+  for (const [accrualKey, { amount, level }] of accrual) {
     if (amount <= 0) continue;
+    const [ancestorId, sourceUserId] = accrualKey.split(":");
     if (!isActiveSponsor(ancestorId)) {
       skipped++;
       continue;
     }
+    const source = buyerInfoByUser.get(sourceUserId);
     try {
       await applyLedgerEntry({
         userId: ancestorId,
@@ -345,22 +367,30 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
         direction: "credit",
         amount,
         type: "team_bonus",
-        reference: { resource: "UserPackage", resourceId: `team-energy:${ancestorId}:${key}` },
-        memo: "Daily team energy bonus",
-        meta: { date: key, depth },
+        reference: { resource: "UserPackage", resourceId: `team-energy:${ancestorId}:${sourceUserId}:${key}` },
+        memo: `Daily team energy bonus — Level ${level}${source ? ` from ${source.name}` : ""}`,
+        meta: {
+          date: key,
+          depth,
+          level,
+          fromUserId: sourceUserId,
+          fromUserName: source?.name ?? null,
+          fromReferralCode: source?.referralCode ?? null,
+        },
       });
       credited++;
       await ActivityLog.create({
         actor: ancestorId,
         action: "compensation.team_bonus",
         resource: "UserPackage",
-        resourceId: `team-energy:${ancestorId}:${key}`,
-        meta: { amount, date: key, depth },
+        resourceId: `team-energy:${ancestorId}:${sourceUserId}:${key}`,
+        meta: { amount, date: key, depth, level, fromUserId: sourceUserId },
       }).catch(() => undefined);
     } catch (err) {
       errors++;
       logger.error("Team energy credit failed", {
         ancestorId,
+        sourceUserId,
         date: key,
         error: err instanceof Error ? err.message : String(err),
       });

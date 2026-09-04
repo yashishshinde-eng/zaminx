@@ -9,6 +9,7 @@ import {
   ArrowRight,
   ShieldCheck,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader } from "@/components/shared";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,7 @@ import type { ActivatePackageResponse } from "@zeminex/shared";
  * Team page's per-row "Activate" action deep-links into this page.
  */
 export function ActivateMemberPage() {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const prefilledCode = searchParams.get("code") ?? "";
@@ -75,7 +77,7 @@ export function ActivateMemberPage() {
     resolvedTarget.status === "inactive" &&
     !resolvedTarget.isSelf;
 
-  const selectedTier = catalog.data?.find((t) => t.id === selectedPackageId) ?? null;
+  const selectedTier = catalog.data?.find((tier) => tier.id === selectedPackageId) ?? null;
   const canAfford = !!selectedTier && mainAvailable >= selectedTier.priceUsd;
   const confirmDisabled =
     !eligible || !selectedTier || !canAfford || activateFor.isPending;
@@ -101,9 +103,9 @@ export function ActivateMemberPage() {
     return (
       <AppShell>
         <PageHeader
-          title="Activate for member"
-          description="Activate a package for another inactive member, paid from your Main wallet."
-          breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Team", to: "/app/team" }, { label: "Activate for member" }]}
+          title={t("activateMember.title")}
+          description={t("activateMember.description")}
+          breadcrumbs={[{ label: t("common.home"), to: "/" }, { label: t("common.dashboard"), to: "/app" }, { label: t("nav.team"), to: "/app/team" }, { label: t("activateMember.title") }]}
         />
         <div className="mt-6 max-w-2xl">
           <ActivationSuccessDialog
@@ -143,22 +145,22 @@ export function ActivateMemberPage() {
                 <UserPlus className="size-4 text-purple-light" />
               </div>
               <div>
-                <h2 className="font-grotesk text-base font-semibold">Member to activate</h2>
+                <h2 className="font-grotesk text-base font-semibold">{t("activateMember.memberToActivate")}</h2>
                 <p className="text-sm text-muted-foreground">
-                  Enter the member&apos;s referral code, then verify.
+                  {t("activateMember.enterCodeThenVerify")}
                 </p>
               </div>
             </div>
 
             <div className="mt-5 space-y-3">
-              <Label htmlFor="target-code">Member referral code</Label>
+              <Label htmlFor="target-code">{t("activateMember.memberReferralCode")}</Label>
               <div className="flex gap-2">
                 <Input
                   id="target-code"
                   value={codeInput}
                   onChange={(e) => setCodeInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleVerify()}
-                  placeholder="Enter the member's referral code"
+                  placeholder={t("activateMember.enterCodePlaceholder")}
                   disabled={activateFor.isPending}
                 />
                 <Button
@@ -167,7 +169,7 @@ export function ActivateMemberPage() {
                   onClick={handleVerify}
                   disabled={!codeInput.trim() || lookup.isFetching}
                 >
-                  <Search className="size-4" /> Verify
+                  <Search className="size-4" /> {t("activateMember.verify")}
                 </Button>
               </div>
 
@@ -175,14 +177,14 @@ export function ActivateMemberPage() {
 
               {lookup.isError && !lookup.isFetching && (
                 <p className="text-sm text-destructive">
-                  No user found for that code. Check the code and try again.
+                  {t("activateMember.noUserFound")}
                 </p>
               )}
 
               {resolvedTarget && !lookup.isFetching && (
                 <div className="glass-card flex items-center justify-between p-3">
                   <div>
-                    <p className="text-xs text-muted-foreground">Beneficiary</p>
+                    <p className="text-xs text-muted-foreground">{t("activateMember.beneficiary")}</p>
                     <p className="font-medium">{resolvedTarget.name}</p>
                   </div>
                   <Badge
@@ -196,13 +198,13 @@ export function ActivateMemberPage() {
 
               {resolvedTarget?.isSelf && (
                 <p className="text-sm text-destructive">
-                  That&apos;s your own code — use the standard activation for your package on the{" "}
-                  <Link to="/app/packages" className="underline">Packages</Link> page.
+                  {t("activateMember.selfCodeError")}{" "}
+                  <Link to="/app/packages" className="underline">{t("nav.packages")}</Link> {t("activateMember.page")}.
                 </p>
               )}
               {resolvedTarget && resolvedTarget.status !== "inactive" && !resolvedTarget.isSelf && (
                 <p className="text-sm text-destructive">
-                  That member is not inactive — only inactive users can be activated for.
+                  {t("activateMember.notInactiveError")}
                 </p>
               )}
             </div>
@@ -215,9 +217,9 @@ export function ActivateMemberPage() {
             transition={{ duration: 0.3, delay: 0.05 }}
             className="glass-card p-5"
           >
-            <p className="font-grotesk text-base font-semibold">Choose a package</p>
+            <p className="font-grotesk text-base font-semibold">{t("activateMember.choosePackage")}</p>
             <p className="mt-1 text-sm text-muted-foreground">
-              The package is charged to your Main wallet and credited to the member.
+              {t("activateMember.choosePackageDesc")}
             </p>
 
             {catalog.isLoading && (
@@ -227,10 +229,10 @@ export function ActivateMemberPage() {
               </div>
             )}
             {catalog.isError && (
-              <p className="mt-3 text-sm text-destructive">Couldn&apos;t load the package catalog.</p>
+              <p className="mt-3 text-sm text-destructive">{t("activateMember.couldNotLoadCatalog")}</p>
             )}
             {catalog.data && catalog.data.length === 0 && (
-              <p className="mt-3 text-sm text-muted-foreground">No packages available.</p>
+              <p className="mt-3 text-sm text-muted-foreground">{t("packages.noPackages")}</p>
             )}
 
             <div className="mt-3 grid gap-2">
@@ -260,8 +262,8 @@ export function ActivateMemberPage() {
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-medium">{tier.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {tier.dailyReturnPct}% daily
-                        {tier.durationDays > 0 ? ` · ${tier.durationDays}d` : " · lifetime"}
+                        {tier.dailyReturnPct}% {t("activateMember.daily")}
+                        {tier.durationDays > 0 ? ` · ${tier.durationDays}d` : ` · ${t("activateMember.lifetime")}`}
                       </p>
                     </div>
                     <span className="shrink-0 font-grotesk font-bold tabular-nums">
@@ -288,7 +290,7 @@ export function ActivateMemberPage() {
                 <WalletIcon className="size-4 text-blue-light" />
               </div>
               <div className="flex-1">
-                <p className="text-xs text-muted-foreground">Your Main wallet balance</p>
+                <p className="text-xs text-muted-foreground">{t("activateMember.yourMainWalletBalance")}</p>
                 <p className="font-grotesk text-lg font-bold tabular-nums">
                   {wallet.isLoading ? "—" : formatCurrency(mainAvailable)}
                 </p>
@@ -299,26 +301,26 @@ export function ActivateMemberPage() {
 
             {/* Selected package summary */}
             <div className="space-y-2">
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Selected package</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{t("activateMember.selectedPackage")}</p>
               {selectedTier ? (
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="font-medium">{selectedTier.name}</p>
                     <p className="text-xs text-muted-foreground">
-                      {selectedTier.dailyReturnPct}% daily
-                      {selectedTier.durationDays > 0 ? ` · ${selectedTier.durationDays}d` : " · lifetime"}
+                      {selectedTier.dailyReturnPct}% {t("activateMember.daily")}
+                      {selectedTier.durationDays > 0 ? ` · ${selectedTier.durationDays}d` : ` · ${t("activateMember.lifetime")}`}
                     </p>
                   </div>
                   <span className="font-grotesk font-bold tabular-nums">{formatCurrency(selectedTier.priceUsd)}</span>
                 </div>
               ) : (
-                <p className="text-sm text-muted-foreground">No package selected yet.</p>
+                <p className="text-sm text-muted-foreground">{t("activateMember.noPackageSelected")}</p>
               )}
             </div>
 
             {/* Beneficiary summary */}
             <div className="space-y-2">
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Beneficiary</p>
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{t("activateMember.beneficiary")}</p>
               {resolvedTarget ? (
                 <div className="flex items-center justify-between">
                   <p className="font-medium">{resolvedTarget.name}</p>
@@ -330,22 +332,22 @@ export function ActivateMemberPage() {
                   </Badge>
                 </div>
               ) : (
-                <p className="text-sm text-muted-foreground">Verify a referral code first.</p>
+                <p className="text-sm text-muted-foreground">{t("activateMember.verifyCodeFirst")}</p>
               )}
             </div>
 
             {/* Insufficient balance hint */}
             {selectedTier && !canAfford && (
               <p className="text-sm text-destructive">
-                Insufficient balance — {formatCurrency(selectedTier.priceUsd)} needed.{" "}
-                <Link to="/app/deposit" className="underline">Deposit</Link>.
+                {t("activateMember.insufficientBalance", { amount: formatCurrency(selectedTier.priceUsd) })}{" "}
+                <Link to="/app/deposit" className="underline">{t("nav.deposit")}</Link>.
               </p>
             )}
 
             {/* Eligibility hint */}
             {!eligible && resolvedTarget && (
               <p className="flex items-center gap-1.5 text-sm text-destructive">
-                <ShieldCheck className="size-3.5" /> This member isn&apos;t eligible for activation.
+                <ShieldCheck className="size-3.5" /> {t("activateMember.notEligible")}
               </p>
             )}
 
@@ -355,11 +357,11 @@ export function ActivateMemberPage() {
               onClick={handleConfirm}
               disabled={confirmDisabled}
             >
-              {activateFor.isPending ? "Activating…" : (<>Activate package <ArrowRight className="size-4" /></>)}
+              {activateFor.isPending ? t("activateMember.activating") : (<>{t("activateMember.activatePackage")} <ArrowRight className="size-4" /></>)}
             </Button>
 
             <p className="text-center text-xs text-muted-foreground">
-              Funds are debited from your Main wallet instantly.
+              {t("activateMember.debitedInstantly")}
             </p>
           </div>
         </motion.aside>

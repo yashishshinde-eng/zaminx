@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2, UserPlus } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, FilterBar, EmptyState, type Column } from "@/components/shared";
@@ -28,6 +29,7 @@ type StatusFilter = "all" | "active" | "inactive";
 
 /** /app/team — referral link, team statistics, lazy referral tree, member list. */
 export function TeamPage() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const stats = useReferralStats();
 
@@ -43,11 +45,11 @@ export function TeamPage() {
   // the member's referral code prefilled (per-row action).
 
   useEffect(() => {
-    const t = setTimeout(() => {
+    const timer = setTimeout(() => {
       setDebouncedSearch(search.trim());
       setPage(1);
     }, 350);
-    return () => clearTimeout(t);
+    return () => clearTimeout(timer);
   }, [search]);
 
   // Reset to page 1 whenever any filter changes.
@@ -79,12 +81,12 @@ export function TeamPage() {
     () => [
       {
         key: "member",
-        header: "Member",
+        header: t("team.columnMember"),
         cell: (r) => <span className="font-medium">{r.name}</span>,
       },
       {
         key: "code",
-        header: "Code",
+        header: t("team.columnCode"),
         cell: (r) => (
           <button
             type="button"
@@ -104,24 +106,24 @@ export function TeamPage() {
       },
       {
         key: "level",
-        header: "Level",
+        header: t("team.columnLevel"),
         align: "right",
         cell: (r) => <span className="tabular-nums text-muted-foreground">L{r.level}</span>,
       },
       {
         key: "status",
-        header: "Status",
+        header: t("common.status"),
         cell: (r) => <Badge variant={STATUS_VARIANT[r.status]} className="capitalize">{r.status}</Badge>,
       },
       {
         key: "direct",
-        header: "Direct",
+        header: t("team.direct"),
         align: "right",
         cell: (r) => <span className="tabular-nums text-muted-foreground">{r.directCount}</span>,
       },
       {
         key: "date",
-        header: "Date",
+        header: t("common.date"),
         cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.joinedAt)}</span>,
       },
       {
@@ -132,7 +134,7 @@ export function TeamPage() {
           r.status === "inactive" ? (
             <Button asChild variant="outline" size="sm">
               <Link to={`/app/activate-member?code=${encodeURIComponent(r.referralCode)}`}>
-                <UserPlus className="size-3.5" /> Activate
+                <UserPlus className="size-3.5" /> {t("team.activate")}
               </Link>
             </Button>
           ) : (
@@ -140,7 +142,7 @@ export function TeamPage() {
           ),
       },
     ],
-    [],
+    [t],
   );
 
   const referral = stats.data ? { code: stats.data.code, link: stats.data.link } : undefined;
@@ -148,12 +150,12 @@ export function TeamPage() {
   return (
     <AppShell>
       <PageHeader
-        title="Team"
-        description="Your referral network — link, statistics, and the referral tree."
-        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Team" }]}
+        title={t("team.title")}
+        description={t("team.description")}
+        breadcrumbs={[{ label: t("common.home"), to: "/" }, { label: t("common.dashboard"), to: "/app" }, { label: t("team.title") }]}
         actions={
           <Button asChild variant="outline" size="sm">
-            <Link to="/app/activate-member"><UserPlus className="size-4" /> Activate for member</Link>
+            <Link to="/app/activate-member"><UserPlus className="size-4" /> {t("team.activateForMember")}</Link>
           </Button>
         }
       />
@@ -181,9 +183,9 @@ export function TeamPage() {
           <CardHeader className="flex-row items-center justify-between space-y-0">
             <div className="space-y-1">
               <CardTitle className="flex items-center gap-2 text-base">
-                <Users className="size-4 text-primary" /> Referral tree
+                <Users className="size-4 text-primary" /> {t("team.referralTree")}
               </CardTitle>
-              <CardDescription>Expand a node to reveal its direct referrals.</CardDescription>
+              <CardDescription>{t("team.referralTreeDesc")}</CardDescription>
             </div>
             <Button
               type="button"
@@ -204,7 +206,7 @@ export function TeamPage() {
                 }
               }}
             >
-              <Share2 className="size-4" /> Share
+              <Share2 className="size-4" /> {t("team.share")}
             </Button>
           </CardHeader>
           <CardContent className="space-y-1">
@@ -213,8 +215,8 @@ export function TeamPage() {
             ) : !stats.data || stats.data.directCount === 0 ? (
               <EmptyState
                 icon={Users}
-                title="No referrals yet"
-                description="Share your referral link above to start building your team."
+                title={t("team.noReferralsTitle")}
+                description={t("team.noReferralsDesc")}
                 action={
                   <Button
                     type="button"
@@ -228,7 +230,7 @@ export function TeamPage() {
                       );
                     }}
                   >
-                    <Copy className="size-4" /> Copy referral link
+                    <Copy className="size-4" /> {t("team.copyReferralLink")}
                   </Button>
                 }
               />
@@ -243,7 +245,7 @@ export function TeamPage() {
           <FilterBar
             search={search}
             onSearchChange={setSearch}
-            searchPlaceholder="Search name or code…"
+            searchPlaceholder={t("team.searchPlaceholder")}
             filters={
               <div className="flex flex-wrap items-center gap-2">
                 {/* Scope group — All / Direct / Level picker (combinable with status). */}
@@ -255,7 +257,7 @@ export function TeamPage() {
                     className="h-8 px-3"
                     onClick={() => setScope("all")}
                   >
-                    All
+                    {t("common.all")}
                   </Button>
                   <Button
                     type="button"
@@ -264,7 +266,7 @@ export function TeamPage() {
                     className="h-8 px-3"
                     onClick={() => setScope("direct")}
                   >
-                    Direct
+                    {t("team.direct")}
                   </Button>
                   <DropdownMenu
                     align="end"
@@ -276,14 +278,14 @@ export function TeamPage() {
                         className="h-8 px-3"
                         disabled={availableLevels.length === 0}
                       >
-                        {scope === "level" && levelNum ? `Level ${levelNum}` : "Level"}
+                        {scope === "level" && levelNum ? `${t("team.level")} ${levelNum}` : t("team.filterLevel")}
                         <ChevronDown className="size-3.5 opacity-70" />
                       </Button>
                     }
                   >
                     {() => (
                       <>
-                        <DropdownMenuLabel>Filter by level</DropdownMenuLabel>
+                        <DropdownMenuLabel>{t("team.filterByLevel")}</DropdownMenuLabel>
                         {availableLevels.map((l) => (
                           <DropdownMenuItem
                             key={l}
@@ -292,7 +294,7 @@ export function TeamPage() {
                               setScope("level");
                             }}
                           >
-                            Level {l}
+                            {t("team.level")} {l}
                             <span className="ml-auto text-xs text-muted-foreground">
                               {(stats.data?.byLevel ?? []).find((b) => b.level === l)?.count ?? 0}
                             </span>
@@ -314,7 +316,7 @@ export function TeamPage() {
                       className="h-8 px-3 capitalize"
                       onClick={() => setStatusFilter((prev) => (prev === s ? "all" : s))}
                     >
-                      {s}
+                      {t(`common.${s}`)}
                     </Button>
                   ))}
                 </div>
@@ -326,10 +328,10 @@ export function TeamPage() {
             data={team.data?.items ?? []}
             rowKey={(r) => r.id}
             isLoading={team.isLoading}
-            error={team.isError ? "We couldn't load your team members." : null}
+            error={team.isError ? t("team.couldNotLoadTeam") : null}
             onRetry={() => team.refetch()}
-            emptyTitle="No members match"
-            emptyDescription="Try a different filter, or share your referral link to grow your team."
+            emptyTitle={t("team.noMembersMatch")}
+            emptyDescription={t("team.noMembersMatchDesc")}
             page={team.data?.page ?? 1}
             pageCount={Math.max(1, team.data?.totalPages ?? 1)}
             onPageChange={setPage}
@@ -345,6 +347,7 @@ export function TeamPage() {
 /* ------------------------------------------------------------------ */
 
 function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined; isLoading: boolean }) {
+  const { t } = useTranslation();
   if (isLoading || !stats) {
     return <div className="h-32 animate-pulse rounded-lg bg-muted/30" />;
   }
@@ -355,34 +358,36 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
           <span className="gradient-blue flex size-7 items-center justify-center rounded-md text-primary-foreground">
             <UserCheck className="size-4" />
           </span>
-          Team statistics
+          {t("team.statsTitle")}
         </CardTitle>
-        <CardDescription>Direct and all-level referral counts</CardDescription>
+        <CardDescription>{t("team.statsDesc")}</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-4">
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Metric label="Direct" value={stats.directCount} />
-          <Metric label="Total team" value={stats.teamCount} />
-          <Metric label="Active direct" value={stats.activeDirectCount} />
-          <Metric label="Active team" value={stats.activeTeamCount} />
-        </div>
+        <Card className="border-border/60 bg-muted/20 shadow-none">
+          <CardContent className="grid grid-cols-2 gap-4 p-4 sm:grid-cols-4">
+            <Metric label={t("team.direct")} value={stats.directCount} />
+            <Metric label={t("team.totalTeam")} value={stats.teamCount} />
+            <Metric label={t("team.activeDirect")} value={stats.activeDirectCount} />
+            <Metric label={t("team.activeTeam")} value={stats.activeTeamCount} />
+          </CardContent>
+        </Card>
         {stats.byLevel.length > 0 && (
           <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 rounded-lg border border-border/60">
             <span className="px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              Level
+              {t("team.level")}
             </span>
             <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              Members
+              {t("team.members")}
             </span>
             <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              Active
+              {t("common.active")}
             </span>
             <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              Business
+              {t("team.business")}
             </span>
             {stats.byLevel.map((l) => (
               <Fragment key={l.level}>
-                <span className="border-t border-border/40 px-3 py-2 text-sm font-medium">Level {l.level}</span>
+                <span className="border-t border-border/40 px-3 py-2 text-sm font-medium">{t("team.level")} {l.level}</span>
                 <span className="border-t border-border/40 px-3 py-2 text-right text-sm tabular-nums text-muted-foreground">
                   {l.count}
                 </span>
@@ -395,7 +400,7 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
               </Fragment>
             ))}
             <span className="col-span-3 border-t border-border/60 bg-muted/30 px-3 py-2 text-sm font-bold">
-              Total team business
+              {t("team.totalTeamBusiness")}
             </span>
             <span className="border-t border-border/60 bg-muted/30 px-3 py-2 text-right text-sm font-bold tabular-nums">
               {formatCurrency(stats.teamBusiness)}

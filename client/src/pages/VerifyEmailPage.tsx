@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { CheckCircle2, MailWarning, Send } from "lucide-react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { verifyEmailRequest, resendVerificationRequest } from "@/lib/auth";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils";
 type State = "verifying" | "success" | "error";
 
 export function VerifyEmailPage() {
+  const { t } = useTranslation();
   const [params] = useSearchParams();
   const token = params.get("token") ?? "";
   const { refreshUser, isAuthenticated } = useAuth();
@@ -51,7 +53,7 @@ export function VerifyEmailPage() {
     setResending(true);
     try {
       await resendVerificationRequest(email);
-      toast.success("If that email exists and is unverified, a new link has been sent.");
+      toast.success(t("verifyEmail.resentToast"));
     } catch {
       // Interceptor toasts on network error.
     } finally {
@@ -64,11 +66,11 @@ export function VerifyEmailPage() {
       <Card className={cn("w-full max-w-md", state === "success" ? "neon-card neon-green" : "border-0 shadow-card")}>
         <CardHeader className="space-y-3 text-center">
           <div className="mx-auto"><Logo className="size-12" /></div>
-          <CardTitle className="text-2xl">Verify your email</CardTitle>
+          <CardTitle className="text-2xl">{t("verifyEmail.title")}</CardTitle>
         </CardHeader>
         <CardContent>
           {state === "verifying" && (
-            <p className="py-6 text-center text-sm text-muted-foreground">Verifying your email…</p>
+            <p className="py-6 text-center text-sm text-muted-foreground">{t("verifyEmail.verifying")}</p>
           )}
 
           {state === "success" && (
@@ -76,9 +78,9 @@ export function VerifyEmailPage() {
               <div className="flex size-12 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
                 <CheckCircle2 className="size-6" />
               </div>
-              <p className="text-sm text-muted-foreground">Your email is verified. Welcome to Zeminex Global!</p>
+              <p className="text-sm text-muted-foreground">{t("verifyEmail.successMessage")}</p>
               <Button className="w-full" asChild>
-                <Link to={isAuthenticated ? "/app" : "/login"}>Continue</Link>
+                <Link to={isAuthenticated ? "/app" : "/login"}>{t("verifyEmail.continue")}</Link>
               </Button>
             </div>
           )}
@@ -90,12 +92,12 @@ export function VerifyEmailPage() {
               </div>
               <p className="text-sm text-muted-foreground">
                 {token
-                  ? "This verification link is invalid or has expired. You can request a new one below."
-                  : "No verification token was found in the link. Use the link from your verification email."}
+                  ? t("verifyEmail.invalidOrExpired")
+                  : t("verifyEmail.noToken")}
               </p>
               <form onSubmit={onResend} className="w-full space-y-3 text-left">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{t("verifyEmail.email")}</Label>
                   <Input
                     id="email"
                     type="email"
@@ -108,10 +110,10 @@ export function VerifyEmailPage() {
                 </div>
                 <Button type="submit" className="w-full" disabled={resending}>
                   {resending ? (
-                    "Sending…"
+                    t("verifyEmail.sending")
                   ) : (
                     <>
-                      <Send className="size-4" /> Resend verification email
+                      <Send className="size-4" /> {t("verifyEmail.resend")}
                     </>
                   )}
                 </Button>
@@ -120,7 +122,7 @@ export function VerifyEmailPage() {
           )}
 
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            <Link to="/login" className="font-medium text-primary hover:underline">Back to sign in</Link>
+            <Link to="/login" className="font-medium text-primary hover:underline">{t("verifyEmail.backToSignIn")}</Link>
           </p>
         </CardContent>
       </Card>

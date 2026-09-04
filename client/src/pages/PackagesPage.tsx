@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Package as PackageIcon, ArrowDownToLine, Wallet as WalletIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, ErrorState, EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -20,6 +21,7 @@ import { formatCurrency } from "@/lib/utils";
 import type { ActivatePackageResponse } from "@zeminex/shared";
 
 export function PackagesPage() {
+  const { t } = useTranslation();
   const catalog = usePackageCatalog();
   const mine = useMyPackages();
   const hasOpen = useHasOpenPackage();
@@ -34,7 +36,7 @@ export function PackagesPage() {
   const pendingPayment = mine.data?.find((p) => p.status === "pending" && p.payment);
 
   const disabledReason = hasOpen
-    ? "You already have a pending or active package"
+    ? t("packages.alreadyHasOpen")
     : undefined;
 
   // Auto-highlight the tier whose price is closest to the catalog median as "Popular".
@@ -45,11 +47,11 @@ export function PackagesPage() {
     const median = sorted[Math.floor(sorted.length / 2)].priceUsd;
     let best = sorted[0];
     let bestDist = Infinity;
-    for (const t of tiers) {
-      const d = Math.abs(t.priceUsd - median);
+    for (const tier of tiers) {
+      const d = Math.abs(tier.priceUsd - median);
       if (d < bestDist) {
         bestDist = d;
-        best = t;
+        best = tier;
       }
     }
     return best.id;
@@ -58,9 +60,9 @@ export function PackagesPage() {
   return (
     <AppShell>
       <PageHeader
-        title="Packages"
-        description="Activation, history & status."
-        breadcrumbs={[{ label: "Dashboard", to: "/app" }, { label: "Packages" }]}
+        title={t("packages.title")}
+        description={t("packages.description")}
+        breadcrumbs={[{ label: t("common.dashboard"), to: "/app" }, { label: t("nav.packages") }]}
       />
 
       <div className="mt-6 space-y-8">
@@ -75,13 +77,13 @@ export function PackagesPage() {
             <WalletIcon className="size-4 text-blue-light" />
           </div>
           <div className="flex-1">
-            <p className="text-xs text-muted-foreground">Main wallet balance</p>
+            <p className="text-xs text-muted-foreground">{t("deposit.mainWalletBalance")}</p>
             <p className="font-grotesk text-lg font-bold tabular-nums">
               {wallet.isLoading ? "—" : formatCurrency(mainAvailable)}
             </p>
           </div>
           <Button asChild variant="outline" size="sm">
-            <Link to="/app/deposit"><ArrowDownToLine className="size-4" /> Deposit</Link>
+            <Link to="/app/deposit"><ArrowDownToLine className="size-4" /> {t("nav.deposit")}</Link>
           </Button>
         </div>
 
@@ -97,7 +99,7 @@ export function PackagesPage() {
 
           {catalog.isError && (
             <ErrorState
-              message="We couldn't load the package catalog. Please try again."
+              message={t("packages.couldNotLoadCatalog")}
               onRetry={() => catalog.refetch()}
             />
           )}
@@ -105,8 +107,8 @@ export function PackagesPage() {
           {catalog.data && catalog.data.length === 0 && (
             <EmptyState
               icon={PackageIcon}
-              title="No packages available"
-              description="No investment tiers are listed right now. Please check back soon."
+              title={t("packages.noPackages")}
+              description={t("packages.noPackagesDesc")}
             />
           )}
 
@@ -133,7 +135,7 @@ export function PackagesPage() {
         <section>
           {mine.isError ? (
             <ErrorState
-              message="We couldn't load your package history. Please try again."
+              message={t("packages.couldNotLoadHistory")}
               onRetry={() => mine.refetch()}
             />
           ) : (

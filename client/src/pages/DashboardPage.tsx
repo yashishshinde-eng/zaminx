@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   TrendingUp,
   Wallet as WalletIcon,
@@ -33,6 +34,7 @@ import {
 } from "@/components/dashboard";
 
 export function DashboardPage() {
+  const { t } = useTranslation();
   const { data, isLoading, isError, refetch } = useDashboardSummary();
 
   return (
@@ -41,7 +43,7 @@ export function DashboardPage() {
 
       {isError && (
         <div className="mt-6">
-          <ErrorState message="We couldn't load your dashboard. Please try again." onRetry={() => refetch()} />
+          <ErrorState message={t("dashboard.errorLoad")} onRetry={() => refetch()} />
         </div>
       )}
 
@@ -52,14 +54,16 @@ export function DashboardPage() {
 
 type SummaryData = NonNullable<ReturnType<typeof useDashboardSummary>["data"]>;
 
-function greeting(): string {
+function useGreeting(): string {
+  const { t } = useTranslation();
   const h = new Date().getHours();
-  if (h < 12) return "Good morning";
-  if (h < 18) return "Good afternoon";
-  return "Good evening";
+  if (h < 12) return t("dashboard.greetingMorning");
+  if (h < 18) return t("dashboard.greetingAfternoon");
+  return t("dashboard.greetingEvening");
 }
 
 function DashboardContent({ data }: { data: SummaryData }) {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const inactive = user?.status !== "active";
   const earnedTrend = (() => {
@@ -70,6 +74,7 @@ function DashboardContent({ data }: { data: SummaryData }) {
     if (prev7 === 0) return undefined;
     return ((last7 - prev7) / prev7) * 100;
   })();
+  const greeting = useGreeting();
 
   return (
     <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-6">
@@ -79,16 +84,16 @@ function DashboardContent({ data }: { data: SummaryData }) {
         <div className="flex items-end justify-between gap-4">
           <div>
             <h2 className="welcome-greeting text-2xl font-bold tracking-tight sm:text-3xl">
-              {greeting()}, {user?.name?.split(" ")[0] ?? "there"}
+              {greeting}, {user?.name?.split(" ")[0] ?? t("dashboard.there")}
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              Here&apos;s your portfolio overview for today
+              {t("dashboard.subtitle")}
             </p>
           </div>
           <div className="hidden items-center gap-1.5 rounded-full bg-gold/10 px-3 py-1.5 sm:flex">
             <Sparkles className="size-3.5 text-gold" />
             <span className="text-xs font-semibold text-gold">
-              {data.account.rank.name} Rank
+              {data.account.rank.name} {t("dashboard.rankSuffix")}
             </span>
             <RankStars name={data.account.rank.name} size={10} />
           </div>
@@ -112,18 +117,18 @@ function DashboardContent({ data }: { data: SummaryData }) {
 
       {/* ═══ KPI ROW: 4 Premium Metric Tiles ══════════════ */}
       <motion.div variants={staggerItem} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <KpiCard icon={WalletIcon} label="Total Balance" value={data.wallets.total} variant="gold" delay={0} />
+        <KpiCard icon={WalletIcon} label={t("dashboard.totalBalance")} value={data.wallets.total} variant="gold" delay={0} />
         <KpiCard
           icon={TrendingUp}
-          label="Total Earned"
+          label={t("dashboard.totalEarned")}
           value={data.income.total}
           series={data.income.series.map((s) => s.value)}
           trend={earnedTrend}
           variant="green"
           delay={0.06}
         />
-        <KpiCard icon={ArrowDownToLine} label="Available" value={data.wallets.totalAvailable} variant="cyan" delay={0.12} />
-        <KpiCard icon={Users} label="Team Size" value={data.team.teamCount} format="number" variant="magenta" delay={0.18} />
+        <KpiCard icon={ArrowDownToLine} label={t("dashboard.available")} value={data.wallets.totalAvailable} variant="cyan" delay={0.12} />
+        <KpiCard icon={Users} label={t("dashboard.teamSize")} value={data.team.teamCount} format="number" variant="magenta" delay={0.18} />
       </motion.div>
 
       {/* ═══ CHARTS: Portfolio Performance + Asset Allocation ═ */}
@@ -137,17 +142,17 @@ function DashboardContent({ data }: { data: SummaryData }) {
         <div className="neon-card neon-blue relative overflow-hidden p-5 sm:p-6">
           <div className="relative z-10 flex items-center gap-2.5 mb-4">
             <Sparkles className="size-4 text-blue" />
-            <p className="metric-label font-grotesk text-xs font-bold uppercase tracking-[0.2em]">Quick Actions</p>
+            <p className="metric-label font-grotesk text-xs font-bold uppercase tracking-[0.2em]">{t("dashboard.quickActions")}</p>
           </div>
           <div className="relative z-10 grid grid-cols-4 gap-3 sm:grid-cols-4 lg:grid-cols-8">
-            <NeonActionButton icon={ArrowDownToLine} label="Deposit" variant="gold" to="/app/deposit" />
-            <NeonActionButton icon={ArrowUpFromLine} label="Withdraw" variant="green" to="/app/withdrawals" disabled={inactive} disabledTitle="Activate a package to unlock" />
-            <NeonActionButton icon={Package} label="Invest" variant="violet" to="/app/packages" />
-            <NeonActionButton icon={Repeat} label="P2P" variant="green" to="/app/p2p" disabled={inactive} disabledTitle="Activate a package to unlock" />
-            <NeonActionButton icon={ArrowRightLeft} label="Convert" variant="cyan" to="/app/p2p" disabled={inactive} disabledTitle="Activate a package to unlock" />
-            <NeonActionButton icon={Gem} label="Stake" variant="goldcyan" to="/app/packages" />
-            <NeonActionButton icon={TrendingUp} label="Trade" variant="blue" to="/app/trade" />
-            <NeonActionButton icon={Users} label="Refer" variant="orange" to="/app/team" />
+            <NeonActionButton icon={ArrowDownToLine} label={t("dashboard.actions.deposit")} variant="gold" to="/app/deposit" />
+            <NeonActionButton icon={ArrowUpFromLine} label={t("dashboard.actions.withdraw")} variant="green" to="/app/withdrawals" disabled={inactive} disabledTitle={t("dashboard.activateHint")} />
+            <NeonActionButton icon={Package} label={t("dashboard.actions.invest")} variant="violet" to="/app/packages" />
+            <NeonActionButton icon={Repeat} label={t("dashboard.actions.p2p")} variant="green" to="/app/p2p" disabled={inactive} disabledTitle={t("dashboard.activateHint")} />
+            <NeonActionButton icon={ArrowRightLeft} label={t("dashboard.actions.convert")} variant="cyan" to="/app/p2p" disabled={inactive} disabledTitle={t("dashboard.activateHint")} />
+            <NeonActionButton icon={Gem} label={t("dashboard.actions.stake")} variant="goldcyan" to="/app/packages" />
+            <NeonActionButton icon={TrendingUp} label={t("dashboard.actions.trade")} variant="blue" to="/app/trade" />
+            <NeonActionButton icon={Users} label={t("dashboard.actions.refer")} variant="orange" to="/app/team" />
           </div>
         </div>
       </motion.div>

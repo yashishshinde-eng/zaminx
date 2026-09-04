@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowDownToLine, AlertTriangle, Check, Clock, X, Info } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, type Column } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,14 +21,14 @@ import { sanitizePinEvent } from "@/lib/pin";
 
 const MIN_WITHDRAWAL = 15;
 
-const STATUS_FILTERS: { value: "all" | WithdrawalStatus; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "pending", label: "Pending" },
-  { value: "under_review", label: "Under review" },
-  { value: "approved", label: "Approved" },
-  { value: "paid", label: "Paid" },
-  { value: "rejected", label: "Rejected" },
-  { value: "cancelled", label: "Cancelled" },
+const STATUS_FILTERS: { value: "all" | WithdrawalStatus; labelKey: string }[] = [
+  { value: "all", labelKey: "common.all" },
+  { value: "pending", labelKey: "withdrawals.statusPending" },
+  { value: "under_review", labelKey: "withdrawals.statusUnderReview" },
+  { value: "approved", labelKey: "withdrawals.statusApproved" },
+  { value: "paid", labelKey: "withdrawals.statusPaid" },
+  { value: "rejected", labelKey: "withdrawals.statusRejected" },
+  { value: "cancelled", labelKey: "withdrawals.statusCancelled" },
 ];
 
 const STATUS_VARIANT: Record<WithdrawalStatus, "default" | "secondary" | "success" | "warning" | "destructive" | "outline"> = {
@@ -39,13 +40,13 @@ const STATUS_VARIANT: Record<WithdrawalStatus, "default" | "secondary" | "succes
   cancelled: "outline",
 };
 
-const STATUS_LABEL: Record<WithdrawalStatus, string> = {
-  pending: "Pending",
-  under_review: "Under review",
-  approved: "Approved",
-  paid: "Paid",
-  rejected: "Rejected",
-  cancelled: "Cancelled",
+const STATUS_LABEL_KEY: Record<WithdrawalStatus, string> = {
+  pending: "withdrawals.statusPending",
+  under_review: "withdrawals.statusUnderReview",
+  approved: "withdrawals.statusApproved",
+  paid: "withdrawals.statusPaid",
+  rejected: "withdrawals.statusRejected",
+  cancelled: "withdrawals.statusCancelled",
 };
 
 /** Success-path stages, in order. Terminal off-path statuses (rejected/cancelled) are shown specially. */
@@ -53,6 +54,7 @@ const STAGES: WithdrawalStatus[] = ["pending", "under_review", "approved", "paid
 
 /** /app/withdrawals — submit a withdrawal and track its history. */
 export function WithdrawalsPage() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const inactive = user?.status !== "active";
   const wallet = useWallet();
@@ -91,18 +93,18 @@ export function WithdrawalsPage() {
     () => [
       {
         key: "wallet",
-        header: "Wallet",
+        header: t("withdrawals.columnWallet"),
         cell: (r) => <Badge variant="outline" className="capitalize">{r.wallet}</Badge>,
       },
       {
         key: "amount",
-        header: "Amount",
+        header: t("withdrawals.columnAmount"),
         align: "right",
         cell: (r) => <span className="whitespace-nowrap font-semibold tabular-nums">{formatCurrency(r.amount)}</span>,
       },
       {
         key: "address",
-        header: "Address",
+        header: t("withdrawals.columnAddress"),
         cell: (r) => (
           <code className="block max-w-[160px] truncate font-mono text-xs text-muted-foreground" title={r.address}>
             {r.address}
@@ -111,17 +113,17 @@ export function WithdrawalsPage() {
       },
       {
         key: "status",
-        header: "Status",
-        cell: (r) => <Badge variant={STATUS_VARIANT[r.status]}>{STATUS_LABEL[r.status]}</Badge>,
+        header: t("withdrawals.columnStatus"),
+        cell: (r) => <Badge variant={STATUS_VARIANT[r.status]}>{t(STATUS_LABEL_KEY[r.status])}</Badge>,
       },
       {
         key: "remarks",
-        header: "Remarks",
+        header: t("withdrawals.columnRemarks"),
         cell: (r) => <span className="text-xs text-muted-foreground">{r.remarks ?? "—"}</span>,
       },
       {
         key: "date",
-        header: "Date",
+        header: t("withdrawals.columnDate"),
         cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
       },
       {
@@ -137,12 +139,12 @@ export function WithdrawalsPage() {
               disabled={cancel.isPending}
               onClick={() => cancel.mutate(r.id)}
             >
-              Cancel
+              {t("withdrawals.cancel")}
             </Button>
           ) : null,
       },
     ],
-    [cancel],
+    [cancel, t],
   );
 
   const available = wallet.data?.totalAvailable ?? 0;
@@ -150,9 +152,9 @@ export function WithdrawalsPage() {
   return (
     <AppShell>
       <PageHeader
-        title="Withdrawals"
-        description="Withdraw USDT-BEP20. All requests are manually reviewed by admins."
-        breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Withdrawals" }]}
+        title={t("withdrawals.title")}
+        description={t("withdrawals.description")}
+        breadcrumbs={[{ label: t("common.home"), to: "/" }, { label: t("common.dashboard"), to: "/app" }, { label: t("withdrawals.title") }]}
       />
 
       <div className="mt-6 space-y-6">
@@ -164,46 +166,46 @@ export function WithdrawalsPage() {
           <div className="gradient-blue h-1 w-full" />
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-base">
-              <ArrowDownToLine className="size-4 text-primary" /> New withdrawal
+              <ArrowDownToLine className="size-4 text-primary" /> {t("withdrawals.newWithdrawal")}
             </CardTitle>
-            <CardDescription>Funds move to "on hold" until an admin approves and pays the request.</CardDescription>
+            <CardDescription>{t("withdrawals.newWithdrawalDesc")}</CardDescription>
           </CardHeader>
           <CardContent>
             {!hasAddress && (
               <div className="mb-4 flex items-start gap-2 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm">
                 <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" />
                 <div>
-                  Add a USDT-BEP20 withdrawal address in{" "}
-                  <a href="/app/settings" className="font-medium underline">Settings</a> before withdrawing.
+                  {t("withdrawals.addAddressWarning1")}{" "}
+                  <a href="/app/settings" className="font-medium underline">{t("withdrawals.addAddressWarningSettings")}</a> {t("withdrawals.addAddressWarning2")}
                 </div>
               </div>
             )}
             <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 sm:grid-cols-3" noValidate>
               <div className="space-y-2">
-                <Label htmlFor="wallet">From wallet</Label>
+                <Label htmlFor="wallet">{t("withdrawals.fromWallet")}</Label>
                 <select
                   id="wallet"
                   {...register("wallet")}
                   className="glass-input h-10 w-full px-3 text-sm"
                 >
-                  <option value="bonus">Bonus</option>
-                  <option value="trading">Trading</option>
+                  <option value="bonus">{t("wallet.bonus")}</option>
+                  <option value="trading">{t("wallet.trading")}</option>
                 </select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="amount">Amount (USD)</Label>
+                <Label htmlFor="amount">{t("withdrawals.amountUsd")}</Label>
                 <Input id="amount" type="number" step="0.01" min={MIN_WITHDRAWAL} {...register("amount", { valueAsNumber: true })} />
                 {errors.amount ? (
                   <p className="text-sm text-destructive">{errors.amount.message}</p>
                 ) : (
                   <p className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Info className="size-3" />
-                    Minimum {formatCurrency(MIN_WITHDRAWAL)} · Available {formatCurrency(available)}
+                    {t("withdrawals.minimumAvailable", { min: formatCurrency(MIN_WITHDRAWAL), available: formatCurrency(available) })}
                   </p>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="txPin">Transaction PIN</Label>
+                <Label htmlFor="txPin">{t("withdrawals.transactionPin")}</Label>
                 <Input
                   id="txPin"
                   type="password"
@@ -224,12 +226,12 @@ export function WithdrawalsPage() {
               </div>
               <div className="sm:col-span-3 flex items-end">
                 <Button type="submit" className="w-full sm:w-auto" disabled={create.isPending || !hasAddress || inactive}>
-                  {create.isPending ? "Submitting…" : "Submit withdrawal"}
+                  {create.isPending ? t("withdrawals.submitting") : t("withdrawals.submitWithdrawal")}
                 </Button>
               </div>
               {inactive && (
                 <p className="text-xs text-muted-foreground">
-                  Activate a package to enable withdrawals.
+                  {t("withdrawals.activateHint")}
                 </p>
               )}
             </form>
@@ -250,7 +252,7 @@ export function WithdrawalsPage() {
                   setPage(1);
                 }}
               >
-                {f.label}
+                {t(f.labelKey)}
               </Button>
             ))}
           </div>
@@ -260,10 +262,10 @@ export function WithdrawalsPage() {
             data={list.data?.items ?? []}
             rowKey={(r) => r.id}
             isLoading={list.isLoading}
-            error={list.isError ? "We couldn't load your withdrawals." : null}
+            error={list.isError ? t("withdrawals.couldNotLoad") : null}
             onRetry={() => list.refetch()}
-            emptyTitle="No withdrawals yet"
-            emptyDescription="Submit a withdrawal above — it will appear here while it's reviewed."
+            emptyTitle={t("withdrawals.noWithdrawals")}
+            emptyDescription={t("withdrawals.noWithdrawalsDesc")}
             page={list.data?.page ?? 1}
             pageCount={Math.max(1, list.data?.totalPages ?? 1)}
             onPageChange={setPage}
@@ -287,6 +289,7 @@ function StatusTimeline({
   onCancel: () => void;
   canCancel: boolean;
 }) {
+  const { t } = useTranslation();
   const terminal = withdrawal.status === "rejected" || withdrawal.status === "cancelled";
   const currentIndex = STAGES.indexOf(withdrawal.status);
 
@@ -295,14 +298,14 @@ function StatusTimeline({
       <Card className="glass">
         <CardHeader className="flex-row items-center justify-between space-y-0">
           <div>
-            <CardTitle className="text-base">Latest request — {formatCurrency(withdrawal.amount)}</CardTitle>
+            <CardTitle className="text-base">{t("withdrawals.latestRequest", { amount: formatCurrency(withdrawal.amount) })}</CardTitle>
             <CardDescription>
-              {STATUS_LABEL[withdrawal.status]} · {formatDate(withdrawal.createdAt)}
+              {t(STATUS_LABEL_KEY[withdrawal.status])} · {formatDate(withdrawal.createdAt)}
             </CardDescription>
           </div>
           {(withdrawal.status === "pending" || withdrawal.status === "under_review") && (
             <Button type="button" variant="outline" size="sm" disabled={canCancel} onClick={onCancel}>
-              Cancel request
+              {t("withdrawals.cancelRequest")}
             </Button>
           )}
         </CardHeader>
@@ -313,7 +316,7 @@ function StatusTimeline({
                 <X className="size-5" />
               </div>
               <div>
-                <p className="font-medium">This request was {STATUS_LABEL[withdrawal.status].toLowerCase()}</p>
+                <p className="font-medium">{t("withdrawals.requestWas", { status: t(STATUS_LABEL_KEY[withdrawal.status]).toLowerCase() })}</p>
                 {withdrawal.remarks && <p className="text-sm text-muted-foreground">{withdrawal.remarks}</p>}
               </div>
             </div>
@@ -341,7 +344,7 @@ function StatusTimeline({
                           (done || active) ? "text-foreground" : "text-muted-foreground",
                         )}
                       >
-                        {STATUS_LABEL[stage]}
+                        {t(STATUS_LABEL_KEY[stage])}
                       </span>
                     </div>
                     {i < STAGES.length - 1 && (
