@@ -254,11 +254,11 @@ const DEFAULT_PACKAGES = [
   {
     name: "Zeminex Global",
     slug: "zeminex-global",
-    description: "One-time $50 package with 1–2% daily trading yield for 365 days.",
+    description: "One-time $50 package with 1–2% daily trading yield.",
     priceUsd: 50,
     dailyReturnPct: 2.0,
     durationDays: 365,
-    features: ["$50 one-time", "1–2% daily yield", "365-day term", "30% monthly cap"],
+    features: ["$50 one-time", "1–2% daily yield", "30% monthly cap"],
     sort: 1,
     status: "active",
   },

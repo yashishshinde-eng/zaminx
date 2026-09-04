@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Sparkles, TrendingUp, CalendarDays, ArrowDownToLine } from "lucide-react";
+import { Sparkles, ArrowDownToLine } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn, formatCurrency } from "@/lib/utils";
@@ -32,12 +32,6 @@ export function PackageTierCard({
   popular = false,
   delay = 0,
 }: PackageTierCardProps) {
-  const isLifetime = tier.durationDays === 0;
-  // For lifetime packages, project 30-day yield; for fixed-term, project full-term yield.
-  const projectedDays = isLifetime ? 30 : tier.durationDays;
-  const projectedReturn = tier.priceUsd * (tier.dailyReturnPct / 100) * projectedDays;
-  const totalAtMaturity = tier.priceUsd + projectedReturn;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 14 }}
@@ -72,31 +66,9 @@ export function PackageTierCard({
               {formatCurrency(tier.priceUsd)}
             </p>
             <p className="text-sm text-muted-foreground">
-              <span className={cn("font-medium", popular ? "text-gold" : "text-foreground")}>{tier.dailyReturnPct}%</span> daily ·{" "}
-              <span className="font-medium text-foreground">365-day</span> term
+              Daily up to{" "}
+              <span className={cn("font-medium", popular ? "text-gold" : "text-foreground")}>{tier.dailyReturnPct}%</span>
             </p>
-          </div>
-
-          {/* ROI block */}
-          <div className="mt-4 grid grid-cols-2 gap-3 rounded-[14px] border border-white/[0.06] bg-white/[0.02] p-3 backdrop-blur-sm">
-            <div className="flex items-center gap-2">
-              <div className="icon-box size-8 rounded-lg bg-success/10 text-success">
-                <TrendingUp className="size-4" />
-              </div>
-              <div>
-                <p className="text-[11px] text-muted-foreground">{isLifetime ? "30-Day yield" : "Projected"}</p>
-                <p className="text-sm font-semibold tabular-nums">{formatCurrency(projectedReturn)}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="icon-box size-8 rounded-lg bg-gold/10 text-gold">
-                <CalendarDays className="size-4" />
-              </div>
-              <div>
-                <p className="text-[11px] text-muted-foreground">{isLifetime ? "Monthly" : "At maturity"}</p>
-                <p className="text-sm font-semibold tabular-nums">{formatCurrency(totalAtMaturity)}</p>
-              </div>
-            </div>
           </div>
 
           <div className="mt-6 flex-1" />
