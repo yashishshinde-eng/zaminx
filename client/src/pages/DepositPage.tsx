@@ -24,6 +24,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { NeonCard } from "@/components/ui/neon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -175,7 +176,7 @@ export function DepositPage() {
                     <div className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-blue/20 to-blue-dark/10">
                       <ArrowDownToLine className="size-3.5 text-blue-light" />
                     </div>
-                    Deposit funds
+                    Deposit
                   </CardTitle>
                   <CardDescription>Enter the amount you want to add to your wallet.</CardDescription>
                 </CardHeader>
@@ -230,7 +231,7 @@ export function DepositPage() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
             >
-              <Card className="dash-panel border-success/40">
+              <NeonCard variant="green">
                 <CardContent className="flex flex-col items-center gap-4 p-8 text-center">
                   <div className="flex size-16 items-center justify-center rounded-full bg-success/10">
                     <CheckCircle2 className="size-8 text-success" />
@@ -248,7 +249,7 @@ export function DepositPage() {
                     <Button type="button" variant="outline" onClick={reset}>Make another deposit</Button>
                   </div>
                 </CardContent>
-              </Card>
+              </NeonCard>
             </motion.div>
           ) : isExpired ? (
             <motion.div
@@ -354,18 +355,24 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
-        <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:gap-6">
+        <div className="flex flex-col items-center gap-5 md:flex-row md:items-start md:gap-6">
           {/* QR code — encodes the pay-to address */}
           {deposit.payAddress && (
-            <div className="flex flex-col items-center gap-2">
-              <div className="rounded-2xl bg-white p-3 shadow-lg">
-                <QRCodeSVG value={deposit.payAddress} size={168} level="M" />
+            <div className="flex w-full shrink-0 flex-col items-center gap-2 md:w-auto">
+              <div className="w-full max-w-[176px] rounded-2xl bg-white p-2.5 shadow-lg sm:p-3">
+                <QRCodeSVG
+                  value={deposit.payAddress}
+                  size={168}
+                  level="M"
+                  className="h-auto w-full"
+                  style={{ width: "100%", height: "auto" }}
+                />
               </div>
               <p className="text-xs text-muted-foreground">Scan to get the address</p>
             </div>
           )}
 
-          <div className="flex-1 space-y-4">
+          <div className="min-w-0 flex-1 space-y-4">
             <div className="space-y-1">
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Amount due</p>
               <p className="font-grotesk text-2xl font-bold tabular-nums">
@@ -378,10 +385,10 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
               <div className="space-y-1">
                 <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Pay-to address</p>
                 <div className="flex items-center gap-2">
-                  <code className="flex-1 truncate rounded-md border border-white/[0.08] bg-muted px-3 py-2 font-mono text-xs">
+                  <code className="min-w-0 flex-1 truncate rounded-md border border-white/[0.08] bg-muted px-3 py-2 font-mono text-xs">
                     {deposit.payAddress}
                   </code>
-                  <Button type="button" variant="outline" size="icon" onClick={copyAddress} aria-label="Copy address">
+                  <Button type="button" variant="outline" size="icon" className="shrink-0" onClick={copyAddress} aria-label="Copy address">
                     {copied ? <Check className="size-4 text-emerald-600" /> : <Copy className="size-4" />}
                   </Button>
                 </div>

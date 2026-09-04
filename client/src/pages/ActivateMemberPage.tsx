@@ -338,7 +338,7 @@ export function ActivateMemberPage() {
             {selectedTier && !canAfford && (
               <p className="text-sm text-destructive">
                 Insufficient balance — {formatCurrency(selectedTier.priceUsd)} needed.{" "}
-                <Link to="/app/deposit" className="underline">Deposit funds</Link>.
+                <Link to="/app/deposit" className="underline">Deposit</Link>.
               </p>
             )}
 

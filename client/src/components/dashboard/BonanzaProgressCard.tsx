@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Gift, ArrowRight } from "lucide-react";
 import { useCountUp } from "@/hooks/useCountUp";
+import { useBonanzaOverview } from "@/hooks/useBonanzas";
 import { formatCurrency } from "@/lib/utils";
 import type { DashboardSummary } from "@zeminex/shared";
 
@@ -11,6 +12,11 @@ import type { DashboardSummary } from "@zeminex/shared";
  */
 export function BonanzaProgressCard({ data }: { data: DashboardSummary }) {
   const earned = useCountUp(data.income.bonanza, 1000);
+  // "View offers" only makes sense when admins have published at least one
+  // active offer — fetched from the cached bonanza overview (shared with the
+  // Bonanza page). While loading or when none exist, the CTA is hidden.
+  const overview = useBonanzaOverview();
+  const hasOffers = !!overview.data?.offers && overview.data.offers.length > 0;
 
   return (
     <motion.div
@@ -50,15 +56,17 @@ export function BonanzaProgressCard({ data }: { data: DashboardSummary }) {
           </p>
         </div>
 
-        {/* CTA */}
-        <div className="mt-auto pt-4">
-          <Link
-            to="/app/bonanzas"
-            className="btn-secondary-premium inline-flex w-full items-center justify-center gap-2 rounded-[14px] px-4 py-2.5 text-sm font-semibold"
-          >
-            View offers <ArrowRight className="size-3.5" />
-          </Link>
-        </div>
+        {/* CTA — only when at least one bonanza offer exists */}
+        {hasOffers && (
+          <div className="mt-auto pt-4">
+            <Link
+              to="/app/bonanzas"
+              className="btn-secondary-premium inline-flex w-full items-center justify-center gap-2 rounded-[14px] px-4 py-2.5 text-sm font-semibold"
+            >
+              View offers <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+        )}
       </div>
     </motion.div>
   );

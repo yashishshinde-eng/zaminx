@@ -27,15 +27,17 @@ export interface IndicatorSpec {
 }
 
 /**
- * MA line colors are fixed hex values (not theme tokens) so they stay clearly
- * visible against the chart's white background and remain distinct from the
- * green/red candlesticks. Paired with the same colors in the IndicatorLegend.
+ * MA line colors are bright, high-luminance hex values (not theme tokens) so
+ * they stay clearly visible against the chart's dark canvas and remain distinct
+ * from the bright green/red candlesticks. Each hue is lightened one step from
+ * the base Tailwind shade for dark-background contrast. Paired with the same
+ * colors in the IndicatorLegend.
  */
 export const MA_SPECS: IndicatorSpec[] = [
-  { key: "ma5", label: "MA5", period: 5, color: "#f59e0b" }, // amber
-  { key: "ma10", label: "MA10", period: 10, color: "#2563eb" }, // blue
-  { key: "ma30", label: "MA30", period: 30, color: "#9333ea" }, // purple
-  { key: "ma60", label: "MA60", period: 60, color: "#0891b2" }, // teal
+  { key: "ma5", label: "MA5", period: 5, color: "#fbbf24" }, // amber-400
+  { key: "ma10", label: "MA10", period: 10, color: "#60a5fa" }, // blue-400
+  { key: "ma30", label: "MA30", period: 30, color: "#a855f7" }, // purple-400
+  { key: "ma60", label: "MA60", period: 60, color: "#22d3ee" }, // cyan-400
 ];
 
 /** Simple Moving Average over `close`. */

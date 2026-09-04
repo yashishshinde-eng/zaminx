@@ -43,19 +43,19 @@ export function ReferralLinkCard({ referral }: { referral: DashboardSummary["ref
       />
 
       {/* Title */}
-      <div className="flex items-center gap-3 p-5 pb-3">
-        <div className="icon-box-gold">
+      <div className="flex items-center gap-3 p-4 pb-3 sm:p-5">
+        <div className="icon-box-gold shrink-0">
           <LinkIcon className="size-4 text-gold" />
         </div>
         <h3 className="section-title">Referral Link</h3>
       </div>
 
-      <div className="flex flex-1 flex-col gap-4 px-5 pb-5">
+      <div className="flex flex-1 flex-col gap-4 px-4 pb-4 sm:px-5 sm:pb-5">
         {/* Referral code */}
         <div>
           <p className="metric-label mb-1.5">Referral code</p>
-          <div className="glass-input flex items-center justify-center p-3">
-            <span className="font-mono text-xl font-bold tracking-widest text-gradient-gold">
+          <div className="glass-input flex items-center justify-center overflow-hidden p-2.5 sm:p-3">
+            <span className="min-w-0 overflow-hidden text-ellipsis whitespace-nowrap font-mono text-lg font-bold tracking-[0.15em] text-gradient-gold sm:text-xl sm:tracking-widest">
               {referral.code}
             </span>
           </div>
@@ -65,24 +65,24 @@ export function ReferralLinkCard({ referral }: { referral: DashboardSummary["ref
         <div className="flex-1">
           <p className="metric-label mb-1.5">Referral link</p>
           <div className="glass-input flex items-center gap-2 p-2.5">
-            <code className="min-w-0 flex-1 truncate text-xs">{referral.link}</code>
+            <code className="min-w-0 flex-1 truncate text-xs sm:text-[13px]">{referral.link}</code>
           </div>
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-2.5">
+        <div className="flex gap-2 sm:gap-2.5">
           <button
             onClick={copy}
-            className="btn-premium flex-1 gap-2 rounded-[14px] px-4 py-2.5 text-sm font-semibold"
+            className="btn-premium flex-1 gap-1.5 rounded-[14px] px-3 py-2.5 text-xs font-semibold sm:gap-2 sm:px-4 sm:text-sm"
           >
-            {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
-            {copied ? "Copied" : "Copy link"}
+            {copied ? <Check className="size-4 shrink-0" /> : <Copy className="size-4 shrink-0" />}
+            <span className="truncate">{copied ? "Copied" : "Copy link"}</span>
           </button>
           <button
             onClick={share}
-            className="btn-secondary-premium flex-1 gap-2 rounded-[14px] px-4 py-2.5 text-sm font-semibold"
+            className="btn-secondary-premium flex-1 gap-1.5 rounded-[14px] px-3 py-2.5 text-xs font-semibold sm:gap-2 sm:px-4 sm:text-sm"
           >
-            <Share2 className="size-4" /> Share
+            <Share2 className="size-4 shrink-0" /> <span className="truncate">Share</span>
           </button>
         </div>
       </div>

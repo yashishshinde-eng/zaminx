@@ -251,7 +251,7 @@ export function RegisterPage() {
                 ) : codeCheck.status === "valid" ? (
                   <p className="flex items-center gap-1.5 text-sm text-green-600 dark:text-green-500">
                     <Check className="size-3.5" />
-                    Valid referral code{codeCheck.name ? ` — referred by ${codeCheck.name}` : ""}
+                    Valid referral code
                   </p>
                 ) : codeCheck.status === "invalid" ? (
                   <p className="flex items-center gap-1.5 text-sm text-destructive">
@@ -286,6 +286,7 @@ export function RegisterPage() {
         onClose={handleGoToLogin}
         labelledBy="credentials-title"
         className="max-w-md"
+        neonVariant="green"
       >
         <div className="text-center">
           <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-green-500/10">

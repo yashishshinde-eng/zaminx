@@ -26,18 +26,20 @@ import type {
 
 const LIMIT = 20;
 
-/** Blueprint order: Deposits, Withdrawals, Wallet, the 6 income streams, P2P. */
-const TABS: { kind: UserReportKind; label: string }[] = [
-  { kind: "deposits", label: "Deposits" },
-  { kind: "withdrawals", label: "Withdrawals" },
-  { kind: "wallet", label: "Wallet" },
-  { kind: "trading", label: "TRADE YIELD CASHFLOWS" },
-  { kind: "direct", label: "DIRECT CONNECT BONUS" },
-  { kind: "team", label: "DAILY TEAM ENERGY BONUS" },
-  { kind: "community", label: "COMMUNITY MONTHLY BONUS" },
-  { kind: "rank", label: "RANK AND REWARD BONUS" },
-  { kind: "bonanza", label: "Bonanza" },
-  { kind: "p2p", label: "P2P" },
+/** Blueprint order: Deposits, Withdrawals, Wallet, the 6 income streams, P2P.
+ *  `label` is the full proper-case name shown in headings/export titles;
+ *  `tab` is a shorter label shown on the tab chip so the tab row stays compact. */
+const TABS: { kind: UserReportKind; label: string; tab: string }[] = [
+  { kind: "deposits", label: "Deposits", tab: "Deposits" },
+  { kind: "withdrawals", label: "Withdrawals", tab: "Withdrawals" },
+  { kind: "wallet", label: "Wallet", tab: "Wallet" },
+  { kind: "trading", label: "Trade Yield Cashflows", tab: "Trade Yield" },
+  { kind: "direct", label: "Direct Connect Bonus", tab: "Direct Connect" },
+  { kind: "team", label: "Daily Team Energy Bonus", tab: "Team Energy" },
+  { kind: "community", label: "Community Monthly Bonus", tab: "Community" },
+  { kind: "rank", label: "Rank and Reward Bonus", tab: "Rank Reward" },
+  { kind: "bonanza", label: "Bonanza", tab: "Bonanza" },
+  { kind: "p2p", label: "P2P", tab: "P2P" },
 ];
 
 const DEPOSIT_STATUSES: DepositStatus[] = ["pending", "paid", "expired", "failed"];
@@ -129,10 +131,10 @@ export function ReportsPage() {
       <div className="mt-6 space-y-6">
         {/* Tabs */}
         <Tabs value={kind} defaultValue="deposits" onValueChange={(v) => selectKind(v as UserReportKind)}>
-          <TabsList className="flex flex-wrap">
+          <TabsList className="neon-card neon-blue flex w-full overflow-x-auto overflow-y-hidden whitespace-nowrap rounded-[14px] bg-muted p-1">
             {TABS.map((t) => (
-              <TabsTrigger key={t.kind} value={t.kind}>
-                {t.label}
+              <TabsTrigger key={t.kind} value={t.kind} className="flex-1 whitespace-nowrap">
+                {t.tab}
               </TabsTrigger>
             ))}
           </TabsList>
@@ -252,37 +254,36 @@ function statusBadge(status: string) {
 function columnsFor(kind: UserReportKind): Column<DepositRow | WithdrawalRow | WalletTxRow | P2PTransferRow>[] {
   if (kind === "deposits") {
     return [
-      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as DepositRow).createdAt) },
       { key: "amount", header: "Amount", align: "right", cell: (r) => formatCurrency((r as DepositRow).amountUsd) },
       { key: "currency", header: "Currency", cell: (r) => (r as DepositRow).currency },
       { key: "status", header: "Status", cell: (r) => statusBadge((r as DepositRow).status) },
       { key: "paidAt", header: "Paid at", cell: (r) => formatDate((r as DepositRow).paidAt) },
+      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as DepositRow).createdAt) },
     ];
   }
   if (kind === "withdrawals") {
     return [
-      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as WithdrawalRow).createdAt) },
       { key: "wallet", header: "Wallet", cell: (r) => <span className="capitalize">{(r as WithdrawalRow).wallet}</span> },
       { key: "amount", header: "Amount", align: "right", cell: (r) => formatCurrency((r as WithdrawalRow).amount) },
       { key: "address", header: "Address", cell: (r) => <span className="font-mono text-xs">{(r as WithdrawalRow).address}</span> },
       { key: "status", header: "Status", cell: (r) => statusBadge((r as WithdrawalRow).status) },
       { key: "processedAt", header: "Processed at", cell: (r) => formatDate((r as WithdrawalRow).processedAt) },
+      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as WithdrawalRow).createdAt) },
     ];
   }
   if (kind === "p2p") {
     return [
-      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as P2PTransferRow).createdAt) },
       { key: "from", header: "From", cell: (r) => (r as P2PTransferRow).fromUserName },
       { key: "to", header: "To", cell: (r) => (r as P2PTransferRow).toUserName },
       { key: "wallet", header: "Wallet", cell: (r) => <span className="capitalize">{(r as P2PTransferRow).wallet}</span> },
       { key: "amount", header: "Amount", align: "right", cell: (r) => formatCurrency((r as P2PTransferRow).amount) },
       { key: "status", header: "Status", cell: (r) => statusBadge((r as P2PTransferRow).status) },
       { key: "memo", header: "Memo", cell: (r) => (r as P2PTransferRow).memo ?? "—" },
+      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as P2PTransferRow).createdAt) },
     ];
   }
   // Ledger kinds (wallet + 6 income streams).
   return [
-    { key: "createdAt", header: "Date", cell: (r) => formatDate((r as WalletTxRow).createdAt) },
     { key: "wallet", header: "Wallet", cell: (r) => <span className="capitalize">{(r as WalletTxRow).wallet}</span> },
     { key: "type", header: "Type", cell: (r) => <span className="capitalize">{(r as WalletTxRow).type.replace(/_/g, " ")}</span> },
     {
@@ -309,6 +310,7 @@ function columnsFor(kind: UserReportKind): Column<DepositRow | WithdrawalRow | W
       },
     },
     { key: "memo", header: "Memo", cell: (r) => (r as WalletTxRow).memo ?? "—" },
+    { key: "createdAt", header: "Date", cell: (r) => formatDate((r as WalletTxRow).createdAt) },
   ];
 }
 

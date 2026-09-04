@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2, Phone, UserPlus } from "lucide-react";
+import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2, UserPlus } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, DataTable, FilterBar, EmptyState, type Column } from "@/components/shared";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -78,11 +78,6 @@ export function TeamPage() {
   const columns: Column<ReferralMemberRow>[] = useMemo(
     () => [
       {
-        key: "date",
-        header: "Date",
-        cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.joinedAt)}</span>,
-      },
-      {
         key: "member",
         header: "Member",
         cell: (r) => <span className="font-medium">{r.name}</span>,
@@ -108,25 +103,6 @@ export function TeamPage() {
         ),
       },
       {
-        key: "mobile",
-        header: "Mobile",
-        cell: (r) =>
-          r.level === 1 ? (
-            r.phone ? (
-              <span className="inline-flex items-center gap-1.5 whitespace-nowrap font-mono text-xs">
-                <Phone className="size-3 text-muted-foreground" />
-                {r.phone}
-              </span>
-            ) : (
-              <span className="text-muted-foreground">—</span>
-            )
-          ) : (
-            <span className="text-muted-foreground/50" title="Mobile visible for direct referrals only">
-              —
-            </span>
-          ),
-      },
-      {
         key: "level",
         header: "Level",
         align: "right",
@@ -142,6 +118,11 @@ export function TeamPage() {
         header: "Direct",
         align: "right",
         cell: (r) => <span className="tabular-nums text-muted-foreground">{r.directCount}</span>,
+      },
+      {
+        key: "date",
+        header: "Date",
+        cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.joinedAt)}</span>,
       },
       {
         key: "actions",
@@ -186,11 +167,11 @@ export function TeamPage() {
           className="grid gap-6 lg:grid-cols-2"
         >
           {referral && (
-            <motion.div variants={staggerItem}>
+            <motion.div variants={staggerItem} className="min-w-0">
               <ReferralLinkCard referral={referral} />
             </motion.div>
           )}
-          <motion.div variants={staggerItem}>
+          <motion.div variants={staggerItem} className="min-w-0">
             <StatsCard stats={stats.data} isLoading={stats.isLoading} />
           </motion.div>
         </motion.div>

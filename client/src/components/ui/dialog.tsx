@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
+import type { NeonVariant } from "./neon";
 
 interface DialogProps {
   open: boolean;
@@ -10,9 +11,13 @@ interface DialogProps {
   children: ReactNode;
   className?: string;
   labelledBy?: string;
+  /** Optional neon traveling-beam border (e.g. for success popups). When set,
+   *  the dialog surface swaps from the plain glass card to a NeonCard-style
+   *  panel with the chosen color identity. */
+  neonVariant?: NeonVariant;
 }
 
-export function Dialog({ open, onClose, children, className, labelledBy }: DialogProps) {
+export function Dialog({ open, onClose, children, className, labelledBy, neonVariant }: DialogProps) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -33,7 +38,8 @@ export function Dialog({ open, onClose, children, className, labelledBy }: Dialo
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md" onClick={onClose} />
       <div
         className={cn(
-          "glass-card relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto p-6 animate-in",
+          "relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto p-6 animate-in",
+          neonVariant ? cn("neon-card", `neon-${neonVariant}`) : "glass-card",
           className,
         )}
       >

@@ -2,18 +2,9 @@ import { memo } from "react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ConnectionBadge } from "./ConnectionBadge";
+import { CoinIcon } from "./CoinIcon";
 import { formatChange, formatPriceGrouped, formatVolume } from "@/lib/market-format";
 import type { ConnectionStatus, Ticker24h, TradePair } from "@/lib/market-types";
-
-const PAIR_GRADIENTS: Record<string, string> = {
-  BTC: "from-amber-400/30 to-orange-500/20",
-  ETH: "from-indigo-400/30 to-purple-500/20",
-  BNB: "from-yellow-400/30 to-amber-500/20",
-  LTC: "from-slate-300/30 to-slate-400/20",
-  ADA: "from-blue-400/30 to-cyan-500/20",
-  XRP: "from-cyan-400/30 to-teal-500/20",
-  TRX: "from-rose-400/30 to-red-500/20",
-};
 
 export const MarketList = memo(function MarketList({
   pairs,
@@ -58,14 +49,7 @@ export const MarketList = memo(function MarketList({
                       : "border-transparent hover:bg-white/[0.03]",
                   )}
                 >
-                  <div
-                    className={cn(
-                      "flex size-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br text-[10px] font-bold",
-                      PAIR_GRADIENTS[p.base] ?? "from-white/10 to-white/5",
-                    )}
-                  >
-                    {p.base.slice(0, 2)}
-                  </div>
+                  <CoinIcon base={p.base} size={32} className="shrink-0 ring-1 ring-white/[0.06]" />
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-sm font-semibold">{p.label}</div>
                     <div className="truncate text-[11px] text-muted-foreground tabular-nums">

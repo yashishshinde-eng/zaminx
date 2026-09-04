@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Package as PackageIcon, ArrowDownToLine, Wallet as WalletIcon, UserPlus } from "lucide-react";
+import { Package as PackageIcon, ArrowDownToLine, Wallet as WalletIcon } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader, ErrorState, EmptyState } from "@/components/shared";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,7 +16,6 @@ import {
   useActivatePackage,
 } from "@/hooks/usePackages";
 import { useWallet } from "@/hooks/useWallet";
-import { useAuth } from "@/context/AuthContext";
 import { formatCurrency } from "@/lib/utils";
 import type { ActivatePackageResponse } from "@zeminex/shared";
 
@@ -26,7 +25,6 @@ export function PackagesPage() {
   const hasOpen = useHasOpenPackage();
   const activate = useActivatePackage();
   const wallet = useWallet();
-  const { user } = useAuth();
   const [success, setSuccess] = useState<ActivatePackageResponse | null>(null);
 
   const mainAvailable = wallet.data?.main.available ?? 0;
@@ -83,13 +81,8 @@ export function PackagesPage() {
             </p>
           </div>
           <Button asChild variant="outline" size="sm">
-            <Link to="/app/deposit"><ArrowDownToLine className="size-4" /> Deposit funds</Link>
+            <Link to="/app/deposit"><ArrowDownToLine className="size-4" /> Deposit</Link>
           </Button>
-          {user?.status === "active" && (
-            <Button asChild variant="outline" size="sm">
-              <Link to="/app/activate-member"><UserPlus className="size-4" /> Activate for member</Link>
-            </Button>
-          )}
         </div>
 
         {/* Catalog */}

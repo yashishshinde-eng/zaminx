@@ -25,7 +25,7 @@ export function ActivationSuccessDialog({ open, onClose, result, beneficiaryName
   const debitedFrom = "Your Main wallet";
 
   return (
-    <Dialog open={open} onClose={onClose} labelledBy="activation-success-title" className="max-w-md">
+    <Dialog open={open} onClose={onClose} labelledBy="activation-success-title" className="max-w-md" neonVariant="green">
       <div className="flex flex-col items-center text-center">
         <div className="flex size-14 items-center justify-center rounded-full bg-success/15">
           <CheckCircle2 className="size-8 text-success" />

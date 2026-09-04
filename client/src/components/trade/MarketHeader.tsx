@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { cn } from "@/lib/utils";
 import { ConnectionBadge } from "./ConnectionBadge";
+import { CoinIcon } from "./CoinIcon";
 import { formatChange, formatPriceGrouped, formatVolume } from "@/lib/market-format";
 import type { ConnectionStatus, Ticker24h, TradePair } from "@/lib/market-types";
 
@@ -34,6 +35,7 @@ export const MarketHeader = memo(function MarketHeader({
         {/* Pair + price */}
         <div className="space-y-1">
           <div className="flex items-center gap-3">
+            <CoinIcon base={pair.base} size={36} className="ring-1 ring-white/[0.06]" />
             <h2 className="text-gradient-gold font-grotesk text-xl font-bold tracking-tight sm:text-2xl">
               {pair.label}
             </h2>

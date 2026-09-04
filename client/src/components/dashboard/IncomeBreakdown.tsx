@@ -124,17 +124,29 @@ export function IncomeBreakdown({
                 boxShadow: `0 0 16px ${hexToRgba(s.color, 0.35)}`,
               }}
             >
-              {/* Icon badge — top-right, accent-bordered circular badge with glow */}
+              {/* 3D icon orb — top-right, glossy gradient gem with specular
+                  highlight, inset depth, and a colored outer glow. */}
               <div
-                className="absolute right-3 top-3 flex size-[60px] items-center justify-center rounded-full"
+                className="absolute right-3 top-3 flex size-[60px] items-center justify-center rounded-[18px]"
                 style={{
-                  border: `1.5px solid ${s.color}`,
-                  backgroundColor: hexToRgba(s.color, 0.08),
-                  color: s.color,
-                  boxShadow: `0 0 14px ${hexToRgba(s.color, 0.4)}, inset 0 0 12px ${hexToRgba(s.color, 0.15)}`,
+                  background: `radial-gradient(circle at 32% 26%, ${hexToRgba(s.color, 0.65)}, ${hexToRgba(s.color, 0.28)} 48%, ${hexToRgba(s.color, 0.08)} 72%)`,
+                  border: `1px solid ${hexToRgba(s.color, 0.55)}`,
+                  boxShadow: `0 8px 22px -6px ${hexToRgba(s.color, 0.6)}, inset 0 1px 1px rgba(255,255,255,0.45), inset 0 -8px 14px ${hexToRgba(s.color, 0.45)}`,
                 }}
               >
-                <Icon className="size-7" strokeWidth={1.8} />
+                {/* Glossy specular highlight — simulates a 3D sphere's light reflection */}
+                <span
+                  className="pointer-events-none absolute inset-0 rounded-[18px]"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 30% 18%, rgba(255,255,255,0.55), rgba(255,255,255,0.08) 38%, transparent 55%)",
+                  }}
+                />
+                <Icon
+                  className="relative size-7 text-white"
+                  strokeWidth={2}
+                  style={{ filter: `drop-shadow(0 2px 3px ${hexToRgba(s.color, 0.7)})` }}
+                />
               </div>
 
               <div className="relative pr-[70px]">

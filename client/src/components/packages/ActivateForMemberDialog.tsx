@@ -262,7 +262,7 @@ export function ActivateForMemberDialog({ open, onClose, target }: ActivateForMe
         </div>
         {selectedTier && !canAfford && (
           <p className="mt-2 text-sm text-destructive">
-            Insufficient balance — {formatCurrency(selectedTier.priceUsd)} needed. Deposit funds first.
+            Insufficient balance — {formatCurrency(selectedTier.priceUsd)} needed. Deposit first.
           </p>
         )}
       </div>

@@ -381,7 +381,6 @@ function BreakdownChips({
 function adminColumnsFor(kind: AdminReportKind): Column<AdminRow>[] {
   if (kind === "users") {
     return [
-      { key: "joinedAt", header: "Joined", cell: (r) => formatDate((r as AdminUserReportRow).joinedAt) },
       { key: "name", header: "Name", cell: (r) => (r as AdminUserReportRow).name },
       { key: "email", header: "Email", cell: (r) => <span className="font-mono text-xs">{(r as AdminUserReportRow).email}</span> },
       { key: "role", header: "Role", cell: (r) => <span className="capitalize">{(r as AdminUserReportRow).role}</span> },
@@ -391,22 +390,22 @@ function adminColumnsFor(kind: AdminReportKind): Column<AdminRow>[] {
       { key: "available", header: "Available", align: "right", cell: (r) => formatCurrency((r as AdminUserReportRow).walletAvailable) },
       { key: "onHold", header: "On hold", align: "right", cell: (r) => formatCurrency((r as AdminUserReportRow).walletOnHold) },
       { key: "lastLoginAt", header: "Last login", cell: (r) => formatDate((r as AdminUserReportRow).lastLoginAt) },
+      { key: "joinedAt", header: "Joined", cell: (r) => formatDate((r as AdminUserReportRow).joinedAt) },
     ];
   }
   if (kind === "deposits") {
     return [
-      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminDepositReportRow).createdAt) },
       { key: "user", header: "User", cell: (r) => (r as AdminDepositReportRow).userName },
       { key: "email", header: "Email", cell: (r) => <span className="font-mono text-xs">{(r as AdminDepositReportRow).userEmail}</span> },
       { key: "amount", header: "Amount", align: "right", cell: (r) => formatCurrency((r as AdminDepositReportRow).amountUsd) },
       { key: "currency", header: "Currency", cell: (r) => (r as AdminDepositReportRow).currency },
       { key: "status", header: "Status", cell: (r) => statusBadge((r as AdminDepositReportRow).status) },
       { key: "paidAt", header: "Paid at", cell: (r) => formatDate((r as AdminDepositReportRow).paidAt) },
+      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminDepositReportRow).createdAt) },
     ];
   }
   if (kind === "withdrawals") {
     return [
-      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminWithdrawalReportRow).createdAt) },
       { key: "user", header: "User", cell: (r) => (r as AdminWithdrawalReportRow).userName },
       { key: "email", header: "Email", cell: (r) => <span className="font-mono text-xs">{(r as AdminWithdrawalReportRow).userEmail}</span> },
       { key: "wallet", header: "Wallet", cell: (r) => <span className="capitalize">{(r as AdminWithdrawalReportRow).wallet}</span> },
@@ -414,20 +413,20 @@ function adminColumnsFor(kind: AdminReportKind): Column<AdminRow>[] {
       { key: "address", header: "Address", cell: (r) => <span className="font-mono text-xs">{(r as AdminWithdrawalReportRow).address}</span> },
       { key: "status", header: "Status", cell: (r) => statusBadge((r as AdminWithdrawalReportRow).status) },
       { key: "processedAt", header: "Processed at", cell: (r) => formatDate((r as AdminWithdrawalReportRow).processedAt) },
+      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminWithdrawalReportRow).createdAt) },
     ];
   }
   if (kind === "income") {
     return [
-      { key: "date", header: "Date", cell: (r) => formatDate((r as AdminIncomeReportRow).date) },
       { key: "user", header: "User", cell: (r) => (r as AdminIncomeReportRow).userName },
       { key: "type", header: "Type", cell: (r) => <span className="capitalize">{(r as AdminIncomeReportRow).type.replace(/_/g, " ")}</span> },
       { key: "amount", header: "Amount", align: "right", cell: (r) => formatCurrency((r as AdminIncomeReportRow).amount) },
       { key: "memo", header: "Memo", cell: (r) => (r as AdminIncomeReportRow).memo ?? "—" },
+      { key: "date", header: "Date", cell: (r) => formatDate((r as AdminIncomeReportRow).date) },
     ];
   }
   if (kind === "wallet") {
     return [
-      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminWalletReportRow).createdAt) },
       { key: "user", header: "User", cell: (r) => (r as AdminWalletReportRow).userName },
       { key: "wallet", header: "Wallet", cell: (r) => <span className="capitalize">{(r as AdminWalletReportRow).wallet}</span> },
       { key: "type", header: "Type", cell: (r) => <span className="capitalize">{(r as AdminWalletReportRow).type.replace(/_/g, " ")}</span> },
@@ -455,34 +454,35 @@ function adminColumnsFor(kind: AdminReportKind): Column<AdminRow>[] {
         },
       },
       { key: "memo", header: "Memo", cell: (r) => (r as AdminWalletReportRow).memo ?? "—" },
+      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminWalletReportRow).createdAt) },
     ];
   }
   if (kind === "gateway") {
     return [
-      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminGatewayReportRow).createdAt) },
       { key: "user", header: "User", cell: (r) => (r as AdminGatewayReportRow).userName },
       { key: "invoiceId", header: "Invoice ID", cell: (r) => <span className="font-mono text-xs">{(r as AdminGatewayReportRow).invoiceId ?? "—"}</span> },
       { key: "amount", header: "Amount", align: "right", cell: (r) => formatCurrency((r as AdminGatewayReportRow).amountUsd) },
       { key: "payAmount", header: "Pay amount", align: "right", cell: (r) => ((r as AdminGatewayReportRow).payAmount ?? "—") },
       { key: "status", header: "Status", cell: (r) => statusBadge((r as AdminGatewayReportRow).status) },
       { key: "paidAt", header: "Paid at", cell: (r) => formatDate((r as AdminGatewayReportRow).paidAt) },
+      { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminGatewayReportRow).createdAt) },
     ];
   }
   if (kind === "bonanza") {
     return [
-      { key: "awardedAt", header: "Awarded at", cell: (r) => formatDate((r as AdminBonanzaReportRow).awardedAt) },
       { key: "user", header: "User", cell: (r) => (r as AdminBonanzaReportRow).userName },
       { key: "offer", header: "Offer", cell: (r) => (r as AdminBonanzaReportRow).offerName },
       { key: "reward", header: "Reward", align: "right", cell: (r) => formatCurrency((r as AdminBonanzaReportRow).rewardAmount) },
+      { key: "awardedAt", header: "Awarded at", cell: (r) => formatDate((r as AdminBonanzaReportRow).awardedAt) },
     ];
   }
   // activity
   return [
-    { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminActivityReportRow).createdAt) },
     { key: "actor", header: "Actor", cell: (r) => (r as AdminActivityReportRow).actorName ?? "—" },
     { key: "action", header: "Action", cell: (r) => <span className="font-mono text-xs">{(r as AdminActivityReportRow).action}</span> },
     { key: "resource", header: "Resource", cell: (r) => (r as AdminActivityReportRow).resource ?? "—" },
     { key: "ip", header: "IP", cell: (r) => <span className="font-mono text-xs">{(r as AdminActivityReportRow).ip ?? "—"}</span> },
+    { key: "createdAt", header: "Date", cell: (r) => formatDate((r as AdminActivityReportRow).createdAt) },
   ];
 }
 

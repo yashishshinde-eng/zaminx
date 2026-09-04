@@ -80,11 +80,6 @@ export function WalletPage() {
   const columns: Column<WalletTxRow>[] = useMemo(
     () => [
       {
-        key: "date",
-        header: "Date",
-        cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
-      },
-      {
         key: "detail",
         header: "Detail",
         cell: (r) => (
@@ -117,6 +112,11 @@ export function WalletPage() {
         cell: (r) => (
           <span className="whitespace-nowrap tabular-nums text-muted-foreground">{formatCurrency(r.availableAfter)}</span>
         ),
+      },
+      {
+        key: "date",
+        header: "Date",
+        cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
       },
     ],
     [],

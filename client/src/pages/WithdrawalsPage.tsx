@@ -90,11 +90,6 @@ export function WithdrawalsPage() {
   const columns: Column<WithdrawalRow>[] = useMemo(
     () => [
       {
-        key: "date",
-        header: "Date",
-        cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
-      },
-      {
         key: "wallet",
         header: "Wallet",
         cell: (r) => <Badge variant="outline" className="capitalize">{r.wallet}</Badge>,
@@ -123,6 +118,11 @@ export function WithdrawalsPage() {
         key: "remarks",
         header: "Remarks",
         cell: (r) => <span className="text-xs text-muted-foreground">{r.remarks ?? "—"}</span>,
+      },
+      {
+        key: "date",
+        header: "Date",
+        cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
       },
       {
         key: "action",

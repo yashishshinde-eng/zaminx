@@ -19,15 +19,22 @@ import type { Candle } from "@/lib/market-types";
 import type { IndicatorPoint, IndicatorSpec } from "@/lib/indicators";
 import { formatChartTime, formatPriceGrouped, formatQty } from "@/lib/market-format";
 
-// Professional light-theme chart palette. The chart background is white so
-// candles, axes, grid and indicators stay crisp and legible regardless of the
-// surrounding app theme.
-const UP = "#16a34a"; // green — bullish candles
-const DOWN = "#dc2626"; // red — bearish candles
-const ACCENT = "#1d4ed8"; // blue — crosshair + live price line
-const AXIS_TEXT = "#374151"; // dark gray — price/time axis labels
-const GRID = "#ececec"; // light gray — grid lines
-const BORDER = "#d4d4d4"; // axis borders
+// Professional dark trading-terminal palette. The chart canvas is a solid dark
+// color matching the app's dark `--card` token (hsl(224 40% 7%) ≈ #0b0f19), so
+// it blends seamlessly with the surrounding glass card while candles, axes,
+// grid and indicators stay high-contrast and legible. These are native
+// lightweight-charts theme options — NOT CSS — so the canvas/SVG rendering uses
+// the dark theme directly.
+const UP = "#22C55E"; // bright green — bullish candle bodies + borders
+const DOWN = "#EF4444"; // bright red — bearish candle bodies + borders
+const WICK_UP = "#2BD580"; // slightly brighter green — wicks stay visible when thin
+const WICK_DOWN = "#F56565"; // slightly brighter red — wicks stay visible when thin
+const ACCENT = "#3b82f6"; // blue — crosshair labels + live price line
+const CROSSHAIR = "#8a98ac"; // muted slate — crosshair lines (visible but subtle)
+const AXIS_TEXT = "#b8c2d0"; // light gray — price/time axis labels
+const GRID = "#1b2233"; // subtle dark-gray — grid lines
+const BORDER = "#26303f"; // axis borders
+const CHART_BG = "#0b0f19"; // dark canvas — matches app dark --card
 
 interface TooltipState {
   x: number;
@@ -68,7 +75,9 @@ export function CandlestickChart({
       width: el.clientWidth,
       height: el.clientHeight,
       layout: {
-        background: { type: ColorType.Solid, color: "#ffffff" },
+        // Dark canvas matches the app's dark `--card` token — blends with the
+        // surrounding glass card with no seam.
+        background: { type: ColorType.Solid, color: CHART_BG },
         textColor: AXIS_TEXT,
         fontFamily: "Space Grotesk, Inter, sans-serif",
         attributionLogo: false,
@@ -79,8 +88,11 @@ export function CandlestickChart({
       },
       crosshair: {
         mode: CrosshairMode.Normal,
-        vertLine: { color: `${ACCENT}80`, labelBackgroundColor: ACCENT, width: 1 },
-        horzLine: { color: `${ACCENT}80`, labelBackgroundColor: ACCENT },
+        // Muted slate lines stay visible but never compete with the candles.
+        // The price/time labels keep the bright ACCENT (blue) background so
+        // values read cleanly against the dark canvas.
+        vertLine: { color: `${CROSSHAIR}cc`, labelBackgroundColor: ACCENT, width: 1 },
+        horzLine: { color: `${CROSSHAIR}cc`, labelBackgroundColor: ACCENT },
       },
       rightPriceScale: { borderColor: BORDER, scaleMargins: { top: 0.1, bottom: 0.22 } },
       timeScale: { borderColor: BORDER, timeVisible: true, secondsVisible: false },
@@ -105,8 +117,10 @@ export function CandlestickChart({
       downColor: DOWN,
       borderUpColor: UP,
       borderDownColor: DOWN,
-      wickUpColor: UP,
-      wickDownColor: DOWN,
+      // Slightly brighter wicks keep thin candles (zoomed-out views) legible
+      // against the dark canvas — bodies stay solid, edges stay crisp.
+      wickUpColor: WICK_UP,
+      wickDownColor: WICK_DOWN,
     });
 
     const volumeSeries = chart.addSeries(HistogramSeries, {
@@ -118,7 +132,7 @@ export function CandlestickChart({
     for (const s of specs) {
       maSeriesRefs.current[s.key] = chart.addSeries(LineSeries, {
         color: s.color,
-        lineWidth: 1,
+        lineWidth: 2,
         priceLineVisible: false,
         lastValueVisible: false,
         crosshairMarkerVisible: false,

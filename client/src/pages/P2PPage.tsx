@@ -336,11 +336,6 @@ interface TransferRow {
 
 const transferColumns: Column<TransferRow>[] = [
   {
-    key: "date",
-    header: "Date",
-    cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
-  },
-  {
     key: "detail",
     header: "Detail",
     cell: (r) => (
@@ -379,6 +374,11 @@ const transferColumns: Column<TransferRow>[] = [
         {r.status}
       </Badge>
     ),
+  },
+  {
+    key: "date",
+    header: "Date",
+    cell: (r) => <span className="whitespace-nowrap text-muted-foreground">{formatDate(r.createdAt)}</span>,
   },
 ];
 

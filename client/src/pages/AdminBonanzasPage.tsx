@@ -99,8 +99,6 @@ function columns(
     { key: "name", header: "Name", cell: (r) => <span className="font-medium">{r.name}</span> },
     { key: "requiredDirects", header: "Required directs", align: "right", cell: (r) => String(r.requiredDirects) },
     { key: "rewardAmount", header: "Reward", align: "right", cell: (r) => formatCurrency(r.rewardAmount) },
-    { key: "startDate", header: "Start", cell: (r) => formatDate(r.startDate) },
-    { key: "endDate", header: "End", cell: (r) => formatDate(r.endDate) },
     {
       key: "status",
       header: "Status",
@@ -110,6 +108,8 @@ function columns(
         </Badge>
       ),
     },
+    { key: "startDate", header: "Start", cell: (r) => formatDate(r.startDate) },
+    { key: "endDate", header: "End", cell: (r) => formatDate(r.endDate) },
     {
       key: "actions",
       header: "",
