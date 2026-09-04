@@ -17,7 +17,7 @@ export interface TradePair {
   label: string;
 }
 
-/** The seven trading pairs shown on the Trade page. */
+/** The fourteen trading pairs shown on the Trade page. */
 export const TRADE_PAIRS: TradePair[] = [
   { symbol: "BTCUSDT", base: "BTC", quote: "USDT", label: "BTC/USDT" },
   { symbol: "ETHUSDT", base: "ETH", quote: "USDT", label: "ETH/USDT" },
@@ -26,6 +26,13 @@ export const TRADE_PAIRS: TradePair[] = [
   { symbol: "ADAUSDT", base: "ADA", quote: "USDT", label: "ADA/USDT" },
   { symbol: "XRPUSDT", base: "XRP", quote: "USDT", label: "XRP/USDT" },
   { symbol: "TRXUSDT", base: "TRX", quote: "USDT", label: "TRX/USDT" },
+  { symbol: "SOLUSDT", base: "SOL", quote: "USDT", label: "SOL/USDT" },
+  { symbol: "DOGEUSDT", base: "DOGE", quote: "USDT", label: "DOGE/USDT" },
+  { symbol: "DOTUSDT", base: "DOT", quote: "USDT", label: "DOT/USDT" },
+  { symbol: "MATICUSDT", base: "MATIC", quote: "USDT", label: "MATIC/USDT" },
+  { symbol: "AVAXUSDT", base: "AVAX", quote: "USDT", label: "AVAX/USDT" },
+  { symbol: "LINKUSDT", base: "LINK", quote: "USDT", label: "LINK/USDT" },
+  { symbol: "SHIBUSDT", base: "SHIB", quote: "USDT", label: "SHIB/USDT" },
 ];
 
 export type Timeframe = "1m" | "5m" | "15m" | "30m" | "1h" | "4h" | "1d" | "1w";

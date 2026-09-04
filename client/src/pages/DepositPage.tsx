@@ -333,13 +333,15 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
 
   return (
     <Card className="glass border-warning/40">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-base">
-          <Clock className="size-4 text-warning" /> Send your payment
+      <CardHeader className="p-4 sm:p-6">
+        <CardTitle className="flex flex-wrap items-center gap-x-2 gap-y-2 text-base">
+          <span className="flex items-center gap-2">
+            <Clock className="size-4 shrink-0 text-warning" /> Send your payment
+          </span>
           {remainingMs != null && (
             <span
               className={cn(
-                "ml-auto inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-sm font-semibold tabular-nums",
+                "ml-auto inline-flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-sm font-semibold tabular-nums",
                 low ? "bg-destructive/10 text-destructive" : "bg-warning/10 text-warning",
               )}
               title="This payment link expires after 10 minutes"
@@ -354,7 +356,7 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
           {deposit.sandbox && " (Sandbox mode — use the simulate button to test.)"}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-5">
+      <CardContent className="space-y-5 p-4 pt-0 sm:p-6 sm:pt-0">
         <div className="flex flex-col items-center gap-5 md:flex-row md:items-start md:gap-6">
           {/* QR code — encodes the pay-to address */}
           {deposit.payAddress && (
@@ -372,7 +374,7 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
             </div>
           )}
 
-          <div className="min-w-0 flex-1 space-y-4">
+          <div className="min-w-0 w-full flex-1 space-y-4">
             <div className="space-y-1">
               <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Amount due</p>
               <p className="font-grotesk text-2xl font-bold tabular-nums">
@@ -384,11 +386,18 @@ function DepositInstructions({ deposit, remainingMs, onReset, onRefresh, onSimul
             {deposit.payAddress && (
               <div className="space-y-1">
                 <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Pay-to address</p>
-                <div className="flex items-center gap-2">
-                  <code className="min-w-0 flex-1 truncate rounded-md border border-white/[0.08] bg-muted px-3 py-2 font-mono text-xs">
+                <div className="flex items-start gap-2">
+                  <code className="min-w-0 flex-1 break-all rounded-md border border-white/[0.08] bg-muted px-3 py-2 font-mono text-xs leading-relaxed">
                     {deposit.payAddress}
                   </code>
-                  <Button type="button" variant="outline" size="icon" className="shrink-0" onClick={copyAddress} aria-label="Copy address">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    className="mt-0.5 shrink-0"
+                    onClick={copyAddress}
+                    aria-label="Copy address"
+                  >
                     {copied ? <Check className="size-4 text-emerald-600" /> : <Copy className="size-4" />}
                   </Button>
                 </div>

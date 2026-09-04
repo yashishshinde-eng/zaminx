@@ -11,6 +11,13 @@ const PAIR_GRADIENTS: Record<string, string> = {
   ADA: "from-blue-400/30 to-cyan-500/20",
   XRP: "from-cyan-400/30 to-teal-500/20",
   TRX: "from-rose-400/30 to-red-500/20",
+  SOL: "from-purple-400/30 to-fuchsia-500/20",
+  DOGE: "from-yellow-300/30 to-amber-400/20",
+  DOT: "from-pink-400/30 to-rose-500/20",
+  MATIC: "from-violet-400/30 to-purple-500/20",
+  AVAX: "from-red-400/30 to-rose-500/20",
+  LINK: "from-blue-400/30 to-indigo-500/20",
+  SHIB: "from-orange-400/30 to-red-500/20",
 };
 
 /**

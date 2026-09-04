@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Users, ChevronRight, ChevronDown, Copy, UserCheck, Share2, UserPlus } from "lucide-react";
@@ -367,28 +367,39 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
           <Metric label="Active team" value={stats.activeTeamCount} />
         </div>
         {stats.byLevel.length > 0 && (
-          <div className="rounded-lg border border-border/60">
-            <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              <span>Level</span>
-              <span className="text-right">Members</span>
-              <span className="text-right">Active</span>
-              <span className="text-right">Business</span>
-            </div>
+          <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 rounded-lg border border-border/60">
+            <span className="px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              Level
+            </span>
+            <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              Members
+            </span>
+            <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              Active
+            </span>
+            <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              Business
+            </span>
             {stats.byLevel.map((l) => (
-              <div
-                key={l.level}
-                className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 border-t border-border/40 px-3 py-2 text-sm"
-              >
-                <span className="font-medium">Level {l.level}</span>
-                <span className="text-right tabular-nums text-muted-foreground">{l.count}</span>
-                <span className="text-right tabular-nums text-success">{l.active}</span>
-                <span className="text-right font-semibold tabular-nums">{formatCurrency(l.business)}</span>
-              </div>
+              <Fragment key={l.level}>
+                <span className="border-t border-border/40 px-3 py-2 text-sm font-medium">Level {l.level}</span>
+                <span className="border-t border-border/40 px-3 py-2 text-right text-sm tabular-nums text-muted-foreground">
+                  {l.count}
+                </span>
+                <span className="border-t border-border/40 px-3 py-2 text-right text-sm tabular-nums text-success">
+                  {l.active}
+                </span>
+                <span className="border-t border-border/40 px-3 py-2 text-right text-sm font-semibold tabular-nums">
+                  {formatCurrency(l.business)}
+                </span>
+              </Fragment>
             ))}
-            <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 border-t border-border/60 bg-muted/30 px-3 py-2 text-sm">
-              <span className="col-span-3 font-bold">Total team business</span>
-              <span className="text-right font-bold tabular-nums">{formatCurrency(stats.teamBusiness)}</span>
-            </div>
+            <span className="col-span-3 border-t border-border/60 bg-muted/30 px-3 py-2 text-sm font-bold">
+              Total team business
+            </span>
+            <span className="border-t border-border/60 bg-muted/30 px-3 py-2 text-right text-sm font-bold tabular-nums">
+              {formatCurrency(stats.teamBusiness)}
+            </span>
           </div>
         )}
       </CardContent>

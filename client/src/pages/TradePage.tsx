@@ -47,7 +47,7 @@ export function TradePage() {
   const { status: streamStatus, klineRef, tickerRef, tradeRef } =
     useActivePairStream(symbol, binanceInterval);
 
-  // Separate long-lived WS for the 7-symbol market list.
+  // Separate long-lived WS for the market list.
   const marketList = useMarketList();
 
   const { candles, isLoading: candlesLoading, error: candlesError, liveCandleRef, refetch } =
@@ -94,26 +94,17 @@ export function TradePage() {
           <>
             {isReconnecting && <ReconnectingBanner />}
 
-            {/* Desktop: market list | chart (chart is the main focus) */}
+            {/* Desktop: market list | chart (chart is the main focus).
+                Below xl, the columns stack — the live-rate header shows
+                first, then the markets list, so order-* keeps xl's
+                left/right layout while flipping the stacked order. */}
             <div className="grid gap-4 xl:grid-cols-[260px_minmax(0,1fr)]">
-              {/* Left — market list (becomes a stacked card on mobile) */}
-              <div className="xl:h-[720px]">
-                <MarketList
-                  pairs={TRADE_PAIRS}
-                  tickers={marketList.tickers}
-                  activeSymbol={symbol}
-                  onSelect={handleSelectPair}
-                  status={marketList.status}
-                  isLoading={marketList.isLoading}
-                />
-              </div>
-
               {/* Center — header, timeframe, indicators, chart.
                   Below xl the columns stack; the chart uses explicit
                   responsive heights so it never collapses or grows
                   unpredictably. At xl the parent has a fixed height and the
                   chart flex-fills the remaining space. */}
-              <div className="flex flex-col gap-4 xl:h-[720px]">
+              <div className="flex flex-col gap-4 xl:order-2 xl:h-[720px]">
                 <MarketHeader
                   pair={activePair}
                   ticker={ticker}
@@ -138,6 +129,19 @@ export function TradePage() {
                     specs={MA_SPECS}
                   />
                 </div>
+              </div>
+
+              {/* Left — market list (becomes a stacked card below the
+                  live-rate header on mobile) */}
+              <div className="xl:order-1 xl:h-[720px]">
+                <MarketList
+                  pairs={TRADE_PAIRS}
+                  tickers={marketList.tickers}
+                  activeSymbol={symbol}
+                  onSelect={handleSelectPair}
+                  status={marketList.status}
+                  isLoading={marketList.isLoading}
+                />
               </div>
             </div>
 

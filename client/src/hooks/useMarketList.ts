@@ -1,7 +1,7 @@
 /**
  * Live market list — 24h tickers for all supported pairs.
  *
- * Owns its own long-lived `@miniTicker`-x7 WebSocket (independent of the active
+ * Owns its own long-lived `@miniTicker` WebSocket (independent of the active
  * pair) so the list updates regardless of which pair is selected. REST-seeds
  * once on mount, then live updates flush to state on a 1s cadence.
  */

@@ -13,6 +13,12 @@ import ltc from "cryptocurrency-icons/svg/color/ltc.svg";
 import ada from "cryptocurrency-icons/svg/color/ada.svg";
 import xrp from "cryptocurrency-icons/svg/color/xrp.svg";
 import trx from "cryptocurrency-icons/svg/color/trx.svg";
+import sol from "cryptocurrency-icons/svg/color/sol.svg";
+import doge from "cryptocurrency-icons/svg/color/doge.svg";
+import dot from "cryptocurrency-icons/svg/color/dot.svg";
+import matic from "cryptocurrency-icons/svg/color/matic.svg";
+import avax from "cryptocurrency-icons/svg/color/avax.svg";
+import link from "cryptocurrency-icons/svg/color/link.svg";
 
 const ICONS: Record<string, string> = {
   BTC: btc,
@@ -22,6 +28,12 @@ const ICONS: Record<string, string> = {
   ADA: ada,
   XRP: xrp,
   TRX: trx,
+  SOL: sol,
+  DOGE: doge,
+  DOT: dot,
+  MATIC: matic,
+  AVAX: avax,
+  LINK: link,
 };
 
 /** Bundled SVG URL for a base asset (e.g. "BTC"), or `null` if unavailable. */
