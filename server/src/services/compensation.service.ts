@@ -4,7 +4,6 @@ import { applyLedgerEntry } from "./wallet.service.js";
 import { sendNotificationEmail } from "./email.service.js";
 import { bonanzaEarnedTemplate } from "./emailTemplates.js";
 import { getTeamCounts } from "./referral.service.js";
-import { getStarFromTeamSize } from "./rank.service.js";
 import {
   getDirectBonusPct,
   isYieldEnabled,
@@ -349,12 +348,25 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     }
   }
 
+  // Rank gate: an ancestor must have achieved 1-Star (ever, sticky — see
+  // `syncHighestStarForUser`) to receive team energy, on top of holding an
+  // active package. Scoped to just the ancestors that actually accrued
+  // something this run, not a full users-collection scan.
+  const accrualAncestorIds = Array.from(new Set(Array.from(accrual.keys()).map((k) => k.split(":")[0])));
+  const rankEligibleAncestorIds = new Set(
+    (
+      await User.find({ _id: { $in: accrualAncestorIds }, highestStar: { $gte: 1 } })
+        .select("_id")
+        .lean()
+    ).map((u) => u._id.toString()),
+  );
+
   let credited = 0;
   let errors = 0;
   for (const [accrualKey, { amount, level }] of accrual) {
     if (amount <= 0) continue;
     const [ancestorId, sourceUserId] = accrualKey.split(":");
-    if (!isActiveSponsor(ancestorId)) {
+    if (!isActiveSponsor(ancestorId) || !rankEligibleAncestorIds.has(ancestorId)) {
       skipped++;
       continue;
     }
@@ -452,18 +464,31 @@ export async function runMonthlyCommunityBonus(asOf?: Date): Promise<CommunityRu
     id.toString(),
   );
 
+  // Sticky highest-ever-achieved star (server/src/services/rank.service.ts,
+  // syncHighestStarForUser) — not the current live team size, so a payout
+  // never drops just because the user's team later shrinks.
+  const highestStarByUser = new Map<string, number>(
+    (
+      await User.find({ _id: { $in: activeUserIds } })
+        .select("highestStar")
+        .lean()
+    ).map((u) => [u._id.toString(), u.highestStar ?? 0]),
+  );
+
   let credited = 0;
   let skipped = 0;
   let errors = 0;
 
   for (const userId of activeUserIds) {
     try {
-      const { teamCount } = await getTeamCounts(userId);
-      const star = getStarFromTeamSize(teamCount);
+      const star = highestStarByUser.get(userId) ?? 0;
       if (star < 1) {
         skipped++;
         continue;
       }
+      // Current team size is recorded on the credit purely for admin/report
+      // context — it no longer determines the star or the reward.
+      const { teamCount } = await getTeamCounts(userId);
       const reward = rewardByStar.get(star) ?? 0;
       if (reward <= 0) {
         skipped++;

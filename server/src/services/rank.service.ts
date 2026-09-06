@@ -323,6 +323,36 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
 }
 
 /**
+ * Ratchet `User.highestStar` up to the highest rank-ladder rung (`order`)
+ * this user currently qualifies for, by directCount/teamCount. Uses the same
+ * admin-editable ladder walk as `evaluateRankForUser`/`getRankInfo` — not the
+ * hardcoded `getStarFromTeamSize` 3^N formula, so it can't drift out of sync
+ * if an admin edits a rank's `requiredTeamSize` independently.
+ *
+ * Sticky by design: `$max` never lowers the stored value, even if the user's
+ * team later shrinks below the threshold that earned it. Gates Team Energy
+ * eligibility and the Community Monthly Bonus payout tier (compensation.service.ts).
+ */
+export async function syncHighestStarForUser(userId: string, counts?: TeamCounts): Promise<void> {
+  const ladder = await activeLadder();
+  if (ladder.length === 0) return;
+
+  const { directCount, teamCount } = await resolveCounts(userId, counts);
+
+  let topOrder = 0;
+  for (const rank of ladder) {
+    if (directCount >= rank.requiredDirects && teamCount >= rank.requiredTeamSize) {
+      topOrder = rank.order;
+    } else {
+      break;
+    }
+  }
+  if (topOrder <= 0) return;
+
+  await User.updateOne({ _id: userId }, { $max: { highestStar: topOrder } });
+}
+
+/**
  * Evaluate the rank ladder for every user (admin trigger). Aggregates per-user
  * results into a single summary.
  */
@@ -339,6 +369,12 @@ export async function runRankCheckAll(): Promise<RankEvalSummary> {
     const r = await evaluateRankForUser(id.toString());
     awarded += r.awarded;
     errors += r.errors;
+    await syncHighestStarForUser(id.toString()).catch((err) => {
+      logger.error("highestStar sync failed", {
+        userId: id.toString(),
+        error: err instanceof Error ? err.message : String(err),
+      });
+    });
   }
 
   return { evaluated: userIds.length, awarded, errors };

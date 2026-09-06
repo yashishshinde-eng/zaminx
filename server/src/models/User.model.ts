@@ -69,6 +69,13 @@ const userSchema = new Schema(
     status: { type: String, enum: ["active", "inactive", "blocked"], default: "inactive", index: true },
 
     lastLoginAt: { type: Date, default: null },
+
+    // Highest rank-ladder rung (Rank.order) this user has ever qualified for,
+    // by directCount/teamCount at evaluation time. Sticky — only ratchets up
+    // (via $max), never decreases even if the team later shrinks. Synced daily
+    // by `syncHighestStarForUser` (rank.service.ts) inside the rank_check cron.
+    // Gates Team Energy eligibility and the Community Monthly Bonus payout tier.
+    highestStar: { type: Number, default: 0, min: 0 },
   },
   { timestamps: true },
 );
