@@ -222,6 +222,11 @@ export function useUpdateSiteConfig() {
     mutationFn: (body: SiteConfigUpdate) => updateSiteConfigAdminRequest(body),
     onSuccess: (siteConfig) => {
       qc.setQueryData(queryKeys.adminSiteConfig, siteConfig);
+      // The public site config (["cms","site"]) is a *separate* cache entry —
+      // consumed by Logo, PublicLayout, and useFavicon everywhere else in the
+      // app. Without invalidating it here, a logo/favicon change only shows up
+      // on this admin page until the public query's 5-minute staleTime lapses.
+      void qc.invalidateQueries({ queryKey: ["cms", "site"] });
     },
   });
 }
