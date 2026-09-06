@@ -72,7 +72,6 @@ export function TradePage() {
     <AppShell>
       <PageHeader
         title={t("nav.trade")}
-        description={t("trade.description")}
         breadcrumbs={[
           { label: t("common.home"), to: "/" },
           { label: t("common.dashboard"), to: "/app" },

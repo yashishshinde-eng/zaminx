@@ -333,9 +333,6 @@
     "noPackagesDesc": "No hay niveles de inversión listados en este momento. Vuelve a consultar pronto.",
     "couldNotLoadHistory": "No pudimos cargar tu historial de paquetes. Inténtalo de nuevo."
   },
-  "trade": {
-    "description": "Mercados cripto en vivo — solo para visualización."
-  },
   "activateMember": {
     "title": "Activar para un miembro",
     "description": "Activa un paquete para otro miembro inactivo, pagado desde tu billetera principal.",

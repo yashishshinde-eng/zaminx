@@ -476,9 +476,6 @@
     "noPackagesDesc": "No investment tiers are listed right now. Please check back soon.",
     "couldNotLoadHistory": "We couldn't load your package history. Please try again."
   },
-  "trade": {
-    "description": "Live crypto markets — for display only."
-  },
   "activateMember": {
     "title": "Activate for member",
     "description": "Activate a package for another inactive member, paid from your Main wallet.",
