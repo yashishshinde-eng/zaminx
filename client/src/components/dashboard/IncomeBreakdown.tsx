@@ -56,16 +56,8 @@ export function IncomeBreakdown({
       transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
       className="glass-card glass-card-hover relative overflow-hidden"
     >
-      {/* Title row */}
-      <div className="flex items-center justify-between p-5 pb-4">
-        <h3 className="section-title">{t("incomeBreakdown.title")}</h3>
-        <span className="chip chip-gold">
-          {t("incomeBreakdown.totalEarned")} <span className="font-bold tabular-nums">{formatCurrency(total)}</span>
-        </span>
-      </div>
-
       {/* Current rank strip — shows the user's achieved rank + progress to next */}
-      <div className="mx-5 mb-4 flex items-center gap-3 rounded-[14px] border border-gold/15 bg-gold/[0.04] px-4 py-3">
+      <div className="mx-5 mb-4 mt-5 flex items-center gap-3 rounded-[14px] border border-gold/15 bg-gold/[0.04] px-4 py-3">
         <div className="icon-box-gold shrink-0">
           <Award className="size-4 text-gold" />
         </div>
