@@ -99,13 +99,13 @@ export function TradePage() {
                 Below xl, the columns stack — the live-rate header shows
                 first, then the markets list, so order-* keeps xl's
                 left/right layout while flipping the stacked order. */}
-            <div className="grid gap-4 xl:grid-cols-[260px_minmax(0,1fr)]">
+            <div className="grid min-w-0 gap-4 xl:grid-cols-[260px_minmax(0,1fr)]">
               {/* Center — header, timeframe, indicators, chart.
                   Below xl the columns stack; the chart uses explicit
                   responsive heights so it never collapses or grows
                   unpredictably. At xl the parent has a fixed height and the
                   chart flex-fills the remaining space. */}
-              <div className="flex flex-col gap-4 xl:order-2 xl:h-[720px]">
+              <div className="flex min-w-0 flex-col gap-4 xl:order-2 xl:h-[720px]">
                 <MarketHeader
                   pair={activePair}
                   ticker={ticker}
@@ -113,7 +113,7 @@ export function TradePage() {
                   dimmed={isReconnecting}
                 />
 
-                <div className="glass-card flex flex-wrap items-center justify-between gap-3 p-3">
+                <div className="glass-card flex min-w-0 flex-wrap items-center justify-between gap-3 p-3">
                   <TimeframeBar
                     timeframes={TIMEFRAMES}
                     active={timeframe}

@@ -12,7 +12,7 @@ export const TimeframeBar = memo(function TimeframeBar({
   onChange: (t: Timeframe) => void;
 }) {
   return (
-    <div className="no-scrollbar inline-flex items-center gap-1 overflow-x-auto rounded-xl border border-white/[0.08] bg-white/[0.02] p-1">
+    <div className="no-scrollbar flex min-w-0 max-w-full items-center gap-1 overflow-x-auto rounded-xl border border-white/[0.08] bg-white/[0.02] p-1">
       {timeframes.map((tf) => {
         const isActive = tf.value === active;
         return (

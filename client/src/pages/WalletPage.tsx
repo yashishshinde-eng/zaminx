@@ -156,7 +156,7 @@ export function WalletPage() {
                       type="button"
                       variant={walletFilter === f.value ? "default" : "ghost"}
                       size="sm"
-                      className="h-8 px-3"
+                      className={cn("h-8 px-3", walletFilter === f.value && "btn-accent")}
                       onClick={() => setWalletFilter(f.value)}
                     >
                       {t(f.labelKey)}
@@ -227,9 +227,9 @@ function BalanceCards({ wallets, isLoading }: { wallets: WalletBalances | undefi
   }
 
   const cards: WalletCardDef[] = [
-    { label: t("wallet.mainWallet"), icon: PiggyBank, balance: wallets.main, strip: "from-[#F6B400] to-[#0D6EFD]" },
-    { label: t("wallet.bonusWallet"), icon: Coins, balance: wallets.bonus, strip: "from-emerald-500 to-teal-500" },
-    { label: t("wallet.tradingWallet"), icon: TrendingUp, balance: wallets.trading, strip: "from-amber-500 to-orange-500" },
+    { label: t("wallet.mainWallet"), icon: PiggyBank, balance: wallets.main, strip: "from-[#18F3CB] to-[#18F3CB]" },
+    { label: t("wallet.bonusWallet"), icon: Coins, balance: wallets.bonus, strip: "from-[#18F3CB] to-[#18F3CB]" },
+    { label: t("wallet.tradingWallet"), icon: TrendingUp, balance: wallets.trading, strip: "from-[#18F3CB] to-[#18F3CB]" },
   ];
 
   return (

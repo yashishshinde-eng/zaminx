@@ -160,6 +160,7 @@ export function AdminSupportPage() {
               type="button"
               variant={statusFilter === f.value ? "default" : "outline"}
               size="sm"
+              className={statusFilter === f.value ? "btn-accent" : undefined}
               onClick={() => {
                 setStatusFilter(f.value);
                 setPage(1);

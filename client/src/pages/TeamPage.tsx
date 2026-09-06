@@ -14,7 +14,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useReferralStats, useTeamReferrals, useTreeChildren } from "@/hooks/useReferrals";
 import { useCountUp } from "@/hooks/useCountUp";
 import { staggerContainer, staggerItem } from "@/lib/motion";
-import { formatDate, formatCurrency } from "@/lib/utils";
+import { formatDate, formatCurrency, cn } from "@/lib/utils";
 import toast from "react-hot-toast";
 import type { ReferralMemberRow, ReferralMemberStatus } from "@zeminex/shared";
 
@@ -254,7 +254,7 @@ export function TeamPage() {
                     type="button"
                     variant={scope === "all" ? "default" : "ghost"}
                     size="sm"
-                    className="h-8 px-3"
+                    className={cn("h-8 px-3", scope === "all" && "btn-accent")}
                     onClick={() => setScope("all")}
                   >
                     {t("common.all")}
@@ -263,7 +263,7 @@ export function TeamPage() {
                     type="button"
                     variant={scope === "direct" ? "default" : "ghost"}
                     size="sm"
-                    className="h-8 px-3"
+                    className={cn("h-8 px-3", scope === "direct" && "btn-accent")}
                     onClick={() => setScope("direct")}
                   >
                     {t("team.direct")}
@@ -275,7 +275,7 @@ export function TeamPage() {
                         type="button"
                         variant={scope === "level" ? "default" : "ghost"}
                         size="sm"
-                        className="h-8 px-3"
+                        className={cn("h-8 px-3", scope === "level" && "btn-accent")}
                         disabled={availableLevels.length === 0}
                       >
                         {scope === "level" && levelNum ? `${t("team.level")} ${levelNum}` : t("team.filterLevel")}
@@ -313,7 +313,7 @@ export function TeamPage() {
                       type="button"
                       variant={statusFilter === s ? "default" : "ghost"}
                       size="sm"
-                      className="h-8 px-3 capitalize"
+                      className={cn("h-8 px-3 capitalize", statusFilter === s && "btn-accent")}
                       onClick={() => setStatusFilter((prev) => (prev === s ? "all" : s))}
                     >
                       {t(`common.${s}`)}

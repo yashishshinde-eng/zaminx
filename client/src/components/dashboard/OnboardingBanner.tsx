@@ -170,7 +170,7 @@ export function OnboardingBanner() {
 
             {/* Primary CTA */}
             <div className="mt-4 flex items-center gap-3">
-              <Link to={nextStep.href} className="btn-premium inline-flex items-center gap-2 rounded-[14px] px-5 py-2.5 text-sm font-semibold">
+              <Link to={nextStep.href} className="btn-accent inline-flex items-center gap-2 rounded-[14px] px-5 py-2.5 text-sm font-semibold">
                 {nextStep.label} <ArrowRight className="size-4" />
               </Link>
               <span className="text-xs text-muted-foreground">

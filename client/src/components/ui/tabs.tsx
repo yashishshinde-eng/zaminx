@@ -75,14 +75,16 @@ export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
       onClick={() => setValue(value)}
       className={cn(
         "relative inline-flex items-center justify-center gap-1.5 rounded-[10px] px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 [&_svg]:size-4 [&_svg]:shrink-0",
-        selected ? "text-foreground" : "hover:text-foreground",
+        !selected && "hover:text-foreground",
         className,
       )}
+      style={selected ? { color: "#052A22" } : undefined}
     >
       {selected && (
         <motion.span
           layoutId={`${baseId}-tab-active`}
-          className="absolute inset-0 rounded-[10px] bg-card shadow-sm"
+          className="absolute inset-0 rounded-[10px] shadow-sm"
+          style={{ background: "#18F3CB" }}
           transition={{ type: "spring", stiffness: 400, damping: 32 }}
         />
       )}
@@ -136,13 +138,15 @@ export function SegmentedControl({ value, onValueChange, options, className }: S
             onClick={() => onValueChange(opt.value)}
             className={cn(
               "relative inline-flex items-center justify-center rounded-[7px] px-2.5 py-1 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
-              selected ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+              !selected && "text-muted-foreground hover:text-foreground",
             )}
+            style={selected ? { color: "#052A22" } : undefined}
           >
             {selected && (
               <motion.span
                 layoutId={`${baseId}-segment-active`}
-                className="absolute inset-0 rounded-[7px] gradient-blue shadow-sm"
+                className="absolute inset-0 rounded-[7px] shadow-sm"
+                style={{ background: "#18F3CB" }}
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
               />
             )}
