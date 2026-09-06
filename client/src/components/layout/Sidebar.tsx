@@ -189,17 +189,25 @@ export function Sidebar({ onNavigate, mobile = false }: SidebarProps) {
                       {isActive && (
                         <motion.span
                           layoutId="sidebar-active"
-                          className="gradient-blue absolute inset-0 rounded-[12px] shadow-glow-blue"
+                          className="absolute inset-0 rounded-[12px]"
+                          style={{ background: "#18F3CB", boxShadow: "0 4px 20px -4px rgba(24,243,203,0.5)" }}
                           transition={{ type: "spring", stiffness: 400, damping: 32 }}
                         />
                       )}
-                      <span className={cn(
-                        "relative z-10 flex size-7 items-center justify-center rounded-lg transition-colors duration-200",
-                        isActive ? "text-primary-foreground" : "text-sidebar-foreground/50 group-hover:text-sidebar-foreground/80",
-                      )}>
+                      <span
+                        className={cn(
+                          "relative z-10 flex size-7 items-center justify-center rounded-lg transition-colors duration-200",
+                          isActive ? "text-primary-foreground" : "text-sidebar-foreground/50 group-hover:text-sidebar-foreground/80",
+                        )}
+                        style={isActive ? { color: "#052A22" } : undefined}
+                      >
                         <item.icon className="size-[17px]" />
                       </span>
-                      {!isCollapsed && <span className="relative z-10">{itemLabel}</span>}
+                      {!isCollapsed && (
+                        <span className="relative z-10" style={isActive ? { color: "#052A22" } : undefined}>
+                          {itemLabel}
+                        </span>
+                      )}
                     </>
                   )}
                 </NavLink>

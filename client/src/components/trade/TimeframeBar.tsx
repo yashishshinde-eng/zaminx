@@ -23,10 +23,13 @@ export const TimeframeBar = memo(function TimeframeBar({
             aria-pressed={isActive}
             className={cn(
               "shrink-0 rounded-lg px-2.5 py-1 text-xs font-semibold transition-all duration-200",
-              isActive
-                ? "gradient-blue text-white shadow-glow-blue"
-                : "text-muted-foreground hover:bg-white/[0.06] hover:text-foreground",
+              !isActive && "text-muted-foreground hover:bg-white/[0.06] hover:text-foreground",
             )}
+            style={
+              isActive
+                ? { background: "#18F3CB", color: "#052A22", boxShadow: "0 0 16px -4px rgba(24,243,203,0.6)" }
+                : undefined
+            }
           >
             {tf.label}
           </button>

@@ -234,7 +234,7 @@ export function SupportPage() {
                     rows={2}
                     className="glass-input min-h-[44px] flex-1 resize-none px-3 py-2 text-sm"
                   />
-                  <Button type="submit" disabled={!replyText.trim() || reply.isPending}>
+                  <Button type="submit" className="btn-accent" disabled={!replyText.trim() || reply.isPending}>
                     <Send className="mr-1 size-4" /> {t("support.send")}
                   </Button>
                 </form>
@@ -283,7 +283,7 @@ export function SupportPage() {
             <Button type="button" variant="outline" onClick={() => setCreateOpen(false)} disabled={create.isPending}>
               {t("common.cancel")}
             </Button>
-            <Button type="submit" disabled={create.isPending}>
+            <Button type="submit" className="btn-accent" disabled={create.isPending}>
               {create.isPending ? t("support.submitting") : t("support.submitTicket")}
             </Button>
           </div>

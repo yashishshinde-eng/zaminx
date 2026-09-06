@@ -225,7 +225,7 @@ export function WithdrawalsPage() {
                 )}
               </div>
               <div className="sm:col-span-3 flex items-end">
-                <Button type="submit" className="w-full sm:w-auto" disabled={create.isPending || !hasAddress || inactive}>
+                <Button type="submit" className="btn-accent w-full sm:w-auto" disabled={create.isPending || !hasAddress || inactive}>
                   {create.isPending ? t("withdrawals.submitting") : t("withdrawals.submitWithdrawal")}
                 </Button>
               </div>

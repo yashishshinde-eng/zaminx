@@ -116,7 +116,7 @@ export function ContactPage() {
                 />
                 {errors.message && <p className="text-sm text-destructive">{errors.message.message}</p>}
               </div>
-              <Button type="submit" className="w-full" disabled={submitting}>
+              <Button type="submit" className="btn-accent w-full" disabled={submitting}>
                 {submitting ? "Sending…" : (<><Send className="size-4" /> Send message</>)}
               </Button>
             </form>

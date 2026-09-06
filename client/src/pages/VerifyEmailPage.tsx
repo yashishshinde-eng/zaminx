@@ -108,7 +108,7 @@ export function VerifyEmailPage() {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={resending}>
+                <Button type="submit" className="btn-accent w-full" disabled={resending}>
                   {resending ? (
                     t("verifyEmail.sending")
                   ) : (

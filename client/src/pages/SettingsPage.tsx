@@ -167,7 +167,7 @@ function PersonalDetailsForm() {
             {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
           </div>
           <div className="sm:col-span-2 flex justify-end">
-            <Button type="submit" disabled={saving || !isDirty}>
+            <Button type="submit" className="btn-accent" disabled={saving || !isDirty}>
               {saving ? t("settings.saving") : t("common.save")}
             </Button>
           </div>
@@ -243,7 +243,7 @@ function WalletAddressForm() {
             {errors.usdtBep20 && <p className="text-sm text-destructive">{errors.usdtBep20.message}</p>}
           </div>
           <div className="flex justify-end">
-            <Button type="submit" disabled={saving || !isDirty}>
+            <Button type="submit" className="btn-accent" disabled={saving || !isDirty}>
               {saving ? t("settings.saving") : t("settings.saveAddress")}
             </Button>
           </div>
@@ -324,7 +324,7 @@ function PasswordForm() {
             </div>
           </div>
           <div className="flex justify-end">
-            <Button type="submit" disabled={saving || !isDirty}>
+            <Button type="submit" className="btn-accent" disabled={saving || !isDirty}>
               {saving ? t("settings.updating") : t("settings.updatePassword")}
             </Button>
           </div>
@@ -478,7 +478,7 @@ function TransactionPinForm() {
             </div>
           </div>
           <div className="flex justify-end">
-            <Button type="submit" disabled={saving || !isDirty}>
+            <Button type="submit" className="btn-accent" disabled={saving || !isDirty}>
               {saving ? t("settings.updating") : t("settings.updatePin")}
             </Button>
           </div>

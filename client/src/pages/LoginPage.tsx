@@ -113,7 +113,7 @@ export function LoginPage() {
                 <PasswordInput id="password" autoComplete="current-password" placeholder="••••••••" {...register("password")} />
                 {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
               </div>
-              <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
+              <Button type="submit" className="btn-accent w-full h-11" disabled={submitting}>
                 {submitting ? t("login.signingIn") : <>{t("login.signIn")} <ArrowRight className="size-4" /></>}
               </Button>
             </form>

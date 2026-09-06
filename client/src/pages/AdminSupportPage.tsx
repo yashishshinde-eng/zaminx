@@ -285,7 +285,7 @@ export function AdminSupportPage() {
                 rows={2}
                 className="glass-input min-h-[44px] flex-1 resize-none px-3 py-2 text-sm"
               />
-              <Button type="submit" disabled={!replyText.trim() || reply.isPending}>
+              <Button type="submit" className="btn-accent" disabled={!replyText.trim() || reply.isPending}>
                 <Send className="mr-1 size-4" /> Send
               </Button>
             </form>

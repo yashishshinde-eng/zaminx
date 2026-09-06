@@ -474,7 +474,7 @@ export function RegisterPage() {
                   </p>
                 ) : null}
               </div>
-              <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
+              <Button type="submit" className="btn-accent w-full h-11" disabled={submitting}>
                 {submitting ? t("register.creatingAccount") : <>{t("register.createAccount")} <ArrowRight className="size-4" /></>}
               </Button>
             </form>

@@ -100,7 +100,7 @@ export function IncomeBreakdown({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="group relative overflow-hidden rounded-[16px] border border-white/[0.06] bg-white/[0.02] p-4 backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/[0.12] hover:bg-white/[0.04]"
-              style={{ borderLeftWidth: "4px", borderLeftColor: s.color }}
+              style={{ borderLeftWidth: "5px", borderLeftColor: "#18F3CB" }}
             >
               {/* Subtle glow on hover */}
               <div

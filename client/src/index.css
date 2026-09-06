@@ -391,6 +391,61 @@
   }
   .btn-premium:active { @apply translate-y-0; filter: brightness(0.95); }
 
+  /* Brand accent button — #18F3CB exactly, scoped to specific
+   * user-requested elements only (not a global button restyle).
+   * !important guards against whatever cva `variant` classes (e.g.
+   * gradient-blue/text-white from the default Button variant) get merged
+   * in alongside this via cn()/twMerge — those are opaque custom classes
+   * twMerge can't dedupe, so this must win the cascade unconditionally. */
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-[14px] font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    background: #18f3cb !important;
+    background-image: none !important;
+    box-shadow: 0 0 24px -4px rgba(24, 243, 203, 0.6), 0 4px 16px -2px rgba(24, 243, 203, 0.35) !important;
+    color: #052a22 !important;
+  }
+  .btn-accent:hover {
+    @apply -translate-y-0.5;
+    background: #18f3cb !important;
+    box-shadow: 0 8px 32px -4px rgba(24, 243, 203, 0.75) !important;
+    color: #052a22 !important;
+    filter: brightness(1.05);
+  }
+  .btn-accent:active { @apply translate-y-0; filter: brightness(0.95); }
+
+  /* App-wide card borders — #18F3CB. Originally dashboard-only, extended to
+   * every page's .glass-card/.neon-card on request. Fixed solid border, no
+   * traveling-beam motion. */
+  .glass-card {
+    border: 2.5px solid #18f3cb !important;
+    box-shadow:
+      var(--shadow-card),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 0 rgba(255, 255, 255, 0.02),
+      0 0 20px -6px rgba(24, 243, 203, 0.45);
+  }
+  .glass-card-hover:hover {
+    border-color: #18f3cb !important;
+    box-shadow: var(--shadow-card-hover), 0 0 32px -6px rgba(24, 243, 203, 0.6);
+  }
+  .neon-gold,
+  .neon-green,
+  .neon-violet,
+  .neon-blue,
+  .neon-orange,
+  .neon-cyan,
+  .neon-magenta,
+  .neon-goldcyan {
+    --neon-a: #18f3cb;
+    --neon-b: #18f3cb;
+    --neon-glow-rgb: 24 243 203;
+    border-width: 2px !important;
+    border-color: #18f3cb !important;
+  }
+  .neon-card::before {
+    display: none;
+  }
+
   .btn-secondary-premium {
     @apply inline-flex items-center justify-center gap-2 rounded-[14px] font-semibold border transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40;
     border-color: hsl(var(--blue) / 0.4);

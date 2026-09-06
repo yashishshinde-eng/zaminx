@@ -75,7 +75,7 @@ export function ReferralLinkCard({ referral }: { referral: DashboardSummary["ref
         <div className="flex gap-2 sm:gap-2.5">
           <button
             onClick={copy}
-            className="btn-premium flex-1 gap-1.5 rounded-[14px] px-3 py-2.5 text-xs font-semibold sm:gap-2 sm:px-4 sm:text-sm"
+            className="btn-accent flex-1 gap-1.5 rounded-[14px] px-3 py-2.5 text-xs font-semibold sm:gap-2 sm:px-4 sm:text-sm"
           >
             {copied ? <Check className="size-4 shrink-0" /> : <Copy className="size-4 shrink-0" />}
             <span className="truncate">{copied ? t("referralCard.copied") : t("referralCard.copyLink")}</span>

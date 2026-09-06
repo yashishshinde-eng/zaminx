@@ -23,10 +23,13 @@ export const PairSelector = memo(function PairSelector({
             aria-pressed={active}
             className={cn(
               "shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-all duration-200",
-              active
-                ? "gradient-blue border-transparent text-white shadow-glow-blue"
-                : "border-white/[0.08] bg-white/[0.02] text-muted-foreground hover:bg-white/[0.06] hover:text-foreground",
+              !active && "border-white/[0.08] bg-white/[0.02] text-muted-foreground hover:bg-white/[0.06] hover:text-foreground",
             )}
+            style={
+              active
+                ? { background: "#18F3CB", borderColor: "#18F3CB", color: "#052A22", boxShadow: "0 0 16px -4px rgba(24,243,203,0.6)" }
+                : undefined
+            }
           >
             {p.label}
           </button>

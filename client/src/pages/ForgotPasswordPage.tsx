@@ -72,7 +72,7 @@ export function ForgotPasswordPage() {
                 <Input id="email" type="email" autoComplete="email" placeholder="you@example.com" {...register("email")} />
                 {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
               </div>
-              <Button type="submit" className="btn-premium w-full h-11" disabled={submitting}>
+              <Button type="submit" className="btn-accent w-full h-11" disabled={submitting}>
                 {submitting ? t("forgotPassword.sending") : <>{t("forgotPassword.sendResetLink")} <ArrowRight className="size-4" /></>}
               </Button>
             </form>

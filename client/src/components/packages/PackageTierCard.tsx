@@ -74,7 +74,7 @@ export function PackageTierCard({
           <div className="mt-6 flex-1" />
           <Button
             type="button"
-            className={cn("w-full h-11", popular ? "btn-premium" : "")}
+            className={cn("w-full h-11 btn-accent")}
             disabled={disabled || loading || !canAfford}
             onClick={() => onActivate?.(tier.id)}
             title={disabled ? disabledReason : !canAfford ? "Insufficient wallet balance — deposit first" : undefined}

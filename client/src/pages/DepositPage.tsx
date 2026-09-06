@@ -215,7 +215,7 @@ export function DepositPage() {
                       ))}
                     </div>
 
-                    <Button type="submit" className="btn-premium w-full h-11" disabled={create.isPending}>
+                    <Button type="submit" className="btn-accent w-full h-11" disabled={create.isPending}>
                       {create.isPending ? t("deposit.starting") : (<>{t("deposit.continue")} <ArrowRight className="size-4" /></>)}
                     </Button>
                     <p className="text-center text-xs text-muted-foreground">

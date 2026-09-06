@@ -220,7 +220,7 @@ export function TeamPage() {
                 action={
                   <Button
                     type="button"
-                    variant="outline"
+                    className="btn-accent"
                     size="sm"
                     onClick={() => {
                       if (!stats.data?.link) return;

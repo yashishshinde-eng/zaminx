@@ -313,7 +313,7 @@ function TransferForm() {
             </p>
             <Button
               type="submit"
-              className="btn-premium"
+              className="btn-accent"
               disabled={send.isPending || insufficient || inactive || recipientCheck.status !== "valid"}
             >
               {send.isPending ? t("p2p.sending") : <><ArrowRightLeft className="size-4" /> {t("p2p.sendTransfer")}</>}

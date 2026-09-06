@@ -265,7 +265,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
               <button
                 type="button"
                 onClick={copyReferral}
-                className="inline-flex items-center justify-center gap-1.5 rounded-[12px] border border-white/[0.08] bg-white/[0.04] px-3 py-2 text-xs font-semibold text-foreground/70 backdrop-blur-sm transition-all duration-200 hover:border-blue/20 hover:bg-white/[0.08] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                className="btn-accent gap-1.5 px-3 py-2 text-xs"
                 aria-label={t("heroCard.copyReferralLink")}
               >
                 {copied ? (
