@@ -60,12 +60,21 @@ export async function getBonanzaOverview(userId: string): Promise<BonanzaOvervie
     BonanzaOffer.find({ status: "active", startDate: { $lte: now }, endDate: { $gte: now } })
       .sort({ requiredDirects: 1 })
       .lean(),
+    // Lifetime total — shown as a general "your directs" figure, not used
+    // for offer qualification (each offer scopes its own count below).
     User.countDocuments({ sponsorId: userId }),
   ]);
 
   const views: BonanzaOfferView[] = [];
   for (const o of offers) {
     const id = o._id.toString();
+    // Only directs referred within this offer's own window count toward it —
+    // a direct made before startDate or after endDate must not qualify the
+    // user, even though the offer itself is currently active.
+    const windowDirectCount = await User.countDocuments({
+      sponsorId: userId,
+      createdAt: { $gte: o.startDate, $lte: o.endDate },
+    });
     views.push({
       id,
       name: o.name,
@@ -74,8 +83,8 @@ export async function getBonanzaOverview(userId: string): Promise<BonanzaOvervie
       startDate: toIso(o.startDate ?? null),
       endDate: toIso(o.endDate ?? null),
       terms: o.terms ?? null,
-      directCount,
-      qualified: directCount >= o.requiredDirects,
+      directCount: windowDirectCount,
+      qualified: windowDirectCount >= o.requiredDirects,
       awarded: await isBonanzaAwarded(id, userId),
     });
   }

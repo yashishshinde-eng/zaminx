@@ -68,7 +68,7 @@ export function BonanzaPage() {
               >
                 {data.offers.map((o) => (
                   <motion.div key={o.id} variants={staggerItem}>
-                    <OfferCard offer={o} directCount={data.directCount} />
+                    <OfferCard offer={o} />
                   </motion.div>
                 ))}
               </motion.div>
@@ -84,8 +84,9 @@ export function BonanzaPage() {
 /*  Offer card                                                         */
 /* ------------------------------------------------------------------ */
 
-function OfferCard({ offer, directCount }: { offer: BonanzaOfferView; directCount: number }) {
+function OfferCard({ offer }: { offer: BonanzaOfferView }) {
   const { t } = useTranslation();
+  const directCount = offer.directCount;
   const progress = Math.min(1, directCount / offer.requiredDirects);
   const pct = Math.round(progress * 100);
   const complete = directCount >= offer.requiredDirects;

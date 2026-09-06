@@ -49,11 +49,11 @@ interface BottomNavItem {
 }
 
 const BOTTOM_NAV: BottomNavItem[] = [
-  { label: "Home", to: "/app", icon: LayoutDashboard, variant: "gold" },
-  { label: "Wallet", to: "/app/wallet", icon: Wallet, variant: "cyan" },
+  { label: "Home", to: "/app", icon: LayoutDashboard, variant: "blue" },
+  { label: "Wallet", to: "/app/wallet", icon: Wallet, variant: "blue" },
   { label: "Trade", to: "/app/trade", icon: Package, variant: "blue" },
-  { label: "Team", to: "/app/team", icon: Users, variant: "magenta" },
-  { label: "Reports", to: "/app/reports", icon: FileText, variant: "goldcyan" },
+  { label: "Team", to: "/app/team", icon: Users, variant: "blue" },
+  { label: "Reports", to: "/app/reports", icon: FileText, variant: "blue" },
 ];
 
 /* ── Grouped sections for the full menu ───────────────────── */

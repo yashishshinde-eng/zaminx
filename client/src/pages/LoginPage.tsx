@@ -87,7 +87,7 @@ export function LoginPage() {
       <div className="flex flex-1 items-center justify-center bg-background bg-depth p-4">
         <div className="w-full max-w-md">
           {/* Logo for mobile */}
-          <div className="mx-auto mb-8 lg:hidden">
+          <div className="mb-8 flex justify-center lg:hidden">
             <Logo className="size-12 shadow-glow-blue" />
           </div>
 

@@ -33,25 +33,6 @@ function getStreams(t: TFunction): { key: IncomeStreamKey; label: string; icon: 
   ];
 }
 
-/* ── Color helpers for per-card accent glow + gradient bars ── */
-function hexToRgba(hex: string, alpha: number): string {
-  const h = hex.replace("#", "");
-  const r = parseInt(h.slice(0, 2), 16);
-  const g = parseInt(h.slice(2, 4), 16);
-  const b = parseInt(h.slice(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
-/** Mix the accent toward white for the light end of the progress gradient. */
-function lighten(hex: string, amount: number): string {
-  const h = hex.replace("#", "");
-  const r = parseInt(h.slice(0, 2), 16);
-  const g = parseInt(h.slice(2, 4), 16);
-  const b = parseInt(h.slice(4, 6), 16);
-  const mix = (c: number) => Math.round(c + (255 - c) * amount);
-  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`;
-}
-
 /** Six income-stream tiles with colored accent borders and progress bars.
  *  Also surfaces the user's current rank (level + progress to next) at the top
  *  of the card, alongside the income breakdown. */
@@ -126,58 +107,41 @@ export function IncomeBreakdown({
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative overflow-hidden rounded-[18px] p-4 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:brightness-110"
-              style={{
-                backgroundColor: "#0d0f1a",
-                border: `1.5px solid ${s.color}`,
-                boxShadow: `0 0 16px ${hexToRgba(s.color, 0.35)}`,
-              }}
+              className="group relative overflow-hidden rounded-[16px] border border-white/[0.06] bg-white/[0.02] p-4 backdrop-blur-xl transition-all duration-300 hover:-translate-y-0.5 hover:border-white/[0.12] hover:bg-white/[0.04]"
+              style={{ borderLeftWidth: "4px", borderLeftColor: s.color }}
             >
-              {/* 3D icon orb — top-right, glossy gradient gem with specular
-                  highlight, inset depth, and a colored outer glow. */}
+              {/* Subtle glow on hover */}
               <div
-                className="absolute right-3 top-3 flex size-[60px] items-center justify-center rounded-[18px]"
+                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 style={{
-                  background: `radial-gradient(circle at 32% 26%, ${hexToRgba(s.color, 0.65)}, ${hexToRgba(s.color, 0.28)} 48%, ${hexToRgba(s.color, 0.08)} 72%)`,
-                  border: `1px solid ${hexToRgba(s.color, 0.55)}`,
-                  boxShadow: `0 8px 22px -6px ${hexToRgba(s.color, 0.6)}, inset 0 1px 1px rgba(255,255,255,0.45), inset 0 -8px 14px ${hexToRgba(s.color, 0.45)}`,
+                  background: `radial-gradient(ellipse 80% 60% at 0% 0%, ${s.color}10, transparent 60%)`,
                 }}
-              >
-                {/* Glossy specular highlight — simulates a 3D sphere's light reflection */}
-                <span
-                  className="pointer-events-none absolute inset-0 rounded-[18px]"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 30% 18%, rgba(255,255,255,0.55), rgba(255,255,255,0.08) 38%, transparent 55%)",
-                  }}
-                />
-                <Icon
-                  className="relative size-7 text-white"
-                  strokeWidth={2}
-                  style={{ filter: `drop-shadow(0 2px 3px ${hexToRgba(s.color, 0.7)})` }}
-                />
-              </div>
+              />
 
-              <div className="relative pr-[70px]">
-                <p
-                  className="text-[11px] font-bold uppercase tracking-wider"
-                  style={{ color: s.color }}
-                >
-                  {s.label}
-                </p>
+              <div className="relative">
+                <div className="flex items-center gap-2.5">
+                  <div
+                    className="flex size-8 shrink-0 items-center justify-center rounded-lg"
+                    style={{ backgroundColor: `${s.color}15`, color: s.color }}
+                  >
+                    <Icon className="size-4" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="metric-label truncate">{s.label}</p>
+                  </div>
+                </div>
 
-                <p className="mt-2 text-2xl font-bold tabular-nums text-white">
-                  {formatCurrency(value)}
-                </p>
+                <p className="metric-value font-grotesk mt-2 text-lg">{formatCurrency(value)}</p>
                 <p className="text-[11px] text-muted-foreground">{s.subtitle}</p>
 
-                {/* Mini progress bar — accent light→solid gradient, rounded ends */}
-                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
+                {/* Mini progress bar */}
+                <div className="mt-2.5 h-1 w-full overflow-hidden rounded-full bg-white/[0.06]">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{
                       width: `${pct}%`,
-                      backgroundImage: `linear-gradient(90deg, ${lighten(s.color, 0.45)}, ${s.color})`,
+                      backgroundColor: s.color,
+                      opacity: 0.75,
                     }}
                   />
                 </div>

@@ -517,6 +517,8 @@ type LeanOffer = {
   name: string;
   requiredDirects: number;
   rewardAmount: number;
+  startDate: Date;
+  endDate: Date;
 };
 
 /** Active offers whose window contains `now`. */
@@ -541,7 +543,6 @@ export async function evaluateBonanzasForUser(userId: string): Promise<{ awarded
   const activePkg = await UserPackage.exists({ user: userId, status: "active" });
   if (!activePkg) return { awarded: 0, errors: 0 };
 
-  const directCount = await User.countDocuments({ sponsorId: userId });
   // Fetched once so each new award can fire a notification email without an
   // extra query per offer in the loop.
   const user = await User.findById(userId).lean();
@@ -549,6 +550,13 @@ export async function evaluateBonanzasForUser(userId: string): Promise<{ awarded
   let errors = 0;
 
   for (const offer of offers) {
+    // Only directs referred within this offer's own window count — a direct
+    // made before startDate or after endDate must not qualify a user, even
+    // though the offer itself is currently active.
+    const directCount = await User.countDocuments({
+      sponsorId: userId,
+      createdAt: { $gte: offer.startDate, $lte: offer.endDate },
+    });
     if (directCount < offer.requiredDirects) continue;
     const offerId = offer._id.toString();
     // Skip already-awarded offers (idempotent) — also keeps `awarded` honest.
