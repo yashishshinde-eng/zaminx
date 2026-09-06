@@ -95,8 +95,9 @@ export const siteConfigSchema = z.object({
   /** Public website URL (e.g. https://zeminexglobal.com). */
   website: z.string().optional(),
   tagline: z.string().optional(),
-  logoLight: z.string().nullable().default(null), // url or null (falls back to text logo)
+  logoLight: z.string().nullable().default(null), // url/data-uri or null (falls back to text logo)
   logoDark: z.string().nullable().default(null),
+  faviconUrl: z.string().nullable().default(null), // url/data-uri or null (falls back to the static default)
   navLinks: z.array(navLink).default([]),
   footerText: z.string().optional(),
   contactDetails: z
@@ -206,6 +207,7 @@ export const siteConfigUpdateSchema = z.object({
     tagline: z.string().optional(),
     logoLight: z.string().nullable().optional(),
     logoDark: z.string().nullable().optional(),
+    faviconUrl: z.string().nullable().optional(),
     navLinks: z.array(navLinkField).optional(),
     footerText: z.string().optional(),
     contactDetails: contactDetailsField.optional(),

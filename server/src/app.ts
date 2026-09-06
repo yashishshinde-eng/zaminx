@@ -37,7 +37,9 @@ export function createApp(): Express {
   app.use(compression());
   app.use(
     express.json({
-      limit: "1mb",
+      // 3mb accommodates base64 data-URI logo/favicon uploads from the admin
+      // site-config page (images stored inline as strings, no file storage).
+      limit: "3mb",
       // Capture the raw body so the NOWPayments IPN webhook can verify the
       // HMAC-SHA512 signature over the exact bytes received.
       verify: (req, _res, buf) => {

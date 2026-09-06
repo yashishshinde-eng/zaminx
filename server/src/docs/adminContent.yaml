@@ -186,6 +186,7 @@ paths:
                 tagline: { type: string }
                 logoLight: { type: string }
                 logoDark: { type: string }
+                faviconUrl: { type: string }
                 navLinks:
                   type: array
                   items:

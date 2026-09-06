@@ -5,6 +5,12 @@ import { ThemeProvider } from "@/context/ThemeContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { MotionProvider } from "@/lib/motion";
 import { AppRouter } from "@/router";
+import { useFavicon } from "@/hooks/useFavicon";
+
+function FaviconSync() {
+  useFavicon();
+  return null;
+}
 
 export default function App() {
   return (
@@ -12,6 +18,7 @@ export default function App() {
       <AuthProvider>
         <ThemeProvider>
           <MotionProvider>
+            <FaviconSync />
             <AppRouter />
             <Toaster
               position="top-right"

@@ -10,6 +10,7 @@ const FALLBACK_CONFIG: SiteConfig = {
   siteName: "Zeminex Global",
   logoLight: null,
   logoDark: null,
+  faviconUrl: null,
   navLinks: [{ label: "Home", href: "/" }],
   contactDetails: {},
   socialLinks: {},

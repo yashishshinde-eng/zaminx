@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { Settings as SettingsIcon, Plus, Trash2 } from "lucide-react";
+import { Settings as SettingsIcon, Plus, Trash2, Upload, X } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { PageHeader } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 import { useSiteConfigAdmin, useUpdateSiteConfig } from "@/hooks/useAdmin";
 import type { SiteConfigUpdate } from "@zeminex/shared";
 
@@ -17,6 +18,7 @@ const EMPTY: SiteConfigUpdate = {
   tagline: "",
   logoLight: "",
   logoDark: "",
+  faviconUrl: "",
   navLinks: [],
   footerText: "",
   contactDetails: { email: "", phone: "", address: "" },
@@ -80,7 +82,7 @@ export function AdminSiteConfigPage() {
                 <CardTitle className="flex items-center gap-2 text-base">
                   <SettingsIcon className="size-4 text-primary" /> Branding
                 </CardTitle>
-                <CardDescription>Site name, tagline, and logos (URLs; leave blank for the text logo).</CardDescription>
+                <CardDescription>Site name, tagline, logos, and favicon. Upload image files directly — no links needed.</CardDescription>
               </CardHeader>
               <CardContent className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
@@ -91,14 +93,31 @@ export function AdminSiteConfigPage() {
                   <Label htmlFor="tagline">Tagline</Label>
                   <Input id="tagline" value={form.tagline ?? ""} onChange={(e) => patch("tagline", e.target.value)} />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="logoLight">Logo (light mode URL)</Label>
-                  <Input id="logoLight" value={form.logoLight ?? ""} onChange={(e) => patch("logoLight", e.target.value)} placeholder="https://…" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="logoDark">Logo (dark mode URL)</Label>
-                  <Input id="logoDark" value={form.logoDark ?? ""} onChange={(e) => patch("logoDark", e.target.value)} placeholder="https://…" />
-                </div>
+                <ImageUploadField
+                  label="Logo (light mode)"
+                  value={form.logoLight ?? ""}
+                  onChange={(v) => patch("logoLight", v)}
+                  accept="image/png,image/jpeg,image/svg+xml,image/webp"
+                  maxSizeKb={500}
+                  hint="PNG, JPG, SVG, or WebP — up to 500KB"
+                />
+                <ImageUploadField
+                  label="Logo (dark mode)"
+                  value={form.logoDark ?? ""}
+                  onChange={(v) => patch("logoDark", v)}
+                  accept="image/png,image/jpeg,image/svg+xml,image/webp"
+                  maxSizeKb={500}
+                  hint="PNG, JPG, SVG, or WebP — up to 500KB"
+                />
+                <ImageUploadField
+                  label="Favicon"
+                  value={form.faviconUrl ?? ""}
+                  onChange={(v) => patch("faviconUrl", v)}
+                  accept="image/png,image/x-icon,image/vnd.microsoft.icon,image/svg+xml"
+                  maxSizeKb={150}
+                  hint="PNG, ICO, or SVG — up to 150KB, square recommended"
+                  previewClassName="rounded-md"
+                />
               </CardContent>
             </Card>
 
@@ -256,6 +275,7 @@ function normalize(c: SiteConfigUpdate): SiteConfigUpdate {
     tagline: c.tagline ?? "",
     logoLight: c.logoLight ?? "",
     logoDark: c.logoDark ?? "",
+    faviconUrl: c.faviconUrl ?? "",
     navLinks: c.navLinks ?? [],
     footerText: c.footerText ?? "",
     contactDetails: { ...EMPTY.contactDetails, ...(c.contactDetails ?? {}) },
@@ -294,6 +314,102 @@ function patchAnnouncement(
 
 function sameConfig(a: SiteConfigUpdate, b: SiteConfigUpdate): boolean {
   return JSON.stringify(normalize(a)) === JSON.stringify(normalize(b));
+}
+
+/** Read a File as a base64 data URI (stored inline — no file storage backend). */
+function readFileAsDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = () => reject(reader.error ?? new Error("Failed to read file"));
+    reader.readAsDataURL(file);
+  });
+}
+
+/**
+ * Image upload control for branding assets (logo/favicon). Stores the image
+ * as a base64 data URI directly in the site-config value — no separate file
+ * storage or upload endpoint needed. Shows a live preview with a remove button.
+ */
+function ImageUploadField({
+  label,
+  value,
+  onChange,
+  accept,
+  maxSizeKb,
+  hint,
+  previewClassName,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  accept: string;
+  maxSizeKb: number;
+  hint: string;
+  previewClassName?: string;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  async function handleFile(file: File | undefined) {
+    if (!file) return;
+    if (!accept.split(",").includes(file.type)) {
+      toast.error(`Unsupported file type. Use: ${accept.replace(/image\//g, "").toUpperCase()}`);
+      return;
+    }
+    if (file.size > maxSizeKb * 1024) {
+      toast.error(`File too large — max ${maxSizeKb}KB`);
+      return;
+    }
+    try {
+      const dataUrl = await readFileAsDataUrl(file);
+      onChange(dataUrl);
+    } catch {
+      toast.error("Could not read the selected file");
+    }
+  }
+
+  return (
+    <div className="space-y-2">
+      <Label>{label}</Label>
+      <div className="flex items-center gap-3">
+        <div
+          className={cn(
+            "flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border/60 bg-muted/30",
+            previewClassName,
+          )}
+        >
+          {value ? (
+            <img src={value} alt={label} className="size-full object-contain" />
+          ) : (
+            <Upload className="size-4 text-muted-foreground" />
+          )}
+        </div>
+        <div className="flex flex-1 flex-col gap-1.5">
+          <div className="flex gap-2">
+            <Button type="button" size="sm" variant="outline" onClick={() => inputRef.current?.click()}>
+              <Upload className="size-3.5" /> {value ? "Replace" : "Upload"}
+            </Button>
+            {value && (
+              <Button type="button" size="sm" variant="ghost" onClick={() => onChange("")}>
+                <X className="size-3.5" /> Remove
+              </Button>
+            )}
+          </div>
+          <p className="text-xs text-muted-foreground">{hint}</p>
+        </div>
+        <input
+          ref={inputRef}
+          type="file"
+          accept={accept}
+          className="hidden"
+          onChange={(e) => {
+            void handleFile(e.target.files?.[0]);
+            e.target.value = "";
+          }}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default AdminSiteConfigPage;

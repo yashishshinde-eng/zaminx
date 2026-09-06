@@ -22,6 +22,7 @@ const CMS_SETTING_KEYS: Record<keyof SiteConfigUpdate, string> = {
   tagline: "cms.tagline",
   logoLight: "cms.logoLight",
   logoDark: "cms.logoDark",
+  faviconUrl: "cms.faviconUrl",
   navLinks: "cms.navLinks",
   footerText: "cms.footerText",
   contactDetails: "cms.contactDetails",
@@ -149,6 +150,7 @@ const CMS_DEFAULTS: SiteConfigUpdate = {
   tagline: "",
   logoLight: "",
   logoDark: "",
+  faviconUrl: "",
   navLinks: [],
   footerText: "",
   contactDetails: { email: "", phone: "", address: "" },
@@ -159,13 +161,14 @@ const CMS_DEFAULTS: SiteConfigUpdate = {
 
 /** Read the admin-editable cms.* fields (with defaults for missing rows). */
 export async function getAdminSiteConfig(): Promise<SiteConfigUpdate> {
-  const [siteName, website, tagline, logoLight, logoDark, navLinks, footerText, contactDetails, socialLinks, seoDefaults, announcementBar] =
+  const [siteName, website, tagline, logoLight, logoDark, faviconUrl, navLinks, footerText, contactDetails, socialLinks, seoDefaults, announcementBar] =
     await Promise.all([
       getSetting("cms.siteName", CMS_DEFAULTS.siteName),
       getSetting("cms.website", CMS_DEFAULTS.website),
       getSetting("cms.tagline", CMS_DEFAULTS.tagline),
       getSetting("cms.logoLight", CMS_DEFAULTS.logoLight),
       getSetting("cms.logoDark", CMS_DEFAULTS.logoDark),
+      getSetting("cms.faviconUrl", CMS_DEFAULTS.faviconUrl),
       getSetting("cms.navLinks", CMS_DEFAULTS.navLinks),
       getSetting("cms.footerText", CMS_DEFAULTS.footerText),
       getSetting("cms.contactDetails", CMS_DEFAULTS.contactDetails),
@@ -173,7 +176,7 @@ export async function getAdminSiteConfig(): Promise<SiteConfigUpdate> {
       getSetting("cms.seoDefaults", CMS_DEFAULTS.seoDefaults),
       getSetting("cms.announcementBar", CMS_DEFAULTS.announcementBar),
     ]);
-  return { siteName, website, tagline, logoLight, logoDark, navLinks, footerText, contactDetails, socialLinks, seoDefaults, announcementBar };
+  return { siteName, website, tagline, logoLight, logoDark, faviconUrl, navLinks, footerText, contactDetails, socialLinks, seoDefaults, announcementBar };
 }
 
 /** Update only the provided cms.* fields (all public — feed the website). */

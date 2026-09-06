@@ -38,6 +38,7 @@ async function seed() {
     { key: "cms.tagline", value: "AI arbitrage + community rewards", category: "cms", isPublic: true },
     { key: "cms.logoLight", value: null, category: "cms", isPublic: true },
     { key: "cms.logoDark", value: null, category: "cms", isPublic: true },
+    { key: "cms.faviconUrl", value: null, category: "cms", isPublic: true },
     {
       key: "cms.navLinks",
       value: [

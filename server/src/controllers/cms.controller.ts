@@ -20,6 +20,7 @@ const SETTING_KEYS = {
   tagline: "cms.tagline",
   logoLight: "cms.logoLight",
   logoDark: "cms.logoDark",
+  faviconUrl: "cms.faviconUrl",
   navLinks: "cms.navLinks",
   footerText: "cms.footerText",
   contactDetails: "cms.contactDetails",
