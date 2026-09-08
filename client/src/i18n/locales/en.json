@@ -143,9 +143,9 @@
   },
   "withdrawals": {
     "title": "Withdrawals",
-    "description": "Withdraw USDT-BEP20. All requests are manually reviewed by admins.",
+    "description": "Withdraw USDT-BEP20.",
     "newWithdrawal": "New withdrawal",
-    "newWithdrawalDesc": "Funds move to \"on hold\" until an admin approves and pays the request.",
+    "newWithdrawalDesc": "Funds move to \"on hold\" until approved and paid.",
     "addAddressWarning1": "Add a USDT-BEP20 withdrawal address in",
     "addAddressWarningSettings": "Settings",
     "addAddressWarning2": "before withdrawing.",
@@ -334,7 +334,8 @@
     "signingIn": "Signing in…",
     "signIn": "Sign in",
     "noAccount": "Don't have an account?",
-    "createOne": "Create one"
+    "createOne": "Create one",
+    "invalidCredentials": "We couldn't sign you in. Please try again."
   },
   "register": {
     "accountCreated": "Account created successfully!",

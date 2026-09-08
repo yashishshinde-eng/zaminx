@@ -28,6 +28,7 @@ export function LoginPage() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<LoginBody>({ resolver: zodResolver(loginSchema.shape.body) });
 
@@ -46,8 +47,18 @@ export function LoginPage() {
           ? from
           : home;
       navigate(target, { replace: true });
-    } catch {
-      // Toast handled by the axios interceptor.
+    } catch (err) {
+      // 401s from the login endpoint carry which field was wrong
+      // (see auth.service.ts loginUser) — surface it on that field instead
+      // of relying on the generic session-expiry toast, which never fires
+      // while we're already on the login page.
+      const apiErr = err as { status?: number; message?: string; errors?: Array<{ path?: string }> };
+      const field = apiErr.errors?.[0]?.path;
+      if (apiErr.status === 401 && (field === "email" || field === "password")) {
+        setError(field, { message: apiErr.message ?? t("login.invalidCredentials") });
+      } else {
+        toast.error(apiErr.message ?? t("login.invalidCredentials"));
+      }
     } finally {
       setSubmitting(false);
     }

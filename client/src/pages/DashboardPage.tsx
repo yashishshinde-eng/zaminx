@@ -117,7 +117,7 @@ function DashboardContent({ data }: { data: SummaryData }) {
 
       {/* ═══ KPI ROW: 4 Premium Metric Tiles ══════════════ */}
       <motion.div variants={staggerItem} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <KpiCard icon={WalletIcon} label={t("dashboard.totalBalance")} value={data.wallets.total} variant="gold" delay={0} />
+        <KpiCard icon={WalletIcon} label={t("dashboard.totalBalance")} value={data.wallets.total} variant="gold" delay={0} flat />
         <KpiCard
           icon={TrendingUp}
           label={t("dashboard.totalEarned")}

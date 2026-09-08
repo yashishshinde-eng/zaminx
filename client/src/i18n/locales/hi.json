@@ -143,9 +143,9 @@
   },
   "withdrawals": {
     "title": "निकासी",
-    "description": "USDT-BEP20 निकालें। सभी अनुरोधों की समीक्षा एडमिन द्वारा मैन्युअल रूप से की जाती है।",
+    "description": "USDT-BEP20 निकालें।",
     "newWithdrawal": "नई निकासी",
-    "newWithdrawalDesc": "जब तक एडमिन अनुरोध को मंज़ूर करके भुगतान नहीं करता, तब तक धनराशि \"होल्ड पर\" रहती है।",
+    "newWithdrawalDesc": "जब तक मंज़ूर करके भुगतान नहीं किया जाता, तब तक धनराशि \"होल्ड पर\" रहती है।",
     "addAddressWarning1": "निकासी से पहले",
     "addAddressWarningSettings": "सेटिंग्स",
     "addAddressWarning2": "में एक USDT-BEP20 निकासी पता जोड़ें।",
@@ -334,7 +334,8 @@
     "signingIn": "साइन इन हो रहा है…",
     "signIn": "साइन इन करें",
     "noAccount": "खाता नहीं है?",
-    "createOne": "एक बनाएं"
+    "createOne": "एक बनाएं",
+    "invalidCredentials": "हम आपको साइन इन नहीं कर सके। कृपया पुनः प्रयास करें।"
   },
   "register": {
     "accountCreated": "खाता सफलतापूर्वक बन गया!",

@@ -143,9 +143,9 @@
   },
   "withdrawals": {
     "title": "السحوبات",
-    "description": "اسحب USDT-BEP20. تتم مراجعة جميع الطلبات يدويًا من قبل الإدارة.",
+    "description": "اسحب USDT-BEP20.",
     "newWithdrawal": "سحب جديد",
-    "newWithdrawalDesc": "تنتقل الأموال إلى حالة \"معلّق\" حتى يوافق المسؤول ويدفع الطلب.",
+    "newWithdrawalDesc": "تنتقل الأموال إلى حالة \"معلّق\" حتى تتم الموافقة عليها ودفعها.",
     "addAddressWarning1": "أضف عنوان سحب USDT-BEP20 في",
     "addAddressWarningSettings": "الإعدادات",
     "addAddressWarning2": "قبل السحب.",
@@ -191,7 +191,8 @@
     "signingIn": "جارٍ تسجيل الدخول…",
     "signIn": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب؟",
-    "createOne": "أنشئ حسابًا"
+    "createOne": "أنشئ حسابًا",
+    "invalidCredentials": "تعذّر تسجيل دخولك. يرجى المحاولة مرة أخرى."
   },
   "register": {
     "accountCreated": "تم إنشاء الحساب بنجاح!",

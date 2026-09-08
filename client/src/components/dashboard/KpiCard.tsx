@@ -17,6 +17,8 @@ interface KpiCardProps {
   delay?: number;
   /** Neon color identity for the animated border. */
   variant?: NeonVariant;
+  /** Skip the radial sheen + ambient glow background layers. */
+  flat?: boolean;
 }
 
 /**
@@ -34,6 +36,7 @@ export function KpiCard({
   className,
   delay = 0,
   variant = "blue",
+  flat = false,
 }: KpiCardProps) {
   const animated = useCountUp(value, 900);
   const display =
@@ -51,24 +54,28 @@ export function KpiCard({
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay }}
       className={cn("group", className)}
     >
-      <div className={cn("neon-card", `neon-${variant}`, "relative overflow-hidden p-5 sm:p-6")}>
-        {/* ── Inner radial sheen overlay ────────────────── */}
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[22px]"
-          style={{
-            background:
-              "radial-gradient(ellipse 80% 60% at 15% 10%, rgba(255,255,255,0.05), transparent 60%)",
-          }}
-        />
+      <div className={cn("neon-card", `neon-${variant}`, flat && "no-glow", "relative overflow-hidden p-5 sm:p-6")}>
+        {!flat && (
+          <>
+            {/* ── Inner radial sheen overlay ────────────────── */}
+            <div
+              className="pointer-events-none absolute inset-0 rounded-[22px]"
+              style={{
+                background:
+                  "radial-gradient(ellipse 80% 60% at 15% 10%, rgba(255,255,255,0.05), transparent 60%)",
+              }}
+            />
 
-        {/* ── Ambient glow behind icon ─────────────────── */}
-        <div
-          className="pointer-events-none absolute -top-6 -left-6 size-28 rounded-full opacity-[0.12] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.22]"
-          style={{
-            background:
-              "radial-gradient(circle, hsl(var(--blue) / 0.6), hsl(var(--purple) / 0.4), transparent 70%)",
-          }}
-        />
+            {/* ── Ambient glow behind icon ─────────────────── */}
+            <div
+              className="pointer-events-none absolute -top-6 -left-6 size-28 rounded-full opacity-[0.12] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.22]"
+              style={{
+                background:
+                  "radial-gradient(circle, hsl(var(--blue) / 0.6), hsl(var(--purple) / 0.4), transparent 70%)",
+              }}
+            />
+          </>
+        )}
 
         {/* ── Top section: icon + label, trend pill ────── */}
         <div className="relative z-10 flex items-start justify-between gap-3">

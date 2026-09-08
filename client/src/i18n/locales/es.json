@@ -143,9 +143,9 @@
   },
   "withdrawals": {
     "title": "Retiros",
-    "description": "Retira USDT-BEP20. Todas las solicitudes son revisadas manualmente por administradores.",
+    "description": "Retira USDT-BEP20.",
     "newWithdrawal": "Nuevo retiro",
-    "newWithdrawalDesc": "Los fondos pasan a estar \"retenidos\" hasta que un administrador apruebe y pague la solicitud.",
+    "newWithdrawalDesc": "Los fondos pasan a estar \"retenidos\" hasta que se aprueben y se paguen.",
     "addAddressWarning1": "Agrega una dirección de retiro USDT-BEP20 en",
     "addAddressWarningSettings": "Ajustes",
     "addAddressWarning2": "antes de retirar.",
@@ -191,7 +191,8 @@
     "signingIn": "Iniciando sesión…",
     "signIn": "Iniciar sesión",
     "noAccount": "¿No tienes una cuenta?",
-    "createOne": "Crea una"
+    "createOne": "Crea una",
+    "invalidCredentials": "No pudimos iniciar tu sesión. Inténtalo de nuevo."
   },
   "register": {
     "accountCreated": "¡Cuenta creada con éxito!",

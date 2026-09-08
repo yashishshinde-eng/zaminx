@@ -428,6 +428,33 @@
     border-color: #18f3cb !important;
     box-shadow: var(--shadow-card-hover), 0 0 32px -6px rgba(24, 243, 203, 0.6);
   }
+
+  /* Dashboard: outer wrapper for a card whose own inner tiles carry the
+   * turquoise accent border (see .tile-glow-border below) — the outer
+   * wrapper itself stays borderless so it doesn't double up on the accent. */
+  .glass-card.no-outer-border {
+    border: none !important;
+    box-shadow:
+      var(--shadow-card),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 0 rgba(255, 255, 255, 0.02) !important;
+  }
+  .glass-card-hover.no-outer-border:hover {
+    border: none !important;
+    box-shadow: var(--shadow-card-hover) !important;
+  }
+
+  /* Per-tile turquoise accent — same border color/thickness, radius, and glow
+   * as the app-wide .glass-card border, applied to an individual inner card
+   * instead of its outer wrapper. */
+  .tile-glow-border {
+    border: 2.5px solid #18f3cb;
+    border-radius: 22px;
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 -1px 0 0 rgba(255, 255, 255, 0.02),
+      0 0 20px -6px rgba(24, 243, 203, 0.45);
+  }
   .neon-gold,
   .neon-green,
   .neon-violet,
@@ -1031,6 +1058,18 @@
 
   /* Static-border mode: freeze the beam, keep the glow. */
   .neon-card-static::before { animation: none; opacity: 0.5; }
+
+  /* No-glow mode: drop the per-variant colored glow/beam entirely, leaving
+   * just the flat dark surface + the app-wide teal border. */
+  .neon-card.no-glow {
+    box-shadow: var(--shadow-card), inset 0 1px 0 0 rgba(255, 255, 255, 0.07) !important;
+  }
+  .neon-card.no-glow::before { display: none !important; }
+  @media (hover: hover) {
+    .neon-card.no-glow:hover {
+      box-shadow: var(--shadow-card-hover) !important;
+    }
+  }
 
   /* ── Color identity variants ──────────────────────────────── */
   .neon-gold    { --neon-a: #FFD43B; --neon-b: #FFB300; --neon-glow-rgb: 255 196 59; }

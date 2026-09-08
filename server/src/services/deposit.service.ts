@@ -501,9 +501,16 @@ export async function confirmDeposit(
 /*  Reads                                                              */
 /* ------------------------------------------------------------------ */
 
-/** GET /payments/deposits — the user's deposits (newest first, capped). */
+/** GET /payments/deposits — the user's deposits (newest first, capped).
+ *  Excludes the synthetic wallet-funded "deposit" record `activatePackageFromWallet`
+ *  creates for the package's receipt/payment info — it isn't new incoming money
+ *  (that was already recorded as a real deposit when the wallet was funded), so
+ *  showing it here would look like a duplicate of that funding deposit. */
 export async function getDeposits(userId: string): Promise<DepositRow[]> {
-  const rows = await Deposit.find({ user: userId }).sort({ createdAt: -1 }).limit(100).lean();
+  const rows = await Deposit.find({ user: userId, "meta.method": { $ne: "wallet" } })
+    .sort({ createdAt: -1 })
+    .limit(100)
+    .lean();
   return rows.map(toDepositRow);
 }
 

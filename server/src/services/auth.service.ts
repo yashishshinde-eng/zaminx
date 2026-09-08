@@ -149,15 +149,17 @@ interface LoginInput {
 
 export async function loginUser(input: LoginInput) {
   const user = await User.findOne({ email: input.email }).select("+passwordHash +refreshTokenHash");
-  if (!user) throw ApiError.unauthorized("Invalid email or password");
+  if (!user) {
+    throw new ApiError(401, "No account found with this email", { details: [{ path: "email" }] });
+  }
 
   const match = user.verifyPassword(input.password);
-  if (!match) throw ApiError.unauthorized("Invalid email or password");
+  if (!match) {
+    throw new ApiError(401, "Incorrect password", { details: [{ path: "password" }] });
+  }
 
-  // Check status AFTER the password check so an attacker can't enumerate which
-  // emails exist / are active without already knowing the password. Inactive
-  // users may log in to deposit funds and activate a package; only blocked
-  // accounts are denied.
+  // Inactive users may log in to deposit funds and activate a package; only
+  // blocked accounts are denied.
   if (user.status === "blocked") throw ApiError.forbidden("Account is blocked");
 
   const tokens = issueTokens(user._id.toString(), user.role);

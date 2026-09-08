@@ -106,7 +106,14 @@ export function clampPage(page: number, limit: number): { page: number; limit: n
 /* ------------------------------------------------------------------ */
 
 function depositFilter(userId: string, q: FilterArgs): Record<string, unknown> {
-  const filter: Record<string, unknown> = { user: userId, ...dateRangeFilter(q.from, q.to) };
+  // Exclude the synthetic wallet-funded "deposit" record `activatePackageFromWallet`
+  // creates for the package's receipt info — it isn't new incoming money, so
+  // showing it here would look like a duplicate of the deposit that funded the wallet.
+  const filter: Record<string, unknown> = {
+    user: userId,
+    "meta.method": { $ne: "wallet" },
+    ...dateRangeFilter(q.from, q.to),
+  };
   if (q.status) filter.status = q.status;
   return filter;
 }

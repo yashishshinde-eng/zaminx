@@ -295,9 +295,13 @@ function toAdminGatewayRow(d: LeanDeposit, userMap: Map<string, UserName>): Admi
   };
 }
 
-/** Deposit filter: date range + status (+ invoice-id search for gateway). */
+/** Deposit filter: date range + status (+ invoice-id search for gateway).
+ *  Excludes the synthetic wallet-funded "deposit" record `activatePackageFromWallet`
+ *  creates for the package's receipt info — it isn't new incoming money (that
+ *  was already recorded as a real deposit when the wallet was funded), so
+ *  showing it here duplicates that funding deposit. */
 function depositFilter(q: ReportQueryArgs, gateway: boolean): Record<string, unknown> {
-  const filter: Record<string, unknown> = { ...dateRangeFilter(q.from, q.to) };
+  const filter: Record<string, unknown> = { "meta.method": { $ne: "wallet" }, ...dateRangeFilter(q.from, q.to) };
   if (q.status) filter.status = q.status;
   if (q.q && gateway) filter.nowpaymentsInvoiceId = { $regex: q.q, $options: "i" };
   return filter;
