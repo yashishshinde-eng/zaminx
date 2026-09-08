@@ -189,7 +189,9 @@ export async function getRankInfo(userId: string, counts?: TeamCounts): Promise<
     return { name: "Starter", nextRank: null, progress: 1 };
   }
 
-  const { directCount, teamCount } = await resolveCounts(userId, counts);
+  // Qualification is gated on ACTIVE downline only (anti-farming) — a direct
+  // or team member who never activated a package doesn't count toward a rank.
+  const { activeDirectCount: directCount, activeTeamCount: teamCount } = await resolveCounts(userId, counts);
 
   // Find the highest qualifying rank. The ladder is sorted by `order`; we stop
   // at the first non-qualifying rank so an out-of-order requirement can't skip
@@ -265,7 +267,9 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
   const activePkg = await UserPackage.exists({ user: userId, status: "active" });
   if (!activePkg) return { awarded: 0, errors: 0 };
 
-  const { directCount, teamCount } = await getTeamCounts(userId);
+  // Qualification is gated on ACTIVE downline only (anti-farming) — a direct
+  // or team member who never activated a package doesn't count toward a rank.
+  const { activeDirectCount: directCount, activeTeamCount: teamCount } = await getTeamCounts(userId);
   // Fetched once so the award notification email doesn't need an extra query.
   const user = await User.findById(userId).lean();
 
@@ -337,7 +341,9 @@ export async function syncHighestStarForUser(userId: string, counts?: TeamCounts
   const ladder = await activeLadder();
   if (ladder.length === 0) return;
 
-  const { directCount, teamCount } = await resolveCounts(userId, counts);
+  // Qualification is gated on ACTIVE downline only (anti-farming) — a direct
+  // or team member who never activated a package doesn't count toward a rank.
+  const { activeDirectCount: directCount, activeTeamCount: teamCount } = await resolveCounts(userId, counts);
 
   let topOrder = 0;
   for (const rank of ladder) {
