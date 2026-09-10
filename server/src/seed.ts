@@ -228,25 +228,24 @@ const DEFAULT_BONANZA = {
 
 /**
  * Default rank ladder (Phase 10A). Starter is the entry tier (0/0, $0); each
- * star is team-size only (requiredDirects: 0) and pays a one-time reward on
- * qualification. Star N requires a team of 3^N (3,9,27,…,59049). The same
- * 10-star reward ladder ($10…$10,000) is reused by the monthly community bonus.
- * Admin-editable via the /ranks endpoints.
+ * star is direct-count only (requiredTeamSize: 0) and pays a one-time reward on
+ * qualification. Star N requires N active directs (1 Star = 1 direct, …,
+ * 10 Star = 10 directs). The same 10-star reward ladder ($10…$10,000) is reused
+ * by the monthly community bonus. Admin-editable via the /ranks endpoints.
  */
 const STAR_REWARDS = [10, 20, 50, 100, 250, 500, 1000, 2000, 5000, 10000];
 const DEFAULT_RANKS = [
   { name: "Starter", order: 0, requiredDirects: 0, requiredTeamSize: 0, rewardAmount: 0, status: "active", description: "Entry tier — every member starts here." },
   ...STAR_REWARDS.map((reward, i) => {
     const star = i + 1;
-    const teamSize = 3 ** star;
     return {
       name: `${star} Star`,
       order: star,
-      requiredDirects: 0,
-      requiredTeamSize: teamSize,
+      requiredDirects: star,
+      requiredTeamSize: 0,
       rewardAmount: reward,
       status: "active" as const,
-      description: `${star} Star — ${teamSize.toLocaleString()}-member team.`,
+      description: `${star} Star — ${star} active direct${star > 1 ? "s" : ""}.`,
     };
   }),
 ];
@@ -257,9 +256,9 @@ const DEFAULT_PACKAGES = [
     slug: "zeminex-global",
     description: "Start with just $50 and earn up to 30% monthly.",
     priceUsd: 50,
-    dailyReturnPct: 2.0,
+    dailyReturnPct: 1.0,
     durationDays: 365,
-    features: ["$50 one-time", "1–2% daily yield", "30% monthly cap"],
+    features: ["$50 one-time", "0.5–1% daily yield", "30% monthly"],
     sort: 1,
     status: "active",
   },

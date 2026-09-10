@@ -6,7 +6,6 @@ import { useAuth } from "@/context/AuthContext";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
 import { MobileBottomNav } from "./MobileBottomNav";
-import { VerifyEmailBanner } from "./VerifyEmailBanner";
 import { InactiveUserBanner } from "./InactiveUserBanner";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { pageTransition } from "@/lib/motion";
@@ -28,60 +27,12 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex h-full min-h-screen dashboard-bg">
-      {/* ── Cinematic background layers — AI color grading ──────── */}
+      {/* ── Background texture — static, no animated glow ──────── */}
       <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
         {/* Grid pattern */}
         <div className="absolute inset-0 grid-pattern opacity-40" />
         {/* Noise texture */}
         <div className="absolute inset-0 noise-overlay" />
-        {/* Electric blue glow orb — top left */}
-        <div
-          className="glow-orb animate-float"
-          style={{
-            width: 700, height: 700, left: "-12%", top: "-8%",
-            background: "radial-gradient(circle, hsl(var(--blue) / 0.12), transparent 70%)",
-          }}
-        />
-        {/* Gold glow orb — top right */}
-        <div
-          className="glow-orb animate-float-delayed"
-          style={{
-            width: 500, height: 500, right: "-5%", top: "5%",
-            background: "radial-gradient(circle, hsl(var(--gold) / 0.06), transparent 70%)",
-          }}
-        />
-        {/* Cyan glow orb — mid right (AI ambient) */}
-        <div
-          className="glow-orb animate-float-slow"
-          style={{
-            width: 520, height: 520, right: "-8%", top: "42%",
-            background: "radial-gradient(circle, rgb(0 213 255 / 0.07), transparent 70%)",
-          }}
-        />
-        {/* Magenta glow orb — bottom left (Web3 ambient) */}
-        <div
-          className="glow-orb animate-pulse-glow"
-          style={{
-            width: 480, height: 480, left: "-6%", bottom: "8%",
-            background: "radial-gradient(circle, rgb(200 90 240 / 0.06), transparent 70%)",
-          }}
-        />
-        {/* Purple glow orb — bottom center */}
-        <div
-          className="glow-orb animate-pulse-glow"
-          style={{
-            width: 500, height: 500, left: "45%", bottom: "5%",
-            background: "radial-gradient(circle, hsl(var(--purple) / 0.06), transparent 70%)",
-          }}
-        />
-        {/* Deep blue glow orb — bottom left */}
-        <div
-          className="glow-orb animate-float-slow"
-          style={{
-            width: 600, height: 600, left: "5%", bottom: "-10%",
-            background: "radial-gradient(circle, hsl(var(--blue-dark) / 0.06), transparent 70%)",
-          }}
-        />
       </div>
 
       {/* ── Desktop sidebar ─────────────────────────────── */}
@@ -97,7 +48,6 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* ── Main content ────────────────────────────────── */}
       <div className="relative z-10 flex min-w-0 flex-1 flex-col">
         <Topbar onToggleMobileSidebar={isAdmin ? () => setMobileSidebarOpen(true) : undefined} />
-        <VerifyEmailBanner />
         <InactiveUserBanner />
         <main className={cn("flex-1 overflow-x-hidden px-4 pt-5 sm:px-6 lg:px-8", isAdmin ? "pb-8 lg:pb-8" : "pb-28 lg:pb-8")}>
           <AnimatePresence mode="wait">

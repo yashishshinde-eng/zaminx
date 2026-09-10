@@ -158,8 +158,9 @@ async function activeLadder(): Promise<LeanRankLadder[]> {
 
 /** Star level (0..10) for a given all-level team size. Star N requires
  *  `teamCount >= 3^N` (3,9,27,81,243,729,2187,6561,19683,59049). Returns 0
- *  below 3 and caps at 10. Pure function — the canonical team-size→star map
- *  shared by the rank ladder and the monthly community bonus. */
+ *  below 3 and caps at 10. Pure function — legacy team-size→star map, kept for
+ *  tests/reports; the live ladder and `highestStar` now qualify on active
+ *  DIRECT count instead (1 Star = 1 active direct, …). */
 export function getStarFromTeamSize(teamCount: number): number {
   if (teamCount < 3) return 0;
   let star = 0;
@@ -260,6 +261,12 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
   const ladder = await activeLadder();
   if (ladder.length === 0) return { awarded: 0, errors: 0 };
 
+  // Keep the sticky highest-star fresh on every eval trigger (registration,
+  // activation, admin runs) — Team Energy's per-star level cap reads this
+  // value, so a newly-achieved star must unlock its depth immediately, not
+  // wait for the next 01:15 UTC rank_check cron. Idempotent ($max).
+  await syncHighestStarForUser(userId).catch(() => undefined);
+
   // Anti-farming: a user only earns rank rewards while holding an active
   // UserPackage — the same guard the direct-connect bonus and the monthly
   // community bonus apply. Without this, a non-package-holding upline member
@@ -335,7 +342,9 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
  *
  * Sticky by design: `$max` never lowers the stored value, even if the user's
  * team later shrinks below the threshold that earned it. Gates Team Energy
- * eligibility and the Community Monthly Bonus payout tier (compensation.service.ts).
+ * eligibility AND its per-star level depth (1 Star earns level 1 only, 2 Star
+ * levels 1–2, …) plus the Community Monthly Bonus payout tier
+ * (compensation.service.ts).
  */
 export async function syncHighestStarForUser(userId: string, counts?: TeamCounts): Promise<void> {
   const ladder = await activeLadder();

@@ -19,7 +19,6 @@ import {
   BarChart3,
   ArrowRight,
   ChevronDown,
-  Star,
   Wallet,
   Bitcoin,
   LineChart,
@@ -573,53 +572,7 @@ function SecuritySection() {
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- *  8. TESTIMONIALS — Modern glass cards
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function TestimonialsSection() {
-  const testimonials = [
-    { name: "Alex M.", role: "Crypto Trader", text: "Zeminex Global has transformed the way I manage my portfolio. The analytics are unmatched, and the security gives me total peace of mind.", stars: 5 },
-    { name: "Sarah K.", role: "Investment Analyst", text: "The interface is beautiful and intuitive. I've recommended Zeminex Global to my entire network — the referral rewards are just a bonus.", stars: 5 },
-    { name: "David L.", role: "Entrepreneur", text: "Finally, a platform that combines premium design with serious financial tools. Zeminex Global feels like it was built for professionals.", stars: 5 },
-  ];
-
-  return (
-    <Section id="testimonials" className="section-bg py-20 sm:py-28">
-      <div className="container mx-auto">
-        <div className="mx-auto max-w-2xl text-center mb-14">
-          <p className="text-sm font-semibold uppercase tracking-wider text-gold mb-3">Testimonials</p>
-          <h2 className="font-grotesk text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-            Loved by <span className="text-gradient">investors worldwide</span>
-          </h2>
-        </div>
-
-        <motion.div variants={stagger} initial="hidden" className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t) => (
-            <motion.div key={t.name} variants={fadeUp} className="testimonial-card">
-              <div className="mb-4 flex gap-1">
-                {Array.from({ length: t.stars }).map((_, i) => (
-                  <Star key={i} className="size-4 fill-gold text-gold" />
-                ))}
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">"{t.text}"</p>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="flex size-10 items-center justify-center rounded-full gradient-blue text-primary-foreground font-bold text-sm">
-                  {t.name.charAt(0)}
-                </div>
-                <div className="text-left">
-                  <p className="text-sm font-semibold">{t.name}</p>
-                  <p className="text-xs text-muted-foreground">{t.role}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </Section>
-  );
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- *  9. FAQ — Glass accordion
+ *  8. FAQ — Glass accordion
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function FaqSection() {
   const faqs = [
@@ -720,7 +673,6 @@ export function LandingPage() {
       <DashboardPreviewSection />
       <WhyChooseUsSection />
       <SecuritySection />
-      <TestimonialsSection />
       <FaqSection />
       <CtaSection />
     </main>

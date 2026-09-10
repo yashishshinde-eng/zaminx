@@ -196,6 +196,7 @@ const columns: Column<AdminUserReportRow>[] = [
   },
   { key: "referralCode", header: "Referral code", cell: (r) => <span className="font-mono text-xs">{r.referralCode}</span> },
   { key: "directs", header: "Directs", align: "right", cell: (r) => String(r.directCount) },
+  { key: "activeDirects", header: "Active directs", align: "right", cell: (r) => String(r.activeDirectCount) },
   { key: "walletAvailable", header: "Available", align: "right", cell: (r) => formatCurrency(r.walletAvailable) },
   { key: "joinedAt", header: "Joined", cell: (r) => formatDate(r.joinedAt) },
   { key: "lastLoginAt", header: "Last login", cell: (r) => formatDate(r.lastLoginAt) },

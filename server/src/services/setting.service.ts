@@ -77,9 +77,25 @@ export async function isYieldEnabled(): Promise<boolean> {
   return getSetting<boolean>("compensation.yieldEnabled", true);
 }
 
-/** Max total yield credited per calendar month, as % of package price (default 30 = 30%; 0 = no cap). */
+/** Max total yield credited per calendar month, as % of package price (default 30 = 30%; 0 = no cap).
+ *  Also the monthly target the flexible daily schedule lands on. */
 export async function getMonthlyYieldCapPct(): Promise<number> {
   return getSetting<number>("compensation.monthlyYieldCapPct", 30);
+}
+
+/** Daily trade-yield band floor, as % of package price (default 0.5). */
+export async function getYieldDailyMinPct(): Promise<number> {
+  return getSetting<number>("compensation.yieldDailyMinPct", 0.5);
+}
+
+/** Daily trade-yield band ceiling, as % of package price (default 1). */
+export async function getYieldDailyMaxPct(): Promise<number> {
+  return getSetting<number>("compensation.yieldDailyMaxPct", 1);
+}
+
+/** Max single-day catch-up rate when the month falls behind the target pace (default 2). */
+export async function getYieldCatchUpCapPct(): Promise<number> {
+  return getSetting<number>("compensation.yieldCatchUpCapPct", 2);
 }
 
 /* ---- Phase 10A compensation convenience reads ---- */
@@ -114,18 +130,21 @@ export async function getCommunityPct(): Promise<number> {
 
 /** Read the compensation knobs as a single snapshot (Phase 14A admin UI). */
 export async function getCompensationSettings(): Promise<CompensationSettings> {
-  const [directBonusPct, yieldEnabled, monthlyYieldCapPct, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct] =
+  const [directBonusPct, yieldEnabled, monthlyYieldCapPct, yieldDailyMinPct, yieldDailyMaxPct, yieldCatchUpCapPct, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct] =
     await Promise.all([
       getDirectBonusPct(),
       isYieldEnabled(),
       getMonthlyYieldCapPct(),
+      getYieldDailyMinPct(),
+      getYieldDailyMaxPct(),
+      getYieldCatchUpCapPct(),
       isTeamEnergyEnabled(),
       getTeamEnergyDepth(),
       getTeamEnergyPct(),
       isCommunityEnabled(),
       getCommunityPct(),
     ]);
-  return { directBonusPct, yieldEnabled, monthlyYieldCapPct, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct };
+  return { directBonusPct, yieldEnabled, monthlyYieldCapPct, yieldDailyMinPct, yieldDailyMaxPct, yieldCatchUpCapPct, teamEnergyEnabled, teamEnergyDepth, teamEnergyPct, communityEnabled, communityPct };
 }
 
 /** Update only the provided compensation knobs, then return the new snapshot. */
@@ -133,6 +152,9 @@ export async function updateCompensationSettings(body: CompensationSettingsBody)
   if (body.directBonusPct !== undefined) await setSetting("compensation.directBonusPct", body.directBonusPct, "compensation");
   if (body.yieldEnabled !== undefined) await setSetting("compensation.yieldEnabled", body.yieldEnabled, "compensation");
   if (body.monthlyYieldCapPct !== undefined) await setSetting("compensation.monthlyYieldCapPct", body.monthlyYieldCapPct, "compensation");
+  if (body.yieldDailyMinPct !== undefined) await setSetting("compensation.yieldDailyMinPct", body.yieldDailyMinPct, "compensation");
+  if (body.yieldDailyMaxPct !== undefined) await setSetting("compensation.yieldDailyMaxPct", body.yieldDailyMaxPct, "compensation");
+  if (body.yieldCatchUpCapPct !== undefined) await setSetting("compensation.yieldCatchUpCapPct", body.yieldCatchUpCapPct, "compensation");
   if (body.teamEnergyEnabled !== undefined) await setSetting("compensation.teamEnergyEnabled", body.teamEnergyEnabled, "compensation");
   if (body.teamEnergyDepth !== undefined) await setSetting("compensation.teamEnergyDepth", body.teamEnergyDepth, "compensation");
   if (body.teamEnergyPct !== undefined) await setSetting("compensation.teamEnergyPct", body.teamEnergyPct, "compensation");

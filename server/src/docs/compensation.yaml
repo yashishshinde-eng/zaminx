@@ -4,10 +4,15 @@ paths:
       tags: [Compensation]
       summary: Run the daily trade-yield credit (admin)
       description: >
-        Credits each active, in-window UserPackage `snapshot.priceUsd ×
-        snapshot.dailyReturnPct / 100` to its trading wallet, idempotent per
-        package per UTC day. Packages past `expiresAt` are flipped to expired.
-        No cron yet (Phase 18) — admins trigger this. Phase 10.
+        Credits each active, in-window UserPackage its scheduled daily trade
+        yield to its trading wallet, idempotent per package per UTC day. The
+        amount follows the flexible schedule: the day's performance factor
+        picks a rate inside the `yieldDailyMinPct–yieldDailyMaxPct` band, and
+        catch-up rates (up to `yieldCatchUpCapPct`) keep the month on pace so
+        it lands on `monthlyYieldCapPct`% of the package price exactly
+        (pro-rated for mid-month activations/expiries). Packages past
+        `expiresAt` are flipped to expired. Runs on the daily 00:30 UTC cron;
+        admins can also trigger/backfill. Phase 10.
       security: [{ bearerAuth: [] }]
       parameters:
         - in: query

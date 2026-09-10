@@ -6,6 +6,7 @@ import { depositSuccessTemplate } from "./emailTemplates.js";
 import { createInvoice } from "./nowpayments.service.js";
 import { applyLedgerEntry, getWalletBalances } from "./wallet.service.js";
 import { awardDirectBonus } from "./compensation.service.js";
+import { evaluateRankForUser } from "./rank.service.js";
 import type { DepositRow, PackageTier, UserPackageRow, WalletBalance, AdminDepositCreateBody } from "@zeminex/shared";
 
 interface Meta {
@@ -372,6 +373,14 @@ export async function activatePackageFromWallet(
     });
   });
 
+  // 6. Rank eval for the buyer's sponsor — a newly-ACTIVE direct may push the
+  //    sponsor's star (which also unlocks their Team Energy depth immediately)
+  //    or pay a one-time rank reward. Best-effort, never blocks the activation.
+  const buyer = await User.findById(targetUserId).select("sponsorId").lean();
+  if (buyer?.sponsorId) {
+    evaluateRankForUser(buyer.sponsorId.toString()).catch(() => undefined);
+  }
+
   const updatedUp = await UserPackage.findById(subscription._id).lean();
   const pkgRow = toUserPackageRow(updatedUp as never, depositToPayment(deposit.toObject()));
   return { pkg: pkgRow, payment: toDepositRow(deposit.toObject()) };
@@ -476,6 +485,14 @@ export async function confirmDeposit(
         error: err instanceof Error ? err.message : String(err),
       });
     });
+
+    // Rank eval for the buyer's sponsor — a newly-ACTIVE direct may push the
+    // sponsor's star (unlocks their Team Energy depth immediately) or pay a
+    // one-time rank reward. Best-effort, never breaks confirmation.
+    const buyer = await User.findById(deposit.user).select("sponsorId").lean();
+    if (buyer?.sponsorId) {
+      evaluateRankForUser(buyer.sponsorId.toString()).catch(() => undefined);
+    }
   }
 
   // 4. Best-effort deposit-success email.

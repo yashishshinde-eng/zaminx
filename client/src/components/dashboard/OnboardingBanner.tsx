@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
-import { MailCheck, Package, Wallet, Users, CheckCircle2, ArrowRight, Sparkles, X } from "lucide-react";
+import { Package, Wallet, Users, CheckCircle2, ArrowRight, Sparkles, X } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/context/AuthContext";
@@ -39,7 +39,6 @@ export function OnboardingBanner() {
 
   const steps: OnboardingStep[] = useMemo(
     () => [
-      { id: "verifyEmail", label: t("onboarding.stepVerifyEmail"), done: Boolean(user?.isEmailVerified), href: "/verify-email", icon: MailCheck },
       { id: "activatePackage", label: t("onboarding.stepActivatePackage"), done: hasOpenPackage, href: "/app/packages", icon: Package },
       { id: "setAddress", label: t("onboarding.stepSetAddress"), done: Boolean(user?.walletAddresses?.usdtBep20), href: "/app/settings", icon: Wallet },
       { id: "referMember", label: t("onboarding.stepReferMember"), done: Boolean((data?.team.directCount ?? 0) > 0), href: "/app/team", icon: Users },
@@ -126,7 +125,7 @@ export function OnboardingBanner() {
             </div>
 
             {/* Steps */}
-            <div className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
               {steps.map((step, i) => (
                 <motion.div
                   key={step.id}

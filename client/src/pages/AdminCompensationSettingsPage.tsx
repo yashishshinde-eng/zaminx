@@ -55,6 +55,10 @@ export function AdminCompensationSettingsPage() {
     const body: CompensationSettingsBody = {
       directBonusPct: form.directBonusPct,
       yieldEnabled: form.yieldEnabled,
+      monthlyYieldCapPct: form.monthlyYieldCapPct,
+      yieldDailyMinPct: form.yieldDailyMinPct,
+      yieldDailyMaxPct: form.yieldDailyMaxPct,
+      yieldCatchUpCapPct: form.yieldCatchUpCapPct,
       teamEnergyEnabled: form.teamEnergyEnabled,
       teamEnergyDepth: form.teamEnergyDepth,
       teamEnergyPct: pct,
@@ -78,7 +82,7 @@ export function AdminCompensationSettingsPage() {
     <AppShell>
       <PageHeader
         title="Compensation Settings"
-        description="The 7 global compensation knobs plus manual engine triggers. Knobs take effect on the next run."
+        description="Global compensation knobs plus manual engine triggers. Knobs take effect on the next run."
         breadcrumbs={[{ label: "Home", to: "/" }, { label: "Dashboard", to: "/app" }, { label: "Admin", to: "/app/admin" }, { label: "Compensation" }]}
       />
 
@@ -148,6 +152,63 @@ export function AdminCompensationSettingsPage() {
                   checked={form.yieldEnabled}
                   onChange={(v) => patch("yieldEnabled", v)}
                 />
+
+                {/* Trade yield schedule — flexible daily band that lands on the
+                    monthly target exactly (catch-up rates when behind). */}
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="monthlyYieldCapPct">Monthly yield target (% of package price)</Label>
+                    <Input
+                      id="monthlyYieldCapPct"
+                      type="number"
+                      min={0}
+                      max={100}
+                      step="0.1"
+                      value={form.monthlyYieldCapPct}
+                      onChange={(e) => patch("monthlyYieldCapPct", Number(e.target.value))}
+                    />
+                    <p className="text-xs text-muted-foreground">Total yield credited per calendar month (0 = no cap/schedule).</p>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="yieldCatchUpCapPct">Catch-up rate cap (%)</Label>
+                    <Input
+                      id="yieldCatchUpCapPct"
+                      type="number"
+                      min={0}
+                      max={100}
+                      step="0.1"
+                      value={form.yieldCatchUpCapPct}
+                      onChange={(e) => patch("yieldCatchUpCapPct", Number(e.target.value))}
+                    />
+                    <p className="text-xs text-muted-foreground">Max single-day rate when the month must catch up to the target.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="yieldDailyMinPct">Daily yield minimum (%)</Label>
+                    <Input
+                      id="yieldDailyMinPct"
+                      type="number"
+                      min={0}
+                      max={100}
+                      step="0.1"
+                      value={form.yieldDailyMinPct}
+                      onChange={(e) => patch("yieldDailyMinPct", Number(e.target.value))}
+                    />
+                    <p className="text-xs text-muted-foreground">Weak-trade day rate.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="yieldDailyMaxPct">Daily yield maximum (%)</Label>
+                    <Input
+                      id="yieldDailyMaxPct"
+                      type="number"
+                      min={0}
+                      max={100}
+                      step="0.1"
+                      value={form.yieldDailyMaxPct}
+                      onChange={(e) => patch("yieldDailyMaxPct", Number(e.target.value))}
+                    />
+                    <p className="text-xs text-muted-foreground">Strong-trade day rate. Catch-up days may exceed this up to the cap.</p>
+                  </div>
+                </div>
                 <Toggle
                   label="Team energy enabled"
                   description="Run the daily team-energy distribution."
@@ -289,6 +350,10 @@ function sameSettings(a: CompensationSettings, b: CompensationSettings, aText: s
   return (
     a.directBonusPct === b.directBonusPct &&
     a.yieldEnabled === b.yieldEnabled &&
+    a.monthlyYieldCapPct === b.monthlyYieldCapPct &&
+    a.yieldDailyMinPct === b.yieldDailyMinPct &&
+    a.yieldDailyMaxPct === b.yieldDailyMaxPct &&
+    a.yieldCatchUpCapPct === b.yieldCatchUpCapPct &&
     a.teamEnergyEnabled === b.teamEnergyEnabled &&
     a.teamEnergyDepth === b.teamEnergyDepth &&
     parsePctArray(aText)?.join(",") === bPct.join(",") &&

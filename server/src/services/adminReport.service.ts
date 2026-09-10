@@ -159,6 +159,7 @@ function userEmail(map: Map<string, UserName>, id: string | null | undefined): s
 function toAdminUserRow(
   u: LeanUser,
   directCount: number,
+  activeDirectCount: number,
   walletAvailable: number,
   walletOnHold: number,
 ): AdminUserReportRow {
@@ -173,6 +174,7 @@ function toAdminUserRow(
     referredBy: u.referredBy ?? null,
     isEmailVerified: u.isEmailVerified,
     directCount,
+    activeDirectCount,
     walletAvailable,
     walletOnHold,
     joinedAt: toIso(u.createdAt),
@@ -203,16 +205,37 @@ export async function fetchUsersRows(filter: Record<string, unknown>, limit: num
   // string `$in` against the ObjectId `sponsorId` field would match nothing
   // (which is why the admin users table showed 0 directs for everyone).
   const pageIdOids = pageIds.map((id) => new mongoose.Types.ObjectId(id));
-  const [directAgg, wallets] = await Promise.all([
+  const [directAgg, activeDirectAgg, wallets] = await Promise.all([
     pageIds.length
       ? User.aggregate<{ _id: string; count: number }>([
           { $match: { sponsorId: { $in: pageIdOids } } },
           { $group: { _id: "$sponsorId", count: { $sum: 1 } } },
         ])
       : Promise.resolve([]),
+    // Active directs = directs holding an active UserPackage — the count star
+    // ranks qualify on, so admin views match what users see on their dashboard.
+    pageIds.length
+      ? User.aggregate<{ _id: string; count: number }>([
+          { $match: { sponsorId: { $in: pageIdOids } } },
+          {
+            $lookup: {
+              from: "userpackages",
+              let: { uid: "$_id" },
+              pipeline: [
+                { $match: { $expr: { $and: [{ $eq: ["$user", "$$uid"] }, { $eq: ["$status", "active"] }] } } },
+                { $limit: 1 },
+              ],
+              as: "_pkg",
+            },
+          },
+          { $match: { _pkg: { $ne: [] } } },
+          { $group: { _id: "$sponsorId", count: { $sum: 1 } } },
+        ])
+      : Promise.resolve([]),
     pageIds.length ? (Wallet.find({ user: { $in: pageIds } }).lean() as Promise<LeanWallet[]>) : Promise.resolve([]),
   ]);
   const directMap = new Map(directAgg.map((d) => [d._id.toString(), d.count]));
+  const activeDirectMap = new Map(activeDirectAgg.map((d) => [d._id.toString(), d.count]));
   const walletMap = new Map<string, { available: number; onHold: number }>();
   for (const w of wallets) {
     const b = w.balances;
@@ -223,7 +246,7 @@ export async function fetchUsersRows(filter: Record<string, unknown>, limit: num
   return users.map((u) => {
     const id = u._id.toString();
     const w = walletMap.get(id) ?? { available: 0, onHold: 0 };
-    return toAdminUserRow(u, directMap.get(id) ?? 0, w.available, w.onHold);
+    return toAdminUserRow(u, directMap.get(id) ?? 0, activeDirectMap.get(id) ?? 0, w.available, w.onHold);
   });
 }
 
@@ -698,10 +721,10 @@ function toAdminSheet(kind: AdminReportKind, rows: unknown[]): { headers: string
   switch (kind) {
     case "users":
       return {
-        headers: ["Joined", "Name", "Email", "Mobile", "Role", "Status", "Referral code", "Referred by", "Verified", "Directs", "Available", "On hold", "Last login"],
+        headers: ["Joined", "Name", "Email", "Mobile", "Role", "Status", "Referral code", "Referred by", "Verified", "Directs", "Active directs", "Available", "On hold", "Last login"],
         data: (rows as AdminUserReportRow[]).map((r) => [
           r.joinedAt, r.name, r.email, r.phone ?? "", r.role, r.status, r.referralCode, r.referredBy ?? "",
-          r.isEmailVerified ? "yes" : "no", r.directCount, r.walletAvailable, r.walletOnHold, r.lastLoginAt ?? "",
+          r.isEmailVerified ? "yes" : "no", r.directCount, r.activeDirectCount, r.walletAvailable, r.walletOnHold, r.lastLoginAt ?? "",
         ]),
       };
     case "deposits":

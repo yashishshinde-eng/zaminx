@@ -8,6 +8,9 @@ import {
   getDirectBonusPct,
   isYieldEnabled,
   getMonthlyYieldCapPct,
+  getYieldDailyMinPct,
+  getYieldDailyMaxPct,
+  getYieldCatchUpCapPct,
   isTeamEnergyEnabled,
   getTeamEnergyDepth,
   getTeamEnergyPct,
@@ -36,6 +39,188 @@ function utcDayBounds(d: Date): { start: number; end: number } {
 /** YYYY-MM-DD (UTC) for a timestamp. */
 function dayKey(ms: number): string {
   return new Date(ms).toISOString().slice(0, 10);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Flexible daily yield schedule (0.5–1% band → exact monthly target) */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Deterministic daily trade-performance factor in [0, 1] for a UTC day.
+ * FNV-1a hash of the date key — stable across re-runs and backfills, and
+ * identical for every package that day (one market-wide "trading day").
+ * Skewed high (`1 − u^4`, mean ≈ 0.8) so most days sit near the top of the
+ * daily band and dips toward the floor are occasional, like real trading.
+ */
+function dailyPerformanceFactor(dateKey: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < dateKey.length; i++) {
+    h ^= dateKey.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  h = (h ^ (h >>> 15)) >>> 0;
+  return 1 - ((h % 100000) / 100000) ** 4;
+}
+
+/**
+ * Pro-rata eligible-days window of a package inside the UTC month starting at
+ * `monthStartMs` (`daysInMonth` days). Returns how many days of the month the
+ * package is yield-eligible on ([activatedAt, expiresAt) overlapping the day),
+ * and how many of those remain counting today's index (0-based from month
+ * start). Mid-month activations/expiries pro-rate the month's target by
+ * `eligibleDays / daysInMonth`.
+ */
+function eligibleDaysWindow(
+  activatedAtMs: number,
+  expiresAtMs: number | null,
+  monthStartMs: number,
+  daysInMonth: number,
+  todayIdx: number,
+): { eligibleDays: number; eligibleDaysRemaining: number } {
+  const monthEndMs = monthStartMs + daysInMonth * DAY_MS;
+  const firstIdx = Math.max(0, Math.floor((Math.max(activatedAtMs, monthStartMs) - monthStartMs) / DAY_MS));
+  const lastIdx =
+    expiresAtMs === null
+      ? daysInMonth - 1
+      : Math.min(daysInMonth - 1, Math.ceil((Math.min(expiresAtMs, monthEndMs) - monthStartMs) / DAY_MS) - 1);
+  if (lastIdx < firstIdx) return { eligibleDays: 0, eligibleDaysRemaining: 0 };
+  const eligibleDays = lastIdx - firstIdx + 1;
+  const eligibleDaysRemaining = todayIdx >= firstIdx && todayIdx <= lastIdx ? lastIdx - todayIdx + 1 : 0;
+  return { eligibleDays, eligibleDaysRemaining };
+}
+
+/**
+ * Scheduled trade-yield amount (USD) for one package-day under the flexible
+ * model. The day's performance picks a base rate inside the `[dailyMinPct,
+ * dailyMaxPct]` band; when the month's remaining target can no longer be
+ * recovered within the band, the rate catches up to the pace (it may exceed
+ * the band, bounded by `catchUpCapPct`); and the credit never overshoots what
+ * is left of the (pro-rata) monthly target — so a fully-run month lands on the
+ * target exactly. `proRataTargetAmount = 0` means no monthly target: the rate
+ * just flexes inside the band.
+ */
+export function scheduledYieldAmount(args: {
+  priceUsd: number;
+  perfFactor: number;
+  dailyMinPct: number;
+  dailyMaxPct: number;
+  catchUpCapPct: number;
+  proRataTargetAmount: number;
+  creditedSoFarAmount: number;
+  eligibleDaysRemaining: number;
+}): number {
+  const { priceUsd, perfFactor, dailyMinPct, dailyMaxPct, catchUpCapPct, proRataTargetAmount, creditedSoFarAmount, eligibleDaysRemaining } = args;
+  const minAmt = (priceUsd * dailyMinPct) / 100;
+  const maxAmt = Math.max(minAmt, (priceUsd * dailyMaxPct) / 100);
+  const catchUpAmt = Math.max(maxAmt, (priceUsd * catchUpCapPct) / 100);
+  const base = minAmt + (maxAmt - minAmt) * perfFactor; // today's trade performance
+  if (proRataTargetAmount <= 0) return round2(base);
+  const remaining = round2(proRataTargetAmount - creditedSoFarAmount);
+  if (eligibleDaysRemaining <= 0 || remaining <= 0) return 0;
+  const need = remaining / eligibleDaysRemaining; // pace that lands exactly on target
+  let rateAmt = base;
+  if (need > maxAmt) rateAmt = Math.min(need, catchUpAmt); // band alone can't recover → catch up
+  if (eligibleDaysRemaining === 1) rateAmt = Math.min(remaining, catchUpAmt); // last eligible day closes the month exactly
+  return round2(Math.min(rateAmt, remaining));
+}
+
+/** Per-day inputs shared by the yield and team-energy runs, loaded once. */
+type YieldScheduleContext = {
+  capPct: number;
+  dailyMinPct: number;
+  dailyMaxPct: number;
+  catchUpCapPct: number;
+  perfFactor: number;
+  monthStartMs: number;
+  daysInMonth: number;
+  monthKey: string;
+  /** Month-to-date credited `trading_yield` per package (USD), keyed by package id. */
+  creditedByPkg: Map<string, number>;
+};
+
+/**
+ * Load the yield-schedule knobs for the target day plus this month's
+ * credited-yield totals per package (one aggregate). `excludeDayKey` drops the
+ * target day's own credits from the totals — team energy uses it so its
+ * estimate matches the amount the yield engine credits for that day
+ * regardless of which run happens first.
+ */
+async function loadYieldScheduleContext(
+  target: Date,
+  dayKeyStr: string,
+  opts: { excludeDayKey?: boolean } = {},
+): Promise<YieldScheduleContext> {
+  const [dailyMinPct, dailyMaxPct, catchUpCapPct, capPct] = await Promise.all([
+    getYieldDailyMinPct(),
+    getYieldDailyMaxPct(),
+    getYieldCatchUpCapPct(),
+    getMonthlyYieldCapPct(),
+  ]);
+  const { start: monthStart, end: monthEnd, key: monthKey } = utcMonthBounds(target);
+  const monthStartMs = monthStart.getTime();
+  const daysInMonth = Math.round((monthEnd.getTime() - monthStartMs) / DAY_MS);
+
+  const creditedByPkg = new Map<string, number>();
+  if (capPct > 0) {
+    const dateFilter = opts.excludeDayKey
+      ? { $gte: `${monthKey}-01`, $lt: dayKeyStr }
+      : { $regex: `^${monthKey}` };
+    const monthAgg = (await WalletTransaction.aggregate([
+      {
+        $match: {
+          type: "trading_yield",
+          direction: "credit",
+          "meta.date": dateFilter,
+        },
+      },
+      { $group: { _id: "$meta.userPackageId", total: { $sum: "$amount" } } },
+    ])) as { _id: string; total: number }[];
+    for (const row of monthAgg) creditedByPkg.set(row._id, round2(row.total));
+  }
+
+  return {
+    capPct,
+    dailyMinPct,
+    dailyMaxPct,
+    catchUpCapPct,
+    perfFactor: dailyPerformanceFactor(dayKeyStr),
+    monthStartMs,
+    daysInMonth,
+    monthKey,
+    creditedByPkg,
+  };
+}
+
+/** Scheduled yield (USD) for one package on the target day, from a loaded context. */
+function scheduledYieldForPackage(
+  ctx: YieldScheduleContext,
+  up: LeanActivePackage,
+  dayStartMs: number,
+  activatedAtMs: number,
+  expiresAtMs: number | null,
+): number {
+  const price = up.snapshot.priceUsd;
+  const todayIdx = Math.floor((dayStartMs - ctx.monthStartMs) / DAY_MS);
+  const { eligibleDays, eligibleDaysRemaining } = eligibleDaysWindow(
+    activatedAtMs,
+    expiresAtMs,
+    ctx.monthStartMs,
+    ctx.daysInMonth,
+    todayIdx,
+  );
+  // Mid-month activations/expiries pro-rate the monthly target by eligible days.
+  const proRataTargetAmount =
+    ctx.capPct > 0 ? round2(((price * ctx.capPct) / 100) * (eligibleDays / ctx.daysInMonth)) : 0;
+  return scheduledYieldAmount({
+    priceUsd: price,
+    perfFactor: ctx.perfFactor,
+    dailyMinPct: ctx.dailyMinPct,
+    dailyMaxPct: ctx.dailyMaxPct,
+    catchUpCapPct: ctx.catchUpCapPct,
+    proRataTargetAmount,
+    creditedSoFarAmount: ctx.creditedByPkg.get(up._id.toString()) ?? 0,
+    eligibleDaysRemaining,
+  });
 }
 
 /* ------------------------------------------------------------------ */
@@ -117,8 +302,16 @@ type LeanActivePackage = {
  * so re-running the same day (or backfilling) is safe. Packages whose
  * `expiresAt` has passed are flipped `active → expired` in the same run.
  *
- * No cron yet (Phase 18) — triggered by the admin `POST /compensation/run-yield`
- * endpoint. `asOf` targets a specific UTC day for backfills; defaults to today.
+ * The daily amount follows the flexible schedule (`scheduledYieldAmount`): the
+ * day's deterministic performance factor picks a base rate inside the admin
+ * `[yieldDailyMinPct, yieldDailyMaxPct]` band, catch-up rates restore the pace
+ * when the band can't reach the monthly target, and the month lands on
+ * `monthlyYieldCapPct`% of the package price exactly (pro-rated for packages
+ * activated/expiring mid-month).
+ *
+ * Triggered by the daily 00:30 UTC cron job and the admin
+ * `POST /compensation/run-yield` endpoint. `asOf` targets a specific UTC day
+ * for backfills; defaults to today.
  */
 export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
   const now = new Date();
@@ -136,29 +329,11 @@ export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
   let expired = 0;
   let errors = 0;
 
-  // Monthly yield cap: total yield credited this calendar month must not exceed
-  // `capPct`% of the package price. 0 means no cap. We aggregate this month's
-  // `trading_yield` credits grouped by `meta.userPackageId` once, then bound
-  // each daily credit so the running monthly total never crosses the cap.
-  // The cap is scoped by the yield's for-day (`meta.date` = YYYY-MM-DD), not
-  // `createdAt`, so backfills to a past month are bounded by that month's cap
-  // even though the ledger row is written "now".
-  const capPct = await getMonthlyYieldCapPct();
-  const creditedThisMonthByPkg = new Map<string, number>();
-  if (capPct > 0) {
-    const { key: monthKey } = utcMonthBounds(target);
-    const monthAgg = (await WalletTransaction.aggregate([
-      {
-        $match: {
-          type: "trading_yield",
-          direction: "credit",
-          "meta.date": { $regex: `^${monthKey}` },
-        },
-      },
-      { $group: { _id: "$meta.userPackageId", total: { $sum: "$amount" } } },
-    ])) as { _id: string; total: number }[];
-    for (const row of monthAgg) creditedThisMonthByPkg.set(row._id, round2(row.total));
-  }
+  // Schedule knobs + this month's credited totals per package. The totals are
+  // scoped by the yield's for-day (`meta.date` = YYYY-MM-DD), not `createdAt`,
+  // so backfills to a past month are bounded by that month's target even
+  // though the ledger row is written "now".
+  const ctx = await loadYieldScheduleContext(target, key);
 
   for (const up of packages) {
     try {
@@ -175,15 +350,9 @@ export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
         skipped++;
       } else {
         const s = up.snapshot;
-        const dailyAmount = round2((s.priceUsd * s.dailyReturnPct) / 100);
-        // Bound the daily credit by the remaining monthly cap (if any).
-        let amount = dailyAmount;
-        if (capPct > 0 && dailyAmount > 0) {
-          const capAmount = round2((s.priceUsd * capPct) / 100);
-          const soFar = creditedThisMonthByPkg.get(up._id.toString()) ?? 0;
-          amount = Math.min(dailyAmount, Math.max(0, capAmount - soFar));
-        }
+        const amount = scheduledYieldForPackage(ctx, up, start, activatedAt, expiresAt);
         if (amount > 0) {
+          const ratePct = s.priceUsd > 0 ? round2((amount / s.priceUsd) * 100) : 0;
           await applyLedgerEntry({
             userId: up.user.toString(),
             wallet: "trading",
@@ -192,12 +361,15 @@ export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
             amount,
             type: "trading_yield",
             reference: { resource: "UserPackage", resourceId: `yield:${up._id.toString()}:${key}` },
-            memo: `Daily trade yield — ${s.name} (${s.dailyReturnPct}%)`,
-            meta: { userPackageId: up._id.toString(), date: key },
+            memo: `Daily trade yield — ${s.name} @ ${ratePct.toFixed(2)}%/day`,
+            meta: { userPackageId: up._id.toString(), date: key, ratePct },
           });
           // Track the credited amount against this package's monthly running total.
-          if (capPct > 0) {
-            creditedThisMonthByPkg.set(up._id.toString(), round2((creditedThisMonthByPkg.get(up._id.toString()) ?? 0) + amount));
+          if (ctx.capPct > 0) {
+            ctx.creditedByPkg.set(
+              up._id.toString(),
+              round2((ctx.creditedByPkg.get(up._id.toString()) ?? 0) + amount),
+            );
           }
           credited++;
         } else {
@@ -276,6 +448,12 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     return { asOf: target.toISOString(), processed: 0, credited: 0, skipped: 0, errors: 0 };
   }
 
+  // The day's scheduled trade yield (same flexible schedule the yield engine
+  // pays) — upstream bonuses track actual yield, not the legacy per-package
+  // snapshot rate. Today's own credits are excluded so this estimate matches
+  // the yield credit for the day regardless of which run happens first.
+  const yieldCtx = await loadYieldScheduleContext(target, key, { excludeDayKey: true });
+
   // Fetch each buyer's lineage + name/referralCode once (map by user id) — the
   // name/code are denormalised onto each credit so reports can show "earned
   // from <name> (<code>) at level N" without an extra join.
@@ -317,8 +495,7 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
         skipped++;
         continue;
       }
-      const s = up.snapshot;
-      const yieldAmt = round2((s.priceUsd * s.dailyReturnPct) / 100);
+      const yieldAmt = scheduledYieldForPackage(yieldCtx, up, start, activatedAt, expiresAt);
       if (yieldAmt <= 0) {
         skipped++;
         continue;
@@ -350,15 +527,18 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
 
   // Rank gate: an ancestor must have achieved 1-Star (ever, sticky — see
   // `syncHighestStarForUser`) to receive team energy, on top of holding an
-  // active package. Scoped to just the ancestors that actually accrued
-  // something this run, not a full users-collection scan.
+  // active package. Their star also CAPS the depth: a 1-Star member earns from
+  // level 1 only, 2-Star from levels 1–2, 3-Star from levels 1–3, … — deeper
+  // levels stay closed until the corresponding star is achieved. Scoped to just
+  // the ancestors that actually accrued something this run, not a full
+  // users-collection scan.
   const accrualAncestorIds = Array.from(new Set(Array.from(accrual.keys()).map((k) => k.split(":")[0])));
-  const rankEligibleAncestorIds = new Set(
+  const starByAncestor = new Map<string, number>(
     (
-      await User.find({ _id: { $in: accrualAncestorIds }, highestStar: { $gte: 1 } })
-        .select("_id")
+      await User.find({ _id: { $in: accrualAncestorIds } })
+        .select("highestStar")
         .lean()
-    ).map((u) => u._id.toString()),
+    ).map((u) => [u._id.toString(), u.highestStar ?? 0]),
   );
 
   let credited = 0;
@@ -366,7 +546,8 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
   for (const [accrualKey, { amount, level }] of accrual) {
     if (amount <= 0) continue;
     const [ancestorId, sourceUserId] = accrualKey.split(":");
-    if (!isActiveSponsor(ancestorId) || !rankEligibleAncestorIds.has(ancestorId)) {
+    const star = starByAncestor.get(ancestorId) ?? 0;
+    if (!isActiveSponsor(ancestorId) || star < 1 || level > star) {
       skipped++;
       continue;
     }

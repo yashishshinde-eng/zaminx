@@ -97,15 +97,6 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
     }
   };
 
-  // Floating ambient orbs — gold-led with blue/purple accents
-  const orbs = [
-    { size: 340, left: "-12%", top: "-18%", dur: 14, delay: 0, color: "var(--gold)", opacity: 0.22 },
-    { size: 260, left: "68%", top: "-12%", dur: 17, delay: 1.5, color: "var(--blue)", opacity: 0.18 },
-    { size: 380, left: "72%", top: "40%", dur: 20, delay: 0.8, color: "var(--blue-dark)", opacity: 0.16 },
-    { size: 180, left: "10%", top: "55%", dur: 12, delay: 2.5, color: "var(--gold)", opacity: 0.14 },
-    { size: 140, left: "40%", top: "75%", dur: 11, delay: 1, color: "var(--purple)", opacity: 0.1 },
-  ];
-
   return (
     <motion.div
       className="neon-card neon-gold card-shimmer relative overflow-hidden"
@@ -113,38 +104,14 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
       animate="visible"
       variants={prefersReduced ? undefined : containerVariants}
     >
-      {/* ── Background layers (hero richness) ──────────────────── */}
-      {/* Base card fill */}
-      <div className="absolute inset-0 bg-[hsl(var(--card))]" />
-      {/* Gold-led radial with blue/purple accent highlights */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_15%_-10%,hsl(var(--gold)/0.16),transparent_55%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_85%_10%,hsl(var(--blue)/0.14),transparent_55%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_50%_90%,hsl(var(--gold)/0.1),transparent_50%)]" />
-      {/* Bottom-left purple glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_5%_100%,hsl(var(--purple)/0.1),transparent_55%)]" />
-      {/* Subtle grid */}
-      <div className="absolute inset-0 grid-pattern opacity-[0.1]" />
-
-      {/* Floating ambient orbs */}
-      {orbs.map((orb, i) => (
-        <motion.span
-          key={i}
-          className="pointer-events-none absolute rounded-full"
-          style={{
-            width: orb.size,
-            height: orb.size,
-            left: orb.left,
-            top: orb.top,
-            background: `radial-gradient(circle, hsl(${orb.color} / ${orb.opacity}), transparent 70%)`,
-          }}
-          animate={
-            prefersReduced
-              ? undefined
-              : { y: [0, -14, 0], opacity: [orb.opacity * 0.7, orb.opacity * 1.2, orb.opacity * 0.7] }
-          }
-          transition={{ duration: orb.dur, repeat: Infinity, ease: "easeInOut", delay: orb.delay }}
-        />
-      ))}
+      {/* ── Background: inner radial sheen overlay, same as other neon cards ── */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-[22px]"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 15% 10%, rgba(255,255,255,0.05), transparent 60%)",
+        }}
+      />
 
       {/* Gold accent line at top */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
@@ -154,7 +121,7 @@ export function HeroPortfolioCard({ data }: { data: DashboardSummary }) {
         <div className="flex flex-col gap-6">
 
           {/* ── Row 1: Balance section (hero) ──────────────── */}
-          <motion.div className="relative flex flex-col gap-3 balance-energy-glow" variants={prefersReduced ? undefined : itemVariants}>
+          <motion.div className="relative flex flex-col gap-3" variants={prefersReduced ? undefined : itemVariants}>
             {/* Label + visibility toggle */}
             <div className="relative z-10 flex items-center justify-between">
               <div className="flex items-center gap-2">

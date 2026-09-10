@@ -387,6 +387,7 @@ function adminColumnsFor(kind: AdminReportKind): Column<AdminRow>[] {
       { key: "status", header: "Status", cell: (r) => statusBadge((r as AdminUserReportRow).status) },
       { key: "referralCode", header: "Referral code", cell: (r) => <span className="font-mono text-xs">{(r as AdminUserReportRow).referralCode}</span> },
       { key: "directs", header: "Directs", align: "right", cell: (r) => String((r as AdminUserReportRow).directCount) },
+      { key: "activeDirects", header: "Active directs", align: "right", cell: (r) => String((r as AdminUserReportRow).activeDirectCount) },
       { key: "available", header: "Available", align: "right", cell: (r) => formatCurrency((r as AdminUserReportRow).walletAvailable) },
       { key: "onHold", header: "On hold", align: "right", cell: (r) => formatCurrency((r as AdminUserReportRow).walletOnHold) },
       { key: "lastLoginAt", header: "Last login", cell: (r) => formatDate((r as AdminUserReportRow).lastLoginAt) },

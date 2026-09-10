@@ -82,6 +82,8 @@ export interface AdminUserDetail {
   walletAddresses: WalletAddresses;
   notificationPreference: { email: boolean; dashboard: boolean };
   directCount: number;
+  /** Directs holding an active package — the count star ranks qualify on. */
+  activeDirectCount: number;
   walletBalances: WalletBalances;
   activePackage: {
     name: string;

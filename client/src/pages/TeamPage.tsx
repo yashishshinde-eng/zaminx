@@ -372,7 +372,9 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
           </CardContent>
         </Card>
         {stats.byLevel.length > 0 && (
-          <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-4 rounded-lg border border-border/60">
+          // Horizontal scroll on mobile — the currency columns don't fit ~360px.
+          <div className="-mx-1 overflow-x-auto pb-1">
+            <div className="grid min-w-[420px] grid-cols-[1fr_auto_auto_auto] gap-x-4 rounded-lg border border-border/60">
             <span className="px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
               {t("team.level")}
             </span>
@@ -405,6 +407,7 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
             <span className="border-t border-border/60 bg-muted/30 px-3 py-2 text-right text-sm font-bold tabular-nums">
               {formatCurrency(stats.teamBusiness)}
             </span>
+            </div>
           </div>
         )}
       </CardContent>

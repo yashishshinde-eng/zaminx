@@ -164,6 +164,7 @@ function ProfileCard({ user }: { user: AdminUserDetail }) {
           value={user.referredBy ? <span className="font-mono text-xs">{user.referredBy}</span> : "—"}
         />
         <Field icon={Users} label="Direct referrals" value={String(user.directCount)} />
+        <Field icon={Users} label="Active directs" value={String(user.activeDirectCount)} />
         <Field icon={Phone} label="Phone" value={user.phone ?? "—"} />
         <Field
           icon={Wallet}

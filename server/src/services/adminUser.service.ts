@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { User, ActivityLog, UserPackage } from "../models/index.js";
 import type { UserDocument } from "../models/index.js";
 import { ApiError } from "../utils/ApiError.js";
@@ -82,12 +83,23 @@ export async function getAdminUserDetail(id: string): Promise<AdminUserDetail> {
   const user = (await User.findById(id).lean()) as LeanDetail | null;
   if (!user) throw ApiError.notFound("User not found");
 
-  const [walletBalances, activePkg, directCount, logs] = await Promise.all([
+  const [walletBalances, activePkg, directCount, activeDirectRows, logs] = await Promise.all([
     getWalletBalances(id),
     UserPackage.findOne({ user: id, status: "active" }).sort({ activatedAt: -1 }).lean(),
     User.countDocuments({ sponsorId: id }),
+    // Directs holding an active package — the count star ranks qualify on.
+    // One row per direct with an active UserPackage, so the row count IS the
+    // active-direct count.
+    UserPackage.aggregate<{ _id: { toString(): string } }>([
+      { $match: { status: "active" } },
+      { $lookup: { from: "users", localField: "user", foreignField: "_id", as: "_u" } },
+      { $unwind: "$_u" },
+      { $match: { "_u.sponsorId": new mongoose.Types.ObjectId(id) } },
+      { $group: { _id: "$_u._id" } },
+    ]),
     ActivityLog.find({ actor: id }).sort({ createdAt: -1 }).limit(10).lean(),
   ]);
+  const activeDirectCount = activeDirectRows.length;
 
   const recentActivity: AdminUserActivityRow[] = logs.map((l) => ({
     id: l._id.toString(),
@@ -114,6 +126,7 @@ export async function getAdminUserDetail(id: string): Promise<AdminUserDetail> {
       dashboard: user.notificationPreference?.dashboard ?? true,
     },
     directCount,
+    activeDirectCount,
     walletBalances,
     activePackage: activePkg
       ? {

@@ -581,8 +581,6 @@
     background: linear-gradient(135deg, hsl(var(--card) / 0.7), hsl(var(--card) / 0.4));
   }
 
-  .testimonial-card { @apply landing-card p-6 sm:p-8 text-center; }
-
   .cta-bg {
     position: relative; overflow: hidden;
     background-image: linear-gradient(135deg, hsl(var(--blue) / 0.15), hsl(var(--blue-dark) / 0.1));
@@ -1060,8 +1058,13 @@
   .neon-card-static::before { animation: none; opacity: 0.5; }
 
   /* No-glow mode: drop the per-variant colored glow/beam entirely, leaving
-   * just the flat dark surface + the app-wide teal border. */
+   * just the flat dark surface + the app-wide teal border. The base .neon-card
+   * surface is a semi-transparent gradient (rgba alpha < 1) over backdrop-blur,
+   * so it still lets the page's ambient background washes (dashboard-bg's
+   * radial gradients, incl. a gold one) tint through — swap to a fully OPAQUE
+   * solid fill so nothing behind the card can bleed into it. */
   .neon-card.no-glow {
+    background: hsl(var(--card)) !important;
     box-shadow: var(--shadow-card), inset 0 1px 0 0 rgba(255, 255, 255, 0.07) !important;
   }
   .neon-card.no-glow::before { display: none !important; }
@@ -1093,27 +1096,26 @@
   }
   .glow-icon svg { filter: drop-shadow(0 0 5px rgb(var(--gi-glow-rgb) / 0.55)); }
 
-  /* ── Neon action button — premium 3D mini action card ─────── */
-  /* Used together with .neon-card (which supplies the glass surface,
-   * border, glows and the traveling-beam ::before). */
+  /* ── Neon action button — simple flat card, thin color-matched border ── */
+  /* Skips .neon-card's traveling-beam ::before and thick outer glow —
+   * just a normal 1px border tinted to the variant color. */
   .neon-action {
     @apply relative flex flex-col items-center justify-center gap-2 rounded-[18px] p-3.5 sm:p-4;
     background: linear-gradient(160deg, rgba(12, 20, 38, 0.82), rgba(8, 16, 30, 0.7));
+    border: 1px solid rgb(var(--neon-glow-rgb) / 0.35) !important;
+    box-shadow: var(--shadow-card) !important;
     will-change: transform;
   }
+  .neon-action::before { display: none !important; }
   @media (hover: hover) {
     .neon-action:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow:
-        var(--shadow-card-hover),
-        0 0 36px -6px rgb(var(--neon-glow-rgb) / 0.5),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
-        inset 0 0 22px -10px rgb(var(--neon-glow-rgb) / 0.34);
+      border-color: rgb(var(--neon-glow-rgb) / 0.55);
+      box-shadow: var(--shadow-card-hover) !important;
     }
   }
   .neon-action:active { transform: scale(0.96); transition-duration: 0.12s; }
   .neon-action.is-disabled { opacity: 0.42; cursor: not-allowed; }
-  .neon-action.is-disabled::before { animation: none; opacity: 0.4; }
 
   /* ── Neon bottom-nav active indicator ────────────────────── */
   .neon-nav-item {

@@ -130,8 +130,15 @@ export interface RankEvalSummary {
 export interface CompensationSettings {
   directBonusPct: number;
   yieldEnabled: boolean;
-  /** Max total yield credited per calendar month, as % of package price (0 = no cap). */
+  /** Max total yield credited per calendar month, as % of package price (0 = no cap).
+   *  Also the monthly target the flexible daily schedule lands on. */
   monthlyYieldCapPct: number;
+  /** Daily trade-yield band floor, as % of package price (weak-performance day). */
+  yieldDailyMinPct: number;
+  /** Daily trade-yield band ceiling, as % of package price (strong-performance day). */
+  yieldDailyMaxPct: number;
+  /** Max single-day catch-up rate when the month falls behind the target pace. */
+  yieldCatchUpCapPct: number;
   teamEnergyEnabled: boolean;
   teamEnergyDepth: number;
   teamEnergyPct: number[];

@@ -158,6 +158,10 @@ export const compensationSettingsSchema = z.object({
     yieldEnabled: z.boolean().optional(),
     /** Max total yield credited per calendar month, as % of package price. */
     monthlyYieldCapPct: z.coerce.number().min(0).max(100).optional(),
+    /** Daily yield band (as % of package price) + catch-up ceiling. */
+    yieldDailyMinPct: z.coerce.number().min(0).max(100).optional(),
+    yieldDailyMaxPct: z.coerce.number().min(0).max(100).optional(),
+    yieldCatchUpCapPct: z.coerce.number().min(0).max(100).optional(),
     teamEnergyEnabled: z.boolean().optional(),
     teamEnergyDepth: z.coerce.number().int().min(0).max(10).optional(),
     teamEnergyPct: z.array(z.coerce.number().min(0).max(100)).max(10).optional(),

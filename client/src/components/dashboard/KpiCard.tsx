@@ -85,13 +85,13 @@ export function KpiCard({
               className="flex size-10 shrink-0 items-center justify-center rounded-[12px]"
               style={{
                 background: `rgb(${neon.rgb} / 0.12)`,
-                boxShadow: `0 0 14px -3px rgb(${neon.rgb} / 0.4), inset 0 0 10px -4px rgb(${neon.rgb} / 0.3)`,
+                boxShadow: flat ? undefined : `0 0 14px -3px rgb(${neon.rgb} / 0.4), inset 0 0 10px -4px rgb(${neon.rgb} / 0.3)`,
                 border: `1px solid rgb(${neon.rgb} / 0.22)`,
               }}
             >
               <Icon
                 className="size-[18px]"
-                style={{ color: neon.a, filter: `drop-shadow(0 0 4px rgb(${neon.rgb} / 0.5))` }}
+                style={{ color: neon.a, filter: flat ? undefined : `drop-shadow(0 0 4px rgb(${neon.rgb} / 0.5))` }}
                 strokeWidth={2.2}
               />
             </div>

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from "vitest";
-import { api, authed, closeApi, seedAdminAndLogin, registerAndLogin, seedPackage, fundWallet } from "../api.js";
+import { authed, closeApi, seedAdminAndLogin, registerAndLogin, seedPackage, fundWallet } from "../api.js";
 import { hasTestDb, connectTestDb, clearDb, disconnectTestDb } from "../db.js";
-import { UserPackage, Rank } from "../../models/index.js";
+import { UserPackage, Rank, WalletTransaction } from "../../models/index.js";
 
 /**
  * Phase 20 — compensation integration test. Exercises the admin-only
@@ -67,11 +67,13 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
     expect(b.body.data.yield).toEqual(a.body.data.yield);
   });
 
-  it("caps a lifetime package's monthly yield at 30% of the package price", async () => {
+  it(
+    "pays a lifetime package exactly 30% of its price across a full month (flexible 0.5–1% daily)",
+    async () => {
     const admin = await seedAdminAndLogin();
     const { accessToken, userId } = await registerAndLogin();
-    // $50 package, 2% daily = $1/day; 30% monthly cap = $15.
-    const pkg = await seedPackage({ priceUsd: 50, dailyReturnPct: 2, durationDays: 0 });
+    // $50 package; the flexible schedule must land the month on 30% = $15.
+    const pkg = await seedPackage({ priceUsd: 50, dailyReturnPct: 1, durationDays: 0 });
     // Fund the wallet, then activate the package from the balance (instant).
     await fundWallet(50, accessToken);
     await authed(accessToken, "/api/v1/packages/activate", {
@@ -85,57 +87,93 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
       { $set: { activatedAt: new Date("2024-01-01T00:00:00Z"), expiresAt: null } },
     );
 
-    // Run yield for 20 days of Jan 2024 — $1/day but capped at $15/month.
-    for (let d = 1; d <= 20; d++) {
+    // Run yield for every day of Jan 2024 (31 days) — the month must total $15.
+    for (let d = 1; d <= 31; d++) {
       const date = `2024-01-${String(d).padStart(2, "0")}`;
       await authed(admin.accessToken, `/api/v1/compensation/run-yield?date=${date}`, { method: "POST" });
     }
 
     const w = await authed<{ data: { wallets: { trading: { available: number } } } }>(accessToken, "/api/v1/wallet");
-    expect(w.body.data.wallets.trading.available).toBe(15);
-  });
+    expect(w.body.data.wallets.trading.available).toBeCloseTo(15, 8);
 
-  it("pays the monthly community bonus to a 3-member-team sponsor by star (idempotent)", async () => {
+    // Every daily credit stays inside the schedule's bounds (0.5%–2% of price):
+    // the band floor on weak days, the catch-up cap on recovery days.
+    const txns = await WalletTransaction.find({ type: "trading_yield", "meta.userPackageId": { $exists: true } })
+      .select("amount")
+      .lean();
+    expect(txns.length).toBe(31);
+    for (const t of txns) {
+      expect(t.amount).toBeGreaterThanOrEqual(0.25); // 0.5% of $50
+      expect(t.amount).toBeLessThanOrEqual(1); // 2% of $50 (catch-up cap)
+    }
+  }, 120_000);
+
+  it("pro-rates a package activated mid-month to its eligible share of 30%", async () => {
+    const admin = await seedAdminAndLogin();
+    const { accessToken, userId } = await registerAndLogin();
+    const pkg = await seedPackage({ priceUsd: 50, dailyReturnPct: 1, durationDays: 0 });
+    await fundWallet(50, accessToken);
+    await authed(accessToken, "/api/v1/packages/activate", {
+      method: "POST",
+      body: JSON.stringify({ packageId: pkg._id }),
+    });
+
+    // Activated on Jan 21 → 11 eligible days of Jan (21st–31st) →
+    // pro-rata target = 30% × 11/31 of $50 = $5.32.
+    await UserPackage.updateOne(
+      { user: userId, status: "active" },
+      { $set: { activatedAt: new Date("2024-01-21T00:00:00Z"), expiresAt: null } },
+    );
+
+    for (let d = 21; d <= 31; d++) {
+      const date = `2024-01-${String(d).padStart(2, "0")}`;
+      await authed(admin.accessToken, `/api/v1/compensation/run-yield?date=${date}`, { method: "POST" });
+    }
+
+    const w = await authed<{ data: { wallets: { trading: { available: number } } } }>(accessToken, "/api/v1/wallet");
+    expect(w.body.data.wallets.trading.available).toBeCloseTo(5.32, 8);
+  }, 120_000);
+
+  it("pays the monthly community bonus to a sponsor with an active direct (idempotent)", async () => {
     const admin = await seedAdminAndLogin();
     const sponsor = await registerAndLogin({ name: "Sponsor" });
     const me = await authed<{ data: { user: { referralCode: string } } }>(sponsor.accessToken, "/api/v1/auth/me");
     const referralCode = me.body.data.user.referralCode;
 
-    // Build a 3-member downline (team size 3 → star 1). The rank ladder is still
-    // empty here, so registration-time rank evals credit nothing.
-    for (let i = 0; i < 3; i++) {
-      await api("/api/v1/auth/register", {
-        method: "POST",
-        body: JSON.stringify({
-          name: `Downline ${i}`,
-          email: `dl-${i}-${Math.random().toString(36).slice(2)}@test.local`,
-          password: "secret123",
-          countryCode: "+91",
-          transactionPassword: "1234",
-          referralCode,
-        }),
-      });
-    }
+    // Ranks now qualify on ACTIVE directs only (1 Star = 1 active direct), and
+    // the community run pays by the sticky `highestStar` on the same ladder.
+    // Zero the direct-connect bonus first so the sponsor's bonus wallet holds
+    // only the rank reward + community bonus this test accounts for.
+    await authed(admin.accessToken, "/api/v1/admin/settings/compensation", {
+      method: "PATCH",
+      body: JSON.stringify({ directBonusPct: 0 }),
+    });
 
-    // Seed the star-1 rank (reward $10) before the community run. The community
-    // run pays by `getStarFromTeamSize(teamCount)` (pure 3^n) — a 3-member team
-    // is star 1 → $10. We set requiredTeamSize a hair above 3 so the sponsor's
-    // 3-member team does NOT also trigger the one-time rank reward (same $10,
-    // same wallet), isolating the community bonus deterministically.
+    // Star-1 rung: 1 active direct, reward $10 (one-time rank reward AND the
+    // monthly community amount come from this same ladder entry).
     await Rank.create({
       name: "1 Star",
       order: 1,
-      requiredDirects: 0,
-      requiredTeamSize: 4,
+      requiredDirects: 1,
+      requiredTeamSize: 0,
       rewardAmount: 10,
       status: "active",
     });
 
     // Sponsor must hold an active package (anti-farming guard).
-    const pkg = await seedPackage({ priceUsd: 50, dailyReturnPct: 2, durationDays: 0 });
-    // Fund the sponsor's wallet, then activate the package from the balance.
+    const pkg = await seedPackage({ priceUsd: 50, dailyReturnPct: 1, durationDays: 0 });
     await fundWallet(50, sponsor.accessToken);
     await authed(sponsor.accessToken, "/api/v1/packages/activate", {
+      method: "POST",
+      body: JSON.stringify({ packageId: pkg._id }),
+    });
+
+    // One ACTIVE direct: register a downline under the sponsor and activate a
+    // package for them. Activation fires the sponsor's rank eval → one-time
+    // rank reward ($10) + sticky highestStar = 1.
+    const direct = await registerAndLogin({ name: "Active direct", referralCode });
+    await fundWallet(50, direct.accessToken);
+    await authed(direct.accessToken, "/api/v1/packages/activate", {
       method: "POST",
       body: JSON.stringify({ packageId: pkg._id }),
     });
@@ -143,13 +181,13 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
     const r = await authed(admin.accessToken, "/api/v1/compensation/run-community?month=2024-01", { method: "POST" });
     expect(r.status).toBe(200);
 
-    // Sponsor earns the star-1 community reward ($10) to the bonus wallet.
+    // Bonus wallet = $10 one-time rank reward + $10 star-1 community bonus.
     const w = await authed<{ data: { wallets: { bonus: { available: number } } } }>(sponsor.accessToken, "/api/v1/wallet");
-    expect(w.body.data.wallets.bonus.available).toBe(10);
+    expect(w.body.data.wallets.bonus.available).toBeCloseTo(20, 8);
 
     // Idempotent: re-running the same month does not double-credit.
     await authed(admin.accessToken, "/api/v1/compensation/run-community?month=2024-01", { method: "POST" });
     const w2 = await authed<{ data: { wallets: { bonus: { available: number } } } }>(sponsor.accessToken, "/api/v1/wallet");
-    expect(w2.body.data.wallets.bonus.available).toBe(10);
+    expect(w2.body.data.wallets.bonus.available).toBeCloseTo(20, 8);
   });
 });

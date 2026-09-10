@@ -87,7 +87,9 @@ export interface AdminReportResult<TRow> {
   summary: AdminReportSummary;
 }
 
-/** One user row in the admin Users report (with wallet balances + directCount). */
+/** One user row in the admin Users report (with wallet balances + directCount).
+ *  `directCount` is every registered direct; `activeDirectCount` is directs who
+ *  activated a package — the count star ranks qualify on. */
 export interface AdminUserReportRow {
   id: string;
   name: string;
@@ -99,6 +101,7 @@ export interface AdminUserReportRow {
   referredBy: string | null;
   isEmailVerified: boolean;
   directCount: number;
+  activeDirectCount: number;
   walletAvailable: number;
   walletOnHold: number;
   joinedAt: string;
