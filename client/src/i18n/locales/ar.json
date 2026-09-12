@@ -594,6 +594,29 @@
     "maxRankAchieved": "تم بلوغ أعلى رتبة",
     "progressTo": "التقدم نحو {{rank}}"
   },
+  "teamEnergyCard": {
+    "title": "طاقة الفريق اليومية",
+    "todayBonus": "مكافأة اليوم",
+    "totalBonus": "إجمالي المكافآت",
+    "bonusRate": "نسبة المكافأة",
+    "teamMembers": "الأعضاء المؤهلون",
+    "levelRow": "المستوى {{level}}",
+    "nextStarGap": "{{count}} عضو نشط إضافي في المستوى {{level}} للوصول إلى {{star}}★",
+    "maxStarAchieved": "تم بلوغ الحد الأقصى للنجوم",
+    "viewHistory": "عرض سجل المكافآت"
+  },
+  "communityCard": {
+    "title": "مكافأة المجتمع الشهرية",
+    "monthlyBonus": "المكافأة الشهرية",
+    "totalBonus": "إجمالي المكافآت",
+    "qualifyingMembers": "الأعضاء المؤهلون",
+    "lastDistribution": "آخر صرف",
+    "noDistributionYet": "لم يتم الدفع بعد",
+    "levelRow": "المستوى {{level}}",
+    "nextStarGap": "{{count}} أعضاء نشطين إضافيين في المستوى {{level}} يصلون إلى {{star}}★",
+    "maxStarAchieved": "تم الوصول إلى أقصى نجمة",
+    "viewHistory": "عرض سجل المدفوعات"
+  },
   "rankStars": {
     "ariaLabel": "{{level}} من {{max}} نجوم"
   }

@@ -447,6 +447,9 @@ interface TreeNodeData {
   directCount: number;
 }
 
+/** Team display cap — matches the server's `MAX_TEAM_DISPLAY_LEVEL` (10). */
+const MAX_TEAM_LEVELS = 10;
+
 /** Root of the tree — the viewer. Loads its direct children on expand. */
 function TreeRoot({ rootName, rootCode }: { rootName: string; rootCode: string }) {
   const root: TreeNodeData = {
@@ -463,12 +466,14 @@ function TreeRoot({ rootName, rootCode }: { rootName: string; rootCode: string }
   );
 }
 
-/** A single expandable tree node. Lazily fetches children when first expanded. */
+/** A single expandable tree node. Lazily fetches children when first expanded.
+ * A node at team level 10 (depth 10) renders as a leaf — the account never
+ * shows levels beyond 10. */
 function TreeNode({ node, depth }: { node: TreeNodeData; depth: number }) {
   const [expanded, setExpanded] = useState(false);
   const children = useTreeChildren(expanded ? node.id : undefined, { page: 1, limit: 50 });
 
-  const hasChildren = node.id === "me" || node.directCount > 0;
+  const hasChildren = depth < MAX_TEAM_LEVELS && (node.id === "me" || node.directCount > 0);
 
   return (
     <div>

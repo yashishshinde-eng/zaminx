@@ -74,8 +74,16 @@ const userSchema = new Schema(
     // by directCount/teamCount at evaluation time. Sticky — only ratchets up
     // (via $max), never decreases even if the team later shrinks. Synced daily
     // by `syncHighestStarForUser` (rank.service.ts) inside the rank_check cron.
-    // Gates Team Energy eligibility and the Community Monthly Bonus payout tier.
+    // Gates the Community Monthly Bonus payout tier.
     highestStar: { type: Number, default: 0, min: 0 },
+
+    // Daily Team Energy star (teamEnergy.service.ts): highest N such that the
+    // user has >= 3^N ACTIVE members AT lineage level N, evaluated
+    // sequentially (level 1 must pass before level 2 is checked). Non-sticky —
+    // always recomputed from the live downline by `recalcTeamEnergyStar` and
+    // never used as a payout input itself. Separate from `highestStar` (the
+    // sticky rank-ladder rung), which keeps its rank/community semantics.
+    teamEnergyStar: { type: Number, default: 0, min: 0 },
   },
   { timestamps: true },
 );

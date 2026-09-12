@@ -1,9 +1,9 @@
-import { User, UserPackage, BonanzaOffer, ActivityLog, WalletTransaction, Rank } from "../models/index.js";
+import mongoose from "mongoose";
+import { User, UserPackage, BonanzaOffer, ActivityLog, WalletTransaction } from "../models/index.js";
 import { logger } from "../config/logger.js";
 import { applyLedgerEntry } from "./wallet.service.js";
 import { sendNotificationEmail } from "./email.service.js";
 import { bonanzaEarnedTemplate } from "./emailTemplates.js";
-import { getTeamCounts } from "./referral.service.js";
 import {
   getDirectBonusPct,
   isYieldEnabled,
@@ -16,11 +16,30 @@ import {
   getTeamEnergyPct,
   isCommunityEnabled,
 } from "./setting.service.js";
+// Star qualification comes from the ONE centralized engine (user architecture
+// rule) — both the daily Team Energy payout and the monthly Community payout
+// consume `computeQualifiedStar`; neither re-implements qualification.
+import {
+  MAX_STAR,
+  STAR_REQUIREMENTS,
+  batchPerLevelActiveTeamCounts,
+  computeQualifiedStar,
+  monthlyBonusCentsForStar,
+  perLevelActiveTeamCounts,
+} from "./starQualification.service.js";
+// The daily income math (percentage × base) is Team Energy's own payout model.
+import { bpFromPct, calcTeamEnergyBonusCents } from "./teamEnergy.service.js";
+// Shared pagination helpers (same clamp + meta block the report endpoints use).
+import { clampPage, paginate } from "./report.service.js";
 import type {
   YieldRunSummary,
   BonanzaEvalSummary,
   TeamEnergyRunSummary,
   CommunityRunSummary,
+  CommunityBonusInfo,
+  TeamEnergyLevelRow,
+  AdminCommunityBonusReport,
+  AdminCommunityBonusRow,
 } from "@zeminex/shared";
 
 const DAY_MS = 86_400_000;
@@ -415,15 +434,18 @@ type LeanLineageUser = {
 };
 
 /**
- * Run the daily team-energy credit: each active, in-window UserPackage
- * generates a daily yield, and a configurable slice of that yield flows up the
- * buyer's `lineage` to each ancestor (weighted by level, up to `depth`). One
- * `team_bonus` credit per (ancestor, downline source user) per day — kept
- * separate per source so reports can show whose activity earned it and at
- * which level — idempotent via `team-energy:<ancestorId>:<sourceUserId>:<date>`.
+ * Run the daily team-energy credit (star-qualified model — teamEnergy.service.ts):
+ * an ancestor qualifies for Star N by having ≥ 3^N ACTIVE members at lineage
+ * level N (evaluated sequentially), and earns `pct[star]`% of the downline
+ * scheduled daily trade-yield volume within their star's depth, as ONE
+ * `team_bonus` credit per earning day — idempotent via
+ * `team-energy:<userId>:<date>`. The star is recomputed from the authoritative
+ * DB per-level counts on every run and persisted (`User.teamEnergyStar`).
  *
  * Eligibility (anti-farming): an ancestor only earns if they hold an active
- * UserPackage. No cron yet (Phase 18) — triggered by the admin
+ * UserPackage. Users already credited for the same day under the legacy
+ * per-ancestor key format are skipped (deploy-day double-pay guard). Triggered
+ * daily by the `daily_team_energy` cron and by the admin
  * `POST /compensation/run-team-energy` endpoint. `asOf` targets a specific UTC
  * day for backfills; defaults to today.
  */
@@ -436,9 +458,11 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     return { asOf: target.toISOString(), processed: 0, credited: 0, skipped: 0, errors: 0 };
   }
 
+  // `depth` = maximum payable star (0 disables payouts); `pcts[star−1]` = the
+  // star's daily bonus percentage (teamEnergy.service.ts table semantics).
   const depth = await getTeamEnergyDepth();
-  const weights = await getTeamEnergyPct();
-  if (depth <= 0 || weights.length === 0) {
+  const pcts = await getTeamEnergyPct();
+  if (depth <= 0 || !pcts.some((p) => p > 0)) {
     return { asOf: target.toISOString(), processed: 0, credited: 0, skipped: 0, errors: 0 };
   }
 
@@ -475,11 +499,13 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
   );
   const isActiveSponsor = (id: string): boolean => activeUserIds.has(id);
 
-  // Accumulate per-ancestor earnings, broken down by the downline source user
-  // (and their level), across all their packages for the day — keyed
-  // `${ancestorId}:${sourceUserId}` so each credit can name who it came from
-  // and at which level, instead of one opaque daily lump sum per ancestor.
-  const accrual = new Map<string, { amount: number; level: number }>();
+  // Accumulate the day's eligible base per ancestor, broken down by the
+  // downline source user (and their level): the base is the scheduled daily
+  // trade yield of downline packages within the ancestor's star depth.
+  // Ancestors of every in-window package are recorded even when the yield is 0
+  // so the star projection still reflects the live team structure.
+  const ancestors = new Set<string>();
+  const sourcesByAncestor = new Map<string, Map<string, { level: number; yieldCents: number }>>();
 
   let skipped = 0;
   for (const up of packages) {
@@ -496,25 +522,26 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
         continue;
       }
       const yieldAmt = scheduledYieldForPackage(yieldCtx, up, start, activatedAt, expiresAt);
-      if (yieldAmt <= 0) {
-        skipped++;
-        continue;
-      }
 
       // Walk the buyer's lineage from the closest ancestor (direct sponsor =
-      // lineage[last]) up to `depth` levels. Level L earns `weights[L-1]`%.
+      // lineage[last]) up to the star-table ceiling. Level L = lineage[len − L].
       const lineage = lineageByUser.get(up.user.toString()) ?? [];
-      for (let level = 1; level <= depth; level++) {
-        const weight = weights[level - 1];
-        if (!weight || weight <= 0) continue;
-        // Closest ancestor is the last entry; level 1 = direct sponsor.
+      for (let level = 1; level <= MAX_STAR; level++) {
         const ancestorId = lineage[lineage.length - level];
-        if (!ancestorId) continue;
-        const share = round2((yieldAmt * weight) / 100);
-        if (share <= 0) continue;
-        const accrualKey = `${ancestorId}:${up.user.toString()}`;
-        const prev = accrual.get(accrualKey);
-        accrual.set(accrualKey, { amount: round2((prev?.amount ?? 0) + share), level });
+        if (!ancestorId) break;
+        ancestors.add(ancestorId);
+        if (yieldAmt <= 0) continue;
+        let sources = sourcesByAncestor.get(ancestorId);
+        if (!sources) {
+          sources = new Map();
+          sourcesByAncestor.set(ancestorId, sources);
+        }
+        // A buyer's multiple packages accumulate into one source entry.
+        const prev = sources.get(up.user.toString());
+        sources.set(up.user.toString(), {
+          level,
+          yieldCents: (prev?.yieldCents ?? 0) + Math.round(yieldAmt * 100),
+        });
       }
     } catch (err) {
       logger.error("Team energy accrual failed for package", {
@@ -525,33 +552,67 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     }
   }
 
-  // Rank gate: an ancestor must have achieved 1-Star (ever, sticky — see
-  // `syncHighestStarForUser`) to receive team energy, on top of holding an
-  // active package. Their star also CAPS the depth: a 1-Star member earns from
-  // level 1 only, 2-Star from levels 1–2, 3-Star from levels 1–3, … — deeper
-  // levels stay closed until the corresponding star is achieved. Scoped to just
-  // the ancestors that actually accrued something this run, not a full
-  // users-collection scan.
-  const accrualAncestorIds = Array.from(new Set(Array.from(accrual.keys()).map((k) => k.split(":")[0])));
-  const starByAncestor = new Map<string, number>(
+  // Per-level ACTIVE member counts for every ancestor — one batch aggregation
+  // instead of N (Star Qualification Engine). The star is recomputed from these
+  // authoritative counts on every run, never from a cache.
+  const maxDepth = Math.min(depth, MAX_STAR);
+  const countsByAncestor = await batchPerLevelActiveTeamCounts(Array.from(ancestors), maxDepth);
+
+  // Deploy-day guard: users already credited for this earning day under the
+  // legacy per-ancestor key format (rows carrying no meta.bonusType) are
+  // skipped — the new idempotency key cannot collide with the old one.
+  const legacyPaid = new Set(
     (
-      await User.find({ _id: { $in: accrualAncestorIds } })
-        .select("highestStar")
-        .lean()
-    ).map((u) => [u._id.toString(), u.highestStar ?? 0]),
+      await WalletTransaction.aggregate<{ _id: { toString(): string } }>([
+        {
+          $match: {
+            type: "team_bonus",
+            direction: "credit",
+            "meta.date": key,
+            "meta.bonusType": { $ne: "DAILY_TEAM_ENERGY" },
+          },
+        },
+        { $group: { _id: "$user" } },
+      ])
+    ).map((r) => r._id.toString()),
   );
 
   let credited = 0;
   let errors = 0;
-  for (const [accrualKey, { amount, level }] of accrual) {
-    if (amount <= 0) continue;
-    const [ancestorId, sourceUserId] = accrualKey.split(":");
-    const star = starByAncestor.get(ancestorId) ?? 0;
-    if (!isActiveSponsor(ancestorId) || star < 1 || level > star) {
+  for (const ancestorId of ancestors) {
+    const star = computeQualifiedStar(countsByAncestor.get(ancestorId) ?? new Map());
+    // Persist the projection (read model only — never a payout input).
+    await User.updateOne({ _id: ancestorId }, { $set: { teamEnergyStar: star } }).catch(() => undefined);
+    const effectiveStar = Math.min(star, depth);
+    if (effectiveStar < 1 || !isActiveSponsor(ancestorId) || legacyPaid.has(ancestorId)) {
       skipped++;
       continue;
     }
-    const source = buyerInfoByUser.get(sourceUserId);
+    const pct = pcts[effectiveStar - 1] ?? 0;
+    // One credit per user per earning day: `applyLedgerEntry` dedupes
+    // (user, type, reference.resourceId) silently, so pre-check here to report
+    // the re-run as "skipped", not "credited".
+    const dupKey = `team-energy:${ancestorId}:${key}`;
+    if (await WalletTransaction.exists({ user: ancestorId, type: "team_bonus", "reference.resourceId": dupKey })) {
+      skipped++;
+      continue;
+    }
+    // Eligible base = the scheduled yield of downline sources within the
+    // star's depth; integer cents throughout (no float percentage math).
+    let baseCents = 0;
+    let teamMemberCount = 0;
+    for (const { level, yieldCents } of sourcesByAncestor.get(ancestorId)?.values() ?? []) {
+      if (level <= effectiveStar) {
+        baseCents += yieldCents;
+        teamMemberCount++;
+      }
+    }
+    const bonusCents = calcTeamEnergyBonusCents(baseCents, bpFromPct(pct));
+    if (bonusCents <= 0) {
+      skipped++;
+      continue;
+    }
+    const amount = bonusCents / 100;
     try {
       await applyLedgerEntry({
         userId: ancestorId,
@@ -560,30 +621,40 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
         direction: "credit",
         amount,
         type: "team_bonus",
-        reference: { resource: "UserPackage", resourceId: `team-energy:${ancestorId}:${sourceUserId}:${key}` },
-        memo: `Daily team energy bonus — Level ${level}${source ? ` from ${source.name}` : ""}`,
+        reference: { resource: "User", resourceId: `team-energy:${ancestorId}:${key}` },
+        memo: `Daily team energy bonus — ${effectiveStar} Star @ ${pct}%`,
         meta: {
           date: key,
-          depth,
-          level,
-          fromUserId: sourceUserId,
-          fromUserName: source?.name ?? null,
-          fromReferralCode: source?.referralCode ?? null,
+          earningDate: key,
+          bonusType: "DAILY_TEAM_ENERGY",
+          starLevel: effectiveStar,
+          starPosition: effectiveStar,
+          teamMemberCount,
+          bonusPercentage: pct,
+          eligibleBonusBase: baseCents / 100,
+          bonusAmount: amount,
+          status: "completed",
         },
       });
       credited++;
       await ActivityLog.create({
         actor: ancestorId,
         action: "compensation.team_bonus",
-        resource: "UserPackage",
-        resourceId: `team-energy:${ancestorId}:${sourceUserId}:${key}`,
-        meta: { amount, date: key, depth, level, fromUserId: sourceUserId },
+        resource: "User",
+        resourceId: `team-energy:${ancestorId}:${key}`,
+        meta: {
+          amount,
+          date: key,
+          bonusType: "DAILY_TEAM_ENERGY",
+          starLevel: effectiveStar,
+          teamMemberCount,
+          bonusPercentage: pct,
+        },
       }).catch(() => undefined);
     } catch (err) {
       errors++;
       logger.error("Team energy credit failed", {
         ancestorId,
-        sourceUserId,
         date: key,
         error: err instanceof Error ? err.message : String(err),
       });
@@ -612,14 +683,22 @@ function utcMonthBounds(d: Date): { start: Date; end: Date; key: string } {
 }
 
 /**
- * Run the monthly community credit: each active-package holder earns the reward
- * for their current star (team-size ladder) — a recurring $ amount per star on
- * the 10th of each month. One `community_bonus` credit per user per month,
- * idempotent via `community:<userId>:<YYYY-MM>`.
+ * Run the monthly community credit: each active-package holder earns the FIXED
+ * monthly $ amount for their highest sequentially qualified star (Community
+ * Monthly Bonus spec) — paid ONCE per distribution month, on the 10th.
  *
- * The star→reward map is the active `Rank` ladder (order === star), so the
- * monthly $-by-star amounts stay admin-tunable via the /ranks endpoints and
- * reuse the same 10-star ladder as the one-time rank rewards ($10…$10,000).
+ * Star qualification is the SAME centralized engine the Daily Team Energy
+ * bonus uses (starQualification.service.ts): 3^N ACTIVE members at lineage
+ * level N, evaluated sequentially — a deep downline can never bypass an
+ * incomplete level 1. The payout itself is fully independent of Team Energy:
+ * a fixed dollar amount from `STAR_MONTHLY_BONUS_USD` (never a percentage,
+ * never derived from any Team Energy amount), with its own transaction type
+ * (`community_bonus`), schedule and duplicate-payment protection.
+ *
+ * One `community_bonus` credit per user per month, idempotent via
+ * `community:<userId>:<YYYY-MM>`. Because the star is recomputed from the live
+ * DB at distribution time, a team that shrank earns its CURRENT star's amount
+ * — the ledger row preserves the star and amount actually paid.
  *
  * Eligibility (anti-farming): a user only earns while holding an active
  * UserPackage. Scheduled by the in-process cron on UTC day 10 (Phase 18) and
@@ -630,31 +709,24 @@ function utcMonthBounds(d: Date): { start: Date; end: Date; key: string } {
 export async function runMonthlyCommunityBonus(asOf?: Date): Promise<CommunityRunSummary> {
   const target = asOf ?? new Date();
   const { key: monthKey } = utcMonthBounds(target);
+  const distributionDate = target.toISOString();
 
   if (!(await isCommunityEnabled())) {
     return { month: monthKey, processed: 0, credited: 0, skipped: 0, errors: 0 };
   }
 
-  // The 10-star reward ladder (order === star). Star 0 (Starter) pays nothing.
-  const ladder = await Rank.find({ status: "active" }).lean();
-  const rewardByStar = new Map<number, number>();
-  for (const r of ladder) rewardByStar.set(r.order, r.rewardAmount);
-
   // Active-package holders only (anti-farming guard).
   const activeUserIds = (await UserPackage.find({ status: "active" }).distinct("user")).map((id) =>
     id.toString(),
   );
+  if (activeUserIds.length === 0) {
+    return { month: monthKey, processed: 0, credited: 0, skipped: 0, errors: 0 };
+  }
 
-  // Sticky highest-ever-achieved star (server/src/services/rank.service.ts,
-  // syncHighestStarForUser) — not the current live team size, so a payout
-  // never drops just because the user's team later shrinks.
-  const highestStarByUser = new Map<string, number>(
-    (
-      await User.find({ _id: { $in: activeUserIds } })
-        .select("highestStar")
-        .lean()
-    ).map((u) => [u._id.toString(), u.highestStar ?? 0]),
-  );
+  // Star Qualification Engine: per-level ACTIVE member counts for every
+  // candidate in one batch aggregation, then the sequential walk. Never a
+  // total team size, never the sticky rank star.
+  const countsByUser = await batchPerLevelActiveTeamCounts(activeUserIds, MAX_STAR);
 
   let credited = 0;
   let skipped = 0;
@@ -662,38 +734,74 @@ export async function runMonthlyCommunityBonus(asOf?: Date): Promise<CommunityRu
 
   for (const userId of activeUserIds) {
     try {
-      const star = highestStarByUser.get(userId) ?? 0;
+      const star = computeQualifiedStar(countsByUser.get(userId) ?? new Map());
       if (star < 1) {
         skipped++;
         continue;
       }
-      // Current team size is recorded on the credit purely for admin/report
-      // context — it no longer determines the star or the reward.
-      const { teamCount } = await getTeamCounts(userId);
-      const reward = rewardByStar.get(star) ?? 0;
-      if (reward <= 0) {
+      // Duplicate-payment protection (spec §7): one payout per user per
+      // distribution month. `applyLedgerEntry` dedupes silently on re-runs,
+      // so pre-check here to report them as "skipped", not "credited".
+      const refKey = `community:${userId}:${monthKey}`;
+      if (
+        await WalletTransaction.exists({
+          user: userId,
+          type: "community_bonus",
+          "reference.resourceId": refKey,
+        })
+      ) {
         skipped++;
         continue;
       }
+      const qualifyingTeamMembers = countsByUser.get(userId)?.get(star) ?? 0;
+      const requiredTeamMembers = STAR_REQUIREMENTS[star];
+      // Fixed dollar amount from the centralized table, integer cents —
+      // NOT a percentage of trading income, deposits, packages or volume.
+      const bonusCents = monthlyBonusCentsForStar(star);
+      if (bonusCents <= 0) {
+        skipped++;
+        continue;
+      }
+      const amount = bonusCents / 100;
 
       await applyLedgerEntry({
         userId,
         wallet: "bonus",
         field: "available",
         direction: "credit",
-        amount: reward,
+        amount,
         type: "community_bonus",
-        reference: { resource: "User", resourceId: `community:${userId}:${monthKey}` },
+        reference: { resource: "User", resourceId: refKey },
         memo: `Community monthly bonus — ${star} Star`,
-        meta: { month: monthKey, star, teamCount },
+        meta: {
+          month: monthKey, // legacy alias (kept for older report queries)
+          distributionMonth: monthKey,
+          distributionDate,
+          bonusType: "COMMUNITY_MONTHLY_BONUS",
+          starLevel: star,
+          starPosition: star,
+          qualifyingTeamMembers,
+          requiredTeamMembers,
+          bonusAmount: amount,
+          currency: "USDT",
+          status: "completed",
+        },
       });
       credited++;
       await ActivityLog.create({
         actor: userId,
         action: "compensation.community_bonus",
         resource: "User",
-        resourceId: `community:${userId}:${monthKey}`,
-        meta: { amount: reward, month: monthKey, star, teamCount },
+        resourceId: refKey,
+        meta: {
+          amount,
+          month: monthKey,
+          distributionMonth: monthKey,
+          bonusType: "COMMUNITY_MONTHLY_BONUS",
+          starLevel: star,
+          qualifyingTeamMembers,
+          requiredTeamMembers,
+        },
       }).catch(() => undefined);
     } catch (err) {
       errors++;
@@ -711,6 +819,144 @@ export async function runMonthlyCommunityBonus(asOf?: Date): Promise<CommunityRu
     credited,
     skipped,
     errors,
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/*  Community Monthly Bonus — read models                              */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Read model for the Community Monthly Bonus dashboard card + the
+ * `GET /dashboard/community` endpoint. The star is recomputed live from the
+ * authoritative DB via the shared engine (never the persisted field, never
+ * the client); the monthly amount comes from the engine's fixed table.
+ */
+export async function getCommunityMonthlyInfo(userId: string): Promise<CommunityBonusInfo> {
+  const userOid = new mongoose.Types.ObjectId(userId);
+  const [counts, historyDocs, totalAgg] = await Promise.all([
+    perLevelActiveTeamCounts(userId, MAX_STAR),
+    WalletTransaction.find({ user: userOid, type: "community_bonus", direction: "credit" })
+      .sort({ createdAt: -1 })
+      .limit(6)
+      .select("amount meta createdAt")
+      .lean(),
+    WalletTransaction.aggregate<{ total: number }>([
+      { $match: { user: userOid, type: "community_bonus", direction: "credit" } },
+      { $group: { _id: null, total: { $sum: "$amount" } } },
+    ]),
+  ]);
+
+  const star = computeQualifiedStar(counts);
+
+  const perLevel: TeamEnergyLevelRow[] = [];
+  for (let level = 1; level <= MAX_STAR; level++) {
+    const required = STAR_REQUIREMENTS[level];
+    const activeCount = counts.get(level) ?? 0;
+    perLevel.push({ level, activeCount, required, qualified: activeCount >= required });
+  }
+
+  let nextStar: CommunityBonusInfo["nextStar"] = null;
+  if (star < MAX_STAR) {
+    const nextLevel = star + 1;
+    const required = STAR_REQUIREMENTS[nextLevel];
+    const current = counts.get(nextLevel) ?? 0;
+    nextStar = { level: nextLevel, required, current, gap: Math.max(0, required - current) };
+  }
+
+  const history = historyDocs.map((d) => ({
+    id: d._id.toString(),
+    month: (d.meta?.distributionMonth ?? d.meta?.month ?? "") as string,
+    amount: d.amount,
+    createdAt: d.createdAt.toISOString(),
+  }));
+  const newest = historyDocs[0];
+  const lastDistribution = newest
+    ? {
+        month: (newest.meta?.distributionMonth ?? newest.meta?.month ?? "") as string,
+        amount: newest.amount,
+        date: newest.createdAt.toISOString(),
+      }
+    : null;
+
+  return {
+    starLevel: star,
+    starPosition: star,
+    qualifyingTeamMembers: star > 0 ? counts.get(star) ?? 0 : 0,
+    requiredTeamMembers: star > 0 ? STAR_REQUIREMENTS[star] : 0,
+    // Fixed monthly $ amount for the star (integer cents ÷ 100).
+    monthlyBonus: monthlyBonusCentsForStar(star) / 100,
+    perLevel,
+    nextStar,
+    lastDistribution,
+    totalBonus: Math.round((totalAgg[0]?.total ?? 0) * 100) / 100,
+    history,
+  };
+}
+
+/**
+ * Admin view of one distribution month's Community payouts (spec §12): every
+ * `community_bonus` ledger row for the month, enriched with the earner's
+ * name/email and carrying the star + amounts preserved on the transaction
+ * (never re-derived from the user's current star), plus the month total.
+ * `meta.distributionMonth` is the primary match; `meta.month` covers rows
+ * written before that field existed.
+ */
+export async function getAdminCommunityBonusReport(
+  month?: string,
+  page = 1,
+  limit = 20,
+): Promise<AdminCommunityBonusReport> {
+  const key = month ?? new Date().toISOString().slice(0, 7);
+  const { page: p, limit: l } = clampPage(page, limit);
+  const filter = {
+    type: "community_bonus",
+    direction: "credit",
+    $or: [{ "meta.distributionMonth": key }, { "meta.month": key }],
+  };
+
+  // Page rows, total row count, and the whole-month summary come from three
+  // independent queries — `total`/`credited` must cover every payout of the
+  // month, not just the rendered page.
+  const [rows, total, sums] = await Promise.all([
+    WalletTransaction.find(filter)
+      .sort({ createdAt: -1 })
+      .skip((p - 1) * l)
+      .limit(l)
+      .lean(),
+    WalletTransaction.countDocuments(filter),
+    WalletTransaction.aggregate<{ _id: null; sum: number; credited: number }>([
+      { $match: filter },
+      { $group: { _id: null, sum: { $sum: "$amount" }, credited: { $sum: 1 } } },
+    ]),
+  ]);
+
+  const userIds = Array.from(new Set(rows.map((r) => r.user.toString())));
+  const users = userIds.length
+    ? await User.find({ _id: { $in: userIds } }).select("name email").lean()
+    : [];
+  const userById = new Map(users.map((u) => [u._id.toString(), { name: u.name, email: u.email }]));
+
+  const mapped: AdminCommunityBonusRow[] = rows.map((r) => ({
+    id: r._id.toString(),
+    userId: r.user.toString(),
+    userName: userById.get(r.user.toString())?.name ?? "—",
+    userEmail: userById.get(r.user.toString())?.email ?? "—",
+    starLevel: ((r.meta?.starLevel ?? r.meta?.star ?? 0) as number) ?? 0,
+    qualifyingTeamMembers: (r.meta?.qualifyingTeamMembers ?? null) as number | null,
+    requiredTeamMembers: (r.meta?.requiredTeamMembers ?? null) as number | null,
+    bonusAmount: r.amount,
+    distributionMonth: (r.meta?.distributionMonth ?? r.meta?.month ?? key) as string,
+    status: (r.meta?.status ?? "completed") as string,
+    paymentDate: r.createdAt.toISOString(),
+  }));
+
+  return {
+    month: key,
+    rows: mapped,
+    pagination: paginate(total, p, l),
+    total: Math.round((sums[0]?.sum ?? 0) * 100) / 100,
+    credited: sums[0]?.credited ?? 0,
   };
 }
 

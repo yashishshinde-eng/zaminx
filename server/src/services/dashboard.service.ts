@@ -5,6 +5,8 @@ import { env } from "../config/env.js";
 import { getWalletBalances } from "./wallet.service.js";
 import { getTeamCounts } from "./referral.service.js";
 import { getRankInfo } from "./rank.service.js";
+import { getTeamEnergyInfo } from "./teamEnergy.service.js";
+import { getCommunityMonthlyInfo } from "./compensation.service.js";
 import type { DashboardSummary, IncomeSummary, WalletTxType } from "@zeminex/shared";
 
 const DAY_MS = 86_400_000;
@@ -107,14 +109,17 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
   // Real (Phase 6): the user's active package, pending count, and history total.
   // Real (Phase 8): the user's wallet balances (Main / Bonus / Trading + totals).
   // Real (Phase 9): the user's referral team counts (direct + all-level).
-  const [activePkg, pendingCount, historyCount, wallets, team, income] = await Promise.all([
-    UserPackage.findOne({ user: userId, status: "active" }).sort({ activatedAt: -1 }).lean(),
-    UserPackage.countDocuments({ user: userId, status: "pending" }),
-    UserPackage.countDocuments({ user: userId }),
-    getWalletBalances(userId),
-    getTeamCounts(userId),
-    getIncomeSummary(userId),
-  ]);
+  const [activePkg, pendingCount, historyCount, wallets, team, income, teamEnergy, communityBonus] =
+    await Promise.all([
+      UserPackage.findOne({ user: userId, status: "active" }).sort({ activatedAt: -1 }).lean(),
+      UserPackage.countDocuments({ user: userId, status: "pending" }),
+      UserPackage.countDocuments({ user: userId }),
+      getWalletBalances(userId),
+      getTeamCounts(userId),
+      getIncomeSummary(userId),
+      getTeamEnergyInfo(userId),
+      getCommunityMonthlyInfo(userId),
+    ]);
 
   // Phase 10A: real rank slice from the active ladder, reusing the `team`
   // counts already fetched above (avoids two extra countDocuments calls).
@@ -151,5 +156,9 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
     // Phase 12 (Notifications) fills this in.
     notifications: { unread: 0, items: [] },
     recentActivity,
+    // Daily Team Energy — star-qualified bonus slice (teamEnergy.service.ts).
+    teamEnergy,
+    // Community Monthly Bonus — fixed $ per qualified star, monthly.
+    communityBonus,
   };
 }

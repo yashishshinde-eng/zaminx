@@ -594,6 +594,29 @@
     "maxRankAchieved": "Rango máximo alcanzado",
     "progressTo": "Progreso hacia {{rank}}"
   },
+  "teamEnergyCard": {
+    "title": "Energía de Equipo Diaria",
+    "todayBonus": "Bono de hoy",
+    "totalBonus": "Bono total",
+    "bonusRate": "Tasa de bono",
+    "teamMembers": "Miembros calificados",
+    "levelRow": "Nivel {{level}}",
+    "nextStarGap": "{{count}} miembros activos más en el nivel {{level}} alcanzan {{star}}★",
+    "maxStarAchieved": "Estrella máxima alcanzada",
+    "viewHistory": "Ver historial de bonos"
+  },
+  "communityCard": {
+    "title": "Bono mensual de comunidad",
+    "monthlyBonus": "Bono mensual",
+    "totalBonus": "Bono total",
+    "qualifyingMembers": "Miembros calificados",
+    "lastDistribution": "Último pago",
+    "noDistributionYet": "Aún no pagado",
+    "levelRow": "Nivel {{level}}",
+    "nextStarGap": "{{count}} miembros activos más en el nivel {{level}} alcanzan {{star}}★",
+    "maxStarAchieved": "Estrella máxima alcanzada",
+    "viewHistory": "Ver historial de pagos"
+  },
   "rankStars": {
     "ariaLabel": "{{level}} de {{max}} estrellas"
   }

@@ -279,10 +279,15 @@ function toTeamRow(r: {
   };
 }
 
+/** Team display cap — the user's account only ever shows levels 1..10. */
+export const MAX_TEAM_DISPLAY_LEVEL = 10;
+
 /**
  * `GET /referrals/team` — the viewer's full downline (every descendant via
  * `lineage`), filterable by relative level and status. Phone is returned only
- * for level-1 (direct) rows.
+ * for level-1 (direct) rows. The view is capped at 10 levels: an explicit
+ * level filter is clamped into 1..10 and the unfiltered list only returns
+ * members within the first 10 levels.
  */
 export async function getTeamReferrals(userId: string, args: GetTeamReferralsArgs): Promise<ReferralPage> {
   const page = Math.max(1, args.page);
@@ -303,7 +308,14 @@ export async function getTeamReferrals(userId: string, args: GetTeamReferralsArg
       relLevel: { $subtract: [{ $size: "$lineage" }, { $indexOfArray: ["$lineage", toOid(userId)] }] },
     },
   };
-  const levelMatch = args.level ? [{ $match: { relLevel: args.level } }] : [];
+  const level =
+    args.level !== undefined
+      ? Math.min(Math.max(Math.trunc(args.level), 1), MAX_TEAM_DISPLAY_LEVEL)
+      : undefined;
+  // No explicit level → still capped: only the first 10 levels are listed.
+  const levelMatch = [
+    { $match: level !== undefined ? { relLevel: level } : { relLevel: { $lte: MAX_TEAM_DISPLAY_LEVEL } } },
+  ];
 
   const basePipeline: mongoose.PipelineStage[] = [
     { $match: filter },
@@ -360,6 +372,7 @@ export async function getTreeChildren(
   if (!requester) throw ApiError.notFound("User not found");
 
   let targetId: mongoose.Types.ObjectId;
+  let targetDepth = 0; // viewer's own node = team level 0; children of it are level 1
   if (targetUserId === "me") {
     targetId = requester._id;
   } else {
@@ -371,6 +384,15 @@ export async function getTreeChildren(
       (target.lineage ?? []).some((a) => a?.toString() === requesterId);
     if (!inSubtree) throw ApiError.notFound("Node not found");
     targetId = target._id;
+    // Relative level of the target under the viewer (viewer itself = 0).
+    const idx = (target.lineage ?? []).findIndex((a) => a?.toString() === requesterId);
+    targetDepth = target._id.equals(requester._id) ? 0 : (target.lineage?.length ?? 0) - idx;
+  }
+
+  // Display cap: nodes at level 10 have no expandable children in the user's
+  // account — their children (level 11+) are never served.
+  if (targetDepth >= MAX_TEAM_DISPLAY_LEVEL) {
+    return { items: [], page, limit, total: 0, totalPages: 0 };
   }
 
   const filter = { sponsorId: targetId };

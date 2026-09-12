@@ -7,6 +7,7 @@ import { createInvoice } from "./nowpayments.service.js";
 import { applyLedgerEntry, getWalletBalances } from "./wallet.service.js";
 import { awardDirectBonus } from "./compensation.service.js";
 import { evaluateRankForUser } from "./rank.service.js";
+import { recalcTeamEnergyStarsForChain } from "./teamEnergy.service.js";
 import type { DepositRow, PackageTier, UserPackageRow, WalletBalance, AdminDepositCreateBody } from "@zeminex/shared";
 
 interface Meta {
@@ -331,6 +332,14 @@ export async function activatePackageFromWallet(
   // full access once their first package is live.
   await User.updateOne({ _id: targetUserId, status: { $ne: "active" } }, { $set: { status: "active" } }).exec();
 
+  // Team Energy: the newly-active member changes per-level counts for every
+  // ancestor — refresh their stars (best-effort, never blocks activation).
+  void User.findById(targetUserId)
+    .select("lineage")
+    .lean()
+    .then((u) => (u?.lineage?.length ? recalcTeamEnergyStarsForChain(u.lineage.map((a) => a.toString())) : undefined))
+    .catch(() => undefined);
+
   // 4. Record a paid, wallet-funded Deposit so the activation appears in the
   //    beneficiary's deposit history and the package row's joined `payment`
   //    info. For a "for other" activation the actor is recorded in meta.
@@ -434,6 +443,13 @@ export async function confirmDeposit(
     );
     // A package going live promotes an inactive user to active (idempotent).
     await User.updateOne({ _id: deposit.user, status: { $ne: "active" } }, { $set: { status: "active" } }).exec();
+
+    // Team Energy: refresh the buyer's ancestor chain (best-effort).
+    void User.findById(deposit.user)
+      .select("lineage")
+      .lean()
+      .then((u) => (u?.lineage?.length ? recalcTeamEnergyStarsForChain(u.lineage.map((a) => a.toString())) : undefined))
+      .catch(() => undefined);
   }
 
   await ActivityLog.create({

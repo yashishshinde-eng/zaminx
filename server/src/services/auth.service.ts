@@ -8,6 +8,7 @@ import { sendEmail } from "./email.service.js";
 import { verifyEmailTemplate, welcomeTemplate, resetPasswordTemplate } from "./emailTemplates.js";
 import { evaluateBonanzasForUser } from "./compensation.service.js";
 import { evaluateRankForUser } from "./rank.service.js";
+import { recalcTeamEnergyStarsForChain } from "./teamEnergy.service.js";
 import type { PublicUser } from "@zeminex/shared";
 
 /** Lifetime of verification/reset tokens, derived from env. */
@@ -94,9 +95,14 @@ export async function registerUser(input: RegisterInput) {
   // never blocks signup.
   if (user.sponsorId) {
     const sponsorId = user.sponsorId.toString();
-    Promise.all([evaluateBonanzasForUser(sponsorId), evaluateRankForUser(sponsorId)]).catch(
-      () => undefined,
-    );
+    // Team Energy: the new member is one more (inactive-for-now) downline entry
+    // in every ancestor's lineage — their stars are refreshed on activation;
+    // recalcing the chain here keeps the projection current from day one.
+    Promise.all([
+      evaluateBonanzasForUser(sponsorId),
+      evaluateRankForUser(sponsorId),
+      recalcTeamEnergyStarsForChain((user.lineage ?? []).map((a) => a.toString())),
+    ]).catch(() => undefined);
   }
 
   return { user, tokens };

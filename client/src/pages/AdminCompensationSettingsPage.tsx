@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { SlidersHorizontal, Zap } from "lucide-react";
+import { SlidersHorizontal, Users, Zap } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
-import { PageHeader } from "@/components/shared";
+import { PageHeader, Pagination } from "@/components/shared";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,9 +16,10 @@ import {
   runCommunityTrigger,
   evaluateBonanzasTrigger,
   runRankCheckTrigger,
+  fetchCommunityReport,
   type TriggerResult,
 } from "@/lib/admin";
-import type { CompensationSettings, CompensationSettingsBody } from "@zeminex/shared";
+import type { CompensationSettings, CompensationSettingsBody, AdminCommunityBonusReport } from "@zeminex/shared";
 
 /** /app/admin/compensation — edit the 7 compensation knobs + run engine triggers. */
 export function AdminCompensationSettingsPage() {
@@ -113,7 +114,7 @@ export function AdminCompensationSettingsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="communityPct">COMMUNITY MONTHLY BONUS (%)</Label>
+                    <Label htmlFor="communityPct">Community bonus — legacy % (unused)</Label>
                     <Input
                       id="communityPct"
                       type="number"
@@ -122,9 +123,12 @@ export function AdminCompensationSettingsPage() {
                       value={form.communityPct}
                       onChange={(e) => patch("communityPct", Number(e.target.value))}
                     />
+                    <p className="text-xs text-muted-foreground">
+                      The Community Monthly Bonus now pays a fixed $ amount per qualified star (see payouts below). This knob is kept for compatibility and no longer affects the payout.
+                    </p>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="teamEnergyDepth">Team energy depth</Label>
+                    <Label htmlFor="teamEnergyDepth">Team energy depth (max star)</Label>
                     <Input
                       id="teamEnergyDepth"
                       type="number"
@@ -135,14 +139,14 @@ export function AdminCompensationSettingsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="teamEnergyPct">Team energy percentages (comma-separated)</Label>
+                    <Label htmlFor="teamEnergyPct">Star percentages (1★…10★, comma-separated)</Label>
                     <Input
                       id="teamEnergyPct"
-                      placeholder="10, 5, 3, 2, 1"
+                      placeholder="10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.25, 0.25"
                       value={teamEnergyPctText}
                       onChange={(e) => setTeamEnergyPctText(e.target.value)}
                     />
-                    <p className="text-xs text-muted-foreground">One percentage per depth level, up to 10.</p>
+                    <p className="text-xs text-muted-foreground">One percentage per star, index = star − 1. Star N pays its rate on downline yield within depth N.</p>
                   </div>
                 </div>
 
@@ -234,8 +238,141 @@ export function AdminCompensationSettingsPage() {
 
         {/* Triggers */}
         <TriggersCard />
+
+        {/* Community Monthly Bonus payouts (spec §12) */}
+        <CommunityPayoutsCard />
       </div>
     </AppShell>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Community payouts report                                           */
+/* ------------------------------------------------------------------ */
+
+function CommunityPayoutsCard() {
+  const defaultMonth = new Date().toISOString().slice(0, 7);
+  const [month, setMonth] = useState(defaultMonth);
+  const [report, setReport] = useState<AdminCommunityBonusReport | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  async function load(targetMonth: string, targetPage = 1) {
+    setReport(null);
+    setLoading(true);
+    try {
+      const data = await fetchCommunityReport(targetMonth || undefined, targetPage);
+      setReport(data);
+    } catch {
+      /* interceptor toasts */
+      setReport(null);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    void load(defaultMonth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const rows = report?.rows ?? [];
+  const pagination = report?.pagination;
+
+  return (
+    <Card className="border-0">
+      <CardHeader className="space-y-1">
+        <CardTitle className="flex items-center gap-2 text-base">
+          <Users className="size-4 text-primary" /> Community monthly payouts
+        </CardTitle>
+        <CardDescription>
+          Fixed monthly amounts paid per qualified star. Star qualification and amounts come from the backend — rows preserve what was actually paid.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="flex flex-wrap items-end gap-3">
+          <div className="space-y-1">
+            <Label htmlFor="communityReportMonth">Distribution month</Label>
+            <Input
+              id="communityReportMonth"
+              type="month"
+              value={month}
+              onChange={(e) => setMonth(e.target.value)}
+              className="w-[180px]"
+            />
+          </div>
+          <Button
+            variant="outline"
+            disabled={loading}
+            onClick={() => void load(month, 1)}
+          >
+            {loading ? "Loading…" : "Load payouts"}
+          </Button>
+          {report && (
+            <div className="sm:ml-auto text-sm">
+              <span className="text-muted-foreground">Total distributed: </span>
+              <span className="font-medium tabular-nums">
+                ${report.total.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </span>
+              <span className="ml-3 text-muted-foreground">Users paid: </span>
+              <span className="font-medium tabular-nums">{report.credited}</span>
+            </div>
+          )}
+        </div>
+
+        {rows.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            {loading ? "Loading…" : report ? "No community payouts for this month." : ""}
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b text-left text-xs uppercase tracking-wide text-muted-foreground">
+                  <th className="py-2 pr-3 font-medium">User</th>
+                  <th className="py-2 pr-3 font-medium">Star</th>
+                  <th className="py-2 pr-3 font-medium">Members</th>
+                  <th className="py-2 pr-3 font-medium">Amount</th>
+                  <th className="py-2 pr-3 font-medium">Month</th>
+                  <th className="py-2 pr-3 font-medium">Status</th>
+                  <th className="py-2 pr-3 font-medium">Transaction</th>
+                  <th className="py-2 font-medium">Paid at</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((r) => (
+                  <tr key={r.id} className="border-b last:border-0">
+                    <td className="py-2 pr-3">
+                      <div className="font-medium">{r.userName}</div>
+                      <div className="text-xs text-muted-foreground">{r.userEmail}</div>
+                    </td>
+                    <td className="py-2 pr-3 tabular-nums">{r.starLevel}★</td>
+                    <td className="py-2 pr-3 tabular-nums">
+                      {r.qualifyingTeamMembers ?? "—"} / {r.requiredTeamMembers ?? "—"}
+                    </td>
+                    <td className="py-2 pr-3 font-medium tabular-nums">
+                      ${r.bonusAmount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </td>
+                    <td className="py-2 pr-3 tabular-nums">{r.distributionMonth}</td>
+                    <td className="py-2 pr-3 capitalize">{r.status}</td>
+                    <td className="py-2 pr-3 font-mono text-xs text-muted-foreground">{r.id}</td>
+                    <td className="py-2 text-xs tabular-nums">{new Date(r.paymentDate).toISOString().slice(0, 10)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {pagination && pagination.totalPages > 1 && (
+          <Pagination
+            page={pagination.page}
+            pageCount={pagination.totalPages}
+            onPageChange={(p) => void load(month, p)}
+            className="justify-center"
+          />
+        )}
+      </CardContent>
+    </Card>
   );
 }
 

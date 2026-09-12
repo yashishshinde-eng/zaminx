@@ -137,6 +137,8 @@ export interface AdminIncomeReportRow {
   fromUserName?: string | null;
   fromReferralCode?: string | null;
   level?: number | null;
+  /** Daily Team Energy rows: the star level earned (legacy rows: null). */
+  starLevel?: number | null;
 }
 
 /** A wallet ledger row enriched with the owning user's name/email (admin view). */

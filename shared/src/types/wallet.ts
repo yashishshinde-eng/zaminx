@@ -84,6 +84,16 @@ export interface WalletTxRow {
   fromUserName?: string | null;
   fromReferralCode?: string | null;
   level?: number | null;
+  /** Daily Team Energy (`team_bonus`, new model): the star level earned,
+   *  bonus %, the eligible base the % applied to, and the earning day (UTC
+   *  YYYY-MM-DD). Null on legacy per-level rows and every other type. */
+  starLevel?: number | null;
+  bonusPercentage?: number | null;
+  eligibleBonusBase?: number | null;
+  earningDate?: string | null;
+  /** Community Monthly Bonus (`community_bonus`): the distribution month
+   *  (YYYY-MM) the payout belongs to. Null on legacy rows and other types. */
+  distributionMonth?: string | null;
   createdAt: string;
 }
 

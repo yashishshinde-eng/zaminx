@@ -5,6 +5,7 @@ import {
   overview,
   runTeamEnergy,
   runCommunity,
+  communityReport,
   runRankCheck,
 } from "../controllers/compensation.controller.js";
 
@@ -17,5 +18,6 @@ router.post("/run-team-energy", ...runTeamEnergy);
 router.post("/run-community", ...runCommunity);
 router.post("/run-rank-check", ...runRankCheck);
 router.get("/overview", ...overview);
+router.get("/community-report", ...communityReport);
 
 export default router;

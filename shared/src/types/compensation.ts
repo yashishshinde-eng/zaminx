@@ -7,6 +7,8 @@
  * of truth for every credit; these types are the API-facing shapes.
  */
 
+import type { ReportPagination } from "./report";
+
 export type BonanzaStatus = "active" | "inactive";
 
 /** A Bonanza offer row, as returned to admins (full record). */
@@ -119,6 +121,50 @@ export interface RankEvalSummary {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Community Monthly Bonus — admin payouts report                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * One Community Monthly Bonus payout (spec §12): a `community_bonus` ledger
+ * row carrying the star + amount that was actually paid (never re-derived
+ * from the user's current star).
+ */
+export interface AdminCommunityBonusRow {
+  /** Ledger transaction id. */
+  id: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+  /** Star level paid (0..10 as recorded on the transaction). */
+  starLevel: number;
+  /** ACTIVE members at the paid star's level, as recorded at payout time. */
+  qualifyingTeamMembers: number | null;
+  /** 3^starLevel requirement the paid level satisfied. */
+  requiredTeamMembers: number | null;
+  /** Fixed $ amount paid. */
+  bonusAmount: number;
+  /** Distribution month the payout belongs to (YYYY-MM). */
+  distributionMonth: string;
+  /** Payment status recorded on the transaction ("completed"). */
+  status: string;
+  /** ISO createdAt of the ledger row (the payment date). */
+  paymentDate: string;
+}
+
+/** `GET /compensation/community-report` — one distribution month's payouts. */
+export interface AdminCommunityBonusReport {
+  /** The distribution month (YYYY-MM) the rows belong to. */
+  month: string;
+  rows: AdminCommunityBonusRow[];
+  /** Pagination of `rows` — `total`/`totalPages` cover the whole month. */
+  pagination: ReportPagination;
+  /** Sum of the month's `bonusAmount`s (all pages, not just this page). */
+  total: number;
+  /** Number of users paid that month (all pages). */
+  credited: number;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Phase 14A — compensation settings snapshot                          */
 /* ------------------------------------------------------------------ */
 
@@ -140,7 +186,9 @@ export interface CompensationSettings {
   /** Max single-day catch-up rate when the month falls behind the target pace. */
   yieldCatchUpCapPct: number;
   teamEnergyEnabled: boolean;
+  /** Maximum star whose payout depth applies (0 disables Team Energy payouts). */
   teamEnergyDepth: number;
+  /** Per-STAR daily bonus percentages, index = star − 1 (1★=10% … 10★=0.25%). */
   teamEnergyPct: number[];
   communityEnabled: boolean;
   communityPct: number;

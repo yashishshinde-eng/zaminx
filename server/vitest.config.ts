@@ -18,5 +18,10 @@ export default defineConfig({
     globalSetup: ["./src/test/globalSetup.ts"],
     // globalSetup probes the test DB once; if unreachable, integration tests skip.
     testTimeout: 20_000,
+    // One retry: the shared Atlas M0 cluster intermittently drops in-flight
+    // writes under sustained multi-file load (register/login `save()`s fail
+    // with DocumentNotFoundError, on the clean tree too). A retry turns those
+    // environmental blips into the deterministic result a local run shows.
+    retry: 1,
   },
 });

@@ -21,10 +21,14 @@ export async function connectTestDb(): Promise<void> {
   connected = true;
 }
 
-/** Drop every collection between tests for isolation. Cheaper than reconnect. */
+/** Wipe every collection between tests for isolation. `deleteMany` (not
+ *  `dropDatabase`) so indexes survive — and to avoid an Atlas free-tier
+ *  race where versioned `save()`s racing the drop report
+ *  `DocumentNotFoundError` (observed flakily across integration files). */
 export async function clearDb(): Promise<void> {
   if (!connected) return;
-  await mongoose.connection.db!.dropDatabase();
+  const collections = await mongoose.connection.db!.collections();
+  await Promise.all(collections.map((c) => c.deleteMany({})));
 }
 
 export async function disconnectTestDb(): Promise<void> {

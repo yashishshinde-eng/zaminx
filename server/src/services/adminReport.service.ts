@@ -113,7 +113,7 @@ type LeanTx = {
   onHoldAfter: number;
   reference?: { resource?: string | null; resourceId?: string | null } | null;
   memo?: string | null;
-  meta?: { fromUserId?: string | null; fromUserName?: string | null; fromReferralCode?: string | null; level?: number | null } | null;
+  meta?: { fromUserId?: string | null; fromUserName?: string | null; fromReferralCode?: string | null; level?: number | null; starLevel?: number | null } | null;
   createdAt: Date | string;
 };
 
@@ -438,6 +438,7 @@ function toAdminIncomeRow(t: LeanTx, userMap: Map<string, UserName>): AdminIncom
     fromUserName: t.meta?.fromUserName ?? null,
     fromReferralCode: t.meta?.fromReferralCode ?? null,
     level: t.meta?.level ?? null,
+    starLevel: t.meta?.starLevel ?? null,
   };
 }
 
@@ -461,6 +462,7 @@ function toAdminWalletRow(t: LeanTx, userMap: Map<string, UserName>): AdminWalle
     fromUserName: t.meta?.fromUserName ?? null,
     fromReferralCode: t.meta?.fromReferralCode ?? null,
     level: t.meta?.level ?? null,
+    starLevel: t.meta?.starLevel ?? null,
     createdAt: toIso(t.createdAt),
     userId,
     userName: userName(userMap, userId),
@@ -739,9 +741,9 @@ function toAdminSheet(kind: AdminReportKind, rows: unknown[]): { headers: string
       };
     case "income":
       return {
-        headers: ["Date", "User", "Type", "Amount", "From", "Referral Code", "Level", "Memo"],
+        headers: ["Date", "User", "Type", "Amount", "From", "Referral Code", "Level", "Star level", "Memo"],
         data: (rows as AdminIncomeReportRow[]).map((r) => [
-          r.date, r.userName, r.type, r.amount, r.fromUserName ?? "", r.fromReferralCode ?? "", r.level ?? "", r.memo ?? "",
+          r.date, r.userName, r.type, r.amount, r.fromUserName ?? "", r.fromReferralCode ?? "", r.level ?? "", r.starLevel ?? "", r.memo ?? "",
         ]),
       };
     case "wallet":

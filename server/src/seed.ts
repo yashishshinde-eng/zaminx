@@ -100,8 +100,15 @@ async function seed() {
     // Max total yield credited per calendar month, as % of package price (0 = no cap).
     { key: "compensation.monthlyYieldCapPct", value: 30, category: "compensation", isPublic: false },
     { key: "compensation.teamEnergyEnabled", value: true, category: "compensation", isPublic: false },
+    // Max star cap — an ancestor's effective star = min(qualifying star, this depth). 0 disables the bonus.
     { key: "compensation.teamEnergyDepth", value: 10, category: "compensation", isPublic: false },
+    // Per-STAR rates (index = star − 1): star N pays this % of downline scheduled
+    // trade-yield within depth N. Qualification = 3^N ACTIVE members at lineage
+    // level N, evaluated sequentially (teamEnergy.service.ts).
     { key: "compensation.teamEnergyPct", value: [10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.25, 0.25], category: "compensation", isPublic: false },
+    // Community Monthly Bonus: gate + legacy percentage knob. The payout is a
+    // FIXED $ amount per qualified star (STAR_MONTHLY_BONUS_USD in
+    // starQualification.service.ts) — communityPct is no longer read by it.
     { key: "compensation.communityEnabled", value: true, category: "compensation", isPublic: false },
     { key: "compensation.communityPct", value: 5, category: "compensation", isPublic: false },
   ];

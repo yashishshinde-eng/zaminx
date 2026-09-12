@@ -134,14 +134,12 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
     expect(w.body.data.wallets.trading.available).toBeCloseTo(5.32, 8);
   }, 120_000);
 
-  it("pays the monthly community bonus to a sponsor with an active direct (idempotent)", async () => {
+  it("pays the monthly community bonus to a 1★ sponsor (3 active directs, idempotent)", async () => {
     const admin = await seedAdminAndLogin();
     const sponsor = await registerAndLogin({ name: "Sponsor" });
     const me = await authed<{ data: { user: { referralCode: string } } }>(sponsor.accessToken, "/api/v1/auth/me");
     const referralCode = me.body.data.user.referralCode;
 
-    // Ranks now qualify on ACTIVE directs only (1 Star = 1 active direct), and
-    // the community run pays by the sticky `highestStar` on the same ladder.
     // Zero the direct-connect bonus first so the sponsor's bonus wallet holds
     // only the rank reward + community bonus this test accounts for.
     await authed(admin.accessToken, "/api/v1/admin/settings/compensation", {
@@ -149,8 +147,9 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
       body: JSON.stringify({ directBonusPct: 0 }),
     });
 
-    // Star-1 rung: 1 active direct, reward $10 (one-time rank reward AND the
-    // monthly community amount come from this same ladder entry).
+    // The one-time RANK ladder is a separate system (direct counts) — kept
+    // here to prove the community payout no longer reads it: the community
+    // star comes from the Star Qualification Engine (3 active directs = 1★).
     await Rank.create({
       name: "1 Star",
       order: 1,
@@ -168,15 +167,18 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
       body: JSON.stringify({ packageId: pkg._id }),
     });
 
-    // One ACTIVE direct: register a downline under the sponsor and activate a
-    // package for them. Activation fires the sponsor's rank eval → one-time
-    // rank reward ($10) + sticky highestStar = 1.
-    const direct = await registerAndLogin({ name: "Active direct", referralCode });
-    await fundWallet(50, direct.accessToken);
-    await authed(direct.accessToken, "/api/v1/packages/activate", {
-      method: "POST",
-      body: JSON.stringify({ packageId: pkg._id }),
-    });
+    // Three ACTIVE directs: register downline under the sponsor and activate a
+    // package for each. The first activation fires the sponsor's rank eval →
+    // one-time rank reward ($10, ladder above); all three together qualify the
+    // COMMUNITY star (1★ → fixed $10).
+    for (let i = 1; i <= 3; i++) {
+      const direct = await registerAndLogin({ name: `Active direct ${i}`, referralCode });
+      await fundWallet(50, direct.accessToken);
+      await authed(direct.accessToken, "/api/v1/packages/activate", {
+        method: "POST",
+        body: JSON.stringify({ packageId: pkg._id }),
+      });
+    }
 
     const r = await authed(admin.accessToken, "/api/v1/compensation/run-community?month=2024-01", { method: "POST" });
     expect(r.status).toBe(200);
@@ -184,6 +186,17 @@ describe.skipIf(!hasTestDb)("compensation flow", () => {
     // Bonus wallet = $10 one-time rank reward + $10 star-1 community bonus.
     const w = await authed<{ data: { wallets: { bonus: { available: number } } } }>(sponsor.accessToken, "/api/v1/wallet");
     expect(w.body.data.wallets.bonus.available).toBeCloseTo(20, 8);
+
+    // Community meta carries the fixed-amount spec fields.
+    const txn = await WalletTransaction.findOne({ type: "community_bonus", "meta.distributionMonth": "2024-01" }).lean();
+    expect(txn?.meta).toMatchObject({
+      bonusType: "COMMUNITY_MONTHLY_BONUS",
+      starLevel: 1,
+      qualifyingTeamMembers: 3,
+      bonusAmount: 10,
+      currency: "USDT",
+      status: "completed",
+    });
 
     // Idempotent: re-running the same month does not double-credit.
     await authed(admin.accessToken, "/api/v1/compensation/run-community?month=2024-01", { method: "POST" });

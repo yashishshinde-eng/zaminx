@@ -105,13 +105,13 @@ export async function isTeamEnergyEnabled(): Promise<boolean> {
   return getSetting<boolean>("compensation.teamEnergyEnabled", true);
 }
 
-/** How many ancestor levels a team-energy run pays (default 10). */
+/** Maximum star whose payout depth applies (default 10; 0 disables payouts). */
 export async function getTeamEnergyDepth(): Promise<number> {
   return getSetting<number>("compensation.teamEnergyDepth", 10);
 }
 
-/** Per-level team-energy weights, level 1 = direct sponsor
- *  (default [10,5,4,3,2,1,0.5,0.5,0.25,0.25] — 10 levels). */
+/** Per-STAR daily bonus percentages, index = star − 1 — 1★=10% … 10★=0.25%
+ *  (default [10,5,4,3,2,1,0.5,0.5,0.25,0.25]). */
 export async function getTeamEnergyPct(): Promise<number[]> {
   return getSetting<number[]>("compensation.teamEnergyPct", [10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.25, 0.25]);
 }
@@ -121,7 +121,10 @@ export async function isCommunityEnabled(): Promise<boolean> {
   return getSetting<boolean>("compensation.communityEnabled", true);
 }
 
-/** Community bonus percentage of the team's monthly trade yield (default 5 = 5%). */
+/** Legacy community-bonus knob (default 5 = 5%). The Community Monthly Bonus
+ *  now pays a FIXED $ amount per qualified star (starQualification.service.ts
+ *  `STAR_MONTHLY_BONUS_USD`) — this percentage is no longer read by the payout
+ *  path; the setting is kept so the admin UI/DB shape stay stable. */
 export async function getCommunityPct(): Promise<number> {
   return getSetting<number>("compensation.communityPct", 5);
 }

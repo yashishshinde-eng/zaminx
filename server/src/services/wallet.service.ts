@@ -242,7 +242,17 @@ function toTxRow(d: {
   onHoldAfter: number;
   reference?: { resource?: string | null; resourceId?: string | null } | null;
   memo?: string | null;
-  meta?: { fromUserId?: string | null; fromUserName?: string | null; fromReferralCode?: string | null; level?: number | null } | null;
+  meta?: {
+    fromUserId?: string | null;
+    fromUserName?: string | null;
+    fromReferralCode?: string | null;
+    level?: number | null;
+    starLevel?: number | null;
+    bonusPercentage?: number | null;
+    eligibleBonusBase?: number | null;
+    earningDate?: string | null;
+    distributionMonth?: string | null;
+  } | null;
   createdAt: Date;
 }): WalletTxRow {
   return {
@@ -262,6 +272,11 @@ function toTxRow(d: {
     fromUserName: d.meta?.fromUserName ?? null,
     fromReferralCode: d.meta?.fromReferralCode ?? null,
     level: d.meta?.level ?? null,
+    starLevel: d.meta?.starLevel ?? null,
+    bonusPercentage: d.meta?.bonusPercentage ?? null,
+    eligibleBonusBase: d.meta?.eligibleBonusBase ?? null,
+    earningDate: d.meta?.earningDate ?? null,
+    distributionMonth: d.meta?.distributionMonth ?? null,
     createdAt: d.createdAt instanceof Date ? d.createdAt.toISOString() : new Date().toISOString(),
   };
 }

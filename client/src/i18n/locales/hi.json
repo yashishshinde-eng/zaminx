@@ -594,6 +594,29 @@
     "maxRankAchieved": "अधिकतम रैंक प्राप्त",
     "progressTo": "{{rank}} तक प्रगति"
   },
+  "teamEnergyCard": {
+    "title": "दैनिक टीम एनर्जी",
+    "todayBonus": "आज का बोनस",
+    "totalBonus": "कुल बोनस",
+    "bonusRate": "बोनस दर",
+    "teamMembers": "योग्य सदस्य",
+    "levelRow": "स्तर {{level}}",
+    "nextStarGap": "स्तर {{level}} पर {{count}} और सक्रिय सदस्य {{star}}★ तक पहुँचेंगे",
+    "maxStarAchieved": "अधिकतम स्टार प्राप्त",
+    "viewHistory": "बोनस इतिहास देखें"
+  },
+  "communityCard": {
+    "title": "कम्युनिटी मासिक बोनस",
+    "monthlyBonus": "मासिक बोनस",
+    "totalBonus": "कुल बोनस",
+    "qualifyingMembers": "योग्य सदस्य",
+    "lastDistribution": "अंतिम भुगतान",
+    "noDistributionYet": "अभी तक भुगतान नहीं",
+    "levelRow": "स्तर {{level}}",
+    "nextStarGap": "स्तर {{level}} पर {{count}} और सक्रिय सदस्य {{star}}★ तक पहुँचेंगे",
+    "maxStarAchieved": "अधिकतम स्टार प्राप्त",
+    "viewHistory": "भुगतान इतिहास देखें"
+  },
   "rankStars": {
     "ariaLabel": "{{max}} में से {{level}} सितारे"
   }

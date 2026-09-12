@@ -4,6 +4,7 @@ import {
   evaluateBonanzaSchema,
   runTeamEnergySchema,
   runCommunitySchema,
+  communityReportQuerySchema,
   runRankCheckSchema,
 } from "@zeminex/shared";
 import { validate } from "../middlewares/validate.js";
@@ -16,6 +17,7 @@ import {
   runBonanzaEvaluationAll,
   runDailyTeamEnergy,
   runMonthlyCommunityBonus,
+  getAdminCommunityBonusReport,
 } from "../services/compensation.service.js";
 import { evaluateRankForUser, runRankCheckAll } from "../services/rank.service.js";
 import { BonanzaOffer, UserPackage, User, Rank } from "../models/index.js";
@@ -50,16 +52,17 @@ export const evaluateBonanzas: RequestHandler[] = [
 /** GET /compensation/overview — admin compensation dashboard counts. */
 export const overview: RequestHandler[] = [
   asyncHandler(async (_req, res) => {
-    const [activePackages, totalUsers, sponsors, activeOffers, activeRanks] = await Promise.all([
+    const [activePackages, totalUsers, sponsors, activeOffers, activeRanks, teamEnergyEligible] = await Promise.all([
       UserPackage.countDocuments({ status: "active" }),
       User.countDocuments({}),
       User.countDocuments({ sponsorId: { $ne: null } }),
       BonanzaOffer.countDocuments({ status: "active" }),
       Rank.countDocuments({ status: "active" }),
+      User.countDocuments({ teamEnergyStar: { $gte: 1 } }),
     ]);
     ok(
       res,
-      { overview: { activePackages, totalUsers, sponsors, activeOffers, activeRanks } },
+      { overview: { activePackages, totalUsers, sponsors, activeOffers, activeRanks, teamEnergyEligible } },
       "Compensation overview",
     );
   }),
@@ -86,6 +89,17 @@ export const runCommunity: RequestHandler[] = [
     if (asOf && Number.isNaN(asOf.getTime())) throw ApiError.badRequest("Invalid month");
     const summary = await runMonthlyCommunityBonus(asOf);
     ok(res, { community: summary }, "Community bonus run complete");
+  }),
+];
+
+/** GET /compensation/community-report — one distribution month's payouts (admin),
+ *  paginated (summary totals always cover the whole month). */
+export const communityReport: RequestHandler[] = [
+  validate(communityReportQuerySchema, "query"),
+  asyncHandler(async (req, res) => {
+    const q = req.query as { month?: string; page?: number; limit?: number };
+    const report = await getAdminCommunityBonusReport(q.month, q.page, q.limit);
+    ok(res, { communityReport: report }, "Community bonus report");
   }),
 ];
 

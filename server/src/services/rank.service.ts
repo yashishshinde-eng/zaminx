@@ -262,9 +262,9 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
   if (ladder.length === 0) return { awarded: 0, errors: 0 };
 
   // Keep the sticky highest-star fresh on every eval trigger (registration,
-  // activation, admin runs) — Team Energy's per-star level cap reads this
-  // value, so a newly-achieved star must unlock its depth immediately, not
-  // wait for the next 01:15 UTC rank_check cron. Idempotent ($max).
+  // activation, admin runs) — rank display + one-time rank rewards read this
+  // value. The income bonuses (Team Energy / Community) use the separate
+  // per-level engine star, recalc'ed on the same triggers. Idempotent ($max).
   await syncHighestStarForUser(userId).catch(() => undefined);
 
   // Anti-farming: a user only earns rank rewards while holding an active
@@ -341,10 +341,12 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
  * if an admin edits a rank's `requiredTeamSize` independently.
  *
  * Sticky by design: `$max` never lowers the stored value, even if the user's
- * team later shrinks below the threshold that earned it. Gates Team Energy
- * eligibility AND its per-star level depth (1 Star earns level 1 only, 2 Star
- * levels 1–2, …) plus the Community Monthly Bonus payout tier
- * (compensation.service.ts).
+ * team later shrinks below the threshold that earned it. Drives the one-time
+ * rank rewards + rank display. The income bonuses each consume the shared Star
+ * Qualification Engine instead: the Daily Team Energy bonus (percentage of
+ * downline yield) and the Community Monthly Bonus (fixed $ on the 10th) both
+ * read the non-sticky, per-level 3^N star (`User.teamEnergyStar`,
+ * starQualification.service.ts) — this field no longer gates either payout.
  */
 export async function syncHighestStarForUser(userId: string, counts?: TeamCounts): Promise<void> {
   const ladder = await activeLadder();

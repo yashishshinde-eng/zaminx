@@ -20,6 +20,7 @@ import type {
   WalletBalance,
   DepositRow,
   PublicUser,
+  AdminCommunityBonusReport,
 } from "@zeminex/shared";
 import type { TokenPair } from "./auth";
 
@@ -263,6 +264,16 @@ export async function runTeamEnergyTrigger(date?: string): Promise<TriggerResult
 export async function runCommunityTrigger(month?: string): Promise<TriggerResult> {
   const { data } = await api.post<{ data: { community: TriggerResult } }>("/compensation/run-community", null, { params: { month } });
   return data.data.community;
+}
+
+/** GET /compensation/community-report — one distribution month's payouts (admin),
+ *  paginated; summary totals always cover the whole month. */
+export async function fetchCommunityReport(month?: string, page = 1, limit = 20): Promise<AdminCommunityBonusReport> {
+  const { data } = await api.get<{ data: { communityReport: AdminCommunityBonusReport } }>(
+    "/compensation/community-report",
+    { params: { month, page, limit } },
+  );
+  return data.data.communityReport;
 }
 
 /** POST /compensation/evaluate-bonanzas — evaluate bonanzas (optional `userId`). */

@@ -594,6 +594,29 @@
     "maxRankAchieved": "Max rank achieved",
     "progressTo": "Progress to {{rank}}"
   },
+  "teamEnergyCard": {
+    "title": "Daily Team Energy",
+    "todayBonus": "Today's bonus",
+    "totalBonus": "Total bonus",
+    "bonusRate": "Bonus rate",
+    "teamMembers": "Qualifying members",
+    "levelRow": "Level {{level}}",
+    "nextStarGap": "{{count}} more active members at level {{level}} reach {{star}}★",
+    "maxStarAchieved": "Maximum star reached",
+    "viewHistory": "View bonus history"
+  },
+  "communityCard": {
+    "title": "Community Monthly Bonus",
+    "monthlyBonus": "Monthly bonus",
+    "totalBonus": "Total bonus",
+    "qualifyingMembers": "Qualifying members",
+    "lastDistribution": "Last payout",
+    "noDistributionYet": "Not paid yet",
+    "levelRow": "Level {{level}}",
+    "nextStarGap": "{{count}} more active members at level {{level}} reach {{star}}★",
+    "maxStarAchieved": "Maximum star reached",
+    "viewHistory": "View payout history"
+  },
   "rankStars": {
     "ariaLabel": "{{level}} of {{max}} stars"
   }

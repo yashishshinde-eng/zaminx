@@ -136,6 +136,19 @@ export const runCommunitySchema = z.object({
   }),
 });
 
+/** GET /compensation/community-report — one distribution month's payouts (admin),
+ *  paginated; `total`/`credited` summaries always cover the whole month. */
+export const communityReportQuerySchema = z.object({
+  query: z.object({
+    month: z
+      .string()
+      .regex(/^\d{4}-\d{2}$/, "Month must be YYYY-MM")
+      .optional(),
+    page: z.coerce.number().int().min(1).default(1),
+    limit: z.coerce.number().int().min(1).max(100).default(20),
+  }),
+});
+
 /** POST /compensation/run-rank-check — trigger a rank evaluation (admin). */
 export const runRankCheckSchema = z.object({
   query: z.object({
@@ -150,7 +163,8 @@ export const runRankCheckSchema = z.object({
 /**
  * PATCH /admin/settings/compensation — update the global compensation knobs.
  * All fields optional; only provided fields are written via `setSetting`.
- * Percentages are 0..100; `teamEnergyPct` is the per-depth weight array.
+ * Percentages are 0..100; `teamEnergyPct` is the per-STAR daily bonus array
+ * (index = star − 1); `teamEnergyDepth` caps the maximum payable star.
  */
 export const compensationSettingsSchema = z.object({
   body: z.object({
@@ -182,5 +196,6 @@ export type RankListQuery = z.infer<typeof rankListQuerySchema>["query"];
 export type RankIdParam = z.infer<typeof rankIdParamSchema>["params"];
 export type RunTeamEnergyQuery = z.infer<typeof runTeamEnergySchema>["query"];
 export type RunCommunityQuery = z.infer<typeof runCommunitySchema>["query"];
+export type CommunityReportQuery = z.infer<typeof communityReportQuerySchema>["query"];
 export type RunRankCheckQuery = z.infer<typeof runRankCheckSchema>["query"];
 export type CompensationSettingsBody = z.infer<typeof compensationSettingsSchema>["body"];
