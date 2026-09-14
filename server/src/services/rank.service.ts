@@ -4,7 +4,7 @@ import { logger } from "../config/logger.js";
 import { applyLedgerEntry } from "./wallet.service.js";
 import { sendNotificationEmail } from "./email.service.js";
 import { rankAchievementTemplate } from "./emailTemplates.js";
-import { getTeamCounts, type TeamCounts } from "./referral.service.js";
+import { MAX_STAR, STAR_REQUIREMENTS, computeQualifiedStar, perLevelActiveTeamCounts } from "./starQualification.service.js";
 import type { RankRow, RankInfo, RankStatus, RankEvalSummary } from "@zeminex/shared";
 
 /* ------------------------------------------------------------------ */
@@ -172,60 +172,46 @@ export function getStarFromTeamSize(teamCount: number): number {
   return star;
 }
 
-/** A user's direct + all-level team counts, reusing a caller's slice if given. */
-async function resolveCounts(userId: string, counts?: TeamCounts): Promise<TeamCounts> {
-  if (counts) return counts;
-  return getTeamCounts(userId);
+/**
+ * A user's current star per the shared Star Qualification Engine
+ * (starQualification.service.ts): sequential 3^N ACTIVE members AT lineage
+ * level N — level 1 must pass before level 2 counts, etc. The SAME engine
+ * that drives the Daily Team Energy Bonus and the Community Monthly Bonus —
+ * the rank ladder no longer re-implements its own direct/team-count rule, so
+ * the star shown on the Rank Card always matches the star shown on the Team
+ * Energy card.
+ */
+async function resolveStar(userId: string, maxLevel: number): Promise<{ star: number; levelCounts: Map<number, number> }> {
+  const levelCounts = await perLevelActiveTeamCounts(userId, maxLevel);
+  const star = computeQualifiedStar(levelCounts, maxLevel);
+  return { star, levelCounts };
 }
 
 /**
- * Read-only rank slice for the dashboard: the highest ladder rank the user
- * qualifies for (current), the next ladder step (nextRank), and progress
- * toward it (min of the direct & team ratios, capped 0..1). Defaults to the
- * lowest ladder rank (e.g. "Starter") with progress 0 when none qualify.
+ * Read-only rank slice for the dashboard: the ladder rank matching the user's
+ * current Star Qualification Engine star (current), the next ladder rung
+ * (nextRank), and progress toward it (active count at the next level vs its
+ * 3^N requirement). Defaults to "Starter" (order 0, always qualifies).
  */
-export async function getRankInfo(userId: string, counts?: TeamCounts): Promise<RankInfo> {
+export async function getRankInfo(userId: string): Promise<RankInfo> {
   const ladder = await activeLadder();
   if (ladder.length === 0) {
     return { name: "Starter", nextRank: null, progress: 1 };
   }
 
-  // Qualification is gated on ACTIVE downline only (anti-farming) — a direct
-  // or team member who never activated a package doesn't count toward a rank.
-  const { activeDirectCount: directCount, activeTeamCount: teamCount } = await resolveCounts(userId, counts);
+  const maxLevel = Math.min(MAX_STAR, ladder[ladder.length - 1]?.order || MAX_STAR);
+  const { star, levelCounts } = await resolveStar(userId, maxLevel);
 
-  // Find the highest qualifying rank. The ladder is sorted by `order`; we stop
-  // at the first non-qualifying rank so an out-of-order requirement can't skip
-  // a tier. Starter (0/0) always qualifies, so currentIdx >= 0 in practice.
-  let currentIdx = -1;
-  for (let i = 0; i < ladder.length; i++) {
-    const r = ladder[i];
-    if (directCount >= r.requiredDirects && teamCount >= r.requiredTeamSize) {
-      currentIdx = i;
-    } else {
-      break;
-    }
-  }
+  const current = ladder.find((r) => r.order === star) ?? null;
+  const next = ladder.find((r) => r.order === star + 1) ?? null;
 
-  let currentName: string;
-  let next: LeanRankLadder | null;
-  if (currentIdx >= 0) {
-    currentName = ladder[currentIdx].name;
-    next = currentIdx + 1 < ladder.length ? ladder[currentIdx + 1] : null;
-  } else {
-    // No rank qualifies (lowest tier has non-zero requirements): show the
-    // first tier as the target with the user working toward it from below.
-    currentName = "Unranked";
-    next = ladder[0];
-  }
+  const currentName = current ? current.name : "Unranked";
 
   let progress = 1;
   if (next) {
-    const directRatio = next.requiredDirects > 0 ? directCount / next.requiredDirects : 1;
-    const teamRatio = next.requiredTeamSize > 0 ? teamCount / next.requiredTeamSize : 1;
-    progress = Math.min(directRatio, teamRatio);
-    if (progress < 0) progress = 0;
-    if (progress > 1) progress = 1;
+    const required = STAR_REQUIREMENTS[next.order] ?? 0;
+    const activeAtNext = levelCounts.get(next.order) ?? 0;
+    progress = required > 0 ? Math.min(1, Math.max(0, activeAtNext / required)) : 1;
   }
 
   return {
@@ -274,23 +260,14 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
   const activePkg = await UserPackage.exists({ user: userId, status: "active" });
   if (!activePkg) return { awarded: 0, errors: 0 };
 
-  // Qualification is gated on ACTIVE downline only (anti-farming) — a direct
-  // or team member who never activated a package doesn't count toward a rank.
-  const { activeDirectCount: directCount, activeTeamCount: teamCount } = await getTeamCounts(userId);
+  // Star Qualification Engine — same sequential 3^N-per-level rule the Team
+  // Energy and Community Monthly bonuses use (starQualification.service.ts).
+  const maxLevel = Math.min(MAX_STAR, ladder[ladder.length - 1]?.order || MAX_STAR);
+  const { star } = await resolveStar(userId, maxLevel);
   // Fetched once so the award notification email doesn't need an extra query.
   const user = await User.findById(userId).lean();
 
-  // Find the HIGHEST qualifying rung. The ladder is sorted by `order`; we stop
-  // at the first non-qualifying rung so an out-of-order requirement can't skip a
-  // tier. Starter (0/0) always qualifies, so topRank is non-null in practice.
-  let topRank: LeanRankLadder | null = null;
-  for (const rank of ladder) {
-    if (directCount >= rank.requiredDirects && teamCount >= rank.requiredTeamSize) {
-      topRank = rank;
-    } else {
-      break;
-    }
-  }
+  const topRank = ladder.find((rank) => rank.order === star) ?? null;
   if (!topRank || topRank.rewardAmount <= 0) return { awarded: 0, errors: 0 }; // e.g. Starter pays nothing
 
   const rankId = topRank._id.toString();
@@ -306,14 +283,14 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
       type: "rank_reward",
       reference: { resource: "Rank", resourceId: `rank:${rankId}:${userId}` },
       memo: `Rank reward — ${topRank.name}`,
-      meta: { rankId, name: topRank.name, directCount, teamCount },
+      meta: { rankId, name: topRank.name, star },
     });
     await ActivityLog.create({
       actor: userId,
       action: "compensation.rank_reward",
       resource: "Rank",
       resourceId: rankId,
-      meta: { name: topRank.name, amount: topRank.rewardAmount, directCount, teamCount },
+      meta: { name: topRank.name, amount: topRank.rewardAmount, star },
     }).catch(() => undefined);
     // Fire-and-forget: bulk "run for all" would otherwise serialize SMTP sends.
     if (user) {
@@ -334,39 +311,26 @@ export async function evaluateRankForUser(userId: string): Promise<{ awarded: nu
 }
 
 /**
- * Ratchet `User.highestStar` up to the highest rank-ladder rung (`order`)
- * this user currently qualifies for, by directCount/teamCount. Uses the same
- * admin-editable ladder walk as `evaluateRankForUser`/`getRankInfo` — not the
- * hardcoded `getStarFromTeamSize` 3^N formula, so it can't drift out of sync
- * if an admin edits a rank's `requiredTeamSize` independently.
+ * Ratchet `User.highestStar` up to the rank-ladder rung matching the user's
+ * current Star Qualification Engine star — the SAME sequential 3^N-per-level
+ * engine the Daily Team Energy Bonus and Community Monthly Bonus consume
+ * (starQualification.service.ts), so the Rank Card always agrees with the
+ * Team Energy card. `requiredDirects`/`requiredTeamSize` on the Rank ladder
+ * are no longer read for qualification — only `order`/`name`/`rewardAmount`.
  *
  * Sticky by design: `$max` never lowers the stored value, even if the user's
  * team later shrinks below the threshold that earned it. Drives the one-time
- * rank rewards + rank display. The income bonuses each consume the shared Star
- * Qualification Engine instead: the Daily Team Energy bonus (percentage of
- * downline yield) and the Community Monthly Bonus (fixed $ on the 10th) both
- * read the non-sticky, per-level 3^N star (`User.teamEnergyStar`,
- * starQualification.service.ts) — this field no longer gates either payout.
+ * rank rewards + rank display.
  */
-export async function syncHighestStarForUser(userId: string, counts?: TeamCounts): Promise<void> {
+export async function syncHighestStarForUser(userId: string): Promise<void> {
   const ladder = await activeLadder();
   if (ladder.length === 0) return;
 
-  // Qualification is gated on ACTIVE downline only (anti-farming) — a direct
-  // or team member who never activated a package doesn't count toward a rank.
-  const { activeDirectCount: directCount, activeTeamCount: teamCount } = await resolveCounts(userId, counts);
+  const maxLevel = Math.min(MAX_STAR, ladder[ladder.length - 1]?.order || MAX_STAR);
+  const { star } = await resolveStar(userId, maxLevel);
+  if (star <= 0) return;
 
-  let topOrder = 0;
-  for (const rank of ladder) {
-    if (directCount >= rank.requiredDirects && teamCount >= rank.requiredTeamSize) {
-      topOrder = rank.order;
-    } else {
-      break;
-    }
-  }
-  if (topOrder <= 0) return;
-
-  await User.updateOne({ _id: userId }, { $max: { highestStar: topOrder } });
+  await User.updateOne({ _id: userId }, { $max: { highestStar: star } });
 }
 
 /**

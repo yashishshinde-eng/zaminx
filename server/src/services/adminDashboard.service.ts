@@ -46,9 +46,13 @@ export async function getAdminDashboardSummary(): Promise<AdminDashboardSummary>
     User.aggregate<{ _id: string | null; count: number }>([
       { $group: { _id: "$status", count: { $sum: 1 } } },
     ]),
-    // Paid deposit volume (completed deposits = real inbound funds).
+    // Paid deposit volume (completed deposits = real inbound funds). Excludes
+    // package-tied rows: `activatePackageFromWallet` records a paid Deposit for
+    // history when a user buys a package from existing wallet balance, but no
+    // new money enters the platform then — counting it would double-count the
+    // same funds (once on the real inbound deposit, again on the purchase).
     Deposit.aggregate<{ _id: null; count: number; sum: number }>([
-      { $match: { status: "paid" } },
+      { $match: { status: "paid", package: null } },
       { $group: { _id: null, count: { $sum: 1 }, sum: { $sum: "$amountUsd" } } },
     ]),
     // Withdrawal counts broken down by status (the full pipeline).
@@ -82,9 +86,10 @@ export async function getAdminDashboardSummary(): Promise<AdminDashboardSummary>
     ]),
     UserPackage.countDocuments({ status: "active" }),
     User.countDocuments({ sponsorId: { $ne: null } }),
-    // 30-day daily paid-deposit volume.
+    // 30-day daily paid-deposit volume (real inbound funds only — see the
+    // `package: null` note on the totals aggregation above).
     Deposit.aggregate<{ _id: string; value: number }>([
-      { $match: { status: "paid", createdAt: { $gte: since } } },
+      { $match: { status: "paid", package: null, createdAt: { $gte: since } } },
       { $group: { _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } }, value: { $sum: "$amountUsd" } } },
       { $sort: { _id: 1 } },
     ]),

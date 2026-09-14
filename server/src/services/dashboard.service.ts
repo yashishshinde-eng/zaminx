@@ -121,9 +121,9 @@ export async function getDashboardSummary(userId: string): Promise<DashboardSumm
       getCommunityMonthlyInfo(userId),
     ]);
 
-  // Phase 10A: real rank slice from the active ladder, reusing the `team`
-  // counts already fetched above (avoids two extra countDocuments calls).
-  const rank = await getRankInfo(userId, team);
+  // Phase 10A: real rank slice — now sourced from the shared Star
+  // Qualification Engine (same sequential 3^N-per-level rule as Team Energy).
+  const rank = await getRankInfo(userId);
 
   return {
     account: {

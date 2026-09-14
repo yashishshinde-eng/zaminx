@@ -87,7 +87,9 @@ export async function getAdminUserDetail(id: string): Promise<AdminUserDetail> {
     getWalletBalances(id),
     UserPackage.findOne({ user: id, status: "active" }).sort({ activatedAt: -1 }).lean(),
     User.countDocuments({ sponsorId: id }),
-    // Directs holding an active package — the count star ranks qualify on.
+    // Directs holding an active package — informational team stat only (star
+    // ranks qualify on the per-level Star Qualification Engine, not this raw
+    // direct count — see rank.service.ts / starQualification.service.ts).
     // One row per direct with an active UserPackage, so the row count IS the
     // active-direct count.
     UserPackage.aggregate<{ _id: { toString(): string } }>([
