@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Deposit, Withdrawal, WalletTransaction, P2PTransfer } from "../models/index.js";
+import { Deposit, Withdrawal, WalletTransaction, P2PTransfer, TeamEnergySourceCache } from "../models/index.js";
 import { buildCsv, buildExcelHtml } from "../utils/csv.js";
 import type {
   UserReportKind,
@@ -12,6 +12,7 @@ import type {
   WalletTxType,
   WalletTxDirection,
   WalletTxRef,
+  WalletTxSource,
   P2PTransferRow,
   ReportExportFormat,
 } from "@zeminex/shared";
@@ -215,7 +216,17 @@ type LeanTx = {
   onHoldAfter: number;
   reference?: { resource?: string | null; resourceId?: string | null } | null;
   memo?: string | null;
-  meta?: { fromUserId?: string | null; fromUserName?: string | null; fromReferralCode?: string | null; level?: number | null } | null;
+  meta?: {
+    fromUserId?: string | null;
+    fromUserName?: string | null;
+    fromReferralCode?: string | null;
+    level?: number | null;
+    starLevel?: number | null;
+    bonusPercentage?: number | null;
+    eligibleBonusBase?: number | null;
+    earningDate?: string | null;
+    sources?: { fromUserId: string; fromUserName: string | null; fromReferralCode: string | null; level: number; amount: number }[] | null;
+  } | null;
   createdAt: Date | string;
 };
 
@@ -238,8 +249,54 @@ function toTxRow(d: LeanTx): WalletTxRow {
     fromUserName: d.meta?.fromUserName ?? null,
     fromReferralCode: d.meta?.fromReferralCode ?? null,
     level: d.meta?.level ?? null,
+    starLevel: d.meta?.starLevel ?? null,
+    bonusPercentage: d.meta?.bonusPercentage ?? null,
+    eligibleBonusBase: d.meta?.eligibleBonusBase ?? null,
+    earningDate: d.meta?.earningDate ?? null,
+    sources: d.meta?.sources ?? null,
     createdAt: toIso(d.createdAt),
   };
+}
+
+/**
+ * Team Energy pays ONE `team_bonus` credit per ancestor per earning day,
+ * summed across every downline package within the ancestor's star depth
+ * (see `runDailyTeamEnergy`) — so the raw ledger row alone can't say "from
+ * user X at level Y". Explode each row into one report row per contributor
+ * so the report reads exactly like Direct Connect's one-row-one-user-one-level
+ * rows, with that contributor's proportional share as the amount. Sources
+ * come from the row's own `meta.sources`, falling back to the reconstructed
+ * `TeamEnergySourceCache` entry for rows credited before that field existed
+ * (see `scripts/backfill-team-energy-sources.ts`); if neither is available
+ * the aggregate row is shown as-is, unattributed.
+ */
+function explodeTeamRow(d: LeanTx, cachedSources?: WalletTxSource[] | null): WalletTxRow[] {
+  const base = toTxRow(d);
+  const sources = d.meta?.sources ?? cachedSources;
+  if (!sources || sources.length === 0) return [base];
+  return sources.map((s, i) => ({
+    ...base,
+    id: `${base.id}:${i}`,
+    amount: s.amount,
+    fromUserId: s.fromUserId,
+    fromUserName: s.fromUserName,
+    fromReferralCode: s.fromReferralCode,
+    level: s.level,
+    sources: null,
+  }));
+}
+
+/** Batch-fetch `TeamEnergySourceCache` entries for docs lacking their own
+ *  `meta.sources`, keyed by ledger entry id (string). */
+async function loadCachedTeamSources(docs: LeanTx[]): Promise<Map<string, WalletTxSource[]>> {
+  const needIds = docs.filter((d) => !d.meta?.sources || d.meta.sources.length === 0).map((d) => d._id);
+  if (needIds.length === 0) return new Map();
+  const cached = await TeamEnergySourceCache.find({ ledgerEntryId: { $in: needIds } })
+    .select("ledgerEntryId sources")
+    .lean();
+  const map = new Map<string, WalletTxSource[]>();
+  for (const c of cached) map.set(c.ledgerEntryId.toString(), c.sources as WalletTxSource[]);
+  return map;
 }
 
 /* ------------------------------------------------------------------ */
@@ -361,6 +418,7 @@ export async function getLedgerReport(
   kind: UserReportKind,
   q: ReportQueryArgs,
 ): Promise<ReportResult<WalletTxRow>> {
+  if (kind === "team") return getTeamBreakdownReport(userId, q);
   const { page, limit } = clampPage(q.page, q.limit);
   const filter = ledgerFilter(userId, kind, q);
   const [rows, total, summary] = await Promise.all([
@@ -369,6 +427,32 @@ export async function getLedgerReport(
     ledgerSummary(filter),
   ]);
   return { rows: rows.map((r) => toTxRow(r as never)), pagination: paginate(total, page, limit), summary };
+}
+
+/** Matching `team_bonus` ledger rows fetched pre-explosion — generous enough
+ *  to cover a single user's lifetime of daily credits (one row/day). */
+const TEAM_BREAKDOWN_FETCH_CAP = 3000;
+
+/**
+ * `GET /reports/team` — Team Energy, exploded to one row per contributing
+ * downline user per level (see `explodeTeamRow`) so "from" and "level" read
+ * the same as Direct Connect instead of the aggregate ledger row. Paginates
+ * over the exploded rows, not the underlying ledger docs — `records`/`total`
+ * in the summary count exploded rows so the stat card matches the table.
+ */
+async function getTeamBreakdownReport(userId: string, q: ReportQueryArgs): Promise<ReportResult<WalletTxRow>> {
+  const { page, limit } = clampPage(q.page, q.limit);
+  const filter = ledgerFilter(userId, "team", q);
+  const [docsRaw, summaryBase] = await Promise.all([
+    WalletTransaction.find(filter).sort({ createdAt: -1 }).limit(TEAM_BREAKDOWN_FETCH_CAP).lean(),
+    ledgerSummary(filter),
+  ]);
+  const docs = docsRaw as never as LeanTx[];
+  const cachedByLedgerId = await loadCachedTeamSources(docs);
+  const exploded = docs.flatMap((d) => explodeTeamRow(d, cachedByLedgerId.get(d._id.toString())));
+  const total = exploded.length;
+  const rows = exploded.slice((page - 1) * limit, (page - 1) * limit + limit);
+  return { rows, pagination: paginate(total, page, limit), summary: { ...summaryBase, count: total } };
 }
 
 /* ------------------------------------------------------------------ */
@@ -487,6 +571,14 @@ async function fetchExportRows(userId: string, kind: UserReportKind, q: ReportEx
   if (kind === "p2p") {
     const rows = await P2PTransfer.find(p2pFilter(userId, f)).sort({ createdAt: -1 }).limit(EXPORT_CAP).lean();
     return rows.map((r) => toP2PRow(r as never));
+  }
+  if (kind === "team") {
+    const docs = (await WalletTransaction.find(ledgerFilter(userId, kind, f))
+      .sort({ createdAt: -1 })
+      .limit(EXPORT_CAP)
+      .lean()) as never as LeanTx[];
+    const cachedByLedgerId = await loadCachedTeamSources(docs);
+    return docs.flatMap((d) => explodeTeamRow(d, cachedByLedgerId.get(d._id.toString()))).slice(0, EXPORT_CAP);
   }
   const rows = await WalletTransaction.find(ledgerFilter(userId, kind, f))
     .sort({ createdAt: -1 })

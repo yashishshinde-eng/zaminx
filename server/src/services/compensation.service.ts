@@ -50,13 +50,13 @@ function round2(n: number): number {
 }
 
 /** UTC midnight bounds of the day containing `d`. */
-function utcDayBounds(d: Date): { start: number; end: number } {
+export function utcDayBounds(d: Date): { start: number; end: number } {
   const start = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate());
   return { start, end: start + DAY_MS };
 }
 
 /** YYYY-MM-DD (UTC) for a timestamp. */
-function dayKey(ms: number): string {
+export function dayKey(ms: number): string {
   return new Date(ms).toISOString().slice(0, 10);
 }
 
@@ -144,7 +144,7 @@ export function scheduledYieldAmount(args: {
 }
 
 /** Per-day inputs shared by the yield and team-energy runs, loaded once. */
-type YieldScheduleContext = {
+export type YieldScheduleContext = {
   capPct: number;
   dailyMinPct: number;
   dailyMaxPct: number;
@@ -164,7 +164,7 @@ type YieldScheduleContext = {
  * estimate matches the amount the yield engine credits for that day
  * regardless of which run happens first.
  */
-async function loadYieldScheduleContext(
+export async function loadYieldScheduleContext(
   target: Date,
   dayKeyStr: string,
   opts: { excludeDayKey?: boolean } = {},
@@ -211,7 +211,7 @@ async function loadYieldScheduleContext(
 }
 
 /** Scheduled yield (USD) for one package on the target day, from a loaded context. */
-function scheduledYieldForPackage(
+export function scheduledYieldForPackage(
   ctx: YieldScheduleContext,
   up: LeanActivePackage,
   dayStartMs: number,
@@ -307,7 +307,7 @@ export async function awardDirectBonus(
 /*  Daily Trade Yield                                                  */
 /* ------------------------------------------------------------------ */
 
-type LeanActivePackage = {
+export type LeanActivePackage = {
   _id: { toString(): string };
   user: { toString(): string };
   snapshot: { name: string; priceUsd: number; dailyReturnPct: number; durationDays: number };
@@ -426,7 +426,7 @@ export async function runDailyYield(asOf?: Date): Promise<YieldRunSummary> {
 /*  Daily Team Energy Bonus                                            */
 /* ------------------------------------------------------------------ */
 
-type LeanLineageUser = {
+export type LeanLineageUser = {
   _id: { toString(): string };
   lineage: { toString(): string }[];
   name: string;
@@ -601,10 +601,12 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     // star's depth; integer cents throughout (no float percentage math).
     let baseCents = 0;
     let teamMemberCount = 0;
-    for (const { level, yieldCents } of sourcesByAncestor.get(ancestorId)?.values() ?? []) {
+    const eligibleSources: { buyerId: string; level: number; yieldCents: number }[] = [];
+    for (const [buyerId, { level, yieldCents }] of sourcesByAncestor.get(ancestorId)?.entries() ?? []) {
       if (level <= effectiveStar) {
         baseCents += yieldCents;
         teamMemberCount++;
+        eligibleSources.push({ buyerId, level, yieldCents });
       }
     }
     const bonusCents = calcTeamEnergyBonusCents(baseCents, bpFromPct(pct));
@@ -613,6 +615,22 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
       continue;
     }
     const amount = bonusCents / 100;
+    // Per-contributor breakdown for the report drill-down: each source's
+    // proportional share of the credited bonus (yieldCents / baseCents of
+    // bonusCents), rounded to cents — may total a cent off `amount` due to
+    // rounding, which is fine for a display breakdown.
+    const sources = eligibleSources
+      .map(({ buyerId, level, yieldCents }) => {
+        const info = buyerInfoByUser.get(buyerId);
+        return {
+          fromUserId: buyerId,
+          fromUserName: info?.name ?? null,
+          fromReferralCode: info?.referralCode ?? null,
+          level,
+          amount: Math.round((bonusCents * yieldCents) / baseCents) / 100,
+        };
+      })
+      .sort((a, b) => a.level - b.level || b.amount - a.amount);
     try {
       await applyLedgerEntry({
         userId: ancestorId,
@@ -633,6 +651,7 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
           bonusPercentage: pct,
           eligibleBonusBase: baseCents / 100,
           bonusAmount: amount,
+          sources,
           status: "completed",
         },
       });

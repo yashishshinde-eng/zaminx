@@ -9,8 +9,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuItem, DropdownMenuLabel } from "@/components/ui/dropdown-menu";
-import { ReferralLinkCard } from "@/components/dashboard";
+import { ReferralLinkCard, TeamEnergyCard, CommunityBonusCard } from "@/components/dashboard";
 import { useAuth } from "@/context/AuthContext";
+import { useDashboardSummary } from "@/hooks/useDashboardSummary";
 import { useReferralStats, useTeamReferrals, useTreeChildren } from "@/hooks/useReferrals";
 import { useCountUp } from "@/hooks/useCountUp";
 import { staggerContainer, staggerItem } from "@/lib/motion";
@@ -32,6 +33,7 @@ export function TeamPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const stats = useReferralStats();
+  const dashboardSummary = useDashboardSummary();
 
   // Team list state — two independent filter groups (scope + status), search, pagination.
   const [scope, setScope] = useState<TeamScope>("all");
@@ -239,6 +241,19 @@ export function TeamPage() {
             )}
           </CardContent>
         </Card>
+
+        {/* Daily Team Energy + Community Monthly Bonus */}
+        {dashboardSummary.isLoading ? (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="h-[380px] animate-pulse rounded-[22px] bg-muted/30" />
+            <div className="h-[380px] animate-pulse rounded-[22px] bg-muted/30" />
+          </div>
+        ) : dashboardSummary.data ? (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <TeamEnergyCard teamEnergy={dashboardSummary.data.teamEnergy} />
+            <CommunityBonusCard communityBonus={dashboardSummary.data.communityBonus} />
+          </div>
+        ) : null}
 
         {/* Team members table */}
         <section className="space-y-4">

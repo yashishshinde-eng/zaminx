@@ -306,10 +306,17 @@ function columnsFor(kind: UserReportKind, t: TFunction): Column<DepositRow | Wit
   }
   // Ledger kinds (wallet + 6 income streams). "Direct Connect" and "Team
   // Energy" are earned from a specific downline member at a specific lineage
-  // level — show who it came from and at which level for those two.
+  // level — show who it came from and at which level for those two. Team
+  // Energy pays one aggregate credit per ancestor per day server-side, but
+  // the report API explodes it into one row per contributing downline user
+  // per level, so it reads the same as Direct Connect here.
   const showSource = kind === "direct" || kind === "team";
+  const walletColumn: Column<DepositRow | WithdrawalRow | WalletTxRow | P2PTransferRow> = {
+    key: "wallet",
+    header: t("common.wallet"),
+    cell: (r) => <span className="capitalize">{(r as WalletTxRow).wallet}</span>,
+  };
   const base: Column<DepositRow | WithdrawalRow | WalletTxRow | P2PTransferRow>[] = [
-    { key: "wallet", header: t("common.wallet"), cell: (r) => <span className="capitalize">{(r as WalletTxRow).wallet}</span> },
     { key: "type", header: t("reports.columnType"), cell: (r) => <span className="capitalize">{txTypeLabel(t, (r as WalletTxRow).type)}</span> },
     {
       key: "direction",
@@ -361,12 +368,15 @@ function columnsFor(kind: UserReportKind, t: TFunction): Column<DepositRow | Wit
         },
       ]
     : [];
-  return [
-    ...base,
-    ...sourceColumns,
+  const memoAndDate: Column<DepositRow | WithdrawalRow | WalletTxRow | P2PTransferRow>[] = [
     { key: "memo", header: t("reports.columnMemo"), cell: (r) => (r as WalletTxRow).memo ?? "—" },
     { key: "createdAt", header: t("common.date"), cell: (r) => formatDate((r as WalletTxRow).createdAt) },
   ];
+  // Team Energy: lead with who it came from (no wallet column — it's always "bonus").
+  if (kind === "team") {
+    return [...sourceColumns, ...base, ...memoAndDate];
+  }
+  return [walletColumn, ...base, ...sourceColumns, ...memoAndDate];
 }
 
 /** Translated ledger-type label, reusing the same `wallet.type*` keys as the

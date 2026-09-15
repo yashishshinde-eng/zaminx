@@ -64,6 +64,21 @@ export interface WalletTxRef {
   resourceId: string | null;
 }
 
+/** One downline contributor behind an aggregated `team_bonus` credit — the
+ *  Daily Team Energy engine pays one credit per ancestor per day, summed
+ *  across every downline package within the ancestor's star depth, so a
+ *  single row can have many contributors at different lineage levels. */
+export interface WalletTxSource {
+  fromUserId: string;
+  fromUserName: string | null;
+  fromReferralCode: string | null;
+  level: number;
+  /** This contributor's share of the credited bonus amount (proportional to
+   *  their eligible yield base; may differ from the row total by a cent due
+   *  to rounding). */
+  amount: number;
+}
+
 /** An immutable ledger row, as returned over the API. */
 export interface WalletTxRow {
   id: string;
@@ -91,6 +106,10 @@ export interface WalletTxRow {
   bonusPercentage?: number | null;
   eligibleBonusBase?: number | null;
   earningDate?: string | null;
+  /** Per-contributor breakdown behind an aggregated `team_bonus` credit (see
+   *  `WalletTxSource`). Null/absent on every other type and on legacy rows
+   *  predating this breakdown. */
+  sources?: WalletTxSource[] | null;
   /** Community Monthly Bonus (`community_bonus`): the distribution month
    *  (YYYY-MM) the payout belongs to. Null on legacy rows and other types. */
   distributionMonth?: string | null;

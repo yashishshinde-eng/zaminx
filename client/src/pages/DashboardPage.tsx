@@ -29,8 +29,6 @@ import {
   IncomeBreakdown,
   ReferralLinkCard,
   RankCard,
-  TeamEnergyCard,
-  CommunityBonusCard,
   MarketOverview,
   RankStars,
 } from "@/components/dashboard";
@@ -176,16 +174,6 @@ function DashboardContent({ data }: { data: SummaryData }) {
       {/* ═══ RANK ═════════════════════════════════════════════ */}
       <motion.div variants={staggerItem}>
         <RankCard rank={data.account.rank} />
-      </motion.div>
-
-      {/* ═══ DAILY TEAM ENERGY ═══════════════════════════════ */}
-      <motion.div variants={staggerItem}>
-        <TeamEnergyCard teamEnergy={data.teamEnergy} />
-      </motion.div>
-
-      {/* ═══ COMMUNITY MONTHLY BONUS ═════════════════════════ */}
-      <motion.div variants={staggerItem}>
-        <CommunityBonusCard communityBonus={data.communityBonus} />
       </motion.div>
 
       {/* ═══ REFERRAL ══════════════════════ */}
