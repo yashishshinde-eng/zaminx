@@ -1,0 +1,58 @@
+[
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "user": 1
+    },
+    "name": "user_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "userPackage": 1
+    },
+    "name": "userPackage_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "status": 1
+    },
+    "name": "status_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "nowpaymentsInvoiceId": 1
+    },
+    "name": "nowpaymentsInvoiceId_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "user": 1,
+      "createdAt": -1
+    },
+    "name": "user_1_createdAt_-1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "expiresAt": 1
+    },
+    "name": "expiresAt_1",
+    "background": true
+  }
+]

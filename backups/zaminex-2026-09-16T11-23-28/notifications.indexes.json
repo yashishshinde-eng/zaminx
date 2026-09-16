@@ -1,0 +1,44 @@
+[
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "user": 1
+    },
+    "name": "user_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "read": 1
+    },
+    "name": "read_1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "user": 1,
+      "read": 1,
+      "createdAt": -1
+    },
+    "name": "user_1_read_1_createdAt_-1",
+    "background": true
+  },
+  {
+    "v": 2,
+    "key": {
+      "user": 1,
+      "createdAt": -1
+    },
+    "name": "user_1_createdAt_-1",
+    "background": true
+  }
+]

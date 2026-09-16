@@ -23,7 +23,7 @@ const EMAIL_DOMAIN = "tree-test.zeminex.dev";
 const BRANCH = 3;
 const MAX_DEPTH = 5;
 
-const treeEmailQuery = { email: { $regex: new RegExp(`${EMAIL_DOMAIN}$`, "i") } };
+const treeEmailQuery = { email: { $regex: new RegExp(`${EMAIL_DOMAIN}$`, "i"), $ne: `zam-root@${EMAIL_DOMAIN}` } };
 
 async function clean(): Promise<void> {
   const result = await User.deleteMany(treeEmailQuery);

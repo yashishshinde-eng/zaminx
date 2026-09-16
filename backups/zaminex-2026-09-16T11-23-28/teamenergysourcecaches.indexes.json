@@ -1,0 +1,18 @@
+[
+  {
+    "v": 2,
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_"
+  },
+  {
+    "v": 2,
+    "key": {
+      "ledgerEntryId": 1
+    },
+    "name": "ledgerEntryId_1",
+    "background": true,
+    "unique": true
+  }
+]

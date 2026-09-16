@@ -1,0 +1,111 @@
+{
+  "db": "zaminex",
+  "createdAt": "2026-09-16T11:23:28.715Z",
+  "collections": [
+    {
+      "name": "announcements",
+      "docs": 0,
+      "indexes": 2
+    },
+    {
+      "name": "settings",
+      "docs": 27,
+      "indexes": 3
+    },
+    {
+      "name": "bonanzaoffers",
+      "docs": 1,
+      "indexes": 3
+    },
+    {
+      "name": "withdrawals",
+      "docs": 0,
+      "indexes": 6
+    },
+    {
+      "name": "wallets",
+      "docs": 369,
+      "indexes": 2
+    },
+    {
+      "name": "activitylogs",
+      "docs": 905,
+      "indexes": 4
+    },
+    {
+      "name": "ranks",
+      "docs": 11,
+      "indexes": 2
+    },
+    {
+      "name": "users",
+      "docs": 371,
+      "indexes": 8
+    },
+    {
+      "name": "cmspages",
+      "docs": 6,
+      "indexes": 4
+    },
+    {
+      "name": "paymentlogs",
+      "docs": 0,
+      "indexes": 5
+    },
+    {
+      "name": "cronlogs",
+      "docs": 15,
+      "indexes": 3
+    },
+    {
+      "name": "deposits",
+      "docs": 382,
+      "indexes": 7
+    },
+    {
+      "name": "teamenergysourcecaches",
+      "docs": 0,
+      "indexes": 2
+    },
+    {
+      "name": "wallettransactions",
+      "docs": 1237,
+      "indexes": 8
+    },
+    {
+      "name": "p2ptransfers",
+      "docs": 0,
+      "indexes": 6
+    },
+    {
+      "name": "notifications",
+      "docs": 0,
+      "indexes": 5
+    },
+    {
+      "name": "emailtemplates",
+      "docs": 0,
+      "indexes": 2
+    },
+    {
+      "name": "packages",
+      "docs": 2,
+      "indexes": 3
+    },
+    {
+      "name": "supporttickets",
+      "docs": 0,
+      "indexes": 6
+    },
+    {
+      "name": "contactmessages",
+      "docs": 0,
+      "indexes": 2
+    },
+    {
+      "name": "userpackages",
+      "docs": 368,
+      "indexes": 4
+    }
+  ]
+}
