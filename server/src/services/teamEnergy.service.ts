@@ -6,9 +6,11 @@
  * is shared with the Community Monthly Bonus (fixed $ amount, monthly on the
  * 10th) — the two income systems never re-implement it.
  *
- * Star N earns `pct[star]`% of the eligible bonus base (the downline scheduled
- * daily trade-yield volume within the star's depth — see `runDailyTeamEnergy`),
- * in integer cents × basis points, as ONE `team_bonus` credit per earning day.
+ * Star N earns the PER-LEVEL table rates within its depth: level L pays
+ * `pct[L]`% of level L's downline scheduled daily trade-yield volume, stacked
+ * across levels 1..N (a 2★ earns L1 at the L1 rate AND L2 at the L2 rate —
+ * see `runDailyTeamEnergy`), in integer cents × basis points, as ONE
+ * `team_bonus` credit per earning day.
  *
  * The engine's symbols are re-exported here under this module's historical
  * names so existing consumers (compensation, scripts, tests) keep importing

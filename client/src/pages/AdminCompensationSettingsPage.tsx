@@ -139,14 +139,14 @@ export function AdminCompensationSettingsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="teamEnergyPct">Star percentages (1★…10★, comma-separated)</Label>
+                    <Label htmlFor="teamEnergyPct">Level percentages (L1…L10, comma-separated)</Label>
                     <Input
                       id="teamEnergyPct"
                       placeholder="10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.25, 0.25"
                       value={teamEnergyPctText}
                       onChange={(e) => setTeamEnergyPctText(e.target.value)}
                     />
-                    <p className="text-xs text-muted-foreground">One percentage per star, index = star − 1. Star N pays its rate on downline yield within depth N.</p>
+                    <p className="text-xs text-muted-foreground">One percentage per level, index = level − 1. Level L pays its rate on that level's downline yield, stacked within your star's depth (a 2★ earns L1 at the L1 rate AND L2 at the L2 rate).</p>
                   </div>
                 </div>
 

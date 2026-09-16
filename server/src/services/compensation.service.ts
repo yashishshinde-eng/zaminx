@@ -436,11 +436,13 @@ export type LeanLineageUser = {
 /**
  * Run the daily team-energy credit (star-qualified model — teamEnergy.service.ts):
  * an ancestor qualifies for Star N by having ≥ 3^N ACTIVE members at lineage
- * level N (evaluated sequentially), and earns `pct[star]`% of the downline
- * scheduled daily trade-yield volume within their star's depth, as ONE
- * `team_bonus` credit per earning day — idempotent via
- * `team-energy:<userId>:<date>`. The star is recomputed from the authoritative
- * DB per-level counts on every run and persisted (`User.teamEnergyStar`).
+ * level N (evaluated sequentially), and earns PER-LEVEL table rates within
+ * their star's depth: level L pays `pct[L]`% of level L's scheduled daily
+ * trade-yield volume, stacked across levels 1..star (a 2★ earns L1 at the L1
+ * rate AND L2 at the L2 rate), as ONE `team_bonus` credit per earning day —
+ * idempotent via `team-energy:<userId>:<date>`. The star is recomputed from
+ * the authoritative DB per-level counts on every run and persisted
+ * (`User.teamEnergyStar`).
  *
  * Eligibility (anti-farming): an ancestor only earns if they hold an active
  * UserPackage. Users already credited for the same day under the legacy
@@ -599,26 +601,43 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     }
     // Eligible base = the scheduled yield of downline sources within the
     // star's depth; integer cents throughout (no float percentage math).
+    // Each level pays its OWN table rate: level L earns pcts[L−1]% of level
+    // L's yield, stacking across levels 1..effectiveStar (a 2★ earns L1 at
+    // the L1 rate AND L2 at the L2 rate) — never one star-wide rate split
+    // proportionally across levels.
     let baseCents = 0;
     let teamMemberCount = 0;
     const eligibleSources: { buyerId: string; level: number; yieldCents: number }[] = [];
+    const yieldCentsByLevel = new Map<number, number>();
     for (const [buyerId, { level, yieldCents }] of sourcesByAncestor.get(ancestorId)?.entries() ?? []) {
       if (level <= effectiveStar) {
         baseCents += yieldCents;
         teamMemberCount++;
+        yieldCentsByLevel.set(level, (yieldCentsByLevel.get(level) ?? 0) + yieldCents);
         eligibleSources.push({ buyerId, level, yieldCents });
       }
     }
-    const bonusCents = calcTeamEnergyBonusCents(baseCents, bpFromPct(pct));
+    // Per-level bonus in integer cents (level base × level rate, nearest-cent
+    // rounded); the day's credit is the sum across levels.
+    let bonusCents = 0;
+    const perLevelMeta: { level: number; base: number; ratePct: number; bonus: number }[] = [];
+    for (let level = 1; level <= effectiveStar; level++) {
+      const levelBaseCents = yieldCentsByLevel.get(level) ?? 0;
+      const ratePct = pcts[level - 1] ?? 0;
+      const levelBonusCents = calcTeamEnergyBonusCents(levelBaseCents, bpFromPct(ratePct));
+      bonusCents += levelBonusCents;
+      perLevelMeta.push({ level, base: levelBaseCents / 100, ratePct, bonus: levelBonusCents / 100 });
+    }
     if (bonusCents <= 0) {
       skipped++;
       continue;
     }
     const amount = bonusCents / 100;
+    const rateSummary = perLevelMeta.map((p) => `L${p.level} ${p.ratePct}%`).join(" + ");
     // Per-contributor breakdown for the report drill-down: each source's
-    // proportional share of the credited bonus (yieldCents / baseCents of
-    // bonusCents), rounded to cents — may total a cent off `amount` due to
-    // rounding, which is fine for a display breakdown.
+    // EXACT per-level share (its yield × its level's rate, rounded to cents) —
+    // no proportional split of the aggregate. Summed source amounts may drift
+    // a cent from `amount` due to per-source rounding, fine for display.
     const sources = eligibleSources
       .map(({ buyerId, level, yieldCents }) => {
         const info = buyerInfoByUser.get(buyerId);
@@ -627,7 +646,7 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
           fromUserName: info?.name ?? null,
           fromReferralCode: info?.referralCode ?? null,
           level,
-          amount: Math.round((bonusCents * yieldCents) / baseCents) / 100,
+          amount: calcTeamEnergyBonusCents(yieldCents, bpFromPct(pcts[level - 1] ?? 0)) / 100,
         };
       })
       .sort((a, b) => a.level - b.level || b.amount - a.amount);
@@ -640,7 +659,7 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
         amount,
         type: "team_bonus",
         reference: { resource: "User", resourceId: `team-energy:${ancestorId}:${key}` },
-        memo: `Daily team energy bonus — ${effectiveStar} Star @ ${pct}%`,
+        memo: `Daily team energy bonus — ${effectiveStar} Star (${rateSummary})`,
         meta: {
           date: key,
           earningDate: key,
@@ -649,6 +668,7 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
           starPosition: effectiveStar,
           teamMemberCount,
           bonusPercentage: pct,
+          perLevel: perLevelMeta,
           eligibleBonusBase: baseCents / 100,
           bonusAmount: amount,
           sources,

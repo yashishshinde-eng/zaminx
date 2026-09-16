@@ -94,6 +94,57 @@ describe.skipIf(!hasTestDb)("team energy flow", () => {
     expect(again.length).toBe(1);
   }, 120_000);
 
+  it("pays a 2-star per-level rates: L1 at 10% AND L2 at 5%", async () => {
+    const admin = await seedAdminAndLogin();
+    // A holds an active package; 3 active directs (L1) + 3 packaged actives
+    // under each direct (9 at L2) → sequential 2★.
+    const A = await registerAndLogin({ name: "Beta" });
+    const pkg = await seedPackage({ priceUsd: 50, dailyReturnPct: 1, durationDays: 0 });
+    await activateFor(A.accessToken, pkg._id, A.userId);
+    const aCode = await referralCodeOf(A.accessToken);
+    for (let i = 1; i <= 3; i++) {
+      const direct = await registerAndLogin({ name: `BD${i}`, referralCode: aCode });
+      await activateFor(direct.accessToken, pkg._id, direct.userId);
+      const dCode = await referralCodeOf(direct.accessToken);
+      for (let j = 1; j <= 3; j++) {
+        const sub = await registerAndLogin({ name: `BS${i}-${j}`, referralCode: dCode });
+        await activateFor(sub.accessToken, pkg._id, sub.userId);
+      }
+    }
+
+    const r = await authed(admin.accessToken, `/api/v1/compensation/run-team-energy?date=${DATE}`, { method: "POST" });
+    expect(r.status).toBe(200);
+
+    const t = (await WalletTransaction.findOne({ user: A.userId, type: "team_bonus", "meta.date": DATE }).lean())!;
+    expect(t.meta).toMatchObject({ bonusType: "DAILY_TEAM_ENERGY", starLevel: 2, bonusPercentage: 5 });
+
+    // Per-level meta: level 1 at its own 10% rate, level 2 at its own 5% —
+    // the credited amount is the SUM, not the star rate split proportionally
+    // (the legacy model would pay 5% of the whole base: 0.6y vs 0.75y here).
+    const perLevel = t.meta.perLevel as { level: number; base: number; ratePct: number; bonus: number }[];
+    const l1 = perLevel.find((p) => p.level === 1)!;
+    const l2 = perLevel.find((p) => p.level === 2)!;
+    expect(l1.ratePct).toBe(10);
+    expect(l2.ratePct).toBe(5);
+    expect(l1.bonus).toBeCloseTo(l1.base * 0.1, 2);
+    expect(l2.bonus).toBeCloseTo(l2.base * 0.05, 2);
+    expect(t.amount).toBeCloseTo(l1.bonus + l2.bonus, 2);
+    expect(t.meta.eligibleBonusBase).toBeCloseTo(l1.base + l2.base, 2);
+
+    // Report drill-down: each source shows its level's exact rate — an L1
+    // contributor earns double an L2 contributor (equal packages/yields).
+    // Per-source nearest-cent rounding may drift ±0.01, so compare with that
+    // slack instead of exact ratios.
+    const sources = t.meta.sources as { level: number; amount: number }[];
+    const l1src = sources.filter((s) => s.level === 1);
+    const l2src = sources.filter((s) => s.level === 2);
+    expect(l1src.length).toBe(3);
+    expect(l2src.length).toBe(9);
+    const y = l2.base / 9; // identical packages → identical per-member yield
+    expect(Math.abs(l1src[0].amount - y * 0.1)).toBeLessThanOrEqual(0.01);
+    expect(Math.abs(l2src[0].amount - y * 0.05)).toBeLessThanOrEqual(0.01);
+  }, 180_000);
+
   it("is sequential: 100 deep actives cannot bypass 2 active directs (< 3)", async () => {
     const admin = await seedAdminAndLogin();
     const S = await registerAndLogin({ name: "Sigma" });
