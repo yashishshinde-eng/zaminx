@@ -80,15 +80,42 @@ export interface TeamCounts {
   activeTeamCount: number;
 }
 
-/** Direct + all-level descendant counts (with active breakdowns). */
+/**
+ * Direct + team descendant counts (with active breakdowns). `teamCount`/
+ * `activeTeamCount` are capped at 10 levels deep — matching the by-level
+ * breakdown and Level filter in `getReferralStats` below, and the Star
+ * Qualification Engine's `MAX_STAR` depth — so the dashboard/Team page total
+ * never exceeds what the by-level table actually shows.
+ */
 export async function getTeamCounts(userId: string): Promise<TeamCounts> {
-  const [directCount, teamCount, activeDirectCount, activeTeamCount] = await Promise.all([
+  const oid = toOid(userId);
+  const [directCount, activeDirectCount, teamAgg] = await Promise.all([
     User.countDocuments({ sponsorId: userId }),
-    User.countDocuments({ lineage: userId }),
     User.countDocuments({ sponsorId: userId, status: "active" }),
-    User.countDocuments({ lineage: userId, status: "active" }),
+    User.aggregate<{ teamCount: number; activeTeamCount: number }>([
+      { $match: { lineage: oid } },
+      {
+        $project: {
+          level: { $subtract: [{ $size: "$lineage" }, { $indexOfArray: ["$lineage", oid] }] },
+          status: 1,
+        },
+      },
+      { $match: { level: { $lte: 10 } } },
+      {
+        $group: {
+          _id: null,
+          teamCount: { $sum: 1 },
+          activeTeamCount: { $sum: { $cond: [{ $eq: ["$status", "active"] }, 1, 0] } },
+        },
+      },
+    ]),
   ]);
-  return { directCount, teamCount, activeDirectCount, activeTeamCount };
+  return {
+    directCount,
+    activeDirectCount,
+    teamCount: teamAgg[0]?.teamCount ?? 0,
+    activeTeamCount: teamAgg[0]?.activeTeamCount ?? 0,
+  };
 }
 
 /* ------------------------------------------------------------------ */
