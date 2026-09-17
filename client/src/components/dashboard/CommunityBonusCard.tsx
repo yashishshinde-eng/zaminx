@@ -120,7 +120,7 @@ export function CommunityBonusCard({ communityBonus }: { communityBonus: Communi
 
         {/* Bonus history */}
         <Link
-          to="/reports/community"
+          to="/app/reports?kind=community"
           className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-[#18F3CB]"
         >
           {t("communityCard.viewHistory")}

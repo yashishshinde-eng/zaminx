@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Download, FileSpreadsheet, Printer } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { TFunction } from "i18next";
@@ -27,6 +28,23 @@ import type {
 } from "@zeminex/shared";
 
 const LIMIT = 20;
+
+/** Every valid report tab — used to validate a `?kind=` deep link (e.g. from
+ *  the Team Energy / Community Bonus dashboard cards' "view history" links)
+ *  so an unrecognized value falls back to the default tab instead of
+ *  rendering nothing. */
+const REPORT_KINDS: UserReportKind[] = [
+  "deposits",
+  "withdrawals",
+  "wallet",
+  "trading",
+  "direct",
+  "team",
+  "community",
+  "rank",
+  "bonanza",
+  "p2p",
+];
 
 /** Blueprint order: Deposits, Withdrawals, Wallet, the 6 income streams, P2P.
  *  `label` is the full proper-case name shown in headings/export titles;
@@ -61,7 +79,11 @@ const P2P_STATUSES: P2PTransferStatus[] = ["completed", "failed"];
 export function ReportsPage() {
   const { t } = useTranslation();
   const TABS = getTabs(t);
-  const [kind, setKind] = useState<UserReportKind>("deposits");
+  const [searchParams] = useSearchParams();
+  const requestedKind = searchParams.get("kind");
+  const [kind, setKind] = useState<UserReportKind>(
+    REPORT_KINDS.includes(requestedKind as UserReportKind) ? (requestedKind as UserReportKind) : "deposits",
+  );
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [status, setStatus] = useState("");

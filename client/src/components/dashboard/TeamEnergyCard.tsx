@@ -10,7 +10,7 @@ import type { TeamEnergyInfo } from "@zeminex/shared";
  * Daily Team Energy — star-qualified bonus card. Shows the user's current
  * energy star (recomputed server-side, never on the client), the bonus rate it
  * earns, today's + total payouts, per-level active/required progress toward
- * the next star, and a link to the bonus history in /reports/team. All data
+ * the next star, and a link to the bonus history in /app/reports. All data
  * comes from the dashboard summary's `teamEnergy` slice — no qualification or
  * payout math lives in the client.
  */
@@ -107,7 +107,7 @@ export function TeamEnergyCard({ teamEnergy }: { teamEnergy: TeamEnergyInfo }) {
 
         {/* Bonus history */}
         <Link
-          to="/reports/team"
+          to="/app/reports?kind=team"
           className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-gold"
         >
           {t("teamEnergyCard.viewHistory")}
