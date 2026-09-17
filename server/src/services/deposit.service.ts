@@ -6,7 +6,7 @@ import { depositSuccessTemplate } from "./emailTemplates.js";
 import { createInvoice } from "./nowpayments.service.js";
 import { applyLedgerEntry, getWalletBalances } from "./wallet.service.js";
 import { awardDirectBonus } from "./compensation.service.js";
-import { evaluateRankForUser } from "./rank.service.js";
+import { evaluateRankForChain } from "./rank.service.js";
 import { recalcTeamEnergyStarsForChain } from "./teamEnergy.service.js";
 import type { DepositRow, PackageTier, UserPackageRow, WalletBalance, AdminDepositCreateBody } from "@zeminex/shared";
 
@@ -332,12 +332,19 @@ export async function activatePackageFromWallet(
   // full access once their first package is live.
   await User.updateOne({ _id: targetUserId, status: { $ne: "active" } }, { $set: { status: "active" } }).exec();
 
-  // Team Energy: the newly-active member changes per-level counts for every
-  // ancestor — refresh their stars (best-effort, never blocks activation).
+  // Team Energy + Rank: the newly-active member changes per-level counts for
+  // every ancestor — refresh their Team Energy stars AND evaluate the rank
+  // ladder for the whole chain, so any ancestor whose star rose at this moment
+  // has their one-time rank reward credited immediately, not at the next daily
+  // rank_check (best-effort, never blocks activation).
   void User.findById(targetUserId)
     .select("lineage")
     .lean()
-    .then((u) => (u?.lineage?.length ? recalcTeamEnergyStarsForChain(u.lineage.map((a) => a.toString())) : undefined))
+    .then((u) => {
+      if (!u?.lineage?.length) return undefined;
+      const chain = u.lineage.map((a) => a.toString());
+      return Promise.all([recalcTeamEnergyStarsForChain(chain), evaluateRankForChain(chain)]);
+    })
     .catch(() => undefined);
 
   // 4. Record a paid, wallet-funded Deposit so the activation appears in the
@@ -381,14 +388,6 @@ export async function activatePackageFromWallet(
       error: err instanceof Error ? err.message : String(err),
     });
   });
-
-  // 6. Rank eval for the buyer's sponsor — a newly-ACTIVE direct may push the
-  //    sponsor's star (which also unlocks their Team Energy depth immediately)
-  //    or pay a one-time rank reward. Best-effort, never blocks the activation.
-  const buyer = await User.findById(targetUserId).select("sponsorId").lean();
-  if (buyer?.sponsorId) {
-    evaluateRankForUser(buyer.sponsorId.toString()).catch(() => undefined);
-  }
 
   const updatedUp = await UserPackage.findById(subscription._id).lean();
   const pkgRow = toUserPackageRow(updatedUp as never, depositToPayment(deposit.toObject()));
@@ -444,11 +443,18 @@ export async function confirmDeposit(
     // A package going live promotes an inactive user to active (idempotent).
     await User.updateOne({ _id: deposit.user, status: { $ne: "active" } }, { $set: { status: "active" } }).exec();
 
-    // Team Energy: refresh the buyer's ancestor chain (best-effort).
+    // Team Energy + Rank: refresh the buyer's ancestor chain AND evaluate the
+    // rank ladder for every ancestor, so any newly-qualified star's one-time
+    // rank reward is credited immediately, not at the next daily rank_check
+    // (best-effort, never breaks confirmation).
     void User.findById(deposit.user)
       .select("lineage")
       .lean()
-      .then((u) => (u?.lineage?.length ? recalcTeamEnergyStarsForChain(u.lineage.map((a) => a.toString())) : undefined))
+      .then((u) => {
+        if (!u?.lineage?.length) return undefined;
+        const chain = u.lineage.map((a) => a.toString());
+        return Promise.all([recalcTeamEnergyStarsForChain(chain), evaluateRankForChain(chain)]);
+      })
       .catch(() => undefined);
   }
 
@@ -501,14 +507,6 @@ export async function confirmDeposit(
         error: err instanceof Error ? err.message : String(err),
       });
     });
-
-    // Rank eval for the buyer's sponsor — a newly-ACTIVE direct may push the
-    // sponsor's star (unlocks their Team Energy depth immediately) or pay a
-    // one-time rank reward. Best-effort, never breaks confirmation.
-    const buyer = await User.findById(deposit.user).select("sponsorId").lean();
-    if (buyer?.sponsorId) {
-      evaluateRankForUser(buyer.sponsorId.toString()).catch(() => undefined);
-    }
   }
 
   // 4. Best-effort deposit-success email.

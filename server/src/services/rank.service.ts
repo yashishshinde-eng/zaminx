@@ -334,6 +334,28 @@ export async function syncHighestStarForUser(userId: string): Promise<void> {
 }
 
 /**
+ * Evaluate the rank ladder for every ancestor in a lineage chain — fired
+ * immediately after a member activates (their ACTIVE status changes per-level
+ * ACTIVE counts across the whole chain). Each ancestor is evaluated
+ * individually (idempotent via the ledger key), so every ancestor whose star
+ * rose at this moment is paid at once instead of waiting for the daily
+ * `rank_check` cron. Returns the aggregated award/error counts.
+ */
+export async function evaluateRankForChain(ancestorIds: string[]): Promise<{ awarded: number; errors: number }> {
+  const seen = new Set<string>();
+  let awarded = 0;
+  let errors = 0;
+  for (const id of ancestorIds) {
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    const r = await evaluateRankForUser(id).catch(() => ({ awarded: 0, errors: 1 }));
+    awarded += r.awarded;
+    errors += r.errors;
+  }
+  return { awarded, errors };
+}
+
+/**
  * Evaluate the rank ladder for every user (admin trigger). Aggregates per-user
  * results into a single summary.
  */

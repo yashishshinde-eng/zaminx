@@ -46,9 +46,9 @@ export function ReportChartCard({
         axisBorder: { show: false },
         axisTicks: { show: false },
       },
-      yaxis: { labels: { style: { colors: themeColor("muted-foreground", "#64748b") }, formatter: (v: number) => formatCurrency(v) } },
+      yaxis: { labels: { style: { colors: themeColor("muted-foreground", "#64748b") }, formatter: (v: number) => formatCurrency(v, "USD", 4) } },
       fill: { type: "gradient", gradient: { shadeIntensity: 1, opacityFrom: 0.35, opacityTo: 0.05, stops: [0, 100] } },
-      tooltip: { theme: "light", y: { formatter: (v: number) => formatCurrency(v) } },
+      tooltip: { theme: "light", y: { formatter: (v: number) => formatCurrency(v, "USD", 4) } },
     }),
     [series],
   );
