@@ -34,7 +34,7 @@ async function main() {
       const indexes = JSON.parse(idxRaw) as { key: Record<string, unknown>; name: string; [k: string]: unknown }[];
       for (const idx of indexes) {
         if (idx.name === "_id_") continue;
-        await db.createIndex(name, idx.key as Record<string, 1 | -1 | string>, { ...idx, key: undefined } as never).catch((e) =>
+        await db.createIndex(name, idx.key as never, { ...idx, key: undefined } as never).catch((e) =>
           console.log(`  ${name}: index ${idx.name} failed: ${e.message}`),
         );
       }

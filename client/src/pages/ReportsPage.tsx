@@ -210,7 +210,7 @@ export function ReportsPage() {
         {/* Summary + chart */}
         <div className="grid gap-6 lg:grid-cols-3">
           <StatCard label={t("reports.records")} value={summary ? String(summary.count) : "—"} />
-          <StatCard label={t("reports.total")} value={summary ? formatCurrency(summary.total) : "—"} />
+          <StatCard label={t("reports.total")} value={summary ? formatCurrency(summary.total, "USD", 4) : "—"} />
           <ReportChartCard title={labelFor(TABS, kind)} description={t("reports.dailyTotal")} series={summary?.series ?? []} />
         </div>
 
@@ -276,7 +276,7 @@ function statusBadge(status: string, t: TFunction) {
 function columnsFor(kind: UserReportKind, t: TFunction): Column<DepositRow | WithdrawalRow | WalletTxRow | P2PTransferRow>[] {
   if (kind === "deposits") {
     return [
-      { key: "amount", header: t("common.amount"), align: "right", cell: (r) => formatCurrency((r as DepositRow).amountUsd) },
+      { key: "amount", header: t("common.amount"), align: "right", cell: (r) => formatCurrency((r as DepositRow).amountUsd, "USD", 4) },
       { key: "currency", header: t("reports.columnCurrency"), cell: (r) => (r as DepositRow).currency },
       { key: "status", header: t("common.status"), cell: (r) => statusBadge((r as DepositRow).status, t) },
       { key: "paidAt", header: t("reports.columnPaidAt"), cell: (r) => formatDate((r as DepositRow).paidAt) },
@@ -286,7 +286,7 @@ function columnsFor(kind: UserReportKind, t: TFunction): Column<DepositRow | Wit
   if (kind === "withdrawals") {
     return [
       { key: "wallet", header: t("common.wallet"), cell: (r) => <span className="capitalize">{(r as WithdrawalRow).wallet}</span> },
-      { key: "amount", header: t("common.amount"), align: "right", cell: (r) => formatCurrency((r as WithdrawalRow).amount) },
+      { key: "amount", header: t("common.amount"), align: "right", cell: (r) => formatCurrency((r as WithdrawalRow).amount, "USD", 4) },
       { key: "address", header: t("reports.columnAddress"), cell: (r) => <span className="font-mono text-xs">{(r as WithdrawalRow).address}</span> },
       { key: "status", header: t("common.status"), cell: (r) => statusBadge((r as WithdrawalRow).status, t) },
       { key: "processedAt", header: t("reports.columnProcessedAt"), cell: (r) => formatDate((r as WithdrawalRow).processedAt) },
@@ -298,7 +298,7 @@ function columnsFor(kind: UserReportKind, t: TFunction): Column<DepositRow | Wit
       { key: "from", header: t("reports.columnFrom"), cell: (r) => (r as P2PTransferRow).fromUserName },
       { key: "to", header: t("reports.columnTo"), cell: (r) => (r as P2PTransferRow).toUserName },
       { key: "wallet", header: t("common.wallet"), cell: (r) => <span className="capitalize">{(r as P2PTransferRow).wallet}</span> },
-      { key: "amount", header: t("common.amount"), align: "right", cell: (r) => formatCurrency((r as P2PTransferRow).amount) },
+      { key: "amount", header: t("common.amount"), align: "right", cell: (r) => formatCurrency((r as P2PTransferRow).amount, "USD", 4) },
       { key: "status", header: t("common.status"), cell: (r) => statusBadge((r as P2PTransferRow).status, t) },
       { key: "memo", header: t("reports.columnMemo"), cell: (r) => (r as P2PTransferRow).memo ?? "—" },
       { key: "createdAt", header: t("common.date"), cell: (r) => formatDate((r as P2PTransferRow).createdAt) },
@@ -336,7 +336,7 @@ function columnsFor(kind: UserReportKind, t: TFunction): Column<DepositRow | Wit
         return (
           <span className={cn("tabular-nums", tx.direction === "credit" ? "text-success" : "text-destructive")}>
             {tx.direction === "credit" ? "+" : "−"}
-            {formatCurrency(tx.amount)}
+            {formatCurrency(tx.amount, "USD", 4)}
           </span>
         );
       },

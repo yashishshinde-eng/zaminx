@@ -7,8 +7,13 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 /** Format a number as USD currency. */
-export function formatCurrency(value: number, currency = "USD"): string {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(value);
+export function formatCurrency(value: number, currency = "USD", fractionDigits = 2): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
+  }).format(value);
 }
 
 /** Format an ISO date string into a readable date. */

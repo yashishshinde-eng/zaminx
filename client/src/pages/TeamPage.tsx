@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -387,41 +387,53 @@ function StatsCard({ stats, isLoading }: { stats: ReferralStatsLite | undefined;
           </CardContent>
         </Card>
         {stats.byLevel.length > 0 && (
-          // Horizontal scroll on mobile — the currency columns don't fit ~360px.
-          <div className="-mx-1 overflow-x-auto pb-1">
-            <div className="grid min-w-[420px] grid-cols-[1fr_auto_auto_auto] gap-x-4 rounded-lg border border-border/60">
-            <span className="px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              {t("team.level")}
-            </span>
-            <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              {t("team.members")}
-            </span>
-            <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              {t("common.active")}
-            </span>
-            <span className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-              {t("team.business")}
-            </span>
-            {stats.byLevel.map((l) => (
-              <Fragment key={l.level}>
-                <span className="border-t border-border/40 px-3 py-2 text-sm font-medium">{t("team.level")} {l.level}</span>
-                <span className="border-t border-border/40 px-3 py-2 text-right text-sm tabular-nums text-muted-foreground">
-                  {l.count}
-                </span>
-                <span className="border-t border-border/40 px-3 py-2 text-right text-sm tabular-nums text-success">
-                  {l.active}
-                </span>
-                <span className="border-t border-border/40 px-3 py-2 text-right text-sm font-semibold tabular-nums">
-                  {formatCurrency(l.business)}
-                </span>
-              </Fragment>
-            ))}
-            <span className="col-span-3 border-t border-border/60 bg-muted/30 px-3 py-2 text-sm font-bold">
-              {t("team.totalTeamBusiness")}
-            </span>
-            <span className="border-t border-border/60 bg-muted/30 px-3 py-2 text-right text-sm font-bold tabular-nums">
-              {formatCurrency(stats.teamBusiness)}
-            </span>
+          // A real <table> (not a CSS grid) so row borders stay continuous
+          // across columns and the layout only scrolls horizontally on
+          // screens genuinely too narrow for it, instead of always forcing it.
+          <div className="overflow-hidden rounded-lg border border-border/60">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr>
+                    <th className="px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      {t("team.level")}
+                    </th>
+                    <th className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      {t("team.members")}
+                    </th>
+                    <th className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      {t("common.active")}
+                    </th>
+                    <th className="px-3 py-2 text-right text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      {t("team.business")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stats.byLevel.map((l) => (
+                    <tr key={l.level} className="border-t border-border/40">
+                      <td className="whitespace-nowrap px-3 py-2 text-sm font-medium">
+                        {t("team.level")} {l.level}
+                      </td>
+                      <td className="px-3 py-2 text-right text-sm tabular-nums text-muted-foreground">{l.count}</td>
+                      <td className="px-3 py-2 text-right text-sm tabular-nums text-success">{l.active}</td>
+                      <td className="whitespace-nowrap px-3 py-2 text-right text-sm font-semibold tabular-nums">
+                        {formatCurrency(l.business)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr className="border-t border-border/60 bg-muted/30">
+                    <td colSpan={3} className="whitespace-nowrap px-3 py-2 text-sm font-bold">
+                      {t("team.totalTeamBusiness")}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-2 text-right text-sm font-bold tabular-nums">
+                      {formatCurrency(stats.teamBusiness)}
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
           </div>
         )}

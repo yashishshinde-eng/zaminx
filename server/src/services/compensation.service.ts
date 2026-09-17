@@ -1041,11 +1041,14 @@ export async function evaluateBonanzasForUser(userId: string): Promise<{ awarded
   let errors = 0;
 
   for (const offer of offers) {
-    // Only directs referred within this offer's own window count — a direct
-    // made before startDate or after endDate must not qualify a user, even
-    // though the offer itself is currently active.
+    // Only ACTIVE directs (purchased a package — same "active" as Team
+    // Energy/Community/Rank; see starQualification.service.ts) referred
+    // within this offer's own window count — a direct made before startDate
+    // or after endDate must not qualify a user, even though the offer itself
+    // is currently active, and a merely-registered non-buyer must not either.
     const directCount = await User.countDocuments({
       sponsorId: userId,
+      status: "active",
       createdAt: { $gte: offer.startDate, $lte: offer.endDate },
     });
     if (directCount < offer.requiredDirects) continue;

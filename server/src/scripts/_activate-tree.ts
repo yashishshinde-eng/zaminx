@@ -16,14 +16,9 @@ async function main() {
   await new Promise<void>((r) => server.once("listening", r));
   const base = `http://127.0.0.1:${(server.address() as { port: number }).port}`;
 
-  const pkg = (await (await import("../models/index.js")).Package).findOne({ slug: PACKAGE_SLUG });
+  const PackageModel = (await import("../models/index.js")).Package;
+  const pkg = await PackageModel.findOne({ slug: PACKAGE_SLUG });
   if (!pkg) throw new Error(`Package ${PACKAGE_SLUG} not found`);
-
-  const api = async (p: string, init?: RequestInit) => {
-    const res = await fetch(base + p, init);
-    const text = await res.text();
-    return { status: res.status, body: text ? JSON.parse(text) : {} as any };
-  };
 
   // Registration order (createdAt), root included.
   const users = await User.find({ email: { $regex: new RegExp(`${EMAIL_DOMAIN}$`, "i") } })

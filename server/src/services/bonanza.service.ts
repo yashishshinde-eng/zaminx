@@ -68,11 +68,14 @@ export async function getBonanzaOverview(userId: string): Promise<BonanzaOvervie
   const views: BonanzaOfferView[] = [];
   for (const o of offers) {
     const id = o._id.toString();
-    // Only directs referred within this offer's own window count toward it —
-    // a direct made before startDate or after endDate must not qualify the
-    // user, even though the offer itself is currently active.
+    // Only ACTIVE directs (purchased a package) referred within this offer's
+    // own window count toward it — matches the payout eligibility check in
+    // evaluateBonanzasForUser (compensation.service.ts): a merely-registered
+    // non-buyer must not count, and neither must a direct made before
+    // startDate or after endDate, even though the offer itself is active.
     const windowDirectCount = await User.countDocuments({
       sponsorId: userId,
+      status: "active",
       createdAt: { $gte: o.startDate, $lte: o.endDate },
     });
     views.push({

@@ -32,18 +32,16 @@ async function main() {
   }
 
   // Bucket earners by star
-  const byStar = new Map<number, { count: number; total: number }>();
+  const byStar = new Map<number, { count: number; sum: number }>();
   for (const [, e] of earners) {
-    const cur = byStar.get(e.star) ?? { count: 0, total: 0 };
+    const cur = byStar.get(e.star) ?? { count: 0, sum: 0 };
     cur.count++;
-    cur.sum ? null : null;
-    cur.sum = (cur.sum ?? 0) + e.amount;
-    (cur as { sum: number }).sum;
+    cur.sum += e.amount;
     byStar.set(e.star, cur);
   }
   console.log("\nEarners by star:");
   for (const [star, v] of [...byStar.entries()].sort((a, b) => a[0] - b[0])) {
-    console.log(`  ${star}★: ${v.count} user(s), total paid $${(v as { sum: number }).sum.toFixed(2)}`);
+    console.log(`  ${star}★: ${v.count} user(s), total paid $${v.sum.toFixed(2)}`);
   }
 
   // Total paid per credit level across all earners
@@ -67,7 +65,7 @@ async function main() {
   }
   console.log("\nIncome paid AT each credit level (all 121 earners combined):");
   for (const [lvl, v] of [...totals.entries()].sort((a, b) => a[0] - b[0])) {
-    console.log(`  L${lvl}: paid to ${v.count} earner-days, bonus $${v.bonus.toFixed(2)} (base $${(bases.get(lvl) ?? 0).toFixed(2)})`);
+    console.log(`  L${lvl}: paid to ${v.n} earner-days, bonus $${v.bonus.toFixed(2)} (base $${(bases.get(lvl) ?? 0).toFixed(2)})`);
   }
 
   // Examples: one earner per star
