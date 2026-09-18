@@ -233,7 +233,9 @@ async function main() {
                 fromUserName: info?.name ?? null,
                 fromReferralCode: info?.referralCode ?? null,
                 level,
-                amount: calcTeamEnergyBonusCents(yieldCents, bpFromPct(pcts[level - 1] ?? 0)) / 100,
+                // Full-precision per-source share — no per-source cent rounding
+                // (see runDailyTeamEnergy's sources comment).
+                amount: (yieldCents * bpFromPct(pcts[level - 1] ?? 0)) / 1_000_000,
               };
             })
             .sort((a, b) => a.level - b.level || b.amount - a.amount);

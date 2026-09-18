@@ -14,7 +14,7 @@ import {
 describe("STAR_REQUIREMENTS / STAR_PCT_TABLE", () => {
   it("matches the spec table (3^N members, spec percentages)", () => {
     expect(STAR_REQUIREMENTS).toEqual([0, 3, 9, 27, 81, 243, 729, 2187, 6561, 19683, 59049]);
-    expect(STAR_PCT_TABLE).toEqual([10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.25, 0.25]);
+    expect(STAR_PCT_TABLE).toEqual([10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.5, 0.5]);
   });
 });
 

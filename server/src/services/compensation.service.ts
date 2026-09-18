@@ -635,9 +635,12 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
     const amount = bonusCents / 100;
     const rateSummary = perLevelMeta.map((p) => `L${p.level} ${p.ratePct}%`).join(" + ");
     // Per-contributor breakdown for the report drill-down: each source's
-    // EXACT per-level share (its yield × its level's rate, rounded to cents) —
-    // no proportional split of the aggregate. Summed source amounts may drift
-    // a cent from `amount` due to per-source rounding, fine for display.
+    // EXACT per-level share (its yield × its level's rate) at FULL precision —
+    // no proportional split of the aggregate and NO per-source cent rounding
+    // (rounding each source to whole cents corrupts small shares: a $0.50
+    // yield at 1% is $0.005, which per-source rounding shows as $0.01, and at
+    // 0.5% is $0.0025, shown as $0.00). The credit's total amount is still
+    // rounded once per LEVEL (above), never per source.
     const sources = eligibleSources
       .map(({ buyerId, level, yieldCents }) => {
         const info = buyerInfoByUser.get(buyerId);
@@ -646,7 +649,7 @@ export async function runDailyTeamEnergy(asOf?: Date): Promise<TeamEnergyRunSumm
           fromUserName: info?.name ?? null,
           fromReferralCode: info?.referralCode ?? null,
           level,
-          amount: calcTeamEnergyBonusCents(yieldCents, bpFromPct(pcts[level - 1] ?? 0)) / 100,
+          amount: (yieldCents * bpFromPct(pcts[level - 1] ?? 0)) / 1_000_000,
         };
       })
       .sort((a, b) => a.level - b.level || b.amount - a.amount);

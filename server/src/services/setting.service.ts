@@ -110,10 +110,10 @@ export async function getTeamEnergyDepth(): Promise<number> {
   return getSetting<number>("compensation.teamEnergyDepth", 10);
 }
 
-/** Per-STAR daily bonus percentages, index = star − 1 — 1★=10% … 10★=0.25%
- *  (default [10,5,4,3,2,1,0.5,0.5,0.25,0.25]). */
+/** Per-LEVEL daily bonus percentages, index = level − 1 — L1=10% … L10=0.5%
+ *  (default [10,5,4,3,2,1,0.5,0.5,0.5,0.5]). */
 export async function getTeamEnergyPct(): Promise<number[]> {
-  return getSetting<number[]>("compensation.teamEnergyPct", [10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.25, 0.25]);
+  return getSetting<number[]>("compensation.teamEnergyPct", [10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.5, 0.5]);
 }
 
 /** Whether the monthly community-bonus run is enabled (default true). */

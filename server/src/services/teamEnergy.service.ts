@@ -42,7 +42,7 @@ export {
 
 /** Daily payout table: index star−1 → daily bonus percentage (%). Defaults
  *  mirror the admin-tunable `compensation.teamEnergyPct` setting. */
-export const STAR_PCT_TABLE: readonly number[] = [10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.25, 0.25];
+export const STAR_PCT_TABLE: readonly number[] = [10, 5, 4, 3, 2, 1, 0.5, 0.5, 0.5, 0.5];
 
 /** Percent → basis points, integer-exact (10 → 1000, 0.25 → 25). */
 export function bpFromPct(pct: number): number {
